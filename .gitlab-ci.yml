@@ -29,7 +29,7 @@ coverage:
   stage: test
   extends: .coverage
   variables:
-    COVERAGE_SOURCE: capella2polarion
+    COVERAGE_SOURCE: polarion_rest_api_client
   needs: []
 
 pre-commit:
