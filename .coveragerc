@@ -4,3 +4,6 @@
 [report]
 exclude_lines =
     @abc.abstractmethod
+
+omit =
+    polarion_rest_api_client/open_api_client/*
