@@ -1,0 +1,43 @@
+{
+  "data": [
+    {
+      "type": "workitems",
+      "attributes": {
+        "description": {
+          "type": "text/html",
+          "value": "My text value"
+        },
+        "status": "open",
+        "title": "Title",
+        "type": "task",
+        "capella_uuid": "asdfg"
+      }
+    },
+    {
+      "type": "workitems",
+      "attributes": {
+        "description": {
+          "type": "text/html",
+          "value": "My text value"
+        },
+        "status": "open",
+        "title": "Title",
+        "type": "task",
+        "capella_uuid": "asdfg"
+      }
+    },
+    {
+      "type": "workitems",
+      "attributes": {
+        "description": {
+          "type": "text/html",
+          "value": "My text value"
+        },
+        "status": "open",
+        "title": "Title",
+        "type": "task",
+        "capella_uuid": "asdfg"
+      }
+    }
+  ]
+}

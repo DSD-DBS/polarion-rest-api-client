@@ -1,0 +1,120 @@
+# Copyright DB Netz AG and contributors
+# SPDX-License-Identifier: Apache-2.0
+
+import json
+from io import BytesIO
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+
+import attr
+
+from ..types import UNSET, File, FileJsonType, Unset
+
+if TYPE_CHECKING:
+    from ..models.document_attachments_single_patch_request import (
+        DocumentAttachmentsSinglePatchRequest,
+    )
+
+
+T = TypeVar("T", bound="PatchDocumentAttachmentsRequestBody")
+
+
+@attr.s(auto_attribs=True)
+class PatchDocumentAttachmentsRequestBody:
+    """
+    Attributes:
+        resource (DocumentAttachmentsSinglePatchRequest):
+        content (Union[Unset, File]): attachments content
+    """
+
+    resource: "DocumentAttachmentsSinglePatchRequest"
+    content: Union[Unset, File] = UNSET
+    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+
+    def to_dict(self) -> Dict[str, Any]:
+        resource = self.resource.to_dict()
+
+        content: Union[Unset, FileJsonType] = UNSET
+        if not isinstance(self.content, Unset):
+            content = self.content.to_tuple()
+
+        field_dict: Dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "resource": resource,
+            }
+        )
+        if content is not UNSET:
+            field_dict["content"] = content
+
+        return field_dict
+
+    def to_multipart(self) -> Dict[str, Any]:
+        resource = (
+            None,
+            json.dumps(self.resource.to_dict()).encode(),
+            "application/json",
+        )
+
+        content: Union[Unset, FileJsonType] = UNSET
+        if not isinstance(self.content, Unset):
+            content = self.content.to_tuple()
+
+        field_dict: Dict[str, Any] = {}
+        field_dict.update(
+            {
+                key: (None, str(value).encode(), "text/plain")
+                for key, value in self.additional_properties.items()
+            }
+        )
+        field_dict.update(
+            {
+                "resource": resource,
+            }
+        )
+        if content is not UNSET:
+            field_dict["content"] = content
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        from ..models.document_attachments_single_patch_request import (
+            DocumentAttachmentsSinglePatchRequest,
+        )
+
+        d = src_dict.copy()
+        resource = DocumentAttachmentsSinglePatchRequest.from_dict(
+            d.pop("resource")
+        )
+
+        _content = d.pop("content", UNSET)
+        content: Union[Unset, File]
+        if isinstance(_content, Unset):
+            content = UNSET
+        else:
+            content = File(payload=BytesIO(_content))
+
+        patch_document_attachments_request_body = cls(
+            resource=resource,
+            content=content,
+        )
+
+        patch_document_attachments_request_body.additional_properties = d
+        return patch_document_attachments_request_body
+
+    @property
+    def additional_keys(self) -> List[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

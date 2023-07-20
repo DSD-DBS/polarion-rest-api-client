@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "type": "linkedworkitems",
+      "id": "PROJ/MyWorkItemId/parent/MyProjectId/MyWorkItemId2"
+    },
+    {
+      "type": "linkedworkitems",
+      "id": "PROJ/MyWorkItemId/parent/PROJ/MyWorkItemId3"
+    }
+  ]
+}

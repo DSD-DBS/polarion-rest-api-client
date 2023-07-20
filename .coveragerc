@@ -1,0 +1,6 @@
+# Copyright DB Netz AG and contributors
+# SPDX-License-Identifier: CC0-1.0
+
+[report]
+exclude_lines =
+    @abc.abstractmethod

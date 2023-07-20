@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "type": "linkedworkitems",
+      "id": "MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/linkedworkitems/parent/MyProjectId/MyLinkedWorkItemId?revision=1234"
+      }
+    }
+  ]
+}

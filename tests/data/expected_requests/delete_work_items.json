@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "type": "workitems",
+      "id": "PROJ/MyWorkItemId"
+    },
+    {
+      "type": "workitems",
+      "id": "PROJ/MyWorkItemId2"
+    }
+  ]
+}
