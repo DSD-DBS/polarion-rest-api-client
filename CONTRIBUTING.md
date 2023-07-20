@@ -17,9 +17,9 @@ our style guidelines outlined below.
 
 <!-- prettier-ignore -->
 [open an issue]:
-  https://github.com/DSD-DBS/capella2polarion/issues
+  https://git.tech.rz.db.de/se-toolchain/innovation-day-projects/polarion-open-api-client/-/issues
 [open a pull request]:
-  https://github.com/DSD-DBS/capella2polarion/pulls
+  https://git.tech.rz.db.de/se-toolchain/innovation-day-projects/polarion-open-api-client/-/merge_requests
 
 ## Developing
 

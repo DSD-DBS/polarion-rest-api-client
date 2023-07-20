@@ -34,8 +34,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/DSD-DBS/capella2polarion"
-Documentation = "https://dsd-dbs.github.io/capella2polarion"
+Homepage = "https://git.tech.rz.db.de/se-toolchain/innovation-day-projects/polarion-open-api-client"
+Documentation = "https://git.tech.rz.db.de/se-toolchain/innovation-day-projects/polarion-open-api-client"
 
 [project.optional-dependencies]
 dev = [
