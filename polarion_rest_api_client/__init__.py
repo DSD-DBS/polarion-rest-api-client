@@ -41,19 +41,13 @@ class WorkItemLink:
 class PolarionApiBaseException(Exception):
     """Base exception, which is raised, if an API error occurs."""
 
-    pass
-
 
 class PolarionApiException(PolarionApiBaseException):
     """Exception, which is raised, if an error is raised by the API."""
 
-    pass
-
 
 class PolarionApiUnexpectedException(PolarionApiBaseException):
     """Exception, which is raised, if an unexpected error is raised."""
-
-    pass
 
 
 class AbstractPolarionProjectApi(abc.ABC):
@@ -68,7 +62,7 @@ class AbstractPolarionProjectApi(abc.ABC):
     @abc.abstractmethod
     def project_exists(self) -> bool:
         """Return True if self.project_id exists and False if not."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def _request_all_items(self, call: t.Callable, **kwargs) -> list[t.Any]:
         page = 1
@@ -110,7 +104,7 @@ class AbstractPolarionProjectApi(abc.ABC):
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
-        raise NotImplemented
+        raise NotImplementedError
 
     def create_work_item(self, work_item: WorkItem):
         """Create a single given work item."""
@@ -127,7 +121,7 @@ class AbstractPolarionProjectApi(abc.ABC):
 
         A maximum of 5 items is allowed only at once.
         """
-        raise NotImplemented
+        raise NotImplementedError
 
     def delete_work_item(self, work_item_id: str):
         """Delete or mark the defined work item as deleted."""
@@ -142,7 +136,7 @@ class AbstractPolarionProjectApi(abc.ABC):
     @abc.abstractmethod
     def _delete_work_items(self, work_item_ids: list[str]):
         """Actually perform a delete request for the given work items."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def _mark_delete_work_items(self, work_item_ids: list[str]):
         """Set the status for all given work items to self.delete_status."""
@@ -158,7 +152,7 @@ class AbstractPolarionProjectApi(abc.ABC):
         Only fields not set to None will be updated in Polarion. None
         fields will stay untouched.
         """
-        raise NotImplemented
+        raise NotImplementedError
 
     def get_all_work_item_links(
         self,
@@ -193,7 +187,7 @@ class AbstractPolarionProjectApi(abc.ABC):
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
-        raise NotImplemented
+        raise NotImplementedError
 
     def create_work_item_links(self, work_item_links: list[WorkItemLink]):
         """Create the links between the work items in work_item_links."""
@@ -211,7 +205,7 @@ class AbstractPolarionProjectApi(abc.ABC):
 
         All work item links must have the same primary work item.
         """
-        raise NotImplemented
+        raise NotImplementedError
 
     def _set_project(self, work_item_link: WorkItemLink):
         if work_item_link.secondary_work_item_project is None:
@@ -254,7 +248,7 @@ class AbstractPolarionProjectApi(abc.ABC):
 
         All work item links have to have the same primary work item.
         """
-        raise NotImplemented
+        raise NotImplementedError
 
     def delete_work_item_link(self, work_item_link: WorkItemLink):
         """Delete the links between the work items in work_item_link."""
