@@ -80,7 +80,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
 
     def _check_response(self, response: oa_types.Response):
         def unexpected_error():
-            raise PolarionApiUnexpectedException(
+            return PolarionApiUnexpectedException(
                 response.status_code, response.content
             )
 
@@ -94,9 +94,9 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
                         *[(e.status, e.detail) for e in error.errors]
                     )
                 else:
-                    unexpected_error()
-            except json.JSONDecodeError:
-                unexpected_error()
+                    raise unexpected_error()
+            except json.JSONDecodeError as error:
+                raise unexpected_error() from error
 
     def _build_work_item_post_request(
         self, work_item: WorkItem
