@@ -1,0 +1,13 @@
+{
+  "errors": [
+    {
+      "status": "400",
+      "title": "Bad Request",
+      "detail": "Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data)",
+      "source": {
+        "pointer": "$.data",
+        "parameter": "revision"
+      }
+    }
+  ]
+}

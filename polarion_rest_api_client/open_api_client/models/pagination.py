@@ -1,0 +1,76 @@
+# Copyright DB Netz AG and contributors
+# SPDX-License-Identifier: Apache-2.0
+
+from typing import Any, Dict, List, Type, TypeVar, Union
+
+import attr
+
+from ..types import UNSET, Unset
+
+T = TypeVar("T", bound="Pagination")
+
+
+@attr.s(auto_attribs=True)
+class Pagination:
+    """
+    Attributes:
+        page_size (Union[Unset, int]):
+        page_number (Union[Unset, int]):
+        calculated_offset (Union[Unset, int]):
+    """
+
+    page_size: Union[Unset, int] = UNSET
+    page_number: Union[Unset, int] = UNSET
+    calculated_offset: Union[Unset, int] = UNSET
+    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+
+    def to_dict(self) -> Dict[str, Any]:
+        page_size = self.page_size
+        page_number = self.page_number
+        calculated_offset = self.calculated_offset
+
+        field_dict: Dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if page_size is not UNSET:
+            field_dict["pageSize"] = page_size
+        if page_number is not UNSET:
+            field_dict["pageNumber"] = page_number
+        if calculated_offset is not UNSET:
+            field_dict["calculatedOffset"] = calculated_offset
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        d = src_dict.copy()
+        page_size = d.pop("pageSize", UNSET)
+
+        page_number = d.pop("pageNumber", UNSET)
+
+        calculated_offset = d.pop("calculatedOffset", UNSET)
+
+        pagination = cls(
+            page_size=page_size,
+            page_number=page_number,
+            calculated_offset=calculated_offset,
+        )
+
+        pagination.additional_properties = d
+        return pagination
+
+    @property
+    def additional_keys(self) -> List[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

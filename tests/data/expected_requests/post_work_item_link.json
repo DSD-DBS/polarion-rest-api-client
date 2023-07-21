@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "type": "linkedworkitems",
+      "attributes": {
+        "role": "relates_to",
+        "suspect": true
+      },
+      "relationships": {
+        "workItem": {
+          "data": {
+            "type": "workitems",
+            "id": "PROJ/MyWorkItemId2"
+          }
+        }
+      }
+    }
+  ]
+}

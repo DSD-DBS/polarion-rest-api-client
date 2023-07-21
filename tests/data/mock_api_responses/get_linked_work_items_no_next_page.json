@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "totalCount": 0
+  },
+  "data": [
+    {
+      "type": "linkedworkitems",
+      "id": "MyProjectId/MyWorkItemId/relates_to/MyProjectId/MyWorkItemId2",
+      "revision": "1234",
+      "attributes": {
+        "revision": "1234",
+        "role": "relates_to",
+        "suspect": true
+      },
+      "relationships": {
+        "workItem": {
+          "data": {
+            "type": "workitems",
+            "id": "MyProjectId/MyWorkItemId2",
+            "revision": "1234"
+          }
+        }
+      },
+      "meta": {},
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/linkedworkitems/parent/MyProjectId/MyLinkedWorkItemId?revision=1234"
+      }
+    }
+  ],
+  "included": [
+    {}
+  ],
+  "links": {
+    "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/linkedworkitems/parent/MyProjectId?page%5Bsize%5D=10&page%5Bnumber%5D=5",
+    "first": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/linkedworkitems/parent/MyProjectId?page%5Bsize%5D=10&page%5Bnumber%5D=1",
+    "prev": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/linkedworkitems/parent/MyProjectId?page%5Bsize%5D=10&page%5Bnumber%5D=4",
+    "last": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/linkedworkitems/parent/MyProjectId?page%5Bsize%5D=10&page%5Bnumber%5D=9"
+  }
+}

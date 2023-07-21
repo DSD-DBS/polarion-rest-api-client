@@ -1,0 +1,53 @@
+{
+  "data": {
+    "type": "projects",
+    "id": "MyProjectId",
+    "revision": "1234",
+    "attributes": {
+      "active": true,
+      "color": "Color",
+      "description": {
+        "type": "text/plain",
+        "value": "My text value"
+      },
+      "finish": "1970-01-01",
+      "icon": "Icon",
+      "id": "MyProjectId",
+      "lockWorkRecordsDate": "1970-01-01",
+      "name": "Name",
+      "start": "1970-01-01",
+      "trackerPrefix": "Tracker Prefix"
+    },
+    "relationships": {
+      "lead": {
+        "data": {
+          "type": "users",
+          "id": "MyUserId",
+          "revision": "1234"
+        }
+      }
+    },
+    "meta": {
+      "errors": [
+        {
+          "status": "400",
+          "title": "Bad Request",
+          "detail": "Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data)",
+          "source": {
+            "pointer": "$.data",
+            "parameter": "revision"
+          }
+        }
+      ]
+    },
+    "links": {
+      "self": "server-host-name/application-path/projects/MyProjectId?revision=1234"
+    }
+  },
+  "included": [
+    {}
+  ],
+  "links": {
+    "self": "server-host-name/application-path/projects/MyProjectId?revision=1234"
+  }
+}

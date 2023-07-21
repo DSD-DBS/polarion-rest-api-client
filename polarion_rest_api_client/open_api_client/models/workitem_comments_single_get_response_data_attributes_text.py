@@ -1,0 +1,87 @@
+# Copyright DB Netz AG and contributors
+# SPDX-License-Identifier: Apache-2.0
+
+from typing import Any, Dict, List, Type, TypeVar, Union
+
+import attr
+
+from ..models.workitem_comments_single_get_response_data_attributes_text_type import (
+    WorkitemCommentsSingleGetResponseDataAttributesTextType,
+)
+from ..types import UNSET, Unset
+
+T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseDataAttributesText")
+
+
+@attr.s(auto_attribs=True)
+class WorkitemCommentsSingleGetResponseDataAttributesText:
+    """
+    Attributes:
+        type (Union[Unset, WorkitemCommentsSingleGetResponseDataAttributesTextType]):
+        value (Union[Unset, str]):  Example: My text value.
+    """
+
+    type: Union[
+        Unset, WorkitemCommentsSingleGetResponseDataAttributesTextType
+    ] = UNSET
+    value: Union[Unset, str] = UNSET
+    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+
+    def to_dict(self) -> Dict[str, Any]:
+        type: Union[Unset, str] = UNSET
+        if not isinstance(self.type, Unset):
+            type = self.type.value
+
+        value = self.value
+
+        field_dict: Dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if type is not UNSET:
+            field_dict["type"] = type
+        if value is not UNSET:
+            field_dict["value"] = value
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        d = src_dict.copy()
+        _type = d.pop("type", UNSET)
+        type: Union[
+            Unset, WorkitemCommentsSingleGetResponseDataAttributesTextType
+        ]
+        if isinstance(_type, Unset):
+            type = UNSET
+        else:
+            type = WorkitemCommentsSingleGetResponseDataAttributesTextType(
+                _type
+            )
+
+        value = d.pop("value", UNSET)
+
+        workitem_comments_single_get_response_data_attributes_text = cls(
+            type=type,
+            value=value,
+        )
+
+        workitem_comments_single_get_response_data_attributes_text.additional_properties = (
+            d
+        )
+        return workitem_comments_single_get_response_data_attributes_text
+
+    @property
+    def additional_keys(self) -> List[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

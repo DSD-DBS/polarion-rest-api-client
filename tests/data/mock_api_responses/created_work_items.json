@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "type": "workitems",
+      "id": "MyProjectId/MyWorkItemId",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId?revision=1234",
+        "portal": "server-host-name/application-path/polarion/redirect/project/MyProjectId/workitem?id=MyWorkItemId&revision=1234"
+      }
+    }
+  ]
+}

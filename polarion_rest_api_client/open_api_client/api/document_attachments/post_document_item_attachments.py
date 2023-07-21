@@ -1,0 +1,270 @@
+# Copyright DB Netz AG and contributors
+# SPDX-License-Identifier: Apache-2.0
+
+import os
+from http import HTTPStatus
+from typing import Any, Dict, Optional, Union, cast
+
+import httpx
+
+from ... import errors
+from ...client import Client
+from ...models.document_attachments_list_post_response import (
+    DocumentAttachmentsListPostResponse,
+)
+from ...models.post_document_attachments_request_body import (
+    PostDocumentAttachmentsRequestBody,
+)
+from ...types import Response
+
+
+def _get_kwargs(
+    project_id: str,
+    space_id: str,
+    document_name: str,
+    *,
+    client: Client,
+    multipart_data: PostDocumentAttachmentsRequestBody,
+) -> Dict[str, Any]:
+    url = "{}/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/attachments".format(
+        client.base_url,
+        projectId=project_id,
+        spaceId=space_id,
+        documentName=document_name,
+    )
+
+    headers: Dict[str, str] = client.get_headers()
+    cookies: Dict[str, Any] = client.get_cookies()
+
+    multipart_multipart_data = multipart_data.to_multipart()
+
+    return {
+        "method": "post",
+        "url": url,
+        "headers": headers,
+        "cookies": cookies,
+        "timeout": client.get_timeout(),
+        "follow_redirects": client.follow_redirects,
+        "files": multipart_multipart_data,
+    }
+
+
+def _parse_response(
+    *, client: Client, response: httpx.Response
+) -> Optional[Union[Any, DocumentAttachmentsListPostResponse]]:
+    if response.status_code == HTTPStatus.CREATED:
+        response_201 = DocumentAttachmentsListPostResponse.from_dict(
+            response.json()
+        )
+
+        return response_201
+    if response.status_code == HTTPStatus.BAD_REQUEST:
+        response_400 = cast(Any, None)
+        return response_400
+    if response.status_code == HTTPStatus.UNAUTHORIZED:
+        response_401 = cast(Any, None)
+        return response_401
+    if response.status_code == HTTPStatus.FORBIDDEN:
+        response_403 = cast(Any, None)
+        return response_403
+    if response.status_code == HTTPStatus.NOT_FOUND:
+        response_404 = cast(Any, None)
+        return response_404
+    if response.status_code == HTTPStatus.NOT_ACCEPTABLE:
+        response_406 = cast(Any, None)
+        return response_406
+    if response.status_code == HTTPStatus.CONFLICT:
+        response_409 = cast(Any, None)
+        return response_409
+    if response.status_code == HTTPStatus.REQUEST_ENTITY_TOO_LARGE:
+        response_413 = cast(Any, None)
+        return response_413
+    if response.status_code == HTTPStatus.UNSUPPORTED_MEDIA_TYPE:
+        response_415 = cast(Any, None)
+        return response_415
+    if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
+        response_500 = cast(Any, None)
+        return response_500
+    if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
+        response_503 = cast(Any, None)
+        return response_503
+    if client.raise_on_unexpected_status:
+        raise errors.UnexpectedStatus(response.status_code, response.content)
+    else:
+        return None
+
+
+def _build_response(
+    *, client: Client, response: httpx.Response
+) -> Response[Union[Any, DocumentAttachmentsListPostResponse]]:
+    return Response(
+        status_code=HTTPStatus(response.status_code),
+        content=response.content,
+        headers=response.headers,
+        parsed=_parse_response(client=client, response=response),
+    )
+
+
+def sync_detailed(
+    project_id: str,
+    space_id: str,
+    document_name: str,
+    *,
+    client: Client,
+    multipart_data: PostDocumentAttachmentsRequestBody,
+) -> Response[Union[Any, DocumentAttachmentsListPostResponse]]:
+    r"""Creates a list of instances.
+
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+    href=\"https://docs.sw.siemens.com/en-
+    US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
+
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        multipart_data (PostDocumentAttachmentsRequestBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[Any, DocumentAttachmentsListPostResponse]]
+    """
+
+    kwargs = _get_kwargs(
+        project_id=project_id,
+        space_id=space_id,
+        document_name=document_name,
+        client=client,
+        multipart_data=multipart_data,
+    )
+
+    response = httpx.request(
+        verify=client.verify_ssl,
+        proxies=os.getenv("PROXIES"),
+        **kwargs,
+    )
+
+    return _build_response(client=client, response=response)
+
+
+def sync(
+    project_id: str,
+    space_id: str,
+    document_name: str,
+    *,
+    client: Client,
+    multipart_data: PostDocumentAttachmentsRequestBody,
+) -> Optional[Union[Any, DocumentAttachmentsListPostResponse]]:
+    r"""Creates a list of instances.
+
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+    href=\"https://docs.sw.siemens.com/en-
+    US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
+
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        multipart_data (PostDocumentAttachmentsRequestBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[Any, DocumentAttachmentsListPostResponse]
+    """
+
+    return sync_detailed(
+        project_id=project_id,
+        space_id=space_id,
+        document_name=document_name,
+        client=client,
+        multipart_data=multipart_data,
+    ).parsed
+
+
+async def asyncio_detailed(
+    project_id: str,
+    space_id: str,
+    document_name: str,
+    *,
+    client: Client,
+    multipart_data: PostDocumentAttachmentsRequestBody,
+) -> Response[Union[Any, DocumentAttachmentsListPostResponse]]:
+    r"""Creates a list of instances.
+
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+    href=\"https://docs.sw.siemens.com/en-
+    US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
+
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        multipart_data (PostDocumentAttachmentsRequestBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[Any, DocumentAttachmentsListPostResponse]]
+    """
+
+    kwargs = _get_kwargs(
+        project_id=project_id,
+        space_id=space_id,
+        document_name=document_name,
+        client=client,
+        multipart_data=multipart_data,
+    )
+
+    async with httpx.AsyncClient(
+        verify=client.verify_ssl, proxies=os.getenv("PROXIES")
+    ) as _client:
+        response = await _client.request(**kwargs)
+
+    return _build_response(client=client, response=response)
+
+
+async def asyncio(
+    project_id: str,
+    space_id: str,
+    document_name: str,
+    *,
+    client: Client,
+    multipart_data: PostDocumentAttachmentsRequestBody,
+) -> Optional[Union[Any, DocumentAttachmentsListPostResponse]]:
+    r"""Creates a list of instances.
+
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+    href=\"https://docs.sw.siemens.com/en-
+    US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
+
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        multipart_data (PostDocumentAttachmentsRequestBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[Any, DocumentAttachmentsListPostResponse]
+    """
+
+    return (
+        await asyncio_detailed(
+            project_id=project_id,
+            space_id=space_id,
+            document_name=document_name,
+            client=client,
+            multipart_data=multipart_data,
+        )
+    ).parsed

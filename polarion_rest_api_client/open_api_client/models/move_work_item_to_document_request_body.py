@@ -1,0 +1,76 @@
+# Copyright DB Netz AG and contributors
+# SPDX-License-Identifier: Apache-2.0
+
+from typing import Any, Dict, List, Type, TypeVar, Union
+
+import attr
+
+from ..types import UNSET, Unset
+
+T = TypeVar("T", bound="MoveWorkItemToDocumentRequestBody")
+
+
+@attr.s(auto_attribs=True)
+class MoveWorkItemToDocumentRequestBody:
+    """
+    Attributes:
+        target_document (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
+        previous_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+        next_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+    """
+
+    target_document: Union[Unset, str] = UNSET
+    previous_part: Union[Unset, str] = UNSET
+    next_part: Union[Unset, str] = UNSET
+    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+
+    def to_dict(self) -> Dict[str, Any]:
+        target_document = self.target_document
+        previous_part = self.previous_part
+        next_part = self.next_part
+
+        field_dict: Dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if target_document is not UNSET:
+            field_dict["targetDocument"] = target_document
+        if previous_part is not UNSET:
+            field_dict["previousPart"] = previous_part
+        if next_part is not UNSET:
+            field_dict["nextPart"] = next_part
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        d = src_dict.copy()
+        target_document = d.pop("targetDocument", UNSET)
+
+        previous_part = d.pop("previousPart", UNSET)
+
+        next_part = d.pop("nextPart", UNSET)
+
+        move_work_item_to_document_request_body = cls(
+            target_document=target_document,
+            previous_part=previous_part,
+            next_part=next_part,
+        )
+
+        move_work_item_to_document_request_body.additional_properties = d
+        return move_work_item_to_document_request_body
+
+    @property
+    def additional_keys(self) -> List[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties
