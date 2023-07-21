@@ -18,7 +18,7 @@ TEST_REQUESTS = TEST_DATA_ROOT / "expected_requests"
 @pytest.fixture()
 def client():
     yield polarion_client.OpenAPIPolarionProjectClient(
-        "PROJ", "capella_uuid", False, "http://127.0.0.1/api", "PAT123"
+        "PROJ", False, "http://127.0.0.1/api", "PAT123"
     )
 
 
@@ -99,7 +99,6 @@ def test_get_all_work_items_single_page(
         "text/html",
         "My text value",
         "task",
-        "asdfgh",
         "open",
         {"capella_uuid": "asdfgh"},
     )
@@ -134,7 +133,7 @@ def test_create_work_item(
         description="My text value",
         status="open",
         type="task",
-        uuid_capella="asdfg",
+        additional_attributes={"capella_uuid": "asdfg"},
     )
 
     client.create_work_item(work_item)
@@ -159,7 +158,7 @@ def test_create_work_items_successfully(
         description="My text value",
         status="open",
         type="task",
-        uuid_capella="asdfg",
+        additional_attributes={"capella_uuid": "asdfg"},
     )
 
     client.create_work_items(3 * [work_item])
@@ -185,7 +184,7 @@ def test_create_work_items_failed(
         description="My text value",
         status="open",
         type="task",
-        uuid_capella="asdfg",
+        additional_attributes={"capella_uuid": "asdfg"},
     )
     with pytest.raises(polarion_api.PolarionApiException) as exc_info:
         client.create_work_items(3 * [work_item])
@@ -210,7 +209,7 @@ def test_create_work_items_failed_no_error(
         description="My text value",
         status="open",
         type="task",
-        uuid_capella="asdfg",
+        additional_attributes={"capella_uuid": "asdfg"},
     )
     with pytest.raises(polarion_api.PolarionApiBaseException) as exc_info:
         client.create_work_items(3 * [work_item])
@@ -233,7 +232,7 @@ def test_update_work_item_completely(
             description="My text value",
             title="Title",
             status="open",
-            uuid_capella="qwertz",
+            additional_attributes={"capella_uuid": "qwertz"},
         )
     )
 
@@ -559,22 +558,3 @@ def test_create_work_item_links_same_primaries(
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
-
-
-def test_get_work_item_element_mapping(
-    client: polarion_client.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-):
-    with open(TEST_RESPONSES / "workitems_next_page.json") as f:
-        httpx_mock.add_response(json=json.load(f))
-    with open(TEST_RESPONSES / "workitems_no_next_page.json") as f:
-        httpx_mock.add_response(json=json.load(f))
-
-    work_item_mapping = client.get_work_item_element_mapping(["task"])
-
-    reqs = httpx_mock.get_requests()
-    assert len(reqs) == 2
-    assert work_item_mapping == {
-        "asdfg": "MyWorkItemId",
-        "asdfgh": "MyWorkItemId2",
-    }

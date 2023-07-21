@@ -15,7 +15,6 @@ class WorkItem:
     description_type: str | None = None
     description: str | None = None
     type: str | None = None
-    uuid_capella: str | None = None
     status: str | None = None
     additional_attributes: dict[str, t.Any] = dataclasses.field(
         default_factory=dict
@@ -60,7 +59,6 @@ class PolarionApiUnexpectedException(PolarionApiBaseException):
 class AbstractPolarionProjectApi(abc.ABC):
     """An abstract base class for a Polarion API client."""
 
-    capella_uuid_attribute: str
     delete_polarion_work_items: bool
     project_id: str
     delete_status: str = "deleted"
@@ -71,25 +69,6 @@ class AbstractPolarionProjectApi(abc.ABC):
     def project_exists(self) -> bool:
         """Return True if self.project_id exists and False if not."""
         raise NotImplemented
-
-    def get_work_item_element_mapping(
-        self, work_item_types: list[str]
-    ) -> dict[str, str]:
-        """Return a mapping of capella_uuid to work item id.
-
-        Will be generated for all work items of the given
-        work_item_types.
-        """
-        work_item_mapping: dict[str, str] = {}
-        _type = " ".join(work_item_types)
-        for work_item in self.get_all_work_items(
-            f"type:({_type})",
-            {"workitems": f"id,{self.capella_uuid_attribute}"},
-        ):
-            if work_item.id is not None and work_item.uuid_capella is not None:
-                work_item_mapping[work_item.uuid_capella] = work_item.id
-
-        return work_item_mapping
 
     def _request_all_items(self, call: t.Callable, **kwargs) -> list[t.Any]:
         page = 1

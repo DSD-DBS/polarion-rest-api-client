@@ -63,7 +63,6 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
     def __init__(
         self,
         project_id: str,
-        capella_uuid_attribute: str,
         delete_polarion_work_items: bool,
         polarion_api_endpoint: str,
         polarion_access_token: str,
@@ -72,7 +71,6 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
     ):
         """Initialize the client for project and endpoint using a token."""
         self.project_id = project_id
-        self.capella_uuid_attribute = capella_uuid_attribute
         self.delete_polarion_work_items = delete_polarion_work_items
         self.client = oa_client.AuthenticatedClient(
             polarion_api_endpoint, polarion_access_token
@@ -122,11 +120,6 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
 
         attrs.additional_properties.update(work_item.additional_attributes)
 
-        if work_item.uuid_capella is not None:
-            attrs.additional_properties[
-                self.capella_uuid_attribute
-            ] = work_item.uuid_capella
-
         return api_models.WorkitemsListPostRequestDataItem(
             api_models.WorkitemsListPostRequestDataItemType.WORKITEMS, attrs
         )
@@ -152,11 +145,6 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
 
         if work_item.additional_attributes is not None:
             attrs.additional_properties.update(work_item.additional_attributes)
-
-        if work_item.uuid_capella is not None:
-            attrs.additional_properties[
-                self.capella_uuid_attribute
-            ] = work_item.uuid_capella
 
         return api_models.WorkitemsSinglePatchRequest(
             api_models.WorkitemsSinglePatchRequestData(
@@ -231,9 +219,6 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
                             if work_item.attributes.description
                             else None,
                             unset_str_builder(work_item.attributes.type),
-                            work_item.attributes.additional_properties[
-                                self.capella_uuid_attribute
-                            ],
                             unset_str_builder(work_item.attributes.status),
                             work_item.attributes.additional_properties,
                         )
