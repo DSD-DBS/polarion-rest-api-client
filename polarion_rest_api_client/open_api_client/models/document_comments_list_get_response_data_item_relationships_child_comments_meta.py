@@ -9,9 +9,7 @@ from ..types import UNSET, Unset
 
 T = TypeVar(
     "T",
-    bound=(
-        "DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta"
-    ),
+    bound="DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta",
 )
 
 
