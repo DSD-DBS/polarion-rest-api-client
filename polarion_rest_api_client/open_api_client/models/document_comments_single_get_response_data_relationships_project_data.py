@@ -71,16 +71,16 @@ class DocumentCommentsSingleGetResponseDataRelationshipsProjectData:
 
         revision = d.pop("revision", UNSET)
 
-        document_comments_single_get_response_data_relationships_project_data = cls(
+        document_comments_single_get_response_data_relationships_project_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        document_comments_single_get_response_data_relationships_project_data.additional_properties = (
+        document_comments_single_get_response_data_relationships_project_data_obj.additional_properties = (
             d
         )
-        return document_comments_single_get_response_data_relationships_project_data
+        return document_comments_single_get_response_data_relationships_project_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

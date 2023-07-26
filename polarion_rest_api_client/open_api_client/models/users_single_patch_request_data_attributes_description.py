@@ -58,15 +58,15 @@ class UsersSinglePatchRequestDataAttributesDescription:
 
         value = d.pop("value", UNSET)
 
-        users_single_patch_request_data_attributes_description = cls(
+        users_single_patch_request_data_attributes_description_obj = cls(
             type=type,
             value=value,
         )
 
-        users_single_patch_request_data_attributes_description.additional_properties = (
+        users_single_patch_request_data_attributes_description_obj.additional_properties = (
             d
         )
-        return users_single_patch_request_data_attributes_description
+        return users_single_patch_request_data_attributes_description_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -61,12 +61,12 @@ class PagesSingleGetResponseDataMeta:
 
             errors.append(errors_item)
 
-        pages_single_get_response_data_meta = cls(
+        pages_single_get_response_data_meta_obj = cls(
             errors=errors,
         )
 
-        pages_single_get_response_data_meta.additional_properties = d
-        return pages_single_get_response_data_meta
+        pages_single_get_response_data_meta_obj.additional_properties = d
+        return pages_single_get_response_data_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

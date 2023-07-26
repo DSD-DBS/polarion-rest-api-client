@@ -92,7 +92,7 @@ class UsergroupsSingleGetResponseDataAttributes:
 
         sso_synchronization_allowed = d.pop("ssoSynchronizationAllowed", UNSET)
 
-        usergroups_single_get_response_data_attributes = cls(
+        usergroups_single_get_response_data_attributes_obj = cls(
             description=description,
             id=id,
             ldap_search_filter=ldap_search_filter,
@@ -100,10 +100,10 @@ class UsergroupsSingleGetResponseDataAttributes:
             sso_synchronization_allowed=sso_synchronization_allowed,
         )
 
-        usergroups_single_get_response_data_attributes.additional_properties = (
+        usergroups_single_get_response_data_attributes_obj.additional_properties = (
             d
         )
-        return usergroups_single_get_response_data_attributes
+        return usergroups_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

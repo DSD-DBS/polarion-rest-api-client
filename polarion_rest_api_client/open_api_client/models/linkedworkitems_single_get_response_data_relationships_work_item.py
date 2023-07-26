@@ -62,14 +62,14 @@ class LinkedworkitemsSingleGetResponseDataRelationshipsWorkItem:
                 _data
             )
 
-        linkedworkitems_single_get_response_data_relationships_work_item = cls(
+        linkedworkitems_single_get_response_data_relationships_work_item_obj = cls(
             data=data,
         )
 
-        linkedworkitems_single_get_response_data_relationships_work_item.additional_properties = (
+        linkedworkitems_single_get_response_data_relationships_work_item_obj.additional_properties = (
             d
         )
-        return linkedworkitems_single_get_response_data_relationships_work_item
+        return linkedworkitems_single_get_response_data_relationships_work_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

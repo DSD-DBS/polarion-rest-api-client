@@ -86,14 +86,14 @@ class LinkedworkitemsSinglePatchRequestData:
                 )
             )
 
-        linkedworkitems_single_patch_request_data = cls(
+        linkedworkitems_single_patch_request_data_obj = cls(
             type=type,
             id=id,
             attributes=attributes,
         )
 
-        linkedworkitems_single_patch_request_data.additional_properties = d
-        return linkedworkitems_single_patch_request_data
+        linkedworkitems_single_patch_request_data_obj.additional_properties = d
+        return linkedworkitems_single_patch_request_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

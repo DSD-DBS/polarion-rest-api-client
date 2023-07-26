@@ -59,12 +59,12 @@ class WorkitemsListPostResponse:
 
             data.append(data_item)
 
-        workitems_list_post_response = cls(
+        workitems_list_post_response_obj = cls(
             data=data,
         )
 
-        workitems_list_post_response.additional_properties = d
-        return workitems_list_post_response
+        workitems_list_post_response_obj.additional_properties = d
+        return workitems_list_post_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

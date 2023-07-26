@@ -90,17 +90,17 @@ class DocumentCommentsListGetResponseDataItemAttributes:
                 _text
             )
 
-        document_comments_list_get_response_data_item_attributes = cls(
+        document_comments_list_get_response_data_item_attributes_obj = cls(
             created=created,
             id=id,
             resolved=resolved,
             text=text,
         )
 
-        document_comments_list_get_response_data_item_attributes.additional_properties = (
+        document_comments_list_get_response_data_item_attributes_obj.additional_properties = (
             d
         )
-        return document_comments_list_get_response_data_item_attributes
+        return document_comments_list_get_response_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

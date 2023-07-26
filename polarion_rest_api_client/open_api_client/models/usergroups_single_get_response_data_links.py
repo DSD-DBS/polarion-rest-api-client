@@ -36,12 +36,12 @@ class UsergroupsSingleGetResponseDataLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        usergroups_single_get_response_data_links = cls(
+        usergroups_single_get_response_data_links_obj = cls(
             self_=self_,
         )
 
-        usergroups_single_get_response_data_links.additional_properties = d
-        return usergroups_single_get_response_data_links
+        usergroups_single_get_response_data_links_obj.additional_properties = d
+        return usergroups_single_get_response_data_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

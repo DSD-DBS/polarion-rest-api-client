@@ -69,7 +69,7 @@ class EnumOptionsActionResponseBodyLinks:
 
         self_ = d.pop("self", UNSET)
 
-        enum_options_action_response_body_links = cls(
+        enum_options_action_response_body_links_obj = cls(
             first=first,
             prev=prev,
             next_=next_,
@@ -77,8 +77,8 @@ class EnumOptionsActionResponseBodyLinks:
             self_=self_,
         )
 
-        enum_options_action_response_body_links.additional_properties = d
-        return enum_options_action_response_body_links
+        enum_options_action_response_body_links_obj.additional_properties = d
+        return enum_options_action_response_body_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

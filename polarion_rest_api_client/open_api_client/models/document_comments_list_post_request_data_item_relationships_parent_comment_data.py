@@ -65,15 +65,15 @@ class DocumentCommentsListPostRequestDataItemRelationshipsParentCommentData:
 
         id = d.pop("id", UNSET)
 
-        document_comments_list_post_request_data_item_relationships_parent_comment_data = cls(
+        document_comments_list_post_request_data_item_relationships_parent_comment_data_obj = cls(
             type=type,
             id=id,
         )
 
-        document_comments_list_post_request_data_item_relationships_parent_comment_data.additional_properties = (
+        document_comments_list_post_request_data_item_relationships_parent_comment_data_obj.additional_properties = (
             d
         )
-        return document_comments_list_post_request_data_item_relationships_parent_comment_data
+        return document_comments_list_post_request_data_item_relationships_parent_comment_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

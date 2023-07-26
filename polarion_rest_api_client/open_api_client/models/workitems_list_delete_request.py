@@ -59,12 +59,12 @@ class WorkitemsListDeleteRequest:
 
             data.append(data_item)
 
-        workitems_list_delete_request = cls(
+        workitems_list_delete_request_obj = cls(
             data=data,
         )
 
-        workitems_list_delete_request.additional_properties = d
-        return workitems_list_delete_request
+        workitems_list_delete_request_obj.additional_properties = d
+        return workitems_list_delete_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

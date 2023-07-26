@@ -119,14 +119,16 @@ class UsersSinglePatchRequestDataRelationships:
                 )
             )
 
-        users_single_patch_request_data_relationships = cls(
+        users_single_patch_request_data_relationships_obj = cls(
             global_roles=global_roles,
             project_roles=project_roles,
             user_groups=user_groups,
         )
 
-        users_single_patch_request_data_relationships.additional_properties = d
-        return users_single_patch_request_data_relationships
+        users_single_patch_request_data_relationships_obj.additional_properties = (
+            d
+        )
+        return users_single_patch_request_data_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:

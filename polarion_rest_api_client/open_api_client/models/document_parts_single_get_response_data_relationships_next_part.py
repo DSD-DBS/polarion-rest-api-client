@@ -61,14 +61,18 @@ class DocumentPartsSingleGetResponseDataRelationshipsNextPart:
                 _data
             )
 
-        document_parts_single_get_response_data_relationships_next_part = cls(
-            data=data,
+        document_parts_single_get_response_data_relationships_next_part_obj = (
+            cls(
+                data=data,
+            )
         )
 
-        document_parts_single_get_response_data_relationships_next_part.additional_properties = (
+        document_parts_single_get_response_data_relationships_next_part_obj.additional_properties = (
             d
         )
-        return document_parts_single_get_response_data_relationships_next_part
+        return (
+            document_parts_single_get_response_data_relationships_next_part_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

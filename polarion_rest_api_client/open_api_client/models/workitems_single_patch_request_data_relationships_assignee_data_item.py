@@ -63,15 +63,15 @@ class WorkitemsSinglePatchRequestDataRelationshipsAssigneeDataItem:
 
         id = d.pop("id", UNSET)
 
-        workitems_single_patch_request_data_relationships_assignee_data_item = cls(
+        workitems_single_patch_request_data_relationships_assignee_data_item_obj = cls(
             type=type,
             id=id,
         )
 
-        workitems_single_patch_request_data_relationships_assignee_data_item.additional_properties = (
+        workitems_single_patch_request_data_relationships_assignee_data_item_obj.additional_properties = (
             d
         )
-        return workitems_single_patch_request_data_relationships_assignee_data_item
+        return workitems_single_patch_request_data_relationships_assignee_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

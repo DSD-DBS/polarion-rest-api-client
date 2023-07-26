@@ -116,16 +116,16 @@ class WorkitemsListGetResponseDataItemRelationshipsComments:
                 _links
             )
 
-        workitems_list_get_response_data_item_relationships_comments = cls(
+        workitems_list_get_response_data_item_relationships_comments_obj = cls(
             data=data,
             meta=meta,
             links=links,
         )
 
-        workitems_list_get_response_data_item_relationships_comments.additional_properties = (
+        workitems_list_get_response_data_item_relationships_comments_obj.additional_properties = (
             d
         )
-        return workitems_list_get_response_data_item_relationships_comments
+        return workitems_list_get_response_data_item_relationships_comments_obj
 
     @property
     def additional_keys(self) -> List[str]:

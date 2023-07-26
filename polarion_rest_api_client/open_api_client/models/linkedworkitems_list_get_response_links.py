@@ -69,7 +69,7 @@ class LinkedworkitemsListGetResponseLinks:
 
         last = d.pop("last", UNSET)
 
-        linkedworkitems_list_get_response_links = cls(
+        linkedworkitems_list_get_response_links_obj = cls(
             self_=self_,
             first=first,
             prev=prev,
@@ -77,8 +77,8 @@ class LinkedworkitemsListGetResponseLinks:
             last=last,
         )
 
-        linkedworkitems_list_get_response_links.additional_properties = d
-        return linkedworkitems_list_get_response_links
+        linkedworkitems_list_get_response_links_obj.additional_properties = d
+        return linkedworkitems_list_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

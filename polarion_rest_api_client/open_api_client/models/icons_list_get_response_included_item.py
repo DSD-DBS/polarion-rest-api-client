@@ -24,10 +24,10 @@ class IconsListGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        icons_list_get_response_included_item = cls()
+        icons_list_get_response_included_item_obj = cls()
 
-        icons_list_get_response_included_item.additional_properties = d
-        return icons_list_get_response_included_item
+        icons_list_get_response_included_item_obj.additional_properties = d
+        return icons_list_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

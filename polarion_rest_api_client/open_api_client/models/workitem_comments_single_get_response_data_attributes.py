@@ -98,7 +98,7 @@ class WorkitemCommentsSingleGetResponseDataAttributes:
 
         title = d.pop("title", UNSET)
 
-        workitem_comments_single_get_response_data_attributes = cls(
+        workitem_comments_single_get_response_data_attributes_obj = cls(
             created=created,
             id=id,
             resolved=resolved,
@@ -106,10 +106,10 @@ class WorkitemCommentsSingleGetResponseDataAttributes:
             title=title,
         )
 
-        workitem_comments_single_get_response_data_attributes.additional_properties = (
+        workitem_comments_single_get_response_data_attributes_obj.additional_properties = (
             d
         )
-        return workitem_comments_single_get_response_data_attributes
+        return workitem_comments_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

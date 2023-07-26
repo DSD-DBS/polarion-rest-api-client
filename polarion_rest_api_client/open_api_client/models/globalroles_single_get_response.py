@@ -105,14 +105,14 @@ class GlobalrolesSingleGetResponse:
         else:
             links = GlobalrolesSingleGetResponseLinks.from_dict(_links)
 
-        globalroles_single_get_response = cls(
+        globalroles_single_get_response_obj = cls(
             data=data,
             included=included,
             links=links,
         )
 
-        globalroles_single_get_response.additional_properties = d
-        return globalroles_single_get_response
+        globalroles_single_get_response_obj.additional_properties = d
+        return globalroles_single_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -66,15 +66,15 @@ class DocumentCommentsListPostRequestDataItemAttributes:
                 _text
             )
 
-        document_comments_list_post_request_data_item_attributes = cls(
+        document_comments_list_post_request_data_item_attributes_obj = cls(
             resolved=resolved,
             text=text,
         )
 
-        document_comments_list_post_request_data_item_attributes.additional_properties = (
+        document_comments_list_post_request_data_item_attributes_obj.additional_properties = (
             d
         )
-        return document_comments_list_post_request_data_item_attributes
+        return document_comments_list_post_request_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

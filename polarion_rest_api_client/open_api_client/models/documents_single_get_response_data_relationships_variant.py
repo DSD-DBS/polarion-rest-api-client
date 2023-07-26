@@ -59,14 +59,14 @@ class DocumentsSingleGetResponseDataRelationshipsVariant:
                 _data
             )
 
-        documents_single_get_response_data_relationships_variant = cls(
+        documents_single_get_response_data_relationships_variant_obj = cls(
             data=data,
         )
 
-        documents_single_get_response_data_relationships_variant.additional_properties = (
+        documents_single_get_response_data_relationships_variant_obj.additional_properties = (
             d
         )
-        return documents_single_get_response_data_relationships_variant
+        return documents_single_get_response_data_relationships_variant_obj
 
     @property
     def additional_keys(self) -> List[str]:

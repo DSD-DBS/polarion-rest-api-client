@@ -24,10 +24,10 @@ class ResourceReference:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        resource_reference = cls()
+        resource_reference_obj = cls()
 
-        resource_reference.additional_properties = d
-        return resource_reference
+        resource_reference_obj.additional_properties = d
+        return resource_reference_obj
 
     @property
     def additional_keys(self) -> List[str]:

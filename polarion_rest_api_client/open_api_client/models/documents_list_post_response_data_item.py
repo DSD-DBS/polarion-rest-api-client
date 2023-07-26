@@ -78,14 +78,14 @@ class DocumentsListPostResponseDataItem:
         else:
             links = DocumentsListPostResponseDataItemLinks.from_dict(_links)
 
-        documents_list_post_response_data_item = cls(
+        documents_list_post_response_data_item_obj = cls(
             type=type,
             id=id,
             links=links,
         )
 
-        documents_list_post_response_data_item.additional_properties = d
-        return documents_list_post_response_data_item
+        documents_list_post_response_data_item_obj.additional_properties = d
+        return documents_list_post_response_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

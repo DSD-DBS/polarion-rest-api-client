@@ -46,15 +46,15 @@ class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesIt
 
         value = d.pop("value", UNSET)
 
-        documents_list_post_request_data_item_attributes_rendering_layouts_item_properties_item = cls(
+        documents_list_post_request_data_item_attributes_rendering_layouts_item_properties_item_obj = cls(
             key=key,
             value=value,
         )
 
-        documents_list_post_request_data_item_attributes_rendering_layouts_item_properties_item.additional_properties = (
+        documents_list_post_request_data_item_attributes_rendering_layouts_item_properties_item_obj.additional_properties = (
             d
         )
-        return documents_list_post_request_data_item_attributes_rendering_layouts_item_properties_item
+        return documents_list_post_request_data_item_attributes_rendering_layouts_item_properties_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

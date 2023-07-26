@@ -62,15 +62,19 @@ class WorkitemsListPostRequestDataItemRelationshipsAuthorData:
 
         id = d.pop("id", UNSET)
 
-        workitems_list_post_request_data_item_relationships_author_data = cls(
-            type=type,
-            id=id,
+        workitems_list_post_request_data_item_relationships_author_data_obj = (
+            cls(
+                type=type,
+                id=id,
+            )
         )
 
-        workitems_list_post_request_data_item_relationships_author_data.additional_properties = (
+        workitems_list_post_request_data_item_relationships_author_data_obj.additional_properties = (
             d
         )
-        return workitems_list_post_request_data_item_relationships_author_data
+        return (
+            workitems_list_post_request_data_item_relationships_author_data_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

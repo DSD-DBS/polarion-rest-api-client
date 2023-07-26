@@ -65,19 +65,15 @@ class DocumentsListPostRequestDataItemAttributesHomePageContent:
 
         value = d.pop("value", UNSET)
 
-        documents_list_post_request_data_item_attributes_home_page_content = (
-            cls(
-                type=type,
-                value=value,
-            )
+        documents_list_post_request_data_item_attributes_home_page_content_obj = cls(
+            type=type,
+            value=value,
         )
 
-        documents_list_post_request_data_item_attributes_home_page_content.additional_properties = (
+        documents_list_post_request_data_item_attributes_home_page_content_obj.additional_properties = (
             d
         )
-        return (
-            documents_list_post_request_data_item_attributes_home_page_content
-        )
+        return documents_list_post_request_data_item_attributes_home_page_content_obj
 
     @property
     def additional_keys(self) -> List[str]:

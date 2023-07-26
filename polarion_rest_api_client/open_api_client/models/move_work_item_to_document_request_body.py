@@ -50,14 +50,14 @@ class MoveWorkItemToDocumentRequestBody:
 
         next_part = d.pop("nextPart", UNSET)
 
-        move_work_item_to_document_request_body = cls(
+        move_work_item_to_document_request_body_obj = cls(
             target_document=target_document,
             previous_part=previous_part,
             next_part=next_part,
         )
 
-        move_work_item_to_document_request_body.additional_properties = d
-        return move_work_item_to_document_request_body
+        move_work_item_to_document_request_body_obj.additional_properties = d
+        return move_work_item_to_document_request_body_obj
 
     @property
     def additional_keys(self) -> List[str]:

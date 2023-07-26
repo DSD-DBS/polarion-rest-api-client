@@ -105,7 +105,7 @@ class UsersSingleGetResponseDataAttributes:
 
         name = d.pop("name", UNSET)
 
-        users_single_get_response_data_attributes = cls(
+        users_single_get_response_data_attributes_obj = cls(
             avatar_url=avatar_url,
             description=description,
             disabled_notifications=disabled_notifications,
@@ -115,8 +115,8 @@ class UsersSingleGetResponseDataAttributes:
             name=name,
         )
 
-        users_single_get_response_data_attributes.additional_properties = d
-        return users_single_get_response_data_attributes
+        users_single_get_response_data_attributes_obj.additional_properties = d
+        return users_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

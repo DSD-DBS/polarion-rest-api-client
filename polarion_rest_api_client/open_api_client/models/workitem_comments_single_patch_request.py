@@ -53,12 +53,12 @@ class WorkitemCommentsSinglePatchRequest:
         else:
             data = WorkitemCommentsSinglePatchRequestData.from_dict(_data)
 
-        workitem_comments_single_patch_request = cls(
+        workitem_comments_single_patch_request_obj = cls(
             data=data,
         )
 
-        workitem_comments_single_patch_request.additional_properties = d
-        return workitem_comments_single_patch_request
+        workitem_comments_single_patch_request_obj.additional_properties = d
+        return workitem_comments_single_patch_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

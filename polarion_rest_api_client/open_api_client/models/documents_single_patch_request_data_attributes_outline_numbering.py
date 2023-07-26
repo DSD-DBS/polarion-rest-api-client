@@ -38,14 +38,14 @@ class DocumentsSinglePatchRequestDataAttributesOutlineNumbering:
         d = src_dict.copy()
         prefix = d.pop("prefix", UNSET)
 
-        documents_single_patch_request_data_attributes_outline_numbering = cls(
+        documents_single_patch_request_data_attributes_outline_numbering_obj = cls(
             prefix=prefix,
         )
 
-        documents_single_patch_request_data_attributes_outline_numbering.additional_properties = (
+        documents_single_patch_request_data_attributes_outline_numbering_obj.additional_properties = (
             d
         )
-        return documents_single_patch_request_data_attributes_outline_numbering
+        return documents_single_patch_request_data_attributes_outline_numbering_obj
 
     @property
     def additional_keys(self) -> List[str]:

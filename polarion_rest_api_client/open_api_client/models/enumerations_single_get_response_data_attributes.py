@@ -83,17 +83,17 @@ class EnumerationsSingleGetResponseDataAttributes:
 
         target_type = d.pop("targetType", UNSET)
 
-        enumerations_single_get_response_data_attributes = cls(
+        enumerations_single_get_response_data_attributes_obj = cls(
             enum_context=enum_context,
             enum_name=enum_name,
             options=options,
             target_type=target_type,
         )
 
-        enumerations_single_get_response_data_attributes.additional_properties = (
+        enumerations_single_get_response_data_attributes_obj.additional_properties = (
             d
         )
-        return enumerations_single_get_response_data_attributes
+        return enumerations_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

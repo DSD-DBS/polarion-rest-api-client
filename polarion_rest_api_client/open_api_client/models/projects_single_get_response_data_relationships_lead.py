@@ -59,14 +59,14 @@ class ProjectsSingleGetResponseDataRelationshipsLead:
                 )
             )
 
-        projects_single_get_response_data_relationships_lead = cls(
+        projects_single_get_response_data_relationships_lead_obj = cls(
             data=data,
         )
 
-        projects_single_get_response_data_relationships_lead.additional_properties = (
+        projects_single_get_response_data_relationships_lead_obj.additional_properties = (
             d
         )
-        return projects_single_get_response_data_relationships_lead
+        return projects_single_get_response_data_relationships_lead_obj
 
     @property
     def additional_keys(self) -> List[str]:

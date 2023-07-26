@@ -36,12 +36,12 @@ class EnumOptionsActionResponseBodyMeta:
         d = src_dict.copy()
         total_count = d.pop("totalCount", UNSET)
 
-        enum_options_action_response_body_meta = cls(
+        enum_options_action_response_body_meta_obj = cls(
             total_count=total_count,
         )
 
-        enum_options_action_response_body_meta.additional_properties = d
-        return enum_options_action_response_body_meta
+        enum_options_action_response_body_meta_obj.additional_properties = d
+        return enum_options_action_response_body_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

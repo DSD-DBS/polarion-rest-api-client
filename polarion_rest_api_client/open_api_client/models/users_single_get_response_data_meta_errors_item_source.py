@@ -43,15 +43,15 @@ class UsersSingleGetResponseDataMetaErrorsItemSource:
 
         parameter = d.pop("parameter", UNSET)
 
-        users_single_get_response_data_meta_errors_item_source = cls(
+        users_single_get_response_data_meta_errors_item_source_obj = cls(
             pointer=pointer,
             parameter=parameter,
         )
 
-        users_single_get_response_data_meta_errors_item_source.additional_properties = (
+        users_single_get_response_data_meta_errors_item_source_obj.additional_properties = (
             d
         )
-        return users_single_get_response_data_meta_errors_item_source
+        return users_single_get_response_data_meta_errors_item_source_obj
 
     @property
     def additional_keys(self) -> List[str]:

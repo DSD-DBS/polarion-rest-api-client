@@ -83,17 +83,17 @@ class WorkitemsSingleGetResponseDataMetaErrorsItem:
                 )
             )
 
-        workitems_single_get_response_data_meta_errors_item = cls(
+        workitems_single_get_response_data_meta_errors_item_obj = cls(
             status=status,
             title=title,
             detail=detail,
             source=source,
         )
 
-        workitems_single_get_response_data_meta_errors_item.additional_properties = (
+        workitems_single_get_response_data_meta_errors_item_obj.additional_properties = (
             d
         )
-        return workitems_single_get_response_data_meta_errors_item
+        return workitems_single_get_response_data_meta_errors_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

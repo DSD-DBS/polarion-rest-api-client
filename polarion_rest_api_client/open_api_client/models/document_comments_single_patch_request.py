@@ -53,12 +53,12 @@ class DocumentCommentsSinglePatchRequest:
         else:
             data = DocumentCommentsSinglePatchRequestData.from_dict(_data)
 
-        document_comments_single_patch_request = cls(
+        document_comments_single_patch_request_obj = cls(
             data=data,
         )
 
-        document_comments_single_patch_request.additional_properties = d
-        return document_comments_single_patch_request
+        document_comments_single_patch_request_obj.additional_properties = d
+        return document_comments_single_patch_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

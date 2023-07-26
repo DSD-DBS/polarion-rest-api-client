@@ -64,14 +64,14 @@ class WorkitemsSinglePatchRequestDataRelationshipsCategories:
 
             data.append(data_item)
 
-        workitems_single_patch_request_data_relationships_categories = cls(
+        workitems_single_patch_request_data_relationships_categories_obj = cls(
             data=data,
         )
 
-        workitems_single_patch_request_data_relationships_categories.additional_properties = (
+        workitems_single_patch_request_data_relationships_categories_obj.additional_properties = (
             d
         )
-        return workitems_single_patch_request_data_relationships_categories
+        return workitems_single_patch_request_data_relationships_categories_obj
 
     @property
     def additional_keys(self) -> List[str]:

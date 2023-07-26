@@ -71,16 +71,16 @@ class DocumentsSingleGetResponseDataRelationshipsAttachmentsDataItem:
 
         revision = d.pop("revision", UNSET)
 
-        documents_single_get_response_data_relationships_attachments_data_item = cls(
+        documents_single_get_response_data_relationships_attachments_data_item_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        documents_single_get_response_data_relationships_attachments_data_item.additional_properties = (
+        documents_single_get_response_data_relationships_attachments_data_item_obj.additional_properties = (
             d
         )
-        return documents_single_get_response_data_relationships_attachments_data_item
+        return documents_single_get_response_data_relationships_attachments_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

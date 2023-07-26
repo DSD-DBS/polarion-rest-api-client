@@ -62,14 +62,14 @@ class UsersListPostRequestDataItemRelationshipsGlobalRoles:
 
             data.append(data_item)
 
-        users_list_post_request_data_item_relationships_global_roles = cls(
+        users_list_post_request_data_item_relationships_global_roles_obj = cls(
             data=data,
         )
 
-        users_list_post_request_data_item_relationships_global_roles.additional_properties = (
+        users_list_post_request_data_item_relationships_global_roles_obj.additional_properties = (
             d
         )
-        return users_list_post_request_data_item_relationships_global_roles
+        return users_list_post_request_data_item_relationships_global_roles_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -63,18 +63,14 @@ class LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem:
                 _data
             )
 
-        linkedworkitems_list_post_request_data_item_relationships_work_item = (
-            cls(
-                data=data,
-            )
+        linkedworkitems_list_post_request_data_item_relationships_work_item_obj = cls(
+            data=data,
         )
 
-        linkedworkitems_list_post_request_data_item_relationships_work_item.additional_properties = (
+        linkedworkitems_list_post_request_data_item_relationships_work_item_obj.additional_properties = (
             d
         )
-        return (
-            linkedworkitems_list_post_request_data_item_relationships_work_item
-        )
+        return linkedworkitems_list_post_request_data_item_relationships_work_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

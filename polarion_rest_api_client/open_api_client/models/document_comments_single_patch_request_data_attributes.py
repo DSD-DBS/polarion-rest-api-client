@@ -36,14 +36,14 @@ class DocumentCommentsSinglePatchRequestDataAttributes:
         d = src_dict.copy()
         resolved = d.pop("resolved", UNSET)
 
-        document_comments_single_patch_request_data_attributes = cls(
+        document_comments_single_patch_request_data_attributes_obj = cls(
             resolved=resolved,
         )
 
-        document_comments_single_patch_request_data_attributes.additional_properties = (
+        document_comments_single_patch_request_data_attributes_obj.additional_properties = (
             d
         )
-        return document_comments_single_patch_request_data_attributes
+        return document_comments_single_patch_request_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

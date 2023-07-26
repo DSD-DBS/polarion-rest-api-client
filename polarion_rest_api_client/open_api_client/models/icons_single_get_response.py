@@ -103,14 +103,14 @@ class IconsSingleGetResponse:
         else:
             links = IconsSingleGetResponseLinks.from_dict(_links)
 
-        icons_single_get_response = cls(
+        icons_single_get_response_obj = cls(
             data=data,
             included=included,
             links=links,
         )
 
-        icons_single_get_response.additional_properties = d
-        return icons_single_get_response
+        icons_single_get_response_obj.additional_properties = d
+        return icons_single_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

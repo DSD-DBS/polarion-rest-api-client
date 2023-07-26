@@ -36,12 +36,12 @@ class EnumerationsSingleGetResponseLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        enumerations_single_get_response_links = cls(
+        enumerations_single_get_response_links_obj = cls(
             self_=self_,
         )
 
-        enumerations_single_get_response_links.additional_properties = d
-        return enumerations_single_get_response_links
+        enumerations_single_get_response_links_obj.additional_properties = d
+        return enumerations_single_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

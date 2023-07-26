@@ -164,7 +164,7 @@ class LinkedworkitemsSingleGetResponseData:
         else:
             links = LinkedworkitemsSingleGetResponseDataLinks.from_dict(_links)
 
-        linkedworkitems_single_get_response_data = cls(
+        linkedworkitems_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -174,8 +174,8 @@ class LinkedworkitemsSingleGetResponseData:
             links=links,
         )
 
-        linkedworkitems_single_get_response_data.additional_properties = d
-        return linkedworkitems_single_get_response_data
+        linkedworkitems_single_get_response_data_obj.additional_properties = d
+        return linkedworkitems_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

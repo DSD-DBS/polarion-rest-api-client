@@ -166,7 +166,7 @@ class DocumentsListPostRequestDataItemAttributes:
 
         uses_outline_numbering = d.pop("usesOutlineNumbering", UNSET)
 
-        documents_list_post_request_data_item_attributes = cls(
+        documents_list_post_request_data_item_attributes_obj = cls(
             auto_suspect=auto_suspect,
             home_page_content=home_page_content,
             module_name=module_name,
@@ -179,10 +179,10 @@ class DocumentsListPostRequestDataItemAttributes:
             uses_outline_numbering=uses_outline_numbering,
         )
 
-        documents_list_post_request_data_item_attributes.additional_properties = (
+        documents_list_post_request_data_item_attributes_obj.additional_properties = (
             d
         )
-        return documents_list_post_request_data_item_attributes
+        return documents_list_post_request_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

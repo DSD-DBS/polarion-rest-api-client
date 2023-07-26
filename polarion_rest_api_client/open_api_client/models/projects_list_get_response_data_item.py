@@ -160,7 +160,7 @@ class ProjectsListGetResponseDataItem:
         else:
             links = ProjectsListGetResponseDataItemLinks.from_dict(_links)
 
-        projects_list_get_response_data_item = cls(
+        projects_list_get_response_data_item_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -170,8 +170,8 @@ class ProjectsListGetResponseDataItem:
             links=links,
         )
 
-        projects_list_get_response_data_item.additional_properties = d
-        return projects_list_get_response_data_item
+        projects_list_get_response_data_item_obj.additional_properties = d
+        return projects_list_get_response_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

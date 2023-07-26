@@ -89,15 +89,15 @@ class WorkitemsSingleGetResponseDataRelationshipsAssignee:
                 _meta
             )
 
-        workitems_single_get_response_data_relationships_assignee = cls(
+        workitems_single_get_response_data_relationships_assignee_obj = cls(
             data=data,
             meta=meta,
         )
 
-        workitems_single_get_response_data_relationships_assignee.additional_properties = (
+        workitems_single_get_response_data_relationships_assignee_obj.additional_properties = (
             d
         )
-        return workitems_single_get_response_data_relationships_assignee
+        return workitems_single_get_response_data_relationships_assignee_obj
 
     @property
     def additional_keys(self) -> List[str]:

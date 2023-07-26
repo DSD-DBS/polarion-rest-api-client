@@ -59,14 +59,14 @@ class DocumentsSingleGetResponseDataRelationshipsUpdatedBy:
                 _data
             )
 
-        documents_single_get_response_data_relationships_updated_by = cls(
+        documents_single_get_response_data_relationships_updated_by_obj = cls(
             data=data,
         )
 
-        documents_single_get_response_data_relationships_updated_by.additional_properties = (
+        documents_single_get_response_data_relationships_updated_by_obj.additional_properties = (
             d
         )
-        return documents_single_get_response_data_relationships_updated_by
+        return documents_single_get_response_data_relationships_updated_by_obj
 
     @property
     def additional_keys(self) -> List[str]:

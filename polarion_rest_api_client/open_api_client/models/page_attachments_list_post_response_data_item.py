@@ -80,14 +80,16 @@ class PageAttachmentsListPostResponseDataItem:
                 _links
             )
 
-        page_attachments_list_post_response_data_item = cls(
+        page_attachments_list_post_response_data_item_obj = cls(
             type=type,
             id=id,
             links=links,
         )
 
-        page_attachments_list_post_response_data_item.additional_properties = d
-        return page_attachments_list_post_response_data_item
+        page_attachments_list_post_response_data_item_obj.additional_properties = (
+            d
+        )
+        return page_attachments_list_post_response_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

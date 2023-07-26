@@ -105,14 +105,14 @@ class ProjectsSingleGetResponse:
         else:
             links = ProjectsSingleGetResponseLinks.from_dict(_links)
 
-        projects_single_get_response = cls(
+        projects_single_get_response_obj = cls(
             data=data,
             included=included,
             links=links,
         )
 
-        projects_single_get_response.additional_properties = d
-        return projects_single_get_response
+        projects_single_get_response_obj.additional_properties = d
+        return projects_single_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

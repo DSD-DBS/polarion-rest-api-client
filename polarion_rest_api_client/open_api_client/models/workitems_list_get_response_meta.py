@@ -36,12 +36,12 @@ class WorkitemsListGetResponseMeta:
         d = src_dict.copy()
         total_count = d.pop("totalCount", UNSET)
 
-        workitems_list_get_response_meta = cls(
+        workitems_list_get_response_meta_obj = cls(
             total_count=total_count,
         )
 
-        workitems_list_get_response_meta.additional_properties = d
-        return workitems_list_get_response_meta
+        workitems_list_get_response_meta_obj.additional_properties = d
+        return workitems_list_get_response_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

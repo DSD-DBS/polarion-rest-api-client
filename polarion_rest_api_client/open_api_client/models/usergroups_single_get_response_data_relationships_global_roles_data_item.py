@@ -65,15 +65,15 @@ class UsergroupsSingleGetResponseDataRelationshipsGlobalRolesDataItem:
 
         id = d.pop("id", UNSET)
 
-        usergroups_single_get_response_data_relationships_global_roles_data_item = cls(
+        usergroups_single_get_response_data_relationships_global_roles_data_item_obj = cls(
             type=type,
             id=id,
         )
 
-        usergroups_single_get_response_data_relationships_global_roles_data_item.additional_properties = (
+        usergroups_single_get_response_data_relationships_global_roles_data_item_obj.additional_properties = (
             d
         )
-        return usergroups_single_get_response_data_relationships_global_roles_data_item
+        return usergroups_single_get_response_data_relationships_global_roles_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

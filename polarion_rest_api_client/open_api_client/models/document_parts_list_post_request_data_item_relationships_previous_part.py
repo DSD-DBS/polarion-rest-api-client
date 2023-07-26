@@ -63,14 +63,14 @@ class DocumentPartsListPostRequestDataItemRelationshipsPreviousPart:
                 _data
             )
 
-        document_parts_list_post_request_data_item_relationships_previous_part = cls(
+        document_parts_list_post_request_data_item_relationships_previous_part_obj = cls(
             data=data,
         )
 
-        document_parts_list_post_request_data_item_relationships_previous_part.additional_properties = (
+        document_parts_list_post_request_data_item_relationships_previous_part_obj.additional_properties = (
             d
         )
-        return document_parts_list_post_request_data_item_relationships_previous_part
+        return document_parts_list_post_request_data_item_relationships_previous_part_obj
 
     @property
     def additional_keys(self) -> List[str]:

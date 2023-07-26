@@ -38,14 +38,14 @@ class WorkitemsSingleGetResponseDataRelationshipsCategoriesMeta:
         d = src_dict.copy()
         total_count = d.pop("totalCount", UNSET)
 
-        workitems_single_get_response_data_relationships_categories_meta = cls(
+        workitems_single_get_response_data_relationships_categories_meta_obj = cls(
             total_count=total_count,
         )
 
-        workitems_single_get_response_data_relationships_categories_meta.additional_properties = (
+        workitems_single_get_response_data_relationships_categories_meta_obj.additional_properties = (
             d
         )
-        return workitems_single_get_response_data_relationships_categories_meta
+        return workitems_single_get_response_data_relationships_categories_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

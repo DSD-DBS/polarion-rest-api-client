@@ -61,14 +61,14 @@ class PagesSingleGetResponseDataRelationshipsUpdatedBy:
                 )
             )
 
-        pages_single_get_response_data_relationships_updated_by = cls(
+        pages_single_get_response_data_relationships_updated_by_obj = cls(
             data=data,
         )
 
-        pages_single_get_response_data_relationships_updated_by.additional_properties = (
+        pages_single_get_response_data_relationships_updated_by_obj.additional_properties = (
             d
         )
-        return pages_single_get_response_data_relationships_updated_by
+        return pages_single_get_response_data_relationships_updated_by_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -24,10 +24,10 @@ class UsersSingleGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        users_single_get_response_included_item = cls()
+        users_single_get_response_included_item_obj = cls()
 
-        users_single_get_response_included_item.additional_properties = d
-        return users_single_get_response_included_item
+        users_single_get_response_included_item_obj.additional_properties = d
+        return users_single_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

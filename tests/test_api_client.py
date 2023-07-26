@@ -8,7 +8,6 @@ import pytest
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
-from polarion_rest_api_client import client as polarion_client
 
 TEST_DATA_ROOT = pathlib.Path(__file__).parent / "data"
 TEST_RESPONSES = TEST_DATA_ROOT / "mock_api_responses"
@@ -17,13 +16,13 @@ TEST_REQUESTS = TEST_DATA_ROOT / "expected_requests"
 
 @pytest.fixture()
 def client():
-    yield polarion_client.OpenAPIPolarionProjectClient(
+    yield polarion_api.OpenAPIPolarionProjectClient(
         "PROJ", False, "http://127.0.0.1/api", "PAT123"
     )
 
 
 def test_api_authentication(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "project.json") as f:
@@ -35,7 +34,7 @@ def test_api_authentication(
 
 
 def test_check_existing_project(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "project.json") as f:
@@ -44,7 +43,7 @@ def test_check_existing_project(
 
 
 def test_check_non_existing_project(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(status_code=404)
@@ -52,7 +51,7 @@ def test_check_non_existing_project(
 
 
 def test_get_all_work_items_multi_page(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "workitems_next_page.json") as f:
@@ -82,7 +81,7 @@ def test_get_all_work_items_multi_page(
 
 
 def test_get_all_work_items_single_page(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "workitems_no_next_page.json") as f:
@@ -105,7 +104,7 @@ def test_get_all_work_items_single_page(
 
 
 def test_get_all_work_items_faulty_item(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "workitems_next_page_error.json") as f:
@@ -122,7 +121,7 @@ def test_get_all_work_items_faulty_item(
 
 
 def test_create_work_item(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "created_work_items.json") as f:
@@ -147,7 +146,7 @@ def test_create_work_item(
 
 
 def test_create_work_items_successfully(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "created_work_items.json") as f:
@@ -173,7 +172,7 @@ def test_create_work_items_successfully(
 
 
 def test_create_work_items_failed(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "error.json") as f:
@@ -198,7 +197,7 @@ def test_create_work_items_failed(
 
 
 def test_create_work_items_failed_no_error(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(501, content=b"asdfg")
@@ -220,13 +219,13 @@ def test_create_work_items_failed_no_error(
 
 
 def test_update_work_item_completely(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
     client.update_work_item(
-        polarion_client.WorkItem(
+        polarion_api.WorkItem(
             id="MyWorkItemId",
             description_type="text/html",
             description="My text value",
@@ -245,13 +244,13 @@ def test_update_work_item_completely(
 
 
 def test_update_work_item_description(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
     client.update_work_item(
-        polarion_client.WorkItem(
+        polarion_api.WorkItem(
             id="MyWorkItemId",
             description_type="text/html",
             description="My text value",
@@ -267,13 +266,13 @@ def test_update_work_item_description(
 
 
 def test_update_work_item_title(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
     client.update_work_item(
-        polarion_client.WorkItem(
+        polarion_api.WorkItem(
             id="MyWorkItemId",
             title="Title",
         )
@@ -288,13 +287,13 @@ def test_update_work_item_title(
 
 
 def test_update_work_item_status(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
     client.update_work_item(
-        polarion_client.WorkItem(
+        polarion_api.WorkItem(
             id="MyWorkItemId",
             status="open",
         )
@@ -309,7 +308,7 @@ def test_update_work_item_status(
 
 
 def test_delete_work_item_status_mode(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
@@ -324,7 +323,7 @@ def test_delete_work_item_status_mode(
 
 
 def test_delete_work_item_delete_mode(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
@@ -341,7 +340,7 @@ def test_delete_work_item_delete_mode(
 
 
 def test_get_work_item_links_single_page(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "get_linked_work_items_no_next_page.json") as f:
@@ -369,7 +368,7 @@ def test_get_work_item_links_single_page(
 
 
 def test_get_work_item_links_multi_page(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "get_linked_work_items_next_page.json") as f:
@@ -395,7 +394,7 @@ def test_get_work_item_links_multi_page(
 
 
 def test_delete_work_item_link(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
@@ -414,7 +413,7 @@ def test_delete_work_item_link(
 
 
 def test_delete_work_item_links(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
@@ -438,7 +437,7 @@ def test_delete_work_item_links(
 
 
 def test_delete_work_item_links_multi_primary(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
@@ -466,7 +465,7 @@ def test_delete_work_item_links_multi_primary(
 
 
 def test_create_work_item_link(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "created_work_item_links.json") as f:
@@ -489,7 +488,7 @@ def test_create_work_item_link(
 
 
 def test_create_work_item_links_different_primaries(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "created_work_item_links.json") as f:
@@ -530,7 +529,7 @@ def test_create_work_item_links_different_primaries(
 
 
 def test_create_work_item_links_same_primaries(
-    client: polarion_client.OpenAPIPolarionProjectClient,
+    client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_RESPONSES / "created_work_item_links.json") as f:

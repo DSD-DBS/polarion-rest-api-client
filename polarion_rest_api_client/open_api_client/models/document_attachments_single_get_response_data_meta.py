@@ -61,14 +61,14 @@ class DocumentAttachmentsSingleGetResponseDataMeta:
 
             errors.append(errors_item)
 
-        document_attachments_single_get_response_data_meta = cls(
+        document_attachments_single_get_response_data_meta_obj = cls(
             errors=errors,
         )
 
-        document_attachments_single_get_response_data_meta.additional_properties = (
+        document_attachments_single_get_response_data_meta_obj.additional_properties = (
             d
         )
-        return document_attachments_single_get_response_data_meta
+        return document_attachments_single_get_response_data_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

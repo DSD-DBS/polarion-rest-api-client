@@ -101,14 +101,14 @@ class EnumOptionsActionResponseBody:
         else:
             links = EnumOptionsActionResponseBodyLinks.from_dict(_links)
 
-        enum_options_action_response_body = cls(
+        enum_options_action_response_body_obj = cls(
             meta=meta,
             data=data,
             links=links,
         )
 
-        enum_options_action_response_body.additional_properties = d
-        return enum_options_action_response_body
+        enum_options_action_response_body_obj.additional_properties = d
+        return enum_options_action_response_body_obj
 
     @property
     def additional_keys(self) -> List[str]:

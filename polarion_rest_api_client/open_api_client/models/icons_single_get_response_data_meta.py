@@ -61,12 +61,12 @@ class IconsSingleGetResponseDataMeta:
 
             errors.append(errors_item)
 
-        icons_single_get_response_data_meta = cls(
+        icons_single_get_response_data_meta_obj = cls(
             errors=errors,
         )
 
-        icons_single_get_response_data_meta.additional_properties = d
-        return icons_single_get_response_data_meta
+        icons_single_get_response_data_meta_obj.additional_properties = d
+        return icons_single_get_response_data_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

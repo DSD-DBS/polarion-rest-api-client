@@ -24,10 +24,10 @@ class PagesSingleGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        pages_single_get_response_included_item = cls()
+        pages_single_get_response_included_item_obj = cls()
 
-        pages_single_get_response_included_item.additional_properties = d
-        return pages_single_get_response_included_item
+        pages_single_get_response_included_item_obj.additional_properties = d
+        return pages_single_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -67,16 +67,16 @@ class PagesSingleGetResponseDataRelationshipsUpdatedByData:
 
         revision = d.pop("revision", UNSET)
 
-        pages_single_get_response_data_relationships_updated_by_data = cls(
+        pages_single_get_response_data_relationships_updated_by_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        pages_single_get_response_data_relationships_updated_by_data.additional_properties = (
+        pages_single_get_response_data_relationships_updated_by_data_obj.additional_properties = (
             d
         )
-        return pages_single_get_response_data_relationships_updated_by_data
+        return pages_single_get_response_data_relationships_updated_by_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

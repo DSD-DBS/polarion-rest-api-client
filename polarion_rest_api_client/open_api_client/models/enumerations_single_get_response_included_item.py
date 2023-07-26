@@ -24,12 +24,12 @@ class EnumerationsSingleGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        enumerations_single_get_response_included_item = cls()
+        enumerations_single_get_response_included_item_obj = cls()
 
-        enumerations_single_get_response_included_item.additional_properties = (
+        enumerations_single_get_response_included_item_obj.additional_properties = (
             d
         )
-        return enumerations_single_get_response_included_item
+        return enumerations_single_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

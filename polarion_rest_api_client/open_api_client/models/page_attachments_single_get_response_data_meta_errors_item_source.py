@@ -45,19 +45,15 @@ class PageAttachmentsSingleGetResponseDataMetaErrorsItemSource:
 
         parameter = d.pop("parameter", UNSET)
 
-        page_attachments_single_get_response_data_meta_errors_item_source = (
-            cls(
-                pointer=pointer,
-                parameter=parameter,
-            )
+        page_attachments_single_get_response_data_meta_errors_item_source_obj = cls(
+            pointer=pointer,
+            parameter=parameter,
         )
 
-        page_attachments_single_get_response_data_meta_errors_item_source.additional_properties = (
+        page_attachments_single_get_response_data_meta_errors_item_source_obj.additional_properties = (
             d
         )
-        return (
-            page_attachments_single_get_response_data_meta_errors_item_source
-        )
+        return page_attachments_single_get_response_data_meta_errors_item_source_obj
 
     @property
     def additional_keys(self) -> List[str]:

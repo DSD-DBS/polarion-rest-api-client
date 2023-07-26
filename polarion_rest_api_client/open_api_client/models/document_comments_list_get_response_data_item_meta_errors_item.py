@@ -81,17 +81,21 @@ class DocumentCommentsListGetResponseDataItemMetaErrorsItem:
                 _source
             )
 
-        document_comments_list_get_response_data_item_meta_errors_item = cls(
-            status=status,
-            title=title,
-            detail=detail,
-            source=source,
+        document_comments_list_get_response_data_item_meta_errors_item_obj = (
+            cls(
+                status=status,
+                title=title,
+                detail=detail,
+                source=source,
+            )
         )
 
-        document_comments_list_get_response_data_item_meta_errors_item.additional_properties = (
+        document_comments_list_get_response_data_item_meta_errors_item_obj.additional_properties = (
             d
         )
-        return document_comments_list_get_response_data_item_meta_errors_item
+        return (
+            document_comments_list_get_response_data_item_meta_errors_item_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

@@ -36,12 +36,12 @@ class UsersListGetResponseDataItemLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        users_list_get_response_data_item_links = cls(
+        users_list_get_response_data_item_links_obj = cls(
             self_=self_,
         )
 
-        users_list_get_response_data_item_links.additional_properties = d
-        return users_list_get_response_data_item_links
+        users_list_get_response_data_item_links_obj.additional_properties = d
+        return users_list_get_response_data_item_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

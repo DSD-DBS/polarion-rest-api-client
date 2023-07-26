@@ -61,14 +61,18 @@ class PageAttachmentsSingleGetResponseDataRelationshipsProject:
                 _data
             )
 
-        page_attachments_single_get_response_data_relationships_project = cls(
-            data=data,
+        page_attachments_single_get_response_data_relationships_project_obj = (
+            cls(
+                data=data,
+            )
         )
 
-        page_attachments_single_get_response_data_relationships_project.additional_properties = (
+        page_attachments_single_get_response_data_relationships_project_obj.additional_properties = (
             d
         )
-        return page_attachments_single_get_response_data_relationships_project
+        return (
+            page_attachments_single_get_response_data_relationships_project_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

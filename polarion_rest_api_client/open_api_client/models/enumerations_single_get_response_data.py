@@ -131,7 +131,7 @@ class EnumerationsSingleGetResponseData:
         else:
             links = EnumerationsSingleGetResponseDataLinks.from_dict(_links)
 
-        enumerations_single_get_response_data = cls(
+        enumerations_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -140,8 +140,8 @@ class EnumerationsSingleGetResponseData:
             links=links,
         )
 
-        enumerations_single_get_response_data.additional_properties = d
-        return enumerations_single_get_response_data
+        enumerations_single_get_response_data_obj.additional_properties = d
+        return enumerations_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

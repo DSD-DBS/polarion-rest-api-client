@@ -140,7 +140,7 @@ class EnumOptionsActionResponseBodyDataItem:
 
         terminal = d.pop("terminal", UNSET)
 
-        enum_options_action_response_body_data_item = cls(
+        enum_options_action_response_body_data_item_obj = cls(
             id=id,
             name=name,
             color=color,
@@ -158,8 +158,10 @@ class EnumOptionsActionResponseBodyDataItem:
             terminal=terminal,
         )
 
-        enum_options_action_response_body_data_item.additional_properties = d
-        return enum_options_action_response_body_data_item
+        enum_options_action_response_body_data_item_obj.additional_properties = (
+            d
+        )
+        return enum_options_action_response_body_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

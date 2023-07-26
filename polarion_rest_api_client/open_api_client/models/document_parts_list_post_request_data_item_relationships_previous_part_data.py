@@ -65,15 +65,15 @@ class DocumentPartsListPostRequestDataItemRelationshipsPreviousPartData:
 
         id = d.pop("id", UNSET)
 
-        document_parts_list_post_request_data_item_relationships_previous_part_data = cls(
+        document_parts_list_post_request_data_item_relationships_previous_part_data_obj = cls(
             type=type,
             id=id,
         )
 
-        document_parts_list_post_request_data_item_relationships_previous_part_data.additional_properties = (
+        document_parts_list_post_request_data_item_relationships_previous_part_data_obj.additional_properties = (
             d
         )
-        return document_parts_list_post_request_data_item_relationships_previous_part_data
+        return document_parts_list_post_request_data_item_relationships_previous_part_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

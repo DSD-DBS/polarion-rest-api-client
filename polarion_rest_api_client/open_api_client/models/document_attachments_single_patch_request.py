@@ -53,12 +53,12 @@ class DocumentAttachmentsSinglePatchRequest:
         else:
             data = DocumentAttachmentsSinglePatchRequestData.from_dict(_data)
 
-        document_attachments_single_patch_request = cls(
+        document_attachments_single_patch_request_obj = cls(
             data=data,
         )
 
-        document_attachments_single_patch_request.additional_properties = d
-        return document_attachments_single_patch_request
+        document_attachments_single_patch_request_obj.additional_properties = d
+        return document_attachments_single_patch_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

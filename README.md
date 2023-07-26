@@ -4,6 +4,11 @@
  -->
 
 # polarion-rest-api-client
+
+<!-- prettier-ignore -->
+![image](https://github.com/DSD-DBS/polarion-rest-api-client/actions/workflows/build-test-publish.yml/badge.svg)
+![image](https://github.com/DSD-DBS/polarion-rest-api-client/actions/workflows/lint.yml/badge.svg)
+
 A client library for accessing Polarion REST API. This project consists of multiple layers. There is a high level, still incomplete
 version of the client and a feature complete low level API client, which was generated using an [OpenAPI generator](https://github.com/openapi-generators/openapi-python-client).
 Therefor the OpenAPI Specification of Polarion was used.
@@ -89,6 +94,11 @@ Things to know:
 1. If your endpoint had any tags on it, the first tag will be used as a module name for the function (my_tag above)
 1. Any endpoint which did not have a tag will be in `polarion_rest_api_client.open_api_client.api.default`
 
+# Documentation
+
+<!-- prettier-ignore -->
+Read the [full documentation on Github pages](https://dsd-dbs.github.io/polarion-rest-api-client).
+
 # Installation
 
 You can install the latest released version directly from PyPI (**Not yet**).
@@ -101,8 +111,8 @@ To set up a development environment, clone the project and install it into a
 virtual environment.
 
 ```zsh
-git clone https://git.tech.rz.db.de/se-toolchain/innovation-day-projects/polarion-open-api-client
-cd polarion-open-api-client
+git clone https://github.com/DSD-DBS/polarion-rest-api-client
+cd polarion-rest-api-client
 python -m venv .venv
 
 source .venv/bin/activate.sh  # for Linux / Mac

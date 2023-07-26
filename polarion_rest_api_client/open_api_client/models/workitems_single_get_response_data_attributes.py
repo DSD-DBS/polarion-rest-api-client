@@ -259,7 +259,7 @@ class WorkitemsSingleGetResponseDataAttributes:
         else:
             updated = isoparse(_updated)
 
-        workitems_single_get_response_data_attributes = cls(
+        workitems_single_get_response_data_attributes_obj = cls(
             created=created,
             description=description,
             due_date=due_date,
@@ -281,8 +281,10 @@ class WorkitemsSingleGetResponseDataAttributes:
             updated=updated,
         )
 
-        workitems_single_get_response_data_attributes.additional_properties = d
-        return workitems_single_get_response_data_attributes
+        workitems_single_get_response_data_attributes_obj.additional_properties = (
+            d
+        )
+        return workitems_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

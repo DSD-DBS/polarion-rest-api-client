@@ -62,14 +62,14 @@ class UsersSinglePatchRequestDataRelationshipsUserGroups:
 
             data.append(data_item)
 
-        users_single_patch_request_data_relationships_user_groups = cls(
+        users_single_patch_request_data_relationships_user_groups_obj = cls(
             data=data,
         )
 
-        users_single_patch_request_data_relationships_user_groups.additional_properties = (
+        users_single_patch_request_data_relationships_user_groups_obj.additional_properties = (
             d
         )
-        return users_single_patch_request_data_relationships_user_groups
+        return users_single_patch_request_data_relationships_user_groups_obj
 
     @property
     def additional_keys(self) -> List[str]:

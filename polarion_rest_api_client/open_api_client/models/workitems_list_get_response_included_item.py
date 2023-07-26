@@ -24,10 +24,10 @@ class WorkitemsListGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        workitems_list_get_response_included_item = cls()
+        workitems_list_get_response_included_item_obj = cls()
 
-        workitems_list_get_response_included_item.additional_properties = d
-        return workitems_list_get_response_included_item
+        workitems_list_get_response_included_item_obj.additional_properties = d
+        return workitems_list_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -72,16 +72,16 @@ class WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorData:
 
         revision = d.pop("revision", UNSET)
 
-        workitem_attachments_single_get_response_data_relationships_author_data = cls(
+        workitem_attachments_single_get_response_data_relationships_author_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        workitem_attachments_single_get_response_data_relationships_author_data.additional_properties = (
+        workitem_attachments_single_get_response_data_relationships_author_data_obj.additional_properties = (
             d
         )
-        return workitem_attachments_single_get_response_data_relationships_author_data
+        return workitem_attachments_single_get_response_data_relationships_author_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

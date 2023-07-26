@@ -96,15 +96,15 @@ class DocumentCommentsListGetResponseDataItemRelationshipsChildComments:
                 _meta
             )
 
-        document_comments_list_get_response_data_item_relationships_child_comments = cls(
+        document_comments_list_get_response_data_item_relationships_child_comments_obj = cls(
             data=data,
             meta=meta,
         )
 
-        document_comments_list_get_response_data_item_relationships_child_comments.additional_properties = (
+        document_comments_list_get_response_data_item_relationships_child_comments_obj.additional_properties = (
             d
         )
-        return document_comments_list_get_response_data_item_relationships_child_comments
+        return document_comments_list_get_response_data_item_relationships_child_comments_obj
 
     @property
     def additional_keys(self) -> List[str]:

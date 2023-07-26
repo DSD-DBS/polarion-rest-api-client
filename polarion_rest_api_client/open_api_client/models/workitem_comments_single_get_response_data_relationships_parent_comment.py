@@ -64,14 +64,14 @@ class WorkitemCommentsSingleGetResponseDataRelationshipsParentComment:
                 _data
             )
 
-        workitem_comments_single_get_response_data_relationships_parent_comment = cls(
+        workitem_comments_single_get_response_data_relationships_parent_comment_obj = cls(
             data=data,
         )
 
-        workitem_comments_single_get_response_data_relationships_parent_comment.additional_properties = (
+        workitem_comments_single_get_response_data_relationships_parent_comment_obj.additional_properties = (
             d
         )
-        return workitem_comments_single_get_response_data_relationships_parent_comment
+        return workitem_comments_single_get_response_data_relationships_parent_comment_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -168,7 +168,7 @@ class DocumentAttachmentsSingleGetResponseData:
                 _links
             )
 
-        document_attachments_single_get_response_data = cls(
+        document_attachments_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -178,8 +178,10 @@ class DocumentAttachmentsSingleGetResponseData:
             links=links,
         )
 
-        document_attachments_single_get_response_data.additional_properties = d
-        return document_attachments_single_get_response_data
+        document_attachments_single_get_response_data_obj.additional_properties = (
+            d
+        )
+        return document_attachments_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

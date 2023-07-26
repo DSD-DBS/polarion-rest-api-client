@@ -53,12 +53,12 @@ class Errors:
 
             errors.append(errors_item)
 
-        errors = cls(
+        errors_obj = cls(
             errors=errors,
         )
 
-        errors.additional_properties = d
-        return errors
+        errors_obj.additional_properties = d
+        return errors_obj
 
     @property
     def additional_keys(self) -> List[str]:

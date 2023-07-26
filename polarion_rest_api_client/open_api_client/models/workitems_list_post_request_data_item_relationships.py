@@ -144,17 +144,17 @@ class WorkitemsListPostRequestDataItemRelationships:
                 )
             )
 
-        workitems_list_post_request_data_item_relationships = cls(
+        workitems_list_post_request_data_item_relationships_obj = cls(
             assignee=assignee,
             author=author,
             categories=categories,
             module=module,
         )
 
-        workitems_list_post_request_data_item_relationships.additional_properties = (
+        workitems_list_post_request_data_item_relationships_obj.additional_properties = (
             d
         )
-        return workitems_list_post_request_data_item_relationships
+        return workitems_list_post_request_data_item_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:

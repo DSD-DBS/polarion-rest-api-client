@@ -36,14 +36,14 @@ class WorkitemCommentsSinglePatchRequestDataAttributes:
         d = src_dict.copy()
         resolved = d.pop("resolved", UNSET)
 
-        workitem_comments_single_patch_request_data_attributes = cls(
+        workitem_comments_single_patch_request_data_attributes_obj = cls(
             resolved=resolved,
         )
 
-        workitem_comments_single_patch_request_data_attributes.additional_properties = (
+        workitem_comments_single_patch_request_data_attributes_obj.additional_properties = (
             d
         )
-        return workitem_comments_single_patch_request_data_attributes
+        return workitem_comments_single_patch_request_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

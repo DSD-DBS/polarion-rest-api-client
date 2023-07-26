@@ -59,12 +59,12 @@ class EnumerationsListPostRequest:
 
             data.append(data_item)
 
-        enumerations_list_post_request = cls(
+        enumerations_list_post_request_obj = cls(
             data=data,
         )
 
-        enumerations_list_post_request.additional_properties = d
-        return enumerations_list_post_request
+        enumerations_list_post_request_obj.additional_properties = d
+        return enumerations_list_post_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

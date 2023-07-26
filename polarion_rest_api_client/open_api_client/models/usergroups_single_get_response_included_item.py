@@ -24,10 +24,12 @@ class UsergroupsSingleGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        usergroups_single_get_response_included_item = cls()
+        usergroups_single_get_response_included_item_obj = cls()
 
-        usergroups_single_get_response_included_item.additional_properties = d
-        return usergroups_single_get_response_included_item
+        usergroups_single_get_response_included_item_obj.additional_properties = (
+            d
+        )
+        return usergroups_single_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -62,18 +62,14 @@ class DocumentPartsListPostRequestDataItemRelationshipsWorkItem:
                 _data
             )
 
-        document_parts_list_post_request_data_item_relationships_work_item = (
-            cls(
-                data=data,
-            )
+        document_parts_list_post_request_data_item_relationships_work_item_obj = cls(
+            data=data,
         )
 
-        document_parts_list_post_request_data_item_relationships_work_item.additional_properties = (
+        document_parts_list_post_request_data_item_relationships_work_item_obj.additional_properties = (
             d
         )
-        return (
-            document_parts_list_post_request_data_item_relationships_work_item
-        )
+        return document_parts_list_post_request_data_item_relationships_work_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

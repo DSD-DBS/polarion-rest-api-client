@@ -116,16 +116,16 @@ class DocumentsSingleGetResponseDataRelationshipsComments:
                 _links
             )
 
-        documents_single_get_response_data_relationships_comments = cls(
+        documents_single_get_response_data_relationships_comments_obj = cls(
             data=data,
             meta=meta,
             links=links,
         )
 
-        documents_single_get_response_data_relationships_comments.additional_properties = (
+        documents_single_get_response_data_relationships_comments_obj.additional_properties = (
             d
         )
-        return documents_single_get_response_data_relationships_comments
+        return documents_single_get_response_data_relationships_comments_obj
 
     @property
     def additional_keys(self) -> List[str]:

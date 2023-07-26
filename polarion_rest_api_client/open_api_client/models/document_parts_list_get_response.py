@@ -132,15 +132,15 @@ class DocumentPartsListGetResponse:
         else:
             links = DocumentPartsListGetResponseLinks.from_dict(_links)
 
-        document_parts_list_get_response = cls(
+        document_parts_list_get_response_obj = cls(
             meta=meta,
             data=data,
             included=included,
             links=links,
         )
 
-        document_parts_list_get_response.additional_properties = d
-        return document_parts_list_get_response
+        document_parts_list_get_response_obj.additional_properties = d
+        return document_parts_list_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

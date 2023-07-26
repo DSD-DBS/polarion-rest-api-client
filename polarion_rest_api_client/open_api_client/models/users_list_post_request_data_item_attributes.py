@@ -99,7 +99,7 @@ class UsersListPostRequestDataItemAttributes:
 
         name = d.pop("name", UNSET)
 
-        users_list_post_request_data_item_attributes = cls(
+        users_list_post_request_data_item_attributes_obj = cls(
             id=id,
             description=description,
             disabled_notifications=disabled_notifications,
@@ -108,8 +108,10 @@ class UsersListPostRequestDataItemAttributes:
             name=name,
         )
 
-        users_list_post_request_data_item_attributes.additional_properties = d
-        return users_list_post_request_data_item_attributes
+        users_list_post_request_data_item_attributes_obj.additional_properties = (
+            d
+        )
+        return users_list_post_request_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

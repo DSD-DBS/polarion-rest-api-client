@@ -57,12 +57,12 @@ class UsersListPostResponse:
 
             data.append(data_item)
 
-        users_list_post_response = cls(
+        users_list_post_response_obj = cls(
             data=data,
         )
 
-        users_list_post_response.additional_properties = d
-        return users_list_post_response
+        users_list_post_response_obj.additional_properties = d
+        return users_list_post_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

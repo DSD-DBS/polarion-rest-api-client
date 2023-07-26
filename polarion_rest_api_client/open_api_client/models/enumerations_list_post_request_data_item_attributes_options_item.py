@@ -142,7 +142,7 @@ class EnumerationsListPostRequestDataItemAttributesOptionsItem:
 
         terminal = d.pop("terminal", UNSET)
 
-        enumerations_list_post_request_data_item_attributes_options_item = cls(
+        enumerations_list_post_request_data_item_attributes_options_item_obj = cls(
             id=id,
             name=name,
             color=color,
@@ -160,10 +160,10 @@ class EnumerationsListPostRequestDataItemAttributesOptionsItem:
             terminal=terminal,
         )
 
-        enumerations_list_post_request_data_item_attributes_options_item.additional_properties = (
+        enumerations_list_post_request_data_item_attributes_options_item_obj.additional_properties = (
             d
         )
-        return enumerations_list_post_request_data_item_attributes_options_item
+        return enumerations_list_post_request_data_item_attributes_options_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

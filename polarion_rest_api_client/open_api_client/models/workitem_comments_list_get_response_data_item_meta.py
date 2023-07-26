@@ -61,14 +61,14 @@ class WorkitemCommentsListGetResponseDataItemMeta:
 
             errors.append(errors_item)
 
-        workitem_comments_list_get_response_data_item_meta = cls(
+        workitem_comments_list_get_response_data_item_meta_obj = cls(
             errors=errors,
         )
 
-        workitem_comments_list_get_response_data_item_meta.additional_properties = (
+        workitem_comments_list_get_response_data_item_meta_obj.additional_properties = (
             d
         )
-        return workitem_comments_list_get_response_data_item_meta
+        return workitem_comments_list_get_response_data_item_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

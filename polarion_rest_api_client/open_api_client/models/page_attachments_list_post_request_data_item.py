@@ -86,14 +86,16 @@ class PageAttachmentsListPostRequestDataItem:
                 )
             )
 
-        page_attachments_list_post_request_data_item = cls(
+        page_attachments_list_post_request_data_item_obj = cls(
             type=type,
             lid=lid,
             attributes=attributes,
         )
 
-        page_attachments_list_post_request_data_item.additional_properties = d
-        return page_attachments_list_post_request_data_item
+        page_attachments_list_post_request_data_item_obj.additional_properties = (
+            d
+        )
+        return page_attachments_list_post_request_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

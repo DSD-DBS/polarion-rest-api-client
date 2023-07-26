@@ -107,14 +107,14 @@ class PageAttachmentsSingleGetResponse:
         else:
             links = PageAttachmentsSingleGetResponseLinks.from_dict(_links)
 
-        page_attachments_single_get_response = cls(
+        page_attachments_single_get_response_obj = cls(
             data=data,
             included=included,
             links=links,
         )
 
-        page_attachments_single_get_response.additional_properties = d
-        return page_attachments_single_get_response
+        page_attachments_single_get_response_obj.additional_properties = d
+        return page_attachments_single_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

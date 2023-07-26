@@ -61,14 +61,14 @@ class SetLicenseRequestBody:
 
         concurrent = d.pop("concurrent", UNSET)
 
-        set_license_request_body = cls(
+        set_license_request_body_obj = cls(
             license_=license_,
             group=group,
             concurrent=concurrent,
         )
 
-        set_license_request_body.additional_properties = d
-        return set_license_request_body
+        set_license_request_body_obj.additional_properties = d
+        return set_license_request_body_obj
 
     @property
     def additional_keys(self) -> List[str]:

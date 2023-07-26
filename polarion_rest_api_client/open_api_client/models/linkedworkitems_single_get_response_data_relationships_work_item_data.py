@@ -71,16 +71,16 @@ class LinkedworkitemsSingleGetResponseDataRelationshipsWorkItemData:
 
         revision = d.pop("revision", UNSET)
 
-        linkedworkitems_single_get_response_data_relationships_work_item_data = cls(
+        linkedworkitems_single_get_response_data_relationships_work_item_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        linkedworkitems_single_get_response_data_relationships_work_item_data.additional_properties = (
+        linkedworkitems_single_get_response_data_relationships_work_item_data_obj.additional_properties = (
             d
         )
-        return linkedworkitems_single_get_response_data_relationships_work_item_data
+        return linkedworkitems_single_get_response_data_relationships_work_item_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -105,14 +105,14 @@ class UsergroupsSingleGetResponse:
         else:
             links = UsergroupsSingleGetResponseLinks.from_dict(_links)
 
-        usergroups_single_get_response = cls(
+        usergroups_single_get_response_obj = cls(
             data=data,
             included=included,
             links=links,
         )
 
-        usergroups_single_get_response.additional_properties = d
-        return usergroups_single_get_response
+        usergroups_single_get_response_obj.additional_properties = d
+        return usergroups_single_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

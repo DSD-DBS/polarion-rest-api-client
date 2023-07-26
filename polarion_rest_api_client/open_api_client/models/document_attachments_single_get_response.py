@@ -107,14 +107,14 @@ class DocumentAttachmentsSingleGetResponse:
         else:
             links = DocumentAttachmentsSingleGetResponseLinks.from_dict(_links)
 
-        document_attachments_single_get_response = cls(
+        document_attachments_single_get_response_obj = cls(
             data=data,
             included=included,
             links=links,
         )
 
-        document_attachments_single_get_response.additional_properties = d
-        return document_attachments_single_get_response
+        document_attachments_single_get_response_obj.additional_properties = d
+        return document_attachments_single_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

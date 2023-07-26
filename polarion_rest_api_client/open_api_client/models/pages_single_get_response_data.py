@@ -154,7 +154,7 @@ class PagesSingleGetResponseData:
         else:
             links = PagesSingleGetResponseDataLinks.from_dict(_links)
 
-        pages_single_get_response_data = cls(
+        pages_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -164,8 +164,8 @@ class PagesSingleGetResponseData:
             links=links,
         )
 
-        pages_single_get_response_data.additional_properties = d
-        return pages_single_get_response_data
+        pages_single_get_response_data_obj.additional_properties = d
+        return pages_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

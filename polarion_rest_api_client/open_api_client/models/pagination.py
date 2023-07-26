@@ -50,14 +50,14 @@ class Pagination:
 
         calculated_offset = d.pop("calculatedOffset", UNSET)
 
-        pagination = cls(
+        pagination_obj = cls(
             page_size=page_size,
             page_number=page_number,
             calculated_offset=calculated_offset,
         )
 
-        pagination.additional_properties = d
-        return pagination
+        pagination_obj.additional_properties = d
+        return pagination_obj
 
     @property
     def additional_keys(self) -> List[str]:

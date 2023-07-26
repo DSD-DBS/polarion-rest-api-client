@@ -37,14 +37,14 @@ class LinkedworkitemsListPostResponseDataItemLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        linkedworkitems_list_post_response_data_item_links = cls(
+        linkedworkitems_list_post_response_data_item_links_obj = cls(
             self_=self_,
         )
 
-        linkedworkitems_list_post_response_data_item_links.additional_properties = (
+        linkedworkitems_list_post_response_data_item_links_obj.additional_properties = (
             d
         )
-        return linkedworkitems_list_post_response_data_item_links
+        return linkedworkitems_list_post_response_data_item_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

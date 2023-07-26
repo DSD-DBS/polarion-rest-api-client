@@ -152,7 +152,7 @@ class DocumentsSinglePostResponseDataAttributes:
 
         uses_outline_numbering = d.pop("usesOutlineNumbering", UNSET)
 
-        documents_single_post_response_data_attributes = cls(
+        documents_single_post_response_data_attributes_obj = cls(
             auto_suspect=auto_suspect,
             home_page_content=home_page_content,
             outline_numbering=outline_numbering,
@@ -163,10 +163,10 @@ class DocumentsSinglePostResponseDataAttributes:
             uses_outline_numbering=uses_outline_numbering,
         )
 
-        documents_single_post_response_data_attributes.additional_properties = (
+        documents_single_post_response_data_attributes_obj.additional_properties = (
             d
         )
-        return documents_single_post_response_data_attributes
+        return documents_single_post_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

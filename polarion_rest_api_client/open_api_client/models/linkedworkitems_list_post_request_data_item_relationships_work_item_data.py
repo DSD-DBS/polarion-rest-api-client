@@ -65,15 +65,15 @@ class LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemData:
 
         id = d.pop("id", UNSET)
 
-        linkedworkitems_list_post_request_data_item_relationships_work_item_data = cls(
+        linkedworkitems_list_post_request_data_item_relationships_work_item_data_obj = cls(
             type=type,
             id=id,
         )
 
-        linkedworkitems_list_post_request_data_item_relationships_work_item_data.additional_properties = (
+        linkedworkitems_list_post_request_data_item_relationships_work_item_data_obj.additional_properties = (
             d
         )
-        return linkedworkitems_list_post_request_data_item_relationships_work_item_data
+        return linkedworkitems_list_post_request_data_item_relationships_work_item_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

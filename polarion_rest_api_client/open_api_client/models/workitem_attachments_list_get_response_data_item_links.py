@@ -45,15 +45,15 @@ class WorkitemAttachmentsListGetResponseDataItemLinks:
 
         content = d.pop("content", UNSET)
 
-        workitem_attachments_list_get_response_data_item_links = cls(
+        workitem_attachments_list_get_response_data_item_links_obj = cls(
             self_=self_,
             content=content,
         )
 
-        workitem_attachments_list_get_response_data_item_links.additional_properties = (
+        workitem_attachments_list_get_response_data_item_links_obj.additional_properties = (
             d
         )
-        return workitem_attachments_list_get_response_data_item_links
+        return workitem_attachments_list_get_response_data_item_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

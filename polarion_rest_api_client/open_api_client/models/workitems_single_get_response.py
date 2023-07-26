@@ -105,14 +105,14 @@ class WorkitemsSingleGetResponse:
         else:
             links = WorkitemsSingleGetResponseLinks.from_dict(_links)
 
-        workitems_single_get_response = cls(
+        workitems_single_get_response_obj = cls(
             data=data,
             included=included,
             links=links,
         )
 
-        workitems_single_get_response.additional_properties = d
-        return workitems_single_get_response
+        workitems_single_get_response_obj.additional_properties = d
+        return workitems_single_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -63,14 +63,14 @@ class DocumentAttachmentsListGetResponseDataItemRelationshipsAuthor:
                 _data
             )
 
-        document_attachments_list_get_response_data_item_relationships_author = cls(
+        document_attachments_list_get_response_data_item_relationships_author_obj = cls(
             data=data,
         )
 
-        document_attachments_list_get_response_data_item_relationships_author.additional_properties = (
+        document_attachments_list_get_response_data_item_relationships_author_obj.additional_properties = (
             d
         )
-        return document_attachments_list_get_response_data_item_relationships_author
+        return document_attachments_list_get_response_data_item_relationships_author_obj
 
     @property
     def additional_keys(self) -> List[str]:

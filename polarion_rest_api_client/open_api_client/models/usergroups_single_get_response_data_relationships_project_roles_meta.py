@@ -38,14 +38,14 @@ class UsergroupsSingleGetResponseDataRelationshipsProjectRolesMeta:
         d = src_dict.copy()
         total_count = d.pop("totalCount", UNSET)
 
-        usergroups_single_get_response_data_relationships_project_roles_meta = cls(
+        usergroups_single_get_response_data_relationships_project_roles_meta_obj = cls(
             total_count=total_count,
         )
 
-        usergroups_single_get_response_data_relationships_project_roles_meta.additional_properties = (
+        usergroups_single_get_response_data_relationships_project_roles_meta_obj.additional_properties = (
             d
         )
-        return usergroups_single_get_response_data_relationships_project_roles_meta
+        return usergroups_single_get_response_data_relationships_project_roles_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

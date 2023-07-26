@@ -59,12 +59,12 @@ class PageAttachmentsListPostRequest:
 
             data.append(data_item)
 
-        page_attachments_list_post_request = cls(
+        page_attachments_list_post_request_obj = cls(
             data=data,
         )
 
-        page_attachments_list_post_request.additional_properties = d
-        return page_attachments_list_post_request
+        page_attachments_list_post_request_obj.additional_properties = d
+        return page_attachments_list_post_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

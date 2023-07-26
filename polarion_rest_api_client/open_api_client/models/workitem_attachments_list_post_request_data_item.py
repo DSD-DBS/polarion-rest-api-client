@@ -86,16 +86,16 @@ class WorkitemAttachmentsListPostRequestDataItem:
                 )
             )
 
-        workitem_attachments_list_post_request_data_item = cls(
+        workitem_attachments_list_post_request_data_item_obj = cls(
             type=type,
             lid=lid,
             attributes=attributes,
         )
 
-        workitem_attachments_list_post_request_data_item.additional_properties = (
+        workitem_attachments_list_post_request_data_item_obj.additional_properties = (
             d
         )
-        return workitem_attachments_list_post_request_data_item
+        return workitem_attachments_list_post_request_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

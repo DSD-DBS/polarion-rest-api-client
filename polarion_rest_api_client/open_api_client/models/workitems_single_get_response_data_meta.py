@@ -63,12 +63,12 @@ class WorkitemsSingleGetResponseDataMeta:
 
             errors.append(errors_item)
 
-        workitems_single_get_response_data_meta = cls(
+        workitems_single_get_response_data_meta_obj = cls(
             errors=errors,
         )
 
-        workitems_single_get_response_data_meta.additional_properties = d
-        return workitems_single_get_response_data_meta
+        workitems_single_get_response_data_meta_obj.additional_properties = d
+        return workitems_single_get_response_data_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

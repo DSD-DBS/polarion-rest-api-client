@@ -128,7 +128,7 @@ class GlobalrolesSingleGetResponseData:
         else:
             links = GlobalrolesSingleGetResponseDataLinks.from_dict(_links)
 
-        globalroles_single_get_response_data = cls(
+        globalroles_single_get_response_data_obj = cls(
             type=type,
             id=id,
             relationships=relationships,
@@ -136,8 +136,8 @@ class GlobalrolesSingleGetResponseData:
             links=links,
         )
 
-        globalroles_single_get_response_data.additional_properties = d
-        return globalroles_single_get_response_data
+        globalroles_single_get_response_data_obj.additional_properties = d
+        return globalroles_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

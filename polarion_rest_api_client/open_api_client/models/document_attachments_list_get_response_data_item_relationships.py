@@ -90,15 +90,19 @@ class DocumentAttachmentsListGetResponseDataItemRelationships:
                 _project
             )
 
-        document_attachments_list_get_response_data_item_relationships = cls(
-            author=author,
-            project=project,
+        document_attachments_list_get_response_data_item_relationships_obj = (
+            cls(
+                author=author,
+                project=project,
+            )
         )
 
-        document_attachments_list_get_response_data_item_relationships.additional_properties = (
+        document_attachments_list_get_response_data_item_relationships_obj.additional_properties = (
             d
         )
-        return document_attachments_list_get_response_data_item_relationships
+        return (
+            document_attachments_list_get_response_data_item_relationships_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

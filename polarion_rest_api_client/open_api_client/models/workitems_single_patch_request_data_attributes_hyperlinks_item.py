@@ -45,15 +45,19 @@ class WorkitemsSinglePatchRequestDataAttributesHyperlinksItem:
 
         uri = d.pop("uri", UNSET)
 
-        workitems_single_patch_request_data_attributes_hyperlinks_item = cls(
-            role=role,
-            uri=uri,
+        workitems_single_patch_request_data_attributes_hyperlinks_item_obj = (
+            cls(
+                role=role,
+                uri=uri,
+            )
         )
 
-        workitems_single_patch_request_data_attributes_hyperlinks_item.additional_properties = (
+        workitems_single_patch_request_data_attributes_hyperlinks_item_obj.additional_properties = (
             d
         )
-        return workitems_single_patch_request_data_attributes_hyperlinks_item
+        return (
+            workitems_single_patch_request_data_attributes_hyperlinks_item_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

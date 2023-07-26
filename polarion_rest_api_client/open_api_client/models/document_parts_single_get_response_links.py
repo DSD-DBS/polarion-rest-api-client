@@ -37,12 +37,12 @@ class DocumentPartsSingleGetResponseLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        document_parts_single_get_response_links = cls(
+        document_parts_single_get_response_links_obj = cls(
             self_=self_,
         )
 
-        document_parts_single_get_response_links.additional_properties = d
-        return document_parts_single_get_response_links
+        document_parts_single_get_response_links_obj.additional_properties = d
+        return document_parts_single_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

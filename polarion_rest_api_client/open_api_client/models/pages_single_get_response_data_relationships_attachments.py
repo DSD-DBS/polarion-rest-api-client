@@ -89,15 +89,15 @@ class PagesSingleGetResponseDataRelationshipsAttachments:
                 _meta
             )
 
-        pages_single_get_response_data_relationships_attachments = cls(
+        pages_single_get_response_data_relationships_attachments_obj = cls(
             data=data,
             meta=meta,
         )
 
-        pages_single_get_response_data_relationships_attachments.additional_properties = (
+        pages_single_get_response_data_relationships_attachments_obj.additional_properties = (
             d
         )
-        return pages_single_get_response_data_relationships_attachments
+        return pages_single_get_response_data_relationships_attachments_obj
 
     @property
     def additional_keys(self) -> List[str]:

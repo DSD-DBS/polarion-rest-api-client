@@ -69,7 +69,7 @@ class IconsListGetResponseLinks:
 
         last = d.pop("last", UNSET)
 
-        icons_list_get_response_links = cls(
+        icons_list_get_response_links_obj = cls(
             self_=self_,
             first=first,
             prev=prev,
@@ -77,8 +77,8 @@ class IconsListGetResponseLinks:
             last=last,
         )
 
-        icons_list_get_response_links.additional_properties = d
-        return icons_list_get_response_links
+        icons_list_get_response_links_obj.additional_properties = d
+        return icons_list_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

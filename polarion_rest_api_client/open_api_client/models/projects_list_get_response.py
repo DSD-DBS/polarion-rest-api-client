@@ -130,15 +130,15 @@ class ProjectsListGetResponse:
         else:
             links = ProjectsListGetResponseLinks.from_dict(_links)
 
-        projects_list_get_response = cls(
+        projects_list_get_response_obj = cls(
             meta=meta,
             data=data,
             included=included,
             links=links,
         )
 
-        projects_list_get_response.additional_properties = d
-        return projects_list_get_response
+        projects_list_get_response_obj.additional_properties = d
+        return projects_list_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

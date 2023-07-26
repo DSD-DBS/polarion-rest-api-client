@@ -64,15 +64,15 @@ class UsersListGetResponseDataItemRelationshipsProjectRolesDataItem:
 
         id = d.pop("id", UNSET)
 
-        users_list_get_response_data_item_relationships_project_roles_data_item = cls(
+        users_list_get_response_data_item_relationships_project_roles_data_item_obj = cls(
             type=type,
             id=id,
         )
 
-        users_list_get_response_data_item_relationships_project_roles_data_item.additional_properties = (
+        users_list_get_response_data_item_relationships_project_roles_data_item_obj.additional_properties = (
             d
         )
-        return users_list_get_response_data_item_relationships_project_roles_data_item
+        return users_list_get_response_data_item_relationships_project_roles_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

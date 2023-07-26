@@ -43,15 +43,15 @@ class LinkedworkitemsSinglePatchRequestDataAttributes:
 
         suspect = d.pop("suspect", UNSET)
 
-        linkedworkitems_single_patch_request_data_attributes = cls(
+        linkedworkitems_single_patch_request_data_attributes_obj = cls(
             revision=revision,
             suspect=suspect,
         )
 
-        linkedworkitems_single_patch_request_data_attributes.additional_properties = (
+        linkedworkitems_single_patch_request_data_attributes_obj.additional_properties = (
             d
         )
-        return linkedworkitems_single_patch_request_data_attributes
+        return linkedworkitems_single_patch_request_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

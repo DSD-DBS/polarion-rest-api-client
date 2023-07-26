@@ -70,16 +70,16 @@ class PageAttachmentsSingleGetResponseDataRelationshipsProjectData:
 
         revision = d.pop("revision", UNSET)
 
-        page_attachments_single_get_response_data_relationships_project_data = cls(
+        page_attachments_single_get_response_data_relationships_project_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        page_attachments_single_get_response_data_relationships_project_data.additional_properties = (
+        page_attachments_single_get_response_data_relationships_project_data_obj.additional_properties = (
             d
         )
-        return page_attachments_single_get_response_data_relationships_project_data
+        return page_attachments_single_get_response_data_relationships_project_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

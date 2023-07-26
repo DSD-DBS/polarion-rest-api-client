@@ -86,15 +86,15 @@ class WorkitemAttachmentsSingleGetResponseDataRelationships:
                 _project
             )
 
-        workitem_attachments_single_get_response_data_relationships = cls(
+        workitem_attachments_single_get_response_data_relationships_obj = cls(
             author=author,
             project=project,
         )
 
-        workitem_attachments_single_get_response_data_relationships.additional_properties = (
+        workitem_attachments_single_get_response_data_relationships_obj.additional_properties = (
             d
         )
-        return workitem_attachments_single_get_response_data_relationships
+        return workitem_attachments_single_get_response_data_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:

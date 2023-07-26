@@ -61,14 +61,18 @@ class DocumentsSingleGetResponseDataRelationshipsDerivedFrom:
                 _data
             )
 
-        documents_single_get_response_data_relationships_derived_from = cls(
-            data=data,
+        documents_single_get_response_data_relationships_derived_from_obj = (
+            cls(
+                data=data,
+            )
         )
 
-        documents_single_get_response_data_relationships_derived_from.additional_properties = (
+        documents_single_get_response_data_relationships_derived_from_obj.additional_properties = (
             d
         )
-        return documents_single_get_response_data_relationships_derived_from
+        return (
+            documents_single_get_response_data_relationships_derived_from_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

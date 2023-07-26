@@ -34,8 +34,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://git.tech.rz.db.de/se-toolchain/innovation-day-projects/polarion-open-api-client"
-Documentation = "https://git.tech.rz.db.de/se-toolchain/innovation-day-projects/polarion-open-api-client"
+Homepage = "https://github.com/DSD-DBS/polarion-rest-api-client"
+Documentation = "https://dsd-dbs.github.io/polarion-rest-api-client"
 
 [project.optional-dependencies]
 dev = [
@@ -46,7 +46,7 @@ docs = [
   "furo",
   "sphinx",
   "sphinx-copybutton",
-  "tomli; python_version<'3.11'",
+  "tomli; python_version<'3.12'",
 ]
 
 test = [
@@ -58,6 +58,21 @@ test = [
 [tool.black]
 line-length = 79
 target-version = ["py310"]
+
+[tool.coverage.run]
+branch = true
+command_line = "-m pytest"
+source = ["polarion_rest_api_client"]
+
+[tool.coverage.report]
+exclude_also = [
+  'if t\.TYPE_CHECKING:',
+  'class .*\bt\.Protocol\):',
+  '@abc\.abstractmethod',
+  '@t\.overload',
+]
+skip_covered = true
+omit = ["polarion_rest_api_client/open_api_client/*"]
 
 [tool.docformatter]
 wrap-descriptions = 72
@@ -83,7 +98,7 @@ allow_untyped_defs = true
 [[tool.mypy.overrides]]
 # Untyped third party libraries
 module = [
-  # ...
+  "polarion_rest_api_client.open_api_client"
 ]
 ignore_missing_imports = true
 
@@ -103,8 +118,12 @@ add-ignore = [
   "D213",  # Multi-line docstring summary should start at the second line
 ]
 
+[tool.pylint.format]
+ignore-long-lines = '^\s*(?:(?:__ |\.\. __: )?https?://[^ ]+$|def test_.*|[A-Za-z0-9_\.]+(?: ?:)?$)'
+
 [tool.pylint.master]
 max-line-length = 79
+ignore-paths = "polarion_rest_api_client/open_api_client/*"
 
 [tool.pylint.messages_control]
 disable = [

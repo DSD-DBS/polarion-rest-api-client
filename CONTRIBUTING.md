@@ -17,9 +17,9 @@ our style guidelines outlined below.
 
 <!-- prettier-ignore -->
 [open an issue]:
-  https://git.tech.rz.db.de/se-toolchain/innovation-day-projects/polarion-open-api-client/-/issues
+  https://github.com/DSD-DBS/polarion-rest-api-client/issues
 [open a pull request]:
-  https://git.tech.rz.db.de/se-toolchain/innovation-day-projects/polarion-open-api-client/-/merge_requests
+  https://github.com/DSD-DBS/polarion-rest-api-client/pulls
 
 ## Developing
 

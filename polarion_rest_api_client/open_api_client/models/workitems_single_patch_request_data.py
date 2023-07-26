@@ -111,15 +111,15 @@ class WorkitemsSinglePatchRequestData:
                 )
             )
 
-        workitems_single_patch_request_data = cls(
+        workitems_single_patch_request_data_obj = cls(
             type=type,
             id=id,
             attributes=attributes,
             relationships=relationships,
         )
 
-        workitems_single_patch_request_data.additional_properties = d
-        return workitems_single_patch_request_data
+        workitems_single_patch_request_data_obj.additional_properties = d
+        return workitems_single_patch_request_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

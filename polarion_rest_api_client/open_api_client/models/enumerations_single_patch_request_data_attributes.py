@@ -61,14 +61,14 @@ class EnumerationsSinglePatchRequestDataAttributes:
 
             options.append(options_item)
 
-        enumerations_single_patch_request_data_attributes = cls(
+        enumerations_single_patch_request_data_attributes_obj = cls(
             options=options,
         )
 
-        enumerations_single_patch_request_data_attributes.additional_properties = (
+        enumerations_single_patch_request_data_attributes_obj.additional_properties = (
             d
         )
-        return enumerations_single_patch_request_data_attributes
+        return enumerations_single_patch_request_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

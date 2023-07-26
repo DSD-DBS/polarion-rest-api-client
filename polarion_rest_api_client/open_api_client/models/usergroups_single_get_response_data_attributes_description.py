@@ -60,15 +60,15 @@ class UsergroupsSingleGetResponseDataAttributesDescription:
 
         value = d.pop("value", UNSET)
 
-        usergroups_single_get_response_data_attributes_description = cls(
+        usergroups_single_get_response_data_attributes_description_obj = cls(
             type=type,
             value=value,
         )
 
-        usergroups_single_get_response_data_attributes_description.additional_properties = (
+        usergroups_single_get_response_data_attributes_description_obj.additional_properties = (
             d
         )
-        return usergroups_single_get_response_data_attributes_description
+        return usergroups_single_get_response_data_attributes_description_obj
 
     @property
     def additional_keys(self) -> List[str]:

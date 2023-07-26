@@ -58,15 +58,15 @@ class UsersListGetResponseDataItemAttributesDescription:
 
         value = d.pop("value", UNSET)
 
-        users_list_get_response_data_item_attributes_description = cls(
+        users_list_get_response_data_item_attributes_description_obj = cls(
             type=type,
             value=value,
         )
 
-        users_list_get_response_data_item_attributes_description.additional_properties = (
+        users_list_get_response_data_item_attributes_description_obj.additional_properties = (
             d
         )
-        return users_list_get_response_data_item_attributes_description
+        return users_list_get_response_data_item_attributes_description_obj
 
     @property
     def additional_keys(self) -> List[str]:

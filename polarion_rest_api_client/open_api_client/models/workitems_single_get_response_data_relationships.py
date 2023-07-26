@@ -312,7 +312,7 @@ class WorkitemsSingleGetResponseDataRelationships:
                 )
             )
 
-        workitems_single_get_response_data_relationships = cls(
+        workitems_single_get_response_data_relationships_obj = cls(
             assignee=assignee,
             attachments=attachments,
             author=author,
@@ -325,10 +325,10 @@ class WorkitemsSingleGetResponseDataRelationships:
             watches=watches,
         )
 
-        workitems_single_get_response_data_relationships.additional_properties = (
+        workitems_single_get_response_data_relationships_obj.additional_properties = (
             d
         )
-        return workitems_single_get_response_data_relationships
+        return workitems_single_get_response_data_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:

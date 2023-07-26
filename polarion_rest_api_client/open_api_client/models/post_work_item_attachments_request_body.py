@@ -111,13 +111,13 @@ class PostWorkItemAttachmentsRequestBody:
 
             files.append(files_item)
 
-        post_work_item_attachments_request_body = cls(
+        post_work_item_attachments_request_body_obj = cls(
             resource=resource,
             files=files,
         )
 
-        post_work_item_attachments_request_body.additional_properties = d
-        return post_work_item_attachments_request_body
+        post_work_item_attachments_request_body_obj.additional_properties = d
+        return post_work_item_attachments_request_body_obj
 
     @property
     def additional_keys(self) -> List[str]:

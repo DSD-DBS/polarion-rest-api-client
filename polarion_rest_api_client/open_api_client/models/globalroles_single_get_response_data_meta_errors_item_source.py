@@ -43,15 +43,15 @@ class GlobalrolesSingleGetResponseDataMetaErrorsItemSource:
 
         parameter = d.pop("parameter", UNSET)
 
-        globalroles_single_get_response_data_meta_errors_item_source = cls(
+        globalroles_single_get_response_data_meta_errors_item_source_obj = cls(
             pointer=pointer,
             parameter=parameter,
         )
 
-        globalroles_single_get_response_data_meta_errors_item_source.additional_properties = (
+        globalroles_single_get_response_data_meta_errors_item_source_obj.additional_properties = (
             d
         )
-        return globalroles_single_get_response_data_meta_errors_item_source
+        return globalroles_single_get_response_data_meta_errors_item_source_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -86,14 +86,16 @@ class DocumentCommentsSinglePatchRequestData:
                 )
             )
 
-        document_comments_single_patch_request_data = cls(
+        document_comments_single_patch_request_data_obj = cls(
             type=type,
             id=id,
             attributes=attributes,
         )
 
-        document_comments_single_patch_request_data.additional_properties = d
-        return document_comments_single_patch_request_data
+        document_comments_single_patch_request_data_obj.additional_properties = (
+            d
+        )
+        return document_comments_single_patch_request_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

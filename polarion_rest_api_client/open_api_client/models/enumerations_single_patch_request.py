@@ -53,12 +53,12 @@ class EnumerationsSinglePatchRequest:
         else:
             data = EnumerationsSinglePatchRequestData.from_dict(_data)
 
-        enumerations_single_patch_request = cls(
+        enumerations_single_patch_request_obj = cls(
             data=data,
         )
 
-        enumerations_single_patch_request.additional_properties = d
-        return enumerations_single_patch_request
+        enumerations_single_patch_request_obj.additional_properties = d
+        return enumerations_single_patch_request_obj
 
     @property
     def additional_keys(self) -> List[str]:
