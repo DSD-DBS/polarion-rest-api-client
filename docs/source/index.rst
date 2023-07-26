@@ -14,12 +14,3 @@ Welcome to polarion-rest-api-client's documentation!
    :caption: API reference
 
    code/modules
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
