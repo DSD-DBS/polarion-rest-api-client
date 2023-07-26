@@ -6,6 +6,13 @@ from __future__ import annotations
 import abc
 import dataclasses
 import typing as t
+from importlib import metadata
+
+try:
+    __version__ = metadata.version("polarion_rest_api_client")
+except metadata.PackageNotFoundError:  # pragma: no cover
+    __version__ = "0.0.0+unknown"
+del metadata
 
 
 @dataclasses.dataclass
