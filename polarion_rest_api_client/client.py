@@ -6,13 +6,9 @@ from __future__ import annotations
 import json
 import logging
 
-from polarion_rest_api_client import (
-    AbstractPolarionProjectApi,
-    PolarionApiException,
-    PolarionApiUnexpectedException,
-    WorkItem,
-    WorkItemLink,
-)
+from polarion_rest_api_client import base_client
+from polarion_rest_api_client import data_models as dm
+from polarion_rest_api_client import errors
 from polarion_rest_api_client.open_api_client import client as oa_client
 from polarion_rest_api_client.open_api_client import models as api_models
 from polarion_rest_api_client.open_api_client import types as oa_types
@@ -57,7 +53,7 @@ def unset_str_builder(value: str | oa_types.Unset) -> str | None:
     return value
 
 
-class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
+class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
     """A Polarion Project Client using an auto generated OpenAPI-Client."""
 
     client: oa_client.AuthenticatedClient
@@ -82,7 +78,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
 
     def _check_response(self, response: oa_types.Response):
         def unexpected_error():
-            return PolarionApiUnexpectedException(
+            return errors.PolarionApiUnexpectedException(
                 response.status_code, response.content
             )
 
@@ -92,7 +88,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
                     json.loads(response.content.decode())
                 )
                 if error.errors:
-                    raise PolarionApiException(
+                    raise errors.PolarionApiException(
                         *[(e.status, e.detail) for e in error.errors]
                     )
                 else:
@@ -101,7 +97,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
                 raise unexpected_error() from error
 
     def _build_work_item_post_request(
-        self, work_item: WorkItem
+        self, work_item: dm.WorkItem
     ) -> api_models.WorkitemsListPostRequestDataItem:
         assert work_item.type is not None
         assert work_item.title is not None
@@ -111,7 +107,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
         attrs = api_models.WorkitemsListPostRequestDataItemAttributes(
             work_item.type,
             api_models.WorkitemsListPostRequestDataItemAttributesDescription(
-                api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(
+                api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description_type
                 ),
                 work_item.description,
@@ -127,7 +123,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
         )
 
     def _build_work_item_patch_request(
-        self, work_item: WorkItem
+        self, work_item: dm.WorkItem
     ) -> api_models.WorkitemsSinglePatchRequest:
         attrs = api_models.WorkitemsSinglePatchRequestDataAttributes()
 
@@ -135,8 +131,8 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
             attrs.title = work_item.title
 
         if work_item.description is not None:
-            attrs.description = api_models.WorkitemsSinglePatchRequestDataAttributesDescription(
-                api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(
+            attrs.description = api_models.WorkitemsSinglePatchRequestDataAttributesDescription(  # pylint: disable=line-too-long
+                api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description_type
                 ),
                 work_item.description,
@@ -172,7 +168,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
-    ) -> tuple[list[WorkItem], bool]:
+    ) -> tuple[list[dm.WorkItem], bool]:
         """Return the work items on a defined page matching the given query.
 
         In addition, a flag whether a next page is available is
@@ -193,7 +189,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
 
         work_items_response = response.parsed
 
-        work_items: list[WorkItem] = []
+        work_items: list[dm.WorkItem] = []
 
         next_page = False
         if (
@@ -207,7 +203,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
                     assert work_item.attributes
                     assert isinstance(work_item.id, str)
                     work_items.append(
-                        WorkItem(
+                        dm.WorkItem(
                             work_item.id.split("/")[-1],
                             unset_str_builder(work_item.attributes.title),
                             unset_str_builder(
@@ -232,7 +228,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
 
         return work_items, next_page
 
-    def _create_work_items(self, work_items: list[WorkItem]):
+    def _create_work_items(self, work_items: list[dm.WorkItem]):
         """Create the given list of work items."""
         response = post_work_items.sync_detailed(
             self.project_id,
@@ -254,7 +250,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
             json_body=api_models.WorkitemsListDeleteRequest(
                 [
                     api_models.WorkitemsListDeleteRequestDataItem(
-                        api_models.WorkitemsListDeleteRequestDataItemType.WORKITEMS,
+                        api_models.WorkitemsListDeleteRequestDataItemType.WORKITEMS,  # pylint: disable=line-too-long
                         f"{self.project_id}/{work_item_id}",
                     )
                     for work_item_id in work_item_ids
@@ -264,7 +260,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
 
         self._check_response(response)
 
-    def update_work_item(self, work_item: WorkItem):
+    def update_work_item(self, work_item: dm.WorkItem):
         """Update the given work item in Polarion.
 
         Only fields not set to None will be updated in Polarion. None
@@ -288,7 +284,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
         include: str | None = None,
         page_size: int = 100,
         page_number: int = 1,
-    ) -> tuple[list[WorkItemLink], bool]:
+    ) -> tuple[list[dm.WorkItemLink], bool]:
         """Get the work item links for the given work item on a page.
 
         In addition, a flag whether a next page is available is
@@ -313,7 +309,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
 
         linked_work_item_response = response.parsed
 
-        work_item_links: list[WorkItemLink] = []
+        work_item_links: list[dm.WorkItemLink] = []
         next_page = False
         if (
             isinstance(
@@ -326,7 +322,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
                 assert isinstance(link.id, str)
                 assert isinstance(
                     link.attributes,
-                    api_models.LinkedworkitemsListGetResponseDataItemAttributes,
+                    api_models.LinkedworkitemsListGetResponseDataItemAttributes,  # pylint: disable=line-too-long
                 )
                 info = link.id.split("/")
                 assert len(info) == 5
@@ -336,7 +332,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
                     suspect = False
 
                 work_item_links.append(
-                    WorkItemLink(
+                    dm.WorkItemLink(
                         work_item_id,
                         linked_work_item_id,
                         role_id,
@@ -352,11 +348,12 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
 
         return work_item_links, next_page
 
-    def _create_work_item_links(self, work_item_links: list[WorkItemLink]):
+    def _create_work_item_links(self, work_item_links: list[dm.WorkItemLink]):
         response = post_linked_work_items.sync_detailed(
             self.project_id,
             work_item_links[0].primary_work_item_id,
             client=self.client,
+            # pylint: disable=line-too-long
             json_body=api_models.LinkedworkitemsListPostRequest(
                 [
                     api_models.LinkedworkitemsListPostRequestDataItem(
@@ -377,15 +374,17 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
                     for work_item_link in work_item_links
                 ]
             ),
+            # pylint: enable=line-too-long
         )
 
         self._check_response(response)
 
-    def _delete_work_item_links(self, work_item_links: list[WorkItemLink]):
+    def _delete_work_item_links(self, work_item_links: list[dm.WorkItemLink]):
         response = delete_linked_work_items.sync_detailed(
             self.project_id,
             work_item_links[0].primary_work_item_id,
             client=self.client,
+            # pylint: disable=line-too-long
             json_body=api_models.LinkedworkitemsListDeleteRequest(
                 [
                     api_models.LinkedworkitemsListDeleteRequestDataItem(
@@ -395,6 +394,7 @@ class OpenAPIPolarionProjectClient(AbstractPolarionProjectApi):
                     for work_item_link in work_item_links
                 ]
             ),
+            # pylint: enable=line-too-long
         )
 
         self._check_response(response)

@@ -123,6 +123,7 @@ ignore-long-lines = '^\s*(?:(?:__ |\.\. __: )?https?://[^ ]+$|def test_.*|[A-Za-
 
 [tool.pylint.master]
 max-line-length = 79
+ignore-paths = "polarion_rest_api_client/open_api_client/*"
 
 [tool.pylint.messages_control]
 disable = [
