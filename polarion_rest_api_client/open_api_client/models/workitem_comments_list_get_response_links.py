@@ -69,7 +69,7 @@ class WorkitemCommentsListGetResponseLinks:
 
         last = d.pop("last", UNSET)
 
-        workitem_comments_list_get_response_links = cls(
+        workitem_comments_list_get_response_links_obj = cls(
             self_=self_,
             first=first,
             prev=prev,
@@ -77,8 +77,8 @@ class WorkitemCommentsListGetResponseLinks:
             last=last,
         )
 
-        workitem_comments_list_get_response_links.additional_properties = d
-        return workitem_comments_list_get_response_links
+        workitem_comments_list_get_response_links_obj.additional_properties = d
+        return workitem_comments_list_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

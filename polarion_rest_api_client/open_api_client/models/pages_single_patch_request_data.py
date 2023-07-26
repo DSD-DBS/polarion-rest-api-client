@@ -80,14 +80,14 @@ class PagesSinglePatchRequestData:
                 _attributes
             )
 
-        pages_single_patch_request_data = cls(
+        pages_single_patch_request_data_obj = cls(
             type=type,
             id=id,
             attributes=attributes,
         )
 
-        pages_single_patch_request_data.additional_properties = d
-        return pages_single_patch_request_data
+        pages_single_patch_request_data_obj.additional_properties = d
+        return pages_single_patch_request_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

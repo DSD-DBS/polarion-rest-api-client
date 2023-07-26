@@ -36,12 +36,12 @@ class GlobalrolesSingleGetResponseLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        globalroles_single_get_response_links = cls(
+        globalroles_single_get_response_links_obj = cls(
             self_=self_,
         )
 
-        globalroles_single_get_response_links.additional_properties = d
-        return globalroles_single_get_response_links
+        globalroles_single_get_response_links_obj.additional_properties = d
+        return globalroles_single_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

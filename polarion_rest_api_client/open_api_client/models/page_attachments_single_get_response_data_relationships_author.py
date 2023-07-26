@@ -61,14 +61,18 @@ class PageAttachmentsSingleGetResponseDataRelationshipsAuthor:
                 _data
             )
 
-        page_attachments_single_get_response_data_relationships_author = cls(
-            data=data,
+        page_attachments_single_get_response_data_relationships_author_obj = (
+            cls(
+                data=data,
+            )
         )
 
-        page_attachments_single_get_response_data_relationships_author.additional_properties = (
+        page_attachments_single_get_response_data_relationships_author_obj.additional_properties = (
             d
         )
-        return page_attachments_single_get_response_data_relationships_author
+        return (
+            page_attachments_single_get_response_data_relationships_author_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

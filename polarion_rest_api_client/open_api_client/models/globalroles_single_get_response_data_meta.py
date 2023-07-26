@@ -63,12 +63,12 @@ class GlobalrolesSingleGetResponseDataMeta:
 
             errors.append(errors_item)
 
-        globalroles_single_get_response_data_meta = cls(
+        globalroles_single_get_response_data_meta_obj = cls(
             errors=errors,
         )
 
-        globalroles_single_get_response_data_meta.additional_properties = d
-        return globalroles_single_get_response_data_meta
+        globalroles_single_get_response_data_meta_obj.additional_properties = d
+        return globalroles_single_get_response_data_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

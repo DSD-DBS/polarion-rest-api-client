@@ -63,14 +63,14 @@ class PageAttachmentsSingleGetResponseDataMeta:
 
             errors.append(errors_item)
 
-        page_attachments_single_get_response_data_meta = cls(
+        page_attachments_single_get_response_data_meta_obj = cls(
             errors=errors,
         )
 
-        page_attachments_single_get_response_data_meta.additional_properties = (
+        page_attachments_single_get_response_data_meta_obj.additional_properties = (
             d
         )
-        return page_attachments_single_get_response_data_meta
+        return page_attachments_single_get_response_data_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

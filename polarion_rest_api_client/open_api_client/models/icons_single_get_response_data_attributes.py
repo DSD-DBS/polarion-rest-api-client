@@ -43,13 +43,13 @@ class IconsSingleGetResponseDataAttributes:
 
         path = d.pop("path", UNSET)
 
-        icons_single_get_response_data_attributes = cls(
+        icons_single_get_response_data_attributes_obj = cls(
             icon_url=icon_url,
             path=path,
         )
 
-        icons_single_get_response_data_attributes.additional_properties = d
-        return icons_single_get_response_data_attributes
+        icons_single_get_response_data_attributes_obj.additional_properties = d
+        return icons_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

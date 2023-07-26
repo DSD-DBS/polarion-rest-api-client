@@ -38,14 +38,18 @@ class PagesSingleGetResponseDataRelationshipsAttachmentsMeta:
         d = src_dict.copy()
         total_count = d.pop("totalCount", UNSET)
 
-        pages_single_get_response_data_relationships_attachments_meta = cls(
-            total_count=total_count,
+        pages_single_get_response_data_relationships_attachments_meta_obj = (
+            cls(
+                total_count=total_count,
+            )
         )
 
-        pages_single_get_response_data_relationships_attachments_meta.additional_properties = (
+        pages_single_get_response_data_relationships_attachments_meta_obj.additional_properties = (
             d
         )
-        return pages_single_get_response_data_relationships_attachments_meta
+        return (
+            pages_single_get_response_data_relationships_attachments_meta_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

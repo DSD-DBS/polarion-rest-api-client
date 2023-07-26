@@ -53,12 +53,12 @@ class DocumentsSinglePostResponse:
         else:
             data = DocumentsSinglePostResponseData.from_dict(_data)
 
-        documents_single_post_response = cls(
+        documents_single_post_response_obj = cls(
             data=data,
         )
 
-        documents_single_post_response.additional_properties = d
-        return documents_single_post_response
+        documents_single_post_response_obj.additional_properties = d
+        return documents_single_post_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

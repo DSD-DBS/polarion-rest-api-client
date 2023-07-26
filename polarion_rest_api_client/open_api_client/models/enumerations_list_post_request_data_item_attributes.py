@@ -83,17 +83,17 @@ class EnumerationsListPostRequestDataItemAttributes:
 
         target_type = d.pop("targetType", UNSET)
 
-        enumerations_list_post_request_data_item_attributes = cls(
+        enumerations_list_post_request_data_item_attributes_obj = cls(
             enum_context=enum_context,
             enum_name=enum_name,
             options=options,
             target_type=target_type,
         )
 
-        enumerations_list_post_request_data_item_attributes.additional_properties = (
+        enumerations_list_post_request_data_item_attributes_obj.additional_properties = (
             d
         )
-        return enumerations_list_post_request_data_item_attributes
+        return enumerations_list_post_request_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

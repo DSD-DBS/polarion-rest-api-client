@@ -91,15 +91,19 @@ class WorkitemsListGetResponseDataItemRelationshipsPlannedIn:
                 _meta
             )
 
-        workitems_list_get_response_data_item_relationships_planned_in = cls(
-            data=data,
-            meta=meta,
+        workitems_list_get_response_data_item_relationships_planned_in_obj = (
+            cls(
+                data=data,
+                meta=meta,
+            )
         )
 
-        workitems_list_get_response_data_item_relationships_planned_in.additional_properties = (
+        workitems_list_get_response_data_item_relationships_planned_in_obj.additional_properties = (
             d
         )
-        return workitems_list_get_response_data_item_relationships_planned_in
+        return (
+            workitems_list_get_response_data_item_relationships_planned_in_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

@@ -43,15 +43,15 @@ class PageAttachmentsListPostRequestDataItemAttributes:
 
         title = d.pop("title", UNSET)
 
-        page_attachments_list_post_request_data_item_attributes = cls(
+        page_attachments_list_post_request_data_item_attributes_obj = cls(
             file_name=file_name,
             title=title,
         )
 
-        page_attachments_list_post_request_data_item_attributes.additional_properties = (
+        page_attachments_list_post_request_data_item_attributes_obj.additional_properties = (
             d
         )
-        return page_attachments_list_post_request_data_item_attributes
+        return page_attachments_list_post_request_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

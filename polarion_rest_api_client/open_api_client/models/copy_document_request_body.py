@@ -69,7 +69,7 @@ class CopyDocumentRequestBody:
             "linkOriginalItemsWithRole", UNSET
         )
 
-        copy_document_request_body = cls(
+        copy_document_request_body_obj = cls(
             target_project_id=target_project_id,
             target_space_id=target_space_id,
             target_document_name=target_document_name,
@@ -77,8 +77,8 @@ class CopyDocumentRequestBody:
             link_original_items_with_role=link_original_items_with_role,
         )
 
-        copy_document_request_body.additional_properties = d
-        return copy_document_request_body
+        copy_document_request_body_obj.additional_properties = d
+        return copy_document_request_body_obj
 
     @property
     def additional_keys(self) -> List[str]:

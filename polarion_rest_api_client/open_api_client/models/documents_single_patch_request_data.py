@@ -82,14 +82,14 @@ class DocumentsSinglePatchRequestData:
                 _attributes
             )
 
-        documents_single_patch_request_data = cls(
+        documents_single_patch_request_data_obj = cls(
             type=type,
             id=id,
             attributes=attributes,
         )
 
-        documents_single_patch_request_data.additional_properties = d
-        return documents_single_patch_request_data
+        documents_single_patch_request_data_obj.additional_properties = d
+        return documents_single_patch_request_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

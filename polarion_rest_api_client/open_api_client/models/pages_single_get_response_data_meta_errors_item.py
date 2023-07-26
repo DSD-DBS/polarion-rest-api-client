@@ -79,17 +79,17 @@ class PagesSingleGetResponseDataMetaErrorsItem:
                 _source
             )
 
-        pages_single_get_response_data_meta_errors_item = cls(
+        pages_single_get_response_data_meta_errors_item_obj = cls(
             status=status,
             title=title,
             detail=detail,
             source=source,
         )
 
-        pages_single_get_response_data_meta_errors_item.additional_properties = (
+        pages_single_get_response_data_meta_errors_item_obj.additional_properties = (
             d
         )
-        return pages_single_get_response_data_meta_errors_item
+        return pages_single_get_response_data_meta_errors_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

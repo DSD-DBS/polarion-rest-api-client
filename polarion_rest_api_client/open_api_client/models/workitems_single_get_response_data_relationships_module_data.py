@@ -67,16 +67,16 @@ class WorkitemsSingleGetResponseDataRelationshipsModuleData:
 
         revision = d.pop("revision", UNSET)
 
-        workitems_single_get_response_data_relationships_module_data = cls(
+        workitems_single_get_response_data_relationships_module_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        workitems_single_get_response_data_relationships_module_data.additional_properties = (
+        workitems_single_get_response_data_relationships_module_data_obj.additional_properties = (
             d
         )
-        return workitems_single_get_response_data_relationships_module_data
+        return workitems_single_get_response_data_relationships_module_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

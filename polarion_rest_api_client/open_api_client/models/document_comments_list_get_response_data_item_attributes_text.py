@@ -60,15 +60,19 @@ class DocumentCommentsListGetResponseDataItemAttributesText:
 
         value = d.pop("value", UNSET)
 
-        document_comments_list_get_response_data_item_attributes_text = cls(
-            type=type,
-            value=value,
+        document_comments_list_get_response_data_item_attributes_text_obj = (
+            cls(
+                type=type,
+                value=value,
+            )
         )
 
-        document_comments_list_get_response_data_item_attributes_text.additional_properties = (
+        document_comments_list_get_response_data_item_attributes_text_obj.additional_properties = (
             d
         )
-        return document_comments_list_get_response_data_item_attributes_text
+        return (
+            document_comments_list_get_response_data_item_attributes_text_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

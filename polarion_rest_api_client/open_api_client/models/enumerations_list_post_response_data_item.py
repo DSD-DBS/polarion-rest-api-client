@@ -78,14 +78,14 @@ class EnumerationsListPostResponseDataItem:
         else:
             links = EnumerationsListPostResponseDataItemLinks.from_dict(_links)
 
-        enumerations_list_post_response_data_item = cls(
+        enumerations_list_post_response_data_item_obj = cls(
             type=type,
             id=id,
             links=links,
         )
 
-        enumerations_list_post_response_data_item.additional_properties = d
-        return enumerations_list_post_response_data_item
+        enumerations_list_post_response_data_item_obj.additional_properties = d
+        return enumerations_list_post_response_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

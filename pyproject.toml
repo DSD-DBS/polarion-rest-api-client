@@ -46,7 +46,7 @@ docs = [
   "furo",
   "sphinx",
   "sphinx-copybutton",
-  "tomli; python_version<'3.11'",
+  "tomli; python_version<'3.12'",
 ]
 
 test = [
@@ -72,6 +72,7 @@ exclude_also = [
   '@t\.overload',
 ]
 skip_covered = true
+omit = ["polarion_rest_api_client/open_api_client/*"]
 
 [tool.docformatter]
 wrap-descriptions = 72
@@ -97,7 +98,7 @@ allow_untyped_defs = true
 [[tool.mypy.overrides]]
 # Untyped third party libraries
 module = [
-  # ...
+  "polarion_rest_api_client.open_api_client"
 ]
 ignore_missing_imports = true
 

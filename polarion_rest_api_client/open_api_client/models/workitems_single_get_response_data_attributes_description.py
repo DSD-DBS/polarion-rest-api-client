@@ -60,15 +60,15 @@ class WorkitemsSingleGetResponseDataAttributesDescription:
 
         value = d.pop("value", UNSET)
 
-        workitems_single_get_response_data_attributes_description = cls(
+        workitems_single_get_response_data_attributes_description_obj = cls(
             type=type,
             value=value,
         )
 
-        workitems_single_get_response_data_attributes_description.additional_properties = (
+        workitems_single_get_response_data_attributes_description_obj.additional_properties = (
             d
         )
-        return workitems_single_get_response_data_attributes_description
+        return workitems_single_get_response_data_attributes_description_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -38,14 +38,18 @@ class DocumentsSingleGetResponseDataRelationshipsCommentsMeta:
         d = src_dict.copy()
         total_count = d.pop("totalCount", UNSET)
 
-        documents_single_get_response_data_relationships_comments_meta = cls(
-            total_count=total_count,
+        documents_single_get_response_data_relationships_comments_meta_obj = (
+            cls(
+                total_count=total_count,
+            )
         )
 
-        documents_single_get_response_data_relationships_comments_meta.additional_properties = (
+        documents_single_get_response_data_relationships_comments_meta_obj.additional_properties = (
             d
         )
-        return documents_single_get_response_data_relationships_comments_meta
+        return (
+            documents_single_get_response_data_relationships_comments_meta_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

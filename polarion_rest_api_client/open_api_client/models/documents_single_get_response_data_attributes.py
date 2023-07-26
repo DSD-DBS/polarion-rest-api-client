@@ -219,7 +219,7 @@ class DocumentsSingleGetResponseDataAttributes:
 
         uses_outline_numbering = d.pop("usesOutlineNumbering", UNSET)
 
-        documents_single_get_response_data_attributes = cls(
+        documents_single_get_response_data_attributes_obj = cls(
             auto_suspect=auto_suspect,
             branched_with_query=branched_with_query,
             created=created,
@@ -237,8 +237,10 @@ class DocumentsSingleGetResponseDataAttributes:
             uses_outline_numbering=uses_outline_numbering,
         )
 
-        documents_single_get_response_data_attributes.additional_properties = d
-        return documents_single_get_response_data_attributes
+        documents_single_get_response_data_attributes_obj.additional_properties = (
+            d
+        )
+        return documents_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

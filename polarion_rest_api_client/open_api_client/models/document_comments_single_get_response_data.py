@@ -166,7 +166,7 @@ class DocumentCommentsSingleGetResponseData:
                 _links
             )
 
-        document_comments_single_get_response_data = cls(
+        document_comments_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -176,8 +176,10 @@ class DocumentCommentsSingleGetResponseData:
             links=links,
         )
 
-        document_comments_single_get_response_data.additional_properties = d
-        return document_comments_single_get_response_data
+        document_comments_single_get_response_data_obj.additional_properties = (
+            d
+        )
+        return document_comments_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

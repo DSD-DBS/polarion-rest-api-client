@@ -117,16 +117,16 @@ class WorkitemsSinglePatchRequestDataRelationships:
                 )
             )
 
-        workitems_single_patch_request_data_relationships = cls(
+        workitems_single_patch_request_data_relationships_obj = cls(
             assignee=assignee,
             categories=categories,
             watches=watches,
         )
 
-        workitems_single_patch_request_data_relationships.additional_properties = (
+        workitems_single_patch_request_data_relationships_obj.additional_properties = (
             d
         )
-        return workitems_single_patch_request_data_relationships
+        return workitems_single_patch_request_data_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:

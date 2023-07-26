@@ -108,14 +108,16 @@ class WorkitemCommentsListPostRequestDataItem:
                 )
             )
 
-        workitem_comments_list_post_request_data_item = cls(
+        workitem_comments_list_post_request_data_item_obj = cls(
             type=type,
             attributes=attributes,
             relationships=relationships,
         )
 
-        workitem_comments_list_post_request_data_item.additional_properties = d
-        return workitem_comments_list_post_request_data_item
+        workitem_comments_list_post_request_data_item_obj.additional_properties = (
+            d
+        )
+        return workitem_comments_list_post_request_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

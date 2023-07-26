@@ -72,16 +72,16 @@ class WorkitemCommentsListGetResponseDataItemRelationshipsParentCommentData:
 
         revision = d.pop("revision", UNSET)
 
-        workitem_comments_list_get_response_data_item_relationships_parent_comment_data = cls(
+        workitem_comments_list_get_response_data_item_relationships_parent_comment_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        workitem_comments_list_get_response_data_item_relationships_parent_comment_data.additional_properties = (
+        workitem_comments_list_get_response_data_item_relationships_parent_comment_data_obj.additional_properties = (
             d
         )
-        return workitem_comments_list_get_response_data_item_relationships_parent_comment_data
+        return workitem_comments_list_get_response_data_item_relationships_parent_comment_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

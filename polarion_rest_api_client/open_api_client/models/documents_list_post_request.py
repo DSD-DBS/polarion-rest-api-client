@@ -59,12 +59,12 @@ class DocumentsListPostRequest:
 
             data.append(data_item)
 
-        documents_list_post_request = cls(
+        documents_list_post_request_obj = cls(
             data=data,
         )
 
-        documents_list_post_request.additional_properties = d
-        return documents_list_post_request
+        documents_list_post_request_obj.additional_properties = d
+        return documents_list_post_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

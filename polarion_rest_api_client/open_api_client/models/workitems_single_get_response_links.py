@@ -37,12 +37,12 @@ class WorkitemsSingleGetResponseLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        workitems_single_get_response_links = cls(
+        workitems_single_get_response_links_obj = cls(
             self_=self_,
         )
 
-        workitems_single_get_response_links.additional_properties = d
-        return workitems_single_get_response_links
+        workitems_single_get_response_links_obj.additional_properties = d
+        return workitems_single_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

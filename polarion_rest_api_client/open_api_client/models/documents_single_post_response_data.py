@@ -82,14 +82,14 @@ class DocumentsSinglePostResponseData:
                 _attributes
             )
 
-        documents_single_post_response_data = cls(
+        documents_single_post_response_data_obj = cls(
             type=type,
             id=id,
             attributes=attributes,
         )
 
-        documents_single_post_response_data.additional_properties = d
-        return documents_single_post_response_data
+        documents_single_post_response_data_obj.additional_properties = d
+        return documents_single_post_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

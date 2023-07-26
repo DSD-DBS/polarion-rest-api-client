@@ -37,14 +37,14 @@ class WorkitemCommentsSingleGetResponseDataLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        workitem_comments_single_get_response_data_links = cls(
+        workitem_comments_single_get_response_data_links_obj = cls(
             self_=self_,
         )
 
-        workitem_comments_single_get_response_data_links.additional_properties = (
+        workitem_comments_single_get_response_data_links_obj.additional_properties = (
             d
         )
-        return workitem_comments_single_get_response_data_links
+        return workitem_comments_single_get_response_data_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

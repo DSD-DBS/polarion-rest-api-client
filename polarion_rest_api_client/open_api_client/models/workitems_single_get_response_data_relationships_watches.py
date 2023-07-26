@@ -89,15 +89,15 @@ class WorkitemsSingleGetResponseDataRelationshipsWatches:
                 _meta
             )
 
-        workitems_single_get_response_data_relationships_watches = cls(
+        workitems_single_get_response_data_relationships_watches_obj = cls(
             data=data,
             meta=meta,
         )
 
-        workitems_single_get_response_data_relationships_watches.additional_properties = (
+        workitems_single_get_response_data_relationships_watches_obj.additional_properties = (
             d
         )
-        return workitems_single_get_response_data_relationships_watches
+        return workitems_single_get_response_data_relationships_watches_obj
 
     @property
     def additional_keys(self) -> List[str]:

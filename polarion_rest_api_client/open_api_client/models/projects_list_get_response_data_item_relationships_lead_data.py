@@ -67,16 +67,16 @@ class ProjectsListGetResponseDataItemRelationshipsLeadData:
 
         revision = d.pop("revision", UNSET)
 
-        projects_list_get_response_data_item_relationships_lead_data = cls(
+        projects_list_get_response_data_item_relationships_lead_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        projects_list_get_response_data_item_relationships_lead_data.additional_properties = (
+        projects_list_get_response_data_item_relationships_lead_data_obj.additional_properties = (
             d
         )
-        return projects_list_get_response_data_item_relationships_lead_data
+        return projects_list_get_response_data_item_relationships_lead_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

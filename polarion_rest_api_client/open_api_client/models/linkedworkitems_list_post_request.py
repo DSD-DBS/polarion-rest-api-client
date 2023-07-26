@@ -59,12 +59,12 @@ class LinkedworkitemsListPostRequest:
 
             data.append(data_item)
 
-        linkedworkitems_list_post_request = cls(
+        linkedworkitems_list_post_request_obj = cls(
             data=data,
         )
 
-        linkedworkitems_list_post_request.additional_properties = d
-        return linkedworkitems_list_post_request
+        linkedworkitems_list_post_request_obj.additional_properties = d
+        return linkedworkitems_list_post_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

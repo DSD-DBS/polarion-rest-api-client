@@ -162,7 +162,7 @@ class SparseFields:
 
         workitem_comments = d.pop("workitem_comments", UNSET)
 
-        sparse_fields = cls(
+        sparse_fields_obj = cls(
             categories=categories,
             documents=documents,
             document_attachments=document_attachments,
@@ -184,8 +184,8 @@ class SparseFields:
             workitem_comments=workitem_comments,
         )
 
-        sparse_fields.additional_properties = d
-        return sparse_fields
+        sparse_fields_obj.additional_properties = d
+        return sparse_fields_obj
 
     @property
     def additional_keys(self) -> List[str]:

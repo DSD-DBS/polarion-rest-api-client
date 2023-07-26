@@ -80,14 +80,16 @@ class DocumentPartsListPostResponseDataItem:
                 _links
             )
 
-        document_parts_list_post_response_data_item = cls(
+        document_parts_list_post_response_data_item_obj = cls(
             type=type,
             id=id,
             links=links,
         )
 
-        document_parts_list_post_response_data_item.additional_properties = d
-        return document_parts_list_post_response_data_item
+        document_parts_list_post_response_data_item_obj.additional_properties = (
+            d
+        )
+        return document_parts_list_post_response_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

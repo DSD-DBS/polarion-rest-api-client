@@ -73,7 +73,7 @@ class PageAttachmentsSingleGetResponseDataAttributes:
         else:
             updated = isoparse(_updated)
 
-        page_attachments_single_get_response_data_attributes = cls(
+        page_attachments_single_get_response_data_attributes_obj = cls(
             file_name=file_name,
             id=id,
             length=length,
@@ -81,10 +81,10 @@ class PageAttachmentsSingleGetResponseDataAttributes:
             updated=updated,
         )
 
-        page_attachments_single_get_response_data_attributes.additional_properties = (
+        page_attachments_single_get_response_data_attributes_obj.additional_properties = (
             d
         )
-        return page_attachments_single_get_response_data_attributes
+        return page_attachments_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

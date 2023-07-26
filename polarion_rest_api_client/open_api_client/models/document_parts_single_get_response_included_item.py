@@ -24,12 +24,12 @@ class DocumentPartsSingleGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        document_parts_single_get_response_included_item = cls()
+        document_parts_single_get_response_included_item_obj = cls()
 
-        document_parts_single_get_response_included_item.additional_properties = (
+        document_parts_single_get_response_included_item_obj.additional_properties = (
             d
         )
-        return document_parts_single_get_response_included_item
+        return document_parts_single_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

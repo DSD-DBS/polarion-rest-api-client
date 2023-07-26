@@ -50,6 +50,11 @@ repos:
     rev: v1.3.0
     hooks:
       - id: mypy
+        additional_dependencies:
+          - types-requests
+          - types-PyYAML
+          - types-python-dateutil
+          - attrs
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.5.1
     hooks:

@@ -50,16 +50,16 @@ class LinkedworkitemsSingleGetResponseDataAttributes:
 
         suspect = d.pop("suspect", UNSET)
 
-        linkedworkitems_single_get_response_data_attributes = cls(
+        linkedworkitems_single_get_response_data_attributes_obj = cls(
             revision=revision,
             role=role,
             suspect=suspect,
         )
 
-        linkedworkitems_single_get_response_data_attributes.additional_properties = (
+        linkedworkitems_single_get_response_data_attributes_obj.additional_properties = (
             d
         )
-        return linkedworkitems_single_get_response_data_attributes
+        return linkedworkitems_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

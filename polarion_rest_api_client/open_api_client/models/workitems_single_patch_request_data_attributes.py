@@ -179,7 +179,7 @@ class WorkitemsSinglePatchRequestDataAttributes:
 
         title = d.pop("title", UNSET)
 
-        workitems_single_patch_request_data_attributes = cls(
+        workitems_single_patch_request_data_attributes_obj = cls(
             description=description,
             due_date=due_date,
             hyperlinks=hyperlinks,
@@ -194,10 +194,10 @@ class WorkitemsSinglePatchRequestDataAttributes:
             title=title,
         )
 
-        workitems_single_patch_request_data_attributes.additional_properties = (
+        workitems_single_patch_request_data_attributes_obj.additional_properties = (
             d
         )
-        return workitems_single_patch_request_data_attributes
+        return workitems_single_patch_request_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

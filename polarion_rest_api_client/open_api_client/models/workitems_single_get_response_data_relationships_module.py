@@ -59,14 +59,14 @@ class WorkitemsSingleGetResponseDataRelationshipsModule:
                 _data
             )
 
-        workitems_single_get_response_data_relationships_module = cls(
+        workitems_single_get_response_data_relationships_module_obj = cls(
             data=data,
         )
 
-        workitems_single_get_response_data_relationships_module.additional_properties = (
+        workitems_single_get_response_data_relationships_module_obj.additional_properties = (
             d
         )
-        return workitems_single_get_response_data_relationships_module
+        return workitems_single_get_response_data_relationships_module_obj
 
     @property
     def additional_keys(self) -> List[str]:

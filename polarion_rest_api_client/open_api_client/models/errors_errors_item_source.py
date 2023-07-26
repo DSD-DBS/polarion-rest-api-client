@@ -43,13 +43,13 @@ class ErrorsErrorsItemSource:
 
         parameter = d.pop("parameter", UNSET)
 
-        errors_errors_item_source = cls(
+        errors_errors_item_source_obj = cls(
             pointer=pointer,
             parameter=parameter,
         )
 
-        errors_errors_item_source.additional_properties = d
-        return errors_errors_item_source
+        errors_errors_item_source_obj.additional_properties = d
+        return errors_errors_item_source_obj
 
     @property
     def additional_keys(self) -> List[str]:

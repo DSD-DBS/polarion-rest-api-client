@@ -24,12 +24,12 @@ class WorkitemCommentsSingleGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        workitem_comments_single_get_response_included_item = cls()
+        workitem_comments_single_get_response_included_item_obj = cls()
 
-        workitem_comments_single_get_response_included_item.additional_properties = (
+        workitem_comments_single_get_response_included_item_obj.additional_properties = (
             d
         )
-        return workitem_comments_single_get_response_included_item
+        return workitem_comments_single_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

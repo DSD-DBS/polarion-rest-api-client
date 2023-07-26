@@ -36,12 +36,12 @@ class IconsSingleGetResponseDataLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        icons_single_get_response_data_links = cls(
+        icons_single_get_response_data_links_obj = cls(
             self_=self_,
         )
 
-        icons_single_get_response_data_links.additional_properties = d
-        return icons_single_get_response_data_links
+        icons_single_get_response_data_links_obj.additional_properties = d
+        return icons_single_get_response_data_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

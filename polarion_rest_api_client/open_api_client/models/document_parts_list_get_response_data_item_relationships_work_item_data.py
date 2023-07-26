@@ -71,16 +71,16 @@ class DocumentPartsListGetResponseDataItemRelationshipsWorkItemData:
 
         revision = d.pop("revision", UNSET)
 
-        document_parts_list_get_response_data_item_relationships_work_item_data = cls(
+        document_parts_list_get_response_data_item_relationships_work_item_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
         )
 
-        document_parts_list_get_response_data_item_relationships_work_item_data.additional_properties = (
+        document_parts_list_get_response_data_item_relationships_work_item_data_obj.additional_properties = (
             d
         )
-        return document_parts_list_get_response_data_item_relationships_work_item_data
+        return document_parts_list_get_response_data_item_relationships_work_item_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

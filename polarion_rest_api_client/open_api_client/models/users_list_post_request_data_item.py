@@ -100,14 +100,14 @@ class UsersListPostRequestDataItem:
                 )
             )
 
-        users_list_post_request_data_item = cls(
+        users_list_post_request_data_item_obj = cls(
             type=type,
             attributes=attributes,
             relationships=relationships,
         )
 
-        users_list_post_request_data_item.additional_properties = d
-        return users_list_post_request_data_item
+        users_list_post_request_data_item_obj.additional_properties = d
+        return users_list_post_request_data_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

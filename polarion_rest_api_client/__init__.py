@@ -1,6 +1,8 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Polarion API module with data classes and an abstract API client."""
+from __future__ import annotations
+
 import abc
 import dataclasses
 import typing as t

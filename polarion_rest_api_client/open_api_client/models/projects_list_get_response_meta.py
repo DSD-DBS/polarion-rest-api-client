@@ -36,12 +36,12 @@ class ProjectsListGetResponseMeta:
         d = src_dict.copy()
         total_count = d.pop("totalCount", UNSET)
 
-        projects_list_get_response_meta = cls(
+        projects_list_get_response_meta_obj = cls(
             total_count=total_count,
         )
 
-        projects_list_get_response_meta.additional_properties = d
-        return projects_list_get_response_meta
+        projects_list_get_response_meta_obj.additional_properties = d
+        return projects_list_get_response_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

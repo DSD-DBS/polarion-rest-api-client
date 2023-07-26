@@ -129,7 +129,7 @@ class IconsSingleGetResponseData:
         else:
             links = IconsSingleGetResponseDataLinks.from_dict(_links)
 
-        icons_single_get_response_data = cls(
+        icons_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -138,8 +138,8 @@ class IconsSingleGetResponseData:
             links=links,
         )
 
-        icons_single_get_response_data.additional_properties = d
-        return icons_single_get_response_data
+        icons_single_get_response_data_obj.additional_properties = d
+        return icons_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

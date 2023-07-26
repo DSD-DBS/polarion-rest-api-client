@@ -36,12 +36,14 @@ class PagesSinglePatchRequestDataAttributes:
         d = src_dict.copy()
         title = d.pop("title", UNSET)
 
-        pages_single_patch_request_data_attributes = cls(
+        pages_single_patch_request_data_attributes_obj = cls(
             title=title,
         )
 
-        pages_single_patch_request_data_attributes.additional_properties = d
-        return pages_single_patch_request_data_attributes
+        pages_single_patch_request_data_attributes_obj.additional_properties = (
+            d
+        )
+        return pages_single_patch_request_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

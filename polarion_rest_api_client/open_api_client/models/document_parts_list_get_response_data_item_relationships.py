@@ -114,16 +114,16 @@ class DocumentPartsListGetResponseDataItemRelationships:
                 _work_item
             )
 
-        document_parts_list_get_response_data_item_relationships = cls(
+        document_parts_list_get_response_data_item_relationships_obj = cls(
             next_part=next_part,
             previous_part=previous_part,
             work_item=work_item,
         )
 
-        document_parts_list_get_response_data_item_relationships.additional_properties = (
+        document_parts_list_get_response_data_item_relationships_obj.additional_properties = (
             d
         )
-        return document_parts_list_get_response_data_item_relationships
+        return document_parts_list_get_response_data_item_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -43,15 +43,15 @@ class WorkitemAttachmentsListPostRequestDataItemAttributes:
 
         title = d.pop("title", UNSET)
 
-        workitem_attachments_list_post_request_data_item_attributes = cls(
+        workitem_attachments_list_post_request_data_item_attributes_obj = cls(
             file_name=file_name,
             title=title,
         )
 
-        workitem_attachments_list_post_request_data_item_attributes.additional_properties = (
+        workitem_attachments_list_post_request_data_item_attributes_obj.additional_properties = (
             d
         )
-        return workitem_attachments_list_post_request_data_item_attributes
+        return workitem_attachments_list_post_request_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

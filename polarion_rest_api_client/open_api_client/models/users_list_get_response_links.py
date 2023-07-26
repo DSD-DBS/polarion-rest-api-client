@@ -69,7 +69,7 @@ class UsersListGetResponseLinks:
 
         last = d.pop("last", UNSET)
 
-        users_list_get_response_links = cls(
+        users_list_get_response_links_obj = cls(
             self_=self_,
             first=first,
             prev=prev,
@@ -77,8 +77,8 @@ class UsersListGetResponseLinks:
             last=last,
         )
 
-        users_list_get_response_links.additional_properties = d
-        return users_list_get_response_links
+        users_list_get_response_links_obj.additional_properties = d
+        return users_list_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

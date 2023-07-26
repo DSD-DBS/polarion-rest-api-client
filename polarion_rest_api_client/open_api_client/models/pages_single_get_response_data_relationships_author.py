@@ -57,14 +57,14 @@ class PagesSingleGetResponseDataRelationshipsAuthor:
                 _data
             )
 
-        pages_single_get_response_data_relationships_author = cls(
+        pages_single_get_response_data_relationships_author_obj = cls(
             data=data,
         )
 
-        pages_single_get_response_data_relationships_author.additional_properties = (
+        pages_single_get_response_data_relationships_author_obj.additional_properties = (
             d
         )
-        return pages_single_get_response_data_relationships_author
+        return pages_single_get_response_data_relationships_author_obj
 
     @property
     def additional_keys(self) -> List[str]:

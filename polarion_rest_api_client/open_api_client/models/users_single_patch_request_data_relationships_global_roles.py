@@ -62,14 +62,14 @@ class UsersSinglePatchRequestDataRelationshipsGlobalRoles:
 
             data.append(data_item)
 
-        users_single_patch_request_data_relationships_global_roles = cls(
+        users_single_patch_request_data_relationships_global_roles_obj = cls(
             data=data,
         )
 
-        users_single_patch_request_data_relationships_global_roles.additional_properties = (
+        users_single_patch_request_data_relationships_global_roles_obj.additional_properties = (
             d
         )
-        return users_single_patch_request_data_relationships_global_roles
+        return users_single_patch_request_data_relationships_global_roles_obj
 
     @property
     def additional_keys(self) -> List[str]:

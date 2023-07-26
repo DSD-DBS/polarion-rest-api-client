@@ -87,17 +87,17 @@ class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem:
 
             properties.append(properties_item)
 
-        documents_list_post_request_data_item_attributes_rendering_layouts_item = cls(
+        documents_list_post_request_data_item_attributes_rendering_layouts_item_obj = cls(
             type=type,
             label=label,
             layouter=layouter,
             properties=properties,
         )
 
-        documents_list_post_request_data_item_attributes_rendering_layouts_item.additional_properties = (
+        documents_list_post_request_data_item_attributes_rendering_layouts_item_obj.additional_properties = (
             d
         )
-        return documents_list_post_request_data_item_attributes_rendering_layouts_item
+        return documents_list_post_request_data_item_attributes_rendering_layouts_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -61,12 +61,12 @@ class UsersListGetResponseDataItemMeta:
 
             errors.append(errors_item)
 
-        users_list_get_response_data_item_meta = cls(
+        users_list_get_response_data_item_meta_obj = cls(
             errors=errors,
         )
 
-        users_list_get_response_data_item_meta.additional_properties = d
-        return users_list_get_response_data_item_meta
+        users_list_get_response_data_item_meta_obj.additional_properties = d
+        return users_list_get_response_data_item_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

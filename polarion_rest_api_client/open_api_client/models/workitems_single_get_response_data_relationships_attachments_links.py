@@ -39,18 +39,14 @@ class WorkitemsSingleGetResponseDataRelationshipsAttachmentsLinks:
         d = src_dict.copy()
         related = d.pop("related", UNSET)
 
-        workitems_single_get_response_data_relationships_attachments_links = (
-            cls(
-                related=related,
-            )
+        workitems_single_get_response_data_relationships_attachments_links_obj = cls(
+            related=related,
         )
 
-        workitems_single_get_response_data_relationships_attachments_links.additional_properties = (
+        workitems_single_get_response_data_relationships_attachments_links_obj.additional_properties = (
             d
         )
-        return (
-            workitems_single_get_response_data_relationships_attachments_links
-        )
+        return workitems_single_get_response_data_relationships_attachments_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

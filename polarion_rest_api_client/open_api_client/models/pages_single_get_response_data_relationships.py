@@ -140,15 +140,17 @@ class PagesSingleGetResponseDataRelationships:
                 )
             )
 
-        pages_single_get_response_data_relationships = cls(
+        pages_single_get_response_data_relationships_obj = cls(
             attachments=attachments,
             author=author,
             project=project,
             updated_by=updated_by,
         )
 
-        pages_single_get_response_data_relationships.additional_properties = d
-        return pages_single_get_response_data_relationships
+        pages_single_get_response_data_relationships_obj.additional_properties = (
+            d
+        )
+        return pages_single_get_response_data_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -38,18 +38,14 @@ class DocumentsListPostRequestDataItemAttributesOutlineNumbering:
         d = src_dict.copy()
         prefix = d.pop("prefix", UNSET)
 
-        documents_list_post_request_data_item_attributes_outline_numbering = (
-            cls(
-                prefix=prefix,
-            )
+        documents_list_post_request_data_item_attributes_outline_numbering_obj = cls(
+            prefix=prefix,
         )
 
-        documents_list_post_request_data_item_attributes_outline_numbering.additional_properties = (
+        documents_list_post_request_data_item_attributes_outline_numbering_obj.additional_properties = (
             d
         )
-        return (
-            documents_list_post_request_data_item_attributes_outline_numbering
-        )
+        return documents_list_post_request_data_item_attributes_outline_numbering_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -71,15 +71,15 @@ class ErrorsErrorsItem:
         else:
             source = ErrorsErrorsItemSource.from_dict(_source)
 
-        errors_errors_item = cls(
+        errors_errors_item_obj = cls(
             status=status,
             title=title,
             detail=detail,
             source=source,
         )
 
-        errors_errors_item.additional_properties = d
-        return errors_errors_item
+        errors_errors_item_obj.additional_properties = d
+        return errors_errors_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

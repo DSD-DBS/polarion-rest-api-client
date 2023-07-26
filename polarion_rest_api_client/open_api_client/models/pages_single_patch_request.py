@@ -53,12 +53,12 @@ class PagesSinglePatchRequest:
         else:
             data = PagesSinglePatchRequestData.from_dict(_data)
 
-        pages_single_patch_request = cls(
+        pages_single_patch_request_obj = cls(
             data=data,
         )
 
-        pages_single_patch_request.additional_properties = d
-        return pages_single_patch_request
+        pages_single_patch_request_obj.additional_properties = d
+        return pages_single_patch_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -62,14 +62,14 @@ class WorkitemCommentsSingleGetResponseDataRelationshipsProject:
                 _data
             )
 
-        workitem_comments_single_get_response_data_relationships_project = cls(
+        workitem_comments_single_get_response_data_relationships_project_obj = cls(
             data=data,
         )
 
-        workitem_comments_single_get_response_data_relationships_project.additional_properties = (
+        workitem_comments_single_get_response_data_relationships_project_obj.additional_properties = (
             d
         )
-        return workitem_comments_single_get_response_data_relationships_project
+        return workitem_comments_single_get_response_data_relationships_project_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -81,17 +81,17 @@ class LinkedworkitemsSingleGetResponseDataMetaErrorsItem:
                 _source
             )
 
-        linkedworkitems_single_get_response_data_meta_errors_item = cls(
+        linkedworkitems_single_get_response_data_meta_errors_item_obj = cls(
             status=status,
             title=title,
             detail=detail,
             source=source,
         )
 
-        linkedworkitems_single_get_response_data_meta_errors_item.additional_properties = (
+        linkedworkitems_single_get_response_data_meta_errors_item_obj.additional_properties = (
             d
         )
-        return linkedworkitems_single_get_response_data_meta_errors_item
+        return linkedworkitems_single_get_response_data_meta_errors_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

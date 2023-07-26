@@ -79,17 +79,17 @@ class UsersSingleGetResponseDataMetaErrorsItem:
                 _source
             )
 
-        users_single_get_response_data_meta_errors_item = cls(
+        users_single_get_response_data_meta_errors_item_obj = cls(
             status=status,
             title=title,
             detail=detail,
             source=source,
         )
 
-        users_single_get_response_data_meta_errors_item.additional_properties = (
+        users_single_get_response_data_meta_errors_item_obj.additional_properties = (
             d
         )
-        return users_single_get_response_data_meta_errors_item
+        return users_single_get_response_data_meta_errors_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

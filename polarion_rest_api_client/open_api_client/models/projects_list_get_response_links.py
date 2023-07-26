@@ -69,7 +69,7 @@ class ProjectsListGetResponseLinks:
 
         last = d.pop("last", UNSET)
 
-        projects_list_get_response_links = cls(
+        projects_list_get_response_links_obj = cls(
             self_=self_,
             first=first,
             prev=prev,
@@ -77,8 +77,8 @@ class ProjectsListGetResponseLinks:
             last=last,
         )
 
-        projects_list_get_response_links.additional_properties = d
-        return projects_list_get_response_links
+        projects_list_get_response_links_obj.additional_properties = d
+        return projects_list_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

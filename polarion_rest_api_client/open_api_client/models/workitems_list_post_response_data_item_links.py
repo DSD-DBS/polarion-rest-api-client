@@ -45,13 +45,15 @@ class WorkitemsListPostResponseDataItemLinks:
 
         portal = d.pop("portal", UNSET)
 
-        workitems_list_post_response_data_item_links = cls(
+        workitems_list_post_response_data_item_links_obj = cls(
             self_=self_,
             portal=portal,
         )
 
-        workitems_list_post_response_data_item_links.additional_properties = d
-        return workitems_list_post_response_data_item_links
+        workitems_list_post_response_data_item_links_obj.additional_properties = (
+            d
+        )
+        return workitems_list_post_response_data_item_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

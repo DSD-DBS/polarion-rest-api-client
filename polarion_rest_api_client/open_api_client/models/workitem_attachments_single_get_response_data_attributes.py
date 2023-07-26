@@ -73,7 +73,7 @@ class WorkitemAttachmentsSingleGetResponseDataAttributes:
         else:
             updated = isoparse(_updated)
 
-        workitem_attachments_single_get_response_data_attributes = cls(
+        workitem_attachments_single_get_response_data_attributes_obj = cls(
             file_name=file_name,
             id=id,
             length=length,
@@ -81,10 +81,10 @@ class WorkitemAttachmentsSingleGetResponseDataAttributes:
             updated=updated,
         )
 
-        workitem_attachments_single_get_response_data_attributes.additional_properties = (
+        workitem_attachments_single_get_response_data_attributes_obj.additional_properties = (
             d
         )
-        return workitem_attachments_single_get_response_data_attributes
+        return workitem_attachments_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -43,15 +43,19 @@ class EnumerationsSingleGetResponseDataMetaErrorsItemSource:
 
         parameter = d.pop("parameter", UNSET)
 
-        enumerations_single_get_response_data_meta_errors_item_source = cls(
-            pointer=pointer,
-            parameter=parameter,
+        enumerations_single_get_response_data_meta_errors_item_source_obj = (
+            cls(
+                pointer=pointer,
+                parameter=parameter,
+            )
         )
 
-        enumerations_single_get_response_data_meta_errors_item_source.additional_properties = (
+        enumerations_single_get_response_data_meta_errors_item_source_obj.additional_properties = (
             d
         )
-        return enumerations_single_get_response_data_meta_errors_item_source
+        return (
+            enumerations_single_get_response_data_meta_errors_item_source_obj
+        )
 
     @property
     def additional_keys(self) -> List[str]:

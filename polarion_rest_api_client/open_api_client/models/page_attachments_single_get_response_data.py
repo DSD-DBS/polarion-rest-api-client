@@ -164,7 +164,7 @@ class PageAttachmentsSingleGetResponseData:
         else:
             links = PageAttachmentsSingleGetResponseDataLinks.from_dict(_links)
 
-        page_attachments_single_get_response_data = cls(
+        page_attachments_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -174,8 +174,8 @@ class PageAttachmentsSingleGetResponseData:
             links=links,
         )
 
-        page_attachments_single_get_response_data.additional_properties = d
-        return page_attachments_single_get_response_data
+        page_attachments_single_get_response_data_obj.additional_properties = d
+        return page_attachments_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

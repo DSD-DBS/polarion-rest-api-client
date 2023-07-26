@@ -46,15 +46,15 @@ class DocumentsSingleGetResponseDataAttributesRenderingLayoutsItemPropertiesItem
 
         value = d.pop("value", UNSET)
 
-        documents_single_get_response_data_attributes_rendering_layouts_item_properties_item = cls(
+        documents_single_get_response_data_attributes_rendering_layouts_item_properties_item_obj = cls(
             key=key,
             value=value,
         )
 
-        documents_single_get_response_data_attributes_rendering_layouts_item_properties_item.additional_properties = (
+        documents_single_get_response_data_attributes_rendering_layouts_item_properties_item_obj.additional_properties = (
             d
         )
-        return documents_single_get_response_data_attributes_rendering_layouts_item_properties_item
+        return documents_single_get_response_data_attributes_rendering_layouts_item_properties_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

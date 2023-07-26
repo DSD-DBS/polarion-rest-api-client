@@ -38,14 +38,14 @@ class UsersListGetResponseDataItemRelationshipsUserGroupsMeta:
         d = src_dict.copy()
         total_count = d.pop("totalCount", UNSET)
 
-        users_list_get_response_data_item_relationships_user_groups_meta = cls(
+        users_list_get_response_data_item_relationships_user_groups_meta_obj = cls(
             total_count=total_count,
         )
 
-        users_list_get_response_data_item_relationships_user_groups_meta.additional_properties = (
+        users_list_get_response_data_item_relationships_user_groups_meta_obj.additional_properties = (
             d
         )
-        return users_list_get_response_data_item_relationships_user_groups_meta
+        return users_list_get_response_data_item_relationships_user_groups_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

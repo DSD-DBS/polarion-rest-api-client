@@ -43,15 +43,15 @@ class DocumentPartsListPostRequestDataItemAttributes:
 
         type = d.pop("type", UNSET)
 
-        document_parts_list_post_request_data_item_attributes = cls(
+        document_parts_list_post_request_data_item_attributes_obj = cls(
             level=level,
             type=type,
         )
 
-        document_parts_list_post_request_data_item_attributes.additional_properties = (
+        document_parts_list_post_request_data_item_attributes_obj.additional_properties = (
             d
         )
-        return document_parts_list_post_request_data_item_attributes
+        return document_parts_list_post_request_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

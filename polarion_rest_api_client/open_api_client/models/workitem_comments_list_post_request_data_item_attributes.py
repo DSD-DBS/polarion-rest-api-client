@@ -74,16 +74,16 @@ class WorkitemCommentsListPostRequestDataItemAttributes:
 
         title = d.pop("title", UNSET)
 
-        workitem_comments_list_post_request_data_item_attributes = cls(
+        workitem_comments_list_post_request_data_item_attributes_obj = cls(
             resolved=resolved,
             text=text,
             title=title,
         )
 
-        workitem_comments_list_post_request_data_item_attributes.additional_properties = (
+        workitem_comments_list_post_request_data_item_attributes_obj.additional_properties = (
             d
         )
-        return workitem_comments_list_post_request_data_item_attributes
+        return workitem_comments_list_post_request_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

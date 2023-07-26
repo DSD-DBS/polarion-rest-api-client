@@ -71,7 +71,7 @@ class BranchDocumentRequestBody:
 
         query = d.pop("query", UNSET)
 
-        branch_document_request_body = cls(
+        branch_document_request_body_obj = cls(
             target_project_id=target_project_id,
             target_space_id=target_space_id,
             target_document_name=target_document_name,
@@ -79,8 +79,8 @@ class BranchDocumentRequestBody:
             query=query,
         )
 
-        branch_document_request_body.additional_properties = d
-        return branch_document_request_body
+        branch_document_request_body_obj.additional_properties = d
+        return branch_document_request_body_obj
 
     @property
     def additional_keys(self) -> List[str]:

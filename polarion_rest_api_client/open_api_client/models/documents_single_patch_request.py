@@ -53,12 +53,12 @@ class DocumentsSinglePatchRequest:
         else:
             data = DocumentsSinglePatchRequestData.from_dict(_data)
 
-        documents_single_patch_request = cls(
+        documents_single_patch_request_obj = cls(
             data=data,
         )
 
-        documents_single_patch_request.additional_properties = d
-        return documents_single_patch_request
+        documents_single_patch_request_obj.additional_properties = d
+        return documents_single_patch_request_obj
 
     @property
     def additional_keys(self) -> List[str]:

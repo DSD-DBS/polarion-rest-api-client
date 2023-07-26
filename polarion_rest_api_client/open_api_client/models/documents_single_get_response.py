@@ -105,14 +105,14 @@ class DocumentsSingleGetResponse:
         else:
             links = DocumentsSingleGetResponseLinks.from_dict(_links)
 
-        documents_single_get_response = cls(
+        documents_single_get_response_obj = cls(
             data=data,
             included=included,
             links=links,
         )
 
-        documents_single_get_response.additional_properties = d
-        return documents_single_get_response
+        documents_single_get_response_obj.additional_properties = d
+        return documents_single_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

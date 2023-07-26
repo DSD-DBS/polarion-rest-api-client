@@ -61,14 +61,14 @@ class DocumentCommentsListGetResponseDataItemMeta:
 
             errors.append(errors_item)
 
-        document_comments_list_get_response_data_item_meta = cls(
+        document_comments_list_get_response_data_item_meta_obj = cls(
             errors=errors,
         )
 
-        document_comments_list_get_response_data_item_meta.additional_properties = (
+        document_comments_list_get_response_data_item_meta_obj.additional_properties = (
             d
         )
-        return document_comments_list_get_response_data_item_meta
+        return document_comments_list_get_response_data_item_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -151,7 +151,7 @@ class ProjectsSingleGetResponseDataAttributes:
 
         tracker_prefix = d.pop("trackerPrefix", UNSET)
 
-        projects_single_get_response_data_attributes = cls(
+        projects_single_get_response_data_attributes_obj = cls(
             active=active,
             color=color,
             description=description,
@@ -164,8 +164,10 @@ class ProjectsSingleGetResponseDataAttributes:
             tracker_prefix=tracker_prefix,
         )
 
-        projects_single_get_response_data_attributes.additional_properties = d
-        return projects_single_get_response_data_attributes
+        projects_single_get_response_data_attributes_obj.additional_properties = (
+            d
+        )
+        return projects_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

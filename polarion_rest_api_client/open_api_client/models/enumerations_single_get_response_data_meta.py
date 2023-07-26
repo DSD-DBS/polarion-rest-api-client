@@ -63,12 +63,14 @@ class EnumerationsSingleGetResponseDataMeta:
 
             errors.append(errors_item)
 
-        enumerations_single_get_response_data_meta = cls(
+        enumerations_single_get_response_data_meta_obj = cls(
             errors=errors,
         )
 
-        enumerations_single_get_response_data_meta.additional_properties = d
-        return enumerations_single_get_response_data_meta
+        enumerations_single_get_response_data_meta_obj.additional_properties = (
+            d
+        )
+        return enumerations_single_get_response_data_meta_obj
 
     @property
     def additional_keys(self) -> List[str]:

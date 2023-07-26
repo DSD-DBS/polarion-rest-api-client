@@ -43,15 +43,15 @@ class IconsListGetResponseDataItemMetaErrorsItemSource:
 
         parameter = d.pop("parameter", UNSET)
 
-        icons_list_get_response_data_item_meta_errors_item_source = cls(
+        icons_list_get_response_data_item_meta_errors_item_source_obj = cls(
             pointer=pointer,
             parameter=parameter,
         )
 
-        icons_list_get_response_data_item_meta_errors_item_source.additional_properties = (
+        icons_list_get_response_data_item_meta_errors_item_source_obj.additional_properties = (
             d
         )
-        return icons_list_get_response_data_item_meta_errors_item_source
+        return icons_list_get_response_data_item_meta_errors_item_source_obj
 
     @property
     def additional_keys(self) -> List[str]:

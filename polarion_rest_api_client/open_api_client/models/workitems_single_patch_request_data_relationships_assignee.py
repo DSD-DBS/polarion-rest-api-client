@@ -62,14 +62,14 @@ class WorkitemsSinglePatchRequestDataRelationshipsAssignee:
 
             data.append(data_item)
 
-        workitems_single_patch_request_data_relationships_assignee = cls(
+        workitems_single_patch_request_data_relationships_assignee_obj = cls(
             data=data,
         )
 
-        workitems_single_patch_request_data_relationships_assignee.additional_properties = (
+        workitems_single_patch_request_data_relationships_assignee_obj.additional_properties = (
             d
         )
-        return workitems_single_patch_request_data_relationships_assignee
+        return workitems_single_patch_request_data_relationships_assignee_obj
 
     @property
     def additional_keys(self) -> List[str]:

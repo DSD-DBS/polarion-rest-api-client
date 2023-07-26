@@ -154,7 +154,7 @@ class UsersSingleGetResponseData:
         else:
             links = UsersSingleGetResponseDataLinks.from_dict(_links)
 
-        users_single_get_response_data = cls(
+        users_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -164,8 +164,8 @@ class UsersSingleGetResponseData:
             links=links,
         )
 
-        users_single_get_response_data.additional_properties = d
-        return users_single_get_response_data
+        users_single_get_response_data_obj.additional_properties = d
+        return users_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -89,15 +89,15 @@ class UsersSingleGetResponseDataRelationshipsProjectRoles:
                 _meta
             )
 
-        users_single_get_response_data_relationships_project_roles = cls(
+        users_single_get_response_data_relationships_project_roles_obj = cls(
             data=data,
             meta=meta,
         )
 
-        users_single_get_response_data_relationships_project_roles.additional_properties = (
+        users_single_get_response_data_relationships_project_roles_obj.additional_properties = (
             d
         )
-        return users_single_get_response_data_relationships_project_roles
+        return users_single_get_response_data_relationships_project_roles_obj
 
     @property
     def additional_keys(self) -> List[str]:

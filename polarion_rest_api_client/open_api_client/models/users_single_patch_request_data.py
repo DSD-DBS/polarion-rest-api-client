@@ -105,15 +105,15 @@ class UsersSinglePatchRequestData:
                 _relationships
             )
 
-        users_single_patch_request_data = cls(
+        users_single_patch_request_data_obj = cls(
             type=type,
             id=id,
             attributes=attributes,
             relationships=relationships,
         )
 
-        users_single_patch_request_data.additional_properties = d
-        return users_single_patch_request_data
+        users_single_patch_request_data_obj.additional_properties = d
+        return users_single_patch_request_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

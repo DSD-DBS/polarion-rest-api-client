@@ -124,16 +124,16 @@ class WorkitemsListGetResponseDataItemRelationshipsLinkedWorkItems:
                 _links
             )
 
-        workitems_list_get_response_data_item_relationships_linked_work_items = cls(
+        workitems_list_get_response_data_item_relationships_linked_work_items_obj = cls(
             data=data,
             meta=meta,
             links=links,
         )
 
-        workitems_list_get_response_data_item_relationships_linked_work_items.additional_properties = (
+        workitems_list_get_response_data_item_relationships_linked_work_items_obj.additional_properties = (
             d
         )
-        return workitems_list_get_response_data_item_relationships_linked_work_items
+        return workitems_list_get_response_data_item_relationships_linked_work_items_obj
 
     @property
     def additional_keys(self) -> List[str]:

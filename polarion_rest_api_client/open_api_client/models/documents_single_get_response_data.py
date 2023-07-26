@@ -160,7 +160,7 @@ class DocumentsSingleGetResponseData:
         else:
             links = DocumentsSingleGetResponseDataLinks.from_dict(_links)
 
-        documents_single_get_response_data = cls(
+        documents_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
@@ -170,8 +170,8 @@ class DocumentsSingleGetResponseData:
             links=links,
         )
 
-        documents_single_get_response_data.additional_properties = d
-        return documents_single_get_response_data
+        documents_single_get_response_data_obj.additional_properties = d
+        return documents_single_get_response_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -1,6 +1,8 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """The actual implementation of the API client using an OpenAPIClient."""
+from __future__ import annotations
+
 import json
 import logging
 

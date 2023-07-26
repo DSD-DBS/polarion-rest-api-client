@@ -62,14 +62,14 @@ class WorkitemsSinglePatchRequestDataRelationshipsWatches:
 
             data.append(data_item)
 
-        workitems_single_patch_request_data_relationships_watches = cls(
+        workitems_single_patch_request_data_relationships_watches_obj = cls(
             data=data,
         )
 
-        workitems_single_patch_request_data_relationships_watches.additional_properties = (
+        workitems_single_patch_request_data_relationships_watches_obj.additional_properties = (
             d
         )
-        return workitems_single_patch_request_data_relationships_watches
+        return workitems_single_patch_request_data_relationships_watches_obj
 
     @property
     def additional_keys(self) -> List[str]:

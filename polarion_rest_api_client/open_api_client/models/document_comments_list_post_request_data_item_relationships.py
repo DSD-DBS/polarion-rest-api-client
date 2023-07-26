@@ -88,15 +88,15 @@ class DocumentCommentsListPostRequestDataItemRelationships:
                 _parent_comment
             )
 
-        document_comments_list_post_request_data_item_relationships = cls(
+        document_comments_list_post_request_data_item_relationships_obj = cls(
             author=author,
             parent_comment=parent_comment,
         )
 
-        document_comments_list_post_request_data_item_relationships.additional_properties = (
+        document_comments_list_post_request_data_item_relationships_obj.additional_properties = (
             d
         )
-        return document_comments_list_post_request_data_item_relationships
+        return document_comments_list_post_request_data_item_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:

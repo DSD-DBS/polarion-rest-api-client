@@ -62,14 +62,14 @@ class WorkitemsListPostRequestDataItemRelationshipsAssignee:
 
             data.append(data_item)
 
-        workitems_list_post_request_data_item_relationships_assignee = cls(
+        workitems_list_post_request_data_item_relationships_assignee_obj = cls(
             data=data,
         )
 
-        workitems_list_post_request_data_item_relationships_assignee.additional_properties = (
+        workitems_list_post_request_data_item_relationships_assignee_obj.additional_properties = (
             d
         )
-        return workitems_list_post_request_data_item_relationships_assignee
+        return workitems_list_post_request_data_item_relationships_assignee_obj
 
     @property
     def additional_keys(self) -> List[str]:

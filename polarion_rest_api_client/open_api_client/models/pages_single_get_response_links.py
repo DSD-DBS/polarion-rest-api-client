@@ -37,12 +37,12 @@ class PagesSingleGetResponseLinks:
         d = src_dict.copy()
         self_ = d.pop("self", UNSET)
 
-        pages_single_get_response_links = cls(
+        pages_single_get_response_links_obj = cls(
             self_=self_,
         )
 
-        pages_single_get_response_links.additional_properties = d
-        return pages_single_get_response_links
+        pages_single_get_response_links_obj.additional_properties = d
+        return pages_single_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

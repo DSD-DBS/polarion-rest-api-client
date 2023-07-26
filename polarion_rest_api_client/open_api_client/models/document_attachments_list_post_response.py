@@ -61,12 +61,12 @@ class DocumentAttachmentsListPostResponse:
 
             data.append(data_item)
 
-        document_attachments_list_post_response = cls(
+        document_attachments_list_post_response_obj = cls(
             data=data,
         )
 
-        document_attachments_list_post_response.additional_properties = d
-        return document_attachments_list_post_response
+        document_attachments_list_post_response_obj.additional_properties = d
+        return document_attachments_list_post_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

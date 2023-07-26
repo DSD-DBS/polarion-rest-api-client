@@ -50,16 +50,16 @@ class LinkedworkitemsListGetResponseDataItemAttributes:
 
         suspect = d.pop("suspect", UNSET)
 
-        linkedworkitems_list_get_response_data_item_attributes = cls(
+        linkedworkitems_list_get_response_data_item_attributes_obj = cls(
             revision=revision,
             role=role,
             suspect=suspect,
         )
 
-        linkedworkitems_list_get_response_data_item_attributes.additional_properties = (
+        linkedworkitems_list_get_response_data_item_attributes_obj.additional_properties = (
             d
         )
-        return linkedworkitems_list_get_response_data_item_attributes
+        return linkedworkitems_list_get_response_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

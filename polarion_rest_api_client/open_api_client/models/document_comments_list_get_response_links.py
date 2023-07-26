@@ -69,7 +69,7 @@ class DocumentCommentsListGetResponseLinks:
 
         last = d.pop("last", UNSET)
 
-        document_comments_list_get_response_links = cls(
+        document_comments_list_get_response_links_obj = cls(
             self_=self_,
             first=first,
             prev=prev,
@@ -77,8 +77,8 @@ class DocumentCommentsListGetResponseLinks:
             last=last,
         )
 
-        document_comments_list_get_response_links.additional_properties = d
-        return document_comments_list_get_response_links
+        document_comments_list_get_response_links_obj.additional_properties = d
+        return document_comments_list_get_response_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

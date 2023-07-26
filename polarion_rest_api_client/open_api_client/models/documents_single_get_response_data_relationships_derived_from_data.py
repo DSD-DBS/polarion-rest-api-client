@@ -72,20 +72,16 @@ class DocumentsSingleGetResponseDataRelationshipsDerivedFromData:
 
         revision = d.pop("revision", UNSET)
 
-        documents_single_get_response_data_relationships_derived_from_data = (
-            cls(
-                type=type,
-                id=id,
-                revision=revision,
-            )
+        documents_single_get_response_data_relationships_derived_from_data_obj = cls(
+            type=type,
+            id=id,
+            revision=revision,
         )
 
-        documents_single_get_response_data_relationships_derived_from_data.additional_properties = (
+        documents_single_get_response_data_relationships_derived_from_data_obj.additional_properties = (
             d
         )
-        return (
-            documents_single_get_response_data_relationships_derived_from_data
-        )
+        return documents_single_get_response_data_relationships_derived_from_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

@@ -65,7 +65,7 @@ class DocumentPartsSingleGetResponseDataAttributes:
 
         type = d.pop("type", UNSET)
 
-        document_parts_single_get_response_data_attributes = cls(
+        document_parts_single_get_response_data_attributes_obj = cls(
             content=content,
             external=external,
             id=id,
@@ -73,10 +73,10 @@ class DocumentPartsSingleGetResponseDataAttributes:
             type=type,
         )
 
-        document_parts_single_get_response_data_attributes.additional_properties = (
+        document_parts_single_get_response_data_attributes_obj.additional_properties = (
             d
         )
-        return document_parts_single_get_response_data_attributes
+        return document_parts_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

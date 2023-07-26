@@ -136,15 +136,15 @@ class WorkitemAttachmentsListGetResponse:
         else:
             links = WorkitemAttachmentsListGetResponseLinks.from_dict(_links)
 
-        workitem_attachments_list_get_response = cls(
+        workitem_attachments_list_get_response_obj = cls(
             meta=meta,
             data=data,
             included=included,
             links=links,
         )
 
-        workitem_attachments_list_get_response.additional_properties = d
-        return workitem_attachments_list_get_response
+        workitem_attachments_list_get_response_obj.additional_properties = d
+        return workitem_attachments_list_get_response_obj
 
     @property
     def additional_keys(self) -> List[str]:

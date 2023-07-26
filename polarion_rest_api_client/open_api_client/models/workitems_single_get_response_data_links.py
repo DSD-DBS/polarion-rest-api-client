@@ -45,13 +45,13 @@ class WorkitemsSingleGetResponseDataLinks:
 
         portal = d.pop("portal", UNSET)
 
-        workitems_single_get_response_data_links = cls(
+        workitems_single_get_response_data_links_obj = cls(
             self_=self_,
             portal=portal,
         )
 
-        workitems_single_get_response_data_links.additional_properties = d
-        return workitems_single_get_response_data_links
+        workitems_single_get_response_data_links_obj.additional_properties = d
+        return workitems_single_get_response_data_links_obj
 
     @property
     def additional_keys(self) -> List[str]:

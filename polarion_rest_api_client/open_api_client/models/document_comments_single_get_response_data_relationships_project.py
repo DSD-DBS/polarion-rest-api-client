@@ -62,14 +62,14 @@ class DocumentCommentsSingleGetResponseDataRelationshipsProject:
                 _data
             )
 
-        document_comments_single_get_response_data_relationships_project = cls(
+        document_comments_single_get_response_data_relationships_project_obj = cls(
             data=data,
         )
 
-        document_comments_single_get_response_data_relationships_project.additional_properties = (
+        document_comments_single_get_response_data_relationships_project_obj.additional_properties = (
             d
         )
-        return document_comments_single_get_response_data_relationships_project
+        return document_comments_single_get_response_data_relationships_project_obj
 
     @property
     def additional_keys(self) -> List[str]:

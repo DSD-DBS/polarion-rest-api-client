@@ -36,14 +36,14 @@ class WorkitemAttachmentsSinglePatchRequestDataAttributes:
         d = src_dict.copy()
         title = d.pop("title", UNSET)
 
-        workitem_attachments_single_patch_request_data_attributes = cls(
+        workitem_attachments_single_patch_request_data_attributes_obj = cls(
             title=title,
         )
 
-        workitem_attachments_single_patch_request_data_attributes.additional_properties = (
+        workitem_attachments_single_patch_request_data_attributes_obj.additional_properties = (
             d
         )
-        return workitem_attachments_single_patch_request_data_attributes
+        return workitem_attachments_single_patch_request_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

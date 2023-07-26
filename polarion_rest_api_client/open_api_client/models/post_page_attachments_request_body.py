@@ -111,13 +111,13 @@ class PostPageAttachmentsRequestBody:
 
             files.append(files_item)
 
-        post_page_attachments_request_body = cls(
+        post_page_attachments_request_body_obj = cls(
             resource=resource,
             files=files,
         )
 
-        post_page_attachments_request_body.additional_properties = d
-        return post_page_attachments_request_body
+        post_page_attachments_request_body_obj.additional_properties = d
+        return post_page_attachments_request_body_obj
 
     @property
     def additional_keys(self) -> List[str]:

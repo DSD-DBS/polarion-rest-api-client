@@ -186,7 +186,7 @@ class WorkitemsListPostRequestDataItemAttributes:
 
         title = d.pop("title", UNSET)
 
-        workitems_list_post_request_data_item_attributes = cls(
+        workitems_list_post_request_data_item_attributes_obj = cls(
             type=type,
             description=description,
             due_date=due_date,
@@ -202,10 +202,10 @@ class WorkitemsListPostRequestDataItemAttributes:
             title=title,
         )
 
-        workitems_list_post_request_data_item_attributes.additional_properties = (
+        workitems_list_post_request_data_item_attributes_obj.additional_properties = (
             d
         )
-        return workitems_list_post_request_data_item_attributes
+        return workitems_list_post_request_data_item_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

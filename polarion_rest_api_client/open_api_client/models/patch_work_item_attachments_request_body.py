@@ -95,13 +95,13 @@ class PatchWorkItemAttachmentsRequestBody:
         else:
             content = File(payload=BytesIO(_content))
 
-        patch_work_item_attachments_request_body = cls(
+        patch_work_item_attachments_request_body_obj = cls(
             resource=resource,
             content=content,
         )
 
-        patch_work_item_attachments_request_body.additional_properties = d
-        return patch_work_item_attachments_request_body
+        patch_work_item_attachments_request_body_obj.additional_properties = d
+        return patch_work_item_attachments_request_body_obj
 
     @property
     def additional_keys(self) -> List[str]:

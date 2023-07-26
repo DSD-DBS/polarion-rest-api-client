@@ -45,15 +45,15 @@ class WorkitemsListPostRequestDataItemAttributesHyperlinksItem:
 
         uri = d.pop("uri", UNSET)
 
-        workitems_list_post_request_data_item_attributes_hyperlinks_item = cls(
+        workitems_list_post_request_data_item_attributes_hyperlinks_item_obj = cls(
             role=role,
             uri=uri,
         )
 
-        workitems_list_post_request_data_item_attributes_hyperlinks_item.additional_properties = (
+        workitems_list_post_request_data_item_attributes_hyperlinks_item_obj.additional_properties = (
             d
         )
-        return workitems_list_post_request_data_item_attributes_hyperlinks_item
+        return workitems_list_post_request_data_item_attributes_hyperlinks_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

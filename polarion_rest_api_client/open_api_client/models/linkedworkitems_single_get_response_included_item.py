@@ -24,12 +24,12 @@ class LinkedworkitemsSingleGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        linkedworkitems_single_get_response_included_item = cls()
+        linkedworkitems_single_get_response_included_item_obj = cls()
 
-        linkedworkitems_single_get_response_included_item.additional_properties = (
+        linkedworkitems_single_get_response_included_item_obj.additional_properties = (
             d
         )
-        return linkedworkitems_single_get_response_included_item
+        return linkedworkitems_single_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

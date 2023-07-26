@@ -81,7 +81,7 @@ class PagesSingleGetResponseDataAttributes:
         else:
             updated = isoparse(_updated)
 
-        pages_single_get_response_data_attributes = cls(
+        pages_single_get_response_data_attributes_obj = cls(
             created=created,
             page_name=page_name,
             space_id=space_id,
@@ -89,8 +89,8 @@ class PagesSingleGetResponseDataAttributes:
             updated=updated,
         )
 
-        pages_single_get_response_data_attributes.additional_properties = d
-        return pages_single_get_response_data_attributes
+        pages_single_get_response_data_attributes_obj.additional_properties = d
+        return pages_single_get_response_data_attributes_obj
 
     @property
     def additional_keys(self) -> List[str]:

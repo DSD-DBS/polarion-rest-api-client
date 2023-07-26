@@ -59,14 +59,14 @@ class GlobalrolesSingleGetResponseDataRelationships:
                 )
             )
 
-        globalroles_single_get_response_data_relationships = cls(
+        globalroles_single_get_response_data_relationships_obj = cls(
             users=users,
         )
 
-        globalroles_single_get_response_data_relationships.additional_properties = (
+        globalroles_single_get_response_data_relationships_obj.additional_properties = (
             d
         )
-        return globalroles_single_get_response_data_relationships
+        return globalroles_single_get_response_data_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:

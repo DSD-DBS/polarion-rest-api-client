@@ -24,12 +24,12 @@ class DocumentAttachmentsSingleGetResponseIncludedItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        document_attachments_single_get_response_included_item = cls()
+        document_attachments_single_get_response_included_item_obj = cls()
 
-        document_attachments_single_get_response_included_item.additional_properties = (
+        document_attachments_single_get_response_included_item_obj.additional_properties = (
             d
         )
-        return document_attachments_single_get_response_included_item
+        return document_attachments_single_get_response_included_item_obj
 
     @property
     def additional_keys(self) -> List[str]:

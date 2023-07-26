@@ -256,7 +256,7 @@ class DocumentsSingleGetResponseDataRelationships:
                 )
             )
 
-        documents_single_get_response_data_relationships = cls(
+        documents_single_get_response_data_relationships_obj = cls(
             attachments=attachments,
             author=author,
             branched_from=branched_from,
@@ -267,10 +267,10 @@ class DocumentsSingleGetResponseDataRelationships:
             variant=variant,
         )
 
-        documents_single_get_response_data_relationships.additional_properties = (
+        documents_single_get_response_data_relationships_obj.additional_properties = (
             d
         )
-        return documents_single_get_response_data_relationships
+        return documents_single_get_response_data_relationships_obj
 
     @property
     def additional_keys(self) -> List[str]:
