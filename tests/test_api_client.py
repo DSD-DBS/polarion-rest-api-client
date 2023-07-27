@@ -67,14 +67,21 @@ class CustomWorkItem(polarion_api.WorkItem):
 @pytest.fixture(name="client")
 def fixture_client():
     yield polarion_api.OpenAPIPolarionProjectClient(
-        "PROJ", False, "http://127.0.0.1/api", "PAT123"
+        project_id="PROJ",
+        delete_polarion_work_items=False,
+        polarion_api_endpoint="http://127.0.0.1/api",
+        polarion_access_token="PAT123",
     )
 
 
 @pytest.fixture(name="client_custom_work_item")
 def fixture_client_custom_work_item():
     yield polarion_api.OpenAPIPolarionProjectClient(
-        "PROJ", False, "http://127.0.0.1/api", "PAT123", CustomWorkItem
+        project_id="PROJ",
+        delete_polarion_work_items=False,
+        polarion_api_endpoint="http://127.0.0.1/api",
+        polarion_access_token="PAT123",
+        custom_work_item=CustomWorkItem,
     )
 
 
