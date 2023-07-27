@@ -64,11 +64,11 @@ class OpenAPIPolarionProjectClient(
     @t.overload
     def __init__(
         self: "OpenAPIPolarionProjectClient[base_client.WIT]",
-        *,
         project_id: str,
         delete_polarion_work_items: bool,
         polarion_api_endpoint: str,
         polarion_access_token: str,
+        *,
         custom_work_item: type[base_client.WIT],
         batch_size: int = 5,
         page_size: int = 100,
@@ -78,11 +78,11 @@ class OpenAPIPolarionProjectClient(
     @t.overload
     def __init__(
         self: "OpenAPIPolarionProjectClient[dm.WorkItem]",
-        *,
         project_id: str,
         delete_polarion_work_items: bool,
         polarion_api_endpoint: str,
         polarion_access_token: str,
+        *,
         batch_size: int = 5,
         page_size: int = 100,
     ):
@@ -90,11 +90,11 @@ class OpenAPIPolarionProjectClient(
 
     def __init__(
         self,
-        *,
         project_id: str,
         delete_polarion_work_items: bool,
         polarion_api_endpoint: str,
         polarion_access_token: str,
+        *,
         custom_work_item=dm.WorkItem,
         batch_size: int = 5,
         page_size: int = 100,
