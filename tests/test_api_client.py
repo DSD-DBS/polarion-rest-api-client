@@ -54,10 +54,27 @@ TEST_ERROR_RESPONSE = TEST_RESPONSES / "error.json"
 TEST_PROJECT_RESPONSE_JSON = TEST_RESPONSES / "project.json"
 
 
+class CustomWorkItem(polarion_api.WorkItem):
+    @property
+    def capella_uuid(self):
+        return self.additional_attributes["capella_uuid"]
+
+    @capella_uuid.setter
+    def capella_uuid(self, value):
+        self.additional_attributes["capella_uuid"] = value
+
+
 @pytest.fixture(name="client")
 def fixture_client():
     yield polarion_api.OpenAPIPolarionProjectClient(
         "PROJ", False, "http://127.0.0.1/api", "PAT123"
+    )
+
+
+@pytest.fixture(name="client_custom_work_item")
+def fixture_client_custom_work_item():
+    yield polarion_api.OpenAPIPolarionProjectClient(
+        "PROJ", False, "http://127.0.0.1/api", "PAT123", CustomWorkItem
     )
 
 
@@ -612,3 +629,15 @@ def test_create_work_item_links_same_primaries(
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
+
+
+def test_get_all_work_items_single_page_custom_work_item(
+    client_custom_work_item: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+):
+    with open(TEST_WI_NO_NEXT_PAGE_RESPONSE) as f:
+        httpx_mock.add_response(json=json.load(f))
+
+    work_items = client_custom_work_item.get_all_work_items("")
+    assert isinstance(work_items[0], CustomWorkItem)
+    assert work_items[0].capella_uuid == "asdfgh"

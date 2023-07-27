@@ -4,12 +4,15 @@
 from __future__ import annotations
 
 import abc
+import typing
 import typing as t
 
 from polarion_rest_api_client import data_models as dm
 
+WIT = typing.TypeVar("WIT", bound=dm.WorkItem)
 
-class AbstractPolarionProjectApi(abc.ABC):
+
+class AbstractPolarionProjectApi(abc.ABC, typing.Generic[WIT]):
     """An abstract base class for a Polarion API client."""
 
     delete_polarion_work_items: bool
@@ -17,6 +20,21 @@ class AbstractPolarionProjectApi(abc.ABC):
     delete_status: str = "deleted"
     _page_size: int = 100
     _batch_size: int = 5
+    _work_item: type[WIT]
+
+    def __init__(
+        self,
+        project_id: str,
+        delete_polarion_work_items: bool,
+        custom_work_item: type[WIT],
+        batch_size: int = 5,
+        page_size: int = 100,
+    ):
+        self.project_id = project_id
+        self.delete_polarion_work_items = delete_polarion_work_items
+        self._batch_size = batch_size
+        self._page_size = page_size
+        self._work_item = custom_work_item
 
     @abc.abstractmethod
     def project_exists(self) -> bool:
@@ -38,7 +56,7 @@ class AbstractPolarionProjectApi(abc.ABC):
 
     def get_all_work_items(
         self, query: str, fields: dict[str, str] | None = None
-    ) -> list[dm.WorkItem]:
+    ) -> list[WIT]:
         """Get all work items matching the given query.
 
         Will handle pagination automatically. Define a fields dictionary
@@ -56,7 +74,7 @@ class AbstractPolarionProjectApi(abc.ABC):
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
-    ) -> tuple[list[dm.WorkItem], bool]:
+    ) -> tuple[list[WIT], bool]:
         """Return the work items on a defined page matching the given query.
 
         In addition, a flag whether a next page is available is
@@ -65,17 +83,17 @@ class AbstractPolarionProjectApi(abc.ABC):
         """
         raise NotImplementedError
 
-    def create_work_item(self, work_item: dm.WorkItem):
+    def create_work_item(self, work_item: WIT):
         """Create a single given work item."""
         return self.create_work_items([work_item])
 
-    def create_work_items(self, work_items: list[dm.WorkItem]):
+    def create_work_items(self, work_items: list[WIT]):
         """Create the given list of work items."""
         for i in range(0, len(work_items), self._batch_size):
             self._create_work_items(work_items[i : i + self._batch_size])
 
     @abc.abstractmethod
-    def _create_work_items(self, work_items: list[dm.WorkItem]):
+    def _create_work_items(self, work_items: list[WIT]):
         """Create the given list of work items.
 
         A maximum of 5 items is allowed only at once.
@@ -101,11 +119,11 @@ class AbstractPolarionProjectApi(abc.ABC):
         """Set the status for all given work items to self.delete_status."""
         for work_item_id in work_item_ids:
             self.update_work_item(
-                dm.WorkItem(id=work_item_id, status=self.delete_status)
+                self._work_item(id=work_item_id, status=self.delete_status)
             )
 
     @abc.abstractmethod
-    def update_work_item(self, work_item: dm.WorkItem):
+    def update_work_item(self, work_item: WIT):
         """Update the given work item in Polarion.
 
         Only fields not set to None will be updated in Polarion. None
