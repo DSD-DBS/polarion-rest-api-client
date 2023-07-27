@@ -4,15 +4,14 @@
 from __future__ import annotations
 
 import abc
-import typing
 import typing as t
 
 from polarion_rest_api_client import data_models as dm
 
-WIT = typing.TypeVar("WIT", bound=dm.WorkItem)
+WIT = t.TypeVar("WIT", bound=dm.WorkItem)
 
 
-class AbstractPolarionProjectApi(abc.ABC, typing.Generic[WIT]):
+class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
     """An abstract base class for a Polarion API client."""
 
     delete_polarion_work_items: bool

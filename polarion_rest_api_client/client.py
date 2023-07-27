@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import json
 import logging
-import typing
+import typing as t
 
 from polarion_rest_api_client import base_client
 from polarion_rest_api_client import data_models as dm
@@ -61,7 +61,7 @@ class OpenAPIPolarionProjectClient(
 
     client: oa_client.AuthenticatedClient
 
-    @typing.overload
+    @t.overload
     def __init__(
         self: "OpenAPIPolarionProjectClient[base_client.WIT]",
         project_id: str,
@@ -74,7 +74,7 @@ class OpenAPIPolarionProjectClient(
     ):
         ...
 
-    @typing.overload
+    @t.overload
     def __init__(
         self: "OpenAPIPolarionProjectClient[dm.WorkItem]",
         project_id: str,
