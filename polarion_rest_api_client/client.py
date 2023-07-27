@@ -164,8 +164,7 @@ class OpenAPIPolarionProjectClient(
             attrs.title = work_item.title
 
         if work_item.description is not None:
-            attrs.description = api_models.WorkitemsSinglePatchRequestDataAttributesDescription(
-                # pylint: disable=line-too-long
+            attrs.description = api_models.WorkitemsSinglePatchRequestDataAttributesDescription(  # pylint: disable=line-too-long
                 api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description_type
                 ),
