@@ -151,11 +151,21 @@ def test_get_all_work_items_single_page(
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
+    client.default_fields.workitems = "@basic,description"
+
     work_items = client.get_all_work_items("")
+
+    query = {
+        "fields[workitems]": "@basic,description",
+        "page[size]": "100",
+        "page[number]": "1",
+        "query": "",
+    }
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert len(work_items) == 1
     assert len(reqs) == 1
+    assert dict(reqs[0].url.params) == query
     assert work_items[0] == polarion_api.WorkItem(
         "MyWorkItemId2",
         "Title",
@@ -420,10 +430,12 @@ def test_get_work_item_links_single_page(
         httpx_mock.add_response(json=json.load(f))
 
     work_item_links = client.get_all_work_item_links(
-        "MyWorkItemId", include="workitem"
+        "MyWorkItemId",
+        include="workitem",
+        fields={"fields[linkedworkitems]": "id,role"},
     )
     query = {
-        "fields[linkedworkitems]": "id,role,suspect",
+        "fields[linkedworkitems]": "id,role",
         "page[size]": "100",
         "page[number]": "1",
         "include": "workitem",

@@ -4,11 +4,37 @@
 from __future__ import annotations
 
 import abc
+import collections
 import typing as t
 
 from polarion_rest_api_client import data_models as dm
 
 WIT = t.TypeVar("WIT", bound=dm.WorkItem)
+
+
+class DefaultFields:
+    """A class to define default values for the fields parameter."""
+
+    _workitems: str = "@basic"
+    _linkedworkitems: str = "id,role,suspect"
+
+    @property
+    def workitems(self):
+        """Return the fields dict for workitems."""
+        return {"workitems": self._workitems}
+
+    @workitems.setter
+    def workitems(self, value):
+        self._workitems = value
+
+    @property
+    def linkedworkitems(self):
+        """Return the fields dict for linkedworkitems."""
+        return {"linkedworkitems": self._linkedworkitems}
+
+    @linkedworkitems.setter
+    def linkedworkitems(self, value):
+        self._linkedworkitems = value
 
 
 class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
@@ -17,6 +43,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
     delete_polarion_work_items: bool
     project_id: str
     delete_status: str = "deleted"
+    default_fields: DefaultFields
     _page_size: int = 100
     _batch_size: int = 5
     _work_item: type[WIT]
@@ -31,6 +58,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
     ):
         self.project_id = project_id
         self.delete_polarion_work_items = delete_polarion_work_items
+        self.default_fields = DefaultFields()
         self._batch_size = batch_size
         self._page_size = page_size
         self._work_item = custom_work_item

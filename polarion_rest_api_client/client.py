@@ -210,6 +210,9 @@ class OpenAPIPolarionProjectClient(
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
+        if fields is None:
+            fields = self.default_fields.workitems
+
         sparse_fields = _build_sparse_fields(fields)
         response = get_work_items.sync_detailed(
             self.project_id,
@@ -327,7 +330,7 @@ class OpenAPIPolarionProjectClient(
         Polarion API documentation to get certain fields.
         """
         if fields is None:
-            fields = {"linkedworkitems": "id,role,suspect"}
+            fields = self.default_fields.linkedworkitems
 
         sparse_fields = _build_sparse_fields(fields)
         response = get_linked_work_items.sync_detailed(
