@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import abc
-import collections
 import typing as t
 
 from polarion_rest_api_client import data_models as dm
