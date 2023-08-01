@@ -42,7 +42,7 @@ class WorkItem:
         self.status = status
         self.additional_attributes = additional_attributes
 
-    def __getattribute__(self, item: str):
+    def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
         if item.startswith("__"):
             return super(WorkItem, self).__getattribute__(item)
@@ -50,17 +50,19 @@ class WorkItem:
         if item in dir(WorkItem):
             return super(WorkItem, self).__getattribute__(item)
 
-        return self.additional_attributes.get(item, None)
+        return self.additional_attributes.get(item)
 
-    def __setattr__(self, key, value):
+    def __setattr__(self, key: str, value: t.Any):
         """Set all non WorkItem attributes in additional_properties."""
         if key in dir(WorkItem):
             super(WorkItem, self).__setattr__(key, value)
         else:
             self.additional_attributes[key] = value
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         """Compare only WorkItem attributes."""
+        if not isinstance(other, WorkItem):
+            return NotImplemented
         return {
             k: v for k, v in self.__dict__.items() if k in dir(WorkItem)
         } == {k: v for k, v in other.__dict__.items() if k in dir(WorkItem)}
