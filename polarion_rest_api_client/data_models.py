@@ -7,7 +7,6 @@ import dataclasses
 import typing as t
 
 
-@dataclasses.dataclass
 class WorkItem:
     """A data class containing all relevant data of a Polarion WorkItem."""
 
@@ -17,9 +16,54 @@ class WorkItem:
     description: str | None = None
     type: str | None = None
     status: str | None = None
-    additional_attributes: dict[str, t.Any] = dataclasses.field(
-        default_factory=dict
-    )
+    additional_attributes: dict[str, t.Any] = {}
+
+    def __init__(
+        self,
+        id: str | None = None,
+        title: str | None = None,
+        description_type: str | None = None,
+        description: str | None = None,
+        type: str | None = None,
+        status: str | None = None,
+        additional_attributes: dict[str, t.Any] | None = None,
+        **kwargs,
+    ):
+        if not additional_attributes:
+            additional_attributes = kwargs
+        else:
+            additional_attributes.update(kwargs)
+
+        self.id = id
+        self.title = title
+        self.description_type = description_type
+        self.description = description
+        self.type = type
+        self.status = status
+        self.additional_attributes = additional_attributes
+
+    def __getattribute__(self, item: str):
+        """Return all non WorkItem attributes from additional_properties."""
+        if item.startswith("__"):
+            return super(WorkItem, self).__getattribute__(item)
+
+        if item in dir(WorkItem):
+            return super(WorkItem, self).__getattribute__(item)
+
+        return self.additional_attributes.get(item, None)
+
+    def __setattr__(self, key, value):
+        """Set all non WorkItem attributes in additional_properties."""
+        if key in dir(WorkItem):
+            super(WorkItem, self).__setattr__(key, value)
+        else:
+            self.additional_attributes[key] = value
+
+    def __eq__(self, other):
+        """Compare only WorkItem attributes."""
+        return {
+            k: v for k, v in self.__dict__.items() if k in dir(WorkItem)
+        } == {k: v for k, v in other.__dict__.items() if k in dir(WorkItem)}
 
 
 @dataclasses.dataclass
