@@ -66,17 +66,7 @@ def fixture_client():
         delete_polarion_work_items=False,
         polarion_api_endpoint="http://127.0.0.1/api",
         polarion_access_token="PAT123",
-    )
-
-
-@pytest.fixture(name="client_custom_work_item")
-def fixture_client_custom_work_item():
-    yield polarion_api.OpenAPIPolarionProjectClient(
-        project_id="PROJ",
-        delete_polarion_work_items=False,
-        polarion_api_endpoint="http://127.0.0.1/api",
-        polarion_access_token="PAT123",
-        custom_work_item=CustomWorkItem,
+        batch_size=3
     )
 
 
@@ -238,6 +228,38 @@ def test_create_work_items_successfully(
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
+
+
+def test_create_work_items_multi_request_successfully(
+    client: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+):
+    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
+        mock_response = json.load(f)
+
+    httpx_mock.add_response(201, json=mock_response)
+    httpx_mock.add_response(201, json=mock_response)
+
+    work_item = polarion_api.WorkItem(
+        title="Title",
+        description_type="text/html",
+        description="My text value",
+        status="open",
+        type="task",
+        additional_attributes={"capella_uuid": "asdfg"},
+    )
+
+    client.create_work_items(6 * [work_item])
+
+    reqs = httpx_mock.get_requests()
+
+    assert reqs[0] is not None and reqs[0].method == "POST"
+    assert reqs[1] is not None and reqs[1].method == "POST"
+    with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
+
+    assert json.loads(reqs[0].content.decode()) == expected
+    assert json.loads(reqs[1].content.decode()) == expected
 
 
 def test_create_work_items_failed(

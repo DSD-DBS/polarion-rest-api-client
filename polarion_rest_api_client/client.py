@@ -27,6 +27,11 @@ from polarion_rest_api_client.open_api_client.api.work_items import (
 )
 
 logger = logging.getLogger(__name__)
+min_wi_request_size = len(
+    json.dumps(api_models.WorkitemsListPostRequest([]).to_dict()).encode(
+        "utf-8"
+    )
+)
 
 
 def _build_sparse_fields(
@@ -96,8 +101,9 @@ class OpenAPIPolarionProjectClient(
         polarion_access_token: str,
         *,
         custom_work_item=dm.WorkItem,
-        batch_size: int = 5,
+        batch_size: int = 100,
         page_size: int = 100,
+        max_content_size: int = 2097152,
     ):
         """Initialize the client for project and endpoint using a token."""
         super().__init__(
@@ -110,6 +116,9 @@ class OpenAPIPolarionProjectClient(
         self.client = oa_client.AuthenticatedClient(
             polarion_api_endpoint, polarion_access_token
         )
+        self._batch_size = batch_size
+        self._page_size = page_size
+        self._max_content_size = max_content_size
 
     def _check_response(self, response: oa_types.Response):
         def unexpected_error():
@@ -131,9 +140,9 @@ class OpenAPIPolarionProjectClient(
             except json.JSONDecodeError as error:
                 raise unexpected_error() from error
 
-    def _build_work_item_post_request(
+    def _build_work_item_post_request_and_calculate_sizes(
         self, work_item: base_client.WIT
-    ) -> api_models.WorkitemsListPostRequestDataItem:
+    ) -> t.Tuple[api_models.WorkitemsListPostRequestDataItem, int, bool]:
         assert work_item.type is not None
         assert work_item.title is not None
         assert work_item.description is not None
@@ -153,8 +162,17 @@ class OpenAPIPolarionProjectClient(
 
         attrs.additional_properties.update(work_item.additional_attributes)
 
-        return api_models.WorkitemsListPostRequestDataItem(
+        work_item_data = api_models.WorkitemsListPostRequestDataItem(
             api_models.WorkitemsListPostRequestDataItemType.WORKITEMS, attrs
+        )
+        work_item_size = len(
+            json.dumps(work_item_data.to_dict()).encode("utf-8")
+        )
+
+        return (
+            work_item_data,
+            work_item_size,
+            (min_wi_request_size + work_item_size) > self._max_content_size,
         )
 
     def _build_work_item_patch_request(
@@ -266,20 +284,56 @@ class OpenAPIPolarionProjectClient(
 
         return work_items, next_page
 
-    def _create_work_items(self, work_items: list[base_client.WIT]):
-        """Create the given list of work items."""
+    def _post_work_item_batch(
+        self, work_item_batch: api_models.WorkitemsListPostRequest
+    ):
         response = post_work_items.sync_detailed(
-            self.project_id,
-            client=self.client,
-            json_body=api_models.WorkitemsListPostRequest(
-                [
-                    self._build_work_item_post_request(work_item)
-                    for work_item in work_items
-                ]
-            ),
+            self.project_id, client=self.client, json_body=work_item_batch
         )
-
         self._check_response(response)
+
+    def create_work_items(self, work_items: list[base_client.WIT]):
+        """Create the given list of work items."""
+        current_batch = api_models.WorkitemsListPostRequest([])
+
+        content_size = len(json.dumps(current_batch.to_dict()).encode("utf-8"))
+        batch_size = 0
+        for work_item in work_items:
+            (
+                work_item_data,
+                work_item_size,
+                to_big,
+            ) = self._build_work_item_post_request_and_calculate_sizes(
+                work_item
+            )
+            if to_big:
+                logger.error("A WorkItem is to large to create.")
+                continue
+
+            proj_content_size = content_size + work_item_size
+            if current_batch.data:
+                proj_content_size += len(b", ")
+            if (
+                proj_content_size >= self._max_content_size
+                or batch_size >= self._batch_size
+            ):
+                self._post_work_item_batch(current_batch)
+
+                current_batch = api_models.WorkitemsListPostRequest(
+                    [work_item_data]
+                )
+                content_size = len(
+                    json.dumps(current_batch.to_dict()).encode("utf-8")
+                )
+                batch_size = 1
+            else:
+                assert isinstance(current_batch.data, list)
+                current_batch.data.append(work_item_data)
+                batch_size += 1
+                content_size = proj_content_size
+
+        if current_batch.data:
+            self._post_work_item_batch(current_batch)
 
     def _delete_work_items(self, work_item_ids: list[str]):
         response = delete_work_items.sync_detailed(

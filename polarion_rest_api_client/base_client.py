@@ -109,21 +109,9 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
         """
         raise NotImplementedError
 
-    def create_work_item(self, work_item: WIT):
-        """Create a single given work item."""
-        return self.create_work_items([work_item])
-
+    @abc.abstractmethod
     def create_work_items(self, work_items: list[WIT]):
         """Create the given list of work items."""
-        for i in range(0, len(work_items), self._batch_size):
-            self._create_work_items(work_items[i : i + self._batch_size])
-
-    @abc.abstractmethod
-    def _create_work_items(self, work_items: list[WIT]):
-        """Create the given list of work items.
-
-        A maximum of 5 items is allowed only at once.
-        """
         raise NotImplementedError
 
     def delete_work_item(self, work_item_id: str):
