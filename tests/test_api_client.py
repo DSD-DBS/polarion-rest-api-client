@@ -54,14 +54,13 @@ TEST_ERROR_RESPONSE = TEST_RESPONSES / "error.json"
 TEST_PROJECT_RESPONSE_JSON = TEST_RESPONSES / "project.json"
 
 
-@pytest.fixture()
-def client():
+@pytest.fixture(name="client")
+def fixture_client():
     yield polarion_api.OpenAPIPolarionProjectClient(
         "PROJ", False, "http://127.0.0.1/api", "PAT123"
     )
 
 
-# pylint: disable=redefined-outer-name
 def test_api_authentication(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
