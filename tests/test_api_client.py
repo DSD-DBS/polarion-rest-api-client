@@ -12,12 +12,46 @@ import polarion_rest_api_client as polarion_api
 TEST_DATA_ROOT = pathlib.Path(__file__).parent / "data"
 TEST_RESPONSES = TEST_DATA_ROOT / "mock_api_responses"
 TEST_REQUESTS = TEST_DATA_ROOT / "expected_requests"
-TEST_PROJECT_RESPONSE_JSON = TEST_RESPONSES / "project.json"
+
+TEST_WIL_MULTI_POST_REQUEST = TEST_REQUESTS / "post_work_item_links.json"
+TEST_WIL_DELETE2_REQUEST = TEST_REQUESTS / "delete_work_item_link_2.json"
+TEST_WIL_DELETE_REQUEST = TEST_REQUESTS / "delete_work_item_links.json"
+TEST_WIL_DELETED_REQUEST = TEST_REQUESTS / "delete_work_item_link.json"
+TEST_WIL_POSTED_REQUEST = TEST_REQUESTS / "post_work_item_link.json"
+
+TEST_WI_DELETE_REQUEST = TEST_REQUESTS / "delete_work_item.json"
+TEST_WI_PATCH_STATUS_DELETED_REQUEST = (
+    TEST_REQUESTS / "patch_work_item_status_deleted.json"
+)
+TEST_WI_PATCH_STATUS_REQUEST = TEST_REQUESTS / "patch_work_item_status.json"
+TEST_WI_PATCH_TITLE_REQUEST = TEST_REQUESTS / "patch_work_item_title.json"
+TEST_WI_PATCH_DESCRIPTION_REQUEST = (
+    TEST_REQUESTS / "patch_work_item_description.json"
+)
+TEST_WI_PATCH_COMPLETELY_REQUEST = (
+    TEST_REQUESTS / "patch_work_item_completely.json"
+)
+TEST_WI_MULTI_POST_REQUEST = TEST_REQUESTS / "post_workitems.json"
+TEST_WI_POST_REQUEST = TEST_REQUESTS / "post_workitem.json"
+
+TEST_WIL_CREATED_RESPONSE = TEST_RESPONSES / "created_work_item_links.json"
+TEST_WIL_NEXT_PAGE_RESPONSE = (
+    TEST_RESPONSES / "get_linked_work_items_next_page.json"
+)
+TEST_WIL_NO_NEXT_PAGE_RESPONSE = (
+    TEST_RESPONSES / "get_linked_work_items_no_next_page.json"
+)
+
 TEST_WI_NO_NEXT_PAGE_RESPONSE = TEST_RESPONSES / "workitems_no_next_page.json"
 TEST_WI_CREATED_RESPONSE = TEST_RESPONSES / "created_work_items.json"
-TEST_WI_LINK_DELETED_RESPONSE = TEST_REQUESTS / "delete_work_item_link.json"
-TEST_WI_LINK_CREATED_RESPONSE = TEST_RESPONSES / "created_work_item_links.json"
-TEST_WI_LINK_POSTED_RESPONSE = TEST_REQUESTS / "post_work_item_link.json"
+TEST_WI_ERROR_NEXT_PAGE_RESPONSE = (
+    TEST_RESPONSES / "workitems_next_page_error.json"
+)
+TEST_WI_NEXT_PAGE_RESPONSE = TEST_RESPONSES / "workitems_next_page.json"
+
+TEST_ERROR_RESPONSE = TEST_RESPONSES / "error.json"
+
+TEST_PROJECT_RESPONSE_JSON = TEST_RESPONSES / "project.json"
 
 
 @pytest.fixture()
@@ -61,8 +95,7 @@ def test_get_all_work_items_multi_page(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    path = TEST_RESPONSES / "workitems_next_page.json"
-    with open(path, encoding="utf8") as f:
+    with open(TEST_WI_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
@@ -115,8 +148,7 @@ def test_get_all_work_items_faulty_item(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    path = TEST_RESPONSES / "workitems_next_page_error.json"
-    with open(path, encoding="utf8") as f:
+    with open(TEST_WI_ERROR_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
@@ -148,7 +180,7 @@ def test_create_work_item(
 
     req = httpx_mock.get_request()
     assert req is not None and req.method == "POST"
-    with open(TEST_REQUESTS / "post_workitem.json", encoding="utf8") as f:
+    with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
@@ -174,7 +206,7 @@ def test_create_work_items_successfully(
     req = httpx_mock.get_request()
 
     assert req is not None and req.method == "POST"
-    with open(TEST_REQUESTS / "post_workitems.json", encoding="utf8") as f:
+    with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
@@ -188,7 +220,7 @@ def test_create_work_items_failed(
         "Unexpected token, BEGIN_ARRAY expected, but was"
         " : BEGIN_OBJECT (at $.data)"
     )
-    with open(TEST_RESPONSES / "error.json", encoding="utf8") as f:
+    with open(TEST_ERROR_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(400, json=json.load(f))
 
     work_item = polarion_api.WorkItem(
@@ -251,9 +283,7 @@ def test_update_work_item_completely(
     assert req is not None
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
-    with open(
-        TEST_REQUESTS / "patch_work_item_completely.json", encoding="utf8"
-    ) as f:
+    with open(TEST_WI_PATCH_COMPLETELY_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
 
@@ -261,7 +291,6 @@ def test_update_work_item_description(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    path = TEST_REQUESTS / "patch_work_item_description.json"
     httpx_mock.add_response(204)
 
     client.update_work_item(
@@ -277,7 +306,7 @@ def test_update_work_item_description(
     assert req is not None
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
-    with open(path, encoding="utf8") as f:
+    with open(TEST_WI_PATCH_DESCRIPTION_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
 
@@ -285,7 +314,6 @@ def test_update_work_item_title(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    path = TEST_REQUESTS / "patch_work_item_title.json"
     httpx_mock.add_response(204)
 
     client.update_work_item(
@@ -300,7 +328,7 @@ def test_update_work_item_title(
     assert req is not None
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
-    with open(path, encoding="utf8") as f:
+    with open(TEST_WI_PATCH_TITLE_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
 
@@ -308,7 +336,6 @@ def test_update_work_item_status(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    path = TEST_REQUESTS / "patch_work_item_status.json"
     httpx_mock.add_response(204)
 
     client.update_work_item(
@@ -323,7 +350,7 @@ def test_update_work_item_status(
     assert req is not None
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
-    with open(path, encoding="utf8") as f:
+    with open(TEST_WI_PATCH_STATUS_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
 
@@ -331,7 +358,6 @@ def test_delete_work_item_status_mode(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    path = TEST_REQUESTS / "patch_work_item_status_deleted.json"
     httpx_mock.add_response(204)
 
     client.delete_work_item("MyWorkItemId")
@@ -339,7 +365,7 @@ def test_delete_work_item_status_mode(
     req = httpx_mock.get_request()
 
     assert req is not None and req.method == "PATCH"
-    with open(path, encoding="utf8") as f:
+    with open(TEST_WI_PATCH_STATUS_DELETED_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
 
@@ -356,7 +382,7 @@ def test_delete_work_item_delete_mode(
     req = httpx_mock.get_request()
 
     assert req is not None and req.method == "DELETE"
-    with open(TEST_REQUESTS / "delete_work_item.json", encoding="utf8") as f:
+    with open(TEST_WI_DELETE_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
 
@@ -365,7 +391,7 @@ def test_get_work_item_links_single_page(
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(
-        TEST_RESPONSES / "get_linked_work_items_no_next_page.json",
+        TEST_WIL_NO_NEXT_PAGE_RESPONSE,
         encoding="utf8",
     ) as f:
         httpx_mock.add_response(json=json.load(f))
@@ -396,12 +422,12 @@ def test_get_work_item_links_multi_page(
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(
-        TEST_RESPONSES / "get_linked_work_items_next_page.json",
+        TEST_WIL_NEXT_PAGE_RESPONSE,
         encoding="utf8",
     ) as f:
         httpx_mock.add_response(json=json.load(f))
     with open(
-        TEST_RESPONSES / "get_linked_work_items_no_next_page.json",
+        TEST_WIL_NO_NEXT_PAGE_RESPONSE,
         encoding="utf8",
     ) as f:
         httpx_mock.add_response(json=json.load(f))
@@ -438,7 +464,7 @@ def test_delete_work_item_link(
     req = httpx_mock.get_request()
 
     assert req is not None and req.method == "DELETE"
-    with open(TEST_WI_LINK_DELETED_RESPONSE, encoding="utf8") as f:
+    with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
 
@@ -462,9 +488,7 @@ def test_delete_work_item_links(
     req = httpx_mock.get_request()
 
     assert req is not None and req.method == "DELETE"
-    with open(
-        TEST_REQUESTS / "delete_work_item_links.json", encoding="utf8"
-    ) as f:
+    with open(TEST_WIL_DELETE_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
 
@@ -472,7 +496,6 @@ def test_delete_work_item_links_multi_primary(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    path = TEST_REQUESTS / "delete_work_item_link_2.json"
     httpx_mock.add_response(204)
 
     client.delete_work_item_links(
@@ -491,9 +514,9 @@ def test_delete_work_item_links_multi_primary(
     assert len(reqs) == 2
     assert reqs[0].method == "DELETE"
     assert reqs[1].method == "DELETE"
-    with open(TEST_WI_LINK_DELETED_RESPONSE, encoding="utf8") as f:
+    with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
         assert json.loads(reqs[0].content.decode()) == json.load(f)
-    with open(path, encoding="utf8") as f:
+    with open(TEST_WIL_DELETE2_REQUEST, encoding="utf8") as f:
         assert json.loads(reqs[1].content.decode()) == json.load(f)
 
 
@@ -501,7 +524,7 @@ def test_create_work_item_link(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_WI_LINK_CREATED_RESPONSE, encoding="utf8") as f:
+    with open(TEST_WIL_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
     client.create_work_item_link(
@@ -514,7 +537,7 @@ def test_create_work_item_link(
 
     assert req is not None and req.method == "POST"
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId/linkedworkitems")
-    with open(TEST_WI_LINK_POSTED_RESPONSE, encoding="utf8") as f:
+    with open(TEST_WIL_POSTED_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
@@ -524,7 +547,7 @@ def test_create_work_item_links_different_primaries(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_WI_LINK_CREATED_RESPONSE, encoding="utf8") as f:
+    with open(TEST_WIL_CREATED_RESPONSE, encoding="utf8") as f:
         content = json.load(f)
 
     httpx_mock.add_response(201, json=content)
@@ -554,7 +577,7 @@ def test_create_work_item_links_different_primaries(
         "PROJ/workitems/MyWorkItemId3/linkedworkitems"
     )
 
-    with open(TEST_WI_LINK_POSTED_RESPONSE, encoding="utf8") as f:
+    with open(TEST_WIL_POSTED_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
     assert json.loads(reqs[0].content.decode()) == expected
@@ -565,7 +588,7 @@ def test_create_work_item_links_same_primaries(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_WI_LINK_CREATED_RESPONSE, encoding="utf8") as f:
+    with open(TEST_WIL_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
     client.create_work_item_links(
@@ -584,10 +607,9 @@ def test_create_work_item_links_same_primaries(
     )
 
     req = httpx_mock.get_request()
-    path = TEST_REQUESTS / "post_work_item_links.json"
 
     assert req is not None and req.method == "POST"
-    with open(path, encoding="utf8") as f:
+    with open(TEST_WIL_MULTI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
