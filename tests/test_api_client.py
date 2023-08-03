@@ -9,6 +9,7 @@ import pytest
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
+from polarion_rest_api_client.open_api_client import models as api_models
 
 TEST_DATA_ROOT = pathlib.Path(__file__).parent / "data"
 TEST_RESPONSES = TEST_DATA_ROOT / "mock_api_responses"
@@ -360,6 +361,69 @@ def test_create_work_items_content_exceed_error(
             assert record.message == "A WorkItem is to large to create."
 
     assert counter == 3
+
+
+def test_work_item_single_request_size(
+    client: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+):
+    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
+        mock_response = json.load(f)
+
+    httpx_mock.add_response(201, json=mock_response)
+
+    min_size = len(
+        json.dumps(api_models.WorkitemsListPostRequest([]).to_dict()).encode(
+            "utf-8"
+        )
+    )
+
+    work_item = get_dummy_work_item()
+
+    work_item_data = client._build_work_item_post_request(work_item)
+
+    size, _ = client._calculate_post_work_item_request_sizes(
+        work_item_data, min_size
+    )
+
+    client.create_work_items([work_item])
+
+    req = httpx_mock.get_request()
+
+    assert len(req.content) == size
+
+
+def test_work_item_multi_request_size(
+    client: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+):
+    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
+        mock_response = json.load(f)
+
+    httpx_mock.add_response(201, json=mock_response)
+
+    size = len(
+        json.dumps(api_models.WorkitemsListPostRequest([]).to_dict()).encode(
+            "utf-8"
+        )
+    )
+
+    work_item = get_dummy_work_item()
+
+    work_item_data = client._build_work_item_post_request(work_item)
+
+    size, _ = client._calculate_post_work_item_request_sizes(
+        work_item_data, size
+    )
+    size, _ = client._calculate_post_work_item_request_sizes(
+        work_item_data, size
+    )
+
+    client.create_work_items(2 * [work_item])
+
+    req = httpx_mock.get_request()
+
+    assert len(req.content) == size
 
 
 def test_create_work_items_failed(
