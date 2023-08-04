@@ -60,7 +60,7 @@ def unset_str_builder(value: str | oa_types.Unset) -> str | None:
 
 
 class OpenAPIPolarionProjectClient(
-    base_client.AbstractPolarionProjectApi[base_client.WIT]
+    base_client.AbstractPolarionProjectApi[base_client.WorkItemType]
 ):
     """A Polarion Project Client using an auto generated OpenAPI-Client."""
 
@@ -68,13 +68,13 @@ class OpenAPIPolarionProjectClient(
 
     @t.overload
     def __init__(
-        self: "OpenAPIPolarionProjectClient[base_client.WIT]",
+        self: "OpenAPIPolarionProjectClient[base_client.WorkItemType]",
         project_id: str,
         delete_polarion_work_items: bool,
         polarion_api_endpoint: str,
         polarion_access_token: str,
         *,
-        custom_work_item: type[base_client.WIT],
+        custom_work_item: type[base_client.WorkItemType],
         batch_size: int = 5,
         page_size: int = 100,
     ):
@@ -141,7 +141,7 @@ class OpenAPIPolarionProjectClient(
                 raise unexpected_error() from error
 
     def _build_work_item_post_request(
-        self, work_item: base_client.WIT
+        self, work_item: base_client.WorkItemType
     ) -> api_models.WorkitemsListPostRequestDataItem:
         assert work_item.type is not None
         assert work_item.title is not None
@@ -167,7 +167,7 @@ class OpenAPIPolarionProjectClient(
         )
 
     def _build_work_item_patch_request(
-        self, work_item: base_client.WIT
+        self, work_item: base_client.WorkItemType
     ) -> api_models.WorkitemsSinglePatchRequest:
         attrs = api_models.WorkitemsSinglePatchRequestDataAttributes()
 
@@ -238,7 +238,7 @@ class OpenAPIPolarionProjectClient(
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
-    ) -> tuple[list[base_client.WIT], bool]:
+    ) -> tuple[list[base_client.WorkItemType], bool]:
         """Return the work items on a defined page matching the given query.
 
         In addition, a flag whether a next page is available is
@@ -262,7 +262,7 @@ class OpenAPIPolarionProjectClient(
 
         work_items_response = response.parsed
 
-        work_items: list[base_client.WIT] = []
+        work_items: list[base_client.WorkItemType] = []
 
         next_page = False
         if (
@@ -301,7 +301,7 @@ class OpenAPIPolarionProjectClient(
 
         return work_items, next_page
 
-    def create_work_items(self, work_items: list[base_client.WIT]):
+    def create_work_items(self, work_items: list[base_client.WorkItemType]):
         """Create the given list of work items."""
         current_batch = api_models.WorkitemsListPostRequest([])
 
@@ -360,7 +360,7 @@ class OpenAPIPolarionProjectClient(
 
         self._check_response(response)
 
-    def update_work_item(self, work_item: base_client.WIT):
+    def update_work_item(self, work_item: base_client.WorkItemType):
         """Update the given work item in Polarion.
 
         Only fields not set to None will be updated in Polarion. None

@@ -2,8 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0
 from __future__ import annotations
 
+import collections
 import json
 import pathlib
+import typing as t
 
 import pytest
 import pytest_httpx
@@ -67,7 +69,19 @@ def fixture_client():
         delete_polarion_work_items=False,
         polarion_api_endpoint="http://127.0.0.1/api",
         polarion_access_token="PAT123",
-        batch_size=3
+        batch_size=3,
+    )
+
+
+@pytest.fixture(name="client_custom_work_item")
+def fixture_client_custom_work_item():
+    yield polarion_api.OpenAPIPolarionProjectClient(
+        project_id="PROJ",
+        delete_polarion_work_items=False,
+        polarion_api_endpoint="http://127.0.0.1/api",
+        polarion_access_token="PAT123",
+        batch_size=3,
+        custom_work_item=CustomWorkItem,
     )
 
 
@@ -821,7 +835,7 @@ def test_get_all_work_items_single_page_custom_work_item(
     client_custom_work_item: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_WI_NO_NEXT_PAGE_RESPONSE) as f:
+    with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
     work_items = client_custom_work_item.get_all_work_items("")
@@ -833,7 +847,7 @@ def test_create_work_item_custom_work_item(
     client_custom_work_item: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_RESPONSES / "created_work_items.json") as f:
+    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
     work_item = CustomWorkItem(
         title="Title",
@@ -850,7 +864,7 @@ def test_create_work_item_custom_work_item(
 
     req = httpx_mock.get_request()
     assert req.method == "POST"
-    with open(TEST_REQUESTS / "post_workitem.json") as f:
+    with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected

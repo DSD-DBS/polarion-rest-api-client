@@ -45,17 +45,17 @@ class WorkItem:
     def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
         if item.startswith("__"):
-            return super(WorkItem, self).__getattribute__(item)
+            return super().__getattribute__(item)
 
         if item in dir(WorkItem):
-            return super(WorkItem, self).__getattribute__(item)
+            return super().__getattribute__(item)
 
         return self.additional_attributes.get(item)
 
     def __setattr__(self, key: str, value: t.Any):
         """Set all non WorkItem attributes in additional_properties."""
         if key in dir(WorkItem):
-            super(WorkItem, self).__setattr__(key, value)
+            super().__setattr__(key, value)
         else:
             self.additional_attributes[key] = value
 

@@ -8,7 +8,7 @@ import typing as t
 
 from polarion_rest_api_client import data_models as dm
 
-WIT = t.TypeVar("WIT", bound=dm.WorkItem)
+WorkItemType = t.TypeVar("WorkItemType", bound=dm.WorkItem)
 
 
 class DefaultFields:
@@ -36,7 +36,7 @@ class DefaultFields:
         self._linkedworkitems = value
 
 
-class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
+class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
     """An abstract base class for a Polarion API client."""
 
     delete_polarion_work_items: bool
@@ -45,13 +45,13 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
     default_fields: DefaultFields
     _page_size: int = 100
     _batch_size: int = 5
-    _work_item: type[WIT]
+    _work_item: type[WorkItemType]
 
     def __init__(
         self,
         project_id: str,
         delete_polarion_work_items: bool,
-        custom_work_item: type[WIT],
+        custom_work_item: type[WorkItemType],
         batch_size: int = 5,
         page_size: int = 100,
     ):
@@ -82,7 +82,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
 
     def get_all_work_items(
         self, query: str, fields: dict[str, str] | None = None
-    ) -> list[WIT]:
+    ) -> list[WorkItemType]:
         """Get all work items matching the given query.
 
         Will handle pagination automatically. Define a fields dictionary
@@ -100,7 +100,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
-    ) -> tuple[list[WIT], bool]:
+    ) -> tuple[list[WorkItemType], bool]:
         """Return the work items on a defined page matching the given query.
 
         In addition, a flag whether a next page is available is
@@ -109,8 +109,12 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
         """
         raise NotImplementedError
 
+    def create_work_item(self, work_item: WorkItemType):
+        """Create a single given work item."""
+        return self.create_work_items([work_item])
+
     @abc.abstractmethod
-    def create_work_items(self, work_items: list[WIT]):
+    def create_work_items(self, work_items: list[WorkItemType]):
         """Create the given list of work items."""
         raise NotImplementedError
 
@@ -137,7 +141,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WIT]):
             )
 
     @abc.abstractmethod
-    def update_work_item(self, work_item: WIT):
+    def update_work_item(self, work_item: WorkItemType):
         """Update the given work item in Polarion.
 
         Only fields not set to None will be updated in Polarion. None
