@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import logging
+import typing as t
 
 from polarion_rest_api_client import base_client
 from polarion_rest_api_client import data_models as dm
@@ -53,10 +54,39 @@ def unset_str_builder(value: str | oa_types.Unset) -> str | None:
     return value
 
 
-class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
+class OpenAPIPolarionProjectClient(
+    base_client.AbstractPolarionProjectApi[base_client.WIT]
+):
     """A Polarion Project Client using an auto generated OpenAPI-Client."""
 
     client: oa_client.AuthenticatedClient
+
+    @t.overload
+    def __init__(
+        self: "OpenAPIPolarionProjectClient[base_client.WIT]",
+        project_id: str,
+        delete_polarion_work_items: bool,
+        polarion_api_endpoint: str,
+        polarion_access_token: str,
+        *,
+        custom_work_item: type[base_client.WIT],
+        batch_size: int = 5,
+        page_size: int = 100,
+    ):
+        ...
+
+    @t.overload
+    def __init__(
+        self: "OpenAPIPolarionProjectClient[dm.WorkItem]",
+        project_id: str,
+        delete_polarion_work_items: bool,
+        polarion_api_endpoint: str,
+        polarion_access_token: str,
+        *,
+        batch_size: int = 5,
+        page_size: int = 100,
+    ):
+        ...
 
     def __init__(
         self,
@@ -64,17 +94,22 @@ class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
         delete_polarion_work_items: bool,
         polarion_api_endpoint: str,
         polarion_access_token: str,
+        *,
+        custom_work_item=dm.WorkItem,
         batch_size: int = 5,
         page_size: int = 100,
     ):
         """Initialize the client for project and endpoint using a token."""
-        self.project_id = project_id
-        self.delete_polarion_work_items = delete_polarion_work_items
+        super().__init__(
+            project_id,
+            delete_polarion_work_items,
+            custom_work_item,
+            batch_size,
+            page_size,
+        )
         self.client = oa_client.AuthenticatedClient(
             polarion_api_endpoint, polarion_access_token
         )
-        self._batch_size = batch_size
-        self._page_size = page_size
 
     def _check_response(self, response: oa_types.Response):
         def unexpected_error():
@@ -97,7 +132,7 @@ class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
                 raise unexpected_error() from error
 
     def _build_work_item_post_request(
-        self, work_item: dm.WorkItem
+        self, work_item: base_client.WIT
     ) -> api_models.WorkitemsListPostRequestDataItem:
         assert work_item.type is not None
         assert work_item.title is not None
@@ -123,7 +158,7 @@ class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
         )
 
     def _build_work_item_patch_request(
-        self, work_item: dm.WorkItem
+        self, work_item: base_client.WIT
     ) -> api_models.WorkitemsSinglePatchRequest:
         attrs = api_models.WorkitemsSinglePatchRequestDataAttributes()
 
@@ -168,13 +203,16 @@ class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
-    ) -> tuple[list[dm.WorkItem], bool]:
+    ) -> tuple[list[base_client.WIT], bool]:
         """Return the work items on a defined page matching the given query.
 
         In addition, a flag whether a next page is available is
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
+        if fields is None:
+            fields = self.default_fields.workitems
+
         sparse_fields = _build_sparse_fields(fields)
         response = get_work_items.sync_detailed(
             self.project_id,
@@ -189,7 +227,7 @@ class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
 
         work_items_response = response.parsed
 
-        work_items: list[dm.WorkItem] = []
+        work_items: list[base_client.WIT] = []
 
         next_page = False
         if (
@@ -203,7 +241,7 @@ class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
                     assert work_item.attributes
                     assert isinstance(work_item.id, str)
                     work_items.append(
-                        dm.WorkItem(
+                        self._work_item(
                             work_item.id.split("/")[-1],
                             unset_str_builder(work_item.attributes.title),
                             unset_str_builder(
@@ -228,7 +266,7 @@ class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
 
         return work_items, next_page
 
-    def _create_work_items(self, work_items: list[dm.WorkItem]):
+    def _create_work_items(self, work_items: list[base_client.WIT]):
         """Create the given list of work items."""
         response = post_work_items.sync_detailed(
             self.project_id,
@@ -260,7 +298,7 @@ class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
 
         self._check_response(response)
 
-    def update_work_item(self, work_item: dm.WorkItem):
+    def update_work_item(self, work_item: base_client.WIT):
         """Update the given work item in Polarion.
 
         Only fields not set to None will be updated in Polarion. None
@@ -292,7 +330,7 @@ class OpenAPIPolarionProjectClient(base_client.AbstractPolarionProjectApi):
         Polarion API documentation to get certain fields.
         """
         if fields is None:
-            fields = {"linkedworkitems": "id,role,suspect"}
+            fields = self.default_fields.linkedworkitems
 
         sparse_fields = _build_sparse_fields(fields)
         response = get_linked_work_items.sync_detailed(

@@ -1,5 +1,6 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
+from __future__ import annotations
 
 import json
 import pathlib
@@ -54,10 +55,28 @@ TEST_ERROR_RESPONSE = TEST_RESPONSES / "error.json"
 TEST_PROJECT_RESPONSE_JSON = TEST_RESPONSES / "project.json"
 
 
+class CustomWorkItem(polarion_api.WorkItem):
+    capella_uuid: str | None
+
+
 @pytest.fixture(name="client")
 def fixture_client():
     yield polarion_api.OpenAPIPolarionProjectClient(
-        "PROJ", False, "http://127.0.0.1/api", "PAT123"
+        project_id="PROJ",
+        delete_polarion_work_items=False,
+        polarion_api_endpoint="http://127.0.0.1/api",
+        polarion_access_token="PAT123",
+    )
+
+
+@pytest.fixture(name="client_custom_work_item")
+def fixture_client_custom_work_item():
+    yield polarion_api.OpenAPIPolarionProjectClient(
+        project_id="PROJ",
+        delete_polarion_work_items=False,
+        polarion_api_endpoint="http://127.0.0.1/api",
+        polarion_access_token="PAT123",
+        custom_work_item=CustomWorkItem,
     )
 
 
@@ -127,11 +146,21 @@ def test_get_all_work_items_single_page(
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
+    client.default_fields.workitems = "@basic,description"
+
     work_items = client.get_all_work_items("")
+
+    query = {
+        "fields[workitems]": "@basic,description",
+        "page[size]": "100",
+        "page[number]": "1",
+        "query": "",
+    }
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert len(work_items) == 1
     assert len(reqs) == 1
+    assert dict(reqs[0].url.params) == query
     assert work_items[0] == polarion_api.WorkItem(
         "MyWorkItemId2",
         "Title",
@@ -396,10 +425,12 @@ def test_get_work_item_links_single_page(
         httpx_mock.add_response(json=json.load(f))
 
     work_item_links = client.get_all_work_item_links(
-        "MyWorkItemId", include="workitem"
+        "MyWorkItemId",
+        include="workitem",
+        fields={"fields[linkedworkitems]": "id,role"},
     )
     query = {
-        "fields[linkedworkitems]": "id,role,suspect",
+        "fields[linkedworkitems]": "id,role",
         "page[size]": "100",
         "page[number]": "1",
         "include": "workitem",
@@ -609,6 +640,45 @@ def test_create_work_item_links_same_primaries(
 
     assert req is not None and req.method == "POST"
     with open(TEST_WIL_MULTI_POST_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
+
+    assert json.loads(req.content.decode()) == expected
+
+
+def test_get_all_work_items_single_page_custom_work_item(
+    client_custom_work_item: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+):
+    with open(TEST_WI_NO_NEXT_PAGE_RESPONSE) as f:
+        httpx_mock.add_response(json=json.load(f))
+
+    work_items = client_custom_work_item.get_all_work_items("")
+    assert isinstance(work_items[0], CustomWorkItem)
+    assert work_items[0].capella_uuid == "asdfgh"
+
+
+def test_create_work_item_custom_work_item(
+    client_custom_work_item: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+):
+    with open(TEST_RESPONSES / "created_work_items.json") as f:
+        httpx_mock.add_response(201, json=json.load(f))
+    work_item = CustomWorkItem(
+        title="Title",
+        description_type="text/html",
+        description="My text value",
+        status="open",
+        type="task",
+        capella_uuid="asdfgh",
+    )
+
+    work_item.capella_uuid = "asdfg"
+
+    client_custom_work_item.create_work_item(work_item)
+
+    req = httpx_mock.get_request()
+    assert req.method == "POST"
+    with open(TEST_REQUESTS / "post_workitem.json") as f:
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
