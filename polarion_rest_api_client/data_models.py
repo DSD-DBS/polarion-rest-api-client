@@ -16,7 +16,7 @@ class WorkItem:
     description: str | None = None
     type: str | None = None
     status: str | None = None
-    additional_attributes: dict[str, t.Any] = {}
+    additional_attributes: dict[str, t.Any] | None = None
 
     def __init__(
         self,
@@ -29,10 +29,11 @@ class WorkItem:
         additional_attributes: dict[str, t.Any] | None = None,
         **kwargs,
     ):
-        if not additional_attributes:
-            additional_attributes = kwargs
-        else:
-            additional_attributes.update(kwargs)
+        if kwargs:
+            if additional_attributes:
+                additional_attributes |= kwargs
+            else:
+                additional_attributes = kwargs
 
         self.id = id
         self.title = title
@@ -49,14 +50,18 @@ class WorkItem:
 
         if item in dir(WorkItem):
             return super().__getattribute__(item)
-
-        return self.additional_attributes.get(item)
+        if self.additional_attributes:
+            return self.additional_attributes.get(item)
+        else:
+            return None
 
     def __setattr__(self, key: str, value: t.Any):
         """Set all non WorkItem attributes in additional_properties."""
         if key in dir(WorkItem):
             super().__setattr__(key, value)
         else:
+            if self.additional_attributes is None:
+                self.additional_attributes = {}
             self.additional_attributes[key] = value
 
     def __eq__(self, other: object) -> bool:

@@ -160,7 +160,8 @@ class OpenAPIPolarionProjectClient(
             title=work_item.title,
         )
 
-        attrs.additional_properties.update(work_item.additional_attributes)
+        if work_item.additional_attributes:
+            attrs.additional_properties.update(work_item.additional_attributes)
 
         return api_models.WorkitemsListPostRequestDataItem(
             api_models.WorkitemsListPostRequestDataItemType.WORKITEMS, attrs
