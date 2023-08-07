@@ -317,8 +317,9 @@ class OpenAPIPolarionProjectClient(
             )
 
             if too_big:
-                logger.error("A WorkItem is to large to create.")
-                continue
+                raise errors.PolarionWorkItemException(
+                    "A WorkItem is too large to create.", work_item
+                )
 
             assert isinstance(current_batch.data, list)
             if (

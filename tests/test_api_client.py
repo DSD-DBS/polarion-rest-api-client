@@ -340,13 +340,7 @@ def test_create_work_items_content_exceed_successfully(
 def test_create_work_items_content_exceed_error(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
-    caplog,
 ):
-    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        mock_response = json.load(f)
-
-    httpx_mock.add_response(201, json=mock_response)
-
     work_item = get_dummy_work_item()
 
     work_item_long = polarion_api.WorkItem(
@@ -357,24 +351,14 @@ def test_create_work_items_content_exceed_error(
         type="task",
         additional_attributes={"capella_uuid": "asdfg"},
     )
+    with pytest.raises(polarion_api.PolarionWorkItemException) as exc_info:
+        client.create_work_items(3 * [work_item, work_item_long])
 
-    client.create_work_items(3 * [work_item, work_item_long])
-
-    reqs = httpx_mock.get_requests()
-
-    assert len(reqs) == 1
-    assert reqs[0] is not None and reqs[0].method == "POST"
-    with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
-    assert json.loads(reqs[0].content.decode()) == expected
-    counter = 0
-    for record in caplog.records:
-        if record.levelname == "ERROR":
-            counter += 1
-            assert record.message == "A WorkItem is to large to create."
-
-    assert counter == 3
+    assert exc_info.value.work_item == work_item_long
+    assert (
+        exc_info.value.args[0]
+        == "A WorkItem is too large to create. (WorkItem Title: Title)"
+    )
 
 
 def test_work_item_single_request_size(
