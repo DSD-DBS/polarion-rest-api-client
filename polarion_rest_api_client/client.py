@@ -75,8 +75,9 @@ class OpenAPIPolarionProjectClient(
         polarion_access_token: str,
         *,
         custom_work_item: type[base_client.WorkItemType],
-        batch_size: int = 5,
-        page_size: int = 100,
+        batch_size: int = ...,
+        page_size: int = ...,
+        max_content_size: int = ...,
     ):
         ...
 
@@ -88,8 +89,9 @@ class OpenAPIPolarionProjectClient(
         polarion_api_endpoint: str,
         polarion_access_token: str,
         *,
-        batch_size: int = 5,
-        page_size: int = 100,
+        batch_size: int = ...,
+        page_size: int = ...,
+        max_content_size: int = ...,
     ):
         ...
 
@@ -103,7 +105,7 @@ class OpenAPIPolarionProjectClient(
         custom_work_item=dm.WorkItem,
         batch_size: int = 100,
         page_size: int = 100,
-        max_content_size: int = 2097152,
+        max_content_size: int = 2 * 1024**2,
     ):
         """Initialize the client for project and endpoint using a token."""
         super().__init__(
