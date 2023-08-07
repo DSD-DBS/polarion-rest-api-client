@@ -35,14 +35,12 @@ min_wi_request_size = len(
 
 
 def _build_sparse_fields(
-    fields_dict: dict[str, str] | None
+    fields_dict: dict[str, str]
 ) -> api_models.SparseFields | oa_types.Unset:
     """Build the SparseFields object based on a dict.
 
     Ensure that every key follow the pattern 'fields[XXX]'.
     """
-    if fields_dict is None:
-        return oa_types.Unset()
     new_field_dict: dict[str, str] = {}
     for key, value in fields_dict.items():
         if key.startswith("fields["):
@@ -187,8 +185,7 @@ class OpenAPIPolarionProjectClient(
         if work_item.status is not None:
             attrs.status = work_item.status
 
-        if work_item.additional_attributes is not None:
-            attrs.additional_properties.update(work_item.additional_attributes)
+        attrs.additional_properties.update(work_item.additional_attributes)
 
         return api_models.WorkitemsSinglePatchRequest(
             api_models.WorkitemsSinglePatchRequestData(

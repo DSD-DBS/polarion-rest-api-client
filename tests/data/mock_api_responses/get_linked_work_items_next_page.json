@@ -9,8 +9,7 @@
       "revision": "1234",
       "attributes": {
         "revision": "1234",
-        "role": "relates_to",
-        "suspect": true
+        "role": "relates_to"
       },
       "relationships": {
         "workItem": {

@@ -2,10 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 from __future__ import annotations
 
-import collections
 import json
 import pathlib
-import typing as t
 
 import pytest
 import pytest_httpx
@@ -153,6 +151,7 @@ def test_get_all_work_items_multi_page(
     assert dict(reqs[1].url.params) == query
     assert len(work_items) == 2
     assert len(reqs) == 2
+    assert work_items[0].status is None
 
 
 def test_get_all_work_items_single_page(
@@ -613,6 +612,7 @@ def test_get_work_item_links_multi_page(
     assert dict(reqs[1].url.params) == query
     assert len(work_items) == 2
     assert len(reqs) == 2
+    assert work_items[0].suspect == False
 
 
 def test_delete_work_item_link(
