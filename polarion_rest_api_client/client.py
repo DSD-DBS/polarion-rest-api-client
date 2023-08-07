@@ -27,10 +27,14 @@ from polarion_rest_api_client.open_api_client.api.work_items import (
 )
 
 logger = logging.getLogger(__name__)
-min_wi_request_size = len(
-    json.dumps(api_models.WorkitemsListPostRequest([]).to_dict()).encode(
-        "utf-8"
-    )
+
+
+def _get_json_content_size(data: dict):
+    return len(json.dumps(data).encode("utf-8"))
+
+
+min_wi_request_size = _get_json_content_size(
+    api_models.WorkitemsListPostRequest([]).to_dict()
 )
 
 
@@ -208,9 +212,7 @@ class OpenAPIPolarionProjectClient(
         work_item_data: api_models.WorkitemsListPostRequestDataItem,
         current_content_size: int,
     ) -> t.Tuple[int, bool]:
-        work_item_size = len(
-            json.dumps(work_item_data.to_dict()).encode("utf-8")
-        )
+        work_item_size = _get_json_content_size(work_item_data.to_dict())
 
         proj_content_size = current_content_size + work_item_size
         if current_content_size != min_wi_request_size:
@@ -303,8 +305,7 @@ class OpenAPIPolarionProjectClient(
     def create_work_items(self, work_items: list[base_client.WorkItemType]):
         """Create the given list of work items."""
         current_batch = api_models.WorkitemsListPostRequest([])
-
-        content_size = len(json.dumps(current_batch.to_dict()).encode("utf-8"))
+        content_size = min_wi_request_size
         for work_item in work_items:
             work_item_data = self._build_work_item_post_request(work_item)
 
@@ -330,9 +331,7 @@ class OpenAPIPolarionProjectClient(
                 current_batch = api_models.WorkitemsListPostRequest(
                     [work_item_data]
                 )
-                content_size = len(
-                    json.dumps(current_batch.to_dict()).encode("utf-8")
-                )
+                content_size = _get_json_content_size(current_batch.to_dict())
             else:
                 assert isinstance(current_batch.data, list)
                 current_batch.data.append(work_item_data)
