@@ -307,24 +307,24 @@ class OpenAPIPolarionProjectClient(
         current_batch = api_models.WorkitemsListPostRequest([])
 
         content_size = len(json.dumps(current_batch.to_dict()).encode("utf-8"))
-        batch_size = 0
         for work_item in work_items:
             work_item_data = self._build_work_item_post_request(work_item)
 
             (
                 proj_content_size,
-                to_big,
+                too_big,
             ) = self._calculate_post_work_item_request_sizes(
                 work_item_data, content_size
             )
 
-            if to_big:
+            if too_big:
                 logger.error("A WorkItem is to large to create.")
                 continue
 
+            assert isinstance(current_batch.data, list)
             if (
                 proj_content_size >= self._max_content_size
-                or batch_size >= self._batch_size
+                or len(current_batch.data) >= self._batch_size
             ):
                 self._post_work_item_batch(current_batch)
 
@@ -334,11 +334,9 @@ class OpenAPIPolarionProjectClient(
                 content_size = len(
                     json.dumps(current_batch.to_dict()).encode("utf-8")
                 )
-                batch_size = 1
             else:
                 assert isinstance(current_batch.data, list)
                 current_batch.data.append(work_item_data)
-                batch_size += 1
                 content_size = proj_content_size
 
         if current_batch.data:
