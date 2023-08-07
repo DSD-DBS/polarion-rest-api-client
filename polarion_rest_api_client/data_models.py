@@ -29,18 +29,13 @@ class WorkItem:
         additional_attributes: dict[str, t.Any] | None = None,
         **kwargs,
     ):
-        if not additional_attributes:
-            additional_attributes = kwargs
-        else:
-            additional_attributes.update(kwargs)
-
         self.id = id
         self.title = title
         self.description_type = description_type
         self.description = description
         self.type = type
         self.status = status
-        self.additional_attributes = additional_attributes
+        self.additional_attributes = (additional_attributes or {}) | kwargs
 
     def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
