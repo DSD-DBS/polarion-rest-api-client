@@ -268,40 +268,6 @@ def test_create_work_items_batch_exceed_successfully(
     assert json.loads(reqs[1].content.decode()) == expected
 
 
-def test_create_work_items_content_big_successfully(
-    client: polarion_api.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-):
-    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        mock_response = json.load(f)
-
-    httpx_mock.add_response(201, json=mock_response)
-    httpx_mock.add_response(201, json=mock_response)
-
-    work_item = get_dummy_work_item()
-
-    work_item_long = polarion_api.WorkItem(
-        title="Title",
-        description_type="text/html",
-        description="AB" * 512 * 1024,
-        status="open",
-        type="task",
-        additional_attributes={"capella_uuid": "asdfg"},
-    )
-
-    client.create_work_items(3 * [work_item, work_item_long])
-
-    reqs = httpx_mock.get_requests()
-
-    assert len(reqs) == 3
-    assert reqs[0] is not None and reqs[0].method == "POST"
-    assert len(json.loads(reqs[0].content.decode("utf-8"))["data"]) == 3
-    assert reqs[1] is not None and reqs[1].method == "POST"
-    assert len(json.loads(reqs[1].content.decode("utf-8"))["data"]) == 2
-    assert reqs[2] is not None and reqs[1].method == "POST"
-    assert len(json.loads(reqs[2].content.decode("utf-8"))["data"]) == 1
-
-
 def test_create_work_items_content_exceed_successfully(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
@@ -333,7 +299,7 @@ def test_create_work_items_content_exceed_successfully(
     assert len(json.loads(reqs[0].content.decode("utf-8"))["data"]) == 3
     assert reqs[1] is not None and reqs[1].method == "POST"
     assert len(json.loads(reqs[1].content.decode("utf-8"))["data"]) == 2
-    assert reqs[2] is not None and reqs[1].method == "POST"
+    assert reqs[2] is not None and reqs[2].method == "POST"
     assert len(json.loads(reqs[2].content.decode("utf-8"))["data"]) == 1
 
 
