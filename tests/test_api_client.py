@@ -334,12 +334,8 @@ def test_work_item_single_request_size(
 
     httpx_mock.add_response(201, json=mock_response)
 
-    min_size = polarion_api.client.min_wi_request_size
     work_item_data = client._build_work_item_post_request(work_item)
-
-    size, _ = client._calculate_post_work_item_request_sizes(
-        work_item_data, min_size
-    )
+    size, _ = client._calculate_post_work_item_request_sizes(work_item_data)
 
     client.create_work_items([work_item])
 

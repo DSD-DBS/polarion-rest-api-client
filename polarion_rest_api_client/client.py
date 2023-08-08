@@ -210,7 +210,7 @@ class OpenAPIPolarionProjectClient(
     def _calculate_post_work_item_request_sizes(
         self,
         work_item_data: api_models.WorkitemsListPostRequestDataItem,
-        current_content_size: int,
+        current_content_size: int = min_wi_request_size,
     ) -> t.Tuple[int, bool]:
         work_item_size = _get_json_content_size(work_item_data.to_dict())
 
