@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.workitem_comments_list_post_request_data_item_type import (
     WorkitemCommentsListPostRequestDataItemType,
@@ -22,13 +22,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemCommentsListPostRequestDataItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemCommentsListPostRequestDataItem:
     """
-    Attributes:
-        type (Union[Unset, WorkitemCommentsListPostRequestDataItemType]):
-        attributes (Union[Unset, WorkitemCommentsListPostRequestDataItemAttributes]):
-        relationships (Union[Unset, WorkitemCommentsListPostRequestDataItemRelationships]):
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemCommentsListPostRequestDataItemType]
+    attributes : Union[Unset, WorkitemCommentsListPostRequestDataItemAttributes]
+    relationships : Union[Unset, WorkitemCommentsListPostRequestDataItemRelationships]
     """
 
     type: Union[Unset, WorkitemCommentsListPostRequestDataItemType] = UNSET
@@ -38,7 +39,7 @@ class WorkitemCommentsListPostRequestDataItem:
     relationships: Union[
         Unset, "WorkitemCommentsListPostRequestDataItemRelationships"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.documents_single_get_response_data_type import (
     DocumentsSingleGetResponseDataType,
@@ -28,17 +28,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentsSingleGetResponseData")
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentsSingleGetResponseData:
     """
-    Attributes:
-        type (Union[Unset, DocumentsSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, DocumentsSingleGetResponseDataAttributes]):
-        relationships (Union[Unset, DocumentsSingleGetResponseDataRelationships]):
-        meta (Union[Unset, DocumentsSingleGetResponseDataMeta]):
-        links (Union[Unset, DocumentsSingleGetResponseDataLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentsSingleGetResponseDataType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, DocumentsSingleGetResponseDataAttributes]
+    relationships : Union[Unset, DocumentsSingleGetResponseDataRelationships]
+    meta : Union[Unset, DocumentsSingleGetResponseDataMeta]
+    links : Union[Unset, DocumentsSingleGetResponseDataLinks]
     """
 
     type: Union[Unset, DocumentsSingleGetResponseDataType] = UNSET
@@ -52,7 +53,7 @@ class DocumentsSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "DocumentsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "DocumentsSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

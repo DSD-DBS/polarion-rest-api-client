@@ -1,14 +1,13 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-import os
 from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
 from ... import errors
-from ...client import Client
+from ...client import AuthenticatedClient, Client
 from ...models.sparse_fields import SparseFields
 from ...models.workitem_attachments_single_get_response import (
     WorkitemAttachmentsSingleGetResponse,
@@ -21,20 +20,11 @@ def _get_kwargs(
     work_item_id: str,
     attachment_id: str,
     *,
-    client: Client,
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/projects/{projectId}/workitems/{workItemId}/attachments/{attachmentId}".format(
-        client.base_url,
-        projectId=project_id,
-        workItemId=work_item_id,
-        attachmentId=attachment_id,
-    )
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
+    pass
 
     params: Dict[str, Any] = {}
     json_fields: Union[Unset, None, Dict[str, Any]] = UNSET
@@ -54,17 +44,17 @@ def _get_kwargs(
 
     return {
         "method": "get",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/projects/{projectId}/workitems/{workItemId}/attachments/{attachmentId}".format(
+            projectId=project_id,
+            workItemId=work_item_id,
+            attachmentId=attachment_id,
+        ),
         "params": params,
     }
 
 
 def _parse_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Any, WorkitemAttachmentsSingleGetResponse]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = WorkitemAttachmentsSingleGetResponse.from_dict(
@@ -100,7 +90,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Response[Union[Any, WorkitemAttachmentsSingleGetResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -115,42 +105,44 @@ def sync_detailed(
     work_item_id: str,
     attachment_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Response[Union[Any, WorkitemAttachmentsSingleGetResponse]]:
     """Returns the specified instance.
 
-    Args:
-        project_id (str):
-        work_item_id (str):
-        attachment_id (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        revision (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    work_item_id : str
+    attachment_id : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    revision : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Union[Any, WorkitemAttachmentsSingleGetResponse]]
+    Returns
+    -------
+    Response[Union[Any, WorkitemAttachmentsSingleGetResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
         attachment_id=attachment_id,
-        client=client,
         fields=fields,
         include=include,
         revision=revision,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
-        proxies=os.getenv("PROXIES"),
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -162,27 +154,32 @@ def sync(
     work_item_id: str,
     attachment_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Optional[Union[Any, WorkitemAttachmentsSingleGetResponse]]:
     """Returns the specified instance.
 
-    Args:
-        project_id (str):
-        work_item_id (str):
-        attachment_id (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        revision (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    work_item_id : str
+    attachment_id : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    revision : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Union[Any, WorkitemAttachmentsSingleGetResponse]
+    Returns
+    -------
+    Union[Any, WorkitemAttachmentsSingleGetResponse]
     """
 
     return sync_detailed(
@@ -201,43 +198,44 @@ async def asyncio_detailed(
     work_item_id: str,
     attachment_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Response[Union[Any, WorkitemAttachmentsSingleGetResponse]]:
     """Returns the specified instance.
 
-    Args:
-        project_id (str):
-        work_item_id (str):
-        attachment_id (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        revision (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    work_item_id : str
+    attachment_id : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    revision : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Union[Any, WorkitemAttachmentsSingleGetResponse]]
+    Returns
+    -------
+    Response[Union[Any, WorkitemAttachmentsSingleGetResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
         attachment_id=attachment_id,
-        client=client,
         fields=fields,
         include=include,
         revision=revision,
     )
 
-    async with httpx.AsyncClient(
-        verify=client.verify_ssl, proxies=os.getenv("PROXIES")
-    ) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -247,27 +245,32 @@ async def asyncio(
     work_item_id: str,
     attachment_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Optional[Union[Any, WorkitemAttachmentsSingleGetResponse]]:
     """Returns the specified instance.
 
-    Args:
-        project_id (str):
-        work_item_id (str):
-        attachment_id (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        revision (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    work_item_id : str
+    attachment_id : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    revision : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Union[Any, WorkitemAttachmentsSingleGetResponse]
+    Returns
+    -------
+    Union[Any, WorkitemAttachmentsSingleGetResponse]
     """
 
     return (

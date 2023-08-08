@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -22,13 +22,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="UsergroupsSingleGetResponseDataRelationships")
 
 
-@attr.s(auto_attribs=True)
+@define
 class UsergroupsSingleGetResponseDataRelationships:
     """
-    Attributes:
-        global_roles (Union[Unset, UsergroupsSingleGetResponseDataRelationshipsGlobalRoles]):
-        project_roles (Union[Unset, UsergroupsSingleGetResponseDataRelationshipsProjectRoles]):
-        users (Union[Unset, UsergroupsSingleGetResponseDataRelationshipsUsers]):
+    Attributes
+    ----------
+    global_roles : Union[Unset, UsergroupsSingleGetResponseDataRelationshipsGlobalRoles]
+    project_roles : Union[Unset, UsergroupsSingleGetResponseDataRelationshipsProjectRoles]
+    users : Union[Unset, UsergroupsSingleGetResponseDataRelationshipsUsers]
     """
 
     global_roles: Union[
@@ -40,7 +41,7 @@ class UsergroupsSingleGetResponseDataRelationships:
     users: Union[
         Unset, "UsergroupsSingleGetResponseDataRelationshipsUsers"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         global_roles: Union[Unset, Dict[str, Any]] = UNSET

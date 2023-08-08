@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.page_attachments_single_get_response_data_type import (
     PageAttachmentsSingleGetResponseDataType,
@@ -28,17 +28,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="PageAttachmentsSingleGetResponseData")
 
 
-@attr.s(auto_attribs=True)
+@define
 class PageAttachmentsSingleGetResponseData:
     """
-    Attributes:
-        type (Union[Unset, PageAttachmentsSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyRichPageId/MyAttachmentId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, PageAttachmentsSingleGetResponseDataAttributes]):
-        relationships (Union[Unset, PageAttachmentsSingleGetResponseDataRelationships]):
-        meta (Union[Unset, PageAttachmentsSingleGetResponseDataMeta]):
-        links (Union[Unset, PageAttachmentsSingleGetResponseDataLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, PageAttachmentsSingleGetResponseDataType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, PageAttachmentsSingleGetResponseDataAttributes]
+    relationships : Union[Unset, PageAttachmentsSingleGetResponseDataRelationships]
+    meta : Union[Unset, PageAttachmentsSingleGetResponseDataMeta]
+    links : Union[Unset, PageAttachmentsSingleGetResponseDataLinks]
     """
 
     type: Union[Unset, PageAttachmentsSingleGetResponseDataType] = UNSET
@@ -52,7 +53,7 @@ class PageAttachmentsSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "PageAttachmentsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "PageAttachmentsSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

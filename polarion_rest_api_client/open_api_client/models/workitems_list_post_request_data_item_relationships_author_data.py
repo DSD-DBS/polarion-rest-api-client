@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.workitems_list_post_request_data_item_relationships_author_data_type import (
     WorkitemsListPostRequestDataItemRelationshipsAuthorDataType,
@@ -15,19 +15,20 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemsListPostRequestDataItemRelationshipsAuthorData:
     """
-    Attributes:
-        type (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAuthorDataType]):
-        id (Union[Unset, str]):  Example: MyUserId.
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAuthorDataType]
+    id : Union[Unset, str]
     """
 
     type: Union[
         Unset, WorkitemsListPostRequestDataItemRelationshipsAuthorDataType
     ] = UNSET
     id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

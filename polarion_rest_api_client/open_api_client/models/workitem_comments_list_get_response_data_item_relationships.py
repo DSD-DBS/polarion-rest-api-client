@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -25,14 +25,15 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemCommentsListGetResponseDataItemRelationships")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemCommentsListGetResponseDataItemRelationships:
     """
-    Attributes:
-        author (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsAuthor]):
-        child_comments (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsChildComments]):
-        parent_comment (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsParentComment]):
-        project (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsProject]):
+    Attributes
+    ----------
+    author : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsAuthor]
+    child_comments : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsChildComments]
+    parent_comment : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsParentComment]
+    project : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsProject]
     """
 
     author: Union[
@@ -49,7 +50,7 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
     project: Union[
         Unset, "WorkitemCommentsListGetResponseDataItemRelationshipsProject"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         author: Union[Unset, Dict[str, Any]] = UNSET

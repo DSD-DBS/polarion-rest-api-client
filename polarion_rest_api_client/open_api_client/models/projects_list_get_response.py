@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -25,23 +25,24 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="ProjectsListGetResponse")
 
 
-@attr.s(auto_attribs=True)
+@define
 class ProjectsListGetResponse:
     """
-    Attributes:
-        meta (Union[Unset, ProjectsListGetResponseMeta]):
-        data (Union[Unset, List['ProjectsListGetResponseDataItem']]):
-        included (Union[Unset, List['ProjectsListGetResponseIncludedItem']]): Related entities might be returned, see <a
-            href="https://docs.sw.siemens.com/en-US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User
-            Guide</a>.
-        links (Union[Unset, ProjectsListGetResponseLinks]):
+    Attributes
+    ----------
+    meta : Union[Unset, ProjectsListGetResponseMeta]
+    data : Union[Unset, List['ProjectsListGetResponseDataItem']]
+    included : Union[Unset, List['ProjectsListGetResponseIncludedItem']]
+        Related entities might be returned, see <a href="https://docs.sw.siemens.com/en-
+        US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
+    links : Union[Unset, ProjectsListGetResponseLinks]
     """
 
     meta: Union[Unset, "ProjectsListGetResponseMeta"] = UNSET
     data: Union[Unset, List["ProjectsListGetResponseDataItem"]] = UNSET
     included: Union[Unset, List["ProjectsListGetResponseIncludedItem"]] = UNSET
     links: Union[Unset, "ProjectsListGetResponseLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         meta: Union[Unset, Dict[str, Any]] = UNSET

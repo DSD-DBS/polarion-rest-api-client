@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -18,14 +18,15 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem:
     """
-    Attributes:
-        type (Union[Unset, str]):  Example: task.
-        label (Union[Unset, str]):  Example: My label.
-        layouter (Union[Unset, str]):  Example: paragraph.
-        properties (Union[Unset, List['DocumentsSingleGetResponseDataAttributesRenderingLayoutsItemPropertiesItem']]):
+    Attributes
+    ----------
+    type : Union[Unset, str]
+    label : Union[Unset, str]
+    layouter : Union[Unset, str]
+    properties : Union[Unset, List['DocumentsSingleGetResponseDataAttributesRenderingLayoutsItemPropertiesItem']]
     """
 
     type: Union[Unset, str] = UNSET
@@ -37,7 +38,7 @@ class DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem:
             "DocumentsSingleGetResponseDataAttributesRenderingLayoutsItemPropertiesItem"
         ],
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type = self.type

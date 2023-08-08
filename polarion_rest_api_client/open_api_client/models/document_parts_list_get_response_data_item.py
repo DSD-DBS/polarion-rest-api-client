@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.document_parts_list_get_response_data_item_type import (
     DocumentPartsListGetResponseDataItemType,
@@ -28,17 +28,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentPartsListGetResponseDataItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentPartsListGetResponseDataItem:
     """
-    Attributes:
-        type (Union[Unset, DocumentPartsListGetResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, DocumentPartsListGetResponseDataItemAttributes]):
-        relationships (Union[Unset, DocumentPartsListGetResponseDataItemRelationships]):
-        meta (Union[Unset, DocumentPartsListGetResponseDataItemMeta]):
-        links (Union[Unset, DocumentPartsListGetResponseDataItemLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentPartsListGetResponseDataItemType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, DocumentPartsListGetResponseDataItemAttributes]
+    relationships : Union[Unset, DocumentPartsListGetResponseDataItemRelationships]
+    meta : Union[Unset, DocumentPartsListGetResponseDataItemMeta]
+    links : Union[Unset, DocumentPartsListGetResponseDataItemLinks]
     """
 
     type: Union[Unset, DocumentPartsListGetResponseDataItemType] = UNSET
@@ -52,7 +53,7 @@ class DocumentPartsListGetResponseDataItem:
     ] = UNSET
     meta: Union[Unset, "DocumentPartsListGetResponseDataItemMeta"] = UNSET
     links: Union[Unset, "DocumentPartsListGetResponseDataItemLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

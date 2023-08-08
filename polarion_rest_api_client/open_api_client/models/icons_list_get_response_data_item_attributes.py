@@ -3,24 +3,25 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IconsListGetResponseDataItemAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class IconsListGetResponseDataItemAttributes:
     """
-    Attributes:
-        icon_url (Union[Unset, str]):  Example: pathexample.
-        path (Union[Unset, str]):  Example: pathexample.
+    Attributes
+    ----------
+    icon_url : Union[Unset, str]
+    path : Union[Unset, str]
     """
 
     icon_url: Union[Unset, str] = UNSET
     path: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         icon_url = self.icon_url

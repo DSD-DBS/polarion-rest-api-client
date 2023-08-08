@@ -4,7 +4,7 @@
 import datetime
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
@@ -24,25 +24,26 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentsSingleGetResponseDataAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentsSingleGetResponseDataAttributes:
     """
-    Attributes:
-        auto_suspect (Union[Unset, bool]):
-        branched_with_query (Union[Unset, str]):  Example: Branched with Query.
-        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        derived_from_link_role (Union[Unset, str]):  Example: relates_to.
-        home_page_content (Union[Unset, DocumentsSingleGetResponseDataAttributesHomePageContent]):
-        module_folder (Union[Unset, str]):  Example: MySpaceId.
-        module_name (Union[Unset, str]):  Example: MyDocumentId.
-        outline_numbering (Union[Unset, DocumentsSingleGetResponseDataAttributesOutlineNumbering]):
-        rendering_layouts (Union[Unset, List['DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem']]):
-        status (Union[Unset, str]):  Example: draft.
-        structure_link_role (Union[Unset, str]):  Example: relates_to.
-        title (Union[Unset, str]):  Example: Title.
-        type (Union[Unset, str]):  Example: req_specification.
-        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        uses_outline_numbering (Union[Unset, bool]):
+    Attributes
+    ----------
+    auto_suspect : Union[Unset, bool]
+    branched_with_query : Union[Unset, str]
+    created : Union[Unset, datetime.datetime]
+    derived_from_link_role : Union[Unset, str]
+    home_page_content : Union[Unset, DocumentsSingleGetResponseDataAttributesHomePageContent]
+    module_folder : Union[Unset, str]
+    module_name : Union[Unset, str]
+    outline_numbering : Union[Unset, DocumentsSingleGetResponseDataAttributesOutlineNumbering]
+    rendering_layouts : Union[Unset, List['DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem']]
+    status : Union[Unset, str]
+    structure_link_role : Union[Unset, str]
+    title : Union[Unset, str]
+    type : Union[Unset, str]
+    updated : Union[Unset, datetime.datetime]
+    uses_outline_numbering : Union[Unset, bool]
     """
 
     auto_suspect: Union[Unset, bool] = UNSET
@@ -67,7 +68,7 @@ class DocumentsSingleGetResponseDataAttributes:
     type: Union[Unset, str] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
     uses_outline_numbering: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         auto_suspect = self.auto_suspect

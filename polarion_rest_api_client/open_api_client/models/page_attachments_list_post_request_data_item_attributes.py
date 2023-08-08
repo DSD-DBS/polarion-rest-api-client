@@ -3,24 +3,25 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PageAttachmentsListPostRequestDataItemAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class PageAttachmentsListPostRequestDataItemAttributes:
     """
-    Attributes:
-        file_name (Union[Unset, str]):  Example: File Name.
-        title (Union[Unset, str]):  Example: Title.
+    Attributes
+    ----------
+    file_name : Union[Unset, str]
+    title : Union[Unset, str]
     """
 
     file_name: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         file_name = self.file_name

@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.documents_list_post_response_data_item_type import (
     DocumentsListPostResponseDataItemType,
@@ -19,19 +19,20 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentsListPostResponseDataItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentsListPostResponseDataItem:
     """
-    Attributes:
-        type (Union[Unset, DocumentsListPostResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
-        links (Union[Unset, DocumentsListPostResponseDataItemLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentsListPostResponseDataItemType]
+    id : Union[Unset, str]
+    links : Union[Unset, DocumentsListPostResponseDataItemLinks]
     """
 
     type: Union[Unset, DocumentsListPostResponseDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
     links: Union[Unset, "DocumentsListPostResponseDataItemLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

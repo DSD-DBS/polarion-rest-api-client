@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -16,14 +16,15 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="EnumerationsSingleGetResponseDataAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class EnumerationsSingleGetResponseDataAttributes:
     """
-    Attributes:
-        enum_context (Union[Unset, str]):  Example: id.
-        enum_name (Union[Unset, str]):  Example: id.
-        options (Union[Unset, List['EnumerationsSingleGetResponseDataAttributesOptionsItem']]):
-        target_type (Union[Unset, str]):  Example: id.
+    Attributes
+    ----------
+    enum_context : Union[Unset, str]
+    enum_name : Union[Unset, str]
+    options : Union[Unset, List['EnumerationsSingleGetResponseDataAttributesOptionsItem']]
+    target_type : Union[Unset, str]
     """
 
     enum_context: Union[Unset, str] = UNSET
@@ -32,7 +33,7 @@ class EnumerationsSingleGetResponseDataAttributes:
         Unset, List["EnumerationsSingleGetResponseDataAttributesOptionsItem"]
     ] = UNSET
     target_type: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         enum_context = self.enum_context

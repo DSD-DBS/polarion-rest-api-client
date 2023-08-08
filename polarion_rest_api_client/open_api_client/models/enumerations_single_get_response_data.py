@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.enumerations_single_get_response_data_type import (
     EnumerationsSingleGetResponseDataType,
@@ -25,16 +25,17 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="EnumerationsSingleGetResponseData")
 
 
-@attr.s(auto_attribs=True)
+@define
 class EnumerationsSingleGetResponseData:
     """
-    Attributes:
-        type (Union[Unset, EnumerationsSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: ~/status/~.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, EnumerationsSingleGetResponseDataAttributes]):
-        meta (Union[Unset, EnumerationsSingleGetResponseDataMeta]):
-        links (Union[Unset, EnumerationsSingleGetResponseDataLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, EnumerationsSingleGetResponseDataType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, EnumerationsSingleGetResponseDataAttributes]
+    meta : Union[Unset, EnumerationsSingleGetResponseDataMeta]
+    links : Union[Unset, EnumerationsSingleGetResponseDataLinks]
     """
 
     type: Union[Unset, EnumerationsSingleGetResponseDataType] = UNSET
@@ -45,7 +46,7 @@ class EnumerationsSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "EnumerationsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "EnumerationsSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

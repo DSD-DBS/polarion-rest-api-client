@@ -3,23 +3,28 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CopyDocumentRequestBody")
 
 
-@attr.s(auto_attribs=True)
+@define
 class CopyDocumentRequestBody:
     """
-    Attributes:
-        target_project_id (Union[Unset, str]): Project where new document will be created. Example: MyProjectId.
-        target_space_id (Union[Unset, str]): Space where new document will be created. Example: MySpaceId.
-        target_document_name (Union[Unset, str]): Name for new document. Example: MyDocumentId.
-        remove_outgoing_links (Union[Unset, bool]): Should outgoing links be removed? Example: True.
-        link_original_items_with_role (Union[Unset, str]): Link a copy of the document to the original. Example:
-            duplicates.
+    Attributes
+    ----------
+    target_project_id : Union[Unset, str]
+        Project where new document will be created.
+    target_space_id : Union[Unset, str]
+        Space where new document will be created.
+    target_document_name : Union[Unset, str]
+        Name for new document.
+    remove_outgoing_links : Union[Unset, bool]
+        Should outgoing links be removed?
+    link_original_items_with_role : Union[Unset, str]
+        Link a copy of the document to the original.
     """
 
     target_project_id: Union[Unset, str] = UNSET
@@ -27,7 +32,7 @@ class CopyDocumentRequestBody:
     target_document_name: Union[Unset, str] = UNSET
     remove_outgoing_links: Union[Unset, bool] = UNSET
     link_original_items_with_role: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         target_project_id = self.target_project_id

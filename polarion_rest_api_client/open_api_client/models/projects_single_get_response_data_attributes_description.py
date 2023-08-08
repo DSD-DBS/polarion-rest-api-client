@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.projects_single_get_response_data_attributes_description_type import (
     ProjectsSingleGetResponseDataAttributesDescriptionType,
@@ -13,19 +13,20 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="ProjectsSingleGetResponseDataAttributesDescription")
 
 
-@attr.s(auto_attribs=True)
+@define
 class ProjectsSingleGetResponseDataAttributesDescription:
     """
-    Attributes:
-        type (Union[Unset, ProjectsSingleGetResponseDataAttributesDescriptionType]):
-        value (Union[Unset, str]):  Example: My text value.
+    Attributes
+    ----------
+    type : Union[Unset, ProjectsSingleGetResponseDataAttributesDescriptionType]
+    value : Union[Unset, str]
     """
 
     type: Union[
         Unset, ProjectsSingleGetResponseDataAttributesDescriptionType
     ] = UNSET
     value: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

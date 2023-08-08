@@ -3,16 +3,16 @@
 
 from typing import Any, Dict, List, Type, TypeVar
 
-import attr
+from attrs import define, field
 
 T = TypeVar("T", bound="WorkitemsSingleGetResponseIncludedItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemsSingleGetResponseIncludedItem:
     """"""
 
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         field_dict: Dict[str, Any] = {}

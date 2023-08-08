@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -16,18 +16,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="UsersListGetResponseDataItemAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class UsersListGetResponseDataItemAttributes:
     """
-    Attributes:
-        avatar_url (Union[Unset, str]):  Example: http://server-host-name/application-
-            path/icons/avatar/MyUserId/avatar.png?revision=1234.
-        description (Union[Unset, UsersListGetResponseDataItemAttributesDescription]):
-        disabled_notifications (Union[Unset, bool]):
-        email (Union[Unset, str]):  Example: Email.
-        id (Union[Unset, str]):  Example: MyUserId.
-        initials (Union[Unset, str]):  Example: Initials.
-        name (Union[Unset, str]):  Example: Name.
+    Attributes
+    ----------
+    avatar_url : Union[Unset, str]
+    description : Union[Unset, UsersListGetResponseDataItemAttributesDescription]
+    disabled_notifications : Union[Unset, bool]
+    email : Union[Unset, str]
+    id : Union[Unset, str]
+    initials : Union[Unset, str]
+    name : Union[Unset, str]
     """
 
     avatar_url: Union[Unset, str] = UNSET
@@ -39,7 +39,7 @@ class UsersListGetResponseDataItemAttributes:
     id: Union[Unset, str] = UNSET
     initials: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         avatar_url = self.avatar_url

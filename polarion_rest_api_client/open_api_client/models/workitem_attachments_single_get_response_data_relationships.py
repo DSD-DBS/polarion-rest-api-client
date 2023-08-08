@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -19,12 +19,13 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemAttachmentsSingleGetResponseDataRelationships")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemAttachmentsSingleGetResponseDataRelationships:
     """
-    Attributes:
-        author (Union[Unset, WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthor]):
-        project (Union[Unset, WorkitemAttachmentsSingleGetResponseDataRelationshipsProject]):
+    Attributes
+    ----------
+    author : Union[Unset, WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthor]
+    project : Union[Unset, WorkitemAttachmentsSingleGetResponseDataRelationshipsProject]
     """
 
     author: Union[
@@ -33,7 +34,7 @@ class WorkitemAttachmentsSingleGetResponseDataRelationships:
     project: Union[
         Unset, "WorkitemAttachmentsSingleGetResponseDataRelationshipsProject"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         author: Union[Unset, Dict[str, Any]] = UNSET

@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.users_single_patch_request_data_relationships_project_roles_data_item_type import (
     UsersSinglePatchRequestDataRelationshipsProjectRolesDataItemType,
@@ -15,19 +15,20 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@define
 class UsersSinglePatchRequestDataRelationshipsProjectRolesDataItem:
     """
-    Attributes:
-        type (Union[Unset, UsersSinglePatchRequestDataRelationshipsProjectRolesDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyRoleId.
+    Attributes
+    ----------
+    type : Union[Unset, UsersSinglePatchRequestDataRelationshipsProjectRolesDataItemType]
+    id : Union[Unset, str]
     """
 
     type: Union[
         Unset, UsersSinglePatchRequestDataRelationshipsProjectRolesDataItemType
     ] = UNSET
     id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

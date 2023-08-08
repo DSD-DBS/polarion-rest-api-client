@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -16,15 +16,16 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="UsergroupsSingleGetResponseDataAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class UsergroupsSingleGetResponseDataAttributes:
     """
-    Attributes:
-        description (Union[Unset, UsergroupsSingleGetResponseDataAttributesDescription]):
-        id (Union[Unset, str]):  Example: MyUserGroupId.
-        ldap_search_filter (Union[Unset, str]):  Example: LDAP Search Filter.
-        name (Union[Unset, str]):  Example: Name.
-        sso_synchronization_allowed (Union[Unset, bool]):
+    Attributes
+    ----------
+    description : Union[Unset, UsergroupsSingleGetResponseDataAttributesDescription]
+    id : Union[Unset, str]
+    ldap_search_filter : Union[Unset, str]
+    name : Union[Unset, str]
+    sso_synchronization_allowed : Union[Unset, bool]
     """
 
     description: Union[
@@ -34,7 +35,7 @@ class UsergroupsSingleGetResponseDataAttributes:
     ldap_search_filter: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
     sso_synchronization_allowed: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         description: Union[Unset, Dict[str, Any]] = UNSET

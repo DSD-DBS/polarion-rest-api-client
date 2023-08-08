@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -12,17 +12,18 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemsSinglePatchRequestDataAttributesHyperlinksItem:
     """
-    Attributes:
-        role (Union[Unset, str]):  Example: ref_ext.
-        uri (Union[Unset, str]):  Example: https://polarion.plm.automation.siemens.com.
+    Attributes
+    ----------
+    role : Union[Unset, str]
+    uri : Union[Unset, str]
     """
 
     role: Union[Unset, str] = UNSET
     uri: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         role = self.role

@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.set_license_request_body_license import (
     SetLicenseRequestBodyLicense,
@@ -13,19 +13,23 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="SetLicenseRequestBody")
 
 
-@attr.s(auto_attribs=True)
+@define
 class SetLicenseRequestBody:
     """
-    Attributes:
-        license_ (Union[Unset, SetLicenseRequestBodyLicense]): User's license type
-        group (Union[Unset, str]): License group Example: Department.
-        concurrent (Union[Unset, bool]): Is concurrent user Example: True.
+    Attributes
+    ----------
+    license_ : Union[Unset, SetLicenseRequestBodyLicense]
+        User's license type
+    group : Union[Unset, str]
+        License group
+    concurrent : Union[Unset, bool]
+        Is concurrent user
     """
 
     license_: Union[Unset, SetLicenseRequestBodyLicense] = UNSET
     group: Union[Unset, str] = UNSET
     concurrent: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         license_: Union[Unset, str] = UNSET

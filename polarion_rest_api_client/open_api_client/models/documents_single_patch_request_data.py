@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.documents_single_patch_request_data_type import (
     DocumentsSinglePatchRequestDataType,
@@ -19,13 +19,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentsSinglePatchRequestData")
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentsSinglePatchRequestData:
     """
-    Attributes:
-        type (Union[Unset, DocumentsSinglePatchRequestDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
-        attributes (Union[Unset, DocumentsSinglePatchRequestDataAttributes]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentsSinglePatchRequestDataType]
+    id : Union[Unset, str]
+    attributes : Union[Unset, DocumentsSinglePatchRequestDataAttributes]
     """
 
     type: Union[Unset, DocumentsSinglePatchRequestDataType] = UNSET
@@ -33,7 +34,7 @@ class DocumentsSinglePatchRequestData:
     attributes: Union[
         Unset, "DocumentsSinglePatchRequestDataAttributes"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

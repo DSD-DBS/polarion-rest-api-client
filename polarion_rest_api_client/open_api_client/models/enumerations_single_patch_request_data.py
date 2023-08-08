@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.enumerations_single_patch_request_data_type import (
     EnumerationsSinglePatchRequestDataType,
@@ -19,13 +19,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="EnumerationsSinglePatchRequestData")
 
 
-@attr.s(auto_attribs=True)
+@define
 class EnumerationsSinglePatchRequestData:
     """
-    Attributes:
-        type (Union[Unset, EnumerationsSinglePatchRequestDataType]):
-        id (Union[Unset, str]):  Example: ~/status/~.
-        attributes (Union[Unset, EnumerationsSinglePatchRequestDataAttributes]):
+    Attributes
+    ----------
+    type : Union[Unset, EnumerationsSinglePatchRequestDataType]
+    id : Union[Unset, str]
+    attributes : Union[Unset, EnumerationsSinglePatchRequestDataAttributes]
     """
 
     type: Union[Unset, EnumerationsSinglePatchRequestDataType] = UNSET
@@ -33,7 +34,7 @@ class EnumerationsSinglePatchRequestData:
     attributes: Union[
         Unset, "EnumerationsSinglePatchRequestDataAttributes"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

@@ -4,7 +4,7 @@
 import datetime
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
@@ -18,15 +18,16 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseDataAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemCommentsSingleGetResponseDataAttributes:
     """
-    Attributes:
-        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        id (Union[Unset, str]):  Example: MyCommentId.
-        resolved (Union[Unset, bool]):
-        text (Union[Unset, WorkitemCommentsSingleGetResponseDataAttributesText]):
-        title (Union[Unset, str]):  Example: Title.
+    Attributes
+    ----------
+    created : Union[Unset, datetime.datetime]
+    id : Union[Unset, str]
+    resolved : Union[Unset, bool]
+    text : Union[Unset, WorkitemCommentsSingleGetResponseDataAttributesText]
+    title : Union[Unset, str]
     """
 
     created: Union[Unset, datetime.datetime] = UNSET
@@ -36,7 +37,7 @@ class WorkitemCommentsSingleGetResponseDataAttributes:
         Unset, "WorkitemCommentsSingleGetResponseDataAttributesText"
     ] = UNSET
     title: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         created: Union[Unset, str] = UNSET

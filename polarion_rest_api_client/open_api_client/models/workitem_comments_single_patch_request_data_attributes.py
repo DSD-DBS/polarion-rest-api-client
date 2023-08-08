@@ -3,22 +3,23 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="WorkitemCommentsSinglePatchRequestDataAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemCommentsSinglePatchRequestDataAttributes:
     """
-    Attributes:
-        resolved (Union[Unset, bool]):
+    Attributes
+    ----------
+    resolved : Union[Unset, bool]
     """
 
     resolved: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         resolved = self.resolved

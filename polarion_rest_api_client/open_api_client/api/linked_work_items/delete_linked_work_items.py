@@ -1,14 +1,13 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-import os
 from http import HTTPStatus
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
 from ... import errors
-from ...client import Client
+from ...client import AuthenticatedClient, Client
 from ...models.linkedworkitems_list_delete_request import (
     LinkedworkitemsListDeleteRequest,
 )
@@ -19,31 +18,24 @@ def _get_kwargs(
     project_id: str,
     work_item_id: str,
     *,
-    client: Client,
     json_body: LinkedworkitemsListDeleteRequest,
 ) -> Dict[str, Any]:
-    url = "{}/projects/{projectId}/workitems/{workItemId}/linkedworkitems".format(
-        client.base_url, projectId=project_id, workItemId=work_item_id
-    )
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
+    pass
 
     json_json_body = json_body.to_dict()
 
     return {
         "method": "delete",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/projects/{projectId}/workitems/{workItemId}/linkedworkitems".format(
+            projectId=project_id,
+            workItemId=work_item_id,
+        ),
         "json": json_json_body,
     }
 
 
 def _parse_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
@@ -70,7 +62,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -84,7 +76,7 @@ def sync_detailed(
     project_id: str,
     work_item_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     json_body: LinkedworkitemsListDeleteRequest,
 ) -> Response[Any]:
     """Deletes a list of instances.
@@ -92,29 +84,31 @@ def sync_detailed(
      Deletes the direct outgoing links to other Work Items. (The same as the corresponding Java API
     method.)  Does not pertain to external links or backlinks.
 
-    Args:
-        project_id (str):
-        work_item_id (str):
-        json_body (LinkedworkitemsListDeleteRequest):
+    Parameters
+    ----------
+    project_id : str
+    work_item_id : str
+    json_body : LinkedworkitemsListDeleteRequest
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Any]
+    Returns
+    -------
+    Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        client=client,
         json_body=json_body,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
-        proxies=os.getenv("PROXIES"),
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -125,7 +119,7 @@ async def asyncio_detailed(
     project_id: str,
     work_item_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     json_body: LinkedworkitemsListDeleteRequest,
 ) -> Response[Any]:
     """Deletes a list of instances.
@@ -133,29 +127,30 @@ async def asyncio_detailed(
      Deletes the direct outgoing links to other Work Items. (The same as the corresponding Java API
     method.)  Does not pertain to external links or backlinks.
 
-    Args:
-        project_id (str):
-        work_item_id (str):
-        json_body (LinkedworkitemsListDeleteRequest):
+    Parameters
+    ----------
+    project_id : str
+    work_item_id : str
+    json_body : LinkedworkitemsListDeleteRequest
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Any]
+    Returns
+    -------
+    Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        client=client,
         json_body=json_body,
     )
 
-    async with httpx.AsyncClient(
-        verify=client.verify_ssl, proxies=os.getenv("PROXIES")
-    ) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)

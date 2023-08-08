@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.documents_single_post_response_data_attributes_home_page_content_type import (
     DocumentsSinglePostResponseDataAttributesHomePageContentType,
@@ -15,19 +15,20 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentsSinglePostResponseDataAttributesHomePageContent:
     """
-    Attributes:
-        type (Union[Unset, DocumentsSinglePostResponseDataAttributesHomePageContentType]):
-        value (Union[Unset, str]):  Example: My text value.
+    Attributes
+    ----------
+    type : Union[Unset, DocumentsSinglePostResponseDataAttributesHomePageContentType]
+    value : Union[Unset, str]
     """
 
     type: Union[
         Unset, DocumentsSinglePostResponseDataAttributesHomePageContentType
     ] = UNSET
     value: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

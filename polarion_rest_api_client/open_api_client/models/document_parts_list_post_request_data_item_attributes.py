@@ -3,24 +3,25 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DocumentPartsListPostRequestDataItemAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentPartsListPostRequestDataItemAttributes:
     """
-    Attributes:
-        level (Union[Unset, int]):
-        type (Union[Unset, str]):  Example: workitem.
+    Attributes
+    ----------
+    level : Union[Unset, int]
+    type : Union[Unset, str]
     """
 
     level: Union[Unset, int] = UNSET
     type: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         level = self.level

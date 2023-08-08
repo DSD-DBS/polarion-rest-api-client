@@ -3,23 +3,23 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DocumentPartsListGetResponseDataItemAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentPartsListGetResponseDataItemAttributes:
     """
-    Attributes:
-        content (Union[Unset, str]):  Example: <div id="polarion_wiki macro name=module-
-            workitem;params=id=workitem_MyWorkItemId"></div>.
-        external (Union[Unset, bool]):
-        id (Union[Unset, str]):  Example: workitem_MyWorkItemId.
-        level (Union[Unset, int]):
-        type (Union[Unset, str]):  Example: workitem.
+    Attributes
+    ----------
+    content : Union[Unset, str]
+    external : Union[Unset, bool]
+    id : Union[Unset, str]
+    level : Union[Unset, int]
+    type : Union[Unset, str]
     """
 
     content: Union[Unset, str] = UNSET
@@ -27,7 +27,7 @@ class DocumentPartsListGetResponseDataItemAttributes:
     id: Union[Unset, str] = UNSET
     level: Union[Unset, int] = UNSET
     type: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         content = self.content

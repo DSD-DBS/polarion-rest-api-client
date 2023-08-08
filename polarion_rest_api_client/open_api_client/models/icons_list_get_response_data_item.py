@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.icons_list_get_response_data_item_type import (
     IconsListGetResponseDataItemType,
@@ -25,16 +25,17 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="IconsListGetResponseDataItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class IconsListGetResponseDataItem:
     """
-    Attributes:
-        type (Union[Unset, IconsListGetResponseDataItemType]):
-        id (Union[Unset, str]):  Example: default/example.gif.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, IconsListGetResponseDataItemAttributes]):
-        meta (Union[Unset, IconsListGetResponseDataItemMeta]):
-        links (Union[Unset, IconsListGetResponseDataItemLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, IconsListGetResponseDataItemType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, IconsListGetResponseDataItemAttributes]
+    meta : Union[Unset, IconsListGetResponseDataItemMeta]
+    links : Union[Unset, IconsListGetResponseDataItemLinks]
     """
 
     type: Union[Unset, IconsListGetResponseDataItemType] = UNSET
@@ -43,7 +44,7 @@ class IconsListGetResponseDataItem:
     attributes: Union[Unset, "IconsListGetResponseDataItemAttributes"] = UNSET
     meta: Union[Unset, "IconsListGetResponseDataItemMeta"] = UNSET
     links: Union[Unset, "IconsListGetResponseDataItemLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

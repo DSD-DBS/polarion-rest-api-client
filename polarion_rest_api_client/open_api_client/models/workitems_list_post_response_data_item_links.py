@@ -3,26 +3,25 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="WorkitemsListPostResponseDataItemLinks")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemsListPostResponseDataItemLinks:
     """
-    Attributes:
-        self_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/workitems/MyWorkItemId?revision=1234.
-        portal (Union[Unset, str]):  Example: server-host-name/application-
-            path/polarion/redirect/project/MyProjectId/workitem?id=MyWorkItemId&revision=1234.
+    Attributes
+    ----------
+    self_ : Union[Unset, str]
+    portal : Union[Unset, str]
     """
 
     self_: Union[Unset, str] = UNSET
     portal: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         self_ = self.self_

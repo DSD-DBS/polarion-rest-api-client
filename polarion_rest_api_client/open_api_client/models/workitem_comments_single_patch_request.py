@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -16,15 +16,16 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemCommentsSinglePatchRequest")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemCommentsSinglePatchRequest:
     """
-    Attributes:
-        data (Union[Unset, WorkitemCommentsSinglePatchRequestData]):
+    Attributes
+    ----------
+    data : Union[Unset, WorkitemCommentsSinglePatchRequestData]
     """
 
     data: Union[Unset, "WorkitemCommentsSinglePatchRequestData"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         data: Union[Unset, Dict[str, Any]] = UNSET

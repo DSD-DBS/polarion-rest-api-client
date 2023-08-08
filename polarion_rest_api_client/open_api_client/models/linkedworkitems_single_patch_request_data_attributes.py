@@ -3,24 +3,25 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="LinkedworkitemsSinglePatchRequestDataAttributes")
 
 
-@attr.s(auto_attribs=True)
+@define
 class LinkedworkitemsSinglePatchRequestDataAttributes:
     """
-    Attributes:
-        revision (Union[Unset, str]):  Example: 1234.
-        suspect (Union[Unset, bool]):
+    Attributes
+    ----------
+    revision : Union[Unset, str]
+    suspect : Union[Unset, bool]
     """
 
     revision: Union[Unset, str] = UNSET
     suspect: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         revision = self.revision

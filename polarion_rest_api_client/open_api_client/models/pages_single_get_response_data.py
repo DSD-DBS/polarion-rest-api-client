@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.pages_single_get_response_data_type import (
     PagesSingleGetResponseDataType,
@@ -28,17 +28,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="PagesSingleGetResponseData")
 
 
-@attr.s(auto_attribs=True)
+@define
 class PagesSingleGetResponseData:
     """
-    Attributes:
-        type (Union[Unset, PagesSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyRichPageId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, PagesSingleGetResponseDataAttributes]):
-        relationships (Union[Unset, PagesSingleGetResponseDataRelationships]):
-        meta (Union[Unset, PagesSingleGetResponseDataMeta]):
-        links (Union[Unset, PagesSingleGetResponseDataLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, PagesSingleGetResponseDataType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, PagesSingleGetResponseDataAttributes]
+    relationships : Union[Unset, PagesSingleGetResponseDataRelationships]
+    meta : Union[Unset, PagesSingleGetResponseDataMeta]
+    links : Union[Unset, PagesSingleGetResponseDataLinks]
     """
 
     type: Union[Unset, PagesSingleGetResponseDataType] = UNSET
@@ -50,7 +51,7 @@ class PagesSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "PagesSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "PagesSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

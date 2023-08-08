@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.workitem_comments_list_get_response_data_item_type import (
     WorkitemCommentsListGetResponseDataItemType,
@@ -28,17 +28,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemCommentsListGetResponseDataItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemCommentsListGetResponseDataItem:
     """
-    Attributes:
-        type (Union[Unset, WorkitemCommentsListGetResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyCommentId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, WorkitemCommentsListGetResponseDataItemAttributes]):
-        relationships (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationships]):
-        meta (Union[Unset, WorkitemCommentsListGetResponseDataItemMeta]):
-        links (Union[Unset, WorkitemCommentsListGetResponseDataItemLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemCommentsListGetResponseDataItemType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, WorkitemCommentsListGetResponseDataItemAttributes]
+    relationships : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationships]
+    meta : Union[Unset, WorkitemCommentsListGetResponseDataItemMeta]
+    links : Union[Unset, WorkitemCommentsListGetResponseDataItemLinks]
     """
 
     type: Union[Unset, WorkitemCommentsListGetResponseDataItemType] = UNSET
@@ -52,7 +53,7 @@ class WorkitemCommentsListGetResponseDataItem:
     ] = UNSET
     meta: Union[Unset, "WorkitemCommentsListGetResponseDataItemMeta"] = UNSET
     links: Union[Unset, "WorkitemCommentsListGetResponseDataItemLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

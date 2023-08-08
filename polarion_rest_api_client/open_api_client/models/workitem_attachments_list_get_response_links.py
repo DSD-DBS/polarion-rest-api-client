@@ -3,27 +3,23 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="WorkitemAttachmentsListGetResponseLinks")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemAttachmentsListGetResponseLinks:
     """
-    Attributes:
-        self_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/workitems/MyWorkItemId/attachments?page%5Bsize%5D=10&page%5Bnumber%5D=5.
-        first (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/workitems/MyWorkItemId/attachments?page%5Bsize%5D=10&page%5Bnumber%5D=1.
-        prev (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/workitems/MyWorkItemId/attachments?page%5Bsize%5D=10&page%5Bnumber%5D=4.
-        next_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/workitems/MyWorkItemId/attachments?page%5Bsize%5D=10&page%5Bnumber%5D=6.
-        last (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/workitems/MyWorkItemId/attachments?page%5Bsize%5D=10&page%5Bnumber%5D=9.
+    Attributes
+    ----------
+    self_ : Union[Unset, str]
+    first : Union[Unset, str]
+    prev : Union[Unset, str]
+    next_ : Union[Unset, str]
+    last : Union[Unset, str]
     """
 
     self_: Union[Unset, str] = UNSET
@@ -31,7 +27,7 @@ class WorkitemAttachmentsListGetResponseLinks:
     prev: Union[Unset, str] = UNSET
     next_: Union[Unset, str] = UNSET
     last: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         self_ = self.self_

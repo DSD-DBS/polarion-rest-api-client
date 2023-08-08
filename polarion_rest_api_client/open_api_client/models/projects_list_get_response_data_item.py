@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.projects_list_get_response_data_item_type import (
     ProjectsListGetResponseDataItemType,
@@ -28,17 +28,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="ProjectsListGetResponseDataItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class ProjectsListGetResponseDataItem:
     """
-    Attributes:
-        type (Union[Unset, ProjectsListGetResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, ProjectsListGetResponseDataItemAttributes]):
-        relationships (Union[Unset, ProjectsListGetResponseDataItemRelationships]):
-        meta (Union[Unset, ProjectsListGetResponseDataItemMeta]):
-        links (Union[Unset, ProjectsListGetResponseDataItemLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, ProjectsListGetResponseDataItemType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, ProjectsListGetResponseDataItemAttributes]
+    relationships : Union[Unset, ProjectsListGetResponseDataItemRelationships]
+    meta : Union[Unset, ProjectsListGetResponseDataItemMeta]
+    links : Union[Unset, ProjectsListGetResponseDataItemLinks]
     """
 
     type: Union[Unset, ProjectsListGetResponseDataItemType] = UNSET
@@ -52,7 +53,7 @@ class ProjectsListGetResponseDataItem:
     ] = UNSET
     meta: Union[Unset, "ProjectsListGetResponseDataItemMeta"] = UNSET
     links: Union[Unset, "ProjectsListGetResponseDataItemLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

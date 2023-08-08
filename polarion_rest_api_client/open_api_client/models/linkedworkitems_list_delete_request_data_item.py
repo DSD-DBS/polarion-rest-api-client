@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.linkedworkitems_list_delete_request_data_item_type import (
     LinkedworkitemsListDeleteRequestDataItemType,
@@ -13,17 +13,18 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="LinkedworkitemsListDeleteRequestDataItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class LinkedworkitemsListDeleteRequestDataItem:
     """
-    Attributes:
-        type (Union[Unset, LinkedworkitemsListDeleteRequestDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId.
+    Attributes
+    ----------
+    type : Union[Unset, LinkedworkitemsListDeleteRequestDataItemType]
+    id : Union[Unset, str]
     """
 
     type: Union[Unset, LinkedworkitemsListDeleteRequestDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

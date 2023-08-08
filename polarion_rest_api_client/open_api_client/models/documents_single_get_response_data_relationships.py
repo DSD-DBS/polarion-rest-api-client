@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -37,18 +37,19 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentsSingleGetResponseDataRelationships")
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentsSingleGetResponseDataRelationships:
     """
-    Attributes:
-        attachments (Union[Unset, DocumentsSingleGetResponseDataRelationshipsAttachments]):
-        author (Union[Unset, DocumentsSingleGetResponseDataRelationshipsAuthor]):
-        branched_from (Union[Unset, DocumentsSingleGetResponseDataRelationshipsBranchedFrom]):
-        comments (Union[Unset, DocumentsSingleGetResponseDataRelationshipsComments]):
-        derived_from (Union[Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFrom]):
-        project (Union[Unset, DocumentsSingleGetResponseDataRelationshipsProject]):
-        updated_by (Union[Unset, DocumentsSingleGetResponseDataRelationshipsUpdatedBy]):
-        variant (Union[Unset, DocumentsSingleGetResponseDataRelationshipsVariant]):
+    Attributes
+    ----------
+    attachments : Union[Unset, DocumentsSingleGetResponseDataRelationshipsAttachments]
+    author : Union[Unset, DocumentsSingleGetResponseDataRelationshipsAuthor]
+    branched_from : Union[Unset, DocumentsSingleGetResponseDataRelationshipsBranchedFrom]
+    comments : Union[Unset, DocumentsSingleGetResponseDataRelationshipsComments]
+    derived_from : Union[Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFrom]
+    project : Union[Unset, DocumentsSingleGetResponseDataRelationshipsProject]
+    updated_by : Union[Unset, DocumentsSingleGetResponseDataRelationshipsUpdatedBy]
+    variant : Union[Unset, DocumentsSingleGetResponseDataRelationshipsVariant]
     """
 
     attachments: Union[
@@ -75,7 +76,7 @@ class DocumentsSingleGetResponseDataRelationships:
     variant: Union[
         Unset, "DocumentsSingleGetResponseDataRelationshipsVariant"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         attachments: Union[Unset, Dict[str, Any]] = UNSET

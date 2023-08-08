@@ -3,36 +3,56 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SparseFields")
 
 
-@attr.s(auto_attribs=True)
+@define
 class SparseFields:
     """
-    Attributes:
-        categories (Union[Unset, str]): Requested fields Example: @all.
-        documents (Union[Unset, str]): Requested fields Example: @all.
-        document_attachments (Union[Unset, str]): Requested fields Example: @all.
-        document_comments (Union[Unset, str]): Requested fields Example: @all.
-        document_parts (Union[Unset, str]): Requested fields Example: @all.
-        enumerations (Union[Unset, str]): Requested fields Example: @all.
-        globalroles (Union[Unset, str]): Requested fields Example: @all.
-        icons (Union[Unset, str]): Requested fields Example: @all.
-        linkedworkitems (Union[Unset, str]): Requested fields Example: @all.
-        pages (Union[Unset, str]): Requested fields Example: @all.
-        page_attachments (Union[Unset, str]): Requested fields Example: @all.
-        plans (Union[Unset, str]): Requested fields Example: @all.
-        projectroles (Union[Unset, str]): Requested fields Example: @all.
-        projects (Union[Unset, str]): Requested fields Example: @all.
-        usergroups (Union[Unset, str]): Requested fields Example: @all.
-        users (Union[Unset, str]): Requested fields Example: @all.
-        workitems (Union[Unset, str]): Requested fields Example: @all.
-        workitem_attachments (Union[Unset, str]): Requested fields Example: @all.
-        workitem_comments (Union[Unset, str]): Requested fields Example: @all.
+    Attributes
+    ----------
+    categories : Union[Unset, str]
+        Requested fields
+    documents : Union[Unset, str]
+        Requested fields
+    document_attachments : Union[Unset, str]
+        Requested fields
+    document_comments : Union[Unset, str]
+        Requested fields
+    document_parts : Union[Unset, str]
+        Requested fields
+    enumerations : Union[Unset, str]
+        Requested fields
+    globalroles : Union[Unset, str]
+        Requested fields
+    icons : Union[Unset, str]
+        Requested fields
+    linkedworkitems : Union[Unset, str]
+        Requested fields
+    pages : Union[Unset, str]
+        Requested fields
+    page_attachments : Union[Unset, str]
+        Requested fields
+    plans : Union[Unset, str]
+        Requested fields
+    projectroles : Union[Unset, str]
+        Requested fields
+    projects : Union[Unset, str]
+        Requested fields
+    usergroups : Union[Unset, str]
+        Requested fields
+    users : Union[Unset, str]
+        Requested fields
+    workitems : Union[Unset, str]
+        Requested fields
+    workitem_attachments : Union[Unset, str]
+        Requested fields
+    workitem_comments : Union[Unset, str]
+        Requested fields
     """
 
     categories: Union[Unset, str] = UNSET
@@ -54,7 +74,7 @@ class SparseFields:
     workitems: Union[Unset, str] = UNSET
     workitem_attachments: Union[Unset, str] = UNSET
     workitem_comments: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         categories = self.categories

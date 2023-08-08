@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -43,20 +43,21 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemsListGetResponseDataItemRelationships")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemsListGetResponseDataItemRelationships:
     """
-    Attributes:
-        assignee (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAssignee]):
-        attachments (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAttachments]):
-        author (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAuthor]):
-        categories (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsCategories]):
-        comments (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsComments]):
-        linked_work_items (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsLinkedWorkItems]):
-        module (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsModule]):
-        planned_in (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsPlannedIn]):
-        project (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsProject]):
-        watches (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsWatches]):
+    Attributes
+    ----------
+    assignee : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAssignee]
+    attachments : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAttachments]
+    author : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAuthor]
+    categories : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsCategories]
+    comments : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsComments]
+    linked_work_items : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsLinkedWorkItems]
+    module : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsModule]
+    planned_in : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsPlannedIn]
+    project : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsProject]
+    watches : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsWatches]
     """
 
     assignee: Union[
@@ -89,7 +90,7 @@ class WorkitemsListGetResponseDataItemRelationships:
     watches: Union[
         Unset, "WorkitemsListGetResponseDataItemRelationshipsWatches"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         assignee: Union[Unset, Dict[str, Any]] = UNSET

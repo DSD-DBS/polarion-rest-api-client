@@ -1,14 +1,13 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-import os
 from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
 from ... import errors
-from ...client import Client
+from ...client import AuthenticatedClient, Client
 from ...models.enumerations_single_patch_request import (
     EnumerationsSinglePatchRequest,
 )
@@ -20,34 +19,25 @@ def _get_kwargs(
     enum_name: str,
     target_type: str,
     *,
-    client: Client,
     json_body: EnumerationsSinglePatchRequest,
 ) -> Dict[str, Any]:
-    url = "{}/enumerations/{enumContext}/{enumName}/{targetType}".format(
-        client.base_url,
-        enumContext=enum_context,
-        enumName=enum_name,
-        targetType=target_type,
-    )
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
+    pass
 
     json_json_body = json_body.to_dict()
 
     return {
         "method": "patch",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/enumerations/{enumContext}/{enumName}/{targetType}".format(
+            enumContext=enum_context,
+            enumName=enum_name,
+            targetType=target_type,
+        ),
         "json": json_json_body,
     }
 
 
 def _parse_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Any, EnumerationsSinglePatchRequest]]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         response_204 = EnumerationsSinglePatchRequest.from_dict(
@@ -89,7 +79,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Response[Union[Any, EnumerationsSinglePatchRequest]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -104,36 +94,38 @@ def sync_detailed(
     enum_name: str,
     target_type: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     json_body: EnumerationsSinglePatchRequest,
 ) -> Response[Union[Any, EnumerationsSinglePatchRequest]]:
     """Updates the specified instance.
 
-    Args:
-        enum_context (str):
-        enum_name (str):
-        target_type (str):
-        json_body (EnumerationsSinglePatchRequest):
+    Parameters
+    ----------
+    enum_context : str
+    enum_name : str
+    target_type : str
+    json_body : EnumerationsSinglePatchRequest
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Union[Any, EnumerationsSinglePatchRequest]]
+    Returns
+    -------
+    Response[Union[Any, EnumerationsSinglePatchRequest]]
     """
 
     kwargs = _get_kwargs(
         enum_context=enum_context,
         enum_name=enum_name,
         target_type=target_type,
-        client=client,
         json_body=json_body,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
-        proxies=os.getenv("PROXIES"),
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -145,23 +137,28 @@ def sync(
     enum_name: str,
     target_type: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     json_body: EnumerationsSinglePatchRequest,
 ) -> Optional[Union[Any, EnumerationsSinglePatchRequest]]:
     """Updates the specified instance.
 
-    Args:
-        enum_context (str):
-        enum_name (str):
-        target_type (str):
-        json_body (EnumerationsSinglePatchRequest):
+    Parameters
+    ----------
+    enum_context : str
+    enum_name : str
+    target_type : str
+    json_body : EnumerationsSinglePatchRequest
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Union[Any, EnumerationsSinglePatchRequest]
+    Returns
+    -------
+    Union[Any, EnumerationsSinglePatchRequest]
     """
 
     return sync_detailed(
@@ -178,37 +175,38 @@ async def asyncio_detailed(
     enum_name: str,
     target_type: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     json_body: EnumerationsSinglePatchRequest,
 ) -> Response[Union[Any, EnumerationsSinglePatchRequest]]:
     """Updates the specified instance.
 
-    Args:
-        enum_context (str):
-        enum_name (str):
-        target_type (str):
-        json_body (EnumerationsSinglePatchRequest):
+    Parameters
+    ----------
+    enum_context : str
+    enum_name : str
+    target_type : str
+    json_body : EnumerationsSinglePatchRequest
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Union[Any, EnumerationsSinglePatchRequest]]
+    Returns
+    -------
+    Response[Union[Any, EnumerationsSinglePatchRequest]]
     """
 
     kwargs = _get_kwargs(
         enum_context=enum_context,
         enum_name=enum_name,
         target_type=target_type,
-        client=client,
         json_body=json_body,
     )
 
-    async with httpx.AsyncClient(
-        verify=client.verify_ssl, proxies=os.getenv("PROXIES")
-    ) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -218,23 +216,28 @@ async def asyncio(
     enum_name: str,
     target_type: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     json_body: EnumerationsSinglePatchRequest,
 ) -> Optional[Union[Any, EnumerationsSinglePatchRequest]]:
     """Updates the specified instance.
 
-    Args:
-        enum_context (str):
-        enum_name (str):
-        target_type (str):
-        json_body (EnumerationsSinglePatchRequest):
+    Parameters
+    ----------
+    enum_context : str
+    enum_name : str
+    target_type : str
+    json_body : EnumerationsSinglePatchRequest
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Union[Any, EnumerationsSinglePatchRequest]
+    Returns
+    -------
+    Union[Any, EnumerationsSinglePatchRequest]
     """
 
     return (

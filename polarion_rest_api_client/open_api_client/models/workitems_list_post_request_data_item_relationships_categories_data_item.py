@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.workitems_list_post_request_data_item_relationships_categories_data_item_type import (
     WorkitemsListPostRequestDataItemRelationshipsCategoriesDataItemType,
@@ -16,12 +16,13 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemsListPostRequestDataItemRelationshipsCategoriesDataItem:
     """
-    Attributes:
-        type (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsCategoriesDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyCategoryId.
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsCategoriesDataItemType]
+    id : Union[Unset, str]
     """
 
     type: Union[
@@ -29,7 +30,7 @@ class WorkitemsListPostRequestDataItemRelationshipsCategoriesDataItem:
         WorkitemsListPostRequestDataItemRelationshipsCategoriesDataItemType,
     ] = UNSET
     id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

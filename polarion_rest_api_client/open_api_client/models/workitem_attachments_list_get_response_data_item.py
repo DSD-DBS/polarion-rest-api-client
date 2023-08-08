@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.workitem_attachments_list_get_response_data_item_type import (
     WorkitemAttachmentsListGetResponseDataItemType,
@@ -28,17 +28,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemAttachmentsListGetResponseDataItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemAttachmentsListGetResponseDataItem:
     """
-    Attributes:
-        type (Union[Unset, WorkitemAttachmentsListGetResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyAttachmentId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, WorkitemAttachmentsListGetResponseDataItemAttributes]):
-        relationships (Union[Unset, WorkitemAttachmentsListGetResponseDataItemRelationships]):
-        meta (Union[Unset, WorkitemAttachmentsListGetResponseDataItemMeta]):
-        links (Union[Unset, WorkitemAttachmentsListGetResponseDataItemLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemAttachmentsListGetResponseDataItemType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, WorkitemAttachmentsListGetResponseDataItemAttributes]
+    relationships : Union[Unset, WorkitemAttachmentsListGetResponseDataItemRelationships]
+    meta : Union[Unset, WorkitemAttachmentsListGetResponseDataItemMeta]
+    links : Union[Unset, WorkitemAttachmentsListGetResponseDataItemLinks]
     """
 
     type: Union[Unset, WorkitemAttachmentsListGetResponseDataItemType] = UNSET
@@ -56,7 +57,7 @@ class WorkitemAttachmentsListGetResponseDataItem:
     links: Union[
         Unset, "WorkitemAttachmentsListGetResponseDataItemLinks"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -22,15 +22,16 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemsSingleGetResponse")
 
 
-@attr.s(auto_attribs=True)
+@define
 class WorkitemsSingleGetResponse:
     """
-    Attributes:
-        data (Union[Unset, WorkitemsSingleGetResponseData]):
-        included (Union[Unset, List['WorkitemsSingleGetResponseIncludedItem']]): Related entities might be returned, see
-            <a href="https://docs.sw.siemens.com/en-US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API
-            User Guide</a>.
-        links (Union[Unset, WorkitemsSingleGetResponseLinks]):
+    Attributes
+    ----------
+    data : Union[Unset, WorkitemsSingleGetResponseData]
+    included : Union[Unset, List['WorkitemsSingleGetResponseIncludedItem']]
+        Related entities might be returned, see <a href="https://docs.sw.siemens.com/en-
+        US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
+    links : Union[Unset, WorkitemsSingleGetResponseLinks]
     """
 
     data: Union[Unset, "WorkitemsSingleGetResponseData"] = UNSET
@@ -38,7 +39,7 @@ class WorkitemsSingleGetResponse:
         Unset, List["WorkitemsSingleGetResponseIncludedItem"]
     ] = UNSET
     links: Union[Unset, "WorkitemsSingleGetResponseLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         data: Union[Unset, Dict[str, Any]] = UNSET

@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, Unset
 
@@ -23,23 +23,24 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="UsersListGetResponse")
 
 
-@attr.s(auto_attribs=True)
+@define
 class UsersListGetResponse:
     """
-    Attributes:
-        meta (Union[Unset, UsersListGetResponseMeta]):
-        data (Union[Unset, List['UsersListGetResponseDataItem']]):
-        included (Union[Unset, List['UsersListGetResponseIncludedItem']]): Related entities might be returned, see <a
-            href="https://docs.sw.siemens.com/en-US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User
-            Guide</a>.
-        links (Union[Unset, UsersListGetResponseLinks]):
+    Attributes
+    ----------
+    meta : Union[Unset, UsersListGetResponseMeta]
+    data : Union[Unset, List['UsersListGetResponseDataItem']]
+    included : Union[Unset, List['UsersListGetResponseIncludedItem']]
+        Related entities might be returned, see <a href="https://docs.sw.siemens.com/en-
+        US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
+    links : Union[Unset, UsersListGetResponseLinks]
     """
 
     meta: Union[Unset, "UsersListGetResponseMeta"] = UNSET
     data: Union[Unset, List["UsersListGetResponseDataItem"]] = UNSET
     included: Union[Unset, List["UsersListGetResponseIncludedItem"]] = UNSET
     links: Union[Unset, "UsersListGetResponseLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         meta: Union[Unset, Dict[str, Any]] = UNSET

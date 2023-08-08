@@ -5,7 +5,7 @@ import json
 from io import BytesIO
 from typing import TYPE_CHECKING, Any, Dict, List, Tuple, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..types import UNSET, File, FileJsonType, Unset
 
@@ -18,17 +18,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="PostWorkItemAttachmentsRequestBody")
 
 
-@attr.s(auto_attribs=True)
+@define
 class PostWorkItemAttachmentsRequestBody:
     """
-    Attributes:
-        resource (Union[Unset, WorkitemAttachmentsListPostRequest]):
-        files (Union[Unset, List[File]]):
+    Attributes
+    ----------
+    resource : Union[Unset, WorkitemAttachmentsListPostRequest]
+    files : Union[Unset, List[File]]
     """
 
     resource: Union[Unset, "WorkitemAttachmentsListPostRequest"] = UNSET
     files: Union[Unset, List[File]] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         resource: Union[Unset, Dict[str, Any]] = UNSET

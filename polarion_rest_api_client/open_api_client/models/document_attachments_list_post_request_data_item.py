@@ -3,7 +3,7 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define, field
 
 from ..models.document_attachments_list_post_request_data_item_type import (
     DocumentAttachmentsListPostRequestDataItemType,
@@ -19,13 +19,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentAttachmentsListPostRequestDataItem")
 
 
-@attr.s(auto_attribs=True)
+@define
 class DocumentAttachmentsListPostRequestDataItem:
     """
-    Attributes:
-        type (Union[Unset, DocumentAttachmentsListPostRequestDataItemType]):
-        lid (Union[Unset, str]):
-        attributes (Union[Unset, DocumentAttachmentsListPostRequestDataItemAttributes]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentAttachmentsListPostRequestDataItemType]
+    lid : Union[Unset, str]
+    attributes : Union[Unset, DocumentAttachmentsListPostRequestDataItemAttributes]
     """
 
     type: Union[Unset, DocumentAttachmentsListPostRequestDataItemType] = UNSET
@@ -33,7 +34,7 @@ class DocumentAttachmentsListPostRequestDataItem:
     attributes: Union[
         Unset, "DocumentAttachmentsListPostRequestDataItemAttributes"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
