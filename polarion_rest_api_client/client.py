@@ -81,7 +81,7 @@ class OpenAPIPolarionProjectClient(
         page_size: int = ...,
         max_content_size: int = ...,
     ):
-        """Initialize the client for project and endpoint using a token."""
+        ...
 
     @t.overload
     def __init__(
@@ -95,7 +95,7 @@ class OpenAPIPolarionProjectClient(
         page_size: int = ...,
         max_content_size: int = ...,
     ):
-        """Initialize the client for project and endpoint using a token."""
+        ...
 
     def __init__(
         self,
@@ -111,16 +111,24 @@ class OpenAPIPolarionProjectClient(
     ):
         """Initialize the client for project and endpoint using a token.
 
-        Args:
-            project_id: ID of the project to create a client for.
-            delete_polarion_work_items: Flag indicating whether to actually
-                delete work items or just mark them as deleted.
-            polarion_api_endpoint: The URL of the Polarion API endpoint.
-            polarion_access_token: A personal access token to access the API.
-            custom_work_item: Custom WorkItem class with additional attributes.
-            batch_size: Maximum amount of items created in one POST request.
-            page_size: Default size of a page when getting items from the API.
-            max_content_size: Maximum content-length of the API (default: 2MB).
+        Parameters
+        ----------
+        project_id : str
+            ID of the project to create a client for.
+        delete_polarion_work_items : bool
+            Flag indicating whether to actually delete work items or just mark them as deleted.
+        polarion_api_endpoint : str
+            The URL of the Polarion API endpoint.
+        polarion_access_token : str
+            A personal access token to access the API.
+        custom_work_item : default dm.WorkItem
+            Custom WorkItem class with additional attributes.
+        batch_size : int, default 100
+            Maximum amount of items created in one POST request.
+        page_size : int, default 100
+            Default size of a page when getting items from the API.
+        max_content_size : int, default 2 * 1024**2
+            Maximum content-length of the API (default: 2MB).
         """
         super().__init__(
             project_id,
