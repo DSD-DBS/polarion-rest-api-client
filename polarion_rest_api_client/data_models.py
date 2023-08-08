@@ -29,33 +29,28 @@ class WorkItem:
         additional_attributes: dict[str, t.Any] | None = None,
         **kwargs,
     ):
-        if not additional_attributes:
-            additional_attributes = kwargs
-        else:
-            additional_attributes.update(kwargs)
-
         self.id = id
         self.title = title
         self.description_type = description_type
         self.description = description
         self.type = type
         self.status = status
-        self.additional_attributes = additional_attributes
+        self.additional_attributes = (additional_attributes or {}) | kwargs
 
     def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
         if item.startswith("__"):
-            return super(WorkItem, self).__getattribute__(item)
+            return super().__getattribute__(item)
 
         if item in dir(WorkItem):
-            return super(WorkItem, self).__getattribute__(item)
+            return super().__getattribute__(item)
 
         return self.additional_attributes.get(item)
 
     def __setattr__(self, key: str, value: t.Any):
         """Set all non WorkItem attributes in additional_properties."""
         if key in dir(WorkItem):
-            super(WorkItem, self).__setattr__(key, value)
+            super().__setattr__(key, value)
         else:
             self.additional_attributes[key] = value
 

@@ -14,5 +14,7 @@ from polarion_rest_api_client.data_models import WorkItem, WorkItemLink
 from polarion_rest_api_client.errors import (
     PolarionApiBaseException,
     PolarionApiException,
+    PolarionApiInternalException,
     PolarionApiUnexpectedException,
+    PolarionWorkItemException,
 )

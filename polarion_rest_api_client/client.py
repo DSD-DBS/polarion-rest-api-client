@@ -29,15 +29,22 @@ from polarion_rest_api_client.open_api_client.api.work_items import (
 logger = logging.getLogger(__name__)
 
 
+def _get_json_content_size(data: dict):
+    return len(json.dumps(data).encode("utf-8"))
+
+
+min_wi_request_size = _get_json_content_size(
+    api_models.WorkitemsListPostRequest([]).to_dict()
+)
+
+
 def _build_sparse_fields(
-    fields_dict: dict[str, str] | None
+    fields_dict: dict[str, str]
 ) -> api_models.SparseFields | oa_types.Unset:
     """Build the SparseFields object based on a dict.
 
     Ensure that every key follow the pattern 'fields[XXX]'.
     """
-    if fields_dict is None:
-        return oa_types.Unset()
     new_field_dict: dict[str, str] = {}
     for key, value in fields_dict.items():
         if key.startswith("fields["):
@@ -55,7 +62,7 @@ def unset_str_builder(value: str | oa_types.Unset) -> str | None:
 
 
 class OpenAPIPolarionProjectClient(
-    base_client.AbstractPolarionProjectApi[base_client.WIT]
+    base_client.AbstractPolarionProjectApi[base_client.WorkItemType]
 ):
     """A Polarion Project Client using an auto generated OpenAPI-Client."""
 
@@ -63,15 +70,16 @@ class OpenAPIPolarionProjectClient(
 
     @t.overload
     def __init__(
-        self: "OpenAPIPolarionProjectClient[base_client.WIT]",
+        self: "OpenAPIPolarionProjectClient[base_client.WorkItemType]",
         project_id: str,
         delete_polarion_work_items: bool,
         polarion_api_endpoint: str,
         polarion_access_token: str,
         *,
-        custom_work_item: type[base_client.WIT],
-        batch_size: int = 5,
-        page_size: int = 100,
+        custom_work_item: type[base_client.WorkItemType],
+        batch_size: int = ...,
+        page_size: int = ...,
+        max_content_size: int = ...,
     ):
         ...
 
@@ -83,8 +91,9 @@ class OpenAPIPolarionProjectClient(
         polarion_api_endpoint: str,
         polarion_access_token: str,
         *,
-        batch_size: int = 5,
-        page_size: int = 100,
+        batch_size: int = ...,
+        page_size: int = ...,
+        max_content_size: int = ...,
     ):
         ...
 
@@ -96,10 +105,31 @@ class OpenAPIPolarionProjectClient(
         polarion_access_token: str,
         *,
         custom_work_item=dm.WorkItem,
-        batch_size: int = 5,
+        batch_size: int = 100,
         page_size: int = 100,
+        max_content_size: int = 2 * 1024**2,
     ):
-        """Initialize the client for project and endpoint using a token."""
+        """Initialize the client for project and endpoint using a token.
+
+        Parameters
+        ----------
+        project_id : str
+            ID of the project to create a client for.
+        delete_polarion_work_items : bool
+            Flag indicating whether to actually delete work items or just mark them as deleted.
+        polarion_api_endpoint : str
+            The URL of the Polarion API endpoint.
+        polarion_access_token : str
+            A personal access token to access the API.
+        custom_work_item : default dm.WorkItem
+            Custom WorkItem class with additional attributes.
+        batch_size : int, default 100
+            Maximum amount of items created in one POST request.
+        page_size : int, default 100
+            Default size of a page when getting items from the API.
+        max_content_size : int, default 2 * 1024**2
+            Maximum content-length of the API (default: 2MB).
+        """
         super().__init__(
             project_id,
             delete_polarion_work_items,
@@ -110,6 +140,9 @@ class OpenAPIPolarionProjectClient(
         self.client = oa_client.AuthenticatedClient(
             polarion_api_endpoint, polarion_access_token
         )
+        self._batch_size = batch_size
+        self._page_size = page_size
+        self._max_content_size = max_content_size
 
     def _check_response(self, response: oa_types.Response):
         def unexpected_error():
@@ -132,7 +165,7 @@ class OpenAPIPolarionProjectClient(
                 raise unexpected_error() from error
 
     def _build_work_item_post_request(
-        self, work_item: base_client.WIT
+        self, work_item: base_client.WorkItemType
     ) -> api_models.WorkitemsListPostRequestDataItem:
         assert work_item.type is not None
         assert work_item.title is not None
@@ -158,7 +191,7 @@ class OpenAPIPolarionProjectClient(
         )
 
     def _build_work_item_patch_request(
-        self, work_item: base_client.WIT
+        self, work_item: base_client.WorkItemType
     ) -> api_models.WorkitemsSinglePatchRequest:
         attrs = api_models.WorkitemsSinglePatchRequestDataAttributes()
 
@@ -176,8 +209,7 @@ class OpenAPIPolarionProjectClient(
         if work_item.status is not None:
             attrs.status = work_item.status
 
-        if work_item.additional_attributes is not None:
-            attrs.additional_properties.update(work_item.additional_attributes)
+        attrs.additional_properties.update(work_item.additional_attributes)
 
         return api_models.WorkitemsSinglePatchRequest(
             api_models.WorkitemsSinglePatchRequestData(
@@ -185,6 +217,30 @@ class OpenAPIPolarionProjectClient(
                 f"{self.project_id}/{work_item.id}",
                 attrs,
             )
+        )
+
+    def _post_work_item_batch(
+        self, work_item_batch: api_models.WorkitemsListPostRequest
+    ):
+        response = post_work_items.sync_detailed(
+            self.project_id, client=self.client, json_body=work_item_batch
+        )
+        self._check_response(response)
+
+    def _calculate_post_work_item_request_sizes(
+        self,
+        work_item_data: api_models.WorkitemsListPostRequestDataItem,
+        current_content_size: int = min_wi_request_size,
+    ) -> t.Tuple[int, bool]:
+        work_item_size = _get_json_content_size(work_item_data.to_dict())
+
+        proj_content_size = current_content_size + work_item_size
+        if current_content_size != min_wi_request_size:
+            proj_content_size += len(b", ")
+
+        return (
+            proj_content_size,
+            (work_item_size + min_wi_request_size) > self._max_content_size,
         )
 
     def project_exists(self) -> bool:
@@ -203,7 +259,7 @@ class OpenAPIPolarionProjectClient(
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
-    ) -> tuple[list[base_client.WIT], bool]:
+    ) -> tuple[list[base_client.WorkItemType], bool]:
         """Return the work items on a defined page matching the given query.
 
         In addition, a flag whether a next page is available is
@@ -227,7 +283,7 @@ class OpenAPIPolarionProjectClient(
 
         work_items_response = response.parsed
 
-        work_items: list[base_client.WIT] = []
+        work_items: list[base_client.WorkItemType] = []
 
         next_page = False
         if (
@@ -266,20 +322,43 @@ class OpenAPIPolarionProjectClient(
 
         return work_items, next_page
 
-    def _create_work_items(self, work_items: list[base_client.WIT]):
+    def create_work_items(self, work_items: list[base_client.WorkItemType]):
         """Create the given list of work items."""
-        response = post_work_items.sync_detailed(
-            self.project_id,
-            client=self.client,
-            json_body=api_models.WorkitemsListPostRequest(
-                [
-                    self._build_work_item_post_request(work_item)
-                    for work_item in work_items
-                ]
-            ),
-        )
+        current_batch = api_models.WorkitemsListPostRequest([])
+        content_size = min_wi_request_size
+        for work_item in work_items:
+            work_item_data = self._build_work_item_post_request(work_item)
 
-        self._check_response(response)
+            (
+                proj_content_size,
+                too_big,
+            ) = self._calculate_post_work_item_request_sizes(
+                work_item_data, content_size
+            )
+
+            if too_big:
+                raise errors.PolarionWorkItemException(
+                    "A WorkItem is too large to create.", work_item
+                )
+
+            assert isinstance(current_batch.data, list)
+            if (
+                proj_content_size >= self._max_content_size
+                or len(current_batch.data) >= self._batch_size
+            ):
+                self._post_work_item_batch(current_batch)
+
+                current_batch = api_models.WorkitemsListPostRequest(
+                    [work_item_data]
+                )
+                content_size = _get_json_content_size(current_batch.to_dict())
+            else:
+                assert isinstance(current_batch.data, list)
+                current_batch.data.append(work_item_data)
+                content_size = proj_content_size
+
+        if current_batch.data:
+            self._post_work_item_batch(current_batch)
 
     def _delete_work_items(self, work_item_ids: list[str]):
         response = delete_work_items.sync_detailed(
@@ -298,7 +377,7 @@ class OpenAPIPolarionProjectClient(
 
         self._check_response(response)
 
-    def update_work_item(self, work_item: base_client.WIT):
+    def update_work_item(self, work_item: base_client.WorkItemType):
         """Update the given work item in Polarion.
 
         Only fields not set to None will be updated in Polarion. None
