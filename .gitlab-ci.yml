@@ -1,0 +1,45 @@
+# Copyright DB Netz AG and contributors
+# SPDX-License-Identifier: Apache-2.0
+
+stages:
+  - build
+  - test
+  - deploy
+
+wheel:
+  stage: build
+  extends: .wheel
+
+coverage:
+  stage: test
+  extends: .coverage
+  variables:
+    COVERAGE_SOURCE: polarion_rest_api_client
+  needs: []
+
+pre-commit:
+  stage: test
+  extends: .pre-commit
+  needs: []
+
+artifactory:
+  stage: deploy
+  extends: .artifactory
+  needs:
+    - job: wheel
+      artifacts: true
+    - job: coverage
+    - job: pre-commit
+  rules:
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+include:
+  - project: "se-toolchain/ci-templates-docker"
+    ref: master
+    file:
+      - "/gitlab-ci/docker/upload-registry.yml"
+      - "/gitlab-ci/generic/pre-commit.yml"
+      - "/gitlab-ci/python/sphinx.yml"
+      - "/gitlab-ci/python/test.yml"
+      - "/gitlab-ci/python/wheel.yml"
