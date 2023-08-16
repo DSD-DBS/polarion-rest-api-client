@@ -144,25 +144,30 @@ class OpenAPIPolarionProjectClient(
         self._page_size = page_size
         self._max_content_size = max_content_size
 
-    def _check_response(self, response: oa_types.Response):
+    def _check_response(self, response: oa_types.Response, _raise) -> bool:
         def unexpected_error():
             return errors.PolarionApiUnexpectedException(
                 response.status_code, response.content
             )
 
         if response.status_code in range(400, 600):
-            try:
-                error = api_models.Errors.from_dict(
-                    json.loads(response.content.decode())
-                )
-                if error.errors:
-                    raise errors.PolarionApiException(
-                        *[(e.status, e.detail) for e in error.errors]
+            if _raise:
+                try:
+                    error = api_models.Errors.from_dict(
+                        json.loads(response.content.decode())
                     )
-                else:
-                    raise unexpected_error()
-            except json.JSONDecodeError as error:
-                raise unexpected_error() from error
+                    if error.errors:
+                        raise errors.PolarionApiException(
+                            *[(e.status, e.detail) for e in error.errors]
+                        )
+                    else:
+                        raise unexpected_error()
+                except json.JSONDecodeError as error:
+                    raise unexpected_error() from error
+            else:
+                return False
+
+        return True
 
     def _build_work_item_post_request(
         self, work_item: base_client.WorkItemType
@@ -220,12 +225,15 @@ class OpenAPIPolarionProjectClient(
         )
 
     def _post_work_item_batch(
-        self, work_item_batch: api_models.WorkitemsListPostRequest
+        self,
+        work_item_batch: api_models.WorkitemsListPostRequest,
+        retry: bool = True,
     ):
         response = post_work_items.sync_detailed(
             self.project_id, client=self.client, json_body=work_item_batch
         )
-        self._check_response(response)
+        if not self._check_response(response, not retry) and retry:
+            self._post_work_item_batch(work_item_batch, False)
 
     def _calculate_post_work_item_request_sizes(
         self,
@@ -259,6 +267,7 @@ class OpenAPIPolarionProjectClient(
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
+        retry: bool = True,
     ) -> tuple[list[base_client.WorkItemType], bool]:
         """Return the work items on a defined page matching the given query.
 
@@ -279,7 +288,10 @@ class OpenAPIPolarionProjectClient(
             pagenumber=page_number,
         )
 
-        self._check_response(response)
+        if not self._check_response(response, not retry) and retry:
+            return self.get_work_items(
+                query, fields, page_size, page_number, False
+            )
 
         work_items_response = response.parsed
 
@@ -360,7 +372,7 @@ class OpenAPIPolarionProjectClient(
         if current_batch.data:
             self._post_work_item_batch(current_batch)
 
-    def _delete_work_items(self, work_item_ids: list[str]):
+    def _delete_work_items(self, work_item_ids: list[str], retry: bool = True):
         response = delete_work_items.sync_detailed(
             self.project_id,
             client=self.client,
@@ -375,9 +387,12 @@ class OpenAPIPolarionProjectClient(
             ),
         )
 
-        self._check_response(response)
+        if not self._check_response(response, not retry) and retry:
+            self._delete_work_items(work_item_ids, False)
 
-    def update_work_item(self, work_item: base_client.WorkItemType):
+    def update_work_item(
+        self, work_item: base_client.WorkItemType, retry: bool = True
+    ):
         """Update the given work item in Polarion.
 
         Only fields not set to None will be updated in Polarion. None
@@ -392,7 +407,8 @@ class OpenAPIPolarionProjectClient(
             json_body=self._build_work_item_patch_request(work_item),
         )
 
-        self._check_response(response)
+        if not self._check_response(response, not retry) and retry:
+            self.update_work_item(work_item, False)
 
     def get_work_item_links(
         self,
@@ -401,6 +417,7 @@ class OpenAPIPolarionProjectClient(
         include: str | None = None,
         page_size: int = 100,
         page_number: int = 1,
+        retry: bool = True,
     ) -> tuple[list[dm.WorkItemLink], bool]:
         """Get the work item links for the given work item on a page.
 
@@ -422,7 +439,10 @@ class OpenAPIPolarionProjectClient(
             pagenumber=page_number,
         )
 
-        self._check_response(response)
+        if not self._check_response(response, not retry) and retry:
+            return self.get_work_item_links(
+                work_item_id, fields, include, page_size, page_number, False
+            )
 
         linked_work_item_response = response.parsed
 
@@ -465,7 +485,9 @@ class OpenAPIPolarionProjectClient(
 
         return work_item_links, next_page
 
-    def _create_work_item_links(self, work_item_links: list[dm.WorkItemLink]):
+    def _create_work_item_links(
+        self, work_item_links: list[dm.WorkItemLink], retry: bool = True
+    ):
         response = post_linked_work_items.sync_detailed(
             self.project_id,
             work_item_links[0].primary_work_item_id,
@@ -494,9 +516,12 @@ class OpenAPIPolarionProjectClient(
             # pylint: enable=line-too-long
         )
 
-        self._check_response(response)
+        if not self._check_response(response, not retry) and retry:
+            self._create_work_item_links(work_item_links, False)
 
-    def _delete_work_item_links(self, work_item_links: list[dm.WorkItemLink]):
+    def _delete_work_item_links(
+        self, work_item_links: list[dm.WorkItemLink], retry: bool = True
+    ):
         response = delete_linked_work_items.sync_detailed(
             self.project_id,
             work_item_links[0].primary_work_item_id,
@@ -514,4 +539,5 @@ class OpenAPIPolarionProjectClient(
             # pylint: enable=line-too-long
         )
 
-        self._check_response(response)
+        if not self._check_response(response, not retry) and retry:
+            self._delete_work_item_links(work_item_links, False)
