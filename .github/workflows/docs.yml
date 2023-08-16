@@ -27,7 +27,7 @@ jobs:
           python -m pip install '.[docs]'
       - name: Auto-generate APIDOC sources
         run: |-
-          sphinx-apidoc --output-dir docs/source/code --force .
+          sphinx-apidoc --output-dir docs/source/code --force . polarion_rest_api_client/open_api_client
       - name: Create docs
         run: |
           make -C docs html
