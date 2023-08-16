@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.linkedworkitems_list_post_response_data_item_type import (
     LinkedworkitemsListPostResponseDataItemType,
@@ -19,7 +20,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="LinkedworkitemsListPostResponseDataItem")
 
 
-@define
+@_attrs_define
 class LinkedworkitemsListPostResponseDataItem:
     """
     Attributes
@@ -32,7 +33,9 @@ class LinkedworkitemsListPostResponseDataItem:
     type: Union[Unset, LinkedworkitemsListPostResponseDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
     links: Union[Unset, "LinkedworkitemsListPostResponseDataItemLinks"] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

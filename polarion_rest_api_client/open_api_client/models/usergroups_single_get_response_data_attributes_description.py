@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.usergroups_single_get_response_data_attributes_description_type import (
     UsergroupsSingleGetResponseDataAttributesDescriptionType,
@@ -13,7 +14,7 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="UsergroupsSingleGetResponseDataAttributesDescription")
 
 
-@define
+@_attrs_define
 class UsergroupsSingleGetResponseDataAttributesDescription:
     """
     Attributes
@@ -26,7 +27,9 @@ class UsergroupsSingleGetResponseDataAttributesDescription:
         Unset, UsergroupsSingleGetResponseDataAttributesDescriptionType
     ] = UNSET
     value: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

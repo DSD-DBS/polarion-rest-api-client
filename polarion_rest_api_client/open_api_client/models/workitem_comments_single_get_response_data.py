@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.workitem_comments_single_get_response_data_type import (
     WorkitemCommentsSingleGetResponseDataType,
@@ -28,7 +29,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseData")
 
 
-@define
+@_attrs_define
 class WorkitemCommentsSingleGetResponseData:
     """
     Attributes
@@ -53,7 +54,9 @@ class WorkitemCommentsSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "WorkitemCommentsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "WorkitemCommentsSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.set_license_request_body_license import (
     SetLicenseRequestBodyLicense,
@@ -13,7 +14,7 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="SetLicenseRequestBody")
 
 
-@define
+@_attrs_define
 class SetLicenseRequestBody:
     """
     Attributes
@@ -29,7 +30,9 @@ class SetLicenseRequestBody:
     license_: Union[Unset, SetLicenseRequestBodyLicense] = UNSET
     group: Union[Unset, str] = UNSET
     concurrent: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         license_: Union[Unset, str] = UNSET

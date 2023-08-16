@@ -4,7 +4,8 @@
 import datetime
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
@@ -18,7 +19,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="ProjectsSingleGetResponseDataAttributes")
 
 
-@define
+@_attrs_define
 class ProjectsSingleGetResponseDataAttributes:
     """
     Attributes
@@ -47,7 +48,9 @@ class ProjectsSingleGetResponseDataAttributes:
     name: Union[Unset, str] = UNSET
     start: Union[Unset, datetime.date] = UNSET
     tracker_prefix: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         active = self.active

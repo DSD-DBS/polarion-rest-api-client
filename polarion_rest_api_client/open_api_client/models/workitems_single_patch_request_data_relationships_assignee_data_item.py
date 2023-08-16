@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.workitems_single_patch_request_data_relationships_assignee_data_item_type import (
     WorkitemsSinglePatchRequestDataRelationshipsAssigneeDataItemType,
@@ -15,7 +16,7 @@ T = TypeVar(
 )
 
 
-@define
+@_attrs_define
 class WorkitemsSinglePatchRequestDataRelationshipsAssigneeDataItem:
     """
     Attributes
@@ -28,7 +29,9 @@ class WorkitemsSinglePatchRequestDataRelationshipsAssigneeDataItem:
         Unset, WorkitemsSinglePatchRequestDataRelationshipsAssigneeDataItemType
     ] = UNSET
     id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

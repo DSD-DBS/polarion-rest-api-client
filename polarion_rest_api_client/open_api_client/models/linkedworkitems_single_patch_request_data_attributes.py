@@ -3,14 +3,15 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="LinkedworkitemsSinglePatchRequestDataAttributes")
 
 
-@define
+@_attrs_define
 class LinkedworkitemsSinglePatchRequestDataAttributes:
     """
     Attributes
@@ -21,7 +22,9 @@ class LinkedworkitemsSinglePatchRequestDataAttributes:
 
     revision: Union[Unset, str] = UNSET
     suspect: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         revision = self.revision

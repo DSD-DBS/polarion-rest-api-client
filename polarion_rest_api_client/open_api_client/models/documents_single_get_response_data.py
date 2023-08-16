@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.documents_single_get_response_data_type import (
     DocumentsSingleGetResponseDataType,
@@ -28,7 +29,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentsSingleGetResponseData")
 
 
-@define
+@_attrs_define
 class DocumentsSingleGetResponseData:
     """
     Attributes
@@ -53,7 +54,9 @@ class DocumentsSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "DocumentsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "DocumentsSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

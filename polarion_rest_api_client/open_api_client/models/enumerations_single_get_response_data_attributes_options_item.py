@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-from attrs import define, field
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -12,7 +13,7 @@ T = TypeVar(
 )
 
 
-@define
+@_attrs_define
 class EnumerationsSingleGetResponseDataAttributesOptionsItem:
     """
     Attributes
@@ -49,7 +50,9 @@ class EnumerationsSingleGetResponseDataAttributesOptionsItem:
     min_value: Union[Unset, float] = UNSET
     requires_signature_for_test_case_execution: Union[Unset, bool] = UNSET
     terminal: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
