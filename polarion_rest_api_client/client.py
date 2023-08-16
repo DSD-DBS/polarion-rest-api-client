@@ -7,6 +7,7 @@ import json
 import logging
 import random
 import time
+import os
 import typing as t
 
 from polarion_rest_api_client import base_client
@@ -152,6 +153,9 @@ class OpenAPIPolarionProjectClient(
 
         if httpx_args is None:
             httpx_args = {}
+
+        if "proxies" not in httpx_args:
+            httpx_args["proxies"] = os.getenv("PROXIES")
 
         self.client = oa_client.AuthenticatedClient(
             polarion_api_endpoint, polarion_access_token, httpx_args=httpx_args
