@@ -5,9 +5,9 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import random
 import time
-import os
 import typing as t
 
 from polarion_rest_api_client import base_client
