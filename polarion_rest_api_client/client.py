@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import json
 import logging
+import random
+import time
 import typing as t
 
 from polarion_rest_api_client import base_client
@@ -59,6 +61,11 @@ def unset_str_builder(value: str | oa_types.Unset) -> str | None:
     if isinstance(value, oa_types.Unset):
         return None
     return value
+
+
+def sleep_random_time(_min: int = 5, _max: int = 15):
+    """Sleep for _min-_max seconds with defaults of 5-15 seconds."""
+    time.sleep(random.uniform(_min, _max))
 
 
 class OpenAPIPolarionProjectClient(
@@ -234,6 +241,7 @@ class OpenAPIPolarionProjectClient(
             self.project_id, client=self.client, json_body=work_item_batch
         )
         if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
             self._post_work_item_batch(work_item_batch, False)
 
     def _calculate_post_work_item_request_sizes(
@@ -290,6 +298,7 @@ class OpenAPIPolarionProjectClient(
         )
 
         if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
             return self.get_work_items(
                 query, fields, page_size, page_number, False
             )
@@ -389,6 +398,7 @@ class OpenAPIPolarionProjectClient(
         )
 
         if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
             self._delete_work_items(work_item_ids, False)
 
     def update_work_item(
@@ -409,6 +419,7 @@ class OpenAPIPolarionProjectClient(
         )
 
         if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
             self.update_work_item(work_item, False)
 
     def get_work_item_links(
@@ -441,6 +452,7 @@ class OpenAPIPolarionProjectClient(
         )
 
         if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
             return self.get_work_item_links(
                 work_item_id, fields, include, page_size, page_number, False
             )
@@ -518,6 +530,7 @@ class OpenAPIPolarionProjectClient(
         )
 
         if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
             self._create_work_item_links(work_item_links, False)
 
     def _delete_work_item_links(
@@ -541,4 +554,5 @@ class OpenAPIPolarionProjectClient(
         )
 
         if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
             self._delete_work_item_links(work_item_links, False)
