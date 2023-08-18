@@ -144,30 +144,31 @@ class OpenAPIPolarionProjectClient(
         self._page_size = page_size
         self._max_content_size = max_content_size
 
-    def _check_response(self, response: oa_types.Response, _raise) -> bool:
+    def _check_response(
+        self, response: oa_types.Response, _raise: bool
+    ) -> bool:
         def unexpected_error():
             return errors.PolarionApiUnexpectedException(
                 response.status_code, response.content
             )
 
-        if response.status_code in range(400, 600):
-            if _raise:
-                try:
-                    error = api_models.Errors.from_dict(
-                        json.loads(response.content.decode())
-                    )
-                    if error.errors:
-                        raise errors.PolarionApiException(
-                            *[(e.status, e.detail) for e in error.errors]
-                        )
-                    else:
-                        raise unexpected_error()
-                except json.JSONDecodeError as error:
-                    raise unexpected_error() from error
-            else:
-                return False
+        if response.status_code not in range(400, 600):
+            return True
 
-        return True
+        if not _raise:
+            return False
+
+        try:
+            decoded_content = json.loads(response.content.decode())
+        except json.JSONDecodeError as e:
+            raise unexpected_error() from e
+
+        error = api_models.Errors.from_dict(decoded_content)
+        if error.errors:
+            raise errors.PolarionApiException(
+                *[(e.status, e.detail) for e in error.errors]
+            )
+        raise unexpected_error()
 
     def _build_work_item_post_request(
         self, work_item: base_client.WorkItemType
