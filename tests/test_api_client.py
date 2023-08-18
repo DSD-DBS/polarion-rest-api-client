@@ -322,6 +322,7 @@ def test_create_work_items_content_exceed_error(
         exc_info.value.args[0]
         == "A WorkItem is too large to create. (WorkItem Title: Title)"
     )
+    assert len(httpx_mock.get_requests()) == 0
 
 
 def test_work_item_single_request_size(
@@ -394,6 +395,7 @@ def test_create_work_items_failed(
     assert exc_info.type is polarion_api.PolarionApiException
     assert exc_info.value.args[0][0] == "400"
     assert exc_info.value.args[0][1] == expected
+    assert len(httpx_mock.get_requests()) == 2
 
 
 def test_create_work_items_failed_no_error(
@@ -805,3 +807,26 @@ def test_create_work_item_custom_work_item(
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
+
+
+def test_get_work_item_links_error_first_request(
+    client: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+):
+    httpx_mock.add_response(502)
+    with open(
+        TEST_WIL_NO_NEXT_PAGE_RESPONSE,
+        encoding="utf8",
+    ) as f:
+        httpx_mock.add_response(json=json.load(f))
+
+    work_item_links = client.get_all_work_item_links(
+        "MyWorkItemId",
+    )
+
+    reqs = httpx_mock.get_requests()
+
+    assert len(reqs) == 2
+    assert work_item_links[0] == polarion_api.WorkItemLink(
+        "MyWorkItemId", "MyWorkItemId2", "relates_to", True, "MyProjectId"
+    )
