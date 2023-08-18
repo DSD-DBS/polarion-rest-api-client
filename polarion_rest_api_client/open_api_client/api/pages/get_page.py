@@ -1,14 +1,13 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-import os
 from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
 from ... import errors
-from ...client import Client
+from ...client import AuthenticatedClient, Client
 from ...models.pages_single_get_response import PagesSingleGetResponse
 from ...models.sparse_fields import SparseFields
 from ...types import UNSET, Response, Unset
@@ -19,20 +18,11 @@ def _get_kwargs(
     space_id: str,
     page_name: str,
     *,
-    client: Client,
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/projects/{projectId}/spaces/{spaceId}/pages/{pageName}".format(
-        client.base_url,
-        projectId=project_id,
-        spaceId=space_id,
-        pageName=page_name,
-    )
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
+    pass
 
     params: Dict[str, Any] = {}
     json_fields: Union[Unset, None, Dict[str, Any]] = UNSET
@@ -52,17 +42,17 @@ def _get_kwargs(
 
     return {
         "method": "get",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/projects/{projectId}/spaces/{spaceId}/pages/{pageName}".format(
+            projectId=project_id,
+            spaceId=space_id,
+            pageName=page_name,
+        ),
         "params": params,
     }
 
 
 def _parse_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Any, PagesSingleGetResponse]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = PagesSingleGetResponse.from_dict(response.json())
@@ -96,7 +86,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Response[Union[Any, PagesSingleGetResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -111,42 +101,44 @@ def sync_detailed(
     space_id: str,
     page_name: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Response[Union[Any, PagesSingleGetResponse]]:
     """Returns the specified instance.
 
-    Args:
-        project_id (str):
-        space_id (str):
-        page_name (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        revision (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    space_id : str
+    page_name : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    revision : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Union[Any, PagesSingleGetResponse]]
+    Returns
+    -------
+    Response[Union[Any, PagesSingleGetResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         page_name=page_name,
-        client=client,
         fields=fields,
         include=include,
         revision=revision,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
-        proxies=os.getenv("PROXIES"),
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -158,27 +150,32 @@ def sync(
     space_id: str,
     page_name: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Optional[Union[Any, PagesSingleGetResponse]]:
     """Returns the specified instance.
 
-    Args:
-        project_id (str):
-        space_id (str):
-        page_name (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        revision (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    space_id : str
+    page_name : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    revision : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Union[Any, PagesSingleGetResponse]
+    Returns
+    -------
+    Union[Any, PagesSingleGetResponse]
     """
 
     return sync_detailed(
@@ -197,43 +194,44 @@ async def asyncio_detailed(
     space_id: str,
     page_name: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Response[Union[Any, PagesSingleGetResponse]]:
     """Returns the specified instance.
 
-    Args:
-        project_id (str):
-        space_id (str):
-        page_name (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        revision (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    space_id : str
+    page_name : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    revision : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Union[Any, PagesSingleGetResponse]]
+    Returns
+    -------
+    Response[Union[Any, PagesSingleGetResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         page_name=page_name,
-        client=client,
         fields=fields,
         include=include,
         revision=revision,
     )
 
-    async with httpx.AsyncClient(
-        verify=client.verify_ssl, proxies=os.getenv("PROXIES")
-    ) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -243,27 +241,32 @@ async def asyncio(
     space_id: str,
     page_name: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     revision: Union[Unset, None, str] = UNSET,
 ) -> Optional[Union[Any, PagesSingleGetResponse]]:
     """Returns the specified instance.
 
-    Args:
-        project_id (str):
-        space_id (str):
-        page_name (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        revision (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    space_id : str
+    page_name : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    revision : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Union[Any, PagesSingleGetResponse]
+    Returns
+    -------
+    Union[Any, PagesSingleGetResponse]
     """
 
     return (

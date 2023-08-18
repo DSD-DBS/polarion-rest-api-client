@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -25,14 +26,15 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemsListPostRequestDataItemRelationships")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemsListPostRequestDataItemRelationships:
     """
-    Attributes:
-        assignee (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAssignee]):
-        author (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAuthor]):
-        categories (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsCategories]):
-        module (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsModule]):
+    Attributes
+    ----------
+    assignee : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAssignee]
+    author : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAuthor]
+    categories : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsCategories]
+    module : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsModule]
     """
 
     assignee: Union[
@@ -47,7 +49,9 @@ class WorkitemsListPostRequestDataItemRelationships:
     module: Union[
         Unset, "WorkitemsListPostRequestDataItemRelationshipsModule"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         assignee: Union[Unset, Dict[str, Any]] = UNSET

@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -12,25 +13,26 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class EnumerationsListPostRequestDataItemAttributesOptionsItem:
     """
-    Attributes:
-        id (Union[Unset, str]):  Example: open.
-        name (Union[Unset, str]):  Example: Open.
-        color (Union[Unset, str]):  Example: #F9FF4D.
-        description (Union[Unset, str]):  Example: Description.
-        hidden (Union[Unset, bool]):
-        default (Union[Unset, bool]):  Example: True.
-        parent (Union[Unset, bool]):  Example: True.
-        opposite_name (Union[Unset, str]):  Example: Opposite Name.
-        column_width (Union[Unset, str]):  Example: 90%.
-        icon_url (Union[Unset, str]):  Example: /polarion/icons/default/enums/status_open.gif.
-        create_defect (Union[Unset, bool]):  Example: True.
-        template_work_item (Union[Unset, str]):  Example: exampleTemplate.
-        min_value (Union[Unset, float]):  Example: 30.0.
-        requires_signature_for_test_case_execution (Union[Unset, bool]):  Example: True.
-        terminal (Union[Unset, bool]):  Example: True.
+    Attributes
+    ----------
+    id : Union[Unset, str]
+    name : Union[Unset, str]
+    color : Union[Unset, str]
+    description : Union[Unset, str]
+    hidden : Union[Unset, bool]
+    default : Union[Unset, bool]
+    parent : Union[Unset, bool]
+    opposite_name : Union[Unset, str]
+    column_width : Union[Unset, str]
+    icon_url : Union[Unset, str]
+    create_defect : Union[Unset, bool]
+    template_work_item : Union[Unset, str]
+    min_value : Union[Unset, float]
+    requires_signature_for_test_case_execution : Union[Unset, bool]
+    terminal : Union[Unset, bool]
     """
 
     id: Union[Unset, str] = UNSET
@@ -48,7 +50,9 @@ class EnumerationsListPostRequestDataItemAttributesOptionsItem:
     min_value: Union[Unset, float] = UNSET
     requires_signature_for_test_case_execution: Union[Unset, bool] = UNSET
     terminal: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id

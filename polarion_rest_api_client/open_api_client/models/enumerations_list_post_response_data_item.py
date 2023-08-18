@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.enumerations_list_post_response_data_item_type import (
     EnumerationsListPostResponseDataItemType,
@@ -19,19 +20,22 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="EnumerationsListPostResponseDataItem")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class EnumerationsListPostResponseDataItem:
     """
-    Attributes:
-        type (Union[Unset, EnumerationsListPostResponseDataItemType]):
-        id (Union[Unset, str]):  Example: ~/status/~.
-        links (Union[Unset, EnumerationsListPostResponseDataItemLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, EnumerationsListPostResponseDataItemType]
+    id : Union[Unset, str]
+    links : Union[Unset, EnumerationsListPostResponseDataItemLinks]
     """
 
     type: Union[Unset, EnumerationsListPostResponseDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
     links: Union[Unset, "EnumerationsListPostResponseDataItemLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

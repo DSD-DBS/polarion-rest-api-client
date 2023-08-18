@@ -3,23 +3,26 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseLinks")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemCommentsSingleGetResponseLinks:
     """
-    Attributes:
-        self_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/workitems/MyWorkItemId/comments/MyCommentId?revision=1234.
+    Attributes
+    ----------
+    self_ : Union[Unset, str]
     """
 
     self_: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         self_ = self.self_

@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.workitems_list_post_request_data_item_attributes_description_type import (
     WorkitemsListPostRequestDataItemAttributesDescriptionType,
@@ -13,19 +14,22 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="WorkitemsListPostRequestDataItemAttributesDescription")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemsListPostRequestDataItemAttributesDescription:
     """
-    Attributes:
-        type (Union[Unset, WorkitemsListPostRequestDataItemAttributesDescriptionType]):
-        value (Union[Unset, str]):  Example: My text value.
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemsListPostRequestDataItemAttributesDescriptionType]
+    value : Union[Unset, str]
     """
 
     type: Union[
         Unset, WorkitemsListPostRequestDataItemAttributesDescriptionType
     ] = UNSET
     value: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

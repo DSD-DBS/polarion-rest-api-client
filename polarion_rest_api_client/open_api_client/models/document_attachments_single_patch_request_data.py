@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.document_attachments_single_patch_request_data_type import (
     DocumentAttachmentsSinglePatchRequestDataType,
@@ -19,13 +20,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentAttachmentsSinglePatchRequestData")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentAttachmentsSinglePatchRequestData:
     """
-    Attributes:
-        type (Union[Unset, DocumentAttachmentsSinglePatchRequestDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/MyAttachmentId.
-        attributes (Union[Unset, DocumentAttachmentsSinglePatchRequestDataAttributes]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentAttachmentsSinglePatchRequestDataType]
+    id : Union[Unset, str]
+    attributes : Union[Unset, DocumentAttachmentsSinglePatchRequestDataAttributes]
     """
 
     type: Union[Unset, DocumentAttachmentsSinglePatchRequestDataType] = UNSET
@@ -33,7 +35,9 @@ class DocumentAttachmentsSinglePatchRequestData:
     attributes: Union[
         Unset, "DocumentAttachmentsSinglePatchRequestDataAttributes"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

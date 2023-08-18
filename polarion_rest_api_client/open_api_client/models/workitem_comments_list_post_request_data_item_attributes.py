@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -16,13 +17,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemCommentsListPostRequestDataItemAttributes")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemCommentsListPostRequestDataItemAttributes:
     """
-    Attributes:
-        resolved (Union[Unset, bool]):
-        text (Union[Unset, WorkitemCommentsListPostRequestDataItemAttributesText]):
-        title (Union[Unset, str]):  Example: Title.
+    Attributes
+    ----------
+    resolved : Union[Unset, bool]
+    text : Union[Unset, WorkitemCommentsListPostRequestDataItemAttributesText]
+    title : Union[Unset, str]
     """
 
     resolved: Union[Unset, bool] = UNSET
@@ -30,7 +32,9 @@ class WorkitemCommentsListPostRequestDataItemAttributes:
         Unset, "WorkitemCommentsListPostRequestDataItemAttributesText"
     ] = UNSET
     title: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         resolved = self.resolved

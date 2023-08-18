@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -18,15 +19,18 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemAttachmentsSingleGetResponseDataMetaErrorsItem:
     """
-    Attributes:
-        status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.
-        title (Union[Unset, str]): Short, human-readable summary of the problem. Example: Bad Request.
-        detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
-            Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).
-        source (Union[Unset, WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSource]):
+    Attributes
+    ----------
+    status : Union[Unset, str]
+        HTTP status code applicable to this problem.
+    title : Union[Unset, str]
+        Short, human-readable summary of the problem.
+    detail : Union[Unset, str]
+        Human-readable explanation specific to this occurrence of the problem.
+    source : Union[Unset, WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSource]
     """
 
     status: Union[Unset, str] = UNSET
@@ -35,7 +39,9 @@ class WorkitemAttachmentsSingleGetResponseDataMetaErrorsItem:
     source: Union[
         Unset, "WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSource"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         status = self.status

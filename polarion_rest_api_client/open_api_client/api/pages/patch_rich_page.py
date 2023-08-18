@@ -1,14 +1,13 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-import os
 from http import HTTPStatus
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
 from ... import errors
-from ...client import Client
+from ...client import AuthenticatedClient, Client
 from ...models.pages_single_patch_request import PagesSinglePatchRequest
 from ...types import Response
 
@@ -18,34 +17,25 @@ def _get_kwargs(
     space_id: str,
     page_name: str,
     *,
-    client: Client,
     json_body: PagesSinglePatchRequest,
 ) -> Dict[str, Any]:
-    url = "{}/projects/{projectId}/spaces/{spaceId}/pages/{pageName}".format(
-        client.base_url,
-        projectId=project_id,
-        spaceId=space_id,
-        pageName=page_name,
-    )
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
+    pass
 
     json_json_body = json_body.to_dict()
 
     return {
         "method": "patch",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/projects/{projectId}/spaces/{spaceId}/pages/{pageName}".format(
+            projectId=project_id,
+            spaceId=space_id,
+            pageName=page_name,
+        ),
         "json": json_json_body,
     }
 
 
 def _parse_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
@@ -74,7 +64,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -89,36 +79,38 @@ def sync_detailed(
     space_id: str,
     page_name: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     json_body: PagesSinglePatchRequest,
 ) -> Response[Any]:
     """Updates the specified instance.
 
-    Args:
-        project_id (str):
-        space_id (str):
-        page_name (str):
-        json_body (PagesSinglePatchRequest):
+    Parameters
+    ----------
+    project_id : str
+    space_id : str
+    page_name : str
+    json_body : PagesSinglePatchRequest
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Any]
+    Returns
+    -------
+    Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         page_name=page_name,
-        client=client,
         json_body=json_body,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
-        proxies=os.getenv("PROXIES"),
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -130,36 +122,37 @@ async def asyncio_detailed(
     space_id: str,
     page_name: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     json_body: PagesSinglePatchRequest,
 ) -> Response[Any]:
     """Updates the specified instance.
 
-    Args:
-        project_id (str):
-        space_id (str):
-        page_name (str):
-        json_body (PagesSinglePatchRequest):
+    Parameters
+    ----------
+    project_id : str
+    space_id : str
+    page_name : str
+    json_body : PagesSinglePatchRequest
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Any]
+    Returns
+    -------
+    Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         page_name=page_name,
-        client=client,
         json_body=json_body,
     )
 
-    async with httpx.AsyncClient(
-        verify=client.verify_ssl, proxies=os.getenv("PROXIES")
-    ) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)

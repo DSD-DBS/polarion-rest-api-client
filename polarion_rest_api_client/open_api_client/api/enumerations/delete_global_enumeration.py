@@ -1,14 +1,13 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-import os
 from http import HTTPStatus
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
 from ... import errors
-from ...client import Client
+from ...client import AuthenticatedClient, Client
 from ...types import Response
 
 
@@ -16,31 +15,21 @@ def _get_kwargs(
     enum_context: str,
     enum_name: str,
     target_type: str,
-    *,
-    client: Client,
 ) -> Dict[str, Any]:
-    url = "{}/enumerations/{enumContext}/{enumName}/{targetType}".format(
-        client.base_url,
-        enumContext=enum_context,
-        enumName=enum_name,
-        targetType=target_type,
-    )
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
+    pass
 
     return {
         "method": "delete",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/enumerations/{enumContext}/{enumName}/{targetType}".format(
+            enumContext=enum_context,
+            enumName=enum_name,
+            targetType=target_type,
+        ),
     }
 
 
 def _parse_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
@@ -63,7 +52,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -78,33 +67,35 @@ def sync_detailed(
     enum_name: str,
     target_type: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
     """Deletes the specified instance.
 
-    Args:
-        enum_context (str):
-        enum_name (str):
-        target_type (str):
+    Parameters
+    ----------
+    enum_context : str
+    enum_name : str
+    target_type : str
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Any]
+    Returns
+    -------
+    Response[Any]
     """
 
     kwargs = _get_kwargs(
         enum_context=enum_context,
         enum_name=enum_name,
         target_type=target_type,
-        client=client,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
-        proxies=os.getenv("PROXIES"),
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -116,33 +107,34 @@ async def asyncio_detailed(
     enum_name: str,
     target_type: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
     """Deletes the specified instance.
 
-    Args:
-        enum_context (str):
-        enum_name (str):
-        target_type (str):
+    Parameters
+    ----------
+    enum_context : str
+    enum_name : str
+    target_type : str
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Any]
+    Returns
+    -------
+    Response[Any]
     """
 
     kwargs = _get_kwargs(
         enum_context=enum_context,
         enum_name=enum_name,
         target_type=target_type,
-        client=client,
     )
 
-    async with httpx.AsyncClient(
-        verify=client.verify_ssl, proxies=os.getenv("PROXIES")
-    ) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)

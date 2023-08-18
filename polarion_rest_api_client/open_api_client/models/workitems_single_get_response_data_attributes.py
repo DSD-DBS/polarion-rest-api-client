@@ -4,7 +4,8 @@
 import datetime
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
@@ -21,29 +22,30 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemsSingleGetResponseDataAttributes")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemsSingleGetResponseDataAttributes:
     """
-    Attributes:
-        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        description (Union[Unset, WorkitemsSingleGetResponseDataAttributesDescription]):
-        due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        hyperlinks (Union[Unset, List['WorkitemsSingleGetResponseDataAttributesHyperlinksItem']]):
-        id (Union[Unset, str]):  Example: MyWorkItemId.
-        initial_estimate (Union[Unset, str]):  Example: 5 1/2d.
-        outline_number (Union[Unset, str]):  Example: 1.11.
-        planned_end (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        planned_start (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        priority (Union[Unset, str]):  Example: 90.0.
-        remaining_estimate (Union[Unset, str]):  Example: 5 1/2d.
-        resolution (Union[Unset, str]):  Example: done.
-        resolved_on (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        severity (Union[Unset, str]):  Example: blocker.
-        status (Union[Unset, str]):  Example: open.
-        time_spent (Union[Unset, str]):  Example: 5 1/2d.
-        title (Union[Unset, str]):  Example: Title.
-        type (Union[Unset, str]):  Example: task.
-        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    Attributes
+    ----------
+    created : Union[Unset, datetime.datetime]
+    description : Union[Unset, WorkitemsSingleGetResponseDataAttributesDescription]
+    due_date : Union[Unset, datetime.date]
+    hyperlinks : Union[Unset, List['WorkitemsSingleGetResponseDataAttributesHyperlinksItem']]
+    id : Union[Unset, str]
+    initial_estimate : Union[Unset, str]
+    outline_number : Union[Unset, str]
+    planned_end : Union[Unset, datetime.datetime]
+    planned_start : Union[Unset, datetime.datetime]
+    priority : Union[Unset, str]
+    remaining_estimate : Union[Unset, str]
+    resolution : Union[Unset, str]
+    resolved_on : Union[Unset, datetime.datetime]
+    severity : Union[Unset, str]
+    status : Union[Unset, str]
+    time_spent : Union[Unset, str]
+    title : Union[Unset, str]
+    type : Union[Unset, str]
+    updated : Union[Unset, datetime.datetime]
     """
 
     created: Union[Unset, datetime.datetime] = UNSET
@@ -69,7 +71,9 @@ class WorkitemsSingleGetResponseDataAttributes:
     title: Union[Unset, str] = UNSET
     type: Union[Unset, str] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         created: Union[Unset, str] = UNSET

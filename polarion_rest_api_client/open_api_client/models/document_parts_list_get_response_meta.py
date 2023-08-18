@@ -3,22 +3,26 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DocumentPartsListGetResponseMeta")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentPartsListGetResponseMeta:
     """
-    Attributes:
-        total_count (Union[Unset, int]):
+    Attributes
+    ----------
+    total_count : Union[Unset, int]
     """
 
     total_count: Union[Unset, int] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         total_count = self.total_count

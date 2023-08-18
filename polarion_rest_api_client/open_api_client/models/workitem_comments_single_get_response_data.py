@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.workitem_comments_single_get_response_data_type import (
     WorkitemCommentsSingleGetResponseDataType,
@@ -28,17 +29,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseData")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemCommentsSingleGetResponseData:
     """
-    Attributes:
-        type (Union[Unset, WorkitemCommentsSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyCommentId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, WorkitemCommentsSingleGetResponseDataAttributes]):
-        relationships (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationships]):
-        meta (Union[Unset, WorkitemCommentsSingleGetResponseDataMeta]):
-        links (Union[Unset, WorkitemCommentsSingleGetResponseDataLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemCommentsSingleGetResponseDataType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, WorkitemCommentsSingleGetResponseDataAttributes]
+    relationships : Union[Unset, WorkitemCommentsSingleGetResponseDataRelationships]
+    meta : Union[Unset, WorkitemCommentsSingleGetResponseDataMeta]
+    links : Union[Unset, WorkitemCommentsSingleGetResponseDataLinks]
     """
 
     type: Union[Unset, WorkitemCommentsSingleGetResponseDataType] = UNSET
@@ -52,7 +54,9 @@ class WorkitemCommentsSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "WorkitemCommentsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "WorkitemCommentsSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

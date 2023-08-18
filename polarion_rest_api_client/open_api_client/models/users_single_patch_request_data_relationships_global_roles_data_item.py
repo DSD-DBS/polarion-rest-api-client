@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.users_single_patch_request_data_relationships_global_roles_data_item_type import (
     UsersSinglePatchRequestDataRelationshipsGlobalRolesDataItemType,
@@ -15,19 +16,22 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class UsersSinglePatchRequestDataRelationshipsGlobalRolesDataItem:
     """
-    Attributes:
-        type (Union[Unset, UsersSinglePatchRequestDataRelationshipsGlobalRolesDataItemType]):
-        id (Union[Unset, str]):  Example: MyRoleId.
+    Attributes
+    ----------
+    type : Union[Unset, UsersSinglePatchRequestDataRelationshipsGlobalRolesDataItemType]
+    id : Union[Unset, str]
     """
 
     type: Union[
         Unset, UsersSinglePatchRequestDataRelationshipsGlobalRolesDataItemType
     ] = UNSET
     id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.linkedworkitems_single_patch_request_data_type import (
     LinkedworkitemsSinglePatchRequestDataType,
@@ -19,13 +20,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="LinkedworkitemsSinglePatchRequestData")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class LinkedworkitemsSinglePatchRequestData:
     """
-    Attributes:
-        type (Union[Unset, LinkedworkitemsSinglePatchRequestDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId.
-        attributes (Union[Unset, LinkedworkitemsSinglePatchRequestDataAttributes]):
+    Attributes
+    ----------
+    type : Union[Unset, LinkedworkitemsSinglePatchRequestDataType]
+    id : Union[Unset, str]
+    attributes : Union[Unset, LinkedworkitemsSinglePatchRequestDataAttributes]
     """
 
     type: Union[Unset, LinkedworkitemsSinglePatchRequestDataType] = UNSET
@@ -33,7 +35,9 @@ class LinkedworkitemsSinglePatchRequestData:
     attributes: Union[
         Unset, "LinkedworkitemsSinglePatchRequestDataAttributes"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

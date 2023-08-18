@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -22,20 +23,21 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentsListPostRequestDataItemAttributes")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentsListPostRequestDataItemAttributes:
     """
-    Attributes:
-        auto_suspect (Union[Unset, bool]):
-        home_page_content (Union[Unset, DocumentsListPostRequestDataItemAttributesHomePageContent]):
-        module_name (Union[Unset, str]):  Example: MyDocumentId.
-        outline_numbering (Union[Unset, DocumentsListPostRequestDataItemAttributesOutlineNumbering]):
-        rendering_layouts (Union[Unset, List['DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem']]):
-        status (Union[Unset, str]):  Example: draft.
-        structure_link_role (Union[Unset, str]):  Example: relates_to.
-        title (Union[Unset, str]):  Example: Title.
-        type (Union[Unset, str]):  Example: req_specification.
-        uses_outline_numbering (Union[Unset, bool]):
+    Attributes
+    ----------
+    auto_suspect : Union[Unset, bool]
+    home_page_content : Union[Unset, DocumentsListPostRequestDataItemAttributesHomePageContent]
+    module_name : Union[Unset, str]
+    outline_numbering : Union[Unset, DocumentsListPostRequestDataItemAttributesOutlineNumbering]
+    rendering_layouts : Union[Unset, List['DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem']]
+    status : Union[Unset, str]
+    structure_link_role : Union[Unset, str]
+    title : Union[Unset, str]
+    type : Union[Unset, str]
+    uses_outline_numbering : Union[Unset, bool]
     """
 
     auto_suspect: Union[Unset, bool] = UNSET
@@ -55,7 +57,9 @@ class DocumentsListPostRequestDataItemAttributes:
     title: Union[Unset, str] = UNSET
     type: Union[Unset, str] = UNSET
     uses_outline_numbering: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         auto_suspect = self.auto_suspect

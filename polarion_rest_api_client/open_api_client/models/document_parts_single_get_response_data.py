@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.document_parts_single_get_response_data_type import (
     DocumentPartsSingleGetResponseDataType,
@@ -28,17 +29,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentPartsSingleGetResponseData")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentPartsSingleGetResponseData:
     """
-    Attributes:
-        type (Union[Unset, DocumentPartsSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, DocumentPartsSingleGetResponseDataAttributes]):
-        relationships (Union[Unset, DocumentPartsSingleGetResponseDataRelationships]):
-        meta (Union[Unset, DocumentPartsSingleGetResponseDataMeta]):
-        links (Union[Unset, DocumentPartsSingleGetResponseDataLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentPartsSingleGetResponseDataType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, DocumentPartsSingleGetResponseDataAttributes]
+    relationships : Union[Unset, DocumentPartsSingleGetResponseDataRelationships]
+    meta : Union[Unset, DocumentPartsSingleGetResponseDataMeta]
+    links : Union[Unset, DocumentPartsSingleGetResponseDataLinks]
     """
 
     type: Union[Unset, DocumentPartsSingleGetResponseDataType] = UNSET
@@ -52,7 +54,9 @@ class DocumentPartsSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "DocumentPartsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "DocumentPartsSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

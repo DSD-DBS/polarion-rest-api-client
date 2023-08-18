@@ -4,7 +4,8 @@
 import datetime
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
@@ -12,15 +13,16 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="PagesSingleGetResponseDataAttributes")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class PagesSingleGetResponseDataAttributes:
     """
-    Attributes:
-        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        page_name (Union[Unset, str]):  Example: MyRichPageId.
-        space_id (Union[Unset, str]):  Example: MySpaceId.
-        title (Union[Unset, str]):  Example: Title.
-        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    Attributes
+    ----------
+    created : Union[Unset, datetime.datetime]
+    page_name : Union[Unset, str]
+    space_id : Union[Unset, str]
+    title : Union[Unset, str]
+    updated : Union[Unset, datetime.datetime]
     """
 
     created: Union[Unset, datetime.datetime] = UNSET
@@ -28,7 +30,9 @@ class PagesSingleGetResponseDataAttributes:
     space_id: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         created: Union[Unset, str] = UNSET

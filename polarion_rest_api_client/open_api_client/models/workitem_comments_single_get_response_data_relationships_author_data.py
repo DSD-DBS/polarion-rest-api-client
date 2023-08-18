@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.workitem_comments_single_get_response_data_relationships_author_data_type import (
     WorkitemCommentsSingleGetResponseDataRelationshipsAuthorDataType,
@@ -15,13 +16,14 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemCommentsSingleGetResponseDataRelationshipsAuthorData:
     """
-    Attributes:
-        type (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsAuthorDataType]):
-        id (Union[Unset, str]):  Example: MyUserId.
-        revision (Union[Unset, str]):  Example: 1234.
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsAuthorDataType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
     """
 
     type: Union[
@@ -29,7 +31,9 @@ class WorkitemCommentsSingleGetResponseDataRelationshipsAuthorData:
     ] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

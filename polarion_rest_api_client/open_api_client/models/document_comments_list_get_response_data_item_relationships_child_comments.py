@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -22,12 +23,13 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentCommentsListGetResponseDataItemRelationshipsChildComments:
     """
-    Attributes:
-        data (Union[Unset, List['DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsDataItem']]):
-        meta (Union[Unset, DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta]):
+    Attributes
+    ----------
+    data : Union[Unset, List['DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsDataItem']]
+    meta : Union[Unset, DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta]
     """
 
     data: Union[
@@ -40,7 +42,9 @@ class DocumentCommentsListGetResponseDataItemRelationshipsChildComments:
         Unset,
         "DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta",
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         data: Union[Unset, List[Dict[str, Any]]] = UNSET

@@ -1,14 +1,13 @@
 # Copyright DB Netz AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-import os
 from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
 from ... import errors
-from ...client import Client
+from ...client import AuthenticatedClient, Client
 from ...models.sparse_fields import SparseFields
 from ...models.workitems_list_get_response import WorkitemsListGetResponse
 from ...types import UNSET, Response, Unset
@@ -17,7 +16,6 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     project_id: str,
     *,
-    client: Client,
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     pagesize: Union[Unset, None, int] = UNSET,
@@ -25,12 +23,7 @@ def _get_kwargs(
     query: Union[Unset, None, str] = UNSET,
     sort: Union[Unset, None, str] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/projects/{projectId}/workitems".format(
-        client.base_url, projectId=project_id
-    )
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
+    pass
 
     params: Dict[str, Any] = {}
     json_fields: Union[Unset, None, Dict[str, Any]] = UNSET
@@ -56,17 +49,15 @@ def _get_kwargs(
 
     return {
         "method": "get",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/projects/{projectId}/workitems".format(
+            projectId=project_id,
+        ),
         "params": params,
     }
 
 
 def _parse_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Any, WorkitemsListGetResponse]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = WorkitemsListGetResponse.from_dict(response.json())
@@ -100,7 +91,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Response[Union[Any, WorkitemsListGetResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -113,7 +104,7 @@ def _build_response(
 def sync_detailed(
     project_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     pagesize: Union[Unset, None, int] = UNSET,
@@ -123,26 +114,30 @@ def sync_detailed(
 ) -> Response[Union[Any, WorkitemsListGetResponse]]:
     """Returns a list of instances.
 
-    Args:
-        project_id (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        pagesize (Union[Unset, None, int]):
-        pagenumber (Union[Unset, None, int]):
-        query (Union[Unset, None, str]):
-        sort (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    pagesize : Union[Unset, None, int]
+    pagenumber : Union[Unset, None, int]
+    query : Union[Unset, None, str]
+    sort : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Union[Any, WorkitemsListGetResponse]]
+    Returns
+    -------
+    Response[Union[Any, WorkitemsListGetResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
-        client=client,
         fields=fields,
         include=include,
         pagesize=pagesize,
@@ -151,9 +146,7 @@ def sync_detailed(
         sort=sort,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
-        proxies=os.getenv("PROXIES"),
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -163,7 +156,7 @@ def sync_detailed(
 def sync(
     project_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     pagesize: Union[Unset, None, int] = UNSET,
@@ -173,21 +166,26 @@ def sync(
 ) -> Optional[Union[Any, WorkitemsListGetResponse]]:
     """Returns a list of instances.
 
-    Args:
-        project_id (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        pagesize (Union[Unset, None, int]):
-        pagenumber (Union[Unset, None, int]):
-        query (Union[Unset, None, str]):
-        sort (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    pagesize : Union[Unset, None, int]
+    pagenumber : Union[Unset, None, int]
+    query : Union[Unset, None, str]
+    sort : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Union[Any, WorkitemsListGetResponse]
+    Returns
+    -------
+    Union[Any, WorkitemsListGetResponse]
     """
 
     return sync_detailed(
@@ -205,7 +203,7 @@ def sync(
 async def asyncio_detailed(
     project_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     pagesize: Union[Unset, None, int] = UNSET,
@@ -215,26 +213,30 @@ async def asyncio_detailed(
 ) -> Response[Union[Any, WorkitemsListGetResponse]]:
     """Returns a list of instances.
 
-    Args:
-        project_id (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        pagesize (Union[Unset, None, int]):
-        pagenumber (Union[Unset, None, int]):
-        query (Union[Unset, None, str]):
-        sort (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    pagesize : Union[Unset, None, int]
+    pagenumber : Union[Unset, None, int]
+    query : Union[Unset, None, str]
+    sort : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Response[Union[Any, WorkitemsListGetResponse]]
+    Returns
+    -------
+    Response[Union[Any, WorkitemsListGetResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
-        client=client,
         fields=fields,
         include=include,
         pagesize=pagesize,
@@ -243,10 +245,7 @@ async def asyncio_detailed(
         sort=sort,
     )
 
-    async with httpx.AsyncClient(
-        verify=client.verify_ssl, proxies=os.getenv("PROXIES")
-    ) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -254,7 +253,7 @@ async def asyncio_detailed(
 async def asyncio(
     project_id: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, None, "SparseFields"] = UNSET,
     include: Union[Unset, None, str] = UNSET,
     pagesize: Union[Unset, None, int] = UNSET,
@@ -264,21 +263,26 @@ async def asyncio(
 ) -> Optional[Union[Any, WorkitemsListGetResponse]]:
     """Returns a list of instances.
 
-    Args:
-        project_id (str):
-        fields (Union[Unset, None, SparseFields]):
-        include (Union[Unset, None, str]):
-        pagesize (Union[Unset, None, int]):
-        pagenumber (Union[Unset, None, int]):
-        query (Union[Unset, None, str]):
-        sort (Union[Unset, None, str]):
+    Parameters
+    ----------
+    project_id : str
+    fields : Union[Unset, None, SparseFields]
+    include : Union[Unset, None, str]
+    pagesize : Union[Unset, None, int]
+    pagenumber : Union[Unset, None, int]
+    query : Union[Unset, None, str]
+    sort : Union[Unset, None, str]
 
-    Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-        httpx.TimeoutException: If the request takes longer than Client.timeout.
+    Raises
+    ------
+    errors.UnexpectedStatus:
+        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+    httpx.TimeoutException:
+        If the request takes longer than Client.timeout.
 
-    Returns:
-        Union[Any, WorkitemsListGetResponse]
+    Returns
+    -------
+    Union[Any, WorkitemsListGetResponse]
     """
 
     return (

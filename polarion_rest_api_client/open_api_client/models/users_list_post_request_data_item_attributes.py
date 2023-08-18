@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -16,16 +17,17 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="UsersListPostRequestDataItemAttributes")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class UsersListPostRequestDataItemAttributes:
     """
-    Attributes:
-        id (str):  Example: MyUserId.
-        description (Union[Unset, UsersListPostRequestDataItemAttributesDescription]):
-        disabled_notifications (Union[Unset, bool]):
-        email (Union[Unset, str]):  Example: Email.
-        initials (Union[Unset, str]):  Example: Initials.
-        name (Union[Unset, str]):  Example: Name.
+    Attributes
+    ----------
+    id : str
+    description : Union[Unset, UsersListPostRequestDataItemAttributesDescription]
+    disabled_notifications : Union[Unset, bool]
+    email : Union[Unset, str]
+    initials : Union[Unset, str]
+    name : Union[Unset, str]
     """
 
     id: str
@@ -36,7 +38,9 @@ class UsersListPostRequestDataItemAttributes:
     email: Union[Unset, str] = UNSET
     initials: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id

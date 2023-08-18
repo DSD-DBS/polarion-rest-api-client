@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.globalroles_single_get_response_data_type import (
     GlobalrolesSingleGetResponseDataType,
@@ -25,15 +26,16 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="GlobalrolesSingleGetResponseData")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class GlobalrolesSingleGetResponseData:
     """
-    Attributes:
-        type (Union[Unset, GlobalrolesSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyRoleId.
-        relationships (Union[Unset, GlobalrolesSingleGetResponseDataRelationships]):
-        meta (Union[Unset, GlobalrolesSingleGetResponseDataMeta]):
-        links (Union[Unset, GlobalrolesSingleGetResponseDataLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, GlobalrolesSingleGetResponseDataType]
+    id : Union[Unset, str]
+    relationships : Union[Unset, GlobalrolesSingleGetResponseDataRelationships]
+    meta : Union[Unset, GlobalrolesSingleGetResponseDataMeta]
+    links : Union[Unset, GlobalrolesSingleGetResponseDataLinks]
     """
 
     type: Union[Unset, GlobalrolesSingleGetResponseDataType] = UNSET
@@ -43,7 +45,9 @@ class GlobalrolesSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "GlobalrolesSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "GlobalrolesSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

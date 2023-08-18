@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.document_comments_list_post_response_data_item_type import (
     DocumentCommentsListPostResponseDataItemType,
@@ -19,13 +20,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentCommentsListPostResponseDataItem")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentCommentsListPostResponseDataItem:
     """
-    Attributes:
-        type (Union[Unset, DocumentCommentsListPostResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/MyCommentId.
-        links (Union[Unset, DocumentCommentsListPostResponseDataItemLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentCommentsListPostResponseDataItemType]
+    id : Union[Unset, str]
+    links : Union[Unset, DocumentCommentsListPostResponseDataItemLinks]
     """
 
     type: Union[Unset, DocumentCommentsListPostResponseDataItemType] = UNSET
@@ -33,7 +35,9 @@ class DocumentCommentsListPostResponseDataItem:
     links: Union[
         Unset, "DocumentCommentsListPostResponseDataItemLinks"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

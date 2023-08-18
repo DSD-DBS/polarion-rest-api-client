@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.document_attachments_list_get_response_data_item_type import (
     DocumentAttachmentsListGetResponseDataItemType,
@@ -28,17 +29,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentAttachmentsListGetResponseDataItem")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentAttachmentsListGetResponseDataItem:
     """
-    Attributes:
-        type (Union[Unset, DocumentAttachmentsListGetResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/MyAttachmentId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, DocumentAttachmentsListGetResponseDataItemAttributes]):
-        relationships (Union[Unset, DocumentAttachmentsListGetResponseDataItemRelationships]):
-        meta (Union[Unset, DocumentAttachmentsListGetResponseDataItemMeta]):
-        links (Union[Unset, DocumentAttachmentsListGetResponseDataItemLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentAttachmentsListGetResponseDataItemType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, DocumentAttachmentsListGetResponseDataItemAttributes]
+    relationships : Union[Unset, DocumentAttachmentsListGetResponseDataItemRelationships]
+    meta : Union[Unset, DocumentAttachmentsListGetResponseDataItemMeta]
+    links : Union[Unset, DocumentAttachmentsListGetResponseDataItemLinks]
     """
 
     type: Union[Unset, DocumentAttachmentsListGetResponseDataItemType] = UNSET
@@ -56,7 +58,9 @@ class DocumentAttachmentsListGetResponseDataItem:
     links: Union[
         Unset, "DocumentAttachmentsListGetResponseDataItemLinks"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

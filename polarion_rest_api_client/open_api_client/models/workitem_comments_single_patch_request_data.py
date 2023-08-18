@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.workitem_comments_single_patch_request_data_type import (
     WorkitemCommentsSinglePatchRequestDataType,
@@ -19,13 +20,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WorkitemCommentsSinglePatchRequestData")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemCommentsSinglePatchRequestData:
     """
-    Attributes:
-        type (Union[Unset, WorkitemCommentsSinglePatchRequestDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyCommentId.
-        attributes (Union[Unset, WorkitemCommentsSinglePatchRequestDataAttributes]):
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemCommentsSinglePatchRequestDataType]
+    id : Union[Unset, str]
+    attributes : Union[Unset, WorkitemCommentsSinglePatchRequestDataAttributes]
     """
 
     type: Union[Unset, WorkitemCommentsSinglePatchRequestDataType] = UNSET
@@ -33,7 +35,9 @@ class WorkitemCommentsSinglePatchRequestData:
     attributes: Union[
         Unset, "WorkitemCommentsSinglePatchRequestDataAttributes"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

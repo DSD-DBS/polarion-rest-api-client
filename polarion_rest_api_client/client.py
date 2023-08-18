@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import random
 import time
 import typing as t
@@ -87,6 +88,7 @@ class OpenAPIPolarionProjectClient(
         batch_size: int = ...,
         page_size: int = ...,
         max_content_size: int = ...,
+        httpx_args: t.Optional[dict[str, t.Any]] = ...,
     ):
         ...
 
@@ -101,6 +103,7 @@ class OpenAPIPolarionProjectClient(
         batch_size: int = ...,
         page_size: int = ...,
         max_content_size: int = ...,
+        httpx_args: t.Optional[dict[str, t.Any]] = ...,
     ):
         ...
 
@@ -115,6 +118,7 @@ class OpenAPIPolarionProjectClient(
         batch_size: int = 100,
         page_size: int = 100,
         max_content_size: int = 2 * 1024**2,
+        httpx_args: t.Optional[dict[str, t.Any]] = None,
     ):
         """Initialize the client for project and endpoint using a token.
 
@@ -136,6 +140,8 @@ class OpenAPIPolarionProjectClient(
             Default size of a page when getting items from the API.
         max_content_size : int, default 2 * 1024**2
             Maximum content-length of the API (default: 2MB).
+        httpx_args: t.Optional[dict[str, t.Any]], default None
+            Additional parameters, which will be passed to the httpx client.
         """
         super().__init__(
             project_id,
@@ -144,8 +150,15 @@ class OpenAPIPolarionProjectClient(
             batch_size,
             page_size,
         )
+
+        if httpx_args is None:
+            httpx_args = {}
+
+        if "proxies" not in httpx_args:
+            httpx_args["proxies"] = os.getenv("PROXIES")
+
         self.client = oa_client.AuthenticatedClient(
-            polarion_api_endpoint, polarion_access_token
+            polarion_api_endpoint, polarion_access_token, httpx_args=httpx_args
         )
         self._batch_size = batch_size
         self._page_size = page_size

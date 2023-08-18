@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.pages_single_patch_request_data_type import (
     PagesSinglePatchRequestDataType,
@@ -19,19 +20,22 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="PagesSinglePatchRequestData")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class PagesSinglePatchRequestData:
     """
-    Attributes:
-        type (Union[Unset, PagesSinglePatchRequestDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyRichPageId.
-        attributes (Union[Unset, PagesSinglePatchRequestDataAttributes]):
+    Attributes
+    ----------
+    type : Union[Unset, PagesSinglePatchRequestDataType]
+    id : Union[Unset, str]
+    attributes : Union[Unset, PagesSinglePatchRequestDataAttributes]
     """
 
     type: Union[Unset, PagesSinglePatchRequestDataType] = UNSET
     id: Union[Unset, str] = UNSET
     attributes: Union[Unset, "PagesSinglePatchRequestDataAttributes"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

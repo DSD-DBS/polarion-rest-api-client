@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -13,17 +14,20 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentsSingleGetResponseDataAttributesRenderingLayoutsItemPropertiesItem:
     """
-    Attributes:
-        key (Union[Unset, str]):  Example: fieldsAtStart.
-        value (Union[Unset, str]):  Example: id.
+    Attributes
+    ----------
+    key : Union[Unset, str]
+    value : Union[Unset, str]
     """
 
     key: Union[Unset, str] = UNSET
     value: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         key = self.key

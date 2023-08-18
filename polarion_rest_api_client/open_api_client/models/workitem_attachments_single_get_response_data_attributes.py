@@ -4,7 +4,8 @@
 import datetime
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
@@ -12,15 +13,16 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="WorkitemAttachmentsSingleGetResponseDataAttributes")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemAttachmentsSingleGetResponseDataAttributes:
     """
-    Attributes:
-        file_name (Union[Unset, str]):  Example: File Name.
-        id (Union[Unset, str]):  Example: MyAttachmentId.
-        length (Union[Unset, int]):
-        title (Union[Unset, str]):  Example: Title.
-        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    Attributes
+    ----------
+    file_name : Union[Unset, str]
+    id : Union[Unset, str]
+    length : Union[Unset, int]
+    title : Union[Unset, str]
+    updated : Union[Unset, datetime.datetime]
     """
 
     file_name: Union[Unset, str] = UNSET
@@ -28,7 +30,9 @@ class WorkitemAttachmentsSingleGetResponseDataAttributes:
     length: Union[Unset, int] = UNSET
     title: Union[Unset, str] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         file_name = self.file_name

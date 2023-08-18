@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.workitems_list_delete_request_data_item_type import (
     WorkitemsListDeleteRequestDataItemType,
@@ -13,17 +14,20 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="WorkitemsListDeleteRequestDataItem")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WorkitemsListDeleteRequestDataItem:
     """
-    Attributes:
-        type (Union[Unset, WorkitemsListDeleteRequestDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId.
+    Attributes
+    ----------
+    type : Union[Unset, WorkitemsListDeleteRequestDataItemType]
+    id : Union[Unset, str]
     """
 
     type: Union[Unset, WorkitemsListDeleteRequestDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

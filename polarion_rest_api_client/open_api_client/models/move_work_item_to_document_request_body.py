@@ -3,26 +3,30 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="MoveWorkItemToDocumentRequestBody")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class MoveWorkItemToDocumentRequestBody:
     """
-    Attributes:
-        target_document (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
-        previous_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
-        next_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+    Attributes
+    ----------
+    target_document : Union[Unset, str]
+    previous_part : Union[Unset, str]
+    next_part : Union[Unset, str]
     """
 
     target_document: Union[Unset, str] = UNSET
     previous_part: Union[Unset, str] = UNSET
     next_part: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         target_document = self.target_document

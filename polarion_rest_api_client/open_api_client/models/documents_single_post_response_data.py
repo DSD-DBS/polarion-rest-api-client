@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.documents_single_post_response_data_type import (
     DocumentsSinglePostResponseDataType,
@@ -19,13 +20,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentsSinglePostResponseData")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentsSinglePostResponseData:
     """
-    Attributes:
-        type (Union[Unset, DocumentsSinglePostResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
-        attributes (Union[Unset, DocumentsSinglePostResponseDataAttributes]):
+    Attributes
+    ----------
+    type : Union[Unset, DocumentsSinglePostResponseDataType]
+    id : Union[Unset, str]
+    attributes : Union[Unset, DocumentsSinglePostResponseDataAttributes]
     """
 
     type: Union[Unset, DocumentsSinglePostResponseDataType] = UNSET
@@ -33,7 +35,9 @@ class DocumentsSinglePostResponseData:
     attributes: Union[
         Unset, "DocumentsSinglePostResponseDataAttributes"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

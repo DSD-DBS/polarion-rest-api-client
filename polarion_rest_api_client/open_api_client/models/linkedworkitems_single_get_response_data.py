@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.linkedworkitems_single_get_response_data_type import (
     LinkedworkitemsSingleGetResponseDataType,
@@ -28,17 +29,18 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="LinkedworkitemsSingleGetResponseData")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class LinkedworkitemsSingleGetResponseData:
     """
-    Attributes:
-        type (Union[Unset, LinkedworkitemsSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, LinkedworkitemsSingleGetResponseDataAttributes]):
-        relationships (Union[Unset, LinkedworkitemsSingleGetResponseDataRelationships]):
-        meta (Union[Unset, LinkedworkitemsSingleGetResponseDataMeta]):
-        links (Union[Unset, LinkedworkitemsSingleGetResponseDataLinks]):
+    Attributes
+    ----------
+    type : Union[Unset, LinkedworkitemsSingleGetResponseDataType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
+    attributes : Union[Unset, LinkedworkitemsSingleGetResponseDataAttributes]
+    relationships : Union[Unset, LinkedworkitemsSingleGetResponseDataRelationships]
+    meta : Union[Unset, LinkedworkitemsSingleGetResponseDataMeta]
+    links : Union[Unset, LinkedworkitemsSingleGetResponseDataLinks]
     """
 
     type: Union[Unset, LinkedworkitemsSingleGetResponseDataType] = UNSET
@@ -52,7 +54,9 @@ class LinkedworkitemsSingleGetResponseData:
     ] = UNSET
     meta: Union[Unset, "LinkedworkitemsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "LinkedworkitemsSingleGetResponseDataLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

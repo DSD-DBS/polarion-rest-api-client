@@ -3,23 +3,29 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="BranchDocumentRequestBody")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class BranchDocumentRequestBody:
     """
-    Attributes:
-        target_project_id (Union[Unset, str]): Project where new document will be created. Example: MyProjectId.
-        target_space_id (Union[Unset, str]): Space where new document will be created. Example: MySpaceId.
-        target_document_name (Union[Unset, str]): Name for new document. Example: MyDocumentId.
-        copy_workflow_status_and_signatures (Union[Unset, bool]): Specifies that workflow status and signatures should
-            be copied to the branched document.
-        query (Union[Unset, str]): Specifies optional filtering query. Example: status:open.
+    Attributes
+    ----------
+    target_project_id : Union[Unset, str]
+        Project where new document will be created.
+    target_space_id : Union[Unset, str]
+        Space where new document will be created.
+    target_document_name : Union[Unset, str]
+        Name for new document.
+    copy_workflow_status_and_signatures : Union[Unset, bool]
+        Specifies that workflow status and signatures should be copied to the branched document.
+    query : Union[Unset, str]
+        Specifies optional filtering query.
     """
 
     target_project_id: Union[Unset, str] = UNSET
@@ -27,7 +33,9 @@ class BranchDocumentRequestBody:
     target_document_name: Union[Unset, str] = UNSET
     copy_workflow_status_and_signatures: Union[Unset, bool] = UNSET
     query: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         target_project_id = self.target_project_id

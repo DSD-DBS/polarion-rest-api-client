@@ -5,7 +5,8 @@ import json
 from io import BytesIO
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, File, FileJsonType, Unset
 
@@ -18,17 +19,21 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="PatchDocumentAttachmentsRequestBody")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class PatchDocumentAttachmentsRequestBody:
     """
-    Attributes:
-        resource (DocumentAttachmentsSinglePatchRequest):
-        content (Union[Unset, File]): attachments content
+    Attributes
+    ----------
+    resource : DocumentAttachmentsSinglePatchRequest
+    content : Union[Unset, File]
+        attachments content
     """
 
     resource: "DocumentAttachmentsSinglePatchRequest"
     content: Union[Unset, File] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         resource = self.resource.to_dict()

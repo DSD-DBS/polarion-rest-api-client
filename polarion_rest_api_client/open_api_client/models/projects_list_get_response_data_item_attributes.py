@@ -4,7 +4,8 @@
 import datetime
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
@@ -18,20 +19,21 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="ProjectsListGetResponseDataItemAttributes")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ProjectsListGetResponseDataItemAttributes:
     """
-    Attributes:
-        active (Union[Unset, bool]):
-        color (Union[Unset, str]):  Example: Color.
-        description (Union[Unset, ProjectsListGetResponseDataItemAttributesDescription]):
-        finish (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        icon (Union[Unset, str]):  Example: Icon.
-        id (Union[Unset, str]):  Example: MyProjectId.
-        lock_work_records_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        name (Union[Unset, str]):  Example: Name.
-        start (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        tracker_prefix (Union[Unset, str]):  Example: Tracker Prefix.
+    Attributes
+    ----------
+    active : Union[Unset, bool]
+    color : Union[Unset, str]
+    description : Union[Unset, ProjectsListGetResponseDataItemAttributesDescription]
+    finish : Union[Unset, datetime.date]
+    icon : Union[Unset, str]
+    id : Union[Unset, str]
+    lock_work_records_date : Union[Unset, datetime.date]
+    name : Union[Unset, str]
+    start : Union[Unset, datetime.date]
+    tracker_prefix : Union[Unset, str]
     """
 
     active: Union[Unset, bool] = UNSET
@@ -46,7 +48,9 @@ class ProjectsListGetResponseDataItemAttributes:
     name: Union[Unset, str] = UNSET
     start: Union[Unset, datetime.date] = UNSET
     tracker_prefix: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         active = self.active

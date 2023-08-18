@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -22,15 +23,16 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentAttachmentsSingleGetResponse")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentAttachmentsSingleGetResponse:
     """
-    Attributes:
-        data (Union[Unset, DocumentAttachmentsSingleGetResponseData]):
-        included (Union[Unset, List['DocumentAttachmentsSingleGetResponseIncludedItem']]): Related entities might be
-            returned, see <a href="https://docs.sw.siemens.com/en-
-            US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
-        links (Union[Unset, DocumentAttachmentsSingleGetResponseLinks]):
+    Attributes
+    ----------
+    data : Union[Unset, DocumentAttachmentsSingleGetResponseData]
+    included : Union[Unset, List['DocumentAttachmentsSingleGetResponseIncludedItem']]
+        Related entities might be returned, see <a href="https://docs.sw.siemens.com/en-
+        US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
+    links : Union[Unset, DocumentAttachmentsSingleGetResponseLinks]
     """
 
     data: Union[Unset, "DocumentAttachmentsSingleGetResponseData"] = UNSET
@@ -38,7 +40,9 @@ class DocumentAttachmentsSingleGetResponse:
         Unset, List["DocumentAttachmentsSingleGetResponseIncludedItem"]
     ] = UNSET
     links: Union[Unset, "DocumentAttachmentsSingleGetResponseLinks"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         data: Union[Unset, Dict[str, Any]] = UNSET

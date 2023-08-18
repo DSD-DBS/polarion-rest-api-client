@@ -3,7 +3,8 @@
 
 from typing import Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..models.documents_single_get_response_data_relationships_attachments_data_item_type import (
     DocumentsSingleGetResponseDataRelationshipsAttachmentsDataItemType,
@@ -15,13 +16,14 @@ T = TypeVar(
 )
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentsSingleGetResponseDataRelationshipsAttachmentsDataItem:
     """
-    Attributes:
-        type (Union[Unset, DocumentsSingleGetResponseDataRelationshipsAttachmentsDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/MyAttachmentId.
-        revision (Union[Unset, str]):  Example: 1234.
+    Attributes
+    ----------
+    type : Union[Unset, DocumentsSingleGetResponseDataRelationshipsAttachmentsDataItemType]
+    id : Union[Unset, str]
+    revision : Union[Unset, str]
     """
 
     type: Union[
@@ -30,7 +32,9 @@ class DocumentsSingleGetResponseDataRelationshipsAttachmentsDataItem:
     ] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET

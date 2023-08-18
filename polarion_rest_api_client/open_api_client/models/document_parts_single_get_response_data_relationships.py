@@ -3,7 +3,8 @@
 
 from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
-import attr
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
@@ -22,13 +23,14 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="DocumentPartsSingleGetResponseDataRelationships")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class DocumentPartsSingleGetResponseDataRelationships:
     """
-    Attributes:
-        next_part (Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsNextPart]):
-        previous_part (Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsPreviousPart]):
-        work_item (Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsWorkItem]):
+    Attributes
+    ----------
+    next_part : Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsNextPart]
+    previous_part : Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsPreviousPart]
+    work_item : Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsWorkItem]
     """
 
     next_part: Union[
@@ -40,7 +42,9 @@ class DocumentPartsSingleGetResponseDataRelationships:
     work_item: Union[
         Unset, "DocumentPartsSingleGetResponseDataRelationshipsWorkItem"
     ] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         next_part: Union[Unset, Dict[str, Any]] = UNSET
