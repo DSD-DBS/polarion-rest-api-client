@@ -22,6 +22,12 @@ from polarion_rest_api_client.open_api_client.api.linked_work_items import (
     post_linked_work_items,
 )
 from polarion_rest_api_client.open_api_client.api.projects import get_project
+from polarion_rest_api_client.open_api_client.api.work_item_attachments import (
+    delete_work_item_attachment,
+    get_work_item_attachments,
+    patch_work_item_attachment,
+    post_work_item_attachments,
+)
 from polarion_rest_api_client.open_api_client.api.work_items import (
     delete_work_items,
     get_work_items,
@@ -288,6 +294,70 @@ class OpenAPIPolarionProjectClient(
             return False
         return True
 
+    def get_work_item_attachments(
+        self,
+        work_item_id: str,
+        fields: dict[str, str] | None = None,
+        page_size: int = 100,
+        page_number: int = 1,
+        retry: bool = True,
+    ) -> tuple[list[dm.WorkItemAttachment], bool]:
+        """Return the attachments for a given work item on a defined page.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+        if fields is None:
+            fields = self.default_fields.workitem_attachments
+
+        sparse_fields = _build_sparse_fields(fields)
+        response = get_work_item_attachments.sync_detailed(
+            self.project_id,
+            work_item_id=work_item_id,
+            client=self.client,
+            fields=sparse_fields,
+            pagesize=page_size,
+            pagenumber=page_number,
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.get_work_item_attachments(
+                work_item_id, fields, page_size, page_number, False
+            )
+
+        parsed_response = response.parsed
+
+        work_item_attachments: list[dm.WorkItemAttachment] = []
+
+        next_page = False
+
+        if (
+            isinstance(
+                parsed_response, api_models.WorkitemAttachmentsListGetResponse
+            )
+            and parsed_response.data
+        ):
+            for attachment in parsed_response.data:
+                assert attachment.attributes
+                assert isinstance(attachment.attributes.id, str)
+
+                work_item_attachments.append(
+                    dm.WorkItemAttachment(
+                        work_item_id,
+                        attachment.attributes.id,
+                        attachment.attributes.additional_properties or {},
+                    )
+                )
+
+            next_page = isinstance(
+                parsed_response.links,
+                api_models.WorkitemsListGetResponseLinks,
+            ) and bool(parsed_response.links.next_)
+
+        return work_item_attachments, next_page
+
     def get_work_items(
         self,
         query: str,
@@ -303,7 +373,7 @@ class OpenAPIPolarionProjectClient(
         Polarion API documentation to get certain fields.
         """
         if fields is None:
-            fields = self.default_fields.workitems
+            fields = self.default_fields.all_types
 
         sparse_fields = _build_sparse_fields(fields)
         response = get_work_items.sync_detailed(
@@ -336,9 +406,49 @@ class OpenAPIPolarionProjectClient(
                 if not getattr(work_item.meta, "errors", []):
                     assert work_item.attributes
                     assert isinstance(work_item.id, str)
+                    work_item_id = work_item.id.split("/")[-1]
+
+                    work_item_links = []
+                    work_item_attachments = []
+
+                    if (
+                        work_item.relationships
+                        and work_item.relationships.linked_work_items
+                        and work_item.relationships.linked_work_items.data
+                    ):
+                        for (
+                            link
+                        ) in work_item.relationships.linked_work_items.data:
+                            work_item_links.append(
+                                self._parse_work_item_link(
+                                    link.id,
+                                    link.additional_properties.get(
+                                        "suspect", False
+                                    ),
+                                    work_item_id,
+                                )
+                            )
+
+                    if (
+                        work_item.relationships
+                        and work_item.relationships.attachments
+                        and work_item.relationships.attachments.data
+                    ):
+                        for (
+                            attachment
+                        ) in work_item.relationships.attachments.data:
+                            assert attachment.id
+                            work_item_attachments.append(
+                                dm.WorkItemAttachment(
+                                    work_item_id,
+                                    attachment.id.split("/")[-1],
+                                    attachment.additional_properties or {},
+                                )
+                            )
+
                     work_items.append(
                         self._work_item(
-                            work_item.id.split("/")[-1],
+                            work_item_id,
                             unset_str_builder(work_item.attributes.title),
                             unset_str_builder(
                                 work_item.attributes.description.type
@@ -353,6 +463,8 @@ class OpenAPIPolarionProjectClient(
                             unset_str_builder(work_item.attributes.type),
                             unset_str_builder(work_item.attributes.status),
                             work_item.attributes.additional_properties,
+                            work_item_links,
+                            work_item_attachments,
                         )
                     )
             next_page = isinstance(
@@ -492,20 +604,10 @@ class OpenAPIPolarionProjectClient(
                     link.attributes,
                     api_models.LinkedworkitemsListGetResponseDataItemAttributes,  # pylint: disable=line-too-long
                 )
-                info = link.id.split("/")
-                assert len(info) == 5
-                role_id, target_project_id, linked_work_item_id = info[2:]
-                suspect = link.attributes.suspect
-                if isinstance(suspect, oa_types.Unset):
-                    suspect = False
 
                 work_item_links.append(
-                    dm.WorkItemLink(
-                        work_item_id,
-                        linked_work_item_id,
-                        role_id,
-                        suspect,
-                        target_project_id,
+                    self._parse_work_item_link(
+                        link.id, link.attributes.suspect, work_item_id
                     )
                 )
 
@@ -515,6 +617,21 @@ class OpenAPIPolarionProjectClient(
             ) and bool(linked_work_item_response.links.next_)
 
         return work_item_links, next_page
+
+    def _parse_work_item_link(self, link_id, suspect, work_item_id):
+        info = link_id.split("/")
+        assert len(info) == 5
+        role_id, target_project_id, linked_work_item_id = info[2:]
+        if isinstance(suspect, oa_types.Unset):
+            suspect = False
+        work_item_link = dm.WorkItemLink(
+            work_item_id,
+            linked_work_item_id,
+            role_id,
+            suspect,
+            target_project_id,
+        )
+        return work_item_link
 
     def _create_work_item_links(
         self, work_item_links: list[dm.WorkItemLink], retry: bool = True

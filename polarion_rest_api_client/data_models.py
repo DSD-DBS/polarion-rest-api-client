@@ -17,6 +17,8 @@ class WorkItem:
     type: str | None = None
     status: str | None = None
     additional_attributes: dict[str, t.Any] = {}
+    linked_work_items: list[WorkItemLink] = []
+    attachments: list[WorkItemAttachment] = []
 
     def __init__(
         self,
@@ -27,6 +29,8 @@ class WorkItem:
         type: str | None = None,
         status: str | None = None,
         additional_attributes: dict[str, t.Any] | None = None,
+        linked_work_items: list[WorkItemLink] | None = None,
+        attachments: list[WorkItemAttachment] | None = None,
         **kwargs,
     ):
         self.id = id
@@ -36,6 +40,8 @@ class WorkItem:
         self.type = type
         self.status = status
         self.additional_attributes = (additional_attributes or {}) | kwargs
+        self.linked_work_items = linked_work_items or []
+        self.attachments = attachments or []
 
     def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
@@ -74,3 +80,13 @@ class WorkItemLink:
     secondary_work_item_project: str | None = (
         None  # Use to set differing project
     )
+
+
+@dataclasses.dataclass
+class WorkItemAttachment:
+    """An Attachment of a WorkItem."""
+
+    work_item_id: str
+    id: str
+    additional_properties: dict = dataclasses.field(default_factory=dict)
+    content: bytes | None = None

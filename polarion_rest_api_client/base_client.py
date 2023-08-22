@@ -16,6 +16,7 @@ class DefaultFields:
 
     _workitems: str = "@basic"
     _linkedworkitems: str = "id,role,suspect"
+    _workitem_attachments: str = "@basic"
 
     @property
     def workitems(self):
@@ -34,6 +35,22 @@ class DefaultFields:
     @linkedworkitems.setter
     def linkedworkitems(self, value):
         self._linkedworkitems = value
+
+    @property
+    def workitem_attachments(self):
+        """Return the fields dict for workitem_attachments."""
+        return {"workitem_attachments": self._workitem_attachments}
+
+    @workitem_attachments.setter
+    def workitem_attachments(self, value):
+        self._workitem_attachments = value
+
+    @property
+    def all_types(self):
+        """Return all fields dicts merged together."""
+        return (
+            self.workitem_attachments | self.workitems | self.linkedworkitems
+        )
 
 
 class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
@@ -79,6 +96,37 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
             )
             items += _items
         return items
+
+    def get_all_work_item_attachments(
+        self, work_item_id: str, fields: dict[str, str] | None = None
+    ) -> list[dm.WorkItemAttachment]:
+        """Get all work item attachments for a given work item.
+
+        Will handle pagination automatically. Define a fields dictionary
+        as described in the Polarion API documentation to get certain
+        fields.
+        """
+        return self._request_all_items(
+            self.get_work_item_attachments,
+            fields=fields,
+            work_item_id=work_item_id,
+        )
+
+    @abc.abstractmethod
+    def get_work_item_attachments(
+        self,
+        work_item_id: str,
+        fields: dict[str, str] | None = None,
+        page_size: int = 100,
+        page_number: int = 1,
+    ) -> tuple[list[dm.WorkItemAttachment], bool]:
+        """Return the attachments for a given work item on a defined page.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+        raise NotImplementedError
 
     def get_all_work_items(
         self, query: str, fields: dict[str, str] | None = None
