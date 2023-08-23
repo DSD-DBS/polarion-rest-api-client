@@ -57,6 +57,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
     """An abstract base class for a Polarion API client."""
 
     delete_polarion_work_items: bool
+    add_work_item_checksum: bool
     project_id: str
     delete_status: str = "deleted"
     default_fields: DefaultFields
@@ -71,6 +72,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         custom_work_item: type[WorkItemType],
         batch_size: int = 5,
         page_size: int = 100,
+        add_work_item_checksum: bool = False,
     ):
         self.project_id = project_id
         self.delete_polarion_work_items = delete_polarion_work_items
@@ -78,6 +80,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         self._batch_size = batch_size
         self._page_size = page_size
         self._work_item = custom_work_item
+        self.add_work_item_checksum = add_work_item_checksum
 
     @abc.abstractmethod
     def project_exists(self) -> bool:

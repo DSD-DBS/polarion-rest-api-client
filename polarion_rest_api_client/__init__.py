@@ -10,7 +10,11 @@ except metadata.PackageNotFoundError:  # pragma: no cover
 del metadata
 
 from polarion_rest_api_client.client import OpenAPIPolarionProjectClient
-from polarion_rest_api_client.data_models import WorkItem, WorkItemLink
+from polarion_rest_api_client.data_models import (
+    WorkItem,
+    WorkItemAttachment,
+    WorkItemLink,
+)
 from polarion_rest_api_client.errors import (
     PolarionApiBaseException,
     PolarionApiException,

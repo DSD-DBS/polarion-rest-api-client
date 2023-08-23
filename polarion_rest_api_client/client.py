@@ -94,6 +94,7 @@ class OpenAPIPolarionProjectClient(
         custom_work_item: type[base_client.WorkItemType],
         batch_size: int = ...,
         page_size: int = ...,
+        add_work_item_checksum: bool = False,
         max_content_size: int = ...,
         httpx_args: t.Optional[dict[str, t.Any]] = ...,
     ):
@@ -109,6 +110,7 @@ class OpenAPIPolarionProjectClient(
         *,
         batch_size: int = ...,
         page_size: int = ...,
+        add_work_item_checksum: bool = False,
         max_content_size: int = ...,
         httpx_args: t.Optional[dict[str, t.Any]] = ...,
     ):
@@ -124,6 +126,7 @@ class OpenAPIPolarionProjectClient(
         custom_work_item=dm.WorkItem,
         batch_size: int = 100,
         page_size: int = 100,
+        add_work_item_checksum: bool = False,
         max_content_size: int = 2 * 1024**2,
         httpx_args: t.Optional[dict[str, t.Any]] = None,
     ):
@@ -145,6 +148,8 @@ class OpenAPIPolarionProjectClient(
             Maximum amount of items created in one POST request.
         page_size : int, default 100
             Default size of a page when getting items from the API.
+        add_work_item_checksum : bool, default False
+            Flag whether post WorkItem checksums.
         max_content_size : int, default 2 * 1024**2
             Maximum content-length of the API (default: 2MB).
         httpx_args: t.Optional[dict[str, t.Any]], default None
@@ -156,6 +161,7 @@ class OpenAPIPolarionProjectClient(
             custom_work_item,
             batch_size,
             page_size,
+            add_work_item_checksum,
         )
 
         if httpx_args is None:
@@ -234,6 +240,11 @@ class OpenAPIPolarionProjectClient(
 
         attrs.additional_properties.update(work_item.additional_attributes)
 
+        if self.add_work_item_checksum:
+            attrs.additional_properties[
+                "checksum"
+            ] = work_item.get_current_checksum()
+
         return api_models.WorkitemsListPostRequestDataItem(
             api_models.WorkitemsListPostRequestDataItemType.WORKITEMS, attrs
         )
@@ -258,6 +269,11 @@ class OpenAPIPolarionProjectClient(
             attrs.status = work_item.status
 
         attrs.additional_properties.update(work_item.additional_attributes)
+
+        if self.add_work_item_checksum:
+            attrs.additional_properties[
+                "checksum"
+            ] = work_item.get_current_checksum()
 
         return api_models.WorkitemsSinglePatchRequest(
             api_models.WorkitemsSinglePatchRequestData(
@@ -514,7 +530,7 @@ class OpenAPIPolarionProjectClient(
         Polarion API documentation to get certain fields.
         """
         if fields is None:
-            fields = self.default_fields.all_types
+            fields = self.default_fields.workitems
 
         sparse_fields = _build_sparse_fields(fields)
         response = get_work_items.sync_detailed(

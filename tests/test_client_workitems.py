@@ -88,6 +88,16 @@ def test_get_all_work_items_single_page(
         "task",
         "open",
         {"capella_uuid": "asdfgh"},
+        [
+            polarion_api.WorkItemLink(
+                "MyWorkItemId2",
+                "MyLinkedWorkItemId",
+                "parent",
+                False,
+                "MyProjectId",
+            )
+        ],
+        [polarion_api.WorkItemAttachment("MyWorkItemId2", "MyAttachmentId")],
     )
 
 

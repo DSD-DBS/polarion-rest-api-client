@@ -3,7 +3,10 @@
 """Data model classes returned by the client."""
 from __future__ import annotations
 
+import copy
 import dataclasses
+import hashlib
+import json
 import typing as t
 
 
@@ -19,6 +22,7 @@ class WorkItem:
     additional_attributes: dict[str, t.Any] = {}
     linked_work_items: list[WorkItemLink] = []
     attachments: list[WorkItemAttachment] = []
+    _check_sum: str | None
 
     def __init__(
         self,
@@ -40,6 +44,10 @@ class WorkItem:
         self.type = type
         self.status = status
         self.additional_attributes = (additional_attributes or {}) | kwargs
+        if "checksum" in self.additional_attributes:
+            self._check_sum = self.additional_attributes["checksum"]
+            del self.additional_attributes["checksum"]
+
         self.linked_work_items = linked_work_items or []
         self.attachments = attachments or []
 
@@ -63,6 +71,36 @@ class WorkItem:
         return {
             k: v for k, v in self.__dict__.items() if k in dir(WorkItem)
         } == {k: v for k, v in other.__dict__.items() if k in dir(WorkItem)}
+
+    def to_dict(self) -> dict[str, t.Any]:
+        """Return the content of the WorkItem as dictionary."""
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description_type": self.description_type,
+            "description": self.description,
+            "type": self.type,
+            "status": self.status,
+            "additional_attributes": copy.deepcopy(self.additional_attributes),
+            "checksum": self._checksum,
+            "linked_work_items": self.linked_work_items,
+            "attachments": self.attachments,
+        }
+
+    def calculate_checksum(self) -> str:
+        """Calculate and return a checksum for this WorkItem.
+
+        In addition, the checksum will be written to self._checksum.
+        """
+        data = self.to_dict()
+        del data["checksum"]
+        converted = json.dumps(data).encode("utf8")
+        self._check_sum = hashlib.sha256(converted).hexdigest()
+        return self._check_sum
+
+    def get_current_checksum(self) -> str | None:
+        """Return the checksum currently set without calculation."""
+        return self._check_sum
 
 
 @dataclasses.dataclass
