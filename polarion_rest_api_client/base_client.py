@@ -113,12 +113,44 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         )
 
     @abc.abstractmethod
+    def delete_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Delete the given work item attachment."""
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def update_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Update the given work item attachment in Polarion."""
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def create_work_item_attachments(
+        self,
+        work_item_attachment: list[dm.WorkItemAttachment],
+        retry: bool = True,
+    ):
+        """Update the given work item attachment in Polarion."""
+        raise NotImplementedError
+
+    def create_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Update the given work item attachment in Polarion."""
+        return self.create_work_item_attachments(
+            [work_item_attachment], retry
+        )[0]
+
+    @abc.abstractmethod
     def get_work_item_attachments(
         self,
         work_item_id: str,
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
+        retry: bool = True,
     ) -> tuple[list[dm.WorkItemAttachment], bool]:
         """Return the attachments for a given work item on a defined page.
 

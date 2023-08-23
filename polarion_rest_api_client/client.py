@@ -3,6 +3,7 @@
 """The actual implementation of the API client using an OpenAPIClient."""
 from __future__ import annotations
 
+import io
 import json
 import logging
 import os
@@ -194,6 +195,16 @@ class OpenAPIPolarionProjectClient(
         except json.JSONDecodeError as e:
             raise unexpected_error() from e
 
+        # This is needed to fix erroneous error responses
+        for er in decoded_content.get("errors", []):
+            delete_keys = []
+            for k, v in er.items():
+                if v is None:
+                    delete_keys.append(k)
+
+            for k in delete_keys:
+                del er[k]
+
         error = api_models.Errors.from_dict(decoded_content)
         if error.errors:
             raise errors.PolarionApiException(
@@ -347,6 +358,7 @@ class OpenAPIPolarionProjectClient(
                     dm.WorkItemAttachment(
                         work_item_id,
                         attachment.attributes.id,
+                        unset_str_builder(attachment.attributes.title),
                         attachment.attributes.additional_properties or {},
                     )
                 )
@@ -357,6 +369,142 @@ class OpenAPIPolarionProjectClient(
             ) and bool(parsed_response.links.next_)
 
         return work_item_attachments, next_page
+
+    def delete_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Delete the given work item attachment."""
+        response = delete_work_item_attachment.sync_detailed(
+            self.project_id,
+            work_item_attachment.work_item_id,
+            work_item_attachment.id,
+            client=self.client,
+        )
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            self.delete_work_item_attachment(work_item_attachment, False)
+
+    def update_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Update the given work item attachment in Polarion."""
+        attributes = (
+            api_models.WorkitemAttachmentsSinglePatchRequestDataAttributes()
+        )
+        if work_item_attachment.title:
+            attributes.title = work_item_attachment.title
+        attributes.additional_properties = (
+            work_item_attachment.additional_properties
+        )
+
+        multipart = api_models.PatchWorkItemAttachmentsRequestBody(
+            api_models.WorkitemAttachmentsSinglePatchRequest(
+                api_models.WorkitemAttachmentsSinglePatchRequestData(
+                    api_models.WorkitemAttachmentsSinglePatchRequestDataType.WORKITEM_ATTACHMENTS,
+                    f"{self.project_id}/{work_item_attachment.work_item_id}/{work_item_attachment.id}",
+                    attributes,
+                )
+            )
+        )
+
+        if work_item_attachment.content_bytes:
+            multipart.content = oa_types.File(
+                io.BytesIO(work_item_attachment.content_bytes),
+                work_item_attachment.file_name,
+                work_item_attachment.mime_type,
+            )
+
+        response = patch_work_item_attachment.sync_detailed(
+            self.project_id,
+            work_item_attachment.work_item_id,
+            work_item_attachment.id,
+            client=self.client,
+            multipart_data=multipart,
+        )
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.update_work_item_attachment(
+                work_item_attachment, False
+            )
+
+    def create_work_item_attachments(
+        self,
+        work_item_attachments: list[dm.WorkItemAttachment],
+        retry: bool = True,
+    ):
+        """Create the given work item attachment in Polarion."""
+        attachment_attributes = []
+        attachment_files = []
+        assert len(work_item_attachments), "No attachments were provided."
+        assert all(
+            [wia.work_item_id == work_item_attachments[0].work_item_id]
+            for wia in work_item_attachments
+        ), "All attachments must belong to the same WorkItem."
+
+        for work_item_attachment in work_item_attachments:
+            assert (
+                work_item_attachment.file_name
+            ), "You have to define a FileName."
+            assert (
+                work_item_attachment.content_bytes
+            ), "You have to provide content bytes."
+            assert (
+                work_item_attachment.mime_type
+            ), "You have to provide a mime_type."
+
+            attributes = api_models.WorkitemAttachmentsListPostRequestDataItemAttributes(
+                file_name=work_item_attachment.file_name
+            )
+            if work_item_attachment.title:
+                attributes.title = work_item_attachment.title
+            attributes.additional_properties = (
+                work_item_attachment.additional_properties
+            )
+
+            attachment_attributes.append(
+                api_models.WorkitemAttachmentsListPostRequestDataItem(
+                    api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,
+                    attributes=attributes,
+                )
+            )
+
+            attachment_files.append(
+                oa_types.File(
+                    io.BytesIO(work_item_attachment.content_bytes),
+                    work_item_attachment.file_name,
+                    work_item_attachment.mime_type,
+                )
+            )
+
+        multipart = api_models.PostWorkItemAttachmentsRequestBody(
+            api_models.WorkitemAttachmentsListPostRequest(
+                attachment_attributes
+            ),
+            attachment_files,
+        )
+
+        response = post_work_item_attachments.sync_detailed(
+            self.project_id,
+            work_item_attachments[0].work_item_id,
+            client=self.client,
+            multipart_data=multipart,
+        )
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.create_work_item_attachments(
+                work_item_attachments, False
+            )
+
+        assert response.parsed and response.parsed.data
+        counter = 0
+        for work_item_attachment_res in response.parsed.data:
+            assert work_item_attachment_res.id
+            work_item_attachments[
+                counter
+            ].id = work_item_attachment_res.id.split("/")[-1]
+            counter += 1
+
+        return work_item_attachments
 
     def get_work_items(
         self,
@@ -442,6 +590,7 @@ class OpenAPIPolarionProjectClient(
                                 dm.WorkItemAttachment(
                                     work_item_id,
                                     attachment.id.split("/")[-1],
+                                    None,  # title isn't provided for some reason
                                     attachment.additional_properties or {},
                                 )
                             )
