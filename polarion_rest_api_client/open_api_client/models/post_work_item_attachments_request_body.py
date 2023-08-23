@@ -63,7 +63,7 @@ class PostWorkItemAttachmentsRequestBody:
             resource = (
                 None,
                 json.dumps(self.resource.to_dict()).encode(),
-                "application/json",
+                "text/plain",
             )
 
         files: Union[Unset, Tuple[None, bytes, str]] = UNSET

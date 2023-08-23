@@ -58,7 +58,7 @@ class PatchDocumentAttachmentsRequestBody:
         resource = (
             None,
             json.dumps(self.resource.to_dict()).encode(),
-            "application/json",
+            "text/plain",
         )
 
         content: Union[Unset, FileJsonType] = UNSET
