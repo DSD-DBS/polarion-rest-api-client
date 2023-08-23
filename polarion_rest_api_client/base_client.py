@@ -132,7 +132,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
     @abc.abstractmethod
     def create_work_item_attachments(
         self,
-        work_item_attachment: list[dm.WorkItemAttachment],
+        work_item_attachments: list[dm.WorkItemAttachment],
         retry: bool = True,
     ):
         """Update the given work item attachment in Polarion."""

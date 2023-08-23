@@ -23,7 +23,7 @@ from polarion_rest_api_client.open_api_client.api.linked_work_items import (
     post_linked_work_items,
 )
 from polarion_rest_api_client.open_api_client.api.projects import get_project
-from polarion_rest_api_client.open_api_client.api.work_item_attachments import (
+from polarion_rest_api_client.open_api_client.api.work_item_attachments import (  # pylint: disable=line-too-long
     delete_work_item_attachment,
     get_work_item_attachments,
     patch_work_item_attachment,
@@ -412,8 +412,8 @@ class OpenAPIPolarionProjectClient(
         multipart = api_models.PatchWorkItemAttachmentsRequestBody(
             api_models.WorkitemAttachmentsSinglePatchRequest(
                 api_models.WorkitemAttachmentsSinglePatchRequestData(
-                    api_models.WorkitemAttachmentsSinglePatchRequestDataType.WORKITEM_ATTACHMENTS,
-                    f"{self.project_id}/{work_item_attachment.work_item_id}/{work_item_attachment.id}",
+                    api_models.WorkitemAttachmentsSinglePatchRequestDataType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
+                    f"{self.project_id}/{work_item_attachment.work_item_id}/{work_item_attachment.id}",  # pylint: disable=line-too-long
                     attributes,
                 )
             )
@@ -435,9 +435,7 @@ class OpenAPIPolarionProjectClient(
         )
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
-            return self.update_work_item_attachment(
-                work_item_attachment, False
-            )
+            self.update_work_item_attachment(work_item_attachment, False)
 
     def create_work_item_attachments(
         self,
@@ -464,7 +462,7 @@ class OpenAPIPolarionProjectClient(
                 work_item_attachment.mime_type
             ), "You have to provide a mime_type."
 
-            attributes = api_models.WorkitemAttachmentsListPostRequestDataItemAttributes(
+            attributes = api_models.WorkitemAttachmentsListPostRequestDataItemAttributes(  # pylint: disable=line-too-long
                 file_name=work_item_attachment.file_name
             )
             if work_item_attachment.title:
@@ -472,7 +470,7 @@ class OpenAPIPolarionProjectClient(
 
             attachment_attributes.append(
                 api_models.WorkitemAttachmentsListPostRequestDataItem(
-                    api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,
+                    api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
                     attributes=attributes,
                 )
             )
@@ -599,7 +597,7 @@ class OpenAPIPolarionProjectClient(
                                 dm.WorkItemAttachment(
                                     work_item_id,
                                     attachment.id.split("/")[-1],
-                                    None,  # title isn't provided for some reason
+                                    None,  # title isn't provided
                                 )
                             )
 
