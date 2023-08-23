@@ -89,7 +89,6 @@ class WorkItemAttachment:
     work_item_id: str
     id: str
     title: str | None = None
-    additional_properties: dict = dataclasses.field(default_factory=dict)
     content_bytes: bytes | None = None
     mime_type: str | None = None
     file_name: str | None = None

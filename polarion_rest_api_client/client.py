@@ -359,7 +359,6 @@ class OpenAPIPolarionProjectClient(
                         work_item_id,
                         attachment.attributes.id,
                         unset_str_builder(attachment.attributes.title),
-                        attachment.attributes.additional_properties or {},
                     )
                 )
 
@@ -393,9 +392,6 @@ class OpenAPIPolarionProjectClient(
         )
         if work_item_attachment.title:
             attributes.title = work_item_attachment.title
-        attributes.additional_properties = (
-            work_item_attachment.additional_properties
-        )
 
         multipart = api_models.PatchWorkItemAttachmentsRequestBody(
             api_models.WorkitemAttachmentsSinglePatchRequest(
@@ -457,9 +453,6 @@ class OpenAPIPolarionProjectClient(
             )
             if work_item_attachment.title:
                 attributes.title = work_item_attachment.title
-            attributes.additional_properties = (
-                work_item_attachment.additional_properties
-            )
 
             attachment_attributes.append(
                 api_models.WorkitemAttachmentsListPostRequestDataItem(
@@ -591,7 +584,6 @@ class OpenAPIPolarionProjectClient(
                                     work_item_id,
                                     attachment.id.split("/")[-1],
                                     None,  # title isn't provided for some reason
-                                    attachment.additional_properties or {},
                                 )
                             )
 
