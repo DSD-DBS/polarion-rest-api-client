@@ -286,6 +286,7 @@ class OpenAPIPolarionProjectClient(
     def _post_work_item_batch(
         self,
         work_item_batch: api_models.WorkitemsListPostRequest,
+        work_item_objs: list[base_client.WorkItemType],
         retry: bool = True,
     ):
         response = post_work_items.sync_detailed(
@@ -293,7 +294,14 @@ class OpenAPIPolarionProjectClient(
         )
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
-            self._post_work_item_batch(work_item_batch, False)
+            self._post_work_item_batch(work_item_batch, work_item_objs, False)
+
+        assert response.parsed and response.parsed.data
+        counter = 0
+        for work_item_res in response.parsed.data:
+            assert work_item_res.id
+            work_item_objs[counter].id = work_item_res.id.split("/")[-1]
+            counter += 1
 
     def _calculate_post_work_item_request_sizes(
         self,
@@ -511,8 +519,6 @@ class OpenAPIPolarionProjectClient(
             ].id = work_item_attachment_res.id.split("/")[-1]
             counter += 1
 
-        return work_item_attachments
-
     def get_work_items(
         self,
         query: str,
@@ -633,6 +639,9 @@ class OpenAPIPolarionProjectClient(
         """Create the given list of work items."""
         current_batch = api_models.WorkitemsListPostRequest([])
         content_size = min_wi_request_size
+        batch_start_index = 0
+        batch_end_index = 0
+
         for work_item in work_items:
             work_item_data = self._build_work_item_post_request(work_item)
 
@@ -653,19 +662,27 @@ class OpenAPIPolarionProjectClient(
                 proj_content_size >= self._max_content_size
                 or len(current_batch.data) >= self._batch_size
             ):
-                self._post_work_item_batch(current_batch)
+                self._post_work_item_batch(
+                    current_batch,
+                    work_items[batch_start_index:batch_end_index],
+                )
 
                 current_batch = api_models.WorkitemsListPostRequest(
                     [work_item_data]
                 )
                 content_size = _get_json_content_size(current_batch.to_dict())
+                batch_start_index = batch_end_index
             else:
                 assert isinstance(current_batch.data, list)
                 current_batch.data.append(work_item_data)
                 content_size = proj_content_size
 
+            batch_end_index += 1
+
         if current_batch.data:
-            self._post_work_item_batch(current_batch)
+            self._post_work_item_batch(
+                current_batch, work_items[batch_start_index:]
+            )
 
     def _delete_work_items(self, work_item_ids: list[str], retry: bool = True):
         response = delete_work_items.sync_detailed(

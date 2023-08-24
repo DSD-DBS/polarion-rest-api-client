@@ -142,9 +142,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
     ):
         """Update the given work item attachment in Polarion."""
-        return self.create_work_item_attachments(
-            [work_item_attachment], retry
-        )[0]
+        self.create_work_item_attachments([work_item_attachment], retry)
 
     @abc.abstractmethod
     def get_work_item_attachments(
@@ -195,7 +193,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
 
     def create_work_item(self, work_item: WorkItemType):
         """Create a single given work item."""
-        return self.create_work_items([work_item])
+        self.create_work_items([work_item])
 
     @abc.abstractmethod
     def create_work_items(self, work_items: list[WorkItemType]):

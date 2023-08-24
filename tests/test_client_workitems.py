@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 
 import pytest
@@ -142,7 +143,10 @@ def test_create_work_items_successfully(
     work_item: polarion_api.WorkItem,
 ):
     with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        httpx_mock.add_response(201, json=json.load(f))
+        mock_response = json.load(f)
+
+    mock_response["data"] *= 3
+    httpx_mock.add_response(201, json=mock_response)
 
     client.create_work_items(3 * [work_item])
 
@@ -163,6 +167,7 @@ def test_create_work_items_batch_exceed_successfully(
     with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
         mock_response = json.load(f)
 
+    mock_response["data"] *= 3
     httpx_mock.add_response(201, json=mock_response)
     httpx_mock.add_response(201, json=mock_response)
 
@@ -188,8 +193,12 @@ def test_create_work_items_content_exceed_successfully(
     with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
         mock_response = json.load(f)
 
+    mock_response_data = mock_response["data"]
+    mock_response["data"] = 3 * mock_response_data
     httpx_mock.add_response(201, json=mock_response)
+    mock_response["data"] = 2 * mock_response_data
     httpx_mock.add_response(201, json=mock_response)
+    mock_response["data"] = mock_response_data
     httpx_mock.add_response(201, json=mock_response)
 
     work_item_long = polarion_api.WorkItem(
@@ -201,7 +210,16 @@ def test_create_work_items_content_exceed_successfully(
         additional_attributes={"capella_uuid": "asdfg"},
     )
 
-    client.create_work_items(3 * [work_item, work_item_long])
+    work_items = [
+        work_item,
+        work_item_long,
+        copy.deepcopy(work_item),
+        copy.deepcopy(work_item_long),
+        copy.deepcopy(work_item),
+        copy.deepcopy(work_item_long),
+    ]
+
+    client.create_work_items(work_items)
 
     reqs = httpx_mock.get_requests()
 
@@ -212,6 +230,8 @@ def test_create_work_items_content_exceed_successfully(
     assert len(json.loads(reqs[1].content.decode("utf-8"))["data"]) == 2
     assert reqs[2] is not None and reqs[2].method == "POST"
     assert len(json.loads(reqs[2].content.decode("utf-8"))["data"]) == 1
+
+    assert all([wi.id == "MyWorkItemId" for wi in work_items])
 
 
 def test_create_work_items_content_exceed_error(
@@ -266,6 +286,7 @@ def test_work_item_multi_request_size(
     with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
         mock_response = json.load(f)
 
+    mock_response["data"] *= 2
     httpx_mock.add_response(201, json=mock_response)
 
     size = len(
