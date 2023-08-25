@@ -388,7 +388,7 @@ class OpenAPIPolarionProjectClient(
 
             next_page = isinstance(
                 parsed_response.links,
-                api_models.WorkitemsListGetResponseLinks,
+                api_models.WorkitemAttachmentsListGetResponseLinks,
             ) and bool(parsed_response.links.next_)
 
         return work_item_attachments, next_page

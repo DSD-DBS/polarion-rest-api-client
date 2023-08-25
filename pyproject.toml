@@ -53,6 +53,7 @@ test = [
   "pytest",
   "pytest-cov",
   "pytest-httpx",
+  "pytest-mock",
 ]
 
 [tool.black]

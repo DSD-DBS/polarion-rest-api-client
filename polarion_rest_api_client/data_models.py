@@ -22,7 +22,7 @@ class WorkItem:
     additional_attributes: dict[str, t.Any] = {}
     linked_work_items: list[WorkItemLink] = []
     attachments: list[WorkItemAttachment] = []
-    _check_sum: str | None
+    _checksum: str | None = None
 
     def __init__(
         self,
@@ -44,10 +44,7 @@ class WorkItem:
         self.type = type
         self.status = status
         self.additional_attributes = (additional_attributes or {}) | kwargs
-        if "checksum" in self.additional_attributes:
-            self._check_sum = self.additional_attributes["checksum"]
-            del self.additional_attributes["checksum"]
-
+        self._checksum = self.additional_attributes.pop("checksum", None)
         self.linked_work_items = linked_work_items or []
         self.attachments = attachments or []
 
@@ -95,12 +92,12 @@ class WorkItem:
         data = self.to_dict()
         del data["checksum"]
         converted = json.dumps(data).encode("utf8")
-        self._check_sum = hashlib.sha256(converted).hexdigest()
-        return self._check_sum
+        self._checksum = hashlib.sha256(converted).hexdigest()
+        return self._checksum
 
     def get_current_checksum(self) -> str | None:
         """Return the checksum currently set without calculation."""
-        return self._check_sum
+        return self._checksum
 
 
 @dataclasses.dataclass

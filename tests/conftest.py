@@ -42,3 +42,15 @@ def fixture_dummy_work_item():
         type="task",
         additional_attributes={"capella_uuid": "asdfg"},
     )
+
+
+@pytest.fixture(name="work_item_patch")
+def fixture_dummy_work_item_patch():
+    return polarion_api.WorkItem(
+        id="MyWorkItemId",
+        description_type="text/html",
+        description="My text value",
+        title="Title",
+        status="open",
+        additional_attributes={"capella_uuid": "qwertz"},
+    )

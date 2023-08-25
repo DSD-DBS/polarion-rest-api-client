@@ -8,6 +8,7 @@ import json
 
 import pytest
 import pytest_httpx
+import pytest_mock as mock
 
 import polarion_rest_api_client as polarion_api
 from polarion_rest_api_client.open_api_client import models as api_models
@@ -134,6 +135,28 @@ def test_create_work_item(
     with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
+    assert json.loads(req.content.decode()) == expected
+
+
+def test_create_work_item_checksum(
+    client: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+    work_item: polarion_api.WorkItem,
+):
+    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
+        httpx_mock.add_response(201, json=json.load(f))
+
+    checksum = work_item.calculate_checksum()
+
+    client.add_work_item_checksum = True
+    client.create_work_item(work_item)
+
+    req = httpx_mock.get_request()
+
+    with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
+
+    expected["data"]["attributes"]["checksum"] = checksum
     assert json.loads(req.content.decode()) == expected
 
 
@@ -350,19 +373,11 @@ def test_create_work_items_failed_no_error(
 def test_update_work_item_completely(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
+    work_item_patch: polarion_api.WorkItem,
 ):
     httpx_mock.add_response(204)
 
-    client.update_work_item(
-        polarion_api.WorkItem(
-            id="MyWorkItemId",
-            description_type="text/html",
-            description="My text value",
-            title="Title",
-            status="open",
-            additional_attributes={"capella_uuid": "qwertz"},
-        )
-    )
+    client.update_work_item(work_item_patch)
 
     req = httpx_mock.get_request()
 
@@ -371,6 +386,30 @@ def test_update_work_item_completely(
     assert req.method == "PATCH"
     with open(TEST_WI_PATCH_COMPLETELY_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
+
+
+def test_update_work_item_completely_checksum(
+    client: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+    work_item_patch: polarion_api.WorkItem,
+    mocker: mock.MockerFixture,
+):
+    httpx_mock.add_response(204)
+
+    spy = mocker.spy(work_item_patch, "calculate_checksum")
+
+    checksum = work_item_patch.calculate_checksum()
+    client.add_work_item_checksum = True
+    client.update_work_item(work_item_patch)
+
+    req = httpx_mock.get_request()
+
+    with open(TEST_WI_PATCH_COMPLETELY_REQUEST, encoding="utf8") as f:
+        request = json.load(f)
+
+    request["data"]["attributes"]["checksum"] = checksum
+    assert json.loads(req.content.decode()) == request
+    spy.assert_called_once()
 
 
 def test_update_work_item_description(
