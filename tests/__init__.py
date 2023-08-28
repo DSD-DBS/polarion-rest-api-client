@@ -11,20 +11,17 @@ TEST_DATA_ROOT = pathlib.Path(__file__).parent / "data"
 TEST_RESPONSES = TEST_DATA_ROOT / "mock_api_responses"
 TEST_REQUESTS = TEST_DATA_ROOT / "expected_requests"
 
-TEST_WIA_MULTI_POST_REQUEST = TEST_REQUESTS / ""
-TEST_WIA_MULTI_POST_MULTI_REQUEST = TEST_REQUESTS / ""
-TEST_WIA_MULTI_PATCH_REQUEST = TEST_REQUESTS / ""
-TEST_WIA_MULTI_PATCH_FILE_REQUEST = TEST_REQUESTS / ""
-
 TEST_WIA_NEXT_PAGE_RESPONSE = (
     TEST_RESPONSES / "get_work_item_attachments_next_page.json"
 )
 TEST_WIA_NO_NEXT_PAGE_RESPONSE = (
     TEST_RESPONSES / "get_work_item_attachments_no_next_page.json"
 )
-TEST_WIA_POSTED_REQUEST = TEST_RESPONSES / ""
 TEST_WIA_CREATED_RESPONSE = (
     TEST_RESPONSES / "created_work_item_attachment.json"
+)
+TEST_WIA_MULTI_CREATED_RESPONSE = (
+    TEST_RESPONSES / "created_work_item_attachments.json"
 )
 
 TEST_WIL_MULTI_POST_REQUEST = TEST_REQUESTS / "post_work_item_links.json"

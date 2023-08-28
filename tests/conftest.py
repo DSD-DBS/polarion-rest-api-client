@@ -6,7 +6,7 @@ from __future__ import annotations
 import pytest
 
 import polarion_rest_api_client as polarion_api
-from tests import CustomWorkItem
+from tests import TEST_WIA_CREATED_RESPONSE, CustomWorkItem
 
 
 @pytest.fixture(name="client")
@@ -53,4 +53,19 @@ def fixture_dummy_work_item_patch():
         title="Title",
         status="open",
         additional_attributes={"capella_uuid": "qwertz"},
+    )
+
+
+@pytest.fixture(name="work_item_attachment")
+def fixture_dummy_work_item_attachment():
+    with open(TEST_WIA_CREATED_RESPONSE, encoding="utf8") as f:
+        attachment_content = f.read()
+
+    return polarion_api.WorkItemAttachment(
+        "MyWorkItemId",
+        "Attachment",
+        "Title",
+        attachment_content.encode("utf-8"),
+        "text/plain",
+        "test.json",
     )
