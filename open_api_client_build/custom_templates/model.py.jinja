@@ -130,6 +130,15 @@ if {{ property.python_name }} is not UNSET:
 return field_dict
 {% endmacro %}
 
+{% macro _transform_property(property, content, multipart=False) %}
+{% import "property_templates/" + property.template as prop_template %}
+{% if prop_template.transform %}
+{{ prop_template.transform(property, content, property.python_name, multipart=multipart) }}
+{% else %}
+property.python_name = self.{{ property.python_name }} if isinstance(self.{{ property.python_name }}, Unset) else (None, str(self.{{ property.python_name }}).encode(), "text/plain")
+{% endif %}
+{% endmacro %}
+
     def to_dict(self) -> Dict[str, Any]:
     {% for lazy_import in model.lazy_imports %}
         {{ lazy_import }}
@@ -137,8 +146,51 @@ return field_dict
         {{ _to_dict() | indent(8) }}
 
 {% if model.is_multipart_body %}
-    def to_multipart(self) -> Dict[str, Any]:
-        {{ _to_dict(multipart=True) | indent(8) }}
+    def to_multipart(self) -> List[Tuple[str, Any]]:
+        field_list: List[Tuple[str, Any]] = []
+        {% for property in model.required_properties + model.optional_properties %}
+        {% if property.__class__.__name__ == 'ListProperty' %}
+        {% if not property.required %}
+        for cont in self.{{ property.python_name }} or []:
+        {% else %}
+        for cont in self.{{ property.python_name }}:
+        {% endif %}
+            {{ _transform_property(property.inner_property, "cont", True) | indent(12) }}
+            field_list.append(("{{ property.python_name }}", {{property.inner_property.python_name}}))
+
+        {% else %}
+        {{ _transform_property(property, "self." + property.python_name, True) | indent(8) }}
+        {% if not property.required %}
+        if {{ property.python_name }} is not UNSET:
+            field_list.append(("{{ property.python_name }}", {{property.python_name}}))
+        {% else %}
+        field_list.append(("{{ property.python_name }}", {{property.python_name}}))
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+        {% if model.additional_properties %}
+        field_dict: Dict[str, Any] = {}
+        {% if model.additional_properties.template %}{# Can be a bool instead of an object #}
+            {% import "property_templates/" + model.additional_properties.template as prop_template %}
+        {% else %}
+            {% set prop_template = None %}
+        {% endif %}
+        {% if prop_template and prop_template.transform %}
+        for prop_name, prop in self.additional_properties.items():
+            {{ prop_template.transform(model.additional_properties, "prop", "field_dict[prop_name]", multipart=True, declare_type=false) | indent(4) }}
+        {% else %}
+        field_dict.update({
+            key: (None, str(value).encode(), "text/plain")
+            for key, value in self.additional_properties.items()
+        })
+        {% endif %}
+        {% endif %}
+
+        field_list += list(field_dict.items())
+
+        return field_list
+
 {% endif %}
 
     @classmethod
