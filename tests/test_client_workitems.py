@@ -156,7 +156,7 @@ def test_create_work_item_checksum(
     with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
-    expected["data"]["attributes"]["checksum"] = checksum
+    expected["data"][0]["attributes"]["checksum"] = checksum
     assert json.loads(req.content.decode()) == expected
 
 
