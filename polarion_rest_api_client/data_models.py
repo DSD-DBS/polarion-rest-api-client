@@ -80,8 +80,8 @@ class WorkItem:
             "status": self.status,
             "additional_attributes": copy.deepcopy(self.additional_attributes),
             "checksum": self._checksum,
-            "linked_work_items": self.linked_work_items,
-            "attachments": self.attachments,
+            "linked_work_items": copy.deepcopy(self.linked_work_items),
+            "attachments": copy.deepcopy(self.attachments),
         }
 
     def calculate_checksum(self) -> str:
@@ -91,6 +91,16 @@ class WorkItem:
         """
         data = self.to_dict()
         del data["checksum"]
+
+        data["linked_work_items"].sort(
+            key=lambda x: f"{x.role}/{x.secondary_work_item_project}/{x.secondary_work_item_id}"  # pylint: disable=line-too-long
+        )
+        data["attachments"].sort(key=lambda x: x.file_name)
+        data["additional_attributes"] = dict(
+            sorted(data["additional_attributes"].items())
+        )
+        data = dict(sorted(data.items()))
+
         converted = json.dumps(data).encode("utf8")
         self._checksum = hashlib.sha256(converted).hexdigest()
         return self._checksum
