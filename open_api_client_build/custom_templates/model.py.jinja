@@ -93,30 +93,34 @@ class {{ class_name }}:
 {%- endif -%}
 {%- endmacro -%}
 
-{% macro _to_dict(multipart=False) %}
-{% for property in model.required_properties + model.optional_properties %}
-{{ _transform_property(property, "self." + property.python_name) }}
-{% endfor %}
-
+{%- macro _prepare_field_dict(multipart=False) -%}
 field_dict: Dict[str, Any] = {}
 {% if model.additional_properties %}
-{% if model.additional_properties.template %}{# Can be a bool instead of an object #}
+{%- if model.additional_properties.template -%}{# Can be a bool instead of an object #}
     {% import "property_templates/" + model.additional_properties.template as prop_template %}
-{% else %}
-    {% set prop_template = None %}
-{% endif %}
-{% if prop_template and prop_template.transform %}
+{%- else -%}
+    {%- set prop_template = None -%}
+{%- endif -%}
+{%- if prop_template and prop_template.transform -%}
 for prop_name, prop in self.additional_properties.items():
     {{ prop_template.transform(model.additional_properties, "prop", "field_dict[prop_name]", multipart=multipart, declare_type=false) | indent(4) }}
-{% elif multipart %}
+{%- elif multipart -%}
 field_dict.update({
     key: (None, str(value).encode(), "text/plain")
     for key, value in self.additional_properties.items()
 })
-{% else %}
+{%- else -%}
 field_dict.update(self.additional_properties)
+{%- endif -%}
 {% endif %}
-{% endif %}
+{%- endmacro -%}
+
+{% macro _to_dict() %}
+{% for property in model.required_properties + model.optional_properties %}
+{{ _transform_property(property, "self." + property.python_name) }}
+{% endfor %}
+
+{{ _prepare_field_dict() }}
 field_dict.update({
     {% for property in model.required_properties + model.optional_properties %}
     {% if property.required %}
@@ -165,23 +169,7 @@ return field_dict
         {% endif %}
         {% endfor %}
 
-        {% if model.additional_properties %}
-        field_dict: Dict[str, Any] = {}
-        {% if model.additional_properties.template %}{# Can be a bool instead of an object #}
-            {% import "property_templates/" + model.additional_properties.template as prop_template %}
-        {% else %}
-            {% set prop_template = None %}
-        {% endif %}
-        {% if prop_template and prop_template.transform %}
-        for prop_name, prop in self.additional_properties.items():
-            {{ prop_template.transform(model.additional_properties, "prop", "field_dict[prop_name]", multipart=True, declare_type=false) | indent(4) }}
-        {% else %}
-        field_dict.update({
-            key: (None, str(value).encode(), "text/plain")
-            for key, value in self.additional_properties.items()
-        })
-        {% endif %}
-        {% endif %}
+        {{ _prepare_field_dict(True) | indent(8) }}
 
         field_list += list(field_dict.items())
 
