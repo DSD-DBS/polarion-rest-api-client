@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 
+import pytest
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
@@ -255,8 +256,9 @@ def test_create_work_item_links_same_primaries(
 def test_get_work_item_links_error_first_request(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
+    caplog: pytest.LogCaptureFixture,
 ):
-    httpx_mock.add_response(502)
+    httpx_mock.add_response(502, content=b"Test")
     with open(
         TEST_WIL_NO_NEXT_PAGE_RESPONSE,
         encoding="utf8",
@@ -268,7 +270,10 @@ def test_get_work_item_links_error_first_request(
     )
 
     reqs = httpx_mock.get_requests()
-
+    assert len(caplog.record_tuples) == 1
+    _, level, message = caplog.record_tuples[0]
+    assert level == 30
+    assert message == "Received error response code 502 with content b'Test'."
     assert len(reqs) == 2
     assert work_item_links[0] == polarion_api.WorkItemLink(
         "MyWorkItemId", "MyWorkItemId2", "relates_to", True, "MyProjectId"
