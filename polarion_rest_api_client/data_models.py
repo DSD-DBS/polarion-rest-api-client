@@ -65,12 +65,24 @@ class WorkItem:
         """Compare only WorkItem attributes."""
         if not isinstance(other, WorkItem):
             return NotImplemented
-        return {
-            k: v for k, v in self.__dict__.items() if k in dir(WorkItem)
-        } == {k: v for k, v in other.__dict__.items() if k in dir(WorkItem)}
+        if self.get_current_checksum() is None:
+            self.calculate_checksum()
+        if other.get_current_checksum() is None:
+            other.calculate_checksum()
+
+        return self.get_current_checksum() == other.get_current_checksum()
 
     def to_dict(self) -> dict[str, t.Any]:
         """Return the content of the WorkItem as dictionary."""
+        sorted_links = sorted(
+            self.linked_work_items,
+            key=lambda x: f"{x.role}/{x.secondary_work_item_project}/{x.secondary_work_item_id}",  # pylint: disable=line-too-long
+        )
+
+        sorted_attachments = sorted(
+            self.attachments, key=lambda x: x.id or x.file_name or ""
+        )
+
         return {
             "id": self.id,
             "title": self.title,
@@ -78,10 +90,16 @@ class WorkItem:
             "description": self.description,
             "type": self.type,
             "status": self.status,
-            "additional_attributes": copy.deepcopy(self.additional_attributes),
+            "additional_attributes": dict(
+                sorted(self.additional_attributes.items())
+            ),
             "checksum": self._checksum,
-            "linked_work_items": copy.deepcopy(self.linked_work_items),
-            "attachments": copy.deepcopy(self.attachments),
+            "linked_work_items": [
+                dataclasses.asdict(lwi) for lwi in sorted_links
+            ],
+            "attachments": [
+                dataclasses.asdict(at) for at in sorted_attachments
+            ],
         }
 
     def calculate_checksum(self) -> str:
@@ -92,13 +110,6 @@ class WorkItem:
         data = self.to_dict()
         del data["checksum"]
 
-        data["linked_work_items"].sort(
-            key=lambda x: f"{x.role}/{x.secondary_work_item_project}/{x.secondary_work_item_id}"  # pylint: disable=line-too-long
-        )
-        data["attachments"].sort(key=lambda x: x.file_name)
-        data["additional_attributes"] = dict(
-            sorted(data["additional_attributes"].items())
-        )
         data = dict(sorted(data.items()))
 
         converted = json.dumps(data).encode("utf8")
