@@ -100,6 +100,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
+        retry: bool = True,
     ) -> tuple[list[WorkItemType], bool]:
         """Return the work items on a defined page matching the given query.
 
@@ -129,7 +130,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         return self._mark_delete_work_items(work_item_ids)
 
     @abc.abstractmethod
-    def _delete_work_items(self, work_item_ids: list[str]):
+    def _delete_work_items(self, work_item_ids: list[str], retry: bool = True):
         """Actually perform a delete request for the given work items."""
         raise NotImplementedError
 
@@ -141,7 +142,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
             )
 
     @abc.abstractmethod
-    def update_work_item(self, work_item: WorkItemType):
+    def update_work_item(self, work_item: WorkItemType, retry: bool = True):
         """Update the given work item in Polarion.
 
         Only fields not set to None will be updated in Polarion. None
@@ -175,6 +176,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         include: str | None = None,
         page_size: int = 100,
         page_number: int = 1,
+        retry: bool = True,
     ) -> tuple[list[dm.WorkItemLink], bool]:
         """Get the work item links for the given work item on a page.
 
@@ -195,7 +197,9 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
                 )
 
     @abc.abstractmethod
-    def _create_work_item_links(self, work_item_links: list[dm.WorkItemLink]):
+    def _create_work_item_links(
+        self, work_item_links: list[dm.WorkItemLink], retry: bool = True
+    ):
         """Create the links between the work items in work_item_links.
 
         All work item links must have the same primary work item.
@@ -238,7 +242,9 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
             self._delete_work_item_links(split_work_item_links)
 
     @abc.abstractmethod
-    def _delete_work_item_links(self, work_item_links: list[dm.WorkItemLink]):
+    def _delete_work_item_links(
+        self, work_item_links: list[dm.WorkItemLink], retry: bool = True
+    ):
         """Delete the links between the work items in work_item_link.
 
         All work item links have to have the same primary work item.

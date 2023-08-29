@@ -176,6 +176,11 @@ class OpenAPIPolarionProjectClient(
             return True
 
         if not _raise:
+            logger.warning(
+                "Received error response code %d with content %s.",
+                response.status_code,
+                response.content,
+            )
             return False
 
         try:
