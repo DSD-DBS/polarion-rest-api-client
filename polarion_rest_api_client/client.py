@@ -137,7 +137,7 @@ class OpenAPIPolarionProjectClient(
         project_id : str
             ID of the project to create a client for.
         delete_polarion_work_items : bool
-            Flag indicating whether to actually delete work items or just mark them as deleted.
+            Flag indicating whether to delete work items or set a status.
         polarion_api_endpoint : str
             The URL of the Polarion API endpoint.
         polarion_access_token : str
@@ -506,9 +506,7 @@ class OpenAPIPolarionProjectClient(
         )
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
-            return self.create_work_item_attachments(
-                work_item_attachments, False
-            )
+            self.create_work_item_attachments(work_item_attachments, False)
 
         assert response.parsed and response.parsed.data
         counter = 0

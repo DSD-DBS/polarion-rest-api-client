@@ -3,7 +3,6 @@
 """Data model classes returned by the client."""
 from __future__ import annotations
 
-import copy
 import dataclasses
 import hashlib
 import json
