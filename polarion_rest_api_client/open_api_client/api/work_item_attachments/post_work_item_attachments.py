@@ -102,7 +102,7 @@ def sync_detailed(
 ) -> Response[Union[Any, WorkitemAttachmentsListPostResponse]]:
     r"""Creates a list of instances.
 
-     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
@@ -114,9 +114,9 @@ def sync_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -146,7 +146,7 @@ def sync(
 ) -> Optional[Union[Any, WorkitemAttachmentsListPostResponse]]:
     r"""Creates a list of instances.
 
-     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
@@ -158,9 +158,9 @@ def sync(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -185,7 +185,7 @@ async def asyncio_detailed(
 ) -> Response[Union[Any, WorkitemAttachmentsListPostResponse]]:
     r"""Creates a list of instances.
 
-     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
@@ -197,9 +197,9 @@ async def asyncio_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -227,7 +227,7 @@ async def asyncio(
 ) -> Optional[Union[Any, WorkitemAttachmentsListPostResponse]]:
     r"""Creates a list of instances.
 
-     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
@@ -239,9 +239,9 @@ async def asyncio(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
