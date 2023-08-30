@@ -243,7 +243,7 @@ class OpenAPIPolarionProjectClient(
         if self.add_work_item_checksum:
             attrs.additional_properties[
                 "checksum"
-            ] = work_item.get_current_checksum()
+            ] = work_item.calculate_checksum()
 
         return api_models.WorkitemsListPostRequestDataItem(
             api_models.WorkitemsListPostRequestDataItemType.WORKITEMS, attrs
