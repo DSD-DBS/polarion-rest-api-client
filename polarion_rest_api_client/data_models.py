@@ -39,12 +39,8 @@ class WorkItem:
 
     def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
-        if item.startswith("__"):
+        if item.startswith("__") or item in dir(WorkItem):
             return super().__getattribute__(item)
-
-        if item in dir(WorkItem):
-            return super().__getattribute__(item)
-
         return self.additional_attributes.get(item)
 
     def __setattr__(self, key: str, value: t.Any):
