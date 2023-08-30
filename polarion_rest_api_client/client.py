@@ -295,6 +295,7 @@ class OpenAPIPolarionProjectClient(
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
             self._post_work_item_batch(work_item_batch, work_item_objs, False)
+            return
 
         assert response.parsed and response.parsed.data
         counter = 0
@@ -507,6 +508,7 @@ class OpenAPIPolarionProjectClient(
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
             self.create_work_item_attachments(work_item_attachments, False)
+            return
 
         assert response.parsed and response.parsed.data
         counter = 0
