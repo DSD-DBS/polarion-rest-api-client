@@ -3,7 +3,7 @@
 
 import json
 from io import BytesIO
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Tuple, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -54,16 +54,21 @@ class PatchWorkItemAttachmentsRequestBody:
 
         return field_dict
 
-    def to_multipart(self) -> Dict[str, Any]:
+    def to_multipart(self) -> List[Tuple[str, Any]]:
+        field_list: List[Tuple[str, Any]] = []
         resource = (
             None,
             json.dumps(self.resource.to_dict()).encode(),
-            "application/json",
+            "text/plain",
         )
 
+        field_list.append(("resource", resource))
         content: Union[Unset, FileJsonType] = UNSET
         if not isinstance(self.content, Unset):
             content = self.content.to_tuple()
+
+        if content is not UNSET:
+            field_list.append(("content", content))
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(
@@ -72,15 +77,10 @@ class PatchWorkItemAttachmentsRequestBody:
                 for key, value in self.additional_properties.items()
             }
         )
-        field_dict.update(
-            {
-                "resource": resource,
-            }
-        )
-        if content is not UNSET:
-            field_dict["content"] = content
 
-        return field_dict
+        field_list += list(field_dict.items())
+
+        return field_list
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:

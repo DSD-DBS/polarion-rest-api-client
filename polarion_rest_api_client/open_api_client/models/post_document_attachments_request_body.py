@@ -57,27 +57,22 @@ class PostDocumentAttachmentsRequestBody:
 
         return field_dict
 
-    def to_multipart(self) -> Dict[str, Any]:
+    def to_multipart(self) -> List[Tuple[str, Any]]:
+        field_list: List[Tuple[str, Any]] = []
         resource: Union[Unset, Tuple[None, bytes, str]] = UNSET
         if not isinstance(self.resource, Unset):
             resource = (
                 None,
                 json.dumps(self.resource.to_dict()).encode(),
-                "application/json",
+                "text/plain",
             )
 
-        files: Union[Unset, Tuple[None, bytes, str]] = UNSET
-        if not isinstance(self.files, Unset):
-            _temp_files = []
-            for files_item_data in self.files:
-                files_item = files_item_data.to_tuple()
+        if resource is not UNSET:
+            field_list.append(("resource", resource))
+        for cont in self.files or []:
+            files_item = cont.to_tuple()
 
-                _temp_files.append(files_item)
-            files = (
-                None,
-                json.dumps(_temp_files).encode(),
-                "application/json",
-            )
+            field_list.append(("files", files_item))
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(
@@ -86,13 +81,10 @@ class PostDocumentAttachmentsRequestBody:
                 for key, value in self.additional_properties.items()
             }
         )
-        field_dict.update({})
-        if resource is not UNSET:
-            field_dict["resource"] = resource
-        if files is not UNSET:
-            field_dict["files"] = files
 
-        return field_dict
+        field_list += list(field_dict.items())
+
+        return field_list
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
