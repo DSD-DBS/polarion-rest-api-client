@@ -89,7 +89,7 @@ def sync_detailed(
 ) -> Response[Any]:
     r"""Updates the specified instance.
 
-     See more in the <a href=\"https://docs.sw.siemens.com/en-
+    See more in the <a href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
     Parameters
@@ -102,9 +102,9 @@ def sync_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -138,7 +138,7 @@ async def asyncio_detailed(
 ) -> Response[Any]:
     r"""Updates the specified instance.
 
-     See more in the <a href=\"https://docs.sw.siemens.com/en-
+    See more in the <a href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
     Parameters
@@ -151,9 +151,9 @@ async def asyncio_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns

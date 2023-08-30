@@ -116,9 +116,9 @@ def sync_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -162,9 +162,9 @@ def sync(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -203,9 +203,9 @@ async def asyncio_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -247,9 +247,9 @@ async def asyncio(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns

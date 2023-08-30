@@ -153,7 +153,7 @@ json_body=json_body,
 {% if endpoint.summary %}{{ endpoint.summary | wordwrap(100)}}
 
 {% endif -%}
-{%- if endpoint.description %} {{ endpoint.description | wordwrap(100) }}
+{%- if endpoint.description %}{{ endpoint.description | wordwrap(100) }}
 
 {% endif %}
 {% if not endpoint.summary and not endpoint.description %}

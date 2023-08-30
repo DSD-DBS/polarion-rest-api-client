@@ -92,9 +92,9 @@ def sync_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -124,7 +124,7 @@ async def asyncio_detailed(
 ) -> Response[Any]:
     """Deletes a list of instances.
 
-     Deletes the direct outgoing links to other Work Items. (The same as the corresponding Java API
+    Deletes the direct outgoing links to other Work Items. (The same as the corresponding Java API
     method.)  Does not pertain to external links or backlinks.
 
     Parameters
@@ -135,9 +135,9 @@ async def asyncio_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns

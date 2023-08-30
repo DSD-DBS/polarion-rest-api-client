@@ -118,7 +118,7 @@ def sync_detailed(
 ) -> Response[Union[Any, LinkedworkitemsSingleGetResponse]]:
     """Returns the specified instance.
 
-     Returns the direct outgoing links to other Work Items. (The same as the corresponding Java API
+    Returns the direct outgoing links to other Work Items. (The same as the corresponding Java API
     method.)  Does not pertain to external links or backlinks.
 
     Parameters
@@ -134,9 +134,9 @@ def sync_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -176,7 +176,7 @@ def sync(
 ) -> Optional[Union[Any, LinkedworkitemsSingleGetResponse]]:
     """Returns the specified instance.
 
-     Returns the direct outgoing links to other Work Items. (The same as the corresponding Java API
+    Returns the direct outgoing links to other Work Items. (The same as the corresponding Java API
     method.)  Does not pertain to external links or backlinks.
 
     Parameters
@@ -192,9 +192,9 @@ def sync(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -229,7 +229,7 @@ async def asyncio_detailed(
 ) -> Response[Union[Any, LinkedworkitemsSingleGetResponse]]:
     """Returns the specified instance.
 
-     Returns the direct outgoing links to other Work Items. (The same as the corresponding Java API
+    Returns the direct outgoing links to other Work Items. (The same as the corresponding Java API
     method.)  Does not pertain to external links or backlinks.
 
     Parameters
@@ -245,9 +245,9 @@ async def asyncio_detailed(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
@@ -285,7 +285,7 @@ async def asyncio(
 ) -> Optional[Union[Any, LinkedworkitemsSingleGetResponse]]:
     """Returns the specified instance.
 
-     Returns the direct outgoing links to other Work Items. (The same as the corresponding Java API
+    Returns the direct outgoing links to other Work Items. (The same as the corresponding Java API
     method.)  Does not pertain to external links or backlinks.
 
     Parameters
@@ -301,9 +301,9 @@ async def asyncio(
 
     Raises
     ------
-    errors.UnexpectedStatus:
+    errors.UnexpectedStatus
         If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException:
+    httpx.TimeoutException
         If the request takes longer than Client.timeout.
 
     Returns
