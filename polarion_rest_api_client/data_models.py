@@ -108,6 +108,7 @@ class WorkItem:
         """
         data = self.to_dict()
         del data["checksum"]
+        del data["id"]
 
         data = dict(sorted(data.items()))
 
