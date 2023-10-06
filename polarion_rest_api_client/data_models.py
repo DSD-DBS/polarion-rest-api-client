@@ -79,7 +79,7 @@ class WorkItem:
         )
 
         sorted_attachments = sorted(
-            self.attachments, key=lambda x: x.id or x.file_name or ""
+            self.attachments, key=lambda x: x.file_name or ""
         )
 
         return {
@@ -109,6 +109,9 @@ class WorkItem:
         data = self.to_dict()
         del data["checksum"]
         del data["id"]
+
+        for at in data["attachments"]:
+            del at["id"]
 
         data = dict(sorted(data.items()))
 
