@@ -3,6 +3,7 @@
 """Data model classes returned by the client."""
 from __future__ import annotations
 
+import base64
 import dataclasses
 import hashlib
 import json
@@ -110,17 +111,18 @@ class WorkItem:
         del data["checksum"]
         del data["id"]
 
-        attachments = data.pop("attachments")
+        for attachment in data["attachments"]:
+            try:
+                attachment["content_bytes"] = base64.b64encode(
+                    attachment["content_bytes"]
+                ).decode("utf8")
+            except TypeError:
+                pass
 
         data = dict(sorted(data.items()))
 
         converted = json.dumps(data).encode("utf8")
-        converted_attachments = json.dumps(attachments).encode("utf8")
-        self._checksum = (
-            hashlib.sha256(converted).hexdigest()
-            + " "
-            + hashlib.sha256(converted_attachments).hexdigest()
-        )
+        self._checksum = hashlib.sha256(converted).hexdigest()
         return self._checksum
 
     def get_current_checksum(self) -> str | None:
