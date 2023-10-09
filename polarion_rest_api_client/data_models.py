@@ -110,13 +110,17 @@ class WorkItem:
         del data["checksum"]
         del data["id"]
 
-        for at in data["attachments"]:
-            del at["id"]
+        attachments = data.pop("attachments")
 
         data = dict(sorted(data.items()))
 
         converted = json.dumps(data).encode("utf8")
-        self._checksum = hashlib.sha256(converted).hexdigest()
+        converted_attachments = json.dumps(attachments).encode("utf8")
+        self._checksum = (
+            hashlib.sha256(converted).hexdigest()
+            + " "
+            + hashlib.sha256(converted_attachments).hexdigest()
+        )
         return self._checksum
 
     def get_current_checksum(self) -> str | None:
