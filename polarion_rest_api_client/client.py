@@ -3,6 +3,7 @@
 """The actual implementation of the API client using an OpenAPIClient."""
 from __future__ import annotations
 
+import io
 import json
 import logging
 import os
@@ -22,6 +23,12 @@ from polarion_rest_api_client.open_api_client.api.linked_work_items import (
     post_linked_work_items,
 )
 from polarion_rest_api_client.open_api_client.api.projects import get_project
+from polarion_rest_api_client.open_api_client.api.work_item_attachments import (  # pylint: disable=line-too-long
+    delete_work_item_attachment,
+    get_work_item_attachments,
+    patch_work_item_attachment,
+    post_work_item_attachments,
+)
 from polarion_rest_api_client.open_api_client.api.work_items import (
     delete_work_items,
     get_work_items,
@@ -87,6 +94,7 @@ class OpenAPIPolarionProjectClient(
         custom_work_item: type[base_client.WorkItemType],
         batch_size: int = ...,
         page_size: int = ...,
+        add_work_item_checksum: bool = False,
         max_content_size: int = ...,
         httpx_args: t.Optional[dict[str, t.Any]] = ...,
     ):
@@ -102,6 +110,7 @@ class OpenAPIPolarionProjectClient(
         *,
         batch_size: int = ...,
         page_size: int = ...,
+        add_work_item_checksum: bool = False,
         max_content_size: int = ...,
         httpx_args: t.Optional[dict[str, t.Any]] = ...,
     ):
@@ -117,6 +126,7 @@ class OpenAPIPolarionProjectClient(
         custom_work_item=dm.WorkItem,
         batch_size: int = 100,
         page_size: int = 100,
+        add_work_item_checksum: bool = False,
         max_content_size: int = 2 * 1024**2,
         httpx_args: t.Optional[dict[str, t.Any]] = None,
     ):
@@ -127,7 +137,7 @@ class OpenAPIPolarionProjectClient(
         project_id : str
             ID of the project to create a client for.
         delete_polarion_work_items : bool
-            Flag indicating whether to actually delete work items or just mark them as deleted.
+            Flag indicating whether to delete work items or set a status.
         polarion_api_endpoint : str
             The URL of the Polarion API endpoint.
         polarion_access_token : str
@@ -138,6 +148,8 @@ class OpenAPIPolarionProjectClient(
             Maximum amount of items created in one POST request.
         page_size : int, default 100
             Default size of a page when getting items from the API.
+        add_work_item_checksum : bool, default False
+            Flag whether post WorkItem checksums.
         max_content_size : int, default 2 * 1024**2
             Maximum content-length of the API (default: 2MB).
         httpx_args: t.Optional[dict[str, t.Any]], default None
@@ -149,6 +161,7 @@ class OpenAPIPolarionProjectClient(
             custom_work_item,
             batch_size,
             page_size,
+            add_work_item_checksum,
         )
 
         if httpx_args is None:
@@ -188,6 +201,16 @@ class OpenAPIPolarionProjectClient(
         except json.JSONDecodeError as e:
             raise unexpected_error() from e
 
+        # This is needed to fix erroneous error responses
+        for er in decoded_content.get("errors", []):
+            delete_keys = []
+            for k, v in er.items():
+                if v is None:
+                    delete_keys.append(k)
+
+            for k in delete_keys:
+                del er[k]
+
         error = api_models.Errors.from_dict(decoded_content)
         if error.errors:
             raise errors.PolarionApiException(
@@ -217,6 +240,11 @@ class OpenAPIPolarionProjectClient(
 
         attrs.additional_properties.update(work_item.additional_attributes)
 
+        if self.add_work_item_checksum:
+            attrs.additional_properties[
+                "checksum"
+            ] = work_item.calculate_checksum()
+
         return api_models.WorkitemsListPostRequestDataItem(
             api_models.WorkitemsListPostRequestDataItemType.WORKITEMS, attrs
         )
@@ -242,6 +270,11 @@ class OpenAPIPolarionProjectClient(
 
         attrs.additional_properties.update(work_item.additional_attributes)
 
+        if self.add_work_item_checksum:
+            attrs.additional_properties[
+                "checksum"
+            ] = work_item.get_current_checksum()
+
         return api_models.WorkitemsSinglePatchRequest(
             api_models.WorkitemsSinglePatchRequestData(
                 api_models.WorkitemsSinglePatchRequestDataType.WORKITEMS,
@@ -253,6 +286,7 @@ class OpenAPIPolarionProjectClient(
     def _post_work_item_batch(
         self,
         work_item_batch: api_models.WorkitemsListPostRequest,
+        work_item_objs: list[base_client.WorkItemType],
         retry: bool = True,
     ):
         response = post_work_items.sync_detailed(
@@ -260,7 +294,15 @@ class OpenAPIPolarionProjectClient(
         )
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
-            self._post_work_item_batch(work_item_batch, False)
+            self._post_work_item_batch(work_item_batch, work_item_objs, False)
+            return
+
+        assert response.parsed and response.parsed.data
+        counter = 0
+        for work_item_res in response.parsed.data:
+            assert work_item_res.id
+            work_item_objs[counter].id = work_item_res.id.split("/")[-1]
+            counter += 1
 
     def _calculate_post_work_item_request_sizes(
         self,
@@ -287,6 +329,195 @@ class OpenAPIPolarionProjectClient(
             logger.error("Polarion request: %s", response.content)
             return False
         return True
+
+    def get_work_item_attachments(
+        self,
+        work_item_id: str,
+        fields: dict[str, str] | None = None,
+        page_size: int = 100,
+        page_number: int = 1,
+        retry: bool = True,
+    ) -> tuple[list[dm.WorkItemAttachment], bool]:
+        """Return the attachments for a given work item on a defined page.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+        if fields is None:
+            fields = self.default_fields.workitem_attachments
+
+        sparse_fields = _build_sparse_fields(fields)
+        response = get_work_item_attachments.sync_detailed(
+            self.project_id,
+            work_item_id=work_item_id,
+            client=self.client,
+            fields=sparse_fields,
+            pagesize=page_size,
+            pagenumber=page_number,
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.get_work_item_attachments(
+                work_item_id, fields, page_size, page_number, False
+            )
+
+        parsed_response = response.parsed
+
+        work_item_attachments: list[dm.WorkItemAttachment] = []
+
+        next_page = False
+
+        if (
+            isinstance(
+                parsed_response, api_models.WorkitemAttachmentsListGetResponse
+            )
+            and parsed_response.data
+        ):
+            for attachment in parsed_response.data:
+                assert attachment.attributes
+                assert isinstance(attachment.attributes.id, str)
+
+                work_item_attachments.append(
+                    dm.WorkItemAttachment(
+                        work_item_id,
+                        attachment.attributes.id,
+                        unset_str_builder(attachment.attributes.title),
+                    )
+                )
+
+            next_page = isinstance(
+                parsed_response.links,
+                api_models.WorkitemAttachmentsListGetResponseLinks,
+            ) and bool(parsed_response.links.next_)
+
+        return work_item_attachments, next_page
+
+    def delete_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Delete the given work item attachment."""
+        response = delete_work_item_attachment.sync_detailed(
+            self.project_id,
+            work_item_attachment.work_item_id,
+            work_item_attachment.id,
+            client=self.client,
+        )
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            self.delete_work_item_attachment(work_item_attachment, False)
+
+    def update_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Update the given work item attachment in Polarion."""
+        attributes = (
+            api_models.WorkitemAttachmentsSinglePatchRequestDataAttributes()
+        )
+        if work_item_attachment.title:
+            attributes.title = work_item_attachment.title
+
+        multipart = api_models.PatchWorkItemAttachmentsRequestBody(
+            api_models.WorkitemAttachmentsSinglePatchRequest(
+                api_models.WorkitemAttachmentsSinglePatchRequestData(
+                    api_models.WorkitemAttachmentsSinglePatchRequestDataType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
+                    f"{self.project_id}/{work_item_attachment.work_item_id}/{work_item_attachment.id}",  # pylint: disable=line-too-long
+                    attributes,
+                )
+            )
+        )
+
+        if work_item_attachment.content_bytes:
+            multipart.content = oa_types.File(
+                io.BytesIO(work_item_attachment.content_bytes),
+                work_item_attachment.file_name,
+                work_item_attachment.mime_type,
+            )
+
+        response = patch_work_item_attachment.sync_detailed(
+            self.project_id,
+            work_item_attachment.work_item_id,
+            work_item_attachment.id,
+            client=self.client,
+            multipart_data=multipart,
+        )
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            self.update_work_item_attachment(work_item_attachment, False)
+
+    def create_work_item_attachments(
+        self,
+        work_item_attachments: list[dm.WorkItemAttachment],
+        retry: bool = True,
+    ):
+        """Create the given work item attachment in Polarion."""
+        attachment_attributes = []
+        attachment_files = []
+        assert len(work_item_attachments), "No attachments were provided."
+        assert all(
+            [wia.work_item_id == work_item_attachments[0].work_item_id]
+            for wia in work_item_attachments
+        ), "All attachments must belong to the same WorkItem."
+
+        for work_item_attachment in work_item_attachments:
+            assert (
+                work_item_attachment.file_name
+            ), "You have to define a FileName."
+            assert (
+                work_item_attachment.content_bytes
+            ), "You have to provide content bytes."
+            assert (
+                work_item_attachment.mime_type
+            ), "You have to provide a mime_type."
+
+            attributes = api_models.WorkitemAttachmentsListPostRequestDataItemAttributes(  # pylint: disable=line-too-long
+                file_name=work_item_attachment.file_name
+            )
+            if work_item_attachment.title:
+                attributes.title = work_item_attachment.title
+
+            attachment_attributes.append(
+                api_models.WorkitemAttachmentsListPostRequestDataItem(
+                    api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
+                    attributes=attributes,
+                )
+            )
+
+            attachment_files.append(
+                oa_types.File(
+                    io.BytesIO(work_item_attachment.content_bytes),
+                    work_item_attachment.file_name,
+                    work_item_attachment.mime_type,
+                )
+            )
+
+        multipart = api_models.PostWorkItemAttachmentsRequestBody(
+            api_models.WorkitemAttachmentsListPostRequest(
+                attachment_attributes
+            ),
+            attachment_files,
+        )
+
+        response = post_work_item_attachments.sync_detailed(
+            self.project_id,
+            work_item_attachments[0].work_item_id,
+            client=self.client,
+            multipart_data=multipart,
+        )
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            self.create_work_item_attachments(work_item_attachments, False)
+            return
+
+        assert response.parsed and response.parsed.data
+        counter = 0
+        for work_item_attachment_res in response.parsed.data:
+            assert work_item_attachment_res.id
+            work_item_attachments[
+                counter
+            ].id = work_item_attachment_res.id.split("/")[-1]
+            counter += 1
 
     def get_work_items(
         self,
@@ -336,9 +567,49 @@ class OpenAPIPolarionProjectClient(
                 if not getattr(work_item.meta, "errors", []):
                     assert work_item.attributes
                     assert isinstance(work_item.id, str)
+                    work_item_id = work_item.id.split("/")[-1]
+
+                    work_item_links = []
+                    work_item_attachments = []
+
+                    if (
+                        work_item.relationships
+                        and work_item.relationships.linked_work_items
+                        and work_item.relationships.linked_work_items.data
+                    ):
+                        for (
+                            link
+                        ) in work_item.relationships.linked_work_items.data:
+                            work_item_links.append(
+                                self._parse_work_item_link(
+                                    link.id,
+                                    link.additional_properties.get(
+                                        "suspect", False
+                                    ),
+                                    work_item_id,
+                                )
+                            )
+
+                    if (
+                        work_item.relationships
+                        and work_item.relationships.attachments
+                        and work_item.relationships.attachments.data
+                    ):
+                        for (
+                            attachment
+                        ) in work_item.relationships.attachments.data:
+                            assert attachment.id
+                            work_item_attachments.append(
+                                dm.WorkItemAttachment(
+                                    work_item_id,
+                                    attachment.id.split("/")[-1],
+                                    None,  # title isn't provided
+                                )
+                            )
+
                     work_items.append(
                         self._work_item(
-                            work_item.id.split("/")[-1],
+                            work_item_id,
                             unset_str_builder(work_item.attributes.title),
                             unset_str_builder(
                                 work_item.attributes.description.type
@@ -353,6 +624,8 @@ class OpenAPIPolarionProjectClient(
                             unset_str_builder(work_item.attributes.type),
                             unset_str_builder(work_item.attributes.status),
                             work_item.attributes.additional_properties,
+                            work_item_links,
+                            work_item_attachments,
                         )
                     )
             next_page = isinstance(
@@ -366,6 +639,9 @@ class OpenAPIPolarionProjectClient(
         """Create the given list of work items."""
         current_batch = api_models.WorkitemsListPostRequest([])
         content_size = min_wi_request_size
+        batch_start_index = 0
+        batch_end_index = 0
+
         for work_item in work_items:
             work_item_data = self._build_work_item_post_request(work_item)
 
@@ -386,19 +662,27 @@ class OpenAPIPolarionProjectClient(
                 proj_content_size >= self._max_content_size
                 or len(current_batch.data) >= self._batch_size
             ):
-                self._post_work_item_batch(current_batch)
+                self._post_work_item_batch(
+                    current_batch,
+                    work_items[batch_start_index:batch_end_index],
+                )
 
                 current_batch = api_models.WorkitemsListPostRequest(
                     [work_item_data]
                 )
                 content_size = _get_json_content_size(current_batch.to_dict())
+                batch_start_index = batch_end_index
             else:
                 assert isinstance(current_batch.data, list)
                 current_batch.data.append(work_item_data)
                 content_size = proj_content_size
 
+            batch_end_index += 1
+
         if current_batch.data:
-            self._post_work_item_batch(current_batch)
+            self._post_work_item_batch(
+                current_batch, work_items[batch_start_index:]
+            )
 
     def _delete_work_items(self, work_item_ids: list[str], retry: bool = True):
         response = delete_work_items.sync_detailed(
@@ -492,20 +776,10 @@ class OpenAPIPolarionProjectClient(
                     link.attributes,
                     api_models.LinkedworkitemsListGetResponseDataItemAttributes,  # pylint: disable=line-too-long
                 )
-                info = link.id.split("/")
-                assert len(info) == 5
-                role_id, target_project_id, linked_work_item_id = info[2:]
-                suspect = link.attributes.suspect
-                if isinstance(suspect, oa_types.Unset):
-                    suspect = False
 
                 work_item_links.append(
-                    dm.WorkItemLink(
-                        work_item_id,
-                        linked_work_item_id,
-                        role_id,
-                        suspect,
-                        target_project_id,
+                    self._parse_work_item_link(
+                        link.id, link.attributes.suspect, work_item_id
                     )
                 )
 
@@ -515,6 +789,21 @@ class OpenAPIPolarionProjectClient(
             ) and bool(linked_work_item_response.links.next_)
 
         return work_item_links, next_page
+
+    def _parse_work_item_link(self, link_id, suspect, work_item_id):
+        info = link_id.split("/")
+        assert len(info) == 5
+        role_id, target_project_id, linked_work_item_id = info[2:]
+        if isinstance(suspect, oa_types.Unset):
+            suspect = False
+        work_item_link = dm.WorkItemLink(
+            work_item_id,
+            linked_work_item_id,
+            role_id,
+            suspect,
+            target_project_id,
+        )
+        return work_item_link
 
     def _create_work_item_links(
         self, work_item_links: list[dm.WorkItemLink], retry: bool = True

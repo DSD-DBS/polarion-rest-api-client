@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "type": "workitem_attachments",
+      "id": "MyProjectId/MyWorkItemId/MyAttachmentId1",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId?revision=1234",
+        "content": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId/content?revision=1234"
+      }
+    },
+    {
+      "type": "workitem_attachments",
+      "id": "MyProjectId/MyWorkItemId/MyAttachmentId2",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId?revision=1234",
+        "content": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId/content?revision=1234"
+      }
+    },
+    {
+      "type": "workitem_attachments",
+      "id": "MyProjectId/MyWorkItemId/MyAttachmentId3",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId?revision=1234",
+        "content": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId/content?revision=1234"
+      }
+    }
+  ]
+}

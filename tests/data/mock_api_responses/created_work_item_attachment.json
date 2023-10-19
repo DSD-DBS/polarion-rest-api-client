@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "type": "workitem_attachments",
+      "id": "MyProjectId/MyWorkItemId/MyAttachmentId",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId?revision=1234",
+        "content": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId/content?revision=1234"
+      }
+    }
+  ]
+}

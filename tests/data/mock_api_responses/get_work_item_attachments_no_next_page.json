@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "totalCount": 0
+  },
+  "data": [
+    {
+      "type": "workitem_attachments",
+      "id": "MyProjectId/MyWorkItemId/MyAttachmentId",
+      "revision": "1234",
+      "attributes": {
+        "fileName": "File Name",
+        "id": "MyAttachmentId",
+        "length": 0,
+        "title": "Title",
+        "updated": "1970-01-01T00:00:00Z"
+      },
+      "relationships": {
+        "author": {
+          "data": {
+            "type": "users",
+            "id": "MyUserId",
+            "revision": "1234"
+          }
+        },
+        "project": {
+          "data": {
+            "type": "projects",
+            "id": "MyProjectId",
+            "revision": "1234"
+          }
+        }
+      },
+      "meta": {
+      },
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId?revision=1234",
+        "content": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId/content?revision=1234"
+      }
+    }
+  ],
+  "included": [
+    {}
+  ],
+  "links": {
+    "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments?page%5Bsize%5D=10&page%5Bnumber%5D=5",
+    "first": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments?page%5Bsize%5D=10&page%5Bnumber%5D=1",
+    "prev": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments?page%5Bsize%5D=10&page%5Bnumber%5D=4",
+    "last": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments?page%5Bsize%5D=10&page%5Bnumber%5D=9"
+  }
+}

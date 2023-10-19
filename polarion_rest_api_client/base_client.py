@@ -16,6 +16,7 @@ class DefaultFields:
 
     _workitems: str = "@basic"
     _linkedworkitems: str = "id,role,suspect"
+    _workitem_attachments: str = "@basic"
 
     @property
     def workitems(self):
@@ -35,11 +36,28 @@ class DefaultFields:
     def linkedworkitems(self, value):
         self._linkedworkitems = value
 
+    @property
+    def workitem_attachments(self):
+        """Return the fields dict for workitem_attachments."""
+        return {"workitem_attachments": self._workitem_attachments}
+
+    @workitem_attachments.setter
+    def workitem_attachments(self, value):
+        self._workitem_attachments = value
+
+    @property
+    def all_types(self):
+        """Return all fields dicts merged together."""
+        return (
+            self.workitem_attachments | self.workitems | self.linkedworkitems
+        )
+
 
 class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
     """An abstract base class for a Polarion API client."""
 
     delete_polarion_work_items: bool
+    add_work_item_checksum: bool
     project_id: str
     delete_status: str = "deleted"
     default_fields: DefaultFields
@@ -54,6 +72,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         custom_work_item: type[WorkItemType],
         batch_size: int = 5,
         page_size: int = 100,
+        add_work_item_checksum: bool = False,
     ):
         self.project_id = project_id
         self.delete_polarion_work_items = delete_polarion_work_items
@@ -61,6 +80,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         self._batch_size = batch_size
         self._page_size = page_size
         self._work_item = custom_work_item
+        self.add_work_item_checksum = add_work_item_checksum
 
     @abc.abstractmethod
     def project_exists(self) -> bool:
@@ -79,6 +99,67 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
             )
             items += _items
         return items
+
+    def get_all_work_item_attachments(
+        self, work_item_id: str, fields: dict[str, str] | None = None
+    ) -> list[dm.WorkItemAttachment]:
+        """Get all work item attachments for a given work item.
+
+        Will handle pagination automatically. Define a fields dictionary
+        as described in the Polarion API documentation to get certain
+        fields.
+        """
+        return self._request_all_items(
+            self.get_work_item_attachments,
+            fields=fields,
+            work_item_id=work_item_id,
+        )
+
+    @abc.abstractmethod
+    def delete_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Delete the given work item attachment."""
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def update_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Update the given work item attachment in Polarion."""
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def create_work_item_attachments(
+        self,
+        work_item_attachments: list[dm.WorkItemAttachment],
+        retry: bool = True,
+    ):
+        """Update the given work item attachment in Polarion."""
+        raise NotImplementedError
+
+    def create_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Update the given work item attachment in Polarion."""
+        self.create_work_item_attachments([work_item_attachment], retry)
+
+    @abc.abstractmethod
+    def get_work_item_attachments(
+        self,
+        work_item_id: str,
+        fields: dict[str, str] | None = None,
+        page_size: int = 100,
+        page_number: int = 1,
+        retry: bool = True,
+    ) -> tuple[list[dm.WorkItemAttachment], bool]:
+        """Return the attachments for a given work item on a defined page.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+        raise NotImplementedError
 
     def get_all_work_items(
         self, query: str, fields: dict[str, str] | None = None
@@ -112,7 +193,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
 
     def create_work_item(self, work_item: WorkItemType):
         """Create a single given work item."""
-        return self.create_work_items([work_item])
+        self.create_work_items([work_item])
 
     @abc.abstractmethod
     def create_work_items(self, work_items: list[WorkItemType]):
