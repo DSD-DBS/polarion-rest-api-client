@@ -69,3 +69,15 @@ def fixture_dummy_work_item_attachment():
         "text/plain",
         "test.json",
     )
+
+
+@pytest.fixture(name="document")
+def fixture_dummy_document():
+    return polarion_api.Document(
+        "MyProjectId/MySpaceId/MyDocumentName",
+        "MySpaceId",
+        "MyDocumentName",
+        "standardSpecification",
+        "open",
+        {"type": "text/html", "value": "<h1>My text value</h1>"},
+    )

@@ -151,3 +151,74 @@ class WorkItemAttachment:
     content_bytes: bytes | None = None
     mime_type: str | None = None
     file_name: str | None = None
+
+
+class Document:
+    """A data class containing all relevant data of a Polarion WorkItem."""
+
+    id: str | None = None
+    module_folder: str | None = None
+    module_name: str | None = None
+    type: str | None = None
+    status: str | None = None
+    home_page_content: dict | None = None
+    _checksum: str | None = None
+
+    def __init__(
+        self,
+        id: str | None = None,
+        module_folder: str | None = None,
+        module_name: str | None = None,
+        type: str | None = None,
+        status: str | None = None,
+        home_page_content: dict | None = None,
+    ):
+        self.id = id
+        self.module_folder = module_folder
+        self.module_name = module_name
+        self.type = type
+        self.status = status
+        self.home_page_content = home_page_content
+        self._checksum = None
+
+    def __eq__(self, other: object) -> bool:
+        """Compare only Document attributes."""
+        if not isinstance(other, Document):
+            return NotImplemented
+        if self.get_current_checksum() is None:
+            self.calculate_checksum()
+        if other.get_current_checksum() is None:
+            other.calculate_checksum()
+
+        return self.get_current_checksum() == other.get_current_checksum()
+
+    def to_dict(self) -> dict[str, t.Any]:
+        """Return the content of the Document as dictionary."""
+        return {
+            "id": self.id,
+            "module_folder": self.module_folder,
+            "module_name": self.module_name,
+            "type": self.type,
+            "status": self.status,
+            "home_page_content": self.home_page_content,
+            "checksum": self._checksum,
+        }
+
+    def calculate_checksum(self) -> str:
+        """Calculate and return a checksum for this Document.
+
+        In addition, the checksum will be written to self._checksum.
+        """
+        data = self.to_dict()
+        del data["checksum"]
+        del data["id"]
+
+        data = dict(sorted(data.items()))
+
+        converted = json.dumps(data).encode("utf8")
+        self._checksum = hashlib.sha256(converted).hexdigest()
+        return self._checksum
+
+    def get_current_checksum(self) -> str | None:
+        """Return the checksum currently set without calculation."""
+        return self._checksum

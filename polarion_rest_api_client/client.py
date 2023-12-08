@@ -35,6 +35,7 @@ from polarion_rest_api_client.open_api_client.api.work_items import (
     patch_work_item,
     post_work_items,
 )
+from polarion_rest_api_client.open_api_client.api.documents import get_document
 
 logger = logging.getLogger(__name__)
 
@@ -611,16 +612,20 @@ class OpenAPIPolarionProjectClient(
                         self._work_item(
                             work_item_id,
                             unset_str_builder(work_item.attributes.title),
-                            unset_str_builder(
-                                work_item.attributes.description.type
-                            )
-                            if work_item.attributes.description
-                            else None,
-                            unset_str_builder(
-                                work_item.attributes.description.value
-                            )
-                            if work_item.attributes.description
-                            else None,
+                            (
+                                unset_str_builder(
+                                    work_item.attributes.description.type
+                                )
+                                if work_item.attributes.description
+                                else None
+                            ),
+                            (
+                                unset_str_builder(
+                                    work_item.attributes.description.value
+                                )
+                                if work_item.attributes.description
+                                else None
+                            ),
                             unset_str_builder(work_item.attributes.type),
                             unset_str_builder(work_item.attributes.status),
                             work_item.attributes.additional_properties,
@@ -634,6 +639,66 @@ class OpenAPIPolarionProjectClient(
             ) and bool(work_items_response.links.next_)
 
         return work_items, next_page
+
+    def get_document(
+        self,
+        space_id: str,
+        document_name: str,
+        fields: dict[str, str] | None = None,
+        include: str | None = None,
+        revision: str | None = None,
+        retry: bool = True,
+    ) -> base_client.DocumentType:
+        """Return the document with the given document_name and space_id."""
+
+        if " " in space_id or " " in document_name:
+            space_id = space_id.replace(" ", "%20")
+            document_name = document_name.replace(" ", "%20")
+        if fields is None:
+            fields = self.default_fields.documents
+
+        sparse_fields = _build_sparse_fields(fields)
+        response = get_document.sync_detailed(
+            self.project_id,
+            space_id,
+            document_name,
+            client=self.client,
+            fields=sparse_fields,
+            include=include,
+            revision=revision,
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.get_work_items(
+                space_id, document_name, fields, include, revision, False
+            )
+
+        document_response = response.parsed
+
+        if isinstance(
+            document_response, api_models.DocumentsSingleGetResponse
+        ) and (data := document_response.data):
+            if not getattr(data.meta, "errors", []):
+                assert (attributes := data.attributes)
+                assert isinstance(data.id, str)
+
+                document: base_client.DocumentType = dm.Document(
+                    id=data.id,
+                    module_folder=unset_str_builder(attributes.module_folder),
+                    module_name=unset_str_builder(attributes.module_name),
+                    type=unset_str_builder(attributes.type),
+                    status=unset_str_builder(attributes.status),
+                    home_page_content={
+                        "type": attributes.home_page_content.type,
+                        "value": attributes.home_page_content.value,
+                    }
+                    if not isinstance(
+                        attributes.home_page_content, oa_types.Unset
+                    )
+                    else None,
+                )
+        return document
 
     def create_work_items(self, work_items: list[base_client.WorkItemType]):
         """Create the given list of work items."""
