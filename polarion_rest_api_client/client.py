@@ -10,6 +10,7 @@ import os
 import random
 import time
 import typing as t
+import urllib
 
 from polarion_rest_api_client import base_client
 from polarion_rest_api_client import data_models as dm
@@ -652,8 +653,12 @@ class OpenAPIPolarionProjectClient(
         """Return the document with the given document_name and space_id."""
 
         if " " in space_id or " " in document_name:
-            space_id = space_id.replace(" ", "%20")
-            document_name = document_name.replace(" ", "%20")
+            space_id = urllib.parse.quote(
+                space_id, safe="/", encoding=None, errors=None
+            )
+            document_name = urllib.parse.quote(
+                document_name, safe="/", encoding=None, errors=None
+            )
         if fields is None:
             fields = self.default_fields.documents
 
@@ -670,7 +675,7 @@ class OpenAPIPolarionProjectClient(
 
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
-            return self.get_work_items(
+            return self.get_document(
                 space_id, document_name, fields, include, revision, False
             )
 

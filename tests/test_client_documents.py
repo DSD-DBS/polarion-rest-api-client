@@ -3,12 +3,9 @@
 
 from __future__ import annotations
 
-import copy
 import json
 
-import pytest
 import pytest_httpx
-import pytest_mock as mock
 
 import polarion_rest_api_client as polarion_api
 from polarion_rest_api_client.open_api_client import models as api_models
@@ -22,9 +19,9 @@ def test_get_document_with_all_fields(
     with open(TEST_DOCUMENT_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    client.default_fields.documents = "@all"
-
-    document = client.get_document("MySpaceId", "MyDocumentName")
+    document = client.get_document(
+        "MySpaceId", "MyDocumentName", {"fields[documents]": "@all"}
+    )
 
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"

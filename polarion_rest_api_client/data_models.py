@@ -9,60 +9,26 @@ import json
 import typing as t
 
 
-class WorkItem:
-    """A data class containing all relevant data of a Polarion WorkItem."""
-
+class BaseItem:
     id: str | None = None
-    title: str | None = None
-    description_type: str | None = None
-    description: str | None = None
     type: str | None = None
     status: str | None = None
-    additional_attributes: dict[str, t.Any] = {}
-    linked_work_items: list[WorkItemLink] = []
-    attachments: list[WorkItemAttachment] = []
     _checksum: str | None = None
 
     def __init__(
         self,
         id: str | None = None,
-        title: str | None = None,
-        description_type: str | None = None,
-        description: str | None = None,
         type: str | None = None,
         status: str | None = None,
-        additional_attributes: dict[str, t.Any] | None = None,
-        linked_work_items: list[WorkItemLink] | None = None,
-        attachments: list[WorkItemAttachment] | None = None,
-        **kwargs,
     ):
         self.id = id
-        self.title = title
-        self.description_type = description_type
-        self.description = description
         self.type = type
         self.status = status
-        self.additional_attributes = (additional_attributes or {}) | kwargs
-        self._checksum = self.additional_attributes.pop("checksum", None)
-        self.linked_work_items = linked_work_items or []
-        self.attachments = attachments or []
-
-    def __getattribute__(self, item: str) -> t.Any:
-        """Return all non WorkItem attributes from additional_properties."""
-        if item.startswith("__") or item in dir(WorkItem):
-            return super().__getattribute__(item)
-        return self.additional_attributes.get(item)
-
-    def __setattr__(self, key: str, value: t.Any):
-        """Set all non WorkItem attributes in additional_properties."""
-        if key in dir(WorkItem):
-            super().__setattr__(key, value)
-        else:
-            self.additional_attributes[key] = value
+        self._checksum = None
 
     def __eq__(self, other: object) -> bool:
-        """Compare only WorkItem attributes."""
-        if not isinstance(other, WorkItem):
+        """Compare only BaseItem attributes."""
+        if not isinstance(other, BaseItem):
             return NotImplemented
         if self.get_current_checksum() is None:
             self.calculate_checksum()
@@ -71,47 +37,23 @@ class WorkItem:
 
         return self.get_current_checksum() == other.get_current_checksum()
 
-    def to_dict(self) -> dict[str, t.Any]:
-        """Return the content of the WorkItem as dictionary."""
-        sorted_links = sorted(
-            self.linked_work_items,
-            key=lambda x: f"{x.role}/{x.secondary_work_item_project}/{x.secondary_work_item_id}",  # pylint: disable=line-too-long
-        )
-
-        sorted_attachments = sorted(
-            self.attachments, key=lambda x: x.file_name or ""
-        )
-
+    def to_dict(self) -> dict[str, Any]:
+        """Return the content of the BaseItem as dictionary."""
         return {
             "id": self.id,
-            "title": self.title,
-            "description_type": self.description_type,
-            "description": self.description,
             "type": self.type,
             "status": self.status,
-            "additional_attributes": dict(
-                sorted(self.additional_attributes.items())
-            ),
             "checksum": self._checksum,
-            "linked_work_items": [
-                dataclasses.asdict(lwi) for lwi in sorted_links
-            ],
-            "attachments": [
-                dataclasses.asdict(at) for at in sorted_attachments
-            ],
         }
 
     def calculate_checksum(self) -> str:
-        """Calculate and return a checksum for this WorkItem.
+        """Calculate and return a checksum for this BaseItem.
 
         In addition, the checksum will be written to self._checksum.
         """
         data = self.to_dict()
         del data["checksum"]
         del data["id"]
-
-        for at in data["attachments"]:
-            del at["id"]
 
         data = dict(sorted(data.items()))
 
@@ -122,6 +64,51 @@ class WorkItem:
     def get_current_checksum(self) -> str | None:
         """Return the checksum currently set without calculation."""
         return self._checksum
+
+
+class WorkItem(BaseItem):
+    """A data class containing all relevant data of a Polarion WorkItem."""
+
+    title: str | None = None
+    description_type: str | None = None
+    description: str | None = None
+    additional_attributes: dict[str, Any] = {}
+    linked_work_items: list[WorkItemLink] = []
+    attachments: list[WorkItemAttachment] = []
+
+    def __init__(
+        self,
+        id: str | None = None,
+        title: str | None = None,
+        description_type: str | None = None,
+        description: str | None = None,
+        type: str | None = None,
+        status: str | None = None,
+        additional_attributes: dict[str, Any] | None = None,
+        linked_work_items: list[WorkItemLink] | None = None,
+        attachments: list[WorkItemAttachment] | None = None,
+        **kwargs,
+    ):
+        super().__init__(id, type, status)
+        self.title = title
+        self.description_type = description_type
+        self.description = description
+        self.additional_attributes = (additional_attributes or {}) | kwargs
+        self.linked_work_items = linked_work_items or []
+        self.attachments = attachments or []
+
+    def __getattribute__(self, item: str) -> Any:
+        """Return all non WorkItem attributes from additional_properties."""
+        if item.startswith("__") or item in dir(WorkItem):
+            return super().__getattribute__(item)
+        return self.additional_attributes.get(item)
+
+    def __setattr__(self, key: str, value: Any):
+        """Set all non WorkItem attributes in additional_properties."""
+        if key in dir(WorkItem):
+            super().__setattr__(key, value)
+        else:
+            self.additional_attributes[key] = value
 
 
 @dataclasses.dataclass
@@ -153,16 +140,10 @@ class WorkItemAttachment:
     file_name: str | None = None
 
 
-class Document:
-    """A data class containing all relevant data of a Polarion WorkItem."""
-
-    id: str | None = None
+class Document(BaseItem):
     module_folder: str | None = None
     module_name: str | None = None
-    type: str | None = None
-    status: str | None = None
     home_page_content: dict | None = None
-    _checksum: str | None = None
 
     def __init__(
         self,
@@ -173,52 +154,7 @@ class Document:
         status: str | None = None,
         home_page_content: dict | None = None,
     ):
-        self.id = id
+        super().__init__(id, type, status)
         self.module_folder = module_folder
         self.module_name = module_name
-        self.type = type
-        self.status = status
         self.home_page_content = home_page_content
-        self._checksum = None
-
-    def __eq__(self, other: object) -> bool:
-        """Compare only Document attributes."""
-        if not isinstance(other, Document):
-            return NotImplemented
-        if self.get_current_checksum() is None:
-            self.calculate_checksum()
-        if other.get_current_checksum() is None:
-            other.calculate_checksum()
-
-        return self.get_current_checksum() == other.get_current_checksum()
-
-    def to_dict(self) -> dict[str, t.Any]:
-        """Return the content of the Document as dictionary."""
-        return {
-            "id": self.id,
-            "module_folder": self.module_folder,
-            "module_name": self.module_name,
-            "type": self.type,
-            "status": self.status,
-            "home_page_content": self.home_page_content,
-            "checksum": self._checksum,
-        }
-
-    def calculate_checksum(self) -> str:
-        """Calculate and return a checksum for this Document.
-
-        In addition, the checksum will be written to self._checksum.
-        """
-        data = self.to_dict()
-        del data["checksum"]
-        del data["id"]
-
-        data = dict(sorted(data.items()))
-
-        converted = json.dumps(data).encode("utf8")
-        self._checksum = hashlib.sha256(converted).hexdigest()
-        return self._checksum
-
-    def get_current_checksum(self) -> str | None:
-        """Return the checksum currently set without calculation."""
-        return self._checksum
