@@ -10,7 +10,7 @@ import os
 import random
 import time
 import typing as t
-import urllib
+import urllib.parse
 
 from polarion_rest_api_client import base_client
 from polarion_rest_api_client import data_models as dm
@@ -18,6 +18,7 @@ from polarion_rest_api_client import errors
 from polarion_rest_api_client.open_api_client import client as oa_client
 from polarion_rest_api_client.open_api_client import models as api_models
 from polarion_rest_api_client.open_api_client import types as oa_types
+from polarion_rest_api_client.open_api_client.api.documents import get_document
 from polarion_rest_api_client.open_api_client.api.linked_work_items import (
     delete_linked_work_items,
     get_linked_work_items,
@@ -36,7 +37,6 @@ from polarion_rest_api_client.open_api_client.api.work_items import (
     patch_work_item,
     post_work_items,
 )
-from polarion_rest_api_client.open_api_client.api.documents import get_document
 
 logger = logging.getLogger(__name__)
 
@@ -649,7 +649,7 @@ class OpenAPIPolarionProjectClient(
         include: str | None = None,
         revision: str | None = None,
         retry: bool = True,
-    ) -> base_client.DocumentType:
+    ) -> dm.Document:
         """Return the document with the given document_name and space_id."""
 
         if " " in space_id or " " in document_name:
@@ -688,7 +688,7 @@ class OpenAPIPolarionProjectClient(
                 assert (attributes := data.attributes)
                 assert isinstance(data.id, str)
 
-                document: base_client.DocumentType = dm.Document(
+                document: dm.Document = dm.Document(
                     id=data.id,
                     module_folder=unset_str_builder(attributes.module_folder),
                     module_name=unset_str_builder(attributes.module_name),

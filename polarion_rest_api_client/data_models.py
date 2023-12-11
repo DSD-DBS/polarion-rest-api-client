@@ -10,6 +10,8 @@ import typing as t
 
 
 class BaseItem:
+    """A parent data class for WorkItem and Document."""
+
     id: str | None = None
     type: str | None = None
     status: str | None = None
@@ -37,7 +39,7 @@ class BaseItem:
 
         return self.get_current_checksum() == other.get_current_checksum()
 
-    def to_dict(self) -> dict[str, Any]:
+    def to_dict(self) -> dict[str, t.Any]:
         """Return the content of the BaseItem as dictionary."""
         return {
             "id": self.id,
@@ -72,7 +74,7 @@ class WorkItem(BaseItem):
     title: str | None = None
     description_type: str | None = None
     description: str | None = None
-    additional_attributes: dict[str, Any] = {}
+    additional_attributes: dict[str, t.Any] = {}
     linked_work_items: list[WorkItemLink] = []
     attachments: list[WorkItemAttachment] = []
 
@@ -84,7 +86,7 @@ class WorkItem(BaseItem):
         description: str | None = None,
         type: str | None = None,
         status: str | None = None,
-        additional_attributes: dict[str, Any] | None = None,
+        additional_attributes: dict[str, t.Any] | None = None,
         linked_work_items: list[WorkItemLink] | None = None,
         attachments: list[WorkItemAttachment] | None = None,
         **kwargs,
@@ -97,13 +99,13 @@ class WorkItem(BaseItem):
         self.linked_work_items = linked_work_items or []
         self.attachments = attachments or []
 
-    def __getattribute__(self, item: str) -> Any:
+    def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
         if item.startswith("__") or item in dir(WorkItem):
             return super().__getattribute__(item)
         return self.additional_attributes.get(item)
 
-    def __setattr__(self, key: str, value: Any):
+    def __setattr__(self, key: str, value: t.Any):
         """Set all non WorkItem attributes in additional_properties."""
         if key in dir(WorkItem):
             super().__setattr__(key, value)
@@ -141,6 +143,8 @@ class WorkItemAttachment:
 
 
 class Document(BaseItem):
+    """A data class containing all relevant data of a Polarion Document."""
+
     module_folder: str | None = None
     module_name: str | None = None
     home_page_content: dict | None = None
