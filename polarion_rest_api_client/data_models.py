@@ -147,7 +147,7 @@ class Document(BaseItem):
 
     module_folder: str | None = None
     module_name: str | None = None
-    home_page_content: dict | None = None
+    home_page_content: TextContent | None = None
 
     def __init__(
         self,
@@ -156,9 +156,24 @@ class Document(BaseItem):
         module_name: str | None = None,
         type: str | None = None,
         status: str | None = None,
-        home_page_content: dict | None = None,
+        home_page_content: TextContent | None = None,
     ):
         super().__init__(id, type, status)
         self.module_folder = module_folder
         self.module_name = module_name
         self.home_page_content = home_page_content
+
+
+class TextContent:
+    """A data class for home_page_content of a Polarion Document."""
+
+    type: str | None = None
+    value: str | None = None
+
+    def __init__(
+        self,
+        type: str | None = None,
+        value: str | None = None,
+    ):
+        self.type = type
+        self.value = value

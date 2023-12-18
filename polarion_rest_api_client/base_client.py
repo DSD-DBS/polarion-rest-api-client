@@ -9,7 +9,6 @@ import typing as t
 from polarion_rest_api_client import data_models as dm
 
 WorkItemType = t.TypeVar("WorkItemType", bound=dm.WorkItem)
-DocumentType = t.TypeVar("DocumentType", bound=dm.Document)
 
 
 class DefaultFields:

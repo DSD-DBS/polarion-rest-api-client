@@ -687,6 +687,9 @@ class OpenAPIPolarionProjectClient(
             if not getattr(data.meta, "errors", []):
                 assert (attributes := data.attributes)
                 assert isinstance(data.id, str)
+                home_page_content = self._handle_home_page_content(
+                    attributes.home_page_content
+                )
 
                 document: dm.Document = dm.Document(
                     id=data.id,
@@ -694,16 +697,36 @@ class OpenAPIPolarionProjectClient(
                     module_name=unset_str_builder(attributes.module_name),
                     type=unset_str_builder(attributes.type),
                     status=unset_str_builder(attributes.status),
-                    home_page_content={
-                        "type": attributes.home_page_content.type,
-                        "value": attributes.home_page_content.value,
-                    }
-                    if not isinstance(
-                        attributes.home_page_content, oa_types.Unset
-                    )
-                    else None,
+                    home_page_content=home_page_content,
                 )
         return document
+
+    def _handle_home_page_content(self, home_page_content):
+        home_page_content_type = None
+        home_page_content_value = None
+
+        if not isinstance(home_page_content, oa_types.Unset):
+            if isinstance(
+                home_page_content.type,
+                api_models.DocumentsSingleGetResponseDataAttributesHomePageContentType,
+            ):
+                home_page_content_type = str(home_page_content.type)
+            elif isinstance(home_page_content.type, oa_types.Unset):
+                home_page_content_type = None
+
+            if isinstance(home_page_content.value, str):
+                home_page_content_value = home_page_content.value
+            elif isinstance(home_page_content.value, oa_types.Unset):
+                home_page_content_value = None
+
+            home_page_content = dm.TextContent(
+                type=home_page_content_type,
+                value=home_page_content_value,
+            )
+        else:
+            home_page_content = None
+
+        return home_page_content
 
     def create_work_items(self, work_items: list[base_client.WorkItemType]):
         """Create the given list of work items."""

@@ -33,5 +33,7 @@ def test_get_document_with_all_fields(
         "MyDocumentName",
         "standardSpecification",
         "open",
-        {"type": "text/html", "value": "<h1>My text value</h1>"},
+        polarion_api.data_models.TextContent(
+            type="text/html", value="<h1>My text value</h1>"
+        ),
     )
