@@ -3,6 +3,7 @@
 """Data model classes returned by the client."""
 from __future__ import annotations
 
+import base64
 import dataclasses
 import hashlib
 import json
@@ -110,8 +111,13 @@ class WorkItem:
         del data["checksum"]
         del data["id"]
 
-        for at in data["attachments"]:
-            del at["id"]
+        for attachment in data["attachments"]:
+            try:
+                attachment["content_bytes"] = base64.b64encode(
+                    attachment["content_bytes"]
+                ).decode("utf8")
+            except TypeError:
+                pass
 
         data = dict(sorted(data.items()))
 
