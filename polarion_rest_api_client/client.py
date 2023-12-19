@@ -701,32 +701,28 @@ class OpenAPIPolarionProjectClient(
                 )
         return document
 
-    def _handle_home_page_content(self, home_page_content):
+    def _handle_home_page_content(
+        self,
+        home_page_content: api_models.DocumentsSingleGetResponseDataAttributesHomePageContent
+        | oa_types.Unset,
+    ) -> dm.TextContent | None:
+        if isinstance(home_page_content, oa_types.Unset):
+            return None
+
         home_page_content_type = None
         home_page_content_value = None
 
-        if not isinstance(home_page_content, oa_types.Unset):
-            if isinstance(
-                home_page_content.type,
-                api_models.DocumentsSingleGetResponseDataAttributesHomePageContentType,
-            ):
-                home_page_content_type = str(home_page_content.type)
-            elif isinstance(home_page_content.type, oa_types.Unset):
-                home_page_content_type = None
-
-            if isinstance(home_page_content.value, str):
-                home_page_content_value = home_page_content.value
-            elif isinstance(home_page_content.value, oa_types.Unset):
-                home_page_content_value = None
-
-            home_page_content = dm.TextContent(
-                type=home_page_content_type,
-                value=home_page_content_value,
-            )
-        else:
-            home_page_content = None
-
-        return home_page_content
+        if isinstance(
+            home_page_content.type,
+            api_models.DocumentsSingleGetResponseDataAttributesHomePageContentType,
+        ):
+            home_page_content_type = str(home_page_content.type)
+        if isinstance(home_page_content.value, str):
+            home_page_content_value = home_page_content.value
+        return dm.TextContent(
+            type=home_page_content_type,
+            value=home_page_content_value,
+        )
 
     def create_work_items(self, work_items: list[base_client.WorkItemType]):
         """Create the given list of work items."""
