@@ -6,7 +6,7 @@ name: Build
 on:
   push:
     branches: ["*"]
-    pull_request: [master]
+    pull_request: [main]
     tags: ["v*.*.*"]
 
 jobs:
@@ -18,12 +18,12 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         python_version:
-          - "3.9"
           - "3.10"
           - "3.11"
+          - "3.12"
         include:
           - os: windows-latest
-            python_version: "3.9"
+            python_version: "3.12"
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{matrix.python_version}}

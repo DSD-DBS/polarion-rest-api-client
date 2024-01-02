@@ -3,6 +3,7 @@
 """Data model classes returned by the client."""
 from __future__ import annotations
 
+import base64
 import dataclasses
 import hashlib
 import json
@@ -111,6 +112,70 @@ class WorkItem(BaseItem):
             super().__setattr__(key, value)
         else:
             self.additional_attributes[key] = value
+
+    def __eq__(self, other: object) -> bool:
+        """Compare only WorkItem attributes."""
+        if not isinstance(other, WorkItem):
+            return NotImplemented
+        if self.get_current_checksum() is None:
+            self.calculate_checksum()
+        if other.get_current_checksum() is None:
+            other.calculate_checksum()
+
+        return self.get_current_checksum() == other.get_current_checksum()
+
+    def to_dict(self) -> dict[str, t.Any]:
+        """Return the content of the WorkItem as dictionary."""
+        sorted_links = sorted(
+            self.linked_work_items,
+            key=lambda x: f"{x.role}/{x.secondary_work_item_project}/{x.secondary_work_item_id}",  # pylint: disable=line-too-long
+        )
+
+        sorted_attachments = sorted(
+            self.attachments, key=lambda x: x.file_name or ""
+        )
+
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description_type": self.description_type,
+            "description": self.description,
+            "type": self.type,
+            "status": self.status,
+            "additional_attributes": dict(
+                sorted(self.additional_attributes.items())
+            ),
+            "checksum": self._checksum,
+            "linked_work_items": [
+                dataclasses.asdict(lwi) for lwi in sorted_links
+            ],
+            "attachments": [
+                dataclasses.asdict(at) for at in sorted_attachments
+            ],
+        }
+
+    def calculate_checksum(self) -> str:
+        """Calculate and return a checksum for this WorkItem.
+
+        In addition, the checksum will be written to self._checksum.
+        """
+        data = self.to_dict()
+        del data["checksum"]
+        del data["id"]
+
+        for attachment in data["attachments"]:
+            try:
+                attachment["content_bytes"] = base64.b64encode(
+                    attachment["content_bytes"]
+                ).decode("utf8")
+            except TypeError:
+                pass
+
+        data = dict(sorted(data.items()))
+
+        converted = json.dumps(data).encode("utf8")
+        self._checksum = hashlib.sha256(converted).hexdigest()
+        return self._checksum
 
 
 @dataclasses.dataclass
