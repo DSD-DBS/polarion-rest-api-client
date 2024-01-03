@@ -10,24 +10,18 @@ import json
 import typing as t
 
 
+@dataclasses.dataclass
 class BaseItem:
     """A parent data class for WorkItem and Document."""
 
     id: str | None = None
     type: str | None = None
     status: str | None = None
-    _checksum: str | None = None
+    _checksum: str | None = dataclasses.field(init=False, default=None)
 
-    def __init__(
-        self,
-        id: str | None = None,
-        type: str | None = None,
-        status: str | None = None,
-    ):
-        self.id = id
-        self.type = type
-        self.status = status
-        self._checksum = None
+    def __post_init__(self):
+        """Set initial checksum value."""
+        self._checksum = self.calculate_checksum()
 
     def __eq__(self, other: object) -> bool:
         """Compare only BaseItem attributes."""
@@ -229,16 +223,9 @@ class Document(BaseItem):
         self.home_page_content = home_page_content
 
 
+@dataclasses.dataclass
 class TextContent:
     """A data class for home_page_content of a Polarion Document."""
 
     type: str | None = None
     value: str | None = None
-
-    def __init__(
-        self,
-        type: str | None = None,
-        value: str | None = None,
-    ):
-        self.type = type
-        self.value = value
