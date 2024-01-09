@@ -19,10 +19,6 @@ class BaseItem:
     status: str | None = None
     _checksum: str | None = dataclasses.field(init=False, default=None)
 
-    def __post_init__(self):
-        """Set initial checksum value."""
-        self._checksum = self.calculate_checksum()
-
     def __eq__(self, other: object) -> bool:
         """Compare only BaseItem attributes."""
         if not isinstance(other, BaseItem):
