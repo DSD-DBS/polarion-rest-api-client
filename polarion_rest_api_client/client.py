@@ -521,7 +521,7 @@ class OpenAPIPolarionProjectClient(
 
     def get_work_items(
         self,
-        query: str,
+        query: str = "",
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
