@@ -175,7 +175,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         raise NotImplementedError
 
     def get_all_work_items(
-        self, query: str, fields: dict[str, str] | None = None
+        self, query: str = "", fields: dict[str, str] | None = None
     ) -> list[WorkItemType]:
         """Get all work items matching the given query.
 
