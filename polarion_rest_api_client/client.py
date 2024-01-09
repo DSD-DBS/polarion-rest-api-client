@@ -10,6 +10,7 @@ import os
 import random
 import time
 import typing as t
+import urllib.parse
 
 from polarion_rest_api_client import base_client
 from polarion_rest_api_client import data_models as dm
@@ -17,6 +18,7 @@ from polarion_rest_api_client import errors
 from polarion_rest_api_client.open_api_client import client as oa_client
 from polarion_rest_api_client.open_api_client import models as api_models
 from polarion_rest_api_client.open_api_client import types as oa_types
+from polarion_rest_api_client.open_api_client.api.documents import get_document
 from polarion_rest_api_client.open_api_client.api.linked_work_items import (
     delete_linked_work_items,
     get_linked_work_items,
@@ -611,16 +613,20 @@ class OpenAPIPolarionProjectClient(
                         self._work_item(
                             work_item_id,
                             unset_str_builder(work_item.attributes.title),
-                            unset_str_builder(
-                                work_item.attributes.description.type
-                            )
-                            if work_item.attributes.description
-                            else None,
-                            unset_str_builder(
-                                work_item.attributes.description.value
-                            )
-                            if work_item.attributes.description
-                            else None,
+                            (
+                                unset_str_builder(
+                                    work_item.attributes.description.type
+                                )
+                                if work_item.attributes.description
+                                else None
+                            ),
+                            (
+                                unset_str_builder(
+                                    work_item.attributes.description.value
+                                )
+                                if work_item.attributes.description
+                                else None
+                            ),
                             unset_str_builder(work_item.attributes.type),
                             unset_str_builder(work_item.attributes.status),
                             work_item.attributes.additional_properties,
@@ -634,6 +640,89 @@ class OpenAPIPolarionProjectClient(
             ) and bool(work_items_response.links.next_)
 
         return work_items, next_page
+
+    def get_document(
+        self,
+        space_id: str,
+        document_name: str,
+        fields: dict[str, str] | None = None,
+        include: str | None = None,
+        revision: str | None = None,
+        retry: bool = True,
+    ) -> dm.Document:
+        """Return the document with the given document_name and space_id."""
+
+        if " " in space_id or " " in document_name:
+            space_id = urllib.parse.quote(
+                space_id, safe="/", encoding=None, errors=None
+            )
+            document_name = urllib.parse.quote(
+                document_name, safe="/", encoding=None, errors=None
+            )
+        if fields is None:
+            fields = self.default_fields.documents
+
+        sparse_fields = _build_sparse_fields(fields)
+        response = get_document.sync_detailed(
+            self.project_id,
+            space_id,
+            document_name,
+            client=self.client,
+            fields=sparse_fields,
+            include=include,
+            revision=revision,
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.get_document(
+                space_id, document_name, fields, include, revision, False
+            )
+
+        document_response = response.parsed
+
+        if isinstance(
+            document_response, api_models.DocumentsSingleGetResponse
+        ) and (data := document_response.data):
+            if not getattr(data.meta, "errors", []):
+                assert (attributes := data.attributes)
+                assert isinstance(data.id, str)
+                home_page_content = self._handle_home_page_content(
+                    attributes.home_page_content
+                )
+
+                document: dm.Document = dm.Document(
+                    id=data.id,
+                    module_folder=unset_str_builder(attributes.module_folder),
+                    module_name=unset_str_builder(attributes.module_name),
+                    type=unset_str_builder(attributes.type),
+                    status=unset_str_builder(attributes.status),
+                    home_page_content=home_page_content,
+                )
+        return document
+
+    def _handle_home_page_content(
+        self,
+        home_page_content: api_models.DocumentsSingleGetResponseDataAttributesHomePageContent
+        | oa_types.Unset,
+    ) -> dm.TextContent | None:
+        if isinstance(home_page_content, oa_types.Unset):
+            return None
+
+        home_page_content_type = None
+        home_page_content_value = None
+
+        if isinstance(
+            home_page_content.type,
+            api_models.DocumentsSingleGetResponseDataAttributesHomePageContentType,
+        ):
+            home_page_content_type = str(home_page_content.type)
+        if isinstance(home_page_content.value, str):
+            home_page_content_value = home_page_content.value
+        return dm.TextContent(
+            type=home_page_content_type,
+            value=home_page_content_value,
+        )
 
     def create_work_items(self, work_items: list[base_client.WorkItemType]):
         """Create the given list of work items."""

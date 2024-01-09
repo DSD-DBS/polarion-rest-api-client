@@ -59,7 +59,7 @@ TEST_WI_ERROR_NEXT_PAGE_RESPONSE = (
     TEST_RESPONSES / "workitems_next_page_error.json"
 )
 TEST_WI_NEXT_PAGE_RESPONSE = TEST_RESPONSES / "workitems_next_page.json"
-
+TEST_DOCUMENT_RESPONSE = TEST_RESPONSES / "get_document.json"
 TEST_ERROR_RESPONSE = TEST_RESPONSES / "error.json"
 TEST_PROJECT_RESPONSE_JSON = TEST_RESPONSES / "project.json"
 

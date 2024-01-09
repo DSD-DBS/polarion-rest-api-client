@@ -10,19 +10,68 @@ import json
 import typing as t
 
 
-class WorkItem:
-    """A data class containing all relevant data of a Polarion WorkItem."""
+@dataclasses.dataclass
+class BaseItem:
+    """A parent data class for WorkItem and Document."""
 
     id: str | None = None
+    type: str | None = None
+    status: str | None = None
+    _checksum: str | None = dataclasses.field(init=False, default=None)
+
+    def __post_init__(self):
+        """Set initial checksum value."""
+        self._checksum = self.calculate_checksum()
+
+    def __eq__(self, other: object) -> bool:
+        """Compare only BaseItem attributes."""
+        if not isinstance(other, BaseItem):
+            return NotImplemented
+        if self.get_current_checksum() is None:
+            self.calculate_checksum()
+        if other.get_current_checksum() is None:
+            other.calculate_checksum()
+
+        return self.get_current_checksum() == other.get_current_checksum()
+
+    def to_dict(self) -> dict[str, t.Any]:
+        """Return the content of the BaseItem as dictionary."""
+        return {
+            "id": self.id,
+            "type": self.type,
+            "status": self.status,
+            "checksum": self._checksum,
+        }
+
+    def calculate_checksum(self) -> str:
+        """Calculate and return a checksum for this BaseItem.
+
+        In addition, the checksum will be written to self._checksum.
+        """
+        data = self.to_dict()
+        del data["checksum"]
+        del data["id"]
+
+        data = dict(sorted(data.items()))
+
+        converted = json.dumps(data).encode("utf8")
+        self._checksum = hashlib.sha256(converted).hexdigest()
+        return self._checksum
+
+    def get_current_checksum(self) -> str | None:
+        """Return the checksum currently set without calculation."""
+        return self._checksum
+
+
+class WorkItem(BaseItem):
+    """A data class containing all relevant data of a Polarion WorkItem."""
+
     title: str | None = None
     description_type: str | None = None
     description: str | None = None
-    type: str | None = None
-    status: str | None = None
     additional_attributes: dict[str, t.Any] = {}
     linked_work_items: list[WorkItemLink] = []
     attachments: list[WorkItemAttachment] = []
-    _checksum: str | None = None
 
     def __init__(
         self,
@@ -37,14 +86,11 @@ class WorkItem:
         attachments: list[WorkItemAttachment] | None = None,
         **kwargs,
     ):
-        self.id = id
+        super().__init__(id, type, status)
         self.title = title
         self.description_type = description_type
         self.description = description
-        self.type = type
-        self.status = status
         self.additional_attributes = (additional_attributes or {}) | kwargs
-        self._checksum = self.additional_attributes.pop("checksum", None)
         self.linked_work_items = linked_work_items or []
         self.attachments = attachments or []
 
@@ -125,10 +171,6 @@ class WorkItem:
         self._checksum = hashlib.sha256(converted).hexdigest()
         return self._checksum
 
-    def get_current_checksum(self) -> str | None:
-        """Return the checksum currently set without calculation."""
-        return self._checksum
-
 
 @dataclasses.dataclass
 class WorkItemLink:
@@ -157,3 +199,33 @@ class WorkItemAttachment:
     content_bytes: bytes | None = None
     mime_type: str | None = None
     file_name: str | None = None
+
+
+class Document(BaseItem):
+    """A data class containing all relevant data of a Polarion Document."""
+
+    module_folder: str | None = None
+    module_name: str | None = None
+    home_page_content: TextContent | None = None
+
+    def __init__(
+        self,
+        id: str | None = None,
+        module_folder: str | None = None,
+        module_name: str | None = None,
+        type: str | None = None,
+        status: str | None = None,
+        home_page_content: TextContent | None = None,
+    ):
+        super().__init__(id, type, status)
+        self.module_folder = module_folder
+        self.module_name = module_name
+        self.home_page_content = home_page_content
+
+
+@dataclasses.dataclass
+class TextContent:
+    """A data class for home_page_content of a Polarion Document."""
+
+    type: str | None = None
+    value: str | None = None

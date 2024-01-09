@@ -17,6 +17,7 @@ class DefaultFields:
     _workitems: str = "@basic"
     _linkedworkitems: str = "id,role,suspect"
     _workitem_attachments: str = "@basic"
+    _documents: str = "@basic"
 
     @property
     def workitems(self):
@@ -46,10 +47,22 @@ class DefaultFields:
         self._workitem_attachments = value
 
     @property
+    def documents(self):
+        """Return the fields dict for document."""
+        return {"documents": self._documents}
+
+    @documents.setter
+    def documents(self, value):
+        self._documents = value
+
+    @property
     def all_types(self):
         """Return all fields dicts merged together."""
         return (
-            self.workitem_attachments | self.workitems | self.linkedworkitems
+            self.workitem_attachments
+            | self.workitems
+            | self.linkedworkitems
+            | self.documents
         )
 
 
