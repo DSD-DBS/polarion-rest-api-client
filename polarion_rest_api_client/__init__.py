@@ -1,4 +1,4 @@
-# Copyright DB Netz AG and contributors
+# Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Polarion API module serving all data classes, clients and errors."""
 from importlib import metadata

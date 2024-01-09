@@ -1,4 +1,4 @@
-# Copyright DB Netz AG and contributors
+# Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Base class for a polarion project client to easily rewrite the client."""
 from __future__ import annotations
