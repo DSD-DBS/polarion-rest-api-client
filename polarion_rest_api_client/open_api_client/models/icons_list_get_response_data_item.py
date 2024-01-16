@@ -29,14 +29,13 @@ T = TypeVar("T", bound="IconsListGetResponseDataItem")
 @_attrs_define
 class IconsListGetResponseDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, IconsListGetResponseDataItemType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
-    attributes : Union[Unset, IconsListGetResponseDataItemAttributes]
-    meta : Union[Unset, IconsListGetResponseDataItemMeta]
-    links : Union[Unset, IconsListGetResponseDataItemLinks]
+    Attributes:
+        type (Union[Unset, IconsListGetResponseDataItemType]):
+        id (Union[Unset, str]):  Example: default/example.gif.
+        revision (Union[Unset, str]):  Example: 1234.
+        attributes (Union[Unset, IconsListGetResponseDataItemAttributes]):
+        meta (Union[Unset, IconsListGetResponseDataItemMeta]):
+        links (Union[Unset, IconsListGetResponseDataItemLinks]):
     """
 
     type: Union[Unset, IconsListGetResponseDataItemType] = UNSET
@@ -55,7 +54,9 @@ class IconsListGetResponseDataItem:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

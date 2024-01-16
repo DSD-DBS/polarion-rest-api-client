@@ -19,10 +19,9 @@ T = TypeVar(
 @_attrs_define
 class UsersSinglePatchRequestDataRelationshipsGlobalRolesDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, UsersSinglePatchRequestDataRelationshipsGlobalRolesDataItemType]
-    id : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, UsersSinglePatchRequestDataRelationshipsGlobalRolesDataItemType]):
+        id (Union[Unset, str]):  Example: MyRoleId.
     """
 
     type: Union[

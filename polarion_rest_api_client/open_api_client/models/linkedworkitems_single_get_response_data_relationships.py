@@ -20,9 +20,8 @@ T = TypeVar("T", bound="LinkedworkitemsSingleGetResponseDataRelationships")
 @_attrs_define
 class LinkedworkitemsSingleGetResponseDataRelationships:
     """
-    Attributes
-    ----------
-    work_item : Union[Unset, LinkedworkitemsSingleGetResponseDataRelationshipsWorkItem]
+    Attributes:
+        work_item (Union[Unset, LinkedworkitemsSingleGetResponseDataRelationshipsWorkItem]):
     """
 
     work_item: Union[

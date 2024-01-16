@@ -20,19 +20,24 @@ from ...types import Response
 def _get_kwargs(
     project_id: str,
     *,
-    json_body: EnumerationsListPostRequest,
+    body: EnumerationsListPostRequest,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/enumerations".format(
             projectId=project_id,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -93,30 +98,25 @@ def sync_detailed(
     project_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: EnumerationsListPostRequest,
+    body: EnumerationsListPostRequest,
 ) -> Response[Union[Any, EnumerationsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Enumerations in the Project context.
 
-    Parameters
-    ----------
-    project_id : str
-    json_body : EnumerationsListPostRequest
+    Args:
+        project_id (str):
+        body (EnumerationsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, EnumerationsListPostResponse]]
+    Returns:
+        Response[Union[Any, EnumerationsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -130,31 +130,26 @@ def sync(
     project_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: EnumerationsListPostRequest,
+    body: EnumerationsListPostRequest,
 ) -> Optional[Union[Any, EnumerationsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Enumerations in the Project context.
 
-    Parameters
-    ----------
-    project_id : str
-    json_body : EnumerationsListPostRequest
+    Args:
+        project_id (str):
+        body (EnumerationsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, EnumerationsListPostResponse]
+    Returns:
+        Union[Any, EnumerationsListPostResponse]
     """
 
     return sync_detailed(
         project_id=project_id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -162,30 +157,25 @@ async def asyncio_detailed(
     project_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: EnumerationsListPostRequest,
+    body: EnumerationsListPostRequest,
 ) -> Response[Union[Any, EnumerationsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Enumerations in the Project context.
 
-    Parameters
-    ----------
-    project_id : str
-    json_body : EnumerationsListPostRequest
+    Args:
+        project_id (str):
+        body (EnumerationsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, EnumerationsListPostResponse]]
+    Returns:
+        Response[Union[Any, EnumerationsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -197,31 +187,26 @@ async def asyncio(
     project_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: EnumerationsListPostRequest,
+    body: EnumerationsListPostRequest,
 ) -> Optional[Union[Any, EnumerationsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Enumerations in the Project context.
 
-    Parameters
-    ----------
-    project_id : str
-    json_body : EnumerationsListPostRequest
+    Args:
+        project_id (str):
+        body (EnumerationsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, EnumerationsListPostResponse]
+    Returns:
+        Union[Any, EnumerationsListPostResponse]
     """
 
     return (
         await asyncio_detailed(
             project_id=project_id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

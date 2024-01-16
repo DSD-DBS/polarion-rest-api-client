@@ -21,20 +21,25 @@ def _get_kwargs(
     project_id: str,
     work_item_id: str,
     *,
-    json_body: WorkitemCommentsListPostRequest,
+    body: WorkitemCommentsListPostRequest,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/workitems/{workItemId}/comments".format(
             projectId=project_id,
             workItemId=work_item_id,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -98,32 +103,27 @@ def sync_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemCommentsListPostRequest,
+    body: WorkitemCommentsListPostRequest,
 ) -> Response[Union[Any, WorkitemCommentsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Work Item Comments.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    json_body : WorkitemCommentsListPostRequest
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (WorkitemCommentsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, WorkitemCommentsListPostResponse]]
+    Returns:
+        Response[Union[Any, WorkitemCommentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -138,33 +138,28 @@ def sync(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemCommentsListPostRequest,
+    body: WorkitemCommentsListPostRequest,
 ) -> Optional[Union[Any, WorkitemCommentsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Work Item Comments.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    json_body : WorkitemCommentsListPostRequest
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (WorkitemCommentsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, WorkitemCommentsListPostResponse]
+    Returns:
+        Union[Any, WorkitemCommentsListPostResponse]
     """
 
     return sync_detailed(
         project_id=project_id,
         work_item_id=work_item_id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -173,32 +168,27 @@ async def asyncio_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemCommentsListPostRequest,
+    body: WorkitemCommentsListPostRequest,
 ) -> Response[Union[Any, WorkitemCommentsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Work Item Comments.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    json_body : WorkitemCommentsListPostRequest
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (WorkitemCommentsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, WorkitemCommentsListPostResponse]]
+    Returns:
+        Response[Union[Any, WorkitemCommentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -211,26 +201,21 @@ async def asyncio(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemCommentsListPostRequest,
+    body: WorkitemCommentsListPostRequest,
 ) -> Optional[Union[Any, WorkitemCommentsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Work Item Comments.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    json_body : WorkitemCommentsListPostRequest
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (WorkitemCommentsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, WorkitemCommentsListPostResponse]
+    Returns:
+        Union[Any, WorkitemCommentsListPostResponse]
     """
 
     return (
@@ -238,6 +223,6 @@ async def asyncio(
             project_id=project_id,
             work_item_id=work_item_id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

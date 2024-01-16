@@ -17,18 +17,16 @@ def _get_kwargs(
     project_id: str,
     work_item_id: str,
     *,
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    revision: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    revision: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_fields: Union[Unset, None, Dict[str, Any]] = UNSET
-    if not isinstance(fields, Unset):
-        json_fields = fields.to_dict() if fields else None
 
-    if not isinstance(json_fields, Unset) and json_fields is not None:
+    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    if not isinstance(fields, Unset):
+        json_fields = fields.to_dict()
+    if not isinstance(json_fields, Unset):
         params.update(json_fields)
 
     params["include"] = include
@@ -39,7 +37,7 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/projects/{projectId}/workitems/{workItemId}".format(
             projectId=project_id,
@@ -47,6 +45,8 @@ def _get_kwargs(
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -99,30 +99,25 @@ def sync_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    revision: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    revision: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, WorkitemsSingleGetResponse]]:
-    """Returns the specified instance.
+    """Returns the specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    fields : Union[Unset, None, SparseFields]
-    include : Union[Unset, None, str]
-    revision : Union[Unset, None, str]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
+        revision (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, WorkitemsSingleGetResponse]]
+    Returns:
+        Response[Union[Any, WorkitemsSingleGetResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -145,30 +140,25 @@ def sync(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    revision: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    revision: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, WorkitemsSingleGetResponse]]:
-    """Returns the specified instance.
+    """Returns the specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    fields : Union[Unset, None, SparseFields]
-    include : Union[Unset, None, str]
-    revision : Union[Unset, None, str]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
+        revision (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, WorkitemsSingleGetResponse]
+    Returns:
+        Union[Any, WorkitemsSingleGetResponse]
     """
 
     return sync_detailed(
@@ -186,30 +176,25 @@ async def asyncio_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    revision: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    revision: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, WorkitemsSingleGetResponse]]:
-    """Returns the specified instance.
+    """Returns the specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    fields : Union[Unset, None, SparseFields]
-    include : Union[Unset, None, str]
-    revision : Union[Unset, None, str]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
+        revision (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, WorkitemsSingleGetResponse]]
+    Returns:
+        Response[Union[Any, WorkitemsSingleGetResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -230,30 +215,25 @@ async def asyncio(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    revision: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    revision: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, WorkitemsSingleGetResponse]]:
-    """Returns the specified instance.
+    """Returns the specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    fields : Union[Unset, None, SparseFields]
-    include : Union[Unset, None, str]
-    revision : Union[Unset, None, str]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
+        revision (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, WorkitemsSingleGetResponse]
+    Returns:
+        Union[Any, WorkitemsSingleGetResponse]
     """
 
     return (

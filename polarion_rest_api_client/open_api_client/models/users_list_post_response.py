@@ -20,9 +20,8 @@ T = TypeVar("T", bound="UsersListPostResponse")
 @_attrs_define
 class UsersListPostResponse:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['UsersListPostResponseDataItem']]
+    Attributes:
+        data (Union[Unset, List['UsersListPostResponseDataItem']]):
     """
 
     data: Union[Unset, List["UsersListPostResponseDataItem"]] = UNSET
@@ -36,7 +35,6 @@ class UsersListPostResponse:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         field_dict: Dict[str, Any] = {}

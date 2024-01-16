@@ -20,13 +20,11 @@ def _get_kwargs(
     document_name: str,
     comment_id: str,
     *,
-    json_body: DocumentCommentsSinglePatchRequest,
+    body: DocumentCommentsSinglePatchRequest,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
         "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/comments/{commentId}".format(
             projectId=project_id,
@@ -34,8 +32,15 @@ def _get_kwargs(
             documentName=document_name,
             commentId=comment_id,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -87,28 +92,23 @@ def sync_detailed(
     comment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentCommentsSinglePatchRequest,
+    body: DocumentCommentsSinglePatchRequest,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified Document Comment.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    comment_id : str
-    json_body : DocumentCommentsSinglePatchRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        comment_id (str):
+        body (DocumentCommentsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -116,7 +116,7 @@ def sync_detailed(
         space_id=space_id,
         document_name=document_name,
         comment_id=comment_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -133,28 +133,23 @@ async def asyncio_detailed(
     comment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentCommentsSinglePatchRequest,
+    body: DocumentCommentsSinglePatchRequest,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified Document Comment.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    comment_id : str
-    json_body : DocumentCommentsSinglePatchRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        comment_id (str):
+        body (DocumentCommentsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -162,7 +157,7 @@ async def asyncio_detailed(
         space_id=space_id,
         document_name=document_name,
         comment_id=comment_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

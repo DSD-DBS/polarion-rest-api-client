@@ -14,9 +14,8 @@ T = TypeVar("T", bound="DocumentCommentsSinglePatchRequestDataAttributes")
 @_attrs_define
 class DocumentCommentsSinglePatchRequestDataAttributes:
     """
-    Attributes
-    ----------
-    resolved : Union[Unset, bool]
+    Attributes:
+        resolved (Union[Unset, bool]):
     """
 
     resolved: Union[Unset, bool] = UNSET

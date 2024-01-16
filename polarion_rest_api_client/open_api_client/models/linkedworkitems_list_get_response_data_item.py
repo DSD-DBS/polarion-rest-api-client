@@ -32,15 +32,14 @@ T = TypeVar("T", bound="LinkedworkitemsListGetResponseDataItem")
 @_attrs_define
 class LinkedworkitemsListGetResponseDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, LinkedworkitemsListGetResponseDataItemType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
-    attributes : Union[Unset, LinkedworkitemsListGetResponseDataItemAttributes]
-    relationships : Union[Unset, LinkedworkitemsListGetResponseDataItemRelationships]
-    meta : Union[Unset, LinkedworkitemsListGetResponseDataItemMeta]
-    links : Union[Unset, LinkedworkitemsListGetResponseDataItemLinks]
+    Attributes:
+        type (Union[Unset, LinkedworkitemsListGetResponseDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId.
+        revision (Union[Unset, str]):  Example: 1234.
+        attributes (Union[Unset, LinkedworkitemsListGetResponseDataItemAttributes]):
+        relationships (Union[Unset, LinkedworkitemsListGetResponseDataItemRelationships]):
+        meta (Union[Unset, LinkedworkitemsListGetResponseDataItemMeta]):
+        links (Union[Unset, LinkedworkitemsListGetResponseDataItemLinks]):
     """
 
     type: Union[Unset, LinkedworkitemsListGetResponseDataItemType] = UNSET
@@ -64,7 +63,9 @@ class LinkedworkitemsListGetResponseDataItem:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

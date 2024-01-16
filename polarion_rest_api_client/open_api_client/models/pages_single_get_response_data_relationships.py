@@ -29,12 +29,11 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataRelationships")
 @_attrs_define
 class PagesSingleGetResponseDataRelationships:
     """
-    Attributes
-    ----------
-    attachments : Union[Unset, PagesSingleGetResponseDataRelationshipsAttachments]
-    author : Union[Unset, PagesSingleGetResponseDataRelationshipsAuthor]
-    project : Union[Unset, PagesSingleGetResponseDataRelationshipsProject]
-    updated_by : Union[Unset, PagesSingleGetResponseDataRelationshipsUpdatedBy]
+    Attributes:
+        attachments (Union[Unset, PagesSingleGetResponseDataRelationshipsAttachments]):
+        author (Union[Unset, PagesSingleGetResponseDataRelationshipsAuthor]):
+        project (Union[Unset, PagesSingleGetResponseDataRelationshipsProject]):
+        updated_by (Union[Unset, PagesSingleGetResponseDataRelationshipsUpdatedBy]):
     """
 
     attachments: Union[

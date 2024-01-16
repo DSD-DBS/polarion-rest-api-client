@@ -29,14 +29,13 @@ T = TypeVar("T", bound="IconsSingleGetResponseData")
 @_attrs_define
 class IconsSingleGetResponseData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, IconsSingleGetResponseDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
-    attributes : Union[Unset, IconsSingleGetResponseDataAttributes]
-    meta : Union[Unset, IconsSingleGetResponseDataMeta]
-    links : Union[Unset, IconsSingleGetResponseDataLinks]
+    Attributes:
+        type (Union[Unset, IconsSingleGetResponseDataType]):
+        id (Union[Unset, str]):  Example: default/example.gif.
+        revision (Union[Unset, str]):  Example: 1234.
+        attributes (Union[Unset, IconsSingleGetResponseDataAttributes]):
+        meta (Union[Unset, IconsSingleGetResponseDataMeta]):
+        links (Union[Unset, IconsSingleGetResponseDataLinks]):
     """
 
     type: Union[Unset, IconsSingleGetResponseDataType] = UNSET
@@ -55,7 +54,9 @@ class IconsSingleGetResponseData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

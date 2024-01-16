@@ -20,15 +20,12 @@ T = TypeVar("T", bound="PageAttachmentsSingleGetResponseDataMetaErrorsItem")
 @_attrs_define
 class PageAttachmentsSingleGetResponseDataMetaErrorsItem:
     """
-    Attributes
-    ----------
-    status : Union[Unset, str]
-        HTTP status code applicable to this problem.
-    title : Union[Unset, str]
-        Short, human-readable summary of the problem.
-    detail : Union[Unset, str]
-        Human-readable explanation specific to this occurrence of the problem.
-    source : Union[Unset, PageAttachmentsSingleGetResponseDataMetaErrorsItemSource]
+    Attributes:
+        status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.
+        title (Union[Unset, str]): Short, human-readable summary of the problem. Example: Bad Request.
+        detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
+            Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).
+        source (Union[Unset, PageAttachmentsSingleGetResponseDataMetaErrorsItemSource]):
     """
 
     status: Union[Unset, str] = UNSET
@@ -43,8 +40,11 @@ class PageAttachmentsSingleGetResponseDataMetaErrorsItem:
 
     def to_dict(self) -> Dict[str, Any]:
         status = self.status
+
         title = self.title
+
         detail = self.detail
+
         source: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.source, Unset):
             source = self.source.to_dict()

@@ -16,23 +16,22 @@ T = TypeVar(
 @_attrs_define
 class EnumerationsListPostRequestDataItemAttributesOptionsItem:
     """
-    Attributes
-    ----------
-    id : Union[Unset, str]
-    name : Union[Unset, str]
-    color : Union[Unset, str]
-    description : Union[Unset, str]
-    hidden : Union[Unset, bool]
-    default : Union[Unset, bool]
-    parent : Union[Unset, bool]
-    opposite_name : Union[Unset, str]
-    column_width : Union[Unset, str]
-    icon_url : Union[Unset, str]
-    create_defect : Union[Unset, bool]
-    template_work_item : Union[Unset, str]
-    min_value : Union[Unset, float]
-    requires_signature_for_test_case_execution : Union[Unset, bool]
-    terminal : Union[Unset, bool]
+    Attributes:
+        id (Union[Unset, str]):  Example: open.
+        name (Union[Unset, str]):  Example: Open.
+        color (Union[Unset, str]):  Example: #F9FF4D.
+        description (Union[Unset, str]):  Example: Description.
+        hidden (Union[Unset, bool]):
+        default (Union[Unset, bool]):  Example: True.
+        parent (Union[Unset, bool]):  Example: True.
+        opposite_name (Union[Unset, str]):  Example: Opposite Name.
+        column_width (Union[Unset, str]):  Example: 90%.
+        icon_url (Union[Unset, str]):  Example: /polarion/icons/default/enums/status_open.gif.
+        create_defect (Union[Unset, bool]):  Example: True.
+        template_work_item (Union[Unset, str]):  Example: exampleTemplate.
+        min_value (Union[Unset, float]):  Example: 30.0.
+        requires_signature_for_test_case_execution (Union[Unset, bool]):  Example: True.
+        terminal (Union[Unset, bool]):  Example: True.
     """
 
     id: Union[Unset, str] = UNSET
@@ -56,21 +55,35 @@ class EnumerationsListPostRequestDataItemAttributesOptionsItem:
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         name = self.name
+
         color = self.color
+
         description = self.description
+
         hidden = self.hidden
+
         default = self.default
+
         parent = self.parent
+
         opposite_name = self.opposite_name
+
         column_width = self.column_width
+
         icon_url = self.icon_url
+
         create_defect = self.create_defect
+
         template_work_item = self.template_work_item
+
         min_value = self.min_value
+
         requires_signature_for_test_case_execution = (
             self.requires_signature_for_test_case_execution
         )
+
         terminal = self.terminal
 
         field_dict: Dict[str, Any] = {}

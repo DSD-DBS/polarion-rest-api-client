@@ -22,10 +22,9 @@ T = TypeVar("T", bound="PostPageAttachmentsRequestBody")
 @_attrs_define
 class PostPageAttachmentsRequestBody:
     """
-    Attributes
-    ----------
-    resource : Union[Unset, PageAttachmentsListPostRequest]
-    files : Union[Unset, List[File]]
+    Attributes:
+        resource (Union[Unset, PageAttachmentsListPostRequest]):
+        files (Union[Unset, List[File]]):
     """
 
     resource: Union[Unset, "PageAttachmentsListPostRequest"] = UNSET

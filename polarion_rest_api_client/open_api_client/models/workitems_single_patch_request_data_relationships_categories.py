@@ -22,9 +22,8 @@ T = TypeVar(
 @_attrs_define
 class WorkitemsSinglePatchRequestDataRelationshipsCategories:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['WorkitemsSinglePatchRequestDataRelationshipsCategoriesDataItem']]
+    Attributes:
+        data (Union[Unset, List['WorkitemsSinglePatchRequestDataRelationshipsCategoriesDataItem']]):
     """
 
     data: Union[
@@ -41,7 +40,6 @@ class WorkitemsSinglePatchRequestDataRelationshipsCategories:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         field_dict: Dict[str, Any] = {}

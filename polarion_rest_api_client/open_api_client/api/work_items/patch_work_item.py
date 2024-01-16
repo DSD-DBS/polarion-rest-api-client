@@ -18,29 +18,38 @@ def _get_kwargs(
     project_id: str,
     work_item_id: str,
     *,
-    json_body: WorkitemsSinglePatchRequest,
-    workflow_action: Union[Unset, None, str] = UNSET,
+    body: WorkitemsSinglePatchRequest,
+    workflow_action: Union[Unset, str] = UNSET,
+    change_type_to: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["workflowAction"] = workflow_action
+
+    params["changeTypeTo"] = change_type_to
 
     params = {
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
         "url": "/projects/{projectId}/workitems/{workItemId}".format(
             projectId=project_id,
             workItemId=work_item_id,
         ),
-        "json": json_json_body,
         "params": params,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -88,35 +97,33 @@ def sync_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemsSinglePatchRequest,
-    workflow_action: Union[Unset, None, str] = UNSET,
+    body: WorkitemsSinglePatchRequest,
+    workflow_action: Union[Unset, str] = UNSET,
+    change_type_to: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    workflow_action : Union[Unset, None, str]
-    json_body : WorkitemsSinglePatchRequest
+    Args:
+        project_id (str):
+        work_item_id (str):
+        workflow_action (Union[Unset, str]):
+        change_type_to (Union[Unset, str]):
+        body (WorkitemsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        json_body=json_body,
+        body=body,
         workflow_action=workflow_action,
+        change_type_to=change_type_to,
     )
 
     response = client.get_httpx_client().request(
@@ -131,35 +138,33 @@ async def asyncio_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemsSinglePatchRequest,
-    workflow_action: Union[Unset, None, str] = UNSET,
+    body: WorkitemsSinglePatchRequest,
+    workflow_action: Union[Unset, str] = UNSET,
+    change_type_to: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    workflow_action : Union[Unset, None, str]
-    json_body : WorkitemsSinglePatchRequest
+    Args:
+        project_id (str):
+        work_item_id (str):
+        workflow_action (Union[Unset, str]):
+        change_type_to (Union[Unset, str]):
+        body (WorkitemsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        json_body=json_body,
+        body=body,
         workflow_action=workflow_action,
+        change_type_to=change_type_to,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

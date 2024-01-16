@@ -26,13 +26,12 @@ T = TypeVar("T", bound="DocumentPartsSingleGetResponse")
 @_attrs_define
 class DocumentPartsSingleGetResponse:
     """
-    Attributes
-    ----------
-    data : Union[Unset, DocumentPartsSingleGetResponseData]
-    included : Union[Unset, List['DocumentPartsSingleGetResponseIncludedItem']]
-        Related entities might be returned, see <a href="https://docs.sw.siemens.com/en-
-        US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
-    links : Union[Unset, DocumentPartsSingleGetResponseLinks]
+    Attributes:
+        data (Union[Unset, DocumentPartsSingleGetResponseData]):
+        included (Union[Unset, List['DocumentPartsSingleGetResponseIncludedItem']]): Related entities might be returned,
+            see <a href="https://docs.sw.siemens.com/en-US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API
+            User Guide</a>.
+        links (Union[Unset, DocumentPartsSingleGetResponseLinks]):
     """
 
     data: Union[Unset, "DocumentPartsSingleGetResponseData"] = UNSET
@@ -54,7 +53,6 @@ class DocumentPartsSingleGetResponse:
             included = []
             for included_item_data in self.included:
                 included_item = included_item_data.to_dict()
-
                 included.append(included_item)
 
         links: Union[Unset, Dict[str, Any]] = UNSET

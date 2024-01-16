@@ -14,11 +14,10 @@ T = TypeVar("T", bound="MoveWorkItemToDocumentRequestBody")
 @_attrs_define
 class MoveWorkItemToDocumentRequestBody:
     """
-    Attributes
-    ----------
-    target_document : Union[Unset, str]
-    previous_part : Union[Unset, str]
-    next_part : Union[Unset, str]
+    Attributes:
+        target_document (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
+        previous_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+        next_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
     """
 
     target_document: Union[Unset, str] = UNSET
@@ -30,7 +29,9 @@ class MoveWorkItemToDocumentRequestBody:
 
     def to_dict(self) -> Dict[str, Any]:
         target_document = self.target_document
+
         previous_part = self.previous_part
+
         next_part = self.next_part
 
         field_dict: Dict[str, Any] = {}

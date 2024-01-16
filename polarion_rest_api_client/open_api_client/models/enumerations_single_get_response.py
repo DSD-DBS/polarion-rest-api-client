@@ -26,13 +26,12 @@ T = TypeVar("T", bound="EnumerationsSingleGetResponse")
 @_attrs_define
 class EnumerationsSingleGetResponse:
     """
-    Attributes
-    ----------
-    data : Union[Unset, EnumerationsSingleGetResponseData]
-    included : Union[Unset, List['EnumerationsSingleGetResponseIncludedItem']]
-        Related entities might be returned, see <a href="https://docs.sw.siemens.com/en-
-        US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
-    links : Union[Unset, EnumerationsSingleGetResponseLinks]
+    Attributes:
+        data (Union[Unset, EnumerationsSingleGetResponseData]):
+        included (Union[Unset, List['EnumerationsSingleGetResponseIncludedItem']]): Related entities might be returned,
+            see <a href="https://docs.sw.siemens.com/en-US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API
+            User Guide</a>.
+        links (Union[Unset, EnumerationsSingleGetResponseLinks]):
     """
 
     data: Union[Unset, "EnumerationsSingleGetResponseData"] = UNSET
@@ -54,7 +53,6 @@ class EnumerationsSingleGetResponse:
             included = []
             for included_item_data in self.included:
                 included_item = included_item_data.to_dict()
-
                 included.append(included_item)
 
         links: Union[Unset, Dict[str, Any]] = UNSET

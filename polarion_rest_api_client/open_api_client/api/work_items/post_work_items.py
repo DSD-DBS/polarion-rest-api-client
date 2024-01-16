@@ -16,19 +16,24 @@ from ...types import Response
 def _get_kwargs(
     project_id: str,
     *,
-    json_body: WorkitemsListPostRequest,
+    body: WorkitemsListPostRequest,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/workitems".format(
             projectId=project_id,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -89,30 +94,25 @@ def sync_detailed(
     project_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemsListPostRequest,
+    body: WorkitemsListPostRequest,
 ) -> Response[Union[Any, WorkitemsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Work Items.
 
-    Parameters
-    ----------
-    project_id : str
-    json_body : WorkitemsListPostRequest
+    Args:
+        project_id (str):
+        body (WorkitemsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, WorkitemsListPostResponse]]
+    Returns:
+        Response[Union[Any, WorkitemsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -126,31 +126,26 @@ def sync(
     project_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemsListPostRequest,
+    body: WorkitemsListPostRequest,
 ) -> Optional[Union[Any, WorkitemsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Work Items.
 
-    Parameters
-    ----------
-    project_id : str
-    json_body : WorkitemsListPostRequest
+    Args:
+        project_id (str):
+        body (WorkitemsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, WorkitemsListPostResponse]
+    Returns:
+        Union[Any, WorkitemsListPostResponse]
     """
 
     return sync_detailed(
         project_id=project_id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -158,30 +153,25 @@ async def asyncio_detailed(
     project_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemsListPostRequest,
+    body: WorkitemsListPostRequest,
 ) -> Response[Union[Any, WorkitemsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Work Items.
 
-    Parameters
-    ----------
-    project_id : str
-    json_body : WorkitemsListPostRequest
+    Args:
+        project_id (str):
+        body (WorkitemsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, WorkitemsListPostResponse]]
+    Returns:
+        Response[Union[Any, WorkitemsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -193,31 +183,26 @@ async def asyncio(
     project_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: WorkitemsListPostRequest,
+    body: WorkitemsListPostRequest,
 ) -> Optional[Union[Any, WorkitemsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Work Items.
 
-    Parameters
-    ----------
-    project_id : str
-    json_body : WorkitemsListPostRequest
+    Args:
+        project_id (str):
+        body (WorkitemsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, WorkitemsListPostResponse]
+    Returns:
+        Union[Any, WorkitemsListPostResponse]
     """
 
     return (
         await asyncio_detailed(
             project_id=project_id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

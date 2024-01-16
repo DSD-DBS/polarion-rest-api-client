@@ -14,9 +14,9 @@ T = TypeVar("T", bound="DocumentCommentsSingleGetResponseDataLinks")
 @_attrs_define
 class DocumentCommentsSingleGetResponseDataLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/spaces/MySpaceId/documents/MyDocumentId/comments/MyCommentId?revision=1234.
     """
 
     self_: Union[Unset, str] = UNSET

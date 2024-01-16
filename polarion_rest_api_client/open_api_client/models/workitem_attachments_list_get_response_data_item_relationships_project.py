@@ -22,9 +22,8 @@ T = TypeVar(
 @_attrs_define
 class WorkitemAttachmentsListGetResponseDataItemRelationshipsProject:
     """
-    Attributes
-    ----------
-    data : Union[Unset, WorkitemAttachmentsListGetResponseDataItemRelationshipsProjectData]
+    Attributes:
+        data (Union[Unset, WorkitemAttachmentsListGetResponseDataItemRelationshipsProjectData]):
     """
 
     data: Union[

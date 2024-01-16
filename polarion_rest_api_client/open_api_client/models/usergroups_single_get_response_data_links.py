@@ -14,9 +14,8 @@ T = TypeVar("T", bound="UsergroupsSingleGetResponseDataLinks")
 @_attrs_define
 class UsergroupsSingleGetResponseDataLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-path/usergroups/MyUserGroupId.
     """
 
     self_: Union[Unset, str] = UNSET

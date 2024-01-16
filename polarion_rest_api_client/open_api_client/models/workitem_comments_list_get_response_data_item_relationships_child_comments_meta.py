@@ -17,9 +17,8 @@ T = TypeVar(
 @_attrs_define
 class WorkitemCommentsListGetResponseDataItemRelationshipsChildCommentsMeta:
     """
-    Attributes
-    ----------
-    total_count : Union[Unset, int]
+    Attributes:
+        total_count (Union[Unset, int]):
     """
 
     total_count: Union[Unset, int] = UNSET

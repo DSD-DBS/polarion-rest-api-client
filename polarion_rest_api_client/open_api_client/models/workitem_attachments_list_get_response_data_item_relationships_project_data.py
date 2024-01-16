@@ -20,11 +20,10 @@ T = TypeVar(
 @_attrs_define
 class WorkitemAttachmentsListGetResponseDataItemRelationshipsProjectData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemAttachmentsListGetResponseDataItemRelationshipsProjectDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemAttachmentsListGetResponseDataItemRelationshipsProjectDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId.
+        revision (Union[Unset, str]):  Example: 1234.
     """
 
     type: Union[
@@ -43,6 +42,7 @@ class WorkitemAttachmentsListGetResponseDataItemRelationshipsProjectData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
 
         field_dict: Dict[str, Any] = {}

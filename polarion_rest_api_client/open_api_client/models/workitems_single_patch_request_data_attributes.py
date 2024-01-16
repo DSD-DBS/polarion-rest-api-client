@@ -25,20 +25,19 @@ T = TypeVar("T", bound="WorkitemsSinglePatchRequestDataAttributes")
 @_attrs_define
 class WorkitemsSinglePatchRequestDataAttributes:
     """
-    Attributes
-    ----------
-    description : Union[Unset, WorkitemsSinglePatchRequestDataAttributesDescription]
-    due_date : Union[Unset, datetime.date]
-    hyperlinks : Union[Unset, List['WorkitemsSinglePatchRequestDataAttributesHyperlinksItem']]
-    initial_estimate : Union[Unset, str]
-    priority : Union[Unset, str]
-    remaining_estimate : Union[Unset, str]
-    resolution : Union[Unset, str]
-    resolved_on : Union[Unset, datetime.datetime]
-    severity : Union[Unset, str]
-    status : Union[Unset, str]
-    time_spent : Union[Unset, str]
-    title : Union[Unset, str]
+    Attributes:
+        description (Union[Unset, WorkitemsSinglePatchRequestDataAttributesDescription]):
+        due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
+        hyperlinks (Union[Unset, List['WorkitemsSinglePatchRequestDataAttributesHyperlinksItem']]):
+        initial_estimate (Union[Unset, str]):  Example: 5 1/2d.
+        priority (Union[Unset, str]):  Example: 90.0.
+        remaining_estimate (Union[Unset, str]):  Example: 5 1/2d.
+        resolution (Union[Unset, str]):  Example: done.
+        resolved_on (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+        severity (Union[Unset, str]):  Example: blocker.
+        status (Union[Unset, str]):  Example: open.
+        time_spent (Union[Unset, str]):  Example: 5 1/2d.
+        title (Union[Unset, str]):  Example: Title.
     """
 
     description: Union[
@@ -75,20 +74,26 @@ class WorkitemsSinglePatchRequestDataAttributes:
             hyperlinks = []
             for hyperlinks_item_data in self.hyperlinks:
                 hyperlinks_item = hyperlinks_item_data.to_dict()
-
                 hyperlinks.append(hyperlinks_item)
 
         initial_estimate = self.initial_estimate
+
         priority = self.priority
+
         remaining_estimate = self.remaining_estimate
+
         resolution = self.resolution
+
         resolved_on: Union[Unset, str] = UNSET
         if not isinstance(self.resolved_on, Unset):
             resolved_on = self.resolved_on.isoformat()
 
         severity = self.severity
+
         status = self.status
+
         time_spent = self.time_spent
+
         title = self.title
 
         field_dict: Dict[str, Any] = {}

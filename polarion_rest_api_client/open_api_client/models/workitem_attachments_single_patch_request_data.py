@@ -23,11 +23,10 @@ T = TypeVar("T", bound="WorkitemAttachmentsSinglePatchRequestData")
 @_attrs_define
 class WorkitemAttachmentsSinglePatchRequestData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemAttachmentsSinglePatchRequestDataType]
-    id : Union[Unset, str]
-    attributes : Union[Unset, WorkitemAttachmentsSinglePatchRequestDataAttributes]
+    Attributes:
+        type (Union[Unset, WorkitemAttachmentsSinglePatchRequestDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyAttachmentId.
+        attributes (Union[Unset, WorkitemAttachmentsSinglePatchRequestDataAttributes]):
     """
 
     type: Union[Unset, WorkitemAttachmentsSinglePatchRequestDataType] = UNSET
@@ -45,6 +44,7 @@ class WorkitemAttachmentsSinglePatchRequestData:
             type = self.type.value
 
         id = self.id
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

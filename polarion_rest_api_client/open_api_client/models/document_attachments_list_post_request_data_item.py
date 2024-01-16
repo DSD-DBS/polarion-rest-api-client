@@ -23,11 +23,10 @@ T = TypeVar("T", bound="DocumentAttachmentsListPostRequestDataItem")
 @_attrs_define
 class DocumentAttachmentsListPostRequestDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentAttachmentsListPostRequestDataItemType]
-    lid : Union[Unset, str]
-    attributes : Union[Unset, DocumentAttachmentsListPostRequestDataItemAttributes]
+    Attributes:
+        type (Union[Unset, DocumentAttachmentsListPostRequestDataItemType]):
+        lid (Union[Unset, str]):
+        attributes (Union[Unset, DocumentAttachmentsListPostRequestDataItemAttributes]):
     """
 
     type: Union[Unset, DocumentAttachmentsListPostRequestDataItemType] = UNSET
@@ -45,6 +44,7 @@ class DocumentAttachmentsListPostRequestDataItem:
             type = self.type.value
 
         lid = self.lid
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

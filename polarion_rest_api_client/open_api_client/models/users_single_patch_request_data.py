@@ -26,12 +26,11 @@ T = TypeVar("T", bound="UsersSinglePatchRequestData")
 @_attrs_define
 class UsersSinglePatchRequestData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, UsersSinglePatchRequestDataType]
-    id : Union[Unset, str]
-    attributes : Union[Unset, UsersSinglePatchRequestDataAttributes]
-    relationships : Union[Unset, UsersSinglePatchRequestDataRelationships]
+    Attributes:
+        type (Union[Unset, UsersSinglePatchRequestDataType]):
+        id (Union[Unset, str]):  Example: MyUserId.
+        attributes (Union[Unset, UsersSinglePatchRequestDataAttributes]):
+        relationships (Union[Unset, UsersSinglePatchRequestDataRelationships]):
     """
 
     type: Union[Unset, UsersSinglePatchRequestDataType] = UNSET
@@ -50,6 +49,7 @@ class UsersSinglePatchRequestData:
             type = self.type.value
 
         id = self.id
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

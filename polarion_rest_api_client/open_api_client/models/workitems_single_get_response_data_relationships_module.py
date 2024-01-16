@@ -20,9 +20,8 @@ T = TypeVar("T", bound="WorkitemsSingleGetResponseDataRelationshipsModule")
 @_attrs_define
 class WorkitemsSingleGetResponseDataRelationshipsModule:
     """
-    Attributes
-    ----------
-    data : Union[Unset, WorkitemsSingleGetResponseDataRelationshipsModuleData]
+    Attributes:
+        data (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsModuleData]):
     """
 
     data: Union[

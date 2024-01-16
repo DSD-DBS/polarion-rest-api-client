@@ -20,11 +20,10 @@ T = TypeVar(
 @_attrs_define
 class WorkitemCommentsListGetResponseDataItemRelationshipsChildCommentsDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsChildCommentsDataItemType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsChildCommentsDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyCommentId.
+        revision (Union[Unset, str]):  Example: 1234.
     """
 
     type: Union[
@@ -43,6 +42,7 @@ class WorkitemCommentsListGetResponseDataItemRelationshipsChildCommentsDataItem:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
 
         field_dict: Dict[str, Any] = {}

@@ -29,14 +29,13 @@ T = TypeVar("T", bound="EnumerationsSingleGetResponseData")
 @_attrs_define
 class EnumerationsSingleGetResponseData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, EnumerationsSingleGetResponseDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
-    attributes : Union[Unset, EnumerationsSingleGetResponseDataAttributes]
-    meta : Union[Unset, EnumerationsSingleGetResponseDataMeta]
-    links : Union[Unset, EnumerationsSingleGetResponseDataLinks]
+    Attributes:
+        type (Union[Unset, EnumerationsSingleGetResponseDataType]):
+        id (Union[Unset, str]):  Example: ~/status/~.
+        revision (Union[Unset, str]):  Example: 1234.
+        attributes (Union[Unset, EnumerationsSingleGetResponseDataAttributes]):
+        meta (Union[Unset, EnumerationsSingleGetResponseDataMeta]):
+        links (Union[Unset, EnumerationsSingleGetResponseDataLinks]):
     """
 
     type: Union[Unset, EnumerationsSingleGetResponseDataType] = UNSET
@@ -57,7 +56,9 @@ class EnumerationsSingleGetResponseData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

@@ -22,9 +22,8 @@ T = TypeVar(
 @_attrs_define
 class LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem:
     """
-    Attributes
-    ----------
-    data : Union[Unset, LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemData]
+    Attributes:
+        data (Union[Unset, LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemData]):
     """
 
     data: Union[

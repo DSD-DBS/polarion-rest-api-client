@@ -23,11 +23,10 @@ T = TypeVar("T", bound="DocumentCommentsSinglePatchRequestData")
 @_attrs_define
 class DocumentCommentsSinglePatchRequestData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentCommentsSinglePatchRequestDataType]
-    id : Union[Unset, str]
-    attributes : Union[Unset, DocumentCommentsSinglePatchRequestDataAttributes]
+    Attributes:
+        type (Union[Unset, DocumentCommentsSinglePatchRequestDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/MyCommentId.
+        attributes (Union[Unset, DocumentCommentsSinglePatchRequestDataAttributes]):
     """
 
     type: Union[Unset, DocumentCommentsSinglePatchRequestDataType] = UNSET
@@ -45,6 +44,7 @@ class DocumentCommentsSinglePatchRequestData:
             type = self.type.value
 
         id = self.id
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

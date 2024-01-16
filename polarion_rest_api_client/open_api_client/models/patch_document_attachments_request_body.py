@@ -22,11 +22,9 @@ T = TypeVar("T", bound="PatchDocumentAttachmentsRequestBody")
 @_attrs_define
 class PatchDocumentAttachmentsRequestBody:
     """
-    Attributes
-    ----------
-    resource : DocumentAttachmentsSinglePatchRequest
-    content : Union[Unset, File]
-        attachments content
+    Attributes:
+        resource (DocumentAttachmentsSinglePatchRequest):
+        content (Union[Unset, File]): attachments content
     """
 
     resource: "DocumentAttachmentsSinglePatchRequest"

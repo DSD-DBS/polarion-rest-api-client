@@ -20,9 +20,8 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataRelationshipsAuthor")
 @_attrs_define
 class PagesSingleGetResponseDataRelationshipsAuthor:
     """
-    Attributes
-    ----------
-    data : Union[Unset, PagesSingleGetResponseDataRelationshipsAuthorData]
+    Attributes:
+        data (Union[Unset, PagesSingleGetResponseDataRelationshipsAuthorData]):
     """
 
     data: Union[

@@ -26,11 +26,10 @@ T = TypeVar("T", bound="EnumOptionsActionResponseBody")
 @_attrs_define
 class EnumOptionsActionResponseBody:
     """
-    Attributes
-    ----------
-    meta : Union[Unset, EnumOptionsActionResponseBodyMeta]
-    data : Union[Unset, List['EnumOptionsActionResponseBodyDataItem']]
-    links : Union[Unset, EnumOptionsActionResponseBodyLinks]
+    Attributes:
+        meta (Union[Unset, EnumOptionsActionResponseBodyMeta]):
+        data (Union[Unset, List['EnumOptionsActionResponseBodyDataItem']]):
+        links (Union[Unset, EnumOptionsActionResponseBodyLinks]):
     """
 
     meta: Union[Unset, "EnumOptionsActionResponseBodyMeta"] = UNSET
@@ -50,7 +49,6 @@ class EnumOptionsActionResponseBody:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         links: Union[Unset, Dict[str, Any]] = UNSET

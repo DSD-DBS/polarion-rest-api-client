@@ -292,7 +292,7 @@ class OpenAPIPolarionProjectClient(
         retry: bool = True,
     ):
         response = post_work_items.sync_detailed(
-            self.project_id, client=self.client, json_body=work_item_batch
+            self.project_id, client=self.client, body=work_item_batch
         )
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
@@ -442,7 +442,7 @@ class OpenAPIPolarionProjectClient(
             work_item_attachment.work_item_id,
             work_item_attachment.id,
             client=self.client,
-            multipart_data=multipart,
+            body=multipart,
         )
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
@@ -505,7 +505,7 @@ class OpenAPIPolarionProjectClient(
             self.project_id,
             work_item_attachments[0].work_item_id,
             client=self.client,
-            multipart_data=multipart,
+            body=multipart,
         )
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
@@ -646,11 +646,16 @@ class OpenAPIPolarionProjectClient(
         space_id: str,
         document_name: str,
         fields: dict[str, str] | None = None,
-        include: str | None = None,
-        revision: str | None = None,
+        include: str | None | oa_types.Unset = None,
+        revision: str | None | oa_types.Unset = None,
         retry: bool = True,
     ) -> dm.Document:
         """Return the document with the given document_name and space_id."""
+        if include is None:
+            include = oa_types.UNSET
+
+        if revision is None:
+            revision = oa_types.UNSET
 
         if " " in space_id or " " in document_name:
             space_id = urllib.parse.quote(
@@ -777,7 +782,7 @@ class OpenAPIPolarionProjectClient(
         response = delete_work_items.sync_detailed(
             self.project_id,
             client=self.client,
-            json_body=api_models.WorkitemsListDeleteRequest(
+            body=api_models.WorkitemsListDeleteRequest(
                 [
                     api_models.WorkitemsListDeleteRequestDataItem(
                         api_models.WorkitemsListDeleteRequestDataItemType.WORKITEMS,  # pylint: disable=line-too-long
@@ -806,7 +811,7 @@ class OpenAPIPolarionProjectClient(
             self.project_id,
             work_item.id,
             client=self.client,
-            json_body=self._build_work_item_patch_request(work_item),
+            body=self._build_work_item_patch_request(work_item),
         )
 
         if not self._check_response(response, not retry) and retry:
@@ -817,7 +822,7 @@ class OpenAPIPolarionProjectClient(
         self,
         work_item_id: str,
         fields: dict[str, str] | None = None,
-        include: str | None = None,
+        include: str | None | oa_types.Unset = None,
         page_size: int = 100,
         page_number: int = 1,
         retry: bool = True,
@@ -830,6 +835,9 @@ class OpenAPIPolarionProjectClient(
         """
         if fields is None:
             fields = self.default_fields.linkedworkitems
+
+        if include is None:
+            include = oa_types.UNSET
 
         sparse_fields = _build_sparse_fields(fields)
         response = get_linked_work_items.sync_detailed(
@@ -902,7 +910,7 @@ class OpenAPIPolarionProjectClient(
             work_item_links[0].primary_work_item_id,
             client=self.client,
             # pylint: disable=line-too-long
-            json_body=api_models.LinkedworkitemsListPostRequest(
+            body=api_models.LinkedworkitemsListPostRequest(
                 [
                     api_models.LinkedworkitemsListPostRequestDataItem(
                         api_models.LinkedworkitemsListPostRequestDataItemType.LINKEDWORKITEMS,
@@ -937,7 +945,7 @@ class OpenAPIPolarionProjectClient(
             work_item_links[0].primary_work_item_id,
             client=self.client,
             # pylint: disable=line-too-long
-            json_body=api_models.LinkedworkitemsListDeleteRequest(
+            body=api_models.LinkedworkitemsListDeleteRequest(
                 [
                     api_models.LinkedworkitemsListDeleteRequestDataItem(
                         api_models.LinkedworkitemsListDeleteRequestDataItemType.LINKEDWORKITEMS,

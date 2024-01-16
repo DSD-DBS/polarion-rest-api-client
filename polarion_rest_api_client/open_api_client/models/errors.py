@@ -18,9 +18,8 @@ T = TypeVar("T", bound="Errors")
 @_attrs_define
 class Errors:
     """
-    Attributes
-    ----------
-    errors : Union[Unset, List['ErrorsErrorsItem']]
+    Attributes:
+        errors (Union[Unset, List['ErrorsErrorsItem']]):
     """
 
     errors: Union[Unset, List["ErrorsErrorsItem"]] = UNSET
@@ -34,7 +33,6 @@ class Errors:
             errors = []
             for errors_item_data in self.errors:
                 errors_item = errors_item_data.to_dict()
-
                 errors.append(errors_item)
 
         field_dict: Dict[str, Any] = {}

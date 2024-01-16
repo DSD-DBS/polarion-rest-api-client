@@ -20,11 +20,10 @@ T = TypeVar("T", bound="WorkitemCommentsListPostRequestDataItemAttributes")
 @_attrs_define
 class WorkitemCommentsListPostRequestDataItemAttributes:
     """
-    Attributes
-    ----------
-    resolved : Union[Unset, bool]
-    text : Union[Unset, WorkitemCommentsListPostRequestDataItemAttributesText]
-    title : Union[Unset, str]
+    Attributes:
+        resolved (Union[Unset, bool]):
+        text (Union[Unset, WorkitemCommentsListPostRequestDataItemAttributesText]):
+        title (Union[Unset, str]):  Example: Title.
     """
 
     resolved: Union[Unset, bool] = UNSET
@@ -38,6 +37,7 @@ class WorkitemCommentsListPostRequestDataItemAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         resolved = self.resolved
+
         text: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.text, Unset):
             text = self.text.to_dict()

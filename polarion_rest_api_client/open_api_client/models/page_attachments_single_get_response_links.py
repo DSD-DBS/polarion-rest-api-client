@@ -14,9 +14,9 @@ T = TypeVar("T", bound="PageAttachmentsSingleGetResponseLinks")
 @_attrs_define
 class PageAttachmentsSingleGetResponseLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/spaces/MySpaceId/pages/MyRichPageId/attachments/MyAttachmentId?revision=1234.
     """
 
     self_: Union[Unset, str] = UNSET

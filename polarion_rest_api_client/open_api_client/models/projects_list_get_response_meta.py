@@ -14,9 +14,8 @@ T = TypeVar("T", bound="ProjectsListGetResponseMeta")
 @_attrs_define
 class ProjectsListGetResponseMeta:
     """
-    Attributes
-    ----------
-    total_count : Union[Unset, int]
+    Attributes:
+        total_count (Union[Unset, int]):
     """
 
     total_count: Union[Unset, int] = UNSET

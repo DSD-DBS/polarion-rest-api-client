@@ -22,21 +22,26 @@ def _get_kwargs(
     space_id: str,
     document_name: str,
     *,
-    json_body: DocumentPartsListPostRequest,
+    body: DocumentPartsListPostRequest,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/parts".format(
             projectId=project_id,
             spaceId=space_id,
             documentName=document_name,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -99,34 +104,29 @@ def sync_detailed(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentPartsListPostRequest,
+    body: DocumentPartsListPostRequest,
 ) -> Response[Union[Any, DocumentPartsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Document Parts.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    json_body : DocumentPartsListPostRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        body (DocumentPartsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, DocumentPartsListPostResponse]]
+    Returns:
+        Response[Union[Any, DocumentPartsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         document_name=document_name,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -142,27 +142,22 @@ def sync(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentPartsListPostRequest,
+    body: DocumentPartsListPostRequest,
 ) -> Optional[Union[Any, DocumentPartsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Document Parts.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    json_body : DocumentPartsListPostRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        body (DocumentPartsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, DocumentPartsListPostResponse]
+    Returns:
+        Union[Any, DocumentPartsListPostResponse]
     """
 
     return sync_detailed(
@@ -170,7 +165,7 @@ def sync(
         space_id=space_id,
         document_name=document_name,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -180,34 +175,29 @@ async def asyncio_detailed(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentPartsListPostRequest,
+    body: DocumentPartsListPostRequest,
 ) -> Response[Union[Any, DocumentPartsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Document Parts.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    json_body : DocumentPartsListPostRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        body (DocumentPartsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, DocumentPartsListPostResponse]]
+    Returns:
+        Response[Union[Any, DocumentPartsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         document_name=document_name,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -221,27 +211,22 @@ async def asyncio(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentPartsListPostRequest,
+    body: DocumentPartsListPostRequest,
 ) -> Optional[Union[Any, DocumentPartsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Document Parts.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    json_body : DocumentPartsListPostRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        body (DocumentPartsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, DocumentPartsListPostResponse]
+    Returns:
+        Union[Any, DocumentPartsListPostResponse]
     """
 
     return (
@@ -250,6 +235,6 @@ async def asyncio(
             space_id=space_id,
             document_name=document_name,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

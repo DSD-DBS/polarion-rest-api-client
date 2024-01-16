@@ -26,13 +26,12 @@ T = TypeVar("T", bound="IconsSingleGetResponse")
 @_attrs_define
 class IconsSingleGetResponse:
     """
-    Attributes
-    ----------
-    data : Union[Unset, IconsSingleGetResponseData]
-    included : Union[Unset, List['IconsSingleGetResponseIncludedItem']]
-        Related entities might be returned, see <a href="https://docs.sw.siemens.com/en-
-        US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
-    links : Union[Unset, IconsSingleGetResponseLinks]
+    Attributes:
+        data (Union[Unset, IconsSingleGetResponseData]):
+        included (Union[Unset, List['IconsSingleGetResponseIncludedItem']]): Related entities might be returned, see <a
+            href="https://docs.sw.siemens.com/en-US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User
+            Guide</a>.
+        links (Union[Unset, IconsSingleGetResponseLinks]):
     """
 
     data: Union[Unset, "IconsSingleGetResponseData"] = UNSET
@@ -52,7 +51,6 @@ class IconsSingleGetResponse:
             included = []
             for included_item_data in self.included:
                 included_item = included_item_data.to_dict()
-
                 included.append(included_item)
 
         links: Union[Unset, Dict[str, Any]] = UNSET

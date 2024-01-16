@@ -16,9 +16,8 @@ T = TypeVar(
 @_attrs_define
 class UsergroupsSingleGetResponseDataRelationshipsProjectRolesMeta:
     """
-    Attributes
-    ----------
-    total_count : Union[Unset, int]
+    Attributes:
+        total_count (Union[Unset, int]):
     """
 
     total_count: Union[Unset, int] = UNSET

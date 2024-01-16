@@ -22,18 +22,17 @@ T = TypeVar("T", bound="ProjectsSingleGetResponseDataAttributes")
 @_attrs_define
 class ProjectsSingleGetResponseDataAttributes:
     """
-    Attributes
-    ----------
-    active : Union[Unset, bool]
-    color : Union[Unset, str]
-    description : Union[Unset, ProjectsSingleGetResponseDataAttributesDescription]
-    finish : Union[Unset, datetime.date]
-    icon : Union[Unset, str]
-    id : Union[Unset, str]
-    lock_work_records_date : Union[Unset, datetime.date]
-    name : Union[Unset, str]
-    start : Union[Unset, datetime.date]
-    tracker_prefix : Union[Unset, str]
+    Attributes:
+        active (Union[Unset, bool]):
+        color (Union[Unset, str]):  Example: Color.
+        description (Union[Unset, ProjectsSingleGetResponseDataAttributesDescription]):
+        finish (Union[Unset, datetime.date]):  Example: 1970-01-01.
+        icon (Union[Unset, str]):  Example: Icon.
+        id (Union[Unset, str]):  Example: MyProjectId.
+        lock_work_records_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
+        name (Union[Unset, str]):  Example: Name.
+        start (Union[Unset, datetime.date]):  Example: 1970-01-01.
+        tracker_prefix (Union[Unset, str]):  Example: Tracker Prefix.
     """
 
     active: Union[Unset, bool] = UNSET
@@ -54,7 +53,9 @@ class ProjectsSingleGetResponseDataAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         active = self.active
+
         color = self.color
+
         description: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
@@ -64,12 +65,15 @@ class ProjectsSingleGetResponseDataAttributes:
             finish = self.finish.isoformat()
 
         icon = self.icon
+
         id = self.id
+
         lock_work_records_date: Union[Unset, str] = UNSET
         if not isinstance(self.lock_work_records_date, Unset):
             lock_work_records_date = self.lock_work_records_date.isoformat()
 
         name = self.name
+
         start: Union[Unset, str] = UNSET
         if not isinstance(self.start, Unset):
             start = self.start.isoformat()

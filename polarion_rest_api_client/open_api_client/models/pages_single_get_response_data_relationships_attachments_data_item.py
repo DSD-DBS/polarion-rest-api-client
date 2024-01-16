@@ -19,11 +19,10 @@ T = TypeVar(
 @_attrs_define
 class PagesSingleGetResponseDataRelationshipsAttachmentsDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, PagesSingleGetResponseDataRelationshipsAttachmentsDataItemType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, PagesSingleGetResponseDataRelationshipsAttachmentsDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyRichPageId/MyAttachmentId.
+        revision (Union[Unset, str]):  Example: 1234.
     """
 
     type: Union[
@@ -41,6 +40,7 @@ class PagesSingleGetResponseDataRelationshipsAttachmentsDataItem:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
 
         field_dict: Dict[str, Any] = {}

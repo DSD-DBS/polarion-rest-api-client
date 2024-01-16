@@ -14,11 +14,10 @@ T = TypeVar("T", bound="Pagination")
 @_attrs_define
 class Pagination:
     """
-    Attributes
-    ----------
-    page_size : Union[Unset, int]
-    page_number : Union[Unset, int]
-    calculated_offset : Union[Unset, int]
+    Attributes:
+        page_size (Union[Unset, int]):
+        page_number (Union[Unset, int]):
+        calculated_offset (Union[Unset, int]):
     """
 
     page_size: Union[Unset, int] = UNSET
@@ -30,7 +29,9 @@ class Pagination:
 
     def to_dict(self) -> Dict[str, Any]:
         page_size = self.page_size
+
         page_number = self.page_number
+
         calculated_offset = self.calculated_offset
 
         field_dict: Dict[str, Any] = {}

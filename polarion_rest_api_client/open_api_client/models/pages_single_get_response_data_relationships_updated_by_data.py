@@ -17,11 +17,10 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataRelationshipsUpdatedByData")
 @_attrs_define
 class PagesSingleGetResponseDataRelationshipsUpdatedByData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, PagesSingleGetResponseDataRelationshipsUpdatedByDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, PagesSingleGetResponseDataRelationshipsUpdatedByDataType]):
+        id (Union[Unset, str]):  Example: MyUserId.
+        revision (Union[Unset, str]):  Example: 1234.
     """
 
     type: Union[
@@ -39,6 +38,7 @@ class PagesSingleGetResponseDataRelationshipsUpdatedByData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
 
         field_dict: Dict[str, Any] = {}

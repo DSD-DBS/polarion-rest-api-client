@@ -17,11 +17,10 @@ T = TypeVar("T", bound="ProjectsListGetResponseDataItemRelationshipsLeadData")
 @_attrs_define
 class ProjectsListGetResponseDataItemRelationshipsLeadData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, ProjectsListGetResponseDataItemRelationshipsLeadDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, ProjectsListGetResponseDataItemRelationshipsLeadDataType]):
+        id (Union[Unset, str]):  Example: MyUserId.
+        revision (Union[Unset, str]):  Example: 1234.
     """
 
     type: Union[
@@ -39,6 +38,7 @@ class ProjectsListGetResponseDataItemRelationshipsLeadData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
 
         field_dict: Dict[str, Any] = {}

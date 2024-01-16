@@ -32,15 +32,14 @@ T = TypeVar("T", bound="DocumentPartsListGetResponseDataItem")
 @_attrs_define
 class DocumentPartsListGetResponseDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentPartsListGetResponseDataItemType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
-    attributes : Union[Unset, DocumentPartsListGetResponseDataItemAttributes]
-    relationships : Union[Unset, DocumentPartsListGetResponseDataItemRelationships]
-    meta : Union[Unset, DocumentPartsListGetResponseDataItemMeta]
-    links : Union[Unset, DocumentPartsListGetResponseDataItemLinks]
+    Attributes:
+        type (Union[Unset, DocumentPartsListGetResponseDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+        revision (Union[Unset, str]):  Example: 1234.
+        attributes (Union[Unset, DocumentPartsListGetResponseDataItemAttributes]):
+        relationships (Union[Unset, DocumentPartsListGetResponseDataItemRelationships]):
+        meta (Union[Unset, DocumentPartsListGetResponseDataItemMeta]):
+        links (Union[Unset, DocumentPartsListGetResponseDataItemLinks]):
     """
 
     type: Union[Unset, DocumentPartsListGetResponseDataItemType] = UNSET
@@ -64,7 +63,9 @@ class DocumentPartsListGetResponseDataItem:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

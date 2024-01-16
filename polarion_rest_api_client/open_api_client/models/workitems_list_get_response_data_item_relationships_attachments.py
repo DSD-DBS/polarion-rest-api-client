@@ -28,11 +28,10 @@ T = TypeVar(
 @_attrs_define
 class WorkitemsListGetResponseDataItemRelationshipsAttachments:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['WorkitemsListGetResponseDataItemRelationshipsAttachmentsDataItem']]
-    meta : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAttachmentsMeta]
-    links : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAttachmentsLinks]
+    Attributes:
+        data (Union[Unset, List['WorkitemsListGetResponseDataItemRelationshipsAttachmentsDataItem']]):
+        meta (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAttachmentsMeta]):
+        links (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAttachmentsLinks]):
     """
 
     data: Union[
@@ -57,7 +56,6 @@ class WorkitemsListGetResponseDataItemRelationshipsAttachments:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         meta: Union[Unset, Dict[str, Any]] = UNSET

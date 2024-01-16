@@ -41,16 +41,15 @@ T = TypeVar("T", bound="DocumentsSingleGetResponseDataRelationships")
 @_attrs_define
 class DocumentsSingleGetResponseDataRelationships:
     """
-    Attributes
-    ----------
-    attachments : Union[Unset, DocumentsSingleGetResponseDataRelationshipsAttachments]
-    author : Union[Unset, DocumentsSingleGetResponseDataRelationshipsAuthor]
-    branched_from : Union[Unset, DocumentsSingleGetResponseDataRelationshipsBranchedFrom]
-    comments : Union[Unset, DocumentsSingleGetResponseDataRelationshipsComments]
-    derived_from : Union[Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFrom]
-    project : Union[Unset, DocumentsSingleGetResponseDataRelationshipsProject]
-    updated_by : Union[Unset, DocumentsSingleGetResponseDataRelationshipsUpdatedBy]
-    variant : Union[Unset, DocumentsSingleGetResponseDataRelationshipsVariant]
+    Attributes:
+        attachments (Union[Unset, DocumentsSingleGetResponseDataRelationshipsAttachments]):
+        author (Union[Unset, DocumentsSingleGetResponseDataRelationshipsAuthor]):
+        branched_from (Union[Unset, DocumentsSingleGetResponseDataRelationshipsBranchedFrom]):
+        comments (Union[Unset, DocumentsSingleGetResponseDataRelationshipsComments]):
+        derived_from (Union[Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFrom]):
+        project (Union[Unset, DocumentsSingleGetResponseDataRelationshipsProject]):
+        updated_by (Union[Unset, DocumentsSingleGetResponseDataRelationshipsUpdatedBy]):
+        variant (Union[Unset, DocumentsSingleGetResponseDataRelationshipsVariant]):
     """
 
     attachments: Union[

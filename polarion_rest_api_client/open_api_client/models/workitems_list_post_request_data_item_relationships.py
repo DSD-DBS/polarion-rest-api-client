@@ -18,6 +18,9 @@ if TYPE_CHECKING:
     from ..models.workitems_list_post_request_data_item_relationships_categories import (
         WorkitemsListPostRequestDataItemRelationshipsCategories,
     )
+    from ..models.workitems_list_post_request_data_item_relationships_linked_revisions import (
+        WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions,
+    )
     from ..models.workitems_list_post_request_data_item_relationships_module import (
         WorkitemsListPostRequestDataItemRelationshipsModule,
     )
@@ -29,12 +32,12 @@ T = TypeVar("T", bound="WorkitemsListPostRequestDataItemRelationships")
 @_attrs_define
 class WorkitemsListPostRequestDataItemRelationships:
     """
-    Attributes
-    ----------
-    assignee : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAssignee]
-    author : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAuthor]
-    categories : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsCategories]
-    module : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsModule]
+    Attributes:
+        assignee (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAssignee]):
+        author (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAuthor]):
+        categories (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsCategories]):
+        linked_revisions (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions]):
+        module (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsModule]):
     """
 
     assignee: Union[
@@ -45,6 +48,9 @@ class WorkitemsListPostRequestDataItemRelationships:
     ] = UNSET
     categories: Union[
         Unset, "WorkitemsListPostRequestDataItemRelationshipsCategories"
+    ] = UNSET
+    linked_revisions: Union[
+        Unset, "WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions"
     ] = UNSET
     module: Union[
         Unset, "WorkitemsListPostRequestDataItemRelationshipsModule"
@@ -66,6 +72,10 @@ class WorkitemsListPostRequestDataItemRelationships:
         if not isinstance(self.categories, Unset):
             categories = self.categories.to_dict()
 
+        linked_revisions: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.linked_revisions, Unset):
+            linked_revisions = self.linked_revisions.to_dict()
+
         module: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.module, Unset):
             module = self.module.to_dict()
@@ -79,6 +89,8 @@ class WorkitemsListPostRequestDataItemRelationships:
             field_dict["author"] = author
         if categories is not UNSET:
             field_dict["categories"] = categories
+        if linked_revisions is not UNSET:
+            field_dict["linkedRevisions"] = linked_revisions
         if module is not UNSET:
             field_dict["module"] = module
 
@@ -94,6 +106,9 @@ class WorkitemsListPostRequestDataItemRelationships:
         )
         from ..models.workitems_list_post_request_data_item_relationships_categories import (
             WorkitemsListPostRequestDataItemRelationshipsCategories,
+        )
+        from ..models.workitems_list_post_request_data_item_relationships_linked_revisions import (
+            WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions,
         )
         from ..models.workitems_list_post_request_data_item_relationships_module import (
             WorkitemsListPostRequestDataItemRelationshipsModule,
@@ -135,6 +150,17 @@ class WorkitemsListPostRequestDataItemRelationships:
                 _categories
             )
 
+        _linked_revisions = d.pop("linkedRevisions", UNSET)
+        linked_revisions: Union[
+            Unset, WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions
+        ]
+        if isinstance(_linked_revisions, Unset):
+            linked_revisions = UNSET
+        else:
+            linked_revisions = WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions.from_dict(
+                _linked_revisions
+            )
+
         _module = d.pop("module", UNSET)
         module: Union[
             Unset, WorkitemsListPostRequestDataItemRelationshipsModule
@@ -152,6 +178,7 @@ class WorkitemsListPostRequestDataItemRelationships:
             assignee=assignee,
             author=author,
             categories=categories,
+            linked_revisions=linked_revisions,
             module=module,
         )
 

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -28,28 +28,31 @@ T = TypeVar("T", bound="DocumentsSingleGetResponseDataAttributes")
 @_attrs_define
 class DocumentsSingleGetResponseDataAttributes:
     """
-    Attributes
-    ----------
-    auto_suspect : Union[Unset, bool]
-    branched_with_query : Union[Unset, str]
-    created : Union[Unset, datetime.datetime]
-    derived_from_link_role : Union[Unset, str]
-    home_page_content : Union[Unset, DocumentsSingleGetResponseDataAttributesHomePageContent]
-    module_folder : Union[Unset, str]
-    module_name : Union[Unset, str]
-    outline_numbering : Union[Unset, DocumentsSingleGetResponseDataAttributesOutlineNumbering]
-    rendering_layouts : Union[Unset, List['DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem']]
-    status : Union[Unset, str]
-    structure_link_role : Union[Unset, str]
-    title : Union[Unset, str]
-    type : Union[Unset, str]
-    updated : Union[Unset, datetime.datetime]
-    uses_outline_numbering : Union[Unset, bool]
+    Attributes:
+        auto_suspect (Union[Unset, bool]):
+        branched_with_initialized_fields (Union[Unset, List[str]]):
+        branched_with_query (Union[Unset, str]):  Example: Branched with Query.
+        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+        derived_fields (Union[Unset, List[str]]):
+        derived_from_link_role (Union[Unset, str]):  Example: relates_to.
+        home_page_content (Union[Unset, DocumentsSingleGetResponseDataAttributesHomePageContent]):
+        module_folder (Union[Unset, str]):  Example: MySpaceId.
+        module_name (Union[Unset, str]):  Example: MyDocumentId.
+        outline_numbering (Union[Unset, DocumentsSingleGetResponseDataAttributesOutlineNumbering]):
+        rendering_layouts (Union[Unset, List['DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem']]):
+        status (Union[Unset, str]):  Example: draft.
+        structure_link_role (Union[Unset, str]):  Example: relates_to.
+        title (Union[Unset, str]):  Example: Title.
+        type (Union[Unset, str]):  Example: req_specification.
+        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+        uses_outline_numbering (Union[Unset, bool]):
     """
 
     auto_suspect: Union[Unset, bool] = UNSET
+    branched_with_initialized_fields: Union[Unset, List[str]] = UNSET
     branched_with_query: Union[Unset, str] = UNSET
     created: Union[Unset, datetime.datetime] = UNSET
+    derived_fields: Union[Unset, List[str]] = UNSET
     derived_from_link_role: Union[Unset, str] = UNSET
     home_page_content: Union[
         Unset, "DocumentsSingleGetResponseDataAttributesHomePageContent"
@@ -75,18 +78,33 @@ class DocumentsSingleGetResponseDataAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         auto_suspect = self.auto_suspect
+
+        branched_with_initialized_fields: Union[Unset, List[str]] = UNSET
+        if not isinstance(self.branched_with_initialized_fields, Unset):
+            branched_with_initialized_fields = (
+                self.branched_with_initialized_fields
+            )
+
         branched_with_query = self.branched_with_query
+
         created: Union[Unset, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
 
+        derived_fields: Union[Unset, List[str]] = UNSET
+        if not isinstance(self.derived_fields, Unset):
+            derived_fields = self.derived_fields
+
         derived_from_link_role = self.derived_from_link_role
+
         home_page_content: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.home_page_content, Unset):
             home_page_content = self.home_page_content.to_dict()
 
         module_folder = self.module_folder
+
         module_name = self.module_name
+
         outline_numbering: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.outline_numbering, Unset):
             outline_numbering = self.outline_numbering.to_dict()
@@ -96,13 +114,16 @@ class DocumentsSingleGetResponseDataAttributes:
             rendering_layouts = []
             for rendering_layouts_item_data in self.rendering_layouts:
                 rendering_layouts_item = rendering_layouts_item_data.to_dict()
-
                 rendering_layouts.append(rendering_layouts_item)
 
         status = self.status
+
         structure_link_role = self.structure_link_role
+
         title = self.title
+
         type = self.type
+
         updated: Union[Unset, str] = UNSET
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()
@@ -114,10 +135,16 @@ class DocumentsSingleGetResponseDataAttributes:
         field_dict.update({})
         if auto_suspect is not UNSET:
             field_dict["autoSuspect"] = auto_suspect
+        if branched_with_initialized_fields is not UNSET:
+            field_dict[
+                "branchedWithInitializedFields"
+            ] = branched_with_initialized_fields
         if branched_with_query is not UNSET:
             field_dict["branchedWithQuery"] = branched_with_query
         if created is not UNSET:
             field_dict["created"] = created
+        if derived_fields is not UNSET:
+            field_dict["derivedFields"] = derived_fields
         if derived_from_link_role is not UNSET:
             field_dict["derivedFromLinkRole"] = derived_from_link_role
         if home_page_content is not UNSET:
@@ -160,6 +187,10 @@ class DocumentsSingleGetResponseDataAttributes:
         d = src_dict.copy()
         auto_suspect = d.pop("autoSuspect", UNSET)
 
+        branched_with_initialized_fields = cast(
+            List[str], d.pop("branchedWithInitializedFields", UNSET)
+        )
+
         branched_with_query = d.pop("branchedWithQuery", UNSET)
 
         _created = d.pop("created", UNSET)
@@ -168,6 +199,8 @@ class DocumentsSingleGetResponseDataAttributes:
             created = UNSET
         else:
             created = isoparse(_created)
+
+        derived_fields = cast(List[str], d.pop("derivedFields", UNSET))
 
         derived_from_link_role = d.pop("derivedFromLinkRole", UNSET)
 
@@ -225,8 +258,10 @@ class DocumentsSingleGetResponseDataAttributes:
 
         documents_single_get_response_data_attributes_obj = cls(
             auto_suspect=auto_suspect,
+            branched_with_initialized_fields=branched_with_initialized_fields,
             branched_with_query=branched_with_query,
             created=created,
+            derived_fields=derived_fields,
             derived_from_link_role=derived_from_link_role,
             home_page_content=home_page_content,
             module_folder=module_folder,

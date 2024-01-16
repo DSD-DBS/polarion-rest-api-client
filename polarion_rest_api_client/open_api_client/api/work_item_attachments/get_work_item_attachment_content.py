@@ -16,18 +16,17 @@ def _get_kwargs(
     work_item_id: str,
     attachment_id: str,
     *,
-    revision: Union[Unset, None, str] = UNSET,
+    revision: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["revision"] = revision
 
     params = {
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/projects/{projectId}/workitems/{workItemId}/attachments/{attachmentId}/content".format(
             projectId=project_id,
@@ -36,6 +35,8 @@ def _get_kwargs(
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -80,27 +81,22 @@ def sync_detailed(
     attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    revision: Union[Unset, None, str] = UNSET,
+    revision: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
-    """Downloads the file content for a specified attachment.
+    """Downloads the file content for a specified Work Item Attachment.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    attachment_id : str
-    revision : Union[Unset, None, str]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        attachment_id (str):
+        revision (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -123,27 +119,22 @@ async def asyncio_detailed(
     attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    revision: Union[Unset, None, str] = UNSET,
+    revision: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
-    """Downloads the file content for a specified attachment.
+    """Downloads the file content for a specified Work Item Attachment.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    attachment_id : str
-    revision : Union[Unset, None, str]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        attachment_id (str):
+        revision (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(

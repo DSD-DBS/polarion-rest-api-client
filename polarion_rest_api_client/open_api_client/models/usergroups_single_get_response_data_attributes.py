@@ -20,13 +20,12 @@ T = TypeVar("T", bound="UsergroupsSingleGetResponseDataAttributes")
 @_attrs_define
 class UsergroupsSingleGetResponseDataAttributes:
     """
-    Attributes
-    ----------
-    description : Union[Unset, UsergroupsSingleGetResponseDataAttributesDescription]
-    id : Union[Unset, str]
-    ldap_search_filter : Union[Unset, str]
-    name : Union[Unset, str]
-    sso_synchronization_allowed : Union[Unset, bool]
+    Attributes:
+        description (Union[Unset, UsergroupsSingleGetResponseDataAttributesDescription]):
+        id (Union[Unset, str]):  Example: MyUserGroupId.
+        ldap_search_filter (Union[Unset, str]):  Example: LDAP Search Filter.
+        name (Union[Unset, str]):  Example: Name.
+        sso_synchronization_allowed (Union[Unset, bool]):
     """
 
     description: Union[
@@ -46,8 +45,11 @@ class UsergroupsSingleGetResponseDataAttributes:
             description = self.description.to_dict()
 
         id = self.id
+
         ldap_search_filter = self.ldap_search_filter
+
         name = self.name
+
         sso_synchronization_allowed = self.sso_synchronization_allowed
 
         field_dict: Dict[str, Any] = {}

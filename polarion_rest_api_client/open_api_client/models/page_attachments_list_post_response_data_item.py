@@ -23,11 +23,10 @@ T = TypeVar("T", bound="PageAttachmentsListPostResponseDataItem")
 @_attrs_define
 class PageAttachmentsListPostResponseDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, PageAttachmentsListPostResponseDataItemType]
-    id : Union[Unset, str]
-    links : Union[Unset, PageAttachmentsListPostResponseDataItemLinks]
+    Attributes:
+        type (Union[Unset, PageAttachmentsListPostResponseDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyRichPageId/MyAttachmentId.
+        links (Union[Unset, PageAttachmentsListPostResponseDataItemLinks]):
     """
 
     type: Union[Unset, PageAttachmentsListPostResponseDataItemType] = UNSET
@@ -43,6 +42,7 @@ class PageAttachmentsListPostResponseDataItem:
             type = self.type.value
 
         id = self.id
+
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()

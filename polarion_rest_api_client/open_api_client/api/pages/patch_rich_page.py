@@ -17,21 +17,26 @@ def _get_kwargs(
     space_id: str,
     page_name: str,
     *,
-    json_body: PagesSinglePatchRequest,
+    body: PagesSinglePatchRequest,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
         "url": "/projects/{projectId}/spaces/{spaceId}/pages/{pageName}".format(
             projectId=project_id,
             spaceId=space_id,
             pageName=page_name,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -80,34 +85,29 @@ def sync_detailed(
     page_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: PagesSinglePatchRequest,
+    body: PagesSinglePatchRequest,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified Page.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    page_name : str
-    json_body : PagesSinglePatchRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        page_name (str):
+        body (PagesSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         page_name=page_name,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -123,34 +123,29 @@ async def asyncio_detailed(
     page_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: PagesSinglePatchRequest,
+    body: PagesSinglePatchRequest,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified Page.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    page_name : str
-    json_body : PagesSinglePatchRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        page_name (str):
+        body (PagesSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         page_name=page_name,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

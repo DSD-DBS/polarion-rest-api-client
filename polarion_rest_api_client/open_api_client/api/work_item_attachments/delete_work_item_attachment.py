@@ -16,9 +16,7 @@ def _get_kwargs(
     work_item_id: str,
     attachment_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
         "url": "/projects/{projectId}/workitems/{workItemId}/attachments/{attachmentId}".format(
             projectId=project_id,
@@ -26,6 +24,8 @@ def _get_kwargs(
             attachmentId=attachment_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -71,24 +71,19 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """Deletes the specified instance.
+    """Deletes the specified Work Item Attachment.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    attachment_id : str
+    Args:
+        project_id (str):
+        work_item_id (str):
+        attachment_id (str):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -111,24 +106,19 @@ async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """Deletes the specified instance.
+    """Deletes the specified Work Item Attachment.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    attachment_id : str
+    Args:
+        project_id (str):
+        work_item_id (str):
+        attachment_id (str):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(

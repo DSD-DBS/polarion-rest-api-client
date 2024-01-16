@@ -1,33 +1,47 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ResourceReference")
 
 
 @_attrs_define
 class ResourceReference:
-    """"""
+    """
+    Attributes:
+        contained_resource (Union[Unset, bool]):
+    """
 
+    contained_resource: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
+        contained_resource = self.contained_resource
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if contained_resource is not UNSET:
+            field_dict["containedResource"] = contained_resource
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        resource_reference_obj = cls()
+        contained_resource = d.pop("containedResource", UNSET)
+
+        resource_reference_obj = cls(
+            contained_resource=contained_resource,
+        )
 
         resource_reference_obj.additional_properties = d
         return resource_reference_obj

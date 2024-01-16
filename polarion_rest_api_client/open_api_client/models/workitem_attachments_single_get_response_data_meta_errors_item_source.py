@@ -1,12 +1,18 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.workitem_attachments_single_get_response_data_meta_errors_item_source_resource import (
+        WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSourceResource,
+    )
+
 
 T = TypeVar(
     "T", bound="WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSource"
@@ -16,23 +22,31 @@ T = TypeVar(
 @_attrs_define
 class WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSource:
     """
-    Attributes
-    ----------
-    pointer : Union[Unset, str]
-        JSON Pointer to the associated entity in the request document.
-    parameter : Union[Unset, str]
-        String indicating which URI query parameter caused the error.
+    Attributes:
+        pointer (Union[Unset, str]): JSON Pointer to the associated entity in the request document. Example: $.data.
+        parameter (Union[Unset, str]): String indicating which URI query parameter caused the error. Example: revision.
+        resource (Union[Unset, WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSourceResource]): Resource causing
+            the error.
     """
 
     pointer: Union[Unset, str] = UNSET
     parameter: Union[Unset, str] = UNSET
+    resource: Union[
+        Unset,
+        "WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSourceResource",
+    ] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
         pointer = self.pointer
+
         parameter = self.parameter
+
+        resource: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.resource, Unset):
+            resource = self.resource.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -41,19 +55,38 @@ class WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSource:
             field_dict["pointer"] = pointer
         if parameter is not UNSET:
             field_dict["parameter"] = parameter
+        if resource is not UNSET:
+            field_dict["resource"] = resource
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        from ..models.workitem_attachments_single_get_response_data_meta_errors_item_source_resource import (
+            WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSourceResource,
+        )
+
         d = src_dict.copy()
         pointer = d.pop("pointer", UNSET)
 
         parameter = d.pop("parameter", UNSET)
 
+        _resource = d.pop("resource", UNSET)
+        resource: Union[
+            Unset,
+            WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSourceResource,
+        ]
+        if isinstance(_resource, Unset):
+            resource = UNSET
+        else:
+            resource = WorkitemAttachmentsSingleGetResponseDataMetaErrorsItemSourceResource.from_dict(
+                _resource
+            )
+
         workitem_attachments_single_get_response_data_meta_errors_item_source_obj = cls(
             pointer=pointer,
             parameter=parameter,
+            resource=resource,
         )
 
         workitem_attachments_single_get_response_data_meta_errors_item_source_obj.additional_properties = (

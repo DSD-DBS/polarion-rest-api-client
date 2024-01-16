@@ -26,16 +26,15 @@ T = TypeVar("T", bound="DocumentsSinglePatchRequestDataAttributes")
 @_attrs_define
 class DocumentsSinglePatchRequestDataAttributes:
     """
-    Attributes
-    ----------
-    auto_suspect : Union[Unset, bool]
-    home_page_content : Union[Unset, DocumentsSinglePatchRequestDataAttributesHomePageContent]
-    outline_numbering : Union[Unset, DocumentsSinglePatchRequestDataAttributesOutlineNumbering]
-    rendering_layouts : Union[Unset, List['DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem']]
-    status : Union[Unset, str]
-    title : Union[Unset, str]
-    type : Union[Unset, str]
-    uses_outline_numbering : Union[Unset, bool]
+    Attributes:
+        auto_suspect (Union[Unset, bool]):
+        home_page_content (Union[Unset, DocumentsSinglePatchRequestDataAttributesHomePageContent]):
+        outline_numbering (Union[Unset, DocumentsSinglePatchRequestDataAttributesOutlineNumbering]):
+        rendering_layouts (Union[Unset, List['DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem']]):
+        status (Union[Unset, str]):  Example: draft.
+        title (Union[Unset, str]):  Example: Title.
+        type (Union[Unset, str]):  Example: req_specification.
+        uses_outline_numbering (Union[Unset, bool]):
     """
 
     auto_suspect: Union[Unset, bool] = UNSET
@@ -59,6 +58,7 @@ class DocumentsSinglePatchRequestDataAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         auto_suspect = self.auto_suspect
+
         home_page_content: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.home_page_content, Unset):
             home_page_content = self.home_page_content.to_dict()
@@ -72,12 +72,14 @@ class DocumentsSinglePatchRequestDataAttributes:
             rendering_layouts = []
             for rendering_layouts_item_data in self.rendering_layouts:
                 rendering_layouts_item = rendering_layouts_item_data.to_dict()
-
                 rendering_layouts.append(rendering_layouts_item)
 
         status = self.status
+
         title = self.title
+
         type = self.type
+
         uses_outline_numbering = self.uses_outline_numbering
 
         field_dict: Dict[str, Any] = {}

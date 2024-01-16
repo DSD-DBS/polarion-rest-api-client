@@ -14,9 +14,9 @@ T = TypeVar("T", bound="LinkedworkitemsSingleGetResponseDataLinks")
 @_attrs_define
 class LinkedworkitemsSingleGetResponseDataLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItem
+            Id/linkedworkitems/parent/MyProjectId/MyLinkedWorkItemId?revision=1234.
     """
 
     self_: Union[Unset, str] = UNSET

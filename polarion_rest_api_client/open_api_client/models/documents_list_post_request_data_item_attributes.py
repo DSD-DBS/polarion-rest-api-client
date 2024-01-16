@@ -26,18 +26,17 @@ T = TypeVar("T", bound="DocumentsListPostRequestDataItemAttributes")
 @_attrs_define
 class DocumentsListPostRequestDataItemAttributes:
     """
-    Attributes
-    ----------
-    auto_suspect : Union[Unset, bool]
-    home_page_content : Union[Unset, DocumentsListPostRequestDataItemAttributesHomePageContent]
-    module_name : Union[Unset, str]
-    outline_numbering : Union[Unset, DocumentsListPostRequestDataItemAttributesOutlineNumbering]
-    rendering_layouts : Union[Unset, List['DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem']]
-    status : Union[Unset, str]
-    structure_link_role : Union[Unset, str]
-    title : Union[Unset, str]
-    type : Union[Unset, str]
-    uses_outline_numbering : Union[Unset, bool]
+    Attributes:
+        auto_suspect (Union[Unset, bool]):
+        home_page_content (Union[Unset, DocumentsListPostRequestDataItemAttributesHomePageContent]):
+        module_name (Union[Unset, str]):  Example: MyDocumentId.
+        outline_numbering (Union[Unset, DocumentsListPostRequestDataItemAttributesOutlineNumbering]):
+        rendering_layouts (Union[Unset, List['DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem']]):
+        status (Union[Unset, str]):  Example: draft.
+        structure_link_role (Union[Unset, str]):  Example: relates_to.
+        title (Union[Unset, str]):  Example: Title.
+        type (Union[Unset, str]):  Example: req_specification.
+        uses_outline_numbering (Union[Unset, bool]):
     """
 
     auto_suspect: Union[Unset, bool] = UNSET
@@ -63,11 +62,13 @@ class DocumentsListPostRequestDataItemAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         auto_suspect = self.auto_suspect
+
         home_page_content: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.home_page_content, Unset):
             home_page_content = self.home_page_content.to_dict()
 
         module_name = self.module_name
+
         outline_numbering: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.outline_numbering, Unset):
             outline_numbering = self.outline_numbering.to_dict()
@@ -77,13 +78,16 @@ class DocumentsListPostRequestDataItemAttributes:
             rendering_layouts = []
             for rendering_layouts_item_data in self.rendering_layouts:
                 rendering_layouts_item = rendering_layouts_item_data.to_dict()
-
                 rendering_layouts.append(rendering_layouts_item)
 
         status = self.status
+
         structure_link_role = self.structure_link_role
+
         title = self.title
+
         type = self.type
+
         uses_outline_numbering = self.uses_outline_numbering
 
         field_dict: Dict[str, Any] = {}

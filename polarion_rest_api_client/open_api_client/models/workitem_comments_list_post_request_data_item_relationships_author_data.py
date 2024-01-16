@@ -19,10 +19,9 @@ T = TypeVar(
 @_attrs_define
 class WorkitemCommentsListPostRequestDataItemRelationshipsAuthorData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemCommentsListPostRequestDataItemRelationshipsAuthorDataType]
-    id : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemCommentsListPostRequestDataItemRelationshipsAuthorDataType]):
+        id (Union[Unset, str]):  Example: MyUserId.
     """
 
     type: Union[

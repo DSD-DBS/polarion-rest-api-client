@@ -14,18 +14,13 @@ T = TypeVar("T", bound="CopyDocumentRequestBody")
 @_attrs_define
 class CopyDocumentRequestBody:
     """
-    Attributes
-    ----------
-    target_project_id : Union[Unset, str]
-        Project where new document will be created.
-    target_space_id : Union[Unset, str]
-        Space where new document will be created.
-    target_document_name : Union[Unset, str]
-        Name for new document.
-    remove_outgoing_links : Union[Unset, bool]
-        Should outgoing links be removed?
-    link_original_items_with_role : Union[Unset, str]
-        Link a copy of the document to the original.
+    Attributes:
+        target_project_id (Union[Unset, str]): Project where new document will be created. Example: MyProjectId.
+        target_space_id (Union[Unset, str]): Space where new document will be created. Example: MySpaceId.
+        target_document_name (Union[Unset, str]): Name for new Document. Example: MyDocumentId.
+        remove_outgoing_links (Union[Unset, bool]): Should outgoing links be removed? Example: True.
+        link_original_items_with_role (Union[Unset, str]): Link a copy of the document to the original. Example:
+            duplicates.
     """
 
     target_project_id: Union[Unset, str] = UNSET
@@ -39,9 +34,13 @@ class CopyDocumentRequestBody:
 
     def to_dict(self) -> Dict[str, Any]:
         target_project_id = self.target_project_id
+
         target_space_id = self.target_space_id
+
         target_document_name = self.target_document_name
+
         remove_outgoing_links = self.remove_outgoing_links
+
         link_original_items_with_role = self.link_original_items_with_role
 
         field_dict: Dict[str, Any] = {}

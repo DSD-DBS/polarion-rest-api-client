@@ -25,27 +25,26 @@ T = TypeVar("T", bound="WorkitemsSingleGetResponseDataAttributes")
 @_attrs_define
 class WorkitemsSingleGetResponseDataAttributes:
     """
-    Attributes
-    ----------
-    created : Union[Unset, datetime.datetime]
-    description : Union[Unset, WorkitemsSingleGetResponseDataAttributesDescription]
-    due_date : Union[Unset, datetime.date]
-    hyperlinks : Union[Unset, List['WorkitemsSingleGetResponseDataAttributesHyperlinksItem']]
-    id : Union[Unset, str]
-    initial_estimate : Union[Unset, str]
-    outline_number : Union[Unset, str]
-    planned_end : Union[Unset, datetime.datetime]
-    planned_start : Union[Unset, datetime.datetime]
-    priority : Union[Unset, str]
-    remaining_estimate : Union[Unset, str]
-    resolution : Union[Unset, str]
-    resolved_on : Union[Unset, datetime.datetime]
-    severity : Union[Unset, str]
-    status : Union[Unset, str]
-    time_spent : Union[Unset, str]
-    title : Union[Unset, str]
-    type : Union[Unset, str]
-    updated : Union[Unset, datetime.datetime]
+    Attributes:
+        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+        description (Union[Unset, WorkitemsSingleGetResponseDataAttributesDescription]):
+        due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
+        hyperlinks (Union[Unset, List['WorkitemsSingleGetResponseDataAttributesHyperlinksItem']]):
+        id (Union[Unset, str]):  Example: MyWorkItemId.
+        initial_estimate (Union[Unset, str]):  Example: 5 1/2d.
+        outline_number (Union[Unset, str]):  Example: 1.11.
+        planned_end (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+        planned_start (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+        priority (Union[Unset, str]):  Example: 90.0.
+        remaining_estimate (Union[Unset, str]):  Example: 5 1/2d.
+        resolution (Union[Unset, str]):  Example: done.
+        resolved_on (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+        severity (Union[Unset, str]):  Example: blocker.
+        status (Union[Unset, str]):  Example: open.
+        time_spent (Union[Unset, str]):  Example: 5 1/2d.
+        title (Union[Unset, str]):  Example: Title.
+        type (Union[Unset, str]):  Example: task.
+        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
     """
 
     created: Union[Unset, datetime.datetime] = UNSET
@@ -93,12 +92,14 @@ class WorkitemsSingleGetResponseDataAttributes:
             hyperlinks = []
             for hyperlinks_item_data in self.hyperlinks:
                 hyperlinks_item = hyperlinks_item_data.to_dict()
-
                 hyperlinks.append(hyperlinks_item)
 
         id = self.id
+
         initial_estimate = self.initial_estimate
+
         outline_number = self.outline_number
+
         planned_end: Union[Unset, str] = UNSET
         if not isinstance(self.planned_end, Unset):
             planned_end = self.planned_end.isoformat()
@@ -108,17 +109,25 @@ class WorkitemsSingleGetResponseDataAttributes:
             planned_start = self.planned_start.isoformat()
 
         priority = self.priority
+
         remaining_estimate = self.remaining_estimate
+
         resolution = self.resolution
+
         resolved_on: Union[Unset, str] = UNSET
         if not isinstance(self.resolved_on, Unset):
             resolved_on = self.resolved_on.isoformat()
 
         severity = self.severity
+
         status = self.status
+
         time_spent = self.time_spent
+
         title = self.title
+
         type = self.type
+
         updated: Union[Unset, str] = UNSET
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()

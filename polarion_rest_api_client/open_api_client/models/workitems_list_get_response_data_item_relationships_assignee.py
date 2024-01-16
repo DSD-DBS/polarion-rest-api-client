@@ -23,10 +23,9 @@ T = TypeVar("T", bound="WorkitemsListGetResponseDataItemRelationshipsAssignee")
 @_attrs_define
 class WorkitemsListGetResponseDataItemRelationshipsAssignee:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['WorkitemsListGetResponseDataItemRelationshipsAssigneeDataItem']]
-    meta : Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAssigneeMeta]
+    Attributes:
+        data (Union[Unset, List['WorkitemsListGetResponseDataItemRelationshipsAssigneeDataItem']]):
+        meta (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAssigneeMeta]):
     """
 
     data: Union[
@@ -46,7 +45,6 @@ class WorkitemsListGetResponseDataItemRelationshipsAssignee:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         meta: Union[Unset, Dict[str, Any]] = UNSET

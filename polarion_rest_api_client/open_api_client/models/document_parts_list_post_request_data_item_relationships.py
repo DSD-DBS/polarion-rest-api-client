@@ -26,11 +26,10 @@ T = TypeVar("T", bound="DocumentPartsListPostRequestDataItemRelationships")
 @_attrs_define
 class DocumentPartsListPostRequestDataItemRelationships:
     """
-    Attributes
-    ----------
-    next_part : Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsNextPart]
-    previous_part : Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsPreviousPart]
-    work_item : Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsWorkItem]
+    Attributes:
+        next_part (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsNextPart]):
+        previous_part (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsPreviousPart]):
+        work_item (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsWorkItem]):
     """
 
     next_part: Union[

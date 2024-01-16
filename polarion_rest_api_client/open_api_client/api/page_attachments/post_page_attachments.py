@@ -22,21 +22,25 @@ def _get_kwargs(
     space_id: str,
     page_name: str,
     *,
-    multipart_data: PostPageAttachmentsRequestBody,
+    body: PostPageAttachmentsRequestBody,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    multipart_multipart_data = multipart_data.to_multipart()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/spaces/{spaceId}/pages/{pageName}/attachments".format(
             projectId=project_id,
             spaceId=space_id,
             pageName=page_name,
         ),
-        "files": multipart_multipart_data,
     }
+
+    _body = body.to_multipart()
+
+    _kwargs["files"] = _body
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -101,38 +105,33 @@ def sync_detailed(
     page_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PostPageAttachmentsRequestBody,
+    body: PostPageAttachmentsRequestBody,
 ) -> Response[Union[Any, PageAttachmentsListPostResponse]]:
-    r"""Creates a list of instances.
+    r"""Creates a list of Page Attachments.
 
-    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    page_name : str
-    multipart_data : PostPageAttachmentsRequestBody
+    Args:
+        project_id (str):
+        space_id (str):
+        page_name (str):
+        body (PostPageAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, PageAttachmentsListPostResponse]]
+    Returns:
+        Response[Union[Any, PageAttachmentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         page_name=page_name,
-        multipart_data=multipart_data,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -148,31 +147,26 @@ def sync(
     page_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PostPageAttachmentsRequestBody,
+    body: PostPageAttachmentsRequestBody,
 ) -> Optional[Union[Any, PageAttachmentsListPostResponse]]:
-    r"""Creates a list of instances.
+    r"""Creates a list of Page Attachments.
 
-    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    page_name : str
-    multipart_data : PostPageAttachmentsRequestBody
+    Args:
+        project_id (str):
+        space_id (str):
+        page_name (str):
+        body (PostPageAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, PageAttachmentsListPostResponse]
+    Returns:
+        Union[Any, PageAttachmentsListPostResponse]
     """
 
     return sync_detailed(
@@ -180,7 +174,7 @@ def sync(
         space_id=space_id,
         page_name=page_name,
         client=client,
-        multipart_data=multipart_data,
+        body=body,
     ).parsed
 
 
@@ -190,38 +184,33 @@ async def asyncio_detailed(
     page_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PostPageAttachmentsRequestBody,
+    body: PostPageAttachmentsRequestBody,
 ) -> Response[Union[Any, PageAttachmentsListPostResponse]]:
-    r"""Creates a list of instances.
+    r"""Creates a list of Page Attachments.
 
-    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    page_name : str
-    multipart_data : PostPageAttachmentsRequestBody
+    Args:
+        project_id (str):
+        space_id (str):
+        page_name (str):
+        body (PostPageAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, PageAttachmentsListPostResponse]]
+    Returns:
+        Response[Union[Any, PageAttachmentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         page_name=page_name,
-        multipart_data=multipart_data,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -235,31 +224,26 @@ async def asyncio(
     page_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PostPageAttachmentsRequestBody,
+    body: PostPageAttachmentsRequestBody,
 ) -> Optional[Union[Any, PageAttachmentsListPostResponse]]:
-    r"""Creates a list of instances.
+    r"""Creates a list of Page Attachments.
 
-    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    page_name : str
-    multipart_data : PostPageAttachmentsRequestBody
+    Args:
+        project_id (str):
+        space_id (str):
+        page_name (str):
+        body (PostPageAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, PageAttachmentsListPostResponse]
+    Returns:
+        Union[Any, PageAttachmentsListPostResponse]
     """
 
     return (
@@ -268,6 +252,6 @@ async def asyncio(
             space_id=space_id,
             page_name=page_name,
             client=client,
-            multipart_data=multipart_data,
+            body=body,
         )
     ).parsed

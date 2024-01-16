@@ -23,10 +23,9 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataRelationshipsAttachments")
 @_attrs_define
 class PagesSingleGetResponseDataRelationshipsAttachments:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['PagesSingleGetResponseDataRelationshipsAttachmentsDataItem']]
-    meta : Union[Unset, PagesSingleGetResponseDataRelationshipsAttachmentsMeta]
+    Attributes:
+        data (Union[Unset, List['PagesSingleGetResponseDataRelationshipsAttachmentsDataItem']]):
+        meta (Union[Unset, PagesSingleGetResponseDataRelationshipsAttachmentsMeta]):
     """
 
     data: Union[
@@ -46,7 +45,6 @@ class PagesSingleGetResponseDataRelationshipsAttachments:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         meta: Union[Unset, Dict[str, Any]] = UNSET

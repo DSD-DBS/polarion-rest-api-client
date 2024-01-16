@@ -19,10 +19,9 @@ T = TypeVar(
 @_attrs_define
 class DocumentPartsListPostRequestDataItemRelationshipsWorkItemData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsWorkItemDataType]
-    id : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsWorkItemDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId.
     """
 
     type: Union[

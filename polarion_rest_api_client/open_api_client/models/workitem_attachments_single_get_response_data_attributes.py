@@ -16,13 +16,12 @@ T = TypeVar("T", bound="WorkitemAttachmentsSingleGetResponseDataAttributes")
 @_attrs_define
 class WorkitemAttachmentsSingleGetResponseDataAttributes:
     """
-    Attributes
-    ----------
-    file_name : Union[Unset, str]
-    id : Union[Unset, str]
-    length : Union[Unset, int]
-    title : Union[Unset, str]
-    updated : Union[Unset, datetime.datetime]
+    Attributes:
+        file_name (Union[Unset, str]):  Example: File Name.
+        id (Union[Unset, str]):  Example: MyAttachmentId.
+        length (Union[Unset, int]):
+        title (Union[Unset, str]):  Example: Title.
+        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
     """
 
     file_name: Union[Unset, str] = UNSET
@@ -36,9 +35,13 @@ class WorkitemAttachmentsSingleGetResponseDataAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         file_name = self.file_name
+
         id = self.id
+
         length = self.length
+
         title = self.title
+
         updated: Union[Unset, str] = UNSET
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()

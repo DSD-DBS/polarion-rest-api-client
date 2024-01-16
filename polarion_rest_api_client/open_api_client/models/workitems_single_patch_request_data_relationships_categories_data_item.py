@@ -19,10 +19,9 @@ T = TypeVar(
 @_attrs_define
 class WorkitemsSinglePatchRequestDataRelationshipsCategoriesDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsCategoriesDataItemType]
-    id : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsCategoriesDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MyCategoryId.
     """
 
     type: Union[

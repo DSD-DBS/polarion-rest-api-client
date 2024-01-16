@@ -15,19 +15,24 @@ from ...types import Response
 def _get_kwargs(
     user_id: str,
     *,
-    json_body: UsersSinglePatchRequest,
+    body: UsersSinglePatchRequest,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
         "url": "/users/{userId}".format(
             userId=user_id,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -74,30 +79,25 @@ def sync_detailed(
     user_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: UsersSinglePatchRequest,
+    body: UsersSinglePatchRequest,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified User.
 
-    Parameters
-    ----------
-    user_id : str
-    json_body : UsersSinglePatchRequest
+    Args:
+        user_id (str):
+        body (UsersSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         user_id=user_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -111,30 +111,25 @@ async def asyncio_detailed(
     user_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: UsersSinglePatchRequest,
+    body: UsersSinglePatchRequest,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified User.
 
-    Parameters
-    ----------
-    user_id : str
-    json_body : UsersSinglePatchRequest
+    Args:
+        user_id (str):
+        body (UsersSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         user_id=user_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

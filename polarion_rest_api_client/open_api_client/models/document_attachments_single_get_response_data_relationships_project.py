@@ -22,9 +22,8 @@ T = TypeVar(
 @_attrs_define
 class DocumentAttachmentsSingleGetResponseDataRelationshipsProject:
     """
-    Attributes
-    ----------
-    data : Union[Unset, DocumentAttachmentsSingleGetResponseDataRelationshipsProjectData]
+    Attributes:
+        data (Union[Unset, DocumentAttachmentsSingleGetResponseDataRelationshipsProjectData]):
     """
 
     data: Union[

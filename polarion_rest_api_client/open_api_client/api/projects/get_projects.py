@@ -15,21 +15,19 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
-    query: Union[Unset, None, str] = UNSET,
-    sort: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
+    query: Union[Unset, str] = UNSET,
+    sort: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_fields: Union[Unset, None, Dict[str, Any]] = UNSET
-    if not isinstance(fields, Unset):
-        json_fields = fields.to_dict() if fields else None
 
-    if not isinstance(json_fields, Unset) and json_fields is not None:
+    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    if not isinstance(fields, Unset):
+        json_fields = fields.to_dict()
+    if not isinstance(json_fields, Unset):
         params.update(json_fields)
 
     params["include"] = include
@@ -46,11 +44,13 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/projects",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -101,34 +101,29 @@ def _build_response(
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
-    query: Union[Unset, None, str] = UNSET,
-    sort: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
+    query: Union[Unset, str] = UNSET,
+    sort: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ProjectsListGetResponse]]:
-    """Returns a list of instances.
+    """Returns a list of Projects.
 
-    Parameters
-    ----------
-    fields : Union[Unset, None, SparseFields]
-    include : Union[Unset, None, str]
-    pagesize : Union[Unset, None, int]
-    pagenumber : Union[Unset, None, int]
-    query : Union[Unset, None, str]
-    sort : Union[Unset, None, str]
+    Args:
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
+        pagesize (Union[Unset, int]):
+        pagenumber (Union[Unset, int]):
+        query (Union[Unset, str]):
+        sort (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, ProjectsListGetResponse]]
+    Returns:
+        Response[Union[Any, ProjectsListGetResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -150,34 +145,29 @@ def sync_detailed(
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
-    query: Union[Unset, None, str] = UNSET,
-    sort: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
+    query: Union[Unset, str] = UNSET,
+    sort: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ProjectsListGetResponse]]:
-    """Returns a list of instances.
+    """Returns a list of Projects.
 
-    Parameters
-    ----------
-    fields : Union[Unset, None, SparseFields]
-    include : Union[Unset, None, str]
-    pagesize : Union[Unset, None, int]
-    pagenumber : Union[Unset, None, int]
-    query : Union[Unset, None, str]
-    sort : Union[Unset, None, str]
+    Args:
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
+        pagesize (Union[Unset, int]):
+        pagenumber (Union[Unset, int]):
+        query (Union[Unset, str]):
+        sort (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, ProjectsListGetResponse]
+    Returns:
+        Union[Any, ProjectsListGetResponse]
     """
 
     return sync_detailed(
@@ -194,34 +184,29 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
-    query: Union[Unset, None, str] = UNSET,
-    sort: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
+    query: Union[Unset, str] = UNSET,
+    sort: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ProjectsListGetResponse]]:
-    """Returns a list of instances.
+    """Returns a list of Projects.
 
-    Parameters
-    ----------
-    fields : Union[Unset, None, SparseFields]
-    include : Union[Unset, None, str]
-    pagesize : Union[Unset, None, int]
-    pagenumber : Union[Unset, None, int]
-    query : Union[Unset, None, str]
-    sort : Union[Unset, None, str]
+    Args:
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
+        pagesize (Union[Unset, int]):
+        pagenumber (Union[Unset, int]):
+        query (Union[Unset, str]):
+        sort (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, ProjectsListGetResponse]]
+    Returns:
+        Response[Union[Any, ProjectsListGetResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -241,34 +226,29 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, None, "SparseFields"] = UNSET,
-    include: Union[Unset, None, str] = UNSET,
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
-    query: Union[Unset, None, str] = UNSET,
-    sort: Union[Unset, None, str] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
+    query: Union[Unset, str] = UNSET,
+    sort: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ProjectsListGetResponse]]:
-    """Returns a list of instances.
+    """Returns a list of Projects.
 
-    Parameters
-    ----------
-    fields : Union[Unset, None, SparseFields]
-    include : Union[Unset, None, str]
-    pagesize : Union[Unset, None, int]
-    pagenumber : Union[Unset, None, int]
-    query : Union[Unset, None, str]
-    sort : Union[Unset, None, str]
+    Args:
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
+        pagesize (Union[Unset, int]):
+        pagenumber (Union[Unset, int]):
+        query (Union[Unset, str]):
+        sort (Union[Unset, str]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, ProjectsListGetResponse]
+    Returns:
+        Union[Any, ProjectsListGetResponse]
     """
 
     return (

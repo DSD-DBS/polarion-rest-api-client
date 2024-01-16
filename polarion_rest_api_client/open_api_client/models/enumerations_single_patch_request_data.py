@@ -23,11 +23,10 @@ T = TypeVar("T", bound="EnumerationsSinglePatchRequestData")
 @_attrs_define
 class EnumerationsSinglePatchRequestData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, EnumerationsSinglePatchRequestDataType]
-    id : Union[Unset, str]
-    attributes : Union[Unset, EnumerationsSinglePatchRequestDataAttributes]
+    Attributes:
+        type (Union[Unset, EnumerationsSinglePatchRequestDataType]):
+        id (Union[Unset, str]):  Example: ~/status/~.
+        attributes (Union[Unset, EnumerationsSinglePatchRequestDataAttributes]):
     """
 
     type: Union[Unset, EnumerationsSinglePatchRequestDataType] = UNSET
@@ -45,6 +44,7 @@ class EnumerationsSinglePatchRequestData:
             type = self.type.value
 
         id = self.id
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

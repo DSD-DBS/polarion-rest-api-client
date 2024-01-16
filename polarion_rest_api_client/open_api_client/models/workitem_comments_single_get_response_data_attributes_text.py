@@ -17,10 +17,9 @@ T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseDataAttributesText")
 @_attrs_define
 class WorkitemCommentsSingleGetResponseDataAttributesText:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemCommentsSingleGetResponseDataAttributesTextType]
-    value : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemCommentsSingleGetResponseDataAttributesTextType]):
+        value (Union[Unset, str]):  Example: My text value.
     """
 
     type: Union[
