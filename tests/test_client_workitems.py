@@ -26,7 +26,34 @@ from tests import (
     TEST_WI_PATCH_STATUS_REQUEST,
     TEST_WI_PATCH_TITLE_REQUEST,
     TEST_WI_POST_REQUEST,
+    TEST_WI_SINGLE_RESPONSE,
 )
+
+
+def test_get_one_work_item(
+    client: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+):
+    with open(TEST_WI_SINGLE_RESPONSE, encoding="utf8") as f:
+        httpx_mock.add_response(json=json.load(f))
+
+    work_item = client.get_work_item("MyWorkItemId")
+
+    query = {
+        "fields[workitems]": "@all",
+        "fields[workitem_attachments]": "@all",
+        "fields[linkedworkitems]": "@all",
+    }
+    reqs = httpx_mock.get_requests()
+
+    assert reqs[0].method == "GET"
+    assert dict(reqs[0].url.params) == query
+    assert len(reqs) == 1
+
+    assert work_item is not None
+    assert len(work_item.linked_work_items) == 1
+    assert len(work_item.attachments) == 1
+    assert "test_custom_field" in work_item.additional_attributes
 
 
 def test_get_all_work_items_multi_page(

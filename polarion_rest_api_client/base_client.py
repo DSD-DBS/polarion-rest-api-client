@@ -204,6 +204,15 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         """
         raise NotImplementedError
 
+    @abc.abstractmethod
+    def get_work_item(
+        self,
+        work_item_id: str,
+        retry: bool = True,
+    ) -> WorkItemType | None:
+        """Return one specific work item with all fields."""
+        raise NotImplementedError
+
     def create_work_item(self, work_item: WorkItemType):
         """Create a single given work item."""
         self.create_work_items([work_item])

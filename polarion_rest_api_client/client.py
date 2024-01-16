@@ -33,6 +33,7 @@ from polarion_rest_api_client.open_api_client.api.work_item_attachments import (
 )
 from polarion_rest_api_client.open_api_client.api.work_items import (
     delete_work_items,
+    get_work_item,
     get_work_items,
     patch_work_item,
     post_work_items,
@@ -567,79 +568,101 @@ class OpenAPIPolarionProjectClient(
         ):
             for work_item in work_items_response.data:
                 if not getattr(work_item.meta, "errors", []):
-                    assert work_item.attributes
-                    assert isinstance(work_item.id, str)
-                    work_item_id = work_item.id.split("/")[-1]
-
-                    work_item_links = []
-                    work_item_attachments = []
-
-                    if (
-                        work_item.relationships
-                        and work_item.relationships.linked_work_items
-                        and work_item.relationships.linked_work_items.data
-                    ):
-                        for (
-                            link
-                        ) in work_item.relationships.linked_work_items.data:
-                            work_item_links.append(
-                                self._parse_work_item_link(
-                                    link.id,
-                                    link.additional_properties.get(
-                                        "suspect", False
-                                    ),
-                                    work_item_id,
-                                )
-                            )
-
-                    if (
-                        work_item.relationships
-                        and work_item.relationships.attachments
-                        and work_item.relationships.attachments.data
-                    ):
-                        for (
-                            attachment
-                        ) in work_item.relationships.attachments.data:
-                            assert attachment.id
-                            work_item_attachments.append(
-                                dm.WorkItemAttachment(
-                                    work_item_id,
-                                    attachment.id.split("/")[-1],
-                                    None,  # title isn't provided
-                                )
-                            )
-
-                    work_items.append(
-                        self._work_item(
-                            work_item_id,
-                            unset_str_builder(work_item.attributes.title),
-                            (
-                                unset_str_builder(
-                                    work_item.attributes.description.type
-                                )
-                                if work_item.attributes.description
-                                else None
-                            ),
-                            (
-                                unset_str_builder(
-                                    work_item.attributes.description.value
-                                )
-                                if work_item.attributes.description
-                                else None
-                            ),
-                            unset_str_builder(work_item.attributes.type),
-                            unset_str_builder(work_item.attributes.status),
-                            work_item.attributes.additional_properties,
-                            work_item_links,
-                            work_item_attachments,
-                        )
-                    )
+                    work_item_obj = self._generate_work_item(work_item)
+                    work_items.append(work_item_obj)
             next_page = isinstance(
                 work_items_response.links,
                 api_models.WorkitemsListGetResponseLinks,
             ) and bool(work_items_response.links.next_)
 
         return work_items, next_page
+
+    def get_work_item(
+        self,
+        work_item_id: str,
+        retry: bool = True,
+    ) -> base_client.WorkItemType | None:
+        """Return one specific work item with all fields."""
+        response = get_work_item.sync_detailed(
+            self.project_id,
+            work_item_id,
+            client=self.client,
+            fields=_build_sparse_fields(
+                {
+                    "workitems": "@all",
+                    "workitem_attachments": "@all",
+                    "linkedworkitems": "@all",
+                }
+            ),
+        )
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.get_work_item(work_item_id, False)
+
+        if response.parsed and isinstance(
+            response.parsed.data, api_models.WorkitemsSingleGetResponseData
+        ):
+            return self._generate_work_item(response.parsed.data)
+
+        return None
+
+    def _generate_work_item(
+        self,
+        work_item: api_models.WorkitemsListGetResponseDataItem
+        | api_models.WorkitemsSingleGetResponseData,
+    ) -> base_client.WorkItemType:
+        assert work_item.attributes
+        assert isinstance(work_item.id, str)
+        work_item_id = work_item.id.split("/")[-1]
+        work_item_links = []
+        work_item_attachments = []
+        if (
+            work_item.relationships
+            and work_item.relationships.linked_work_items
+            and work_item.relationships.linked_work_items.data
+        ):
+            for link in work_item.relationships.linked_work_items.data:
+                work_item_links.append(
+                    self._parse_work_item_link(
+                        link.id,
+                        link.additional_properties.get("suspect", False),
+                        work_item_id,
+                    )
+                )
+        if (
+            work_item.relationships
+            and work_item.relationships.attachments
+            and work_item.relationships.attachments.data
+        ):
+            for attachment in work_item.relationships.attachments.data:
+                assert attachment.id
+                work_item_attachments.append(
+                    dm.WorkItemAttachment(
+                        work_item_id,
+                        attachment.id.split("/")[-1],
+                        None,  # title isn't provided
+                    )
+                )
+        work_item_obj = self._work_item(
+            work_item_id,
+            unset_str_builder(work_item.attributes.title),
+            (
+                unset_str_builder(work_item.attributes.description.type)
+                if work_item.attributes.description
+                else None
+            ),
+            (
+                unset_str_builder(work_item.attributes.description.value)
+                if work_item.attributes.description
+                else None
+            ),
+            unset_str_builder(work_item.attributes.type),
+            unset_str_builder(work_item.attributes.status),
+            work_item.attributes.additional_properties,
+            work_item_links,
+            work_item_attachments,
+        )
+        return work_item_obj
 
     def get_document(
         self,
