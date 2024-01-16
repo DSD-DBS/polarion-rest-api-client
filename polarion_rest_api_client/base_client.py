@@ -249,7 +249,9 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         """Update the given work item in Polarion.
 
         Only fields not set to None will be updated in Polarion. None
-        fields will stay untouched.
+        fields will stay untouched. If you want to change the Work Item
+        Type, we will extract it from the Work Item passed to this
+        method.
         """
         raise NotImplementedError
 

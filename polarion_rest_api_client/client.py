@@ -846,11 +846,13 @@ class OpenAPIPolarionProjectClient(
         fields will stay untouched.
         """
         assert work_item.id is not None
+        work_item_type = work_item.type or oa_types.UNSET
 
         response = patch_work_item.sync_detailed(
             self.project_id,
             work_item.id,
             client=self.client,
+            change_type_to=work_item_type,
             body=self._build_work_item_patch_request(work_item),
         )
 
