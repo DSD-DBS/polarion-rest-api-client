@@ -1,0 +1,273 @@
+{
+  "data": {
+    "type": "workitems",
+    "id": "MyProjectId/MyWorkItemId",
+    "revision": "1234",
+    "attributes": {
+      "created": "1970-01-01T00:00:00Z",
+      "description": {
+        "type": "text/html",
+        "value": "My text value"
+      },
+      "test_custom_field": {
+        "type": "text/html",
+        "value": "My text value"
+      },
+      "dueDate": "1970-01-01",
+      "hyperlinks": [
+        {
+          "role": "ref_ext",
+          "uri": "https://polarion.plm.automation.siemens.com"
+        }
+      ],
+      "id": "MyWorkItemId",
+      "initialEstimate": "5 1/2d",
+      "outlineNumber": "1.11",
+      "plannedEnd": "1970-01-01T00:00:00Z",
+      "plannedStart": "1970-01-01T00:00:00Z",
+      "priority": "90.0",
+      "remainingEstimate": "5 1/2d",
+      "resolution": "done",
+      "resolvedOn": "1970-01-01T00:00:00Z",
+      "severity": "blocker",
+      "status": "open",
+      "timeSpent": "5 1/2d",
+      "title": "Title",
+      "type": "task",
+      "updated": "1970-01-01T00:00:00Z"
+    },
+    "relationships": {
+      "approvals": {
+        "data": [
+          {
+            "type": "workrecords",
+            "id": "MyProjectId/MyWorkItemId/MyWorkRecordId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "assignee": {
+        "data": [
+          {
+            "type": "users",
+            "id": "MyUserId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "attachments": {
+        "data": [
+          {
+            "type": "workitem_attachments",
+            "id": "MyProjectId/MyWorkItemId/MyAttachmentId",
+            "revision": "1234"
+          }
+        ],
+        "links": {
+          "related": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/attachments?revision=1234"
+        }
+      },
+      "author": {
+        "data": {
+          "type": "users",
+          "id": "MyUserId",
+          "revision": "1234"
+        }
+      },
+      "backlinkedWorkItems": {
+        "data": [
+          {
+            "type": "linkedworkitems",
+            "id": "MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "categories": {
+        "data": [
+          {
+            "type": "categories",
+            "id": "MyProjectId/MyCategoryId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "comments": {
+        "data": [
+          {
+            "type": "workitem_comments",
+            "id": "MyProjectId/MyWorkItemId/MyCommentId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        },
+        "links": {
+          "related": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/comments?revision=1234"
+        }
+      },
+      "externallyLinkedWorkItems": {
+        "data": [
+          {
+            "type": "externallylinkedworkitems",
+            "id": "MyProjectId/MyWorkItemId/parent/hostname/MyProjectId/MyLinkedWorkItemId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "linkedOslcResources": {
+        "data": [
+          {
+            "type": "linkedoslcresources",
+            "id": "MyProjectId/MyWorkItemId/http://server-host-name/ns/cm#relatedChangeRequest/http://server-host-name/application-path/oslc/services/projects/MyProjectId/workitems/MyWorkItemId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "linkedRevisions": {
+        "data": [
+          {
+            "type": "revisions",
+            "id": "default/1234",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "linkedWorkItems": {
+        "data": [
+          {
+            "type": "linkedworkitems",
+            "id": "MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId",
+            "revision": "1234"
+          }
+        ],
+        "links": {
+          "related": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/linkedworkitems?revision=1234"
+        }
+      },
+      "module": {
+        "data": {
+          "type": "documents",
+          "id": "MyProjectId/MySpaceId/MyDocumentId",
+          "revision": "1234"
+        }
+      },
+      "plannedIn": {
+        "data": [
+          {
+            "type": "plans",
+            "id": "MyProjectId/MyPlanId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "project": {
+        "data": {
+          "type": "projects",
+          "id": "MyProjectId",
+          "revision": "1234"
+        }
+      },
+      "testSteps": {
+        "data": [
+          {
+            "type": "teststeps",
+            "id": "MyProjectId/MyWorkItemId/MyTestStepIndex",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "votes": {
+        "data": [
+          {
+            "type": "users",
+            "id": "MyUserId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "watches": {
+        "data": [
+          {
+            "type": "users",
+            "id": "MyUserId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      },
+      "workRecords": {
+        "data": [
+          {
+            "type": "workrecords",
+            "id": "MyProjectId/MyWorkItemId/MyWorkRecordId",
+            "revision": "1234"
+          }
+        ],
+        "meta": {
+          "totalCount": 0
+        }
+      }
+    },
+    "meta": {
+      "errors": [
+        {
+          "status": "400",
+          "title": "Bad Request",
+          "detail": "Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data)",
+          "source": {
+            "pointer": "$.data",
+            "parameter": "revision",
+            "resource": {
+              "id": "MyProjectId/id",
+              "type": "type"
+            }
+          }
+        }
+      ]
+    },
+    "links": {
+      "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId?revision=1234",
+      "portal": "server-host-name/application-path/polarion/redirect/project/MyProjectId/workitem?id=MyWorkItemId&revision=1234"
+    }
+  },
+  "included": [
+    {}
+  ],
+  "links": {
+    "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId?revision=1234"
+  }
+}

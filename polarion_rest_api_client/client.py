@@ -582,7 +582,13 @@ class OpenAPIPolarionProjectClient(
         work_item_id: str,
         retry: bool = True,
     ) -> base_client.WorkItemType | None:
-        """Return one specific work item with all fields."""
+        """Return one specific work item with all fields.
+
+        This also includes all linked work items and attachments. If
+        there are to many of these to get them in one request, the
+        truncated flags for linked_work_items and attachments will be
+        set to True.
+        """
         response = get_work_item.sync_detailed(
             self.project_id,
             work_item_id,
@@ -616,33 +622,39 @@ class OpenAPIPolarionProjectClient(
         work_item_id = work_item.id.split("/")[-1]
         work_item_links = []
         work_item_attachments = []
-        if (
-            work_item.relationships
-            and work_item.relationships.linked_work_items
-            and work_item.relationships.linked_work_items.data
-        ):
-            for link in work_item.relationships.linked_work_items.data:
-                work_item_links.append(
+        links_truncated = True
+        attachments_truncated = True
+        if work_item.relationships:
+            if links := work_item.relationships.linked_work_items:
+                if not links.meta or links.meta.total_count is oa_types.UNSET:
+                    links_truncated = False
+
+                work_item_links = [
                     self._parse_work_item_link(
                         link.id,
                         link.additional_properties.get("suspect", False),
                         work_item_id,
                     )
-                )
-        if (
-            work_item.relationships
-            and work_item.relationships.attachments
-            and work_item.relationships.attachments.data
-        ):
-            for attachment in work_item.relationships.attachments.data:
-                assert attachment.id
-                work_item_attachments.append(
+                    for link in links.data or []
+                ]
+
+            if attachments := work_item.relationships.attachments:
+                if (
+                    not attachments.meta
+                    or attachments.meta.total_count is oa_types.UNSET
+                ):
+                    attachments_truncated = False
+
+                work_item_attachments = [
                     dm.WorkItemAttachment(
                         work_item_id,
                         attachment.id.split("/")[-1],
                         None,  # title isn't provided
                     )
-                )
+                    for attachment in attachments.data or []
+                    if attachment.id
+                ]
+
         work_item_obj = self._work_item(
             work_item_id,
             unset_str_builder(work_item.attributes.title),
@@ -661,6 +673,8 @@ class OpenAPIPolarionProjectClient(
             work_item.attributes.additional_properties,
             work_item_links,
             work_item_attachments,
+            links_truncated,
+            attachments_truncated,
         )
         return work_item_obj
 

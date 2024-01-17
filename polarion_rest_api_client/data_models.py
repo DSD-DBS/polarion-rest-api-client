@@ -67,7 +67,9 @@ class WorkItem(BaseItem):
     description: str | None = None
     additional_attributes: dict[str, t.Any] = {}
     linked_work_items: list[WorkItemLink] = []
+    linked_work_items_truncated: bool = False
     attachments: list[WorkItemAttachment] = []
+    attachments_truncated: bool = False
 
     def __init__(
         self,
@@ -80,6 +82,8 @@ class WorkItem(BaseItem):
         additional_attributes: dict[str, t.Any] | None = None,
         linked_work_items: list[WorkItemLink] | None = None,
         attachments: list[WorkItemAttachment] | None = None,
+        linked_work_items_truncated: bool = False,
+        attachments_truncated: bool = False,
         **kwargs,
     ):
         super().__init__(id, type, status)
@@ -89,6 +93,8 @@ class WorkItem(BaseItem):
         self.additional_attributes = (additional_attributes or {}) | kwargs
         self.linked_work_items = linked_work_items or []
         self.attachments = attachments or []
+        self.linked_work_items_truncated = linked_work_items_truncated
+        self.attachments_truncated = attachments_truncated
 
     def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
