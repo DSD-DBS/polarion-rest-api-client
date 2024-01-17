@@ -658,19 +658,17 @@ class OpenAPIPolarionProjectClient(
                     if attachment.id
                 ]
 
+        desctype = None
+        desc = None
+        if work_item.attributes.description:
+            desctype = unset_str_builder(work_item.attributes.description.type)
+            desc = unset_str_builder(work_item.attributes.description.value)
+
         work_item_obj = self._work_item(
             work_item_id,
             unset_str_builder(work_item.attributes.title),
-            (
-                unset_str_builder(work_item.attributes.description.type)
-                if work_item.attributes.description
-                else None
-            ),
-            (
-                unset_str_builder(work_item.attributes.description.value)
-                if work_item.attributes.description
-                else None
-            ),
+            desctype,
+            desc,
             unset_str_builder(work_item.attributes.type),
             unset_str_builder(work_item.attributes.status),
             work_item.attributes.additional_properties,
