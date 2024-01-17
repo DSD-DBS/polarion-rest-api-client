@@ -35,7 +35,8 @@
         "title": "Title",
         "type": "task",
         "updated": "1970-01-01T00:00:00Z",
-        "capella_uuid": "asdfgh"
+        "capella_uuid": "asdfgh",
+        "checksum": "123"
       },
       "relationships": {
         "assignee": {
