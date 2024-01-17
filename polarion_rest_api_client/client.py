@@ -33,6 +33,7 @@ from polarion_rest_api_client.open_api_client.api.work_item_attachments import (
 )
 from polarion_rest_api_client.open_api_client.api.work_items import (
     delete_work_items,
+    get_work_item,
     get_work_items,
     patch_work_item,
     post_work_items,
@@ -565,81 +566,120 @@ class OpenAPIPolarionProjectClient(
             )
             and work_items_response.data
         ):
-            for work_item in work_items_response.data:
-                if not getattr(work_item.meta, "errors", []):
-                    assert work_item.attributes
-                    assert isinstance(work_item.id, str)
-                    work_item_id = work_item.id.split("/")[-1]
+            work_items = [
+                self._generate_work_item(work_item)
+                for work_item in work_items_response.data
+                if not getattr(work_item.meta, "errors", [])
+            ]
 
-                    work_item_links = []
-                    work_item_attachments = []
-
-                    if (
-                        work_item.relationships
-                        and work_item.relationships.linked_work_items
-                        and work_item.relationships.linked_work_items.data
-                    ):
-                        for (
-                            link
-                        ) in work_item.relationships.linked_work_items.data:
-                            work_item_links.append(
-                                self._parse_work_item_link(
-                                    link.id,
-                                    link.additional_properties.get(
-                                        "suspect", False
-                                    ),
-                                    work_item_id,
-                                )
-                            )
-
-                    if (
-                        work_item.relationships
-                        and work_item.relationships.attachments
-                        and work_item.relationships.attachments.data
-                    ):
-                        for (
-                            attachment
-                        ) in work_item.relationships.attachments.data:
-                            assert attachment.id
-                            work_item_attachments.append(
-                                dm.WorkItemAttachment(
-                                    work_item_id,
-                                    attachment.id.split("/")[-1],
-                                    None,  # title isn't provided
-                                )
-                            )
-
-                    work_items.append(
-                        self._work_item(
-                            work_item_id,
-                            unset_str_builder(work_item.attributes.title),
-                            (
-                                unset_str_builder(
-                                    work_item.attributes.description.type
-                                )
-                                if work_item.attributes.description
-                                else None
-                            ),
-                            (
-                                unset_str_builder(
-                                    work_item.attributes.description.value
-                                )
-                                if work_item.attributes.description
-                                else None
-                            ),
-                            unset_str_builder(work_item.attributes.type),
-                            unset_str_builder(work_item.attributes.status),
-                            work_item.attributes.additional_properties,
-                            work_item_links,
-                            work_item_attachments,
-                        )
-                    )
             next_page = isinstance(
                 work_items_response.links,
                 api_models.WorkitemsListGetResponseLinks,
             ) and bool(work_items_response.links.next_)
 
         return work_items, next_page
+
+    def get_work_item(
+        self,
+        work_item_id: str,
+        retry: bool = True,
+    ) -> base_client.WorkItemType | None:
+        """Return one specific work item with all fields.
+
+        This also includes all linked work items and attachments. If
+        there are to many of these to get them in one request, the
+        truncated flags for linked_work_items and attachments will be
+        set to True.
+        """
+        response = get_work_item.sync_detailed(
+            self.project_id,
+            work_item_id,
+            client=self.client,
+            fields=_build_sparse_fields(
+                {
+                    "workitems": "@all",
+                    "workitem_attachments": "@all",
+                    "linkedworkitems": "@all",
+                }
+            ),
+        )
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.get_work_item(work_item_id, False)
+
+        if response.parsed and isinstance(
+            response.parsed.data, api_models.WorkitemsSingleGetResponseData
+        ):
+            return self._generate_work_item(response.parsed.data)
+
+        return None
+
+    def _generate_work_item(
+        self,
+        work_item: api_models.WorkitemsListGetResponseDataItem
+        | api_models.WorkitemsSingleGetResponseData,
+    ) -> base_client.WorkItemType:
+        assert work_item.attributes
+        assert isinstance(work_item.id, str)
+        work_item_id = work_item.id.split("/")[-1]
+        work_item_links = []
+        work_item_attachments = []
+
+        # We set both truncated flags to True and will only set them to False,
+        # if the corresponding fields were requested and returned completely
+        links_truncated = True
+        attachments_truncated = True
+        if work_item.relationships:
+            if links := work_item.relationships.linked_work_items:
+                if not links.meta or links.meta.total_count is oa_types.UNSET:
+                    links_truncated = False
+
+                work_item_links = [
+                    self._parse_work_item_link(
+                        link.id,
+                        link.additional_properties.get("suspect", False),
+                        work_item_id,
+                    )
+                    for link in links.data or []
+                ]
+
+            if attachments := work_item.relationships.attachments:
+                if (
+                    not attachments.meta
+                    or attachments.meta.total_count is oa_types.UNSET
+                ):
+                    attachments_truncated = False
+
+                work_item_attachments = [
+                    dm.WorkItemAttachment(
+                        work_item_id,
+                        attachment.id.split("/")[-1],
+                        None,  # title isn't provided
+                    )
+                    for attachment in attachments.data or []
+                    if attachment.id
+                ]
+
+        desctype = None
+        desc = None
+        if work_item.attributes.description:
+            desctype = unset_str_builder(work_item.attributes.description.type)
+            desc = unset_str_builder(work_item.attributes.description.value)
+
+        work_item_obj = self._work_item(
+            work_item_id,
+            unset_str_builder(work_item.attributes.title),
+            desctype,
+            desc,
+            unset_str_builder(work_item.attributes.type),
+            unset_str_builder(work_item.attributes.status),
+            work_item.attributes.additional_properties,
+            work_item_links,
+            work_item_attachments,
+            links_truncated,
+            attachments_truncated,
+        )
+        return work_item_obj
 
     def get_document(
         self,
