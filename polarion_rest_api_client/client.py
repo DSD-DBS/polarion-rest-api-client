@@ -622,6 +622,9 @@ class OpenAPIPolarionProjectClient(
         work_item_id = work_item.id.split("/")[-1]
         work_item_links = []
         work_item_attachments = []
+
+        # We set both truncated flags to True and will only set them to False,
+        # if the corresponding fields were requested and returned completely
         links_truncated = True
         attachments_truncated = True
         if work_item.relationships:
