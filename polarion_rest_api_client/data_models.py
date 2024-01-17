@@ -87,6 +87,7 @@ class WorkItem(BaseItem):
         self.description_type = description_type
         self.description = description
         self.additional_attributes = (additional_attributes or {}) | kwargs
+        self._checksum = self.additional_attributes.pop("checksum", None)
         self.linked_work_items = linked_work_items or []
         self.attachments = attachments or []
 

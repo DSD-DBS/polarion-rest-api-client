@@ -89,7 +89,7 @@ def test_get_all_work_items_single_page(
         "My text value",
         "task",
         "open",
-        {"capella_uuid": "asdfgh"},
+        {"capella_uuid": "asdfgh", "checksum": "123"},
         [
             polarion_api.WorkItemLink(
                 "MyWorkItemId2",
@@ -101,6 +101,8 @@ def test_get_all_work_items_single_page(
         ],
         [polarion_api.WorkItemAttachment("MyWorkItemId2", "MyAttachmentId")],
     )
+    assert "checksum" not in work_items[0].additional_attributes
+    assert work_items[0].get_current_checksum() == "123"
 
 
 def test_get_all_work_items_faulty_item(
