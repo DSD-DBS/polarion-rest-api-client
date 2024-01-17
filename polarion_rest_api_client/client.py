@@ -846,19 +846,18 @@ class OpenAPIPolarionProjectClient(
         fields will stay untouched.
         """
         assert work_item.id is not None
-        work_item_type = work_item.type or oa_types.UNSET
-        if work_item_type:
+        if work_item.type:
             logger.warning(
-                "You are attempting to change the type of Work Item %s to %s.",
+                "Attempting to change the type of Work Item %s to %s.",
                 work_item.id,
-                work_item_type,
+                work_item.type,
             )
 
         response = patch_work_item.sync_detailed(
             self.project_id,
             work_item.id,
             client=self.client,
-            change_type_to=work_item_type,
+            change_type_to=work_item.type or oa_types.UNSET,
             body=self._build_work_item_patch_request(work_item),
         )
 
