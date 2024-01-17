@@ -67,8 +67,8 @@ class WorkItem(BaseItem):
     description: str | None = None
     additional_attributes: dict[str, t.Any] = {}
     linked_work_items: list[WorkItemLink] = []
-    linked_work_items_truncated: bool = False
     attachments: list[WorkItemAttachment] = []
+    linked_work_items_truncated: bool = False
     attachments_truncated: bool = False
 
     def __init__(
