@@ -22,12 +22,11 @@ T = TypeVar(
 @_attrs_define
 class DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, str]
-    label : Union[Unset, str]
-    layouter : Union[Unset, str]
-    properties : Union[Unset, List['DocumentsSingleGetResponseDataAttributesRenderingLayoutsItemPropertiesItem']]
+    Attributes:
+        type (Union[Unset, str]):  Example: task.
+        label (Union[Unset, str]):  Example: My label.
+        layouter (Union[Unset, str]):  Example: paragraph.
+        properties (Union[Unset, List['DocumentsSingleGetResponseDataAttributesRenderingLayoutsItemPropertiesItem']]):
     """
 
     type: Union[Unset, str] = UNSET
@@ -45,14 +44,16 @@ class DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem:
 
     def to_dict(self) -> Dict[str, Any]:
         type = self.type
+
         label = self.label
+
         layouter = self.layouter
+
         properties: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.properties, Unset):
             properties = []
             for properties_item_data in self.properties:
                 properties_item = properties_item_data.to_dict()
-
                 properties.append(properties_item)
 
         field_dict: Dict[str, Any] = {}

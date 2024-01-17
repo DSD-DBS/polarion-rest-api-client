@@ -20,9 +20,8 @@ T = TypeVar("T", bound="LinkedworkitemsListDeleteRequest")
 @_attrs_define
 class LinkedworkitemsListDeleteRequest:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['LinkedworkitemsListDeleteRequestDataItem']]
+    Attributes:
+        data (Union[Unset, List['LinkedworkitemsListDeleteRequestDataItem']]):
     """
 
     data: Union[
@@ -38,7 +37,6 @@ class LinkedworkitemsListDeleteRequest:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         field_dict: Dict[str, Any] = {}

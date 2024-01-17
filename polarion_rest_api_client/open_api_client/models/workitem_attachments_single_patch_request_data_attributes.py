@@ -14,9 +14,8 @@ T = TypeVar("T", bound="WorkitemAttachmentsSinglePatchRequestDataAttributes")
 @_attrs_define
 class WorkitemAttachmentsSinglePatchRequestDataAttributes:
     """
-    Attributes
-    ----------
-    title : Union[Unset, str]
+    Attributes:
+        title (Union[Unset, str]):  Example: Title.
     """
 
     title: Union[Unset, str] = UNSET

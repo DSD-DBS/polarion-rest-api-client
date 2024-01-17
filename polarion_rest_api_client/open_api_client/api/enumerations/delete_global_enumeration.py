@@ -16,9 +16,7 @@ def _get_kwargs(
     enum_name: str,
     target_type: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
         "url": "/enumerations/{enumContext}/{enumName}/{targetType}".format(
             enumContext=enum_context,
@@ -26,6 +24,8 @@ def _get_kwargs(
             targetType=target_type,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -69,24 +69,19 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """Deletes the specified instance.
+    """Deletes the specified Enumeration from the Global context.
 
-    Parameters
-    ----------
-    enum_context : str
-    enum_name : str
-    target_type : str
+    Args:
+        enum_context (str):
+        enum_name (str):
+        target_type (str):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -109,24 +104,19 @@ async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """Deletes the specified instance.
+    """Deletes the specified Enumeration from the Global context.
 
-    Parameters
-    ----------
-    enum_context : str
-    enum_name : str
-    target_type : str
+    Args:
+        enum_context (str):
+        enum_name (str):
+        target_type (str):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(

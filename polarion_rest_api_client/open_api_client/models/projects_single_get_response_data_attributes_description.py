@@ -17,10 +17,9 @@ T = TypeVar("T", bound="ProjectsSingleGetResponseDataAttributesDescription")
 @_attrs_define
 class ProjectsSingleGetResponseDataAttributesDescription:
     """
-    Attributes
-    ----------
-    type : Union[Unset, ProjectsSingleGetResponseDataAttributesDescriptionType]
-    value : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, ProjectsSingleGetResponseDataAttributesDescriptionType]):
+        value (Union[Unset, str]):  Example: My text value.
     """
 
     type: Union[

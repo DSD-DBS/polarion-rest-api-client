@@ -22,9 +22,8 @@ T = TypeVar(
 @_attrs_define
 class WorkitemCommentsSingleGetResponseDataRelationshipsProject:
     """
-    Attributes
-    ----------
-    data : Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsProjectData]
+    Attributes:
+        data (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsProjectData]):
     """
 
     data: Union[

@@ -20,9 +20,8 @@ T = TypeVar("T", bound="ProjectsSingleGetResponseDataRelationships")
 @_attrs_define
 class ProjectsSingleGetResponseDataRelationships:
     """
-    Attributes
-    ----------
-    lead : Union[Unset, ProjectsSingleGetResponseDataRelationshipsLead]
+    Attributes:
+        lead (Union[Unset, ProjectsSingleGetResponseDataRelationshipsLead]):
     """
 
     lead: Union[

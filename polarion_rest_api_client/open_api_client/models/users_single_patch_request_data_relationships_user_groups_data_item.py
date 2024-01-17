@@ -19,10 +19,9 @@ T = TypeVar(
 @_attrs_define
 class UsersSinglePatchRequestDataRelationshipsUserGroupsDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, UsersSinglePatchRequestDataRelationshipsUserGroupsDataItemType]
-    id : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, UsersSinglePatchRequestDataRelationshipsUserGroupsDataItemType]):
+        id (Union[Unset, str]):  Example: MyUserGroupId.
     """
 
     type: Union[

@@ -20,9 +20,8 @@ T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseDataMeta")
 @_attrs_define
 class WorkitemCommentsSingleGetResponseDataMeta:
     """
-    Attributes
-    ----------
-    errors : Union[Unset, List['WorkitemCommentsSingleGetResponseDataMetaErrorsItem']]
+    Attributes:
+        errors (Union[Unset, List['WorkitemCommentsSingleGetResponseDataMetaErrorsItem']]):
     """
 
     errors: Union[
@@ -38,7 +37,6 @@ class WorkitemCommentsSingleGetResponseDataMeta:
             errors = []
             for errors_item_data in self.errors:
                 errors_item = errors_item_data.to_dict()
-
                 errors.append(errors_item)
 
         field_dict: Dict[str, Any] = {}

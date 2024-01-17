@@ -19,21 +19,25 @@ def _get_kwargs(
     work_item_id: str,
     attachment_id: str,
     *,
-    multipart_data: PatchWorkItemAttachmentsRequestBody,
+    body: PatchWorkItemAttachmentsRequestBody,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    multipart_multipart_data = multipart_data.to_multipart()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
         "url": "/projects/{projectId}/workitems/{workItemId}/attachments/{attachmentId}".format(
             projectId=project_id,
             workItemId=work_item_id,
             attachmentId=attachment_id,
         ),
-        "files": multipart_multipart_data,
     }
+
+    _body = body.to_multipart()
+
+    _kwargs["files"] = _body
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -82,37 +86,32 @@ def sync_detailed(
     attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PatchWorkItemAttachmentsRequestBody,
+    body: PatchWorkItemAttachmentsRequestBody,
 ) -> Response[Any]:
-    r"""Updates the specified instance.
+    r"""Updates the specified Work Item Attachment.
 
-    See more in the <a href=\"https://docs.sw.siemens.com/en-
+     See more in the <a href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    attachment_id : str
-    multipart_data : PatchWorkItemAttachmentsRequestBody
+    Args:
+        project_id (str):
+        work_item_id (str):
+        attachment_id (str):
+        body (PatchWorkItemAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
         attachment_id=attachment_id,
-        multipart_data=multipart_data,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -128,37 +127,32 @@ async def asyncio_detailed(
     attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PatchWorkItemAttachmentsRequestBody,
+    body: PatchWorkItemAttachmentsRequestBody,
 ) -> Response[Any]:
-    r"""Updates the specified instance.
+    r"""Updates the specified Work Item Attachment.
 
-    See more in the <a href=\"https://docs.sw.siemens.com/en-
+     See more in the <a href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    attachment_id : str
-    multipart_data : PatchWorkItemAttachmentsRequestBody
+    Args:
+        project_id (str):
+        work_item_id (str):
+        attachment_id (str):
+        body (PatchWorkItemAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
         attachment_id=attachment_id,
-        multipart_data=multipart_data,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

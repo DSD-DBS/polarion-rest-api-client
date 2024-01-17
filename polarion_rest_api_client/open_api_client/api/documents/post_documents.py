@@ -17,20 +17,25 @@ def _get_kwargs(
     project_id: str,
     space_id: str,
     *,
-    json_body: DocumentsListPostRequest,
+    body: DocumentsListPostRequest,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/spaces/{spaceId}/documents".format(
             projectId=project_id,
             spaceId=space_id,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -92,32 +97,27 @@ def sync_detailed(
     space_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentsListPostRequest,
+    body: DocumentsListPostRequest,
 ) -> Response[Union[Any, DocumentsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Documents.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    json_body : DocumentsListPostRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        body (DocumentsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, DocumentsListPostResponse]]
+    Returns:
+        Response[Union[Any, DocumentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -132,33 +132,28 @@ def sync(
     space_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentsListPostRequest,
+    body: DocumentsListPostRequest,
 ) -> Optional[Union[Any, DocumentsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Documents.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    json_body : DocumentsListPostRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        body (DocumentsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, DocumentsListPostResponse]
+    Returns:
+        Union[Any, DocumentsListPostResponse]
     """
 
     return sync_detailed(
         project_id=project_id,
         space_id=space_id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -167,32 +162,27 @@ async def asyncio_detailed(
     space_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentsListPostRequest,
+    body: DocumentsListPostRequest,
 ) -> Response[Union[Any, DocumentsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Documents.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    json_body : DocumentsListPostRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        body (DocumentsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, DocumentsListPostResponse]]
+    Returns:
+        Response[Union[Any, DocumentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -205,26 +195,21 @@ async def asyncio(
     space_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentsListPostRequest,
+    body: DocumentsListPostRequest,
 ) -> Optional[Union[Any, DocumentsListPostResponse]]:
-    """Creates a list of instances.
+    """Creates a list of Documents.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    json_body : DocumentsListPostRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        body (DocumentsListPostRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, DocumentsListPostResponse]
+    Returns:
+        Union[Any, DocumentsListPostResponse]
     """
 
     return (
@@ -232,6 +217,6 @@ async def asyncio(
             project_id=project_id,
             space_id=space_id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

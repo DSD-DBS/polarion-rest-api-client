@@ -29,12 +29,11 @@ T = TypeVar("T", bound="WorkitemCommentsListGetResponseDataItemRelationships")
 @_attrs_define
 class WorkitemCommentsListGetResponseDataItemRelationships:
     """
-    Attributes
-    ----------
-    author : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsAuthor]
-    child_comments : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsChildComments]
-    parent_comment : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsParentComment]
-    project : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsProject]
+    Attributes:
+        author (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsAuthor]):
+        child_comments (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsChildComments]):
+        parent_comment (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsParentComment]):
+        project (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsProject]):
     """
 
     author: Union[

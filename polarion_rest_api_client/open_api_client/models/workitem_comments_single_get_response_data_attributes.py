@@ -22,13 +22,12 @@ T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseDataAttributes")
 @_attrs_define
 class WorkitemCommentsSingleGetResponseDataAttributes:
     """
-    Attributes
-    ----------
-    created : Union[Unset, datetime.datetime]
-    id : Union[Unset, str]
-    resolved : Union[Unset, bool]
-    text : Union[Unset, WorkitemCommentsSingleGetResponseDataAttributesText]
-    title : Union[Unset, str]
+    Attributes:
+        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+        id (Union[Unset, str]):  Example: MyCommentId.
+        resolved (Union[Unset, bool]):
+        text (Union[Unset, WorkitemCommentsSingleGetResponseDataAttributesText]):
+        title (Union[Unset, str]):  Example: Title.
     """
 
     created: Union[Unset, datetime.datetime] = UNSET
@@ -48,7 +47,9 @@ class WorkitemCommentsSingleGetResponseDataAttributes:
             created = self.created.isoformat()
 
         id = self.id
+
         resolved = self.resolved
+
         text: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.text, Unset):
             text = self.text.to_dict()

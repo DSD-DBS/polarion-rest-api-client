@@ -20,9 +20,8 @@ T = TypeVar("T", bound="LinkedworkitemsSinglePatchRequest")
 @_attrs_define
 class LinkedworkitemsSinglePatchRequest:
     """
-    Attributes
-    ----------
-    data : Union[Unset, LinkedworkitemsSinglePatchRequestData]
+    Attributes:
+        data (Union[Unset, LinkedworkitemsSinglePatchRequestData]):
     """
 
     data: Union[Unset, "LinkedworkitemsSinglePatchRequestData"] = UNSET

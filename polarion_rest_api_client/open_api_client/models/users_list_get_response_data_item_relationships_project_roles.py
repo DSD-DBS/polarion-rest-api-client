@@ -23,10 +23,9 @@ T = TypeVar("T", bound="UsersListGetResponseDataItemRelationshipsProjectRoles")
 @_attrs_define
 class UsersListGetResponseDataItemRelationshipsProjectRoles:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['UsersListGetResponseDataItemRelationshipsProjectRolesDataItem']]
-    meta : Union[Unset, UsersListGetResponseDataItemRelationshipsProjectRolesMeta]
+    Attributes:
+        data (Union[Unset, List['UsersListGetResponseDataItemRelationshipsProjectRolesDataItem']]):
+        meta (Union[Unset, UsersListGetResponseDataItemRelationshipsProjectRolesMeta]):
     """
 
     data: Union[
@@ -46,7 +45,6 @@ class UsersListGetResponseDataItemRelationshipsProjectRoles:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         meta: Union[Unset, Dict[str, Any]] = UNSET

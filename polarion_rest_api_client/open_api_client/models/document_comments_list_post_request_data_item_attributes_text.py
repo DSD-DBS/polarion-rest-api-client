@@ -17,10 +17,9 @@ T = TypeVar("T", bound="DocumentCommentsListPostRequestDataItemAttributesText")
 @_attrs_define
 class DocumentCommentsListPostRequestDataItemAttributesText:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentCommentsListPostRequestDataItemAttributesTextType]
-    value : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, DocumentCommentsListPostRequestDataItemAttributesTextType]):
+        value (Union[Unset, str]):  Example: My text value.
     """
 
     type: Union[

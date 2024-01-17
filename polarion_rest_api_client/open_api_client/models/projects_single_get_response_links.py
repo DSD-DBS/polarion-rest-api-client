@@ -14,9 +14,8 @@ T = TypeVar("T", bound="ProjectsSingleGetResponseLinks")
 @_attrs_define
 class ProjectsSingleGetResponseLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId?revision=1234.
     """
 
     self_: Union[Unset, str] = UNSET

@@ -18,20 +18,25 @@ def _get_kwargs(
     project_id: str,
     work_item_id: str,
     *,
-    json_body: MoveWorkItemToDocumentRequestBody,
+    body: MoveWorkItemToDocumentRequestBody,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/workitems/{workItemId}/actions/moveToDocument".format(
             projectId=project_id,
             workItemId=work_item_id,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -79,32 +84,27 @@ def sync_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: MoveWorkItemToDocumentRequestBody,
+    body: MoveWorkItemToDocumentRequestBody,
 ) -> Response[Any]:
-    """Moves Work Item to the document.
+    """Moves the specified Work Item to the Document.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    json_body : MoveWorkItemToDocumentRequestBody
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (MoveWorkItemToDocumentRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -119,32 +119,27 @@ async def asyncio_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: MoveWorkItemToDocumentRequestBody,
+    body: MoveWorkItemToDocumentRequestBody,
 ) -> Response[Any]:
-    """Moves Work Item to the document.
+    """Moves the specified Work Item to the Document.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    json_body : MoveWorkItemToDocumentRequestBody
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (MoveWorkItemToDocumentRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

@@ -14,10 +14,11 @@ T = TypeVar("T", bound="DocumentAttachmentsListPostResponseDataItemLinks")
 @_attrs_define
 class DocumentAttachmentsListPostResponseDataItemLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
-    content : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/spaces/MySpaceId/documents/MyDocumentId/attachments/MyAttachmentId?revision=1234.
+        content (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/spaces/MySpaceId/d
+            ocuments/MyDocumentId/attachments/MyAttachmentId/content?revision=1234.
     """
 
     self_: Union[Unset, str] = UNSET
@@ -28,6 +29,7 @@ class DocumentAttachmentsListPostResponseDataItemLinks:
 
     def to_dict(self) -> Dict[str, Any]:
         self_ = self.self_
+
         content = self.content
 
         field_dict: Dict[str, Any] = {}

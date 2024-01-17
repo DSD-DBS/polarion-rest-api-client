@@ -14,13 +14,14 @@ T = TypeVar("T", bound="IconsSingleGetResponseDataAttributes")
 @_attrs_define
 class IconsSingleGetResponseDataAttributes:
     """
-    Attributes
-    ----------
-    icon_url : Union[Unset, str]
-    path : Union[Unset, str]
+    Attributes:
+        icon_url (Union[Unset, str]):  Example: pathexample.
+        id (Union[Unset, str]):  Example: pathexample.
+        path (Union[Unset, str]):  Example: pathexample.
     """
 
     icon_url: Union[Unset, str] = UNSET
+    id: Union[Unset, str] = UNSET
     path: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -28,6 +29,9 @@ class IconsSingleGetResponseDataAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         icon_url = self.icon_url
+
+        id = self.id
+
         path = self.path
 
         field_dict: Dict[str, Any] = {}
@@ -35,6 +39,8 @@ class IconsSingleGetResponseDataAttributes:
         field_dict.update({})
         if icon_url is not UNSET:
             field_dict["iconUrl"] = icon_url
+        if id is not UNSET:
+            field_dict["id"] = id
         if path is not UNSET:
             field_dict["path"] = path
 
@@ -45,10 +51,13 @@ class IconsSingleGetResponseDataAttributes:
         d = src_dict.copy()
         icon_url = d.pop("iconUrl", UNSET)
 
+        id = d.pop("id", UNSET)
+
         path = d.pop("path", UNSET)
 
         icons_single_get_response_data_attributes_obj = cls(
             icon_url=icon_url,
+            id=id,
             path=path,
         )
 

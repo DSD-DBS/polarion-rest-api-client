@@ -20,9 +20,8 @@ T = TypeVar("T", bound="PageAttachmentsSingleGetResponseDataMeta")
 @_attrs_define
 class PageAttachmentsSingleGetResponseDataMeta:
     """
-    Attributes
-    ----------
-    errors : Union[Unset, List['PageAttachmentsSingleGetResponseDataMetaErrorsItem']]
+    Attributes:
+        errors (Union[Unset, List['PageAttachmentsSingleGetResponseDataMetaErrorsItem']]):
     """
 
     errors: Union[
@@ -38,7 +37,6 @@ class PageAttachmentsSingleGetResponseDataMeta:
             errors = []
             for errors_item_data in self.errors:
                 errors_item = errors_item_data.to_dict()
-
                 errors.append(errors_item)
 
         field_dict: Dict[str, Any] = {}

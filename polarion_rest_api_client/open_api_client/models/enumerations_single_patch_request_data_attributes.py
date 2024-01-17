@@ -20,9 +20,8 @@ T = TypeVar("T", bound="EnumerationsSinglePatchRequestDataAttributes")
 @_attrs_define
 class EnumerationsSinglePatchRequestDataAttributes:
     """
-    Attributes
-    ----------
-    options : Union[Unset, List['EnumerationsSinglePatchRequestDataAttributesOptionsItem']]
+    Attributes:
+        options (Union[Unset, List['EnumerationsSinglePatchRequestDataAttributesOptionsItem']]):
     """
 
     options: Union[
@@ -38,7 +37,6 @@ class EnumerationsSinglePatchRequestDataAttributes:
             options = []
             for options_item_data in self.options:
                 options_item = options_item_data.to_dict()
-
                 options.append(options_item)
 
         field_dict: Dict[str, Any] = {}

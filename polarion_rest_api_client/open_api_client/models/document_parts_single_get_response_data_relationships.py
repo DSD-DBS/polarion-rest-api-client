@@ -26,11 +26,10 @@ T = TypeVar("T", bound="DocumentPartsSingleGetResponseDataRelationships")
 @_attrs_define
 class DocumentPartsSingleGetResponseDataRelationships:
     """
-    Attributes
-    ----------
-    next_part : Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsNextPart]
-    previous_part : Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsPreviousPart]
-    work_item : Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsWorkItem]
+    Attributes:
+        next_part (Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsNextPart]):
+        previous_part (Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsPreviousPart]):
+        work_item (Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsWorkItem]):
     """
 
     next_part: Union[

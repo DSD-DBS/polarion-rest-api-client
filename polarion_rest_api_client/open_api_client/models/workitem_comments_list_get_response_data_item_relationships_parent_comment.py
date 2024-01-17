@@ -23,9 +23,8 @@ T = TypeVar(
 @_attrs_define
 class WorkitemCommentsListGetResponseDataItemRelationshipsParentComment:
     """
-    Attributes
-    ----------
-    data : Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsParentCommentData]
+    Attributes:
+        data (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsParentCommentData]):
     """
 
     data: Union[

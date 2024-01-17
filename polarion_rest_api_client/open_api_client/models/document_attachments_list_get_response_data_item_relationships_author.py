@@ -22,9 +22,8 @@ T = TypeVar(
 @_attrs_define
 class DocumentAttachmentsListGetResponseDataItemRelationshipsAuthor:
     """
-    Attributes
-    ----------
-    data : Union[Unset, DocumentAttachmentsListGetResponseDataItemRelationshipsAuthorData]
+    Attributes:
+        data (Union[Unset, DocumentAttachmentsListGetResponseDataItemRelationshipsAuthorData]):
     """
 
     data: Union[

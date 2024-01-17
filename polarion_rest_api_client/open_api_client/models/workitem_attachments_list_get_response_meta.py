@@ -14,9 +14,8 @@ T = TypeVar("T", bound="WorkitemAttachmentsListGetResponseMeta")
 @_attrs_define
 class WorkitemAttachmentsListGetResponseMeta:
     """
-    Attributes
-    ----------
-    total_count : Union[Unset, int]
+    Attributes:
+        total_count (Union[Unset, int]):
     """
 
     total_count: Union[Unset, int] = UNSET

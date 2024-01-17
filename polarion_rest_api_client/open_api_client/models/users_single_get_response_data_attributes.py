@@ -20,15 +20,15 @@ T = TypeVar("T", bound="UsersSingleGetResponseDataAttributes")
 @_attrs_define
 class UsersSingleGetResponseDataAttributes:
     """
-    Attributes
-    ----------
-    avatar_url : Union[Unset, str]
-    description : Union[Unset, UsersSingleGetResponseDataAttributesDescription]
-    disabled_notifications : Union[Unset, bool]
-    email : Union[Unset, str]
-    id : Union[Unset, str]
-    initials : Union[Unset, str]
-    name : Union[Unset, str]
+    Attributes:
+        avatar_url (Union[Unset, str]):  Example: http://server-host-name/application-
+            path/icons/avatar/MyUserId/avatar.png?revision=1234.
+        description (Union[Unset, UsersSingleGetResponseDataAttributesDescription]):
+        disabled_notifications (Union[Unset, bool]):
+        email (Union[Unset, str]):  Example: Email.
+        id (Union[Unset, str]):  Example: MyUserId.
+        initials (Union[Unset, str]):  Example: Initials.
+        name (Union[Unset, str]):  Example: Name.
     """
 
     avatar_url: Union[Unset, str] = UNSET
@@ -46,14 +46,19 @@ class UsersSingleGetResponseDataAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         avatar_url = self.avatar_url
+
         description: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
         disabled_notifications = self.disabled_notifications
+
         email = self.email
+
         id = self.id
+
         initials = self.initials
+
         name = self.name
 
         field_dict: Dict[str, Any] = {}

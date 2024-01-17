@@ -14,9 +14,8 @@ T = TypeVar("T", bound="IconsListGetResponseMeta")
 @_attrs_define
 class IconsListGetResponseMeta:
     """
-    Attributes
-    ----------
-    total_count : Union[Unset, int]
+    Attributes:
+        total_count (Union[Unset, int]):
     """
 
     total_count: Union[Unset, int] = UNSET

@@ -19,30 +19,36 @@ def _get_kwargs(
     space_id: str,
     document_name: str,
     *,
-    json_body: DocumentsSinglePatchRequest,
-    workflow_action: Union[Unset, None, str] = UNSET,
+    body: DocumentsSinglePatchRequest,
+    workflow_action: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["workflowAction"] = workflow_action
 
     params = {
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
         "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}".format(
             projectId=project_id,
             spaceId=space_id,
             documentName=document_name,
         ),
-        "json": json_json_body,
         "params": params,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -91,36 +97,31 @@ def sync_detailed(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentsSinglePatchRequest,
-    workflow_action: Union[Unset, None, str] = UNSET,
+    body: DocumentsSinglePatchRequest,
+    workflow_action: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified Document.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    workflow_action : Union[Unset, None, str]
-    json_body : DocumentsSinglePatchRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        workflow_action (Union[Unset, str]):
+        body (DocumentsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         document_name=document_name,
-        json_body=json_body,
+        body=body,
         workflow_action=workflow_action,
     )
 
@@ -137,36 +138,31 @@ async def asyncio_detailed(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: DocumentsSinglePatchRequest,
-    workflow_action: Union[Unset, None, str] = UNSET,
+    body: DocumentsSinglePatchRequest,
+    workflow_action: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
-    """Updates the specified instance.
+    """Updates the specified Document.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    workflow_action : Union[Unset, None, str]
-    json_body : DocumentsSinglePatchRequest
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        workflow_action (Union[Unset, str]):
+        body (DocumentsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         document_name=document_name,
-        json_body=json_body,
+        body=body,
         workflow_action=workflow_action,
     )
 

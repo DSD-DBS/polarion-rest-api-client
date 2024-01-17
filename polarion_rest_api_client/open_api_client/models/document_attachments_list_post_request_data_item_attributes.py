@@ -14,10 +14,9 @@ T = TypeVar("T", bound="DocumentAttachmentsListPostRequestDataItemAttributes")
 @_attrs_define
 class DocumentAttachmentsListPostRequestDataItemAttributes:
     """
-    Attributes
-    ----------
-    file_name : Union[Unset, str]
-    title : Union[Unset, str]
+    Attributes:
+        file_name (Union[Unset, str]):  Example: File Name.
+        title (Union[Unset, str]):  Example: Title.
     """
 
     file_name: Union[Unset, str] = UNSET
@@ -28,6 +27,7 @@ class DocumentAttachmentsListPostRequestDataItemAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         file_name = self.file_name
+
         title = self.title
 
         field_dict: Dict[str, Any] = {}

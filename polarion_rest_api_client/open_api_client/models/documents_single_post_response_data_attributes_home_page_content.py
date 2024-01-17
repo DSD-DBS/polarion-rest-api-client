@@ -19,10 +19,9 @@ T = TypeVar(
 @_attrs_define
 class DocumentsSinglePostResponseDataAttributesHomePageContent:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentsSinglePostResponseDataAttributesHomePageContentType]
-    value : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, DocumentsSinglePostResponseDataAttributesHomePageContentType]):
+        value (Union[Unset, str]):  Example: My text value.
     """
 
     type: Union[

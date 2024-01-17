@@ -18,9 +18,7 @@ def _get_kwargs(
     target_project_id: str,
     linked_work_item_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
         "url": "/projects/{projectId}/workitems/{workItemId}/linkedworkitems/{roleId}/{targetProjectId}/{linkedWorkItemId}".format(
             projectId=project_id,
@@ -30,6 +28,8 @@ def _get_kwargs(
             linkedWorkItemId=linked_work_item_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -77,29 +77,24 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """Deletes the specified instance.
+    """Deletes the specified Linked Work Item.
 
-    Deletes the direct outgoing links to other Work Items. (The same as the corresponding Java API
+     Deletes the direct outgoing links to other Work Items. (The same as the corresponding Java API
     method.)  Does not pertain to external links or backlinks.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    role_id : str
-    target_project_id : str
-    linked_work_item_id : str
+    Args:
+        project_id (str):
+        work_item_id (str):
+        role_id (str):
+        target_project_id (str):
+        linked_work_item_id (str):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -126,29 +121,24 @@ async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """Deletes the specified instance.
+    """Deletes the specified Linked Work Item.
 
-    Deletes the direct outgoing links to other Work Items. (The same as the corresponding Java API
+     Deletes the direct outgoing links to other Work Items. (The same as the corresponding Java API
     method.)  Does not pertain to external links or backlinks.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    role_id : str
-    target_project_id : str
-    linked_work_item_id : str
+    Args:
+        project_id (str):
+        work_item_id (str):
+        role_id (str):
+        target_project_id (str):
+        linked_work_item_id (str):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(

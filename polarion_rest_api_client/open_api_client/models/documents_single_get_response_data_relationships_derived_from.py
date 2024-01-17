@@ -22,9 +22,8 @@ T = TypeVar(
 @_attrs_define
 class DocumentsSingleGetResponseDataRelationshipsDerivedFrom:
     """
-    Attributes
-    ----------
-    data : Union[Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFromData]
+    Attributes:
+        data (Union[Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFromData]):
     """
 
     data: Union[

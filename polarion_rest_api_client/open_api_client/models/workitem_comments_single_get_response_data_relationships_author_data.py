@@ -19,11 +19,10 @@ T = TypeVar(
 @_attrs_define
 class WorkitemCommentsSingleGetResponseDataRelationshipsAuthorData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsAuthorDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsAuthorDataType]):
+        id (Union[Unset, str]):  Example: MyUserId.
+        revision (Union[Unset, str]):  Example: 1234.
     """
 
     type: Union[
@@ -41,6 +40,7 @@ class WorkitemCommentsSingleGetResponseDataRelationshipsAuthorData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
 
         field_dict: Dict[str, Any] = {}

@@ -23,11 +23,10 @@ T = TypeVar("T", bound="EnumerationsListPostResponseDataItem")
 @_attrs_define
 class EnumerationsListPostResponseDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, EnumerationsListPostResponseDataItemType]
-    id : Union[Unset, str]
-    links : Union[Unset, EnumerationsListPostResponseDataItemLinks]
+    Attributes:
+        type (Union[Unset, EnumerationsListPostResponseDataItemType]):
+        id (Union[Unset, str]):  Example: ~/status/~.
+        links (Union[Unset, EnumerationsListPostResponseDataItemLinks]):
     """
 
     type: Union[Unset, EnumerationsListPostResponseDataItemType] = UNSET
@@ -43,6 +42,7 @@ class EnumerationsListPostResponseDataItem:
             type = self.type.value
 
         id = self.id
+
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()

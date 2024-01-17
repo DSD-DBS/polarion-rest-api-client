@@ -17,10 +17,9 @@ T = TypeVar("T", bound="WorkitemsListPostRequestDataItemAttributesDescription")
 @_attrs_define
 class WorkitemsListPostRequestDataItemAttributesDescription:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemsListPostRequestDataItemAttributesDescriptionType]
-    value : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemsListPostRequestDataItemAttributesDescriptionType]):
+        value (Union[Unset, str]):  Example: My text value.
     """
 
     type: Union[

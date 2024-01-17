@@ -23,11 +23,10 @@ T = TypeVar("T", bound="DocumentsListPostResponseDataItem")
 @_attrs_define
 class DocumentsListPostResponseDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentsListPostResponseDataItemType]
-    id : Union[Unset, str]
-    links : Union[Unset, DocumentsListPostResponseDataItemLinks]
+    Attributes:
+        type (Union[Unset, DocumentsListPostResponseDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
+        links (Union[Unset, DocumentsListPostResponseDataItemLinks]):
     """
 
     type: Union[Unset, DocumentsListPostResponseDataItemType] = UNSET
@@ -43,6 +42,7 @@ class DocumentsListPostResponseDataItem:
             type = self.type.value
 
         id = self.id
+
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()

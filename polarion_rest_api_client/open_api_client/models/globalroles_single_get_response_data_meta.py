@@ -20,9 +20,8 @@ T = TypeVar("T", bound="GlobalrolesSingleGetResponseDataMeta")
 @_attrs_define
 class GlobalrolesSingleGetResponseDataMeta:
     """
-    Attributes
-    ----------
-    errors : Union[Unset, List['GlobalrolesSingleGetResponseDataMetaErrorsItem']]
+    Attributes:
+        errors (Union[Unset, List['GlobalrolesSingleGetResponseDataMetaErrorsItem']]):
     """
 
     errors: Union[
@@ -38,7 +37,6 @@ class GlobalrolesSingleGetResponseDataMeta:
             errors = []
             for errors_item_data in self.errors:
                 errors_item = errors_item_data.to_dict()
-
                 errors.append(errors_item)
 
         field_dict: Dict[str, Any] = {}

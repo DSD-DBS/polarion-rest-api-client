@@ -19,10 +19,9 @@ T = TypeVar(
 @_attrs_define
 class UsersListPostRequestDataItemRelationshipsProjectRolesDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, UsersListPostRequestDataItemRelationshipsProjectRolesDataItemType]
-    id : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, UsersListPostRequestDataItemRelationshipsProjectRolesDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MyRoleId.
     """
 
     type: Union[

@@ -26,11 +26,10 @@ T = TypeVar("T", bound="LinkedworkitemsListPostRequestDataItem")
 @_attrs_define
 class LinkedworkitemsListPostRequestDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, LinkedworkitemsListPostRequestDataItemType]
-    attributes : Union[Unset, LinkedworkitemsListPostRequestDataItemAttributes]
-    relationships : Union[Unset, LinkedworkitemsListPostRequestDataItemRelationships]
+    Attributes:
+        type (Union[Unset, LinkedworkitemsListPostRequestDataItemType]):
+        attributes (Union[Unset, LinkedworkitemsListPostRequestDataItemAttributes]):
+        relationships (Union[Unset, LinkedworkitemsListPostRequestDataItemRelationships]):
     """
 
     type: Union[Unset, LinkedworkitemsListPostRequestDataItemType] = UNSET

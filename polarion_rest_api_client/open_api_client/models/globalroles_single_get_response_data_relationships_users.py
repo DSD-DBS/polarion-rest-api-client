@@ -23,10 +23,9 @@ T = TypeVar("T", bound="GlobalrolesSingleGetResponseDataRelationshipsUsers")
 @_attrs_define
 class GlobalrolesSingleGetResponseDataRelationshipsUsers:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['GlobalrolesSingleGetResponseDataRelationshipsUsersDataItem']]
-    meta : Union[Unset, GlobalrolesSingleGetResponseDataRelationshipsUsersMeta]
+    Attributes:
+        data (Union[Unset, List['GlobalrolesSingleGetResponseDataRelationshipsUsersDataItem']]):
+        meta (Union[Unset, GlobalrolesSingleGetResponseDataRelationshipsUsersMeta]):
     """
 
     data: Union[
@@ -46,7 +45,6 @@ class GlobalrolesSingleGetResponseDataRelationshipsUsers:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         meta: Union[Unset, Dict[str, Any]] = UNSET

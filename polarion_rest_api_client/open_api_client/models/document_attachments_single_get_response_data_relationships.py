@@ -23,10 +23,9 @@ T = TypeVar("T", bound="DocumentAttachmentsSingleGetResponseDataRelationships")
 @_attrs_define
 class DocumentAttachmentsSingleGetResponseDataRelationships:
     """
-    Attributes
-    ----------
-    author : Union[Unset, DocumentAttachmentsSingleGetResponseDataRelationshipsAuthor]
-    project : Union[Unset, DocumentAttachmentsSingleGetResponseDataRelationshipsProject]
+    Attributes:
+        author (Union[Unset, DocumentAttachmentsSingleGetResponseDataRelationshipsAuthor]):
+        project (Union[Unset, DocumentAttachmentsSingleGetResponseDataRelationshipsProject]):
     """
 
     author: Union[

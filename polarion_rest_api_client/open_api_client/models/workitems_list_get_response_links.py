@@ -14,14 +14,19 @@ T = TypeVar("T", bound="WorkitemsListGetResponseLinks")
 @_attrs_define
 class WorkitemsListGetResponseLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
-    first : Union[Unset, str]
-    prev : Union[Unset, str]
-    next_ : Union[Unset, str]
-    last : Union[Unset, str]
-    portal : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/workitems?page%5Bsize%5D=10&page%5Bnumber%5D=5.
+        first (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/workitems?page%5Bsize%5D=10&page%5Bnumber%5D=1.
+        prev (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/workitems?page%5Bsize%5D=10&page%5Bnumber%5D=4.
+        next_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/workitems?page%5Bsize%5D=10&page%5Bnumber%5D=6.
+        last (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/workitems?page%5Bsize%5D=10&page%5Bnumber%5D=9.
+        portal (Union[Unset, str]):  Example: server-host-name/application-
+            path/polarion/redirect/project/MyProjectId/workitems.
     """
 
     self_: Union[Unset, str] = UNSET
@@ -36,10 +41,15 @@ class WorkitemsListGetResponseLinks:
 
     def to_dict(self) -> Dict[str, Any]:
         self_ = self.self_
+
         first = self.first
+
         prev = self.prev
+
         next_ = self.next_
+
         last = self.last
+
         portal = self.portal
 
         field_dict: Dict[str, Any] = {}

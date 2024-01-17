@@ -17,11 +17,10 @@ T = TypeVar("T", bound="WorkitemsSingleGetResponseDataRelationshipsModuleData")
 @_attrs_define
 class WorkitemsSingleGetResponseDataRelationshipsModuleData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemsSingleGetResponseDataRelationshipsModuleDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsModuleDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
+        revision (Union[Unset, str]):  Example: 1234.
     """
 
     type: Union[
@@ -39,6 +38,7 @@ class WorkitemsSingleGetResponseDataRelationshipsModuleData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
 
         field_dict: Dict[str, Any] = {}

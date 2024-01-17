@@ -14,9 +14,8 @@ T = TypeVar("T", bound="EnumerationsSingleGetResponseLinks")
 @_attrs_define
 class EnumerationsSingleGetResponseLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-path/enumerations/%7E/status/%7E.
     """
 
     self_: Union[Unset, str] = UNSET

@@ -39,7 +39,7 @@ Documentation = "https://dsd-dbs.github.io/polarion-rest-api-client"
 
 [project.optional-dependencies]
 dev = [
-  "openapi-python-client==0.15.1"
+  "openapi-python-client==0.17.1"
 ]
 
 docs = [

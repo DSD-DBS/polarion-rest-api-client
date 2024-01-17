@@ -16,9 +16,8 @@ T = TypeVar(
 @_attrs_define
 class DocumentsSinglePatchRequestDataAttributesOutlineNumbering:
     """
-    Attributes
-    ----------
-    prefix : Union[Unset, str]
+    Attributes:
+        prefix (Union[Unset, str]):  Example: ABC.
     """
 
     prefix: Union[Unset, str] = UNSET

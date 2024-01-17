@@ -15,6 +15,12 @@ if TYPE_CHECKING:
     from ..models.workitems_single_patch_request_data_relationships_categories import (
         WorkitemsSinglePatchRequestDataRelationshipsCategories,
     )
+    from ..models.workitems_single_patch_request_data_relationships_linked_revisions import (
+        WorkitemsSinglePatchRequestDataRelationshipsLinkedRevisions,
+    )
+    from ..models.workitems_single_patch_request_data_relationships_votes import (
+        WorkitemsSinglePatchRequestDataRelationshipsVotes,
+    )
     from ..models.workitems_single_patch_request_data_relationships_watches import (
         WorkitemsSinglePatchRequestDataRelationshipsWatches,
     )
@@ -26,11 +32,12 @@ T = TypeVar("T", bound="WorkitemsSinglePatchRequestDataRelationships")
 @_attrs_define
 class WorkitemsSinglePatchRequestDataRelationships:
     """
-    Attributes
-    ----------
-    assignee : Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsAssignee]
-    categories : Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsCategories]
-    watches : Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsWatches]
+    Attributes:
+        assignee (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsAssignee]):
+        categories (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsCategories]):
+        linked_revisions (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsLinkedRevisions]):
+        votes (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsVotes]):
+        watches (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsWatches]):
     """
 
     assignee: Union[
@@ -38,6 +45,12 @@ class WorkitemsSinglePatchRequestDataRelationships:
     ] = UNSET
     categories: Union[
         Unset, "WorkitemsSinglePatchRequestDataRelationshipsCategories"
+    ] = UNSET
+    linked_revisions: Union[
+        Unset, "WorkitemsSinglePatchRequestDataRelationshipsLinkedRevisions"
+    ] = UNSET
+    votes: Union[
+        Unset, "WorkitemsSinglePatchRequestDataRelationshipsVotes"
     ] = UNSET
     watches: Union[
         Unset, "WorkitemsSinglePatchRequestDataRelationshipsWatches"
@@ -55,6 +68,14 @@ class WorkitemsSinglePatchRequestDataRelationships:
         if not isinstance(self.categories, Unset):
             categories = self.categories.to_dict()
 
+        linked_revisions: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.linked_revisions, Unset):
+            linked_revisions = self.linked_revisions.to_dict()
+
+        votes: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.votes, Unset):
+            votes = self.votes.to_dict()
+
         watches: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.watches, Unset):
             watches = self.watches.to_dict()
@@ -66,6 +87,10 @@ class WorkitemsSinglePatchRequestDataRelationships:
             field_dict["assignee"] = assignee
         if categories is not UNSET:
             field_dict["categories"] = categories
+        if linked_revisions is not UNSET:
+            field_dict["linkedRevisions"] = linked_revisions
+        if votes is not UNSET:
+            field_dict["votes"] = votes
         if watches is not UNSET:
             field_dict["watches"] = watches
 
@@ -78,6 +103,12 @@ class WorkitemsSinglePatchRequestDataRelationships:
         )
         from ..models.workitems_single_patch_request_data_relationships_categories import (
             WorkitemsSinglePatchRequestDataRelationshipsCategories,
+        )
+        from ..models.workitems_single_patch_request_data_relationships_linked_revisions import (
+            WorkitemsSinglePatchRequestDataRelationshipsLinkedRevisions,
+        )
+        from ..models.workitems_single_patch_request_data_relationships_votes import (
+            WorkitemsSinglePatchRequestDataRelationshipsVotes,
         )
         from ..models.workitems_single_patch_request_data_relationships_watches import (
             WorkitemsSinglePatchRequestDataRelationshipsWatches,
@@ -108,6 +139,28 @@ class WorkitemsSinglePatchRequestDataRelationships:
                 _categories
             )
 
+        _linked_revisions = d.pop("linkedRevisions", UNSET)
+        linked_revisions: Union[
+            Unset, WorkitemsSinglePatchRequestDataRelationshipsLinkedRevisions
+        ]
+        if isinstance(_linked_revisions, Unset):
+            linked_revisions = UNSET
+        else:
+            linked_revisions = WorkitemsSinglePatchRequestDataRelationshipsLinkedRevisions.from_dict(
+                _linked_revisions
+            )
+
+        _votes = d.pop("votes", UNSET)
+        votes: Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsVotes]
+        if isinstance(_votes, Unset):
+            votes = UNSET
+        else:
+            votes = (
+                WorkitemsSinglePatchRequestDataRelationshipsVotes.from_dict(
+                    _votes
+                )
+            )
+
         _watches = d.pop("watches", UNSET)
         watches: Union[
             Unset, WorkitemsSinglePatchRequestDataRelationshipsWatches
@@ -124,6 +177,8 @@ class WorkitemsSinglePatchRequestDataRelationships:
         workitems_single_patch_request_data_relationships_obj = cls(
             assignee=assignee,
             categories=categories,
+            linked_revisions=linked_revisions,
+            votes=votes,
             watches=watches,
         )
 

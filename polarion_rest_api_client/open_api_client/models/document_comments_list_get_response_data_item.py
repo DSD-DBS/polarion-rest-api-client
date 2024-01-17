@@ -32,15 +32,14 @@ T = TypeVar("T", bound="DocumentCommentsListGetResponseDataItem")
 @_attrs_define
 class DocumentCommentsListGetResponseDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentCommentsListGetResponseDataItemType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
-    attributes : Union[Unset, DocumentCommentsListGetResponseDataItemAttributes]
-    relationships : Union[Unset, DocumentCommentsListGetResponseDataItemRelationships]
-    meta : Union[Unset, DocumentCommentsListGetResponseDataItemMeta]
-    links : Union[Unset, DocumentCommentsListGetResponseDataItemLinks]
+    Attributes:
+        type (Union[Unset, DocumentCommentsListGetResponseDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/MyCommentId.
+        revision (Union[Unset, str]):  Example: 1234.
+        attributes (Union[Unset, DocumentCommentsListGetResponseDataItemAttributes]):
+        relationships (Union[Unset, DocumentCommentsListGetResponseDataItemRelationships]):
+        meta (Union[Unset, DocumentCommentsListGetResponseDataItemMeta]):
+        links (Union[Unset, DocumentCommentsListGetResponseDataItemLinks]):
     """
 
     type: Union[Unset, DocumentCommentsListGetResponseDataItemType] = UNSET
@@ -64,7 +63,9 @@ class DocumentCommentsListGetResponseDataItem:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

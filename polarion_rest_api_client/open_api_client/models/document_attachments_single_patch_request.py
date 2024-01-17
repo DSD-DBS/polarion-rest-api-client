@@ -20,9 +20,8 @@ T = TypeVar("T", bound="DocumentAttachmentsSinglePatchRequest")
 @_attrs_define
 class DocumentAttachmentsSinglePatchRequest:
     """
-    Attributes
-    ----------
-    data : Union[Unset, DocumentAttachmentsSinglePatchRequestData]
+    Attributes:
+        data (Union[Unset, DocumentAttachmentsSinglePatchRequestData]):
     """
 
     data: Union[Unset, "DocumentAttachmentsSinglePatchRequestData"] = UNSET

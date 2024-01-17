@@ -20,10 +20,9 @@ T = TypeVar(
 @_attrs_define
 class WorkitemCommentsListPostRequestDataItemRelationshipsParentCommentData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemCommentsListPostRequestDataItemRelationshipsParentCommentDataType]
-    id : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemCommentsListPostRequestDataItemRelationshipsParentCommentDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyCommentId.
     """
 
     type: Union[

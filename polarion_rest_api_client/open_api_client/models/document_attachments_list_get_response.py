@@ -29,14 +29,13 @@ T = TypeVar("T", bound="DocumentAttachmentsListGetResponse")
 @_attrs_define
 class DocumentAttachmentsListGetResponse:
     """
-    Attributes
-    ----------
-    meta : Union[Unset, DocumentAttachmentsListGetResponseMeta]
-    data : Union[Unset, List['DocumentAttachmentsListGetResponseDataItem']]
-    included : Union[Unset, List['DocumentAttachmentsListGetResponseIncludedItem']]
-        Related entities might be returned, see <a href="https://docs.sw.siemens.com/en-
-        US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
-    links : Union[Unset, DocumentAttachmentsListGetResponseLinks]
+    Attributes:
+        meta (Union[Unset, DocumentAttachmentsListGetResponseMeta]):
+        data (Union[Unset, List['DocumentAttachmentsListGetResponseDataItem']]):
+        included (Union[Unset, List['DocumentAttachmentsListGetResponseIncludedItem']]): Related entities might be
+            returned, see <a href="https://docs.sw.siemens.com/en-
+            US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
+        links (Union[Unset, DocumentAttachmentsListGetResponseLinks]):
     """
 
     meta: Union[Unset, "DocumentAttachmentsListGetResponseMeta"] = UNSET
@@ -61,7 +60,6 @@ class DocumentAttachmentsListGetResponse:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         included: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -69,7 +67,6 @@ class DocumentAttachmentsListGetResponse:
             included = []
             for included_item_data in self.included:
                 included_item = included_item_data.to_dict()
-
                 included.append(included_item)
 
         links: Union[Unset, Dict[str, Any]] = UNSET

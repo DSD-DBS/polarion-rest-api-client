@@ -23,11 +23,10 @@ T = TypeVar("T", bound="WorkitemAttachmentsListPostRequestDataItem")
 @_attrs_define
 class WorkitemAttachmentsListPostRequestDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemAttachmentsListPostRequestDataItemType]
-    lid : Union[Unset, str]
-    attributes : Union[Unset, WorkitemAttachmentsListPostRequestDataItemAttributes]
+    Attributes:
+        type (Union[Unset, WorkitemAttachmentsListPostRequestDataItemType]):
+        lid (Union[Unset, str]):
+        attributes (Union[Unset, WorkitemAttachmentsListPostRequestDataItemAttributes]):
     """
 
     type: Union[Unset, WorkitemAttachmentsListPostRequestDataItemType] = UNSET
@@ -45,6 +44,7 @@ class WorkitemAttachmentsListPostRequestDataItem:
             type = self.type.value
 
         lid = self.lid
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

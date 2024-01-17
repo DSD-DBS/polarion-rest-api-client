@@ -29,13 +29,12 @@ T = TypeVar("T", bound="GlobalrolesSingleGetResponseData")
 @_attrs_define
 class GlobalrolesSingleGetResponseData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, GlobalrolesSingleGetResponseDataType]
-    id : Union[Unset, str]
-    relationships : Union[Unset, GlobalrolesSingleGetResponseDataRelationships]
-    meta : Union[Unset, GlobalrolesSingleGetResponseDataMeta]
-    links : Union[Unset, GlobalrolesSingleGetResponseDataLinks]
+    Attributes:
+        type (Union[Unset, GlobalrolesSingleGetResponseDataType]):
+        id (Union[Unset, str]):  Example: MyRoleId.
+        relationships (Union[Unset, GlobalrolesSingleGetResponseDataRelationships]):
+        meta (Union[Unset, GlobalrolesSingleGetResponseDataMeta]):
+        links (Union[Unset, GlobalrolesSingleGetResponseDataLinks]):
     """
 
     type: Union[Unset, GlobalrolesSingleGetResponseDataType] = UNSET
@@ -55,6 +54,7 @@ class GlobalrolesSingleGetResponseData:
             type = self.type.value
 
         id = self.id
+
         relationships: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()

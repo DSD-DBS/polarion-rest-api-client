@@ -19,10 +19,9 @@ T = TypeVar(
 @_attrs_define
 class WorkitemsListPostRequestDataItemRelationshipsModuleData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemsListPostRequestDataItemRelationshipsModuleDataType]
-    id : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsModuleDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
     """
 
     type: Union[

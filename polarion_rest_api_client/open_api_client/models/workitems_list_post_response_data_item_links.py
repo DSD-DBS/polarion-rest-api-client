@@ -14,10 +14,11 @@ T = TypeVar("T", bound="WorkitemsListPostResponseDataItemLinks")
 @_attrs_define
 class WorkitemsListPostResponseDataItemLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
-    portal : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/workitems/MyWorkItemId?revision=1234.
+        portal (Union[Unset, str]):  Example: server-host-name/application-
+            path/polarion/redirect/project/MyProjectId/workitem?id=MyWorkItemId&revision=1234.
     """
 
     self_: Union[Unset, str] = UNSET
@@ -28,6 +29,7 @@ class WorkitemsListPostResponseDataItemLinks:
 
     def to_dict(self) -> Dict[str, Any]:
         self_ = self.self_
+
         portal = self.portal
 
         field_dict: Dict[str, Any] = {}

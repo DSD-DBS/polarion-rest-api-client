@@ -14,10 +14,9 @@ T = TypeVar("T", bound="DocumentPartsListPostRequestDataItemAttributes")
 @_attrs_define
 class DocumentPartsListPostRequestDataItemAttributes:
     """
-    Attributes
-    ----------
-    level : Union[Unset, int]
-    type : Union[Unset, str]
+    Attributes:
+        level (Union[Unset, int]):
+        type (Union[Unset, str]):  Example: workitem.
     """
 
     level: Union[Unset, int] = UNSET
@@ -28,6 +27,7 @@ class DocumentPartsListPostRequestDataItemAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         level = self.level
+
         type = self.type
 
         field_dict: Dict[str, Any] = {}

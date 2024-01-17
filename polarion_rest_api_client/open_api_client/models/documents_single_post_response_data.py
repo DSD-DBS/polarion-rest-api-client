@@ -15,6 +15,12 @@ if TYPE_CHECKING:
     from ..models.documents_single_post_response_data_attributes import (
         DocumentsSinglePostResponseDataAttributes,
     )
+    from ..models.documents_single_post_response_data_links import (
+        DocumentsSinglePostResponseDataLinks,
+    )
+    from ..models.documents_single_post_response_data_relationships import (
+        DocumentsSinglePostResponseDataRelationships,
+    )
 
 
 T = TypeVar("T", bound="DocumentsSinglePostResponseData")
@@ -23,11 +29,12 @@ T = TypeVar("T", bound="DocumentsSinglePostResponseData")
 @_attrs_define
 class DocumentsSinglePostResponseData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentsSinglePostResponseDataType]
-    id : Union[Unset, str]
-    attributes : Union[Unset, DocumentsSinglePostResponseDataAttributes]
+    Attributes:
+        type (Union[Unset, DocumentsSinglePostResponseDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
+        attributes (Union[Unset, DocumentsSinglePostResponseDataAttributes]):
+        relationships (Union[Unset, DocumentsSinglePostResponseDataRelationships]):
+        links (Union[Unset, DocumentsSinglePostResponseDataLinks]):
     """
 
     type: Union[Unset, DocumentsSinglePostResponseDataType] = UNSET
@@ -35,6 +42,10 @@ class DocumentsSinglePostResponseData:
     attributes: Union[
         Unset, "DocumentsSinglePostResponseDataAttributes"
     ] = UNSET
+    relationships: Union[
+        Unset, "DocumentsSinglePostResponseDataRelationships"
+    ] = UNSET
+    links: Union[Unset, "DocumentsSinglePostResponseDataLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -45,9 +56,18 @@ class DocumentsSinglePostResponseData:
             type = self.type.value
 
         id = self.id
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
+
+        relationships: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.relationships, Unset):
+            relationships = self.relationships.to_dict()
+
+        links: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.links, Unset):
+            links = self.links.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -58,6 +78,10 @@ class DocumentsSinglePostResponseData:
             field_dict["id"] = id
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
+        if relationships is not UNSET:
+            field_dict["relationships"] = relationships
+        if links is not UNSET:
+            field_dict["links"] = links
 
         return field_dict
 
@@ -65,6 +89,12 @@ class DocumentsSinglePostResponseData:
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         from ..models.documents_single_post_response_data_attributes import (
             DocumentsSinglePostResponseDataAttributes,
+        )
+        from ..models.documents_single_post_response_data_links import (
+            DocumentsSinglePostResponseDataLinks,
+        )
+        from ..models.documents_single_post_response_data_relationships import (
+            DocumentsSinglePostResponseDataRelationships,
         )
 
         d = src_dict.copy()
@@ -86,10 +116,32 @@ class DocumentsSinglePostResponseData:
                 _attributes
             )
 
+        _relationships = d.pop("relationships", UNSET)
+        relationships: Union[
+            Unset, DocumentsSinglePostResponseDataRelationships
+        ]
+        if isinstance(_relationships, Unset):
+            relationships = UNSET
+        else:
+            relationships = (
+                DocumentsSinglePostResponseDataRelationships.from_dict(
+                    _relationships
+                )
+            )
+
+        _links = d.pop("links", UNSET)
+        links: Union[Unset, DocumentsSinglePostResponseDataLinks]
+        if isinstance(_links, Unset):
+            links = UNSET
+        else:
+            links = DocumentsSinglePostResponseDataLinks.from_dict(_links)
+
         documents_single_post_response_data_obj = cls(
             type=type,
             id=id,
             attributes=attributes,
+            relationships=relationships,
+            links=links,
         )
 
         documents_single_post_response_data_obj.additional_properties = d

@@ -14,9 +14,8 @@ T = TypeVar("T", bound="DocumentAttachmentsSinglePatchRequestDataAttributes")
 @_attrs_define
 class DocumentAttachmentsSinglePatchRequestDataAttributes:
     """
-    Attributes
-    ----------
-    title : Union[Unset, str]
+    Attributes:
+        title (Union[Unset, str]):  Example: Title.
     """
 
     title: Union[Unset, str] = UNSET

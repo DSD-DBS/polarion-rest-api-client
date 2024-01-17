@@ -20,13 +20,12 @@ T = TypeVar("T", bound="UsersSinglePatchRequestDataAttributes")
 @_attrs_define
 class UsersSinglePatchRequestDataAttributes:
     """
-    Attributes
-    ----------
-    description : Union[Unset, UsersSinglePatchRequestDataAttributesDescription]
-    disabled_notifications : Union[Unset, bool]
-    email : Union[Unset, str]
-    initials : Union[Unset, str]
-    name : Union[Unset, str]
+    Attributes:
+        description (Union[Unset, UsersSinglePatchRequestDataAttributesDescription]):
+        disabled_notifications (Union[Unset, bool]):
+        email (Union[Unset, str]):  Example: Email.
+        initials (Union[Unset, str]):  Example: Initials.
+        name (Union[Unset, str]):  Example: Name.
     """
 
     description: Union[
@@ -46,8 +45,11 @@ class UsersSinglePatchRequestDataAttributes:
             description = self.description.to_dict()
 
         disabled_notifications = self.disabled_notifications
+
         email = self.email
+
         initials = self.initials
+
         name = self.name
 
         field_dict: Dict[str, Any] = {}

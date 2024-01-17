@@ -32,15 +32,14 @@ T = TypeVar("T", bound="ProjectsSingleGetResponseData")
 @_attrs_define
 class ProjectsSingleGetResponseData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, ProjectsSingleGetResponseDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
-    attributes : Union[Unset, ProjectsSingleGetResponseDataAttributes]
-    relationships : Union[Unset, ProjectsSingleGetResponseDataRelationships]
-    meta : Union[Unset, ProjectsSingleGetResponseDataMeta]
-    links : Union[Unset, ProjectsSingleGetResponseDataLinks]
+    Attributes:
+        type (Union[Unset, ProjectsSingleGetResponseDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId.
+        revision (Union[Unset, str]):  Example: 1234.
+        attributes (Union[Unset, ProjectsSingleGetResponseDataAttributes]):
+        relationships (Union[Unset, ProjectsSingleGetResponseDataRelationships]):
+        meta (Union[Unset, ProjectsSingleGetResponseDataMeta]):
+        links (Union[Unset, ProjectsSingleGetResponseDataLinks]):
     """
 
     type: Union[Unset, ProjectsSingleGetResponseDataType] = UNSET
@@ -62,7 +61,9 @@ class ProjectsSingleGetResponseData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

@@ -21,20 +21,24 @@ def _get_kwargs(
     project_id: str,
     work_item_id: str,
     *,
-    multipart_data: PostWorkItemAttachmentsRequestBody,
+    body: PostWorkItemAttachmentsRequestBody,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    multipart_multipart_data = multipart_data.to_multipart()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/workitems/{workItemId}/attachments".format(
             projectId=project_id,
             workItemId=work_item_id,
         ),
-        "files": multipart_multipart_data,
     }
+
+    _body = body.to_multipart()
+
+    _kwargs["files"] = _body
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -98,36 +102,31 @@ def sync_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PostWorkItemAttachmentsRequestBody,
+    body: PostWorkItemAttachmentsRequestBody,
 ) -> Response[Union[Any, WorkitemAttachmentsListPostResponse]]:
-    r"""Creates a list of instances.
+    r"""Creates a list of Work Item Attachments.
 
-    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    multipart_data : PostWorkItemAttachmentsRequestBody
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (PostWorkItemAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, WorkitemAttachmentsListPostResponse]]
+    Returns:
+        Response[Union[Any, WorkitemAttachmentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        multipart_data=multipart_data,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -142,37 +141,32 @@ def sync(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PostWorkItemAttachmentsRequestBody,
+    body: PostWorkItemAttachmentsRequestBody,
 ) -> Optional[Union[Any, WorkitemAttachmentsListPostResponse]]:
-    r"""Creates a list of instances.
+    r"""Creates a list of Work Item Attachments.
 
-    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    multipart_data : PostWorkItemAttachmentsRequestBody
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (PostWorkItemAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, WorkitemAttachmentsListPostResponse]
+    Returns:
+        Union[Any, WorkitemAttachmentsListPostResponse]
     """
 
     return sync_detailed(
         project_id=project_id,
         work_item_id=work_item_id,
         client=client,
-        multipart_data=multipart_data,
+        body=body,
     ).parsed
 
 
@@ -181,36 +175,31 @@ async def asyncio_detailed(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PostWorkItemAttachmentsRequestBody,
+    body: PostWorkItemAttachmentsRequestBody,
 ) -> Response[Union[Any, WorkitemAttachmentsListPostResponse]]:
-    r"""Creates a list of instances.
+    r"""Creates a list of Work Item Attachments.
 
-    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    multipart_data : PostWorkItemAttachmentsRequestBody
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (PostWorkItemAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, WorkitemAttachmentsListPostResponse]]
+    Returns:
+        Response[Union[Any, WorkitemAttachmentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         work_item_id=work_item_id,
-        multipart_data=multipart_data,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -223,30 +212,25 @@ async def asyncio(
     work_item_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    multipart_data: PostWorkItemAttachmentsRequestBody,
+    body: PostWorkItemAttachmentsRequestBody,
 ) -> Optional[Union[Any, WorkitemAttachmentsListPostResponse]]:
-    r"""Creates a list of instances.
+    r"""Creates a list of Work Item Attachments.
 
-    Files are identified by order or optionally by the 'lid' attribute. See more in the <a
+     Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
     US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    multipart_data : PostWorkItemAttachmentsRequestBody
+    Args:
+        project_id (str):
+        work_item_id (str):
+        body (PostWorkItemAttachmentsRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, WorkitemAttachmentsListPostResponse]
+    Returns:
+        Union[Any, WorkitemAttachmentsListPostResponse]
     """
 
     return (
@@ -254,6 +238,6 @@ async def asyncio(
             project_id=project_id,
             work_item_id=work_item_id,
             client=client,
-            multipart_data=multipart_data,
+            body=body,
         )
     ).parsed

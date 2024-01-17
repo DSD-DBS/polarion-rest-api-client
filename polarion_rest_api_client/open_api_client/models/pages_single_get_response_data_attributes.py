@@ -16,13 +16,12 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataAttributes")
 @_attrs_define
 class PagesSingleGetResponseDataAttributes:
     """
-    Attributes
-    ----------
-    created : Union[Unset, datetime.datetime]
-    page_name : Union[Unset, str]
-    space_id : Union[Unset, str]
-    title : Union[Unset, str]
-    updated : Union[Unset, datetime.datetime]
+    Attributes:
+        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+        page_name (Union[Unset, str]):  Example: MyRichPageId.
+        space_id (Union[Unset, str]):  Example: MySpaceId.
+        title (Union[Unset, str]):  Example: Title.
+        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
     """
 
     created: Union[Unset, datetime.datetime] = UNSET
@@ -40,8 +39,11 @@ class PagesSingleGetResponseDataAttributes:
             created = self.created.isoformat()
 
         page_name = self.page_name
+
         space_id = self.space_id
+
         title = self.title
+
         updated: Union[Unset, str] = UNSET
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()

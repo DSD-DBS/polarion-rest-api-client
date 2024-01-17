@@ -19,12 +19,11 @@ def _get_kwargs(
     work_item_id: str,
     field_id: str,
     *,
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["page[size]"] = pagesize
 
     params["page[number]"] = pagenumber
@@ -33,7 +32,7 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/projects/{projectId}/workitems/{workItemId}/fields/{fieldId}/actions/getAvailableOptions".format(
             projectId=project_id,
@@ -42,6 +41,8 @@ def _get_kwargs(
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -95,29 +96,25 @@ def sync_detailed(
     field_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
 ) -> Response[Union[Any, EnumOptionsActionResponseBody]]:
-    """Returns a list of instances.
+    """Returns a list of available options for the requested field for the
+    specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    field_id : str
-    pagesize : Union[Unset, None, int]
-    pagenumber : Union[Unset, None, int]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        field_id (str):
+        pagesize (Union[Unset, int]):
+        pagenumber (Union[Unset, int]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, EnumOptionsActionResponseBody]]
+    Returns:
+        Response[Union[Any, EnumOptionsActionResponseBody]]
     """
 
     kwargs = _get_kwargs(
@@ -141,29 +138,25 @@ def sync(
     field_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
 ) -> Optional[Union[Any, EnumOptionsActionResponseBody]]:
-    """Returns a list of instances.
+    """Returns a list of available options for the requested field for the
+    specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    field_id : str
-    pagesize : Union[Unset, None, int]
-    pagenumber : Union[Unset, None, int]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        field_id (str):
+        pagesize (Union[Unset, int]):
+        pagenumber (Union[Unset, int]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, EnumOptionsActionResponseBody]
+    Returns:
+        Union[Any, EnumOptionsActionResponseBody]
     """
 
     return sync_detailed(
@@ -182,29 +175,25 @@ async def asyncio_detailed(
     field_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
 ) -> Response[Union[Any, EnumOptionsActionResponseBody]]:
-    """Returns a list of instances.
+    """Returns a list of available options for the requested field for the
+    specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    field_id : str
-    pagesize : Union[Unset, None, int]
-    pagenumber : Union[Unset, None, int]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        field_id (str):
+        pagesize (Union[Unset, int]):
+        pagenumber (Union[Unset, int]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, EnumOptionsActionResponseBody]]
+    Returns:
+        Response[Union[Any, EnumOptionsActionResponseBody]]
     """
 
     kwargs = _get_kwargs(
@@ -226,29 +215,25 @@ async def asyncio(
     field_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, None, int] = UNSET,
-    pagenumber: Union[Unset, None, int] = UNSET,
+    pagesize: Union[Unset, int] = UNSET,
+    pagenumber: Union[Unset, int] = UNSET,
 ) -> Optional[Union[Any, EnumOptionsActionResponseBody]]:
-    """Returns a list of instances.
+    """Returns a list of available options for the requested field for the
+    specified Work Item.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
-    field_id : str
-    pagesize : Union[Unset, None, int]
-    pagenumber : Union[Unset, None, int]
+    Args:
+        project_id (str):
+        work_item_id (str):
+        field_id (str):
+        pagesize (Union[Unset, int]):
+        pagenumber (Union[Unset, int]):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, EnumOptionsActionResponseBody]
+    Returns:
+        Union[Any, EnumOptionsActionResponseBody]
     """
 
     return (

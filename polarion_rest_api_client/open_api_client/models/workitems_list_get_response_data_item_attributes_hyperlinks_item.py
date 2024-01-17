@@ -16,10 +16,9 @@ T = TypeVar(
 @_attrs_define
 class WorkitemsListGetResponseDataItemAttributesHyperlinksItem:
     """
-    Attributes
-    ----------
-    role : Union[Unset, str]
-    uri : Union[Unset, str]
+    Attributes:
+        role (Union[Unset, str]):  Example: ref_ext.
+        uri (Union[Unset, str]):  Example: https://polarion.plm.automation.siemens.com.
     """
 
     role: Union[Unset, str] = UNSET
@@ -30,6 +29,7 @@ class WorkitemsListGetResponseDataItemAttributesHyperlinksItem:
 
     def to_dict(self) -> Dict[str, Any]:
         role = self.role
+
         uri = self.uri
 
         field_dict: Dict[str, Any] = {}

@@ -15,15 +15,15 @@ def _get_kwargs(
     project_id: str,
     work_item_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/workitems/{workItemId}/actions/moveFromDocument".format(
             projectId=project_id,
             workItemId=work_item_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -66,23 +66,18 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """Moves Work Item from the document.
+    """Moves the specified Work Item from the Document.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
+    Args:
+        project_id (str):
+        work_item_id (str):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(
@@ -103,23 +98,18 @@ async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
 ) -> Response[Any]:
-    """Moves Work Item from the document.
+    """Moves the specified Work Item from the Document.
 
-    Parameters
-    ----------
-    project_id : str
-    work_item_id : str
+    Args:
+        project_id (str):
+        work_item_id (str):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Any]
+    Returns:
+        Response[Any]
     """
 
     kwargs = _get_kwargs(

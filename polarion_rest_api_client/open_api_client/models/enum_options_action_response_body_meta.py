@@ -14,9 +14,8 @@ T = TypeVar("T", bound="EnumOptionsActionResponseBodyMeta")
 @_attrs_define
 class EnumOptionsActionResponseBodyMeta:
     """
-    Attributes
-    ----------
-    total_count : Union[Unset, int]
+    Attributes:
+        total_count (Union[Unset, int]):
     """
 
     total_count: Union[Unset, int] = UNSET

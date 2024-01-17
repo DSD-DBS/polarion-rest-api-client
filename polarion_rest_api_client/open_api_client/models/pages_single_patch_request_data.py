@@ -23,11 +23,10 @@ T = TypeVar("T", bound="PagesSinglePatchRequestData")
 @_attrs_define
 class PagesSinglePatchRequestData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, PagesSinglePatchRequestDataType]
-    id : Union[Unset, str]
-    attributes : Union[Unset, PagesSinglePatchRequestDataAttributes]
+    Attributes:
+        type (Union[Unset, PagesSinglePatchRequestDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyRichPageId.
+        attributes (Union[Unset, PagesSinglePatchRequestDataAttributes]):
     """
 
     type: Union[Unset, PagesSinglePatchRequestDataType] = UNSET
@@ -43,6 +42,7 @@ class PagesSinglePatchRequestData:
             type = self.type.value
 
         id = self.id
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

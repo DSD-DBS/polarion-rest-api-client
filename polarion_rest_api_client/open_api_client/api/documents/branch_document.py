@@ -20,30 +20,36 @@ def _get_kwargs(
     space_id: str,
     document_name: str,
     *,
-    json_body: BranchDocumentRequestBody,
-    revision: Union[Unset, None, str] = UNSET,
+    body: BranchDocumentRequestBody,
+    revision: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["revision"] = revision
 
     params = {
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/actions/branch".format(
             projectId=project_id,
             spaceId=space_id,
             documentName=document_name,
         ),
-        "json": json_json_body,
         "params": params,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -106,36 +112,31 @@ def sync_detailed(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: BranchDocumentRequestBody,
-    revision: Union[Unset, None, str] = UNSET,
+    body: BranchDocumentRequestBody,
+    revision: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, DocumentsSinglePostResponse]]:
-    """Creates a branch of the document.
+    """Creates a Branch of the Document.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    revision : Union[Unset, None, str]
-    json_body : BranchDocumentRequestBody
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        revision (Union[Unset, str]):
+        body (BranchDocumentRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, DocumentsSinglePostResponse]]
+    Returns:
+        Response[Union[Any, DocumentsSinglePostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         document_name=document_name,
-        json_body=json_body,
+        body=body,
         revision=revision,
     )
 
@@ -152,29 +153,24 @@ def sync(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: BranchDocumentRequestBody,
-    revision: Union[Unset, None, str] = UNSET,
+    body: BranchDocumentRequestBody,
+    revision: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, DocumentsSinglePostResponse]]:
-    """Creates a branch of the document.
+    """Creates a Branch of the Document.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    revision : Union[Unset, None, str]
-    json_body : BranchDocumentRequestBody
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        revision (Union[Unset, str]):
+        body (BranchDocumentRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, DocumentsSinglePostResponse]
+    Returns:
+        Union[Any, DocumentsSinglePostResponse]
     """
 
     return sync_detailed(
@@ -182,7 +178,7 @@ def sync(
         space_id=space_id,
         document_name=document_name,
         client=client,
-        json_body=json_body,
+        body=body,
         revision=revision,
     ).parsed
 
@@ -193,36 +189,31 @@ async def asyncio_detailed(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: BranchDocumentRequestBody,
-    revision: Union[Unset, None, str] = UNSET,
+    body: BranchDocumentRequestBody,
+    revision: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, DocumentsSinglePostResponse]]:
-    """Creates a branch of the document.
+    """Creates a Branch of the Document.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    revision : Union[Unset, None, str]
-    json_body : BranchDocumentRequestBody
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        revision (Union[Unset, str]):
+        body (BranchDocumentRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, DocumentsSinglePostResponse]]
+    Returns:
+        Response[Union[Any, DocumentsSinglePostResponse]]
     """
 
     kwargs = _get_kwargs(
         project_id=project_id,
         space_id=space_id,
         document_name=document_name,
-        json_body=json_body,
+        body=body,
         revision=revision,
     )
 
@@ -237,29 +228,24 @@ async def asyncio(
     document_name: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: BranchDocumentRequestBody,
-    revision: Union[Unset, None, str] = UNSET,
+    body: BranchDocumentRequestBody,
+    revision: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, DocumentsSinglePostResponse]]:
-    """Creates a branch of the document.
+    """Creates a Branch of the Document.
 
-    Parameters
-    ----------
-    project_id : str
-    space_id : str
-    document_name : str
-    revision : Union[Unset, None, str]
-    json_body : BranchDocumentRequestBody
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        revision (Union[Unset, str]):
+        body (BranchDocumentRequestBody):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, DocumentsSinglePostResponse]
+    Returns:
+        Union[Any, DocumentsSinglePostResponse]
     """
 
     return (
@@ -268,7 +254,7 @@ async def asyncio(
             space_id=space_id,
             document_name=document_name,
             client=client,
-            json_body=json_body,
+            body=body,
             revision=revision,
         )
     ).parsed

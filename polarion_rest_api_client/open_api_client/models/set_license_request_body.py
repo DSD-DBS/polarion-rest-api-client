@@ -17,14 +17,10 @@ T = TypeVar("T", bound="SetLicenseRequestBody")
 @_attrs_define
 class SetLicenseRequestBody:
     """
-    Attributes
-    ----------
-    license_ : Union[Unset, SetLicenseRequestBodyLicense]
-        User's license type
-    group : Union[Unset, str]
-        License group
-    concurrent : Union[Unset, bool]
-        Is concurrent user
+    Attributes:
+        license_ (Union[Unset, SetLicenseRequestBodyLicense]): User's license type
+        group (Union[Unset, str]): License group Example: Department.
+        concurrent (Union[Unset, bool]): Is concurrent user Example: True.
     """
 
     license_: Union[Unset, SetLicenseRequestBodyLicense] = UNSET
@@ -40,6 +36,7 @@ class SetLicenseRequestBody:
             license_ = self.license_.value
 
         group = self.group
+
         concurrent = self.concurrent
 
         field_dict: Dict[str, Any] = {}

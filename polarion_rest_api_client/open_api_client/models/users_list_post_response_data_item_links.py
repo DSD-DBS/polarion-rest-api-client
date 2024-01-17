@@ -14,9 +14,8 @@ T = TypeVar("T", bound="UsersListPostResponseDataItemLinks")
 @_attrs_define
 class UsersListPostResponseDataItemLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-path/users/MyUserId.
     """
 
     self_: Union[Unset, str] = UNSET

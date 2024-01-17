@@ -20,13 +20,11 @@ def _get_kwargs(
     enum_name: str,
     target_type: str,
     *,
-    json_body: EnumerationsSinglePatchRequest,
+    body: EnumerationsSinglePatchRequest,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "patch",
         "url": "/projects/{projectId}/enumerations/{enumContext}/{enumName}/{targetType}".format(
             projectId=project_id,
@@ -34,8 +32,15 @@ def _get_kwargs(
             enumName=enum_name,
             targetType=target_type,
         ),
-        "json": json_json_body,
     }
+
+    _body = body.to_dict()
+
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -101,28 +106,23 @@ def sync_detailed(
     target_type: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: EnumerationsSinglePatchRequest,
+    body: EnumerationsSinglePatchRequest,
 ) -> Response[Union[Any, EnumerationsSinglePatchRequest]]:
-    """Updates the specified instance.
+    """Updates the specified Enumeration in the Project context.
 
-    Parameters
-    ----------
-    project_id : str
-    enum_context : str
-    enum_name : str
-    target_type : str
-    json_body : EnumerationsSinglePatchRequest
+    Args:
+        project_id (str):
+        enum_context (str):
+        enum_name (str):
+        target_type (str):
+        body (EnumerationsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, EnumerationsSinglePatchRequest]]
+    Returns:
+        Response[Union[Any, EnumerationsSinglePatchRequest]]
     """
 
     kwargs = _get_kwargs(
@@ -130,7 +130,7 @@ def sync_detailed(
         enum_context=enum_context,
         enum_name=enum_name,
         target_type=target_type,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -147,28 +147,23 @@ def sync(
     target_type: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: EnumerationsSinglePatchRequest,
+    body: EnumerationsSinglePatchRequest,
 ) -> Optional[Union[Any, EnumerationsSinglePatchRequest]]:
-    """Updates the specified instance.
+    """Updates the specified Enumeration in the Project context.
 
-    Parameters
-    ----------
-    project_id : str
-    enum_context : str
-    enum_name : str
-    target_type : str
-    json_body : EnumerationsSinglePatchRequest
+    Args:
+        project_id (str):
+        enum_context (str):
+        enum_name (str):
+        target_type (str):
+        body (EnumerationsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, EnumerationsSinglePatchRequest]
+    Returns:
+        Union[Any, EnumerationsSinglePatchRequest]
     """
 
     return sync_detailed(
@@ -177,7 +172,7 @@ def sync(
         enum_name=enum_name,
         target_type=target_type,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -188,28 +183,23 @@ async def asyncio_detailed(
     target_type: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: EnumerationsSinglePatchRequest,
+    body: EnumerationsSinglePatchRequest,
 ) -> Response[Union[Any, EnumerationsSinglePatchRequest]]:
-    """Updates the specified instance.
+    """Updates the specified Enumeration in the Project context.
 
-    Parameters
-    ----------
-    project_id : str
-    enum_context : str
-    enum_name : str
-    target_type : str
-    json_body : EnumerationsSinglePatchRequest
+    Args:
+        project_id (str):
+        enum_context (str):
+        enum_name (str):
+        target_type (str):
+        body (EnumerationsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Response[Union[Any, EnumerationsSinglePatchRequest]]
+    Returns:
+        Response[Union[Any, EnumerationsSinglePatchRequest]]
     """
 
     kwargs = _get_kwargs(
@@ -217,7 +207,7 @@ async def asyncio_detailed(
         enum_context=enum_context,
         enum_name=enum_name,
         target_type=target_type,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -232,28 +222,23 @@ async def asyncio(
     target_type: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: EnumerationsSinglePatchRequest,
+    body: EnumerationsSinglePatchRequest,
 ) -> Optional[Union[Any, EnumerationsSinglePatchRequest]]:
-    """Updates the specified instance.
+    """Updates the specified Enumeration in the Project context.
 
-    Parameters
-    ----------
-    project_id : str
-    enum_context : str
-    enum_name : str
-    target_type : str
-    json_body : EnumerationsSinglePatchRequest
+    Args:
+        project_id (str):
+        enum_context (str):
+        enum_name (str):
+        target_type (str):
+        body (EnumerationsSinglePatchRequest):
 
-    Raises
-    ------
-    errors.UnexpectedStatus
-        If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
-    httpx.TimeoutException
-        If the request takes longer than Client.timeout.
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns
-    -------
-    Union[Any, EnumerationsSinglePatchRequest]
+    Returns:
+        Union[Any, EnumerationsSinglePatchRequest]
     """
 
     return (
@@ -263,6 +248,6 @@ async def asyncio(
             enum_name=enum_name,
             target_type=target_type,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

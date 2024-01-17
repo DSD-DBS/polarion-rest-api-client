@@ -22,9 +22,8 @@ T = TypeVar(
 @_attrs_define
 class DocumentPartsListGetResponseDataItemRelationshipsWorkItem:
     """
-    Attributes
-    ----------
-    data : Union[Unset, DocumentPartsListGetResponseDataItemRelationshipsWorkItemData]
+    Attributes:
+        data (Union[Unset, DocumentPartsListGetResponseDataItemRelationshipsWorkItemData]):
     """
 
     data: Union[

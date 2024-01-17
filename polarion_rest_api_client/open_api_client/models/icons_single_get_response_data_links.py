@@ -14,9 +14,8 @@ T = TypeVar("T", bound="IconsSingleGetResponseDataLinks")
 @_attrs_define
 class IconsSingleGetResponseDataLinks:
     """
-    Attributes
-    ----------
-    self_ : Union[Unset, str]
+    Attributes:
+        self_ (Union[Unset, str]):  Example: server-host-name/application-path/enumerations/defaulticons/example.gif.
     """
 
     self_: Union[Unset, str] = UNSET

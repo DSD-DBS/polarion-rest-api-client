@@ -14,11 +14,10 @@ T = TypeVar("T", bound="LinkedworkitemsListGetResponseDataItemAttributes")
 @_attrs_define
 class LinkedworkitemsListGetResponseDataItemAttributes:
     """
-    Attributes
-    ----------
-    revision : Union[Unset, str]
-    role : Union[Unset, str]
-    suspect : Union[Unset, bool]
+    Attributes:
+        revision (Union[Unset, str]):  Example: 1234.
+        role (Union[Unset, str]):  Example: relates_to.
+        suspect (Union[Unset, bool]):
     """
 
     revision: Union[Unset, str] = UNSET
@@ -30,7 +29,9 @@ class LinkedworkitemsListGetResponseDataItemAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         revision = self.revision
+
         role = self.role
+
         suspect = self.suspect
 
         field_dict: Dict[str, Any] = {}

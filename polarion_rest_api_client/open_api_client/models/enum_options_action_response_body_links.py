@@ -14,13 +14,17 @@ T = TypeVar("T", bound="EnumOptionsActionResponseBodyLinks")
 @_attrs_define
 class EnumOptionsActionResponseBodyLinks:
     """
-    Attributes
-    ----------
-    first : Union[Unset, str]
-    prev : Union[Unset, str]
-    next_ : Union[Unset, str]
-    last : Union[Unset, str]
-    self_ : Union[Unset, str]
+    Attributes:
+        first (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=1.
+        prev (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=4.
+        next_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=6.
+        last (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=9.
+        self_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bsize%5D=10&page%5Bnumber%5D=5.
     """
 
     first: Union[Unset, str] = UNSET
@@ -34,9 +38,13 @@ class EnumOptionsActionResponseBodyLinks:
 
     def to_dict(self) -> Dict[str, Any]:
         first = self.first
+
         prev = self.prev
+
         next_ = self.next_
+
         last = self.last
+
         self_ = self.self_
 
         field_dict: Dict[str, Any] = {}

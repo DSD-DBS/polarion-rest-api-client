@@ -26,10 +26,9 @@ T = TypeVar(
 @_attrs_define
 class DocumentCommentsListGetResponseDataItemRelationshipsChildComments:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsDataItem']]
-    meta : Union[Unset, DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta]
+    Attributes:
+        data (Union[Unset, List['DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsDataItem']]):
+        meta (Union[Unset, DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta]):
     """
 
     data: Union[
@@ -52,7 +51,6 @@ class DocumentCommentsListGetResponseDataItemRelationshipsChildComments:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         meta: Union[Unset, Dict[str, Any]] = UNSET

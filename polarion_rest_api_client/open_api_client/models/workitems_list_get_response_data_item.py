@@ -32,15 +32,14 @@ T = TypeVar("T", bound="WorkitemsListGetResponseDataItem")
 @_attrs_define
 class WorkitemsListGetResponseDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemsListGetResponseDataItemType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
-    attributes : Union[Unset, WorkitemsListGetResponseDataItemAttributes]
-    relationships : Union[Unset, WorkitemsListGetResponseDataItemRelationships]
-    meta : Union[Unset, WorkitemsListGetResponseDataItemMeta]
-    links : Union[Unset, WorkitemsListGetResponseDataItemLinks]
+    Attributes:
+        type (Union[Unset, WorkitemsListGetResponseDataItemType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId.
+        revision (Union[Unset, str]):  Example: 1234.
+        attributes (Union[Unset, WorkitemsListGetResponseDataItemAttributes]):
+        relationships (Union[Unset, WorkitemsListGetResponseDataItemRelationships]):
+        meta (Union[Unset, WorkitemsListGetResponseDataItemMeta]):
+        links (Union[Unset, WorkitemsListGetResponseDataItemLinks]):
     """
 
     type: Union[Unset, WorkitemsListGetResponseDataItemType] = UNSET
@@ -64,7 +63,9 @@ class WorkitemsListGetResponseDataItem:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

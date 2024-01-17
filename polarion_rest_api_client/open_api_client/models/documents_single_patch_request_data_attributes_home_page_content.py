@@ -19,10 +19,9 @@ T = TypeVar(
 @_attrs_define
 class DocumentsSinglePatchRequestDataAttributesHomePageContent:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentsSinglePatchRequestDataAttributesHomePageContentType]
-    value : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, DocumentsSinglePatchRequestDataAttributesHomePageContentType]):
+        value (Union[Unset, str]):  Example: My text value.
     """
 
     type: Union[

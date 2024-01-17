@@ -20,9 +20,8 @@ T = TypeVar("T", bound="DocumentCommentsListPostRequest")
 @_attrs_define
 class DocumentCommentsListPostRequest:
     """
-    Attributes
-    ----------
-    data : Union[Unset, List['DocumentCommentsListPostRequestDataItem']]
+    Attributes:
+        data (Union[Unset, List['DocumentCommentsListPostRequestDataItem']]):
     """
 
     data: Union[Unset, List["DocumentCommentsListPostRequestDataItem"]] = UNSET
@@ -36,7 +35,6 @@ class DocumentCommentsListPostRequest:
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
-
                 data.append(data_item)
 
         field_dict: Dict[str, Any] = {}

@@ -26,11 +26,10 @@ T = TypeVar("T", bound="DocumentCommentsListPostRequestDataItem")
 @_attrs_define
 class DocumentCommentsListPostRequestDataItem:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentCommentsListPostRequestDataItemType]
-    attributes : Union[Unset, DocumentCommentsListPostRequestDataItemAttributes]
-    relationships : Union[Unset, DocumentCommentsListPostRequestDataItemRelationships]
+    Attributes:
+        type (Union[Unset, DocumentCommentsListPostRequestDataItemType]):
+        attributes (Union[Unset, DocumentCommentsListPostRequestDataItemAttributes]):
+        relationships (Union[Unset, DocumentCommentsListPostRequestDataItemRelationships]):
     """
 
     type: Union[Unset, DocumentCommentsListPostRequestDataItemType] = UNSET

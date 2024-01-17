@@ -20,10 +20,9 @@ T = TypeVar("T", bound="DocumentCommentsListPostRequestDataItemAttributes")
 @_attrs_define
 class DocumentCommentsListPostRequestDataItemAttributes:
     """
-    Attributes
-    ----------
-    resolved : Union[Unset, bool]
-    text : Union[Unset, DocumentCommentsListPostRequestDataItemAttributesText]
+    Attributes:
+        resolved (Union[Unset, bool]):
+        text (Union[Unset, DocumentCommentsListPostRequestDataItemAttributesText]):
     """
 
     resolved: Union[Unset, bool] = UNSET
@@ -36,6 +35,7 @@ class DocumentCommentsListPostRequestDataItemAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         resolved = self.resolved
+
         text: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.text, Unset):
             text = self.text.to_dict()

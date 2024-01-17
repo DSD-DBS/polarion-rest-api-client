@@ -17,10 +17,9 @@ T = TypeVar(
 @_attrs_define
 class DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesItem:
     """
-    Attributes
-    ----------
-    key : Union[Unset, str]
-    value : Union[Unset, str]
+    Attributes:
+        key (Union[Unset, str]):  Example: fieldsAtStart.
+        value (Union[Unset, str]):  Example: id.
     """
 
     key: Union[Unset, str] = UNSET
@@ -31,6 +30,7 @@ class DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesIte
 
     def to_dict(self) -> Dict[str, Any]:
         key = self.key
+
         value = self.value
 
         field_dict: Dict[str, Any] = {}

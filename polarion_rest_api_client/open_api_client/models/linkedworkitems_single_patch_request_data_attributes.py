@@ -14,10 +14,9 @@ T = TypeVar("T", bound="LinkedworkitemsSinglePatchRequestDataAttributes")
 @_attrs_define
 class LinkedworkitemsSinglePatchRequestDataAttributes:
     """
-    Attributes
-    ----------
-    revision : Union[Unset, str]
-    suspect : Union[Unset, bool]
+    Attributes:
+        revision (Union[Unset, str]):  Example: 1234.
+        suspect (Union[Unset, bool]):
     """
 
     revision: Union[Unset, str] = UNSET
@@ -28,6 +27,7 @@ class LinkedworkitemsSinglePatchRequestDataAttributes:
 
     def to_dict(self) -> Dict[str, Any]:
         revision = self.revision
+
         suspect = self.suspect
 
         field_dict: Dict[str, Any] = {}

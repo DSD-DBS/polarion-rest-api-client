@@ -17,11 +17,10 @@ T = TypeVar("T", bound="WorkitemsSingleGetResponseDataRelationshipsAuthorData")
 @_attrs_define
 class WorkitemsSingleGetResponseDataRelationshipsAuthorData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAuthorDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAuthorDataType]):
+        id (Union[Unset, str]):  Example: MyUserId.
+        revision (Union[Unset, str]):  Example: 1234.
     """
 
     type: Union[
@@ -39,6 +38,7 @@ class WorkitemsSingleGetResponseDataRelationshipsAuthorData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
 
         field_dict: Dict[str, Any] = {}

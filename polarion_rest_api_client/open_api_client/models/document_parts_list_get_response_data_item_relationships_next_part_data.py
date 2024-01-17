@@ -19,11 +19,10 @@ T = TypeVar(
 @_attrs_define
 class DocumentPartsListGetResponseDataItemRelationshipsNextPartData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, DocumentPartsListGetResponseDataItemRelationshipsNextPartDataType]
-    id : Union[Unset, str]
-    revision : Union[Unset, str]
+    Attributes:
+        type (Union[Unset, DocumentPartsListGetResponseDataItemRelationshipsNextPartDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+        revision (Union[Unset, str]):  Example: 1234.
     """
 
     type: Union[
@@ -42,6 +41,7 @@ class DocumentPartsListGetResponseDataItemRelationshipsNextPartData:
             type = self.type.value
 
         id = self.id
+
         revision = self.revision
 
         field_dict: Dict[str, Any] = {}

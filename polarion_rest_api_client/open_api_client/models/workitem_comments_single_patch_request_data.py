@@ -23,11 +23,10 @@ T = TypeVar("T", bound="WorkitemCommentsSinglePatchRequestData")
 @_attrs_define
 class WorkitemCommentsSinglePatchRequestData:
     """
-    Attributes
-    ----------
-    type : Union[Unset, WorkitemCommentsSinglePatchRequestDataType]
-    id : Union[Unset, str]
-    attributes : Union[Unset, WorkitemCommentsSinglePatchRequestDataAttributes]
+    Attributes:
+        type (Union[Unset, WorkitemCommentsSinglePatchRequestDataType]):
+        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyCommentId.
+        attributes (Union[Unset, WorkitemCommentsSinglePatchRequestDataAttributes]):
     """
 
     type: Union[Unset, WorkitemCommentsSinglePatchRequestDataType] = UNSET
@@ -45,6 +44,7 @@ class WorkitemCommentsSinglePatchRequestData:
             type = self.type.value
 
         id = self.id
+
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()

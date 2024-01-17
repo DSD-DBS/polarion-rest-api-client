@@ -26,11 +26,10 @@ T = TypeVar("T", bound="UsergroupsSingleGetResponseDataRelationships")
 @_attrs_define
 class UsergroupsSingleGetResponseDataRelationships:
     """
-    Attributes
-    ----------
-    global_roles : Union[Unset, UsergroupsSingleGetResponseDataRelationshipsGlobalRoles]
-    project_roles : Union[Unset, UsergroupsSingleGetResponseDataRelationshipsProjectRoles]
-    users : Union[Unset, UsergroupsSingleGetResponseDataRelationshipsUsers]
+    Attributes:
+        global_roles (Union[Unset, UsergroupsSingleGetResponseDataRelationshipsGlobalRoles]):
+        project_roles (Union[Unset, UsergroupsSingleGetResponseDataRelationshipsProjectRoles]):
+        users (Union[Unset, UsergroupsSingleGetResponseDataRelationshipsUsers]):
     """
 
     global_roles: Union[
