@@ -535,6 +535,31 @@ def test_update_work_item_status(
     assert req is not None
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
+    assert len(req.url.params) == 0
+    with open(TEST_WI_PATCH_STATUS_REQUEST, encoding="utf8") as f:
+        assert json.loads(req.content.decode()) == json.load(f)
+
+
+def test_update_work_item_type(
+    client: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+):
+    httpx_mock.add_response(204)
+
+    client.update_work_item(
+        polarion_api.WorkItem(
+            id="MyWorkItemId",
+            type="newType",
+            status="open",
+        )
+    )
+
+    req = httpx_mock.get_request()
+
+    assert req is not None
+    assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
+    assert req.url.params["changeTypeTo"] == "newType"
+    assert req.method == "PATCH"
     with open(TEST_WI_PATCH_STATUS_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
