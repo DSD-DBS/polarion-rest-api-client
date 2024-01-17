@@ -566,10 +566,12 @@ class OpenAPIPolarionProjectClient(
             )
             and work_items_response.data
         ):
-            for work_item in work_items_response.data:
-                if not getattr(work_item.meta, "errors", []):
-                    work_item_obj = self._generate_work_item(work_item)
-                    work_items.append(work_item_obj)
+            work_items = [
+                self._generate_work_item(work_item)
+                for work_item in work_items_response.data
+                if not getattr(work_item.meta, "errors", [])
+            ]
+
             next_page = isinstance(
                 work_items_response.links,
                 api_models.WorkitemsListGetResponseLinks,
