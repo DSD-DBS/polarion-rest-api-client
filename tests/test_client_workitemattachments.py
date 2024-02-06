@@ -45,7 +45,7 @@ def test_get_work_item_attachments_single_page(
     assert len(work_item_attachments) == 1
     assert len(reqs) == 1
     assert work_item_attachments[0] == polarion_api.WorkItemAttachment(
-        "MyWorkItemId", "MyAttachmentId", "Title"
+        "MyWorkItemId", "MyAttachmentId", "Title", file_name="File Name"
     )
 
 

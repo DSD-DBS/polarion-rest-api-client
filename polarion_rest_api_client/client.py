@@ -387,6 +387,9 @@ class OpenAPIPolarionProjectClient(
                         work_item_id,
                         attachment.attributes.id,
                         unset_str_builder(attachment.attributes.title),
+                        file_name=unset_str_builder(
+                            attachment.attributes.file_name
+                        ),
                     )
                 )
 

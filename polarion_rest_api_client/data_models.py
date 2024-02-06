@@ -168,6 +168,8 @@ class WorkItem(BaseItem):
             except TypeError:
                 pass
 
+            del attachment["id"]
+
         data = dict(sorted(data.items()))
 
         converted = json.dumps(data).encode("utf8")
