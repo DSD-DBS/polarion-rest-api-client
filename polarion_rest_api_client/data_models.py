@@ -65,9 +65,15 @@ class WorkItem(BaseItem):
     title: str | None = None
     description_type: str | None = None
     description: str | None = None
-    additional_attributes: dict[str, t.Any] = {}
-    linked_work_items: list[WorkItemLink] = []
-    attachments: list[WorkItemAttachment] = []
+    additional_attributes: dict[str, t.Any] = dataclasses.field(
+        default_factory=dict
+    )
+    linked_work_items: list[WorkItemLink] = dataclasses.field(
+        default_factory=list
+    )
+    attachments: list[WorkItemAttachment] = dataclasses.field(
+        default_factory=list
+    )
     linked_work_items_truncated: bool = False
     attachments_truncated: bool = False
 
@@ -167,6 +173,8 @@ class WorkItem(BaseItem):
                 ).decode("utf8")
             except TypeError:
                 pass
+
+            del attachment["id"]
 
         data = dict(sorted(data.items()))
 
