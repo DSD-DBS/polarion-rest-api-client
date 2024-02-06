@@ -65,15 +65,9 @@ class WorkItem(BaseItem):
     title: str | None = None
     description_type: str | None = None
     description: str | None = None
-    additional_attributes: dict[str, t.Any] = dataclasses.field(
-        default_factory=dict
-    )
-    linked_work_items: list[WorkItemLink] = dataclasses.field(
-        default_factory=list
-    )
-    attachments: list[WorkItemAttachment] = dataclasses.field(
-        default_factory=list
-    )
+    additional_attributes: dict[str, t.Any] = {}
+    linked_work_items: list[WorkItemLink] = []
+    attachments: list[WorkItemAttachment] = []
     linked_work_items_truncated: bool = False
     attachments_truncated: bool = False
 
