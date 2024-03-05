@@ -67,7 +67,7 @@ class ErrorsErrorsItemSource:
 
         _resource = d.pop("resource", UNSET)
         resource: Union[Unset, ErrorsErrorsItemSourceResource]
-        if isinstance(_resource, Unset):
+        if isinstance(_resource, (Unset, type(None))):
             resource = UNSET
         else:
             resource = ErrorsErrorsItemSourceResource.from_dict(_resource)

@@ -72,7 +72,7 @@ class ErrorsErrorsItem:
 
         _source = d.pop("source", UNSET)
         source: Union[Unset, ErrorsErrorsItemSource]
-        if isinstance(_source, Unset):
+        if isinstance(_source, (Unset, type(None))):
             source = UNSET
         else:
             source = ErrorsErrorsItemSource.from_dict(_source)
