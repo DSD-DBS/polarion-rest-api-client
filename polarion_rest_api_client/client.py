@@ -697,7 +697,7 @@ class OpenAPIPolarionProjectClient(
         include: str | None | oa_types.Unset = None,
         revision: str | None | oa_types.Unset = None,
         retry: bool = True,
-    ) -> dm.Document:
+    ) -> dm.Document | None:
         """Return the document with the given document_name and space_id."""
         if include is None:
             include = oa_types.UNSET
@@ -744,7 +744,7 @@ class OpenAPIPolarionProjectClient(
                     attributes.home_page_content
                 )
 
-                document: dm.Document = dm.Document(
+                return dm.Document(
                     id=data.id,
                     module_folder=unset_str_builder(attributes.module_folder),
                     module_name=unset_str_builder(attributes.module_name),
@@ -752,7 +752,7 @@ class OpenAPIPolarionProjectClient(
                     status=unset_str_builder(attributes.status),
                     home_page_content=home_page_content,
                 )
-        return document
+        return None
 
     def _handle_home_page_content(
         self,
