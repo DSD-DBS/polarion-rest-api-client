@@ -205,20 +205,19 @@ class OpenAPIPolarionProjectClient(
             raise unexpected_error() from e
 
         # This is needed to fix erroneous error responses
-        def delete_none_keys(data):
-            delete_keys = []
+        def filter_none_values(data: dict[str, t.Any]):
+            result = {}
             for k, v in data.items():
                 if v is None:
-                    delete_keys.append(k)
-            for k in delete_keys:
-                del data[k]
+                    continue
+                if isinstance(v, dict):
+                    v = filter_none_values(v)
+                result[k] = v
+            return result
 
-        for er in decoded_content.get("errors", []):
-            delete_none_keys(er)
-            if source := er.get("source"):
-                delete_none_keys(source)
-                if resource := source.get("resource"):
-                    delete_none_keys(resource)
+        decoded_content["errors"] = [
+            filter_none_values(er) for er in decoded_content.get("errors", [])
+        ]
 
         error = api_models.Errors.from_dict(decoded_content)
         if error.errors:
