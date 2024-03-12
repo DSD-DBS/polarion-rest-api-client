@@ -8,7 +8,6 @@ import json
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
-from polarion_rest_api_client import data_models as dm
 from tests import TEST_DOCUMENT_RESPONSE
 
 
@@ -19,7 +18,7 @@ def test_get_document_with_all_fields(
     with open(TEST_DOCUMENT_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    document: dm.Document = client.get_document(
+    document = client.get_document(
         "MySpaceId", "MyDocumentName", {"fields[documents]": "@all"}
     )
 

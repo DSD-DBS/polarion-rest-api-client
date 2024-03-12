@@ -205,14 +205,19 @@ class OpenAPIPolarionProjectClient(
             raise unexpected_error() from e
 
         # This is needed to fix erroneous error responses
-        for er in decoded_content.get("errors", []):
-            delete_keys = []
-            for k, v in er.items():
+        def filter_none_values(data: dict[str, t.Any]):
+            result = {}
+            for k, v in data.items():
                 if v is None:
-                    delete_keys.append(k)
+                    continue
+                if isinstance(v, dict):
+                    v = filter_none_values(v)
+                result[k] = v
+            return result
 
-            for k in delete_keys:
-                del er[k]
+        decoded_content["errors"] = [
+            filter_none_values(er) for er in decoded_content.get("errors", [])
+        ]
 
         error = api_models.Errors.from_dict(decoded_content)
         if error.errors:
@@ -692,7 +697,7 @@ class OpenAPIPolarionProjectClient(
         include: str | None | oa_types.Unset = None,
         revision: str | None | oa_types.Unset = None,
         retry: bool = True,
-    ) -> dm.Document:
+    ) -> dm.Document | None:
         """Return the document with the given document_name and space_id."""
         if include is None:
             include = oa_types.UNSET
@@ -739,7 +744,7 @@ class OpenAPIPolarionProjectClient(
                     attributes.home_page_content
                 )
 
-                document: dm.Document = dm.Document(
+                return dm.Document(
                     id=data.id,
                     module_folder=unset_str_builder(attributes.module_folder),
                     module_name=unset_str_builder(attributes.module_name),
@@ -747,7 +752,7 @@ class OpenAPIPolarionProjectClient(
                     status=unset_str_builder(attributes.status),
                     home_page_content=home_page_content,
                 )
-        return document
+        return None
 
     def _handle_home_page_content(
         self,
