@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import base64
 import dataclasses
+import enum
 import hashlib
 import json
 import typing as t
@@ -228,9 +229,43 @@ class Document(BaseItem):
         self.home_page_content = home_page_content
 
 
+class TestRun(BaseItem):
+    """A data class for all data of a test run."""
+
+    title: str | None = None
+    home_page_content: TextContent | None = None
+    select_test_cases_by: SelectTestCasesBy | None = None
+
+
+@dataclasses.dataclass
+class TestRecord:
+    """A data class for test record data."""
+
+    work_item_id: str
+    iteration: int = 0
+    duration: int = 0
+    result: str | None = None
+    test_case_revision: str | None = None
+    comment: TextContent | None = None
+    additional_properties: dict[str, t.Any] = dataclasses.field(
+        default_factory=dict
+    )
+
+
 @dataclasses.dataclass
 class TextContent:
     """A data class for home_page_content of a Polarion Document."""
 
     type: str | None = None
     value: str | None = None
+
+
+class SelectTestCasesBy(str, enum.Enum):
+    """Test case selection mode enum."""
+
+    AUTOMATEDPROCESS = "automatedProcess"
+    DYNAMICLIVEDOC = "dynamicLiveDoc"
+    DYNAMICQUERYRESULT = "dynamicQueryResult"
+    MANUALSELECTION = "manualSelection"
+    STATICLIVEDOC = "staticLiveDoc"
+    STATICQUERYRESULT = "staticQueryResult"
