@@ -18,6 +18,8 @@ class DefaultFields:
     _linkedworkitems: str = "id,role,suspect"
     _workitem_attachments: str = "@basic"
     _documents: str = "@basic"
+    _testrecords: str = "@basic"
+    _testruns: str = "@basic"
 
     @property
     def workitems(self):
@@ -56,6 +58,24 @@ class DefaultFields:
         self._documents = value
 
     @property
+    def testruns(self):
+        """Return the fields dict for document."""
+        return {"testruns": self._testruns}
+
+    @testruns.setter
+    def testruns(self, value):
+        self._testruns = value
+
+    @property
+    def testrecords(self):
+        """Return the fields dict for document."""
+        return {"testrecords": self._testrecords}
+
+    @testrecords.setter
+    def testrecords(self, value):
+        self._testrecords = value
+
+    @property
     def all_types(self):
         """Return all fields dicts merged together."""
         return (
@@ -63,6 +83,8 @@ class DefaultFields:
             | self.workitems
             | self.linkedworkitems
             | self.documents
+            | self.testruns
+            | self.testrecords
         )
 
 
@@ -360,3 +382,67 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         """Delete the links between the work items in work_item_link."""
         self._set_project(work_item_link)
         self._delete_work_item_links([work_item_link])
+
+    def get_all_test_runs(
+        self,
+        query: str,
+        fields: dict[str, str] | None = None,
+    ) -> list[dm.TestRun]:
+        """Get all test runs matching the given query.
+
+        Will handle pagination automatically. Define a fields dictionary
+        as described in the Polarion API documentation to get certain
+        fields.
+        """
+        return self._request_all_items(
+            self.get_test_runs, fields=fields, query=query
+        )
+
+    @abc.abstractmethod
+    def get_test_runs(
+        self,
+        query: str,
+        fields: dict[str, str] | None = None,
+        page_size: int = 100,
+        page_number: int = 1,
+        retry: bool = True,
+    ) -> tuple[list[dm.TestRun], bool]:
+        """Return the test runs on a defined page matching the given query.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+        raise NotImplementedError
+
+    def get_all_test_records(
+        self,
+        test_run_id: str,
+        fields: dict[str, str] | None = None,
+    ) -> list[dm.TestRecord]:
+        """Get all test records matching the given query.
+
+        Will handle pagination automatically. Define a fields dictionary
+        as described in the Polarion API documentation to get certain
+        fields.
+        """
+        return self._request_all_items(
+            self.get_test_records, fields=fields, test_run_id=test_run_id
+        )
+
+    @abc.abstractmethod
+    def get_test_records(
+        self,
+        test_run_id: str,
+        fields: dict[str, str] | None = None,
+        page_size: int = 100,
+        page_number: int = 1,
+        retry: bool = True,
+    ) -> tuple[list[dm.TestRecord], bool]:
+        """Return the test records on a defined page matching the given query.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+        raise NotImplementedError

@@ -229,25 +229,30 @@ class Document(BaseItem):
         self.home_page_content = home_page_content
 
 
+@dataclasses.dataclass
 class TestRun(BaseItem):
     """A data class for all data of a test run."""
 
     title: str | None = None
     home_page_content: TextContent | None = None
     select_test_cases_by: SelectTestCasesBy | None = None
+    additional_attributes: dict[str, t.Any] = dataclasses.field(
+        default_factory=dict
+    )
 
 
 @dataclasses.dataclass
 class TestRecord:
     """A data class for test record data."""
 
+    work_item_project_id: str
     work_item_id: str
+    work_item_revision: str | None = None
     iteration: int = 0
-    duration: int = 0
+    duration: float = 0
     result: str | None = None
-    test_case_revision: str | None = None
     comment: TextContent | None = None
-    additional_properties: dict[str, t.Any] = dataclasses.field(
+    additional_attributes: dict[str, t.Any] = dataclasses.field(
         default_factory=dict
     )
 

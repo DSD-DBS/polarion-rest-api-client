@@ -25,6 +25,14 @@ from polarion_rest_api_client.open_api_client.api.linked_work_items import (
     post_linked_work_items,
 )
 from polarion_rest_api_client.open_api_client.api.projects import get_project
+from polarion_rest_api_client.open_api_client.api.test_records import (
+    get_test_records,
+    post_test_records,
+)
+from polarion_rest_api_client.open_api_client.api.test_runs import (
+    get_test_runs,
+    post_test_runs,
+)
 from polarion_rest_api_client.open_api_client.api.work_item_attachments import (  # pylint: disable=line-too-long
     delete_work_item_attachment,
     get_work_item_attachments,
@@ -747,7 +755,7 @@ class OpenAPIPolarionProjectClient(
             if not getattr(data.meta, "errors", []):
                 assert (attributes := data.attributes)
                 assert isinstance(data.id, str)
-                home_page_content = self._handle_home_page_content(
+                home_page_content = self._handle_text_content(
                     attributes.home_page_content
                 )
 
@@ -761,29 +769,19 @@ class OpenAPIPolarionProjectClient(
                 )
         return None
 
-    def _handle_home_page_content(
+    def _handle_text_content(
         self,
-        home_page_content: (
-            api_models.DocumentsSingleGetResponseDataAttributesHomePageContent
-            | oa_types.Unset
-        ),
+        polarion_content: api_models.DocumentsSingleGetResponseDataAttributesHomePageContent
+        | api_models.TestrecordsListGetResponseDataItemAttributesComment
+        | api_models.TestrunsListGetResponseDataItemAttributesHomePageContent
+        | oa_types.Unset,
     ) -> dm.TextContent | None:
-        if isinstance(home_page_content, oa_types.Unset):
+        if not polarion_content:
             return None
 
-        home_page_content_type = None
-        home_page_content_value = None
-
-        if isinstance(
-            home_page_content.type,
-            api_models.DocumentsSingleGetResponseDataAttributesHomePageContentType,
-        ):
-            home_page_content_type = str(home_page_content.type)
-        if isinstance(home_page_content.value, str):
-            home_page_content_value = home_page_content.value
         return dm.TextContent(
-            type=home_page_content_type,
-            value=home_page_content_value,
+            type=str(polarion_content.type) if polarion_content.type else None,
+            value=polarion_content.value or None,
         )
 
     def create_work_items(self, work_items: list[base_client.WorkItemType]):
@@ -1024,3 +1022,133 @@ class OpenAPIPolarionProjectClient(
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
             self._delete_work_item_links(work_item_links, False)
+
+    def get_test_records(
+        self,
+        test_run_id: str,
+        fields: dict[str, str] | None = None,
+        page_size: int = 100,
+        page_number: int = 1,
+        retry: bool = True,
+    ) -> tuple[list[dm.TestRecord], bool]:
+        """Return the test records on a defined page matching the given query.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+        if fields is None:
+            fields = self.default_fields.testrecords
+
+        sparse_fields = _build_sparse_fields(fields)
+        response = get_test_records.sync_detailed(
+            self.project_id,
+            test_run_id,
+            client=self.client,
+            fields=sparse_fields,
+            pagenumber=page_number,
+            pagesize=page_size,
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.get_test_records(
+                test_run_id, fields, page_size, page_number, False
+            )
+
+        parsed_response = response.parsed
+        assert parsed_response
+
+        test_records = []
+        for data in parsed_response.data or []:
+            assert isinstance(data.id, str)
+            assert isinstance(
+                data.attributes,
+                api_models.TestrecordsListGetResponseDataItemAttributes,
+            )
+            _, _, project_id, work_item, iteration = data.id.split("/")
+            test_records.append(
+                dm.TestRecord(
+                    project_id,
+                    work_item,
+                    data.attributes.test_case_revision or None,
+                    int(iteration),
+                    data.attributes.duration or -1,
+                    data.attributes.result or None,
+                    self._handle_text_content(data.attributes.comment),
+                    data.additional_properties or {},
+                )
+            )
+        next_page = isinstance(
+            parsed_response.links,
+            api_models.TestrecordsListGetResponseLinks,
+        ) and bool(parsed_response.links.next_)
+
+        return test_records, next_page
+
+    def get_test_runs(
+        self,
+        query: str,
+        fields: dict[str, str] | None = None,
+        page_size: int = 100,
+        page_number: int = 1,
+        retry: bool = True,
+    ) -> tuple[list[dm.TestRun], bool]:
+        """Return the test runs on a defined page matching the given query.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+        if fields is None:
+            fields = self.default_fields.testruns
+
+        sparse_fields = _build_sparse_fields(fields)
+        response = get_test_runs.sync_detailed(
+            self.project_id,
+            client=self.client,
+            query=query,
+            fields=sparse_fields,
+            pagenumber=page_number,
+            pagesize=page_size,
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            return self.get_test_runs(
+                query, fields, page_size, page_number, False
+            )
+
+        parsed_response = response.parsed
+        assert parsed_response
+
+        test_runs = []
+        for data in parsed_response.data or []:
+            assert isinstance(data.id, str)
+            assert isinstance(
+                data.attributes,
+                api_models.TestrunsListGetResponseDataItemAttributes,
+            )
+            test_runs.append(
+                dm.TestRun(
+                    data.id.split("/")[-1],
+                    data.attributes.type or None,
+                    data.attributes.status or None,
+                    data.attributes.title or None,
+                    self._handle_text_content(
+                        data.attributes.home_page_content
+                    ),
+                    dm.SelectTestCasesBy(
+                        str(data.attributes.select_test_cases_by)
+                    )
+                    if data.attributes.select_test_cases_by
+                    else None,
+                    data.attributes.additional_properties or {},
+                )
+            )
+        next_page = isinstance(
+            parsed_response.links,
+            api_models.TestrunsListGetResponseLinks,
+        ) and bool(parsed_response.links.next_)
+
+        return test_runs, next_page
