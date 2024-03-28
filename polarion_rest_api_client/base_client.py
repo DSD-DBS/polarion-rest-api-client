@@ -446,3 +446,28 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
         Polarion API documentation to get certain fields.
         """
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def create_test_runs(
+        self, test_runs: list[dm.TestRun], retry: bool = True
+    ):
+        """Create the given list of test runs."""
+        raise NotImplementedError
+
+    def create_test_run(self, test_run: dm.TestRun):
+        """Create the given test run."""
+        self.create_test_runs([test_run])
+
+    @abc.abstractmethod
+    def create_test_records(
+        self,
+        test_run_id: str,
+        test_records: list[dm.TestRecord],
+        retry: bool = True,
+    ):
+        """Create the given list of test records."""
+        raise NotImplementedError
+
+    def create_test_record(self, test_run_id: str, test_record: dm.TestRecord):
+        """Create the given list of test records."""
+        self.create_test_records(test_run_id, [test_record])

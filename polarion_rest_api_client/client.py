@@ -27,10 +27,12 @@ from polarion_rest_api_client.open_api_client.api.linked_work_items import (
 from polarion_rest_api_client.open_api_client.api.projects import get_project
 from polarion_rest_api_client.open_api_client.api.test_records import (
     get_test_records,
+    patch_test_record,
     post_test_records,
 )
 from polarion_rest_api_client.open_api_client.api.test_runs import (
     get_test_runs,
+    patch_test_run,
     post_test_runs,
 )
 from polarion_rest_api_client.open_api_client.api.work_item_attachments import (  # pylint: disable=line-too-long
@@ -771,7 +773,7 @@ class OpenAPIPolarionProjectClient(
 
     def _handle_text_content(
         self,
-        polarion_content: api_models.DocumentsSingleGetResponseDataAttributesHomePageContent
+        polarion_content: api_models.DocumentsSingleGetResponseDataAttributesHomePageContent  # pylint: disable=line-too-long
         | api_models.TestrecordsListGetResponseDataItemAttributesComment
         | api_models.TestrunsListGetResponseDataItemAttributesHomePageContent
         | oa_types.Unset,
@@ -1152,3 +1154,186 @@ class OpenAPIPolarionProjectClient(
         ) and bool(parsed_response.links.next_)
 
         return test_runs, next_page
+
+    def create_test_runs(
+        self, test_runs: list[dm.TestRun], retry: bool = True
+    ):
+        """Create the given list of test runs."""
+        polarion_test_runs = [
+            api_models.TestrunsListPostRequestDataItem(
+                api_models.TestrunsListPostRequestDataItemType.TESTRUNS,
+                self._fill_test_run_attributes(
+                    api_models.TestrunsListPostRequestDataItemAttributes,
+                    test_run,
+                ),
+            )
+            for test_run in test_runs
+        ]
+
+        response = post_test_runs.sync_detailed(
+            self.project_id,
+            client=self.client,
+            body=api_models.TestrunsListPostRequest(polarion_test_runs),
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            self.create_test_runs(test_runs, False)
+
+    def update_test_run(self, test_run: dm.TestRun, retry: bool = True):
+        """Create the given list of test runs."""
+        assert test_run.id
+        response = patch_test_run.sync_detailed(
+            self.project_id,
+            test_run.id,
+            client=self.client,
+            body=api_models.TestrunsSinglePatchRequest(
+                api_models.TestrunsSinglePatchRequestData(
+                    api_models.TestrunsSinglePatchRequestDataType.TESTRUNS,
+                    f"{self.project_id}/{test_run.id}",
+                    self._fill_test_run_attributes(
+                        api_models.TestrunsSinglePatchRequestDataAttributes,
+                        test_run,
+                    ),
+                )
+            ),
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            self.update_test_run(test_run, False)
+
+    def _fill_test_run_attributes(
+        self,
+        attributes_type: type[
+            api_models.TestrunsListPostRequestDataItemAttributes
+            | api_models.TestrunsSinglePatchRequestDataAttributes
+        ],
+        test_run: dm.TestRun,
+    ):
+        type_prefix = attributes_type.__name__
+        attributes = attributes_type()
+        if test_run.type:
+            attributes.type = test_run.type
+        if test_run.id and hasattr(attributes, "id"):
+            attributes.id = test_run.id
+        if test_run.status:
+            attributes.status = test_run.status
+        if test_run.title:
+            attributes.title = test_run.title
+        if test_run.additional_attributes:
+            attributes.additional_properties = test_run.additional_attributes
+        if test_run.select_test_cases_by:
+            attributes.select_test_cases_by = getattr(
+                api_models, f"{type_prefix}SelectTestCasesBy"
+            )(str(test_run.select_test_cases_by))
+        if test_run.home_page_content:
+            attributes.home_page_content = getattr(
+                api_models, f"{type_prefix}HomePageContent"
+            )()
+            assert attributes.home_page_content
+            if test_run.home_page_content.type:
+                attributes.home_page_content.type = getattr(
+                    api_models, f"{type_prefix}HomePageContentType"
+                )(test_run.home_page_content.type)
+            if test_run.home_page_content.value:
+                attributes.home_page_content.value = (
+                    test_run.home_page_content.value
+                )
+
+        return attributes
+
+    def _fill_test_record_attributes(
+        self,
+        attributes_type: type[
+            api_models.TestrecordsListPostRequestDataItemAttributes
+            | api_models.TestrecordsSinglePatchRequestDataAttributes
+        ],
+        test_record: dm.TestRecord,
+    ):
+        type_prefix = attributes_type.__name__
+        attributes = attributes_type()
+        if test_record.result:
+            attributes.result = test_record.result
+        if test_record.comment:
+            attributes.comment = getattr(api_models, f"{type_prefix}Comment")()
+            assert attributes.comment
+            if test_record.comment.type:
+                attributes.comment.type = getattr(
+                    api_models, f"{type_prefix}CommentType"
+                )(test_record.comment.type)
+            if test_record.comment.value:
+                attributes.comment.value = test_record.comment.value
+        if test_record.duration:
+            attributes.duration = test_record.duration
+        if test_record.work_item_revision:
+            attributes.test_case_revision = test_record.work_item_revision
+        if test_record.additional_attributes:
+            attributes.additional_properties = (
+                test_record.additional_attributes
+            )
+        return attributes
+
+    def create_test_records(
+        self,
+        test_run_id: str,
+        test_records: list[dm.TestRecord],
+        retry: bool = True,
+    ):
+        """Create the given list of test records."""
+        response = post_test_records.sync_detailed(
+            self.project_id,
+            test_run_id,
+            client=self.client,
+            body=api_models.TestrecordsListPostRequest(
+                [
+                    api_models.TestrecordsListPostRequestDataItem(
+                        api_models.TestrecordsListPostRequestDataItemType.TESTRECORDS,
+                        self._fill_test_record_attributes(
+                            api_models.TestrecordsListPostRequestDataItemAttributes,
+                            test_record,
+                        ),
+                        api_models.TestrecordsListPostRequestDataItemRelationships(
+                            test_case=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCase(
+                                api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseData(
+                                    api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseDataType.WORKITEMS,
+                                    f"{test_record.work_item_project_id}/{test_record.work_item_id}",
+                                )
+                            )
+                        ),
+                    )
+                    for test_record in test_records
+                ]
+            ),
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            self.create_test_records(test_run_id, test_records, False)
+
+    def update_test_record(
+        self, test_run_id: str, test_record: dm.TestRecord, retry: bool = True
+    ):
+        """Create the given list of test records."""
+        response = patch_test_record.sync_detailed(
+            self.project_id,
+            test_run_id,
+            test_record.work_item_project_id,
+            test_record.work_item_id,
+            str(test_record.iteration),
+            client=self.client,
+            body=api_models.TestrecordsSinglePatchRequest(
+                api_models.TestrecordsSinglePatchRequestData(
+                    api_models.TestrecordsSinglePatchRequestDataType.TESTRECORDS,
+                    f"{self.project_id}/{test_run_id}/{test_record.work_item_project_id}/{test_record.work_item_id}/{test_record.iteration}",
+                    self._fill_test_record_attributes(
+                        api_models.TestrecordsSinglePatchRequestDataAttributes,
+                        test_record,
+                    ),
+                )
+            ),
+        )
+
+        if not self._check_response(response, not retry) and retry:
+            sleep_random_time()
+            self.update_test_record(test_run_id, test_record, False)
