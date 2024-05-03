@@ -28,9 +28,9 @@ class TestparameterDefinitionsListPostRequestDataItem:
         attributes (Union[Unset, TestparameterDefinitionsListPostRequestDataItemAttributes]):
     """
 
-    type: Union[
-        Unset, TestparameterDefinitionsListPostRequestDataItemType
-    ] = UNSET
+    type: Union[Unset, TestparameterDefinitionsListPostRequestDataItemType] = (
+        UNSET
+    )
     attributes: Union[
         Unset, "TestparameterDefinitionsListPostRequestDataItemAttributes"
     ] = UNSET

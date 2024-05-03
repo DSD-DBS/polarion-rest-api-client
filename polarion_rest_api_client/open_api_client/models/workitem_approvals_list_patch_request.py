@@ -24,9 +24,9 @@ class WorkitemApprovalsListPatchRequest:
         data (Union[Unset, List['WorkitemApprovalsListPatchRequestDataItem']]):
     """
 
-    data: Union[
-        Unset, List["WorkitemApprovalsListPatchRequestDataItem"]
-    ] = UNSET
+    data: Union[Unset, List["WorkitemApprovalsListPatchRequestDataItem"]] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

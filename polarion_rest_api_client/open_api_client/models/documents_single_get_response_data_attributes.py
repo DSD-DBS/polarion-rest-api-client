@@ -136,9 +136,9 @@ class DocumentsSingleGetResponseDataAttributes:
         if auto_suspect is not UNSET:
             field_dict["autoSuspect"] = auto_suspect
         if branched_with_initialized_fields is not UNSET:
-            field_dict[
-                "branchedWithInitializedFields"
-            ] = branched_with_initialized_fields
+            field_dict["branchedWithInitializedFields"] = (
+                branched_with_initialized_fields
+            )
         if branched_with_query is not UNSET:
             field_dict["branchedWithQuery"] = branched_with_query
         if created is not UNSET:

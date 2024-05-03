@@ -90,9 +90,9 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
         if target_document_name is not UNSET:
             field_dict["targetDocumentName"] = target_document_name
         if copy_workflow_status_and_signatures is not UNSET:
-            field_dict[
-                "copyWorkflowStatusAndSignatures"
-            ] = copy_workflow_status_and_signatures
+            field_dict["copyWorkflowStatusAndSignatures"] = (
+                copy_workflow_status_and_signatures
+            )
         if query is not UNSET:
             field_dict["query"] = query
         if target_document_title is not UNSET:

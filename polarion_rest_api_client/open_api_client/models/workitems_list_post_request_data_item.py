@@ -33,9 +33,9 @@ class WorkitemsListPostRequestDataItem:
     """
 
     type: Union[Unset, WorkitemsListPostRequestDataItemType] = UNSET
-    attributes: Union[
-        Unset, "WorkitemsListPostRequestDataItemAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "WorkitemsListPostRequestDataItemAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "WorkitemsListPostRequestDataItemRelationships"
     ] = UNSET

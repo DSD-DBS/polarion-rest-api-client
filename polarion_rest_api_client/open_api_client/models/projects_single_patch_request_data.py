@@ -35,9 +35,9 @@ class ProjectsSinglePatchRequestData:
 
     type: Union[Unset, ProjectsSinglePatchRequestDataType] = UNSET
     id: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "ProjectsSinglePatchRequestDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "ProjectsSinglePatchRequestDataAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "ProjectsSinglePatchRequestDataRelationships"
     ] = UNSET

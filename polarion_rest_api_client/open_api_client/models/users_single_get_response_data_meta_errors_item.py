@@ -31,9 +31,9 @@ class UsersSingleGetResponseDataMetaErrorsItem:
     status: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
     detail: Union[Unset, str] = UNSET
-    source: Union[
-        Unset, "UsersSingleGetResponseDataMetaErrorsItemSource"
-    ] = UNSET
+    source: Union[Unset, "UsersSingleGetResponseDataMetaErrorsItemSource"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

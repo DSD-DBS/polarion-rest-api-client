@@ -64,9 +64,9 @@ class UsergroupsSingleGetResponseDataAttributes:
         if name is not UNSET:
             field_dict["name"] = name
         if sso_synchronization_allowed is not UNSET:
-            field_dict[
-                "ssoSynchronizationAllowed"
-            ] = sso_synchronization_allowed
+            field_dict["ssoSynchronizationAllowed"] = (
+                sso_synchronization_allowed
+            )
 
         return field_dict
 

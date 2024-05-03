@@ -38,9 +38,9 @@ class TestparameterDefinitionsSingleGetResponse:
     included: Union[
         Unset, List["TestparameterDefinitionsSingleGetResponseIncludedItem"]
     ] = UNSET
-    links: Union[
-        Unset, "TestparameterDefinitionsSingleGetResponseLinks"
-    ] = UNSET
+    links: Union[Unset, "TestparameterDefinitionsSingleGetResponseLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

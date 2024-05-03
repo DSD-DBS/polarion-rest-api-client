@@ -32,9 +32,9 @@ class PlansSinglePatchRequestDataRelationships:
         work_items (Union[Unset, PlansSinglePatchRequestDataRelationshipsWorkItems]):
     """
 
-    parent: Union[
-        Unset, "PlansSinglePatchRequestDataRelationshipsParent"
-    ] = UNSET
+    parent: Union[Unset, "PlansSinglePatchRequestDataRelationshipsParent"] = (
+        UNSET
+    )
     project_span: Union[
         Unset, "PlansSinglePatchRequestDataRelationshipsProjectSpan"
     ] = UNSET

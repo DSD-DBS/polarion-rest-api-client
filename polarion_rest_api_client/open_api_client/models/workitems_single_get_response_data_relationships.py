@@ -139,9 +139,9 @@ class WorkitemsSingleGetResponseDataRelationships:
     test_steps: Union[
         Unset, "WorkitemsSingleGetResponseDataRelationshipsTestSteps"
     ] = UNSET
-    votes: Union[
-        Unset, "WorkitemsSingleGetResponseDataRelationshipsVotes"
-    ] = UNSET
+    votes: Union[Unset, "WorkitemsSingleGetResponseDataRelationshipsVotes"] = (
+        UNSET
+    )
     watches: Union[
         Unset, "WorkitemsSingleGetResponseDataRelationshipsWatches"
     ] = UNSET
@@ -245,9 +245,9 @@ class WorkitemsSingleGetResponseDataRelationships:
         if comments is not UNSET:
             field_dict["comments"] = comments
         if externally_linked_work_items is not UNSET:
-            field_dict[
-                "externallyLinkedWorkItems"
-            ] = externally_linked_work_items
+            field_dict["externallyLinkedWorkItems"] = (
+                externally_linked_work_items
+            )
         if linked_oslc_resources is not UNSET:
             field_dict["linkedOslcResources"] = linked_oslc_resources
         if linked_revisions is not UNSET:

@@ -39,9 +39,9 @@ class FeatureselectionsListGetResponse:
     """
 
     meta: Union[Unset, "FeatureselectionsListGetResponseMeta"] = UNSET
-    data: Union[
-        Unset, List["FeatureselectionsListGetResponseDataItem"]
-    ] = UNSET
+    data: Union[Unset, List["FeatureselectionsListGetResponseDataItem"]] = (
+        UNSET
+    )
     included: Union[
         Unset, List["FeatureselectionsListGetResponseIncludedItem"]
     ] = UNSET

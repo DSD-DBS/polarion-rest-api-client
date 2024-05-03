@@ -42,9 +42,9 @@ class TestrecordAttachmentsListGetResponseDataItem:
         links (Union[Unset, TestrecordAttachmentsListGetResponseDataItemLinks]):
     """
 
-    type: Union[
-        Unset, TestrecordAttachmentsListGetResponseDataItemType
-    ] = UNSET
+    type: Union[Unset, TestrecordAttachmentsListGetResponseDataItemType] = (
+        UNSET
+    )
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
     attributes: Union[
@@ -53,9 +53,9 @@ class TestrecordAttachmentsListGetResponseDataItem:
     relationships: Union[
         Unset, "TestrecordAttachmentsListGetResponseDataItemRelationships"
     ] = UNSET
-    meta: Union[
-        Unset, "TestrecordAttachmentsListGetResponseDataItemMeta"
-    ] = UNSET
+    meta: Union[Unset, "TestrecordAttachmentsListGetResponseDataItemMeta"] = (
+        UNSET
+    )
     links: Union[
         Unset, "TestrecordAttachmentsListGetResponseDataItemLinks"
     ] = UNSET

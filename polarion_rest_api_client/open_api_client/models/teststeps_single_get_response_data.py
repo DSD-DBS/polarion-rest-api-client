@@ -41,9 +41,9 @@ class TeststepsSingleGetResponseData:
     type: Union[Unset, TeststepsSingleGetResponseDataType] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "TeststepsSingleGetResponseDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "TeststepsSingleGetResponseDataAttributes"] = (
+        UNSET
+    )
     meta: Union[Unset, "TeststepsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "TeststepsSingleGetResponseDataLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(

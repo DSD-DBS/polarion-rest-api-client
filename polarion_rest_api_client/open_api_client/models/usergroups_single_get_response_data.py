@@ -45,9 +45,9 @@ class UsergroupsSingleGetResponseData:
     type: Union[Unset, UsergroupsSingleGetResponseDataType] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "UsergroupsSingleGetResponseDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "UsergroupsSingleGetResponseDataAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "UsergroupsSingleGetResponseDataRelationships"
     ] = UNSET

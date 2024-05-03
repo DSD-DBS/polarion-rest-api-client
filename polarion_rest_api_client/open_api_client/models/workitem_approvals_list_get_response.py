@@ -39,9 +39,9 @@ class WorkitemApprovalsListGetResponse:
     """
 
     meta: Union[Unset, "WorkitemApprovalsListGetResponseMeta"] = UNSET
-    data: Union[
-        Unset, List["WorkitemApprovalsListGetResponseDataItem"]
-    ] = UNSET
+    data: Union[Unset, List["WorkitemApprovalsListGetResponseDataItem"]] = (
+        UNSET
+    )
     included: Union[
         Unset, List["WorkitemApprovalsListGetResponseIncludedItem"]
     ] = UNSET

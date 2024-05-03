@@ -31,9 +31,9 @@ class DocumentsSinglePatchRequestData:
 
     type: Union[Unset, DocumentsSinglePatchRequestDataType] = UNSET
     id: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "DocumentsSinglePatchRequestDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "DocumentsSinglePatchRequestDataAttributes"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

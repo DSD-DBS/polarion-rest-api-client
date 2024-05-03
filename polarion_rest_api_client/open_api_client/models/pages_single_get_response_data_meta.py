@@ -24,9 +24,9 @@ class PagesSingleGetResponseDataMeta:
         errors (Union[Unset, List['PagesSingleGetResponseDataMetaErrorsItem']]):
     """
 
-    errors: Union[
-        Unset, List["PagesSingleGetResponseDataMetaErrorsItem"]
-    ] = UNSET
+    errors: Union[Unset, List["PagesSingleGetResponseDataMetaErrorsItem"]] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

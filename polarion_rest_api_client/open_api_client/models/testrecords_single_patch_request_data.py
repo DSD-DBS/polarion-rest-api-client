@@ -35,9 +35,9 @@ class TestrecordsSinglePatchRequestData:
 
     type: Union[Unset, TestrecordsSinglePatchRequestDataType] = UNSET
     id: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "TestrecordsSinglePatchRequestDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "TestrecordsSinglePatchRequestDataAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "TestrecordsSinglePatchRequestDataRelationships"
     ] = UNSET

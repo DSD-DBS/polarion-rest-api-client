@@ -31,9 +31,9 @@ class TestrunAttachmentsListPostResponseDataItem:
 
     type: Union[Unset, TestrunAttachmentsListPostResponseDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
-    links: Union[
-        Unset, "TestrunAttachmentsListPostResponseDataItemLinks"
-    ] = UNSET
+    links: Union[Unset, "TestrunAttachmentsListPostResponseDataItemLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

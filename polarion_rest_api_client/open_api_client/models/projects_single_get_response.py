@@ -35,9 +35,9 @@ class ProjectsSingleGetResponse:
     """
 
     data: Union[Unset, "ProjectsSingleGetResponseData"] = UNSET
-    included: Union[
-        Unset, List["ProjectsSingleGetResponseIncludedItem"]
-    ] = UNSET
+    included: Union[Unset, List["ProjectsSingleGetResponseIncludedItem"]] = (
+        UNSET
+    )
     links: Union[Unset, "ProjectsSingleGetResponseLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict

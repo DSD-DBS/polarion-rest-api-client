@@ -46,9 +46,9 @@ class PlansSingleGetResponseData:
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
     attributes: Union[Unset, "PlansSingleGetResponseDataAttributes"] = UNSET
-    relationships: Union[
-        Unset, "PlansSingleGetResponseDataRelationships"
-    ] = UNSET
+    relationships: Union[Unset, "PlansSingleGetResponseDataRelationships"] = (
+        UNSET
+    )
     meta: Union[Unset, "PlansSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "PlansSingleGetResponseDataLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(

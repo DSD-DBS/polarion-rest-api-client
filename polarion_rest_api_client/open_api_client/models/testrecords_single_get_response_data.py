@@ -45,9 +45,9 @@ class TestrecordsSingleGetResponseData:
     type: Union[Unset, TestrecordsSingleGetResponseDataType] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "TestrecordsSingleGetResponseDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "TestrecordsSingleGetResponseDataAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "TestrecordsSingleGetResponseDataRelationships"
     ] = UNSET

@@ -42,9 +42,9 @@ class TeststepresultAttachmentsSingleGetResponseData:
         links (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataLinks]):
     """
 
-    type: Union[
-        Unset, TeststepresultAttachmentsSingleGetResponseDataType
-    ] = UNSET
+    type: Union[Unset, TeststepresultAttachmentsSingleGetResponseDataType] = (
+        UNSET
+    )
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
     attributes: Union[

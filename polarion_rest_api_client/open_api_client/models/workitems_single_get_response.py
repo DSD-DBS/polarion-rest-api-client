@@ -35,9 +35,9 @@ class WorkitemsSingleGetResponse:
     """
 
     data: Union[Unset, "WorkitemsSingleGetResponseData"] = UNSET
-    included: Union[
-        Unset, List["WorkitemsSingleGetResponseIncludedItem"]
-    ] = UNSET
+    included: Union[Unset, List["WorkitemsSingleGetResponseIncludedItem"]] = (
+        UNSET
+    )
     links: Union[Unset, "WorkitemsSingleGetResponseLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict

@@ -24,9 +24,9 @@ class PlansSingleGetResponseDataRelationshipsParent:
         data (Union[Unset, PlansSingleGetResponseDataRelationshipsParentData]):
     """
 
-    data: Union[
-        Unset, "PlansSingleGetResponseDataRelationshipsParentData"
-    ] = UNSET
+    data: Union[Unset, "PlansSingleGetResponseDataRelationshipsParentData"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

@@ -36,9 +36,9 @@ class PlansListPostRequestDataItemRelationships:
         work_items (Union[Unset, PlansListPostRequestDataItemRelationshipsWorkItems]):
     """
 
-    parent: Union[
-        Unset, "PlansListPostRequestDataItemRelationshipsParent"
-    ] = UNSET
+    parent: Union[Unset, "PlansListPostRequestDataItemRelationshipsParent"] = (
+        UNSET
+    )
     project_span: Union[
         Unset, "PlansListPostRequestDataItemRelationshipsProjectSpan"
     ] = UNSET

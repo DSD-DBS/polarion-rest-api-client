@@ -51,12 +51,12 @@ class TestrecordAttachmentsSingleGetResponseData:
     relationships: Union[
         Unset, "TestrecordAttachmentsSingleGetResponseDataRelationships"
     ] = UNSET
-    meta: Union[
-        Unset, "TestrecordAttachmentsSingleGetResponseDataMeta"
-    ] = UNSET
-    links: Union[
-        Unset, "TestrecordAttachmentsSingleGetResponseDataLinks"
-    ] = UNSET
+    meta: Union[Unset, "TestrecordAttachmentsSingleGetResponseDataMeta"] = (
+        UNSET
+    )
+    links: Union[Unset, "TestrecordAttachmentsSingleGetResponseDataLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

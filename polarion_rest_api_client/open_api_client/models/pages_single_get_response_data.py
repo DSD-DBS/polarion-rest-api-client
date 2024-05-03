@@ -46,9 +46,9 @@ class PagesSingleGetResponseData:
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
     attributes: Union[Unset, "PagesSingleGetResponseDataAttributes"] = UNSET
-    relationships: Union[
-        Unset, "PagesSingleGetResponseDataRelationships"
-    ] = UNSET
+    relationships: Union[Unset, "PagesSingleGetResponseDataRelationships"] = (
+        UNSET
+    )
     meta: Union[Unset, "PagesSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "PagesSingleGetResponseDataLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(

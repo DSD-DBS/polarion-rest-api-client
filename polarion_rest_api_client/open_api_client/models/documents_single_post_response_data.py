@@ -39,9 +39,9 @@ class DocumentsSinglePostResponseData:
 
     type: Union[Unset, DocumentsSinglePostResponseDataType] = UNSET
     id: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "DocumentsSinglePostResponseDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "DocumentsSinglePostResponseDataAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "DocumentsSinglePostResponseDataRelationships"
     ] = UNSET

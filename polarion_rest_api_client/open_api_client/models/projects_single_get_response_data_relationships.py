@@ -24,9 +24,9 @@ class ProjectsSingleGetResponseDataRelationships:
         lead (Union[Unset, ProjectsSingleGetResponseDataRelationshipsLead]):
     """
 
-    lead: Union[
-        Unset, "ProjectsSingleGetResponseDataRelationshipsLead"
-    ] = UNSET
+    lead: Union[Unset, "ProjectsSingleGetResponseDataRelationshipsLead"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

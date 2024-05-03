@@ -45,9 +45,9 @@ class TeststepresultAttachmentsListGetResponse:
     included: Union[
         Unset, List["TeststepresultAttachmentsListGetResponseIncludedItem"]
     ] = UNSET
-    links: Union[
-        Unset, "TeststepresultAttachmentsListGetResponseLinks"
-    ] = UNSET
+    links: Union[Unset, "TeststepresultAttachmentsListGetResponseLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

@@ -29,9 +29,9 @@ class TestrecordAttachmentsListPostResponseDataItem:
         links (Union[Unset, TestrecordAttachmentsListPostResponseDataItemLinks]):
     """
 
-    type: Union[
-        Unset, TestrecordAttachmentsListPostResponseDataItemType
-    ] = UNSET
+    type: Union[Unset, TestrecordAttachmentsListPostResponseDataItemType] = (
+        UNSET
+    )
     id: Union[Unset, str] = UNSET
     links: Union[
         Unset, "TestrecordAttachmentsListPostResponseDataItemLinks"
