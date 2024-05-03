@@ -100,8 +100,7 @@ class OpenAPIPolarionProjectClient(
         add_work_item_checksum: bool = False,
         max_content_size: int = ...,
         httpx_args: t.Optional[dict[str, t.Any]] = ...,
-    ):
-        ...
+    ): ...
 
     @t.overload
     def __init__(
@@ -116,8 +115,7 @@ class OpenAPIPolarionProjectClient(
         add_work_item_checksum: bool = False,
         max_content_size: int = ...,
         httpx_args: t.Optional[dict[str, t.Any]] = ...,
-    ):
-        ...
+    ): ...
 
     def __init__(
         self,
@@ -222,7 +220,18 @@ class OpenAPIPolarionProjectClient(
         error = api_models.Errors.from_dict(decoded_content)
         if error.errors:
             raise errors.PolarionApiException(
-                *[(e.status, e.detail) for e in error.errors]
+                *[
+                    (
+                        e.status,
+                        e.detail,
+                        (
+                            e.source.pointer
+                            if not isinstance(e.source, oa_types.Unset)
+                            else "No error pointer"
+                        ),
+                    )
+                    for e in error.errors
+                ]
             )
         raise unexpected_error()
 
@@ -249,9 +258,9 @@ class OpenAPIPolarionProjectClient(
         attrs.additional_properties.update(work_item.additional_attributes)
 
         if self.add_work_item_checksum:
-            attrs.additional_properties[
-                "checksum"
-            ] = work_item.calculate_checksum()
+            attrs.additional_properties["checksum"] = (
+                work_item.calculate_checksum()
+            )
 
         return api_models.WorkitemsListPostRequestDataItem(
             api_models.WorkitemsListPostRequestDataItemType.WORKITEMS, attrs
@@ -279,9 +288,9 @@ class OpenAPIPolarionProjectClient(
         attrs.additional_properties.update(work_item.additional_attributes)
 
         if self.add_work_item_checksum:
-            attrs.additional_properties[
-                "checksum"
-            ] = work_item.get_current_checksum()
+            attrs.additional_properties["checksum"] = (
+                work_item.get_current_checksum()
+            )
 
         return api_models.WorkitemsSinglePatchRequest(
             api_models.WorkitemsSinglePatchRequestData(
@@ -525,9 +534,9 @@ class OpenAPIPolarionProjectClient(
         counter = 0
         for work_item_attachment_res in response.parsed.data:
             assert work_item_attachment_res.id
-            work_item_attachments[
-                counter
-            ].id = work_item_attachment_res.id.split("/")[-1]
+            work_item_attachments[counter].id = (
+                work_item_attachment_res.id.split("/")[-1]
+            )
             counter += 1
 
     def get_work_items(
@@ -624,8 +633,10 @@ class OpenAPIPolarionProjectClient(
 
     def _generate_work_item(
         self,
-        work_item: api_models.WorkitemsListGetResponseDataItem
-        | api_models.WorkitemsSingleGetResponseData,
+        work_item: (
+            api_models.WorkitemsListGetResponseDataItem
+            | api_models.WorkitemsSingleGetResponseData
+        ),
     ) -> base_client.WorkItemType:
         assert work_item.attributes
         assert isinstance(work_item.id, str)
@@ -756,8 +767,10 @@ class OpenAPIPolarionProjectClient(
 
     def _handle_home_page_content(
         self,
-        home_page_content: api_models.DocumentsSingleGetResponseDataAttributesHomePageContent
-        | oa_types.Unset,
+        home_page_content: (
+            api_models.DocumentsSingleGetResponseDataAttributesHomePageContent
+            | oa_types.Unset
+        ),
     ) -> dm.TextContent | None:
         if isinstance(home_page_content, oa_types.Unset):
             return None
