@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Contains some shared types for properties."""
+
 from http import HTTPStatus
 from typing import (
     BinaryIO,

@@ -28,19 +28,19 @@ class WorkitemsSingleGetResponseDataRelationshipsComments:
     """
     Attributes:
         data (Union[Unset, List['WorkitemsSingleGetResponseDataRelationshipsCommentsDataItem']]):
-        meta (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsCommentsMeta]):
         links (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsCommentsLinks]):
+        meta (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsCommentsMeta]):
     """
 
     data: Union[
         Unset,
         List["WorkitemsSingleGetResponseDataRelationshipsCommentsDataItem"],
     ] = UNSET
-    meta: Union[
-        Unset, "WorkitemsSingleGetResponseDataRelationshipsCommentsMeta"
-    ] = UNSET
     links: Union[
         Unset, "WorkitemsSingleGetResponseDataRelationshipsCommentsLinks"
+    ] = UNSET
+    meta: Union[
+        Unset, "WorkitemsSingleGetResponseDataRelationshipsCommentsMeta"
     ] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -54,23 +54,23 @@ class WorkitemsSingleGetResponseDataRelationshipsComments:
                 data_item = data_item_data.to_dict()
                 data.append(data_item)
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
+
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if data is not UNSET:
             field_dict["data"] = data
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -96,17 +96,6 @@ class WorkitemsSingleGetResponseDataRelationshipsComments:
 
             data.append(data_item)
 
-        _meta = d.pop("meta", UNSET)
-        meta: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsCommentsMeta
-        ]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = WorkitemsSingleGetResponseDataRelationshipsCommentsMeta.from_dict(
-                _meta
-            )
-
         _links = d.pop("links", UNSET)
         links: Union[
             Unset, WorkitemsSingleGetResponseDataRelationshipsCommentsLinks
@@ -118,10 +107,21 @@ class WorkitemsSingleGetResponseDataRelationshipsComments:
                 _links
             )
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[
+            Unset, WorkitemsSingleGetResponseDataRelationshipsCommentsMeta
+        ]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = WorkitemsSingleGetResponseDataRelationshipsCommentsMeta.from_dict(
+                _meta
+            )
+
         workitems_single_get_response_data_relationships_comments_obj = cls(
             data=data,
-            meta=meta,
             links=links,
+            meta=meta,
         )
 
         workitems_single_get_response_data_relationships_comments_obj.additional_properties = (

@@ -15,43 +15,43 @@ T = TypeVar("T", bound="PlansSingleGetResponseDataLinks")
 class PlansSingleGetResponseDataLinks:
     """
     Attributes:
-        self_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/plans/MyPlanId?revision=1234.
         portal (Union[Unset, str]):  Example: server-host-name/application-
             path/polarion/redirect/project/MyProjectId/plan?id=MyPlanId&revision=1234.
+        self_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/plans/MyPlanId?revision=1234.
     """
 
-    self_: Union[Unset, str] = UNSET
     portal: Union[Unset, str] = UNSET
+    self_: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        self_ = self.self_
-
         portal = self.portal
+
+        self_ = self.self_
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if self_ is not UNSET:
-            field_dict["self"] = self_
         if portal is not UNSET:
             field_dict["portal"] = portal
+        if self_ is not UNSET:
+            field_dict["self"] = self_
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        self_ = d.pop("self", UNSET)
-
         portal = d.pop("portal", UNSET)
 
+        self_ = d.pop("self", UNSET)
+
         plans_single_get_response_data_links_obj = cls(
-            self_=self_,
             portal=portal,
+            self_=self_,
         )
 
         plans_single_get_response_data_links_obj.additional_properties = d

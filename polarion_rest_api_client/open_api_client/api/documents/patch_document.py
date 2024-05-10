@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
@@ -11,6 +11,7 @@ from ...client import AuthenticatedClient, Client
 from ...models.documents_single_patch_request import (
     DocumentsSinglePatchRequest,
 )
+from ...models.errors import Errors
 from ...types import UNSET, Response, Unset
 
 
@@ -53,27 +54,46 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Any]:
+) -> Optional[Union[Any, Errors]]:
     if response.status_code == HTTPStatus.NO_CONTENT:
-        return None
+        response_204 = cast(Any, None)
+        return response_204
     if response.status_code == HTTPStatus.BAD_REQUEST:
-        return None
+        response_400 = Errors.from_dict(response.json())
+
+        return response_400
     if response.status_code == HTTPStatus.UNAUTHORIZED:
-        return None
+        response_401 = Errors.from_dict(response.json())
+
+        return response_401
     if response.status_code == HTTPStatus.FORBIDDEN:
-        return None
+        response_403 = Errors.from_dict(response.json())
+
+        return response_403
     if response.status_code == HTTPStatus.NOT_FOUND:
-        return None
+        response_404 = Errors.from_dict(response.json())
+
+        return response_404
     if response.status_code == HTTPStatus.CONFLICT:
-        return None
+        response_409 = Errors.from_dict(response.json())
+
+        return response_409
     if response.status_code == HTTPStatus.REQUEST_ENTITY_TOO_LARGE:
-        return None
+        response_413 = Errors.from_dict(response.json())
+
+        return response_413
     if response.status_code == HTTPStatus.UNSUPPORTED_MEDIA_TYPE:
-        return None
+        response_415 = Errors.from_dict(response.json())
+
+        return response_415
     if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
-        return None
+        response_500 = Errors.from_dict(response.json())
+
+        return response_500
     if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
-        return None
+        response_503 = Errors.from_dict(response.json())
+
+        return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -82,7 +102,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Any]:
+) -> Response[Union[Any, Errors]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -99,7 +119,7 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     body: DocumentsSinglePatchRequest,
     workflow_action: Union[Unset, str] = UNSET,
-) -> Response[Any]:
+) -> Response[Union[Any, Errors]]:
     """Updates the specified Document.
 
     Args:
@@ -114,7 +134,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        Response[Union[Any, Errors]]
     """
 
     kwargs = _get_kwargs(
@@ -132,7 +152,7 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-async def asyncio_detailed(
+def sync(
     project_id: str,
     space_id: str,
     document_name: str,
@@ -140,7 +160,7 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     body: DocumentsSinglePatchRequest,
     workflow_action: Union[Unset, str] = UNSET,
-) -> Response[Any]:
+) -> Optional[Union[Any, Errors]]:
     """Updates the specified Document.
 
     Args:
@@ -155,7 +175,43 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        Union[Any, Errors]
+    """
+
+    return sync_detailed(
+        project_id=project_id,
+        space_id=space_id,
+        document_name=document_name,
+        client=client,
+        body=body,
+        workflow_action=workflow_action,
+    ).parsed
+
+
+async def asyncio_detailed(
+    project_id: str,
+    space_id: str,
+    document_name: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+    body: DocumentsSinglePatchRequest,
+    workflow_action: Union[Unset, str] = UNSET,
+) -> Response[Union[Any, Errors]]:
+    """Updates the specified Document.
+
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        workflow_action (Union[Unset, str]):
+        body (DocumentsSinglePatchRequest):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[Any, Errors]]
     """
 
     kwargs = _get_kwargs(
@@ -169,3 +225,41 @@ async def asyncio_detailed(
     response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
+
+async def asyncio(
+    project_id: str,
+    space_id: str,
+    document_name: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+    body: DocumentsSinglePatchRequest,
+    workflow_action: Union[Unset, str] = UNSET,
+) -> Optional[Union[Any, Errors]]:
+    """Updates the specified Document.
+
+    Args:
+        project_id (str):
+        space_id (str):
+        document_name (str):
+        workflow_action (Union[Unset, str]):
+        body (DocumentsSinglePatchRequest):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[Any, Errors]
+    """
+
+    return (
+        await asyncio_detailed(
+            project_id=project_id,
+            space_id=space_id,
+            document_name=document_name,
+            client=client,
+            body=body,
+            workflow_action=workflow_action,
+        )
+    ).parsed

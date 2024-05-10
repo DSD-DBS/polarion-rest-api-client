@@ -34,8 +34,8 @@ class ExternallylinkedworkitemsListGetResponseDataItem:
         id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/hostname/MyProjectId/MyLinkedWorkItemId.
         revision (Union[Unset, str]):  Example: 1234.
         attributes (Union[Unset, ExternallylinkedworkitemsListGetResponseDataItemAttributes]):
-        meta (Union[Unset, ExternallylinkedworkitemsListGetResponseDataItemMeta]):
         links (Union[Unset, ExternallylinkedworkitemsListGetResponseDataItemLinks]):
+        meta (Union[Unset, ExternallylinkedworkitemsListGetResponseDataItemMeta]):
     """
 
     type: Union[
@@ -46,11 +46,11 @@ class ExternallylinkedworkitemsListGetResponseDataItem:
     attributes: Union[
         Unset, "ExternallylinkedworkitemsListGetResponseDataItemAttributes"
     ] = UNSET
-    meta: Union[
-        Unset, "ExternallylinkedworkitemsListGetResponseDataItemMeta"
-    ] = UNSET
     links: Union[
         Unset, "ExternallylinkedworkitemsListGetResponseDataItemLinks"
+    ] = UNSET
+    meta: Union[
+        Unset, "ExternallylinkedworkitemsListGetResponseDataItemMeta"
     ] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -69,13 +69,13 @@ class ExternallylinkedworkitemsListGetResponseDataItem:
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
+
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -88,10 +88,10 @@ class ExternallylinkedworkitemsListGetResponseDataItem:
             field_dict["revision"] = revision
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -132,6 +132,17 @@ class ExternallylinkedworkitemsListGetResponseDataItem:
                 _attributes
             )
 
+        _links = d.pop("links", UNSET)
+        links: Union[
+            Unset, ExternallylinkedworkitemsListGetResponseDataItemLinks
+        ]
+        if isinstance(_links, Unset):
+            links = UNSET
+        else:
+            links = ExternallylinkedworkitemsListGetResponseDataItemLinks.from_dict(
+                _links
+            )
+
         _meta = d.pop("meta", UNSET)
         meta: Union[
             Unset, ExternallylinkedworkitemsListGetResponseDataItemMeta
@@ -145,24 +156,13 @@ class ExternallylinkedworkitemsListGetResponseDataItem:
                 )
             )
 
-        _links = d.pop("links", UNSET)
-        links: Union[
-            Unset, ExternallylinkedworkitemsListGetResponseDataItemLinks
-        ]
-        if isinstance(_links, Unset):
-            links = UNSET
-        else:
-            links = ExternallylinkedworkitemsListGetResponseDataItemLinks.from_dict(
-                _links
-            )
-
         externallylinkedworkitems_list_get_response_data_item_obj = cls(
             type=type,
             id=id,
             revision=revision,
             attributes=attributes,
-            meta=meta,
             links=links,
+            meta=meta,
         )
 
         externallylinkedworkitems_list_get_response_data_item_obj.additional_properties = (

@@ -6,22 +6,26 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.jobs_single_post_response_data_relationships_document_data_type import (
+    JobsSinglePostResponseDataRelationshipsDocumentDataType,
+)
 from ..types import UNSET, Unset
 
-T = TypeVar("T", bound="ErrorsErrorsItemSourceResource")
+T = TypeVar("T", bound="JobsSinglePostResponseDataRelationshipsDocumentData")
 
 
 @_attrs_define
-class ErrorsErrorsItemSourceResource:
-    """Resource causing the error.
-
+class JobsSinglePostResponseDataRelationshipsDocumentData:
+    """
     Attributes:
-        id (Union[Unset, str]):  Example: MyProjectId/id.
-        type (Union[Unset, str]):  Example: type.
+        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
+        type (Union[Unset, JobsSinglePostResponseDataRelationshipsDocumentDataType]):
     """
 
     id: Union[Unset, str] = UNSET
-    type: Union[Unset, str] = UNSET
+    type: Union[
+        Unset, JobsSinglePostResponseDataRelationshipsDocumentDataType
+    ] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -29,7 +33,9 @@ class ErrorsErrorsItemSourceResource:
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
 
-        type = self.type
+        type: Union[Unset, str] = UNSET
+        if not isinstance(self.type, Unset):
+            type = self.type.value
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -46,15 +52,26 @@ class ErrorsErrorsItemSourceResource:
         d = src_dict.copy()
         id = d.pop("id", UNSET)
 
-        type = d.pop("type", UNSET)
+        _type = d.pop("type", UNSET)
+        type: Union[
+            Unset, JobsSinglePostResponseDataRelationshipsDocumentDataType
+        ]
+        if isinstance(_type, Unset):
+            type = UNSET
+        else:
+            type = JobsSinglePostResponseDataRelationshipsDocumentDataType(
+                _type
+            )
 
-        errors_errors_item_source_resource_obj = cls(
+        jobs_single_post_response_data_relationships_document_data_obj = cls(
             id=id,
             type=type,
         )
 
-        errors_errors_item_source_resource_obj.additional_properties = d
-        return errors_errors_item_source_resource_obj
+        jobs_single_post_response_data_relationships_document_data_obj.additional_properties = (
+            d
+        )
+        return jobs_single_post_response_data_relationships_document_data_obj
 
     @property
     def additional_keys(self) -> List[str]:

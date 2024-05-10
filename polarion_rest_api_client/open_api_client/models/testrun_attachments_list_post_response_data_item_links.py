@@ -15,43 +15,43 @@ T = TypeVar("T", bound="TestrunAttachmentsListPostResponseDataItemLinks")
 class TestrunAttachmentsListPostResponseDataItemLinks:
     """
     Attributes:
-        self_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/testruns/MyTestRunId/attachments/MyAttachmentId?revision=1234.
         content (Union[Unset, str]):  Example: server-host-name/application-
             path/projects/MyProjectId/testruns/MyTestRunId/attachments/MyAttachmentId/content?revision=1234.
+        self_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/testruns/MyTestRunId/attachments/MyAttachmentId?revision=1234.
     """
 
-    self_: Union[Unset, str] = UNSET
     content: Union[Unset, str] = UNSET
+    self_: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        self_ = self.self_
-
         content = self.content
+
+        self_ = self.self_
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if self_ is not UNSET:
-            field_dict["self"] = self_
         if content is not UNSET:
             field_dict["content"] = content
+        if self_ is not UNSET:
+            field_dict["self"] = self_
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        self_ = d.pop("self", UNSET)
-
         content = d.pop("content", UNSET)
 
+        self_ = d.pop("self", UNSET)
+
         testrun_attachments_list_post_response_data_item_links_obj = cls(
-            self_=self_,
             content=content,
+            self_=self_,
         )
 
         testrun_attachments_list_post_response_data_item_links_obj.additional_properties = (

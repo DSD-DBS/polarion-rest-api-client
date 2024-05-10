@@ -2,12 +2,13 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.errors import Errors
 from ...models.sparse_fields import SparseFields
 from ...models.testrecords_single_get_response import (
     TestrecordsSingleGetResponse,
@@ -59,31 +60,38 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, TestrecordsSingleGetResponse]]:
+) -> Optional[Union[Errors, TestrecordsSingleGetResponse]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = TestrecordsSingleGetResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == HTTPStatus.BAD_REQUEST:
-        response_400 = cast(Any, None)
+        response_400 = Errors.from_dict(response.json())
+
         return response_400
     if response.status_code == HTTPStatus.UNAUTHORIZED:
-        response_401 = cast(Any, None)
+        response_401 = Errors.from_dict(response.json())
+
         return response_401
     if response.status_code == HTTPStatus.FORBIDDEN:
-        response_403 = cast(Any, None)
+        response_403 = Errors.from_dict(response.json())
+
         return response_403
     if response.status_code == HTTPStatus.NOT_FOUND:
-        response_404 = cast(Any, None)
+        response_404 = Errors.from_dict(response.json())
+
         return response_404
     if response.status_code == HTTPStatus.NOT_ACCEPTABLE:
-        response_406 = cast(Any, None)
+        response_406 = Errors.from_dict(response.json())
+
         return response_406
     if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
-        response_500 = cast(Any, None)
+        response_500 = Errors.from_dict(response.json())
+
         return response_500
     if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
-        response_503 = cast(Any, None)
+        response_503 = Errors.from_dict(response.json())
+
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
@@ -93,7 +101,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, TestrecordsSingleGetResponse]]:
+) -> Response[Union[Errors, TestrecordsSingleGetResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -113,7 +121,7 @@ def sync_detailed(
     fields: Union[Unset, "SparseFields"] = UNSET,
     include: Union[Unset, str] = UNSET,
     revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Any, TestrecordsSingleGetResponse]]:
+) -> Response[Union[Errors, TestrecordsSingleGetResponse]]:
     """Returns the specified Test Record.
 
     Args:
@@ -131,7 +139,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, TestrecordsSingleGetResponse]]
+        Response[Union[Errors, TestrecordsSingleGetResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -163,7 +171,7 @@ def sync(
     fields: Union[Unset, "SparseFields"] = UNSET,
     include: Union[Unset, str] = UNSET,
     revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, TestrecordsSingleGetResponse]]:
+) -> Optional[Union[Errors, TestrecordsSingleGetResponse]]:
     """Returns the specified Test Record.
 
     Args:
@@ -181,7 +189,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, TestrecordsSingleGetResponse]
+        Union[Errors, TestrecordsSingleGetResponse]
     """
 
     return sync_detailed(
@@ -208,7 +216,7 @@ async def asyncio_detailed(
     fields: Union[Unset, "SparseFields"] = UNSET,
     include: Union[Unset, str] = UNSET,
     revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Any, TestrecordsSingleGetResponse]]:
+) -> Response[Union[Errors, TestrecordsSingleGetResponse]]:
     """Returns the specified Test Record.
 
     Args:
@@ -226,7 +234,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, TestrecordsSingleGetResponse]]
+        Response[Union[Errors, TestrecordsSingleGetResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -256,7 +264,7 @@ async def asyncio(
     fields: Union[Unset, "SparseFields"] = UNSET,
     include: Union[Unset, str] = UNSET,
     revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, TestrecordsSingleGetResponse]]:
+) -> Optional[Union[Errors, TestrecordsSingleGetResponse]]:
     """Returns the specified Test Record.
 
     Args:
@@ -274,7 +282,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, TestrecordsSingleGetResponse]
+        Union[Errors, TestrecordsSingleGetResponse]
     """
 
     return (

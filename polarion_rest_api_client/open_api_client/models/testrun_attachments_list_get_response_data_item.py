@@ -38,8 +38,8 @@ class TestrunAttachmentsListGetResponseDataItem:
         revision (Union[Unset, str]):  Example: 1234.
         attributes (Union[Unset, TestrunAttachmentsListGetResponseDataItemAttributes]):
         relationships (Union[Unset, TestrunAttachmentsListGetResponseDataItemRelationships]):
-        meta (Union[Unset, TestrunAttachmentsListGetResponseDataItemMeta]):
         links (Union[Unset, TestrunAttachmentsListGetResponseDataItemLinks]):
+        meta (Union[Unset, TestrunAttachmentsListGetResponseDataItemMeta]):
     """
 
     type: Union[Unset, TestrunAttachmentsListGetResponseDataItemType] = UNSET
@@ -51,10 +51,10 @@ class TestrunAttachmentsListGetResponseDataItem:
     relationships: Union[
         Unset, "TestrunAttachmentsListGetResponseDataItemRelationships"
     ] = UNSET
-    meta: Union[Unset, "TestrunAttachmentsListGetResponseDataItemMeta"] = UNSET
     links: Union[Unset, "TestrunAttachmentsListGetResponseDataItemLinks"] = (
         UNSET
     )
+    meta: Union[Unset, "TestrunAttachmentsListGetResponseDataItemMeta"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -76,13 +76,13 @@ class TestrunAttachmentsListGetResponseDataItem:
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
+
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -97,10 +97,10 @@ class TestrunAttachmentsListGetResponseDataItem:
             field_dict["attributes"] = attributes
         if relationships is not UNSET:
             field_dict["relationships"] = relationships
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -155,15 +155,6 @@ class TestrunAttachmentsListGetResponseDataItem:
                 _relationships
             )
 
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, TestrunAttachmentsListGetResponseDataItemMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = TestrunAttachmentsListGetResponseDataItemMeta.from_dict(
-                _meta
-            )
-
         _links = d.pop("links", UNSET)
         links: Union[Unset, TestrunAttachmentsListGetResponseDataItemLinks]
         if isinstance(_links, Unset):
@@ -173,14 +164,23 @@ class TestrunAttachmentsListGetResponseDataItem:
                 _links
             )
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, TestrunAttachmentsListGetResponseDataItemMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = TestrunAttachmentsListGetResponseDataItemMeta.from_dict(
+                _meta
+            )
+
         testrun_attachments_list_get_response_data_item_obj = cls(
             type=type,
             id=id,
             revision=revision,
             attributes=attributes,
             relationships=relationships,
-            meta=meta,
             links=links,
+            meta=meta,
         )
 
         testrun_attachments_list_get_response_data_item_obj.additional_properties = (

@@ -20,38 +20,40 @@ T = TypeVar(
 class GlobalrolesSingleGetResponseDataRelationshipsUsersDataItem:
     """
     Attributes:
-        type (Union[Unset, GlobalrolesSingleGetResponseDataRelationshipsUsersDataItemType]):
         id (Union[Unset, str]):  Example: MyUserId.
+        type (Union[Unset, GlobalrolesSingleGetResponseDataRelationshipsUsersDataItemType]):
     """
 
+    id: Union[Unset, str] = UNSET
     type: Union[
         Unset, GlobalrolesSingleGetResponseDataRelationshipsUsersDataItemType
     ] = UNSET
-    id: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
+        id = self.id
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        id = self.id
-
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
         if id is not UNSET:
             field_dict["id"] = id
+        if type is not UNSET:
+            field_dict["type"] = type
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        id = d.pop("id", UNSET)
+
         _type = d.pop("type", UNSET)
         type: Union[
             Unset,
@@ -66,11 +68,9 @@ class GlobalrolesSingleGetResponseDataRelationshipsUsersDataItem:
                 )
             )
 
-        id = d.pop("id", UNSET)
-
         globalroles_single_get_response_data_relationships_users_data_item_obj = cls(
-            type=type,
             id=id,
+            type=type,
         )
 
         globalroles_single_get_response_data_relationships_users_data_item_obj.additional_properties = (

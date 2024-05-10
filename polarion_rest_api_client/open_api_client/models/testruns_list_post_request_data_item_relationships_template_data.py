@@ -20,38 +20,40 @@ T = TypeVar(
 class TestrunsListPostRequestDataItemRelationshipsTemplateData:
     """
     Attributes:
-        type (Union[Unset, TestrunsListPostRequestDataItemRelationshipsTemplateDataType]):
         id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId.
+        type (Union[Unset, TestrunsListPostRequestDataItemRelationshipsTemplateDataType]):
     """
 
+    id: Union[Unset, str] = UNSET
     type: Union[
         Unset, TestrunsListPostRequestDataItemRelationshipsTemplateDataType
     ] = UNSET
-    id: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
+        id = self.id
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        id = self.id
-
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
         if id is not UNSET:
             field_dict["id"] = id
+        if type is not UNSET:
+            field_dict["type"] = type
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        id = d.pop("id", UNSET)
+
         _type = d.pop("type", UNSET)
         type: Union[
             Unset, TestrunsListPostRequestDataItemRelationshipsTemplateDataType
@@ -65,11 +67,9 @@ class TestrunsListPostRequestDataItemRelationshipsTemplateData:
                 )
             )
 
-        id = d.pop("id", UNSET)
-
         testruns_list_post_request_data_item_relationships_template_data_obj = cls(
-            type=type,
             id=id,
+            type=type,
         )
 
         testruns_list_post_request_data_item_relationships_template_data_obj.additional_properties = (

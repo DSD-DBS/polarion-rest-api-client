@@ -27,25 +27,21 @@ T = TypeVar("T", bound="WorkflowActionsActionResponseBody")
 class WorkflowActionsActionResponseBody:
     """
     Attributes:
-        meta (Union[Unset, WorkflowActionsActionResponseBodyMeta]):
         data (Union[Unset, List['WorkflowActionsActionResponseBodyDataItem']]):
         links (Union[Unset, WorkflowActionsActionResponseBodyLinks]):
+        meta (Union[Unset, WorkflowActionsActionResponseBodyMeta]):
     """
 
-    meta: Union[Unset, "WorkflowActionsActionResponseBodyMeta"] = UNSET
     data: Union[Unset, List["WorkflowActionsActionResponseBodyDataItem"]] = (
         UNSET
     )
     links: Union[Unset, "WorkflowActionsActionResponseBodyLinks"] = UNSET
+    meta: Union[Unset, "WorkflowActionsActionResponseBodyMeta"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         data: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.data, Unset):
             data = []
@@ -57,15 +53,19 @@ class WorkflowActionsActionResponseBody:
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if data is not UNSET:
             field_dict["data"] = data
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -82,13 +82,6 @@ class WorkflowActionsActionResponseBody:
         )
 
         d = src_dict.copy()
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, WorkflowActionsActionResponseBodyMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = WorkflowActionsActionResponseBodyMeta.from_dict(_meta)
-
         data = []
         _data = d.pop("data", UNSET)
         for data_item_data in _data or []:
@@ -105,10 +98,17 @@ class WorkflowActionsActionResponseBody:
         else:
             links = WorkflowActionsActionResponseBodyLinks.from_dict(_links)
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, WorkflowActionsActionResponseBodyMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = WorkflowActionsActionResponseBodyMeta.from_dict(_meta)
+
         workflow_actions_action_response_body_obj = cls(
-            meta=meta,
             data=data,
             links=links,
+            meta=meta,
         )
 
         workflow_actions_action_response_body_obj.additional_properties = d

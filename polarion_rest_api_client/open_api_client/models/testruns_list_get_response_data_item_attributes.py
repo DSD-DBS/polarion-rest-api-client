@@ -31,7 +31,7 @@ class TestrunsListGetResponseDataItemAttributes:
         group_id (Union[Unset, str]):  Example: Group ID.
         home_page_content (Union[Unset, TestrunsListGetResponseDataItemAttributesHomePageContent]):
         id (Union[Unset, str]):  Example: ID.
-        id_prefix (Union[Unset, str]):  Example: ID Prefix.
+        id_prefix (Union[Unset, str]):  Example: MyTestRunIdPrefix.
         is_template (Union[Unset, bool]):
         keep_in_history (Union[Unset, bool]):
         query (Union[Unset, str]):  Example: Query.

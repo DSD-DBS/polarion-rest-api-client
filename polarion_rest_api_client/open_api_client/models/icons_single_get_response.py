@@ -29,7 +29,8 @@ class IconsSingleGetResponse:
     Attributes:
         data (Union[Unset, IconsSingleGetResponseData]):
         included (Union[Unset, List['IconsSingleGetResponseIncludedItem']]): Related entities might be returned, see <a
-            href="https://docs.sw.siemens.com/en-US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User
+            href="https://docs.sw.siemens.com/en-
+            US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
             Guide</a>.
         links (Union[Unset, IconsSingleGetResponseLinks]):
     """

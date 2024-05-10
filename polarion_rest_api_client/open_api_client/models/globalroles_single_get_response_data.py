@@ -33,8 +33,8 @@ class GlobalrolesSingleGetResponseData:
         type (Union[Unset, GlobalrolesSingleGetResponseDataType]):
         id (Union[Unset, str]):  Example: MyRoleId.
         relationships (Union[Unset, GlobalrolesSingleGetResponseDataRelationships]):
-        meta (Union[Unset, GlobalrolesSingleGetResponseDataMeta]):
         links (Union[Unset, GlobalrolesSingleGetResponseDataLinks]):
+        meta (Union[Unset, GlobalrolesSingleGetResponseDataMeta]):
     """
 
     type: Union[Unset, GlobalrolesSingleGetResponseDataType] = UNSET
@@ -42,8 +42,8 @@ class GlobalrolesSingleGetResponseData:
     relationships: Union[
         Unset, "GlobalrolesSingleGetResponseDataRelationships"
     ] = UNSET
-    meta: Union[Unset, "GlobalrolesSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "GlobalrolesSingleGetResponseDataLinks"] = UNSET
+    meta: Union[Unset, "GlobalrolesSingleGetResponseDataMeta"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -59,13 +59,13 @@ class GlobalrolesSingleGetResponseData:
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
+
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -76,10 +76,10 @@ class GlobalrolesSingleGetResponseData:
             field_dict["id"] = id
         if relationships is not UNSET:
             field_dict["relationships"] = relationships
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -118,13 +118,6 @@ class GlobalrolesSingleGetResponseData:
                 )
             )
 
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, GlobalrolesSingleGetResponseDataMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = GlobalrolesSingleGetResponseDataMeta.from_dict(_meta)
-
         _links = d.pop("links", UNSET)
         links: Union[Unset, GlobalrolesSingleGetResponseDataLinks]
         if isinstance(_links, Unset):
@@ -132,12 +125,19 @@ class GlobalrolesSingleGetResponseData:
         else:
             links = GlobalrolesSingleGetResponseDataLinks.from_dict(_links)
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, GlobalrolesSingleGetResponseDataMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = GlobalrolesSingleGetResponseDataMeta.from_dict(_meta)
+
         globalroles_single_get_response_data_obj = cls(
             type=type,
             id=id,
             relationships=relationships,
-            meta=meta,
             links=links,
+            meta=meta,
         )
 
         globalroles_single_get_response_data_obj.additional_properties = d

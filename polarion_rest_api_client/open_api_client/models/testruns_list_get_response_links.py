@@ -15,83 +15,83 @@ T = TypeVar("T", bound="TestrunsListGetResponseLinks")
 class TestrunsListGetResponseLinks:
     """
     Attributes:
-        self_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=5.
         first (Union[Unset, str]):  Example: server-host-name/application-
             path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=1.
-        prev (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=4.
-        next_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=6.
         last (Union[Unset, str]):  Example: server-host-name/application-
             path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=9.
+        next_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=6.
         portal (Union[Unset, str]):  Example: server-host-name/application-
             path/polarion/redirect/project/MyProjectId/testruns.
+        prev (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=4.
+        self_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=5.
     """
 
-    self_: Union[Unset, str] = UNSET
     first: Union[Unset, str] = UNSET
-    prev: Union[Unset, str] = UNSET
-    next_: Union[Unset, str] = UNSET
     last: Union[Unset, str] = UNSET
+    next_: Union[Unset, str] = UNSET
     portal: Union[Unset, str] = UNSET
+    prev: Union[Unset, str] = UNSET
+    self_: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        self_ = self.self_
-
         first = self.first
-
-        prev = self.prev
-
-        next_ = self.next_
 
         last = self.last
 
+        next_ = self.next_
+
         portal = self.portal
+
+        prev = self.prev
+
+        self_ = self.self_
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if self_ is not UNSET:
-            field_dict["self"] = self_
         if first is not UNSET:
             field_dict["first"] = first
-        if prev is not UNSET:
-            field_dict["prev"] = prev
-        if next_ is not UNSET:
-            field_dict["next"] = next_
         if last is not UNSET:
             field_dict["last"] = last
+        if next_ is not UNSET:
+            field_dict["next"] = next_
         if portal is not UNSET:
             field_dict["portal"] = portal
+        if prev is not UNSET:
+            field_dict["prev"] = prev
+        if self_ is not UNSET:
+            field_dict["self"] = self_
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        self_ = d.pop("self", UNSET)
-
         first = d.pop("first", UNSET)
-
-        prev = d.pop("prev", UNSET)
-
-        next_ = d.pop("next", UNSET)
 
         last = d.pop("last", UNSET)
 
+        next_ = d.pop("next", UNSET)
+
         portal = d.pop("portal", UNSET)
 
+        prev = d.pop("prev", UNSET)
+
+        self_ = d.pop("self", UNSET)
+
         testruns_list_get_response_links_obj = cls(
-            self_=self_,
             first=first,
-            prev=prev,
-            next_=next_,
             last=last,
+            next_=next_,
             portal=portal,
+            prev=prev,
+            self_=self_,
         )
 
         testruns_list_get_response_links_obj.additional_properties = d

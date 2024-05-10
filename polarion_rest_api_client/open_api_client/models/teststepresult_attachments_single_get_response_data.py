@@ -34,12 +34,12 @@ class TeststepresultAttachmentsSingleGetResponseData:
     """
     Attributes:
         type (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/1234/MyProjectId/MyTestcaseId/0/1/MyAttachmentId.
+        id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/1/MyAttachmentId.
         revision (Union[Unset, str]):  Example: 1234.
         attributes (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataAttributes]):
         relationships (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataRelationships]):
-        meta (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataMeta]):
         links (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataLinks]):
+        meta (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataMeta]):
     """
 
     type: Union[Unset, TeststepresultAttachmentsSingleGetResponseDataType] = (
@@ -53,11 +53,11 @@ class TeststepresultAttachmentsSingleGetResponseData:
     relationships: Union[
         Unset, "TeststepresultAttachmentsSingleGetResponseDataRelationships"
     ] = UNSET
-    meta: Union[
-        Unset, "TeststepresultAttachmentsSingleGetResponseDataMeta"
-    ] = UNSET
     links: Union[
         Unset, "TeststepresultAttachmentsSingleGetResponseDataLinks"
+    ] = UNSET
+    meta: Union[
+        Unset, "TeststepresultAttachmentsSingleGetResponseDataMeta"
     ] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -80,13 +80,13 @@ class TeststepresultAttachmentsSingleGetResponseData:
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
+
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -101,10 +101,10 @@ class TeststepresultAttachmentsSingleGetResponseData:
             field_dict["attributes"] = attributes
         if relationships is not UNSET:
             field_dict["relationships"] = relationships
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -157,17 +157,6 @@ class TeststepresultAttachmentsSingleGetResponseData:
                 _relationships
             )
 
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, TeststepresultAttachmentsSingleGetResponseDataMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = (
-                TeststepresultAttachmentsSingleGetResponseDataMeta.from_dict(
-                    _meta
-                )
-            )
-
         _links = d.pop("links", UNSET)
         links: Union[
             Unset, TeststepresultAttachmentsSingleGetResponseDataLinks
@@ -181,14 +170,25 @@ class TeststepresultAttachmentsSingleGetResponseData:
                 )
             )
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, TeststepresultAttachmentsSingleGetResponseDataMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = (
+                TeststepresultAttachmentsSingleGetResponseDataMeta.from_dict(
+                    _meta
+                )
+            )
+
         teststepresult_attachments_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
             attributes=attributes,
             relationships=relationships,
-            meta=meta,
             links=links,
+            meta=meta,
         )
 
         teststepresult_attachments_single_get_response_data_obj.additional_properties = (

@@ -34,8 +34,8 @@ class ExternallylinkedworkitemsSingleGetResponseData:
         id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/hostname/MyProjectId/MyLinkedWorkItemId.
         revision (Union[Unset, str]):  Example: 1234.
         attributes (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataAttributes]):
-        meta (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataMeta]):
         links (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataLinks]):
+        meta (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataMeta]):
     """
 
     type: Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataType] = (
@@ -46,11 +46,11 @@ class ExternallylinkedworkitemsSingleGetResponseData:
     attributes: Union[
         Unset, "ExternallylinkedworkitemsSingleGetResponseDataAttributes"
     ] = UNSET
-    meta: Union[
-        Unset, "ExternallylinkedworkitemsSingleGetResponseDataMeta"
-    ] = UNSET
     links: Union[
         Unset, "ExternallylinkedworkitemsSingleGetResponseDataLinks"
+    ] = UNSET
+    meta: Union[
+        Unset, "ExternallylinkedworkitemsSingleGetResponseDataMeta"
     ] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -69,13 +69,13 @@ class ExternallylinkedworkitemsSingleGetResponseData:
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
+
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -88,10 +88,10 @@ class ExternallylinkedworkitemsSingleGetResponseData:
             field_dict["revision"] = revision
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -130,17 +130,6 @@ class ExternallylinkedworkitemsSingleGetResponseData:
                 _attributes
             )
 
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = (
-                ExternallylinkedworkitemsSingleGetResponseDataMeta.from_dict(
-                    _meta
-                )
-            )
-
         _links = d.pop("links", UNSET)
         links: Union[
             Unset, ExternallylinkedworkitemsSingleGetResponseDataLinks
@@ -154,13 +143,24 @@ class ExternallylinkedworkitemsSingleGetResponseData:
                 )
             )
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = (
+                ExternallylinkedworkitemsSingleGetResponseDataMeta.from_dict(
+                    _meta
+                )
+            )
+
         externallylinkedworkitems_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
             attributes=attributes,
-            meta=meta,
             links=links,
+            meta=meta,
         )
 
         externallylinkedworkitems_single_get_response_data_obj.additional_properties = (

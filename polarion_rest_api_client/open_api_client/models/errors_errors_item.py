@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +9,9 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.errors_errors_item_source import ErrorsErrorsItemSource
+    from ..models.errors_errors_item_source_type_0 import (
+        ErrorsErrorsItemSourceType0,
+    )
 
 
 T = TypeVar("T", bound="ErrorsErrorsItem")
@@ -23,27 +25,35 @@ class ErrorsErrorsItem:
         title (Union[Unset, str]): Short, human-readable summary of the problem. Example: Bad Request.
         detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
             Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).
-        source (Union[Unset, ErrorsErrorsItemSource]):
+        source (Union['ErrorsErrorsItemSourceType0', None, Unset]):
     """
 
     status: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
     detail: Union[Unset, str] = UNSET
-    source: Union[Unset, "ErrorsErrorsItemSource"] = UNSET
+    source: Union["ErrorsErrorsItemSourceType0", None, Unset] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.errors_errors_item_source_type_0 import (
+            ErrorsErrorsItemSourceType0,
+        )
+
         status = self.status
 
         title = self.title
 
         detail = self.detail
 
-        source: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.source, Unset):
+        source: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.source, Unset):
+            source = UNSET
+        elif isinstance(self.source, ErrorsErrorsItemSourceType0):
             source = self.source.to_dict()
+        else:
+            source = self.source
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -61,7 +71,9 @@ class ErrorsErrorsItem:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.errors_errors_item_source import ErrorsErrorsItemSource
+        from ..models.errors_errors_item_source_type_0 import (
+            ErrorsErrorsItemSourceType0,
+        )
 
         d = src_dict.copy()
         status = d.pop("status", UNSET)
@@ -70,12 +82,26 @@ class ErrorsErrorsItem:
 
         detail = d.pop("detail", UNSET)
 
-        _source = d.pop("source", UNSET)
-        source: Union[Unset, ErrorsErrorsItemSource]
-        if isinstance(_source, Unset):
-            source = UNSET
-        else:
-            source = ErrorsErrorsItemSource.from_dict(_source)
+        def _parse_source(
+            data: object,
+        ) -> Union["ErrorsErrorsItemSourceType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                source_type_0 = ErrorsErrorsItemSourceType0.from_dict(data)
+
+                return source_type_0
+            except:  # noqa: E722
+                pass
+            return cast(
+                Union["ErrorsErrorsItemSourceType0", None, Unset], data
+            )
+
+        source = _parse_source(d.pop("source", UNSET))
 
         errors_errors_item_obj = cls(
             status=status,

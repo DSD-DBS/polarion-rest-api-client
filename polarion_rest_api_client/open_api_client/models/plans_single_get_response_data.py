@@ -38,8 +38,8 @@ class PlansSingleGetResponseData:
         revision (Union[Unset, str]):  Example: 1234.
         attributes (Union[Unset, PlansSingleGetResponseDataAttributes]):
         relationships (Union[Unset, PlansSingleGetResponseDataRelationships]):
-        meta (Union[Unset, PlansSingleGetResponseDataMeta]):
         links (Union[Unset, PlansSingleGetResponseDataLinks]):
+        meta (Union[Unset, PlansSingleGetResponseDataMeta]):
     """
 
     type: Union[Unset, PlansSingleGetResponseDataType] = UNSET
@@ -49,8 +49,8 @@ class PlansSingleGetResponseData:
     relationships: Union[Unset, "PlansSingleGetResponseDataRelationships"] = (
         UNSET
     )
-    meta: Union[Unset, "PlansSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "PlansSingleGetResponseDataLinks"] = UNSET
+    meta: Union[Unset, "PlansSingleGetResponseDataMeta"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -72,13 +72,13 @@ class PlansSingleGetResponseData:
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
+
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -93,10 +93,10 @@ class PlansSingleGetResponseData:
             field_dict["attributes"] = attributes
         if relationships is not UNSET:
             field_dict["relationships"] = relationships
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -145,13 +145,6 @@ class PlansSingleGetResponseData:
                 _relationships
             )
 
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, PlansSingleGetResponseDataMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = PlansSingleGetResponseDataMeta.from_dict(_meta)
-
         _links = d.pop("links", UNSET)
         links: Union[Unset, PlansSingleGetResponseDataLinks]
         if isinstance(_links, Unset):
@@ -159,14 +152,21 @@ class PlansSingleGetResponseData:
         else:
             links = PlansSingleGetResponseDataLinks.from_dict(_links)
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, PlansSingleGetResponseDataMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = PlansSingleGetResponseDataMeta.from_dict(_meta)
+
         plans_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
             attributes=attributes,
             relationships=relationships,
-            meta=meta,
             links=links,
+            meta=meta,
         )
 
         plans_single_get_response_data_obj.additional_properties = d

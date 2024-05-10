@@ -25,7 +25,7 @@ class TeststepresultAttachmentsListPostResponseDataItem:
     """
     Attributes:
         type (Union[Unset, TeststepresultAttachmentsListPostResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/1234/MyProjectId/MyTestcaseId/0/1/MyAttachmentId.
+        id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/1/MyAttachmentId.
         links (Union[Unset, TeststepresultAttachmentsListPostResponseDataItemLinks]):
     """
 

@@ -38,8 +38,8 @@ class PageAttachmentsSingleGetResponseData:
         revision (Union[Unset, str]):  Example: 1234.
         attributes (Union[Unset, PageAttachmentsSingleGetResponseDataAttributes]):
         relationships (Union[Unset, PageAttachmentsSingleGetResponseDataRelationships]):
-        meta (Union[Unset, PageAttachmentsSingleGetResponseDataMeta]):
         links (Union[Unset, PageAttachmentsSingleGetResponseDataLinks]):
+        meta (Union[Unset, PageAttachmentsSingleGetResponseDataMeta]):
     """
 
     type: Union[Unset, PageAttachmentsSingleGetResponseDataType] = UNSET
@@ -51,8 +51,8 @@ class PageAttachmentsSingleGetResponseData:
     relationships: Union[
         Unset, "PageAttachmentsSingleGetResponseDataRelationships"
     ] = UNSET
-    meta: Union[Unset, "PageAttachmentsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "PageAttachmentsSingleGetResponseDataLinks"] = UNSET
+    meta: Union[Unset, "PageAttachmentsSingleGetResponseDataMeta"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -74,13 +74,13 @@ class PageAttachmentsSingleGetResponseData:
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
+
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -95,10 +95,10 @@ class PageAttachmentsSingleGetResponseData:
             field_dict["attributes"] = attributes
         if relationships is not UNSET:
             field_dict["relationships"] = relationships
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -155,13 +155,6 @@ class PageAttachmentsSingleGetResponseData:
                 )
             )
 
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, PageAttachmentsSingleGetResponseDataMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = PageAttachmentsSingleGetResponseDataMeta.from_dict(_meta)
-
         _links = d.pop("links", UNSET)
         links: Union[Unset, PageAttachmentsSingleGetResponseDataLinks]
         if isinstance(_links, Unset):
@@ -169,14 +162,21 @@ class PageAttachmentsSingleGetResponseData:
         else:
             links = PageAttachmentsSingleGetResponseDataLinks.from_dict(_links)
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, PageAttachmentsSingleGetResponseDataMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = PageAttachmentsSingleGetResponseDataMeta.from_dict(_meta)
+
         page_attachments_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
             attributes=attributes,
             relationships=relationships,
-            meta=meta,
             links=links,
+            meta=meta,
         )
 
         page_attachments_single_get_response_data_obj.additional_properties = d

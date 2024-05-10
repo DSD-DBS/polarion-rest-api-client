@@ -38,8 +38,8 @@ class TestrunsSingleGetResponseData:
         revision (Union[Unset, str]):  Example: 1234.
         attributes (Union[Unset, TestrunsSingleGetResponseDataAttributes]):
         relationships (Union[Unset, TestrunsSingleGetResponseDataRelationships]):
-        meta (Union[Unset, TestrunsSingleGetResponseDataMeta]):
         links (Union[Unset, TestrunsSingleGetResponseDataLinks]):
+        meta (Union[Unset, TestrunsSingleGetResponseDataMeta]):
     """
 
     type: Union[Unset, TestrunsSingleGetResponseDataType] = UNSET
@@ -49,8 +49,8 @@ class TestrunsSingleGetResponseData:
     relationships: Union[
         Unset, "TestrunsSingleGetResponseDataRelationships"
     ] = UNSET
-    meta: Union[Unset, "TestrunsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "TestrunsSingleGetResponseDataLinks"] = UNSET
+    meta: Union[Unset, "TestrunsSingleGetResponseDataMeta"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -72,13 +72,13 @@ class TestrunsSingleGetResponseData:
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         links: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
+
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -93,10 +93,10 @@ class TestrunsSingleGetResponseData:
             field_dict["attributes"] = attributes
         if relationships is not UNSET:
             field_dict["relationships"] = relationships
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -147,13 +147,6 @@ class TestrunsSingleGetResponseData:
                 )
             )
 
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, TestrunsSingleGetResponseDataMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = TestrunsSingleGetResponseDataMeta.from_dict(_meta)
-
         _links = d.pop("links", UNSET)
         links: Union[Unset, TestrunsSingleGetResponseDataLinks]
         if isinstance(_links, Unset):
@@ -161,14 +154,21 @@ class TestrunsSingleGetResponseData:
         else:
             links = TestrunsSingleGetResponseDataLinks.from_dict(_links)
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, TestrunsSingleGetResponseDataMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = TestrunsSingleGetResponseDataMeta.from_dict(_meta)
+
         testruns_single_get_response_data_obj = cls(
             type=type,
             id=id,
             revision=revision,
             attributes=attributes,
             relationships=relationships,
-            meta=meta,
             links=links,
+            meta=meta,
         )
 
         testruns_single_get_response_data_obj.additional_properties = d
