@@ -20,7 +20,7 @@ import httpx
 error_code_pattern = re.compile("[4,5][0-9]{2}")
 
 
-def fix_spec(src, path):
+def fix_spec(src: str, path: str | os.PathLike):
     """Fix errors in the specification."""
     if src == "path":
         with open(path, "r") as f:
