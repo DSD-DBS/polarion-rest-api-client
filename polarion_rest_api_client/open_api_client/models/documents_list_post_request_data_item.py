@@ -29,9 +29,9 @@ class DocumentsListPostRequestDataItem:
     """
 
     type: Union[Unset, DocumentsListPostRequestDataItemType] = UNSET
-    attributes: Union[
-        Unset, "DocumentsListPostRequestDataItemAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "DocumentsListPostRequestDataItemAttributes"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

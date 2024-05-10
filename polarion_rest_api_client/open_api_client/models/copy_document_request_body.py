@@ -55,9 +55,9 @@ class CopyDocumentRequestBody:
         if remove_outgoing_links is not UNSET:
             field_dict["removeOutgoingLinks"] = remove_outgoing_links
         if link_original_items_with_role is not UNSET:
-            field_dict[
-                "linkOriginalItemsWithRole"
-            ] = link_original_items_with_role
+            field_dict["linkOriginalItemsWithRole"] = (
+                link_original_items_with_role
+            )
 
         return field_dict
 

@@ -114,9 +114,9 @@ class EnumOptionsActionResponseBodyDataItem:
         if min_value is not UNSET:
             field_dict["minValue"] = min_value
         if requires_signature_for_test_case_execution is not UNSET:
-            field_dict[
-                "requiresSignatureForTestCaseExecution"
-            ] = requires_signature_for_test_case_execution
+            field_dict["requiresSignatureForTestCaseExecution"] = (
+                requires_signature_for_test_case_execution
+            )
         if terminal is not UNSET:
             field_dict["terminal"] = terminal
 

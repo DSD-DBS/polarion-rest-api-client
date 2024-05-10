@@ -24,9 +24,9 @@ class PagesSingleGetResponseDataRelationshipsAuthor:
         data (Union[Unset, PagesSingleGetResponseDataRelationshipsAuthorData]):
     """
 
-    data: Union[
-        Unset, "PagesSingleGetResponseDataRelationshipsAuthorData"
-    ] = UNSET
+    data: Union[Unset, "PagesSingleGetResponseDataRelationshipsAuthorData"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

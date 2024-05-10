@@ -36,9 +36,9 @@ class PlansSinglePatchRequestData:
     type: Union[Unset, PlansSinglePatchRequestDataType] = UNSET
     id: Union[Unset, str] = UNSET
     attributes: Union[Unset, "PlansSinglePatchRequestDataAttributes"] = UNSET
-    relationships: Union[
-        Unset, "PlansSinglePatchRequestDataRelationships"
-    ] = UNSET
+    relationships: Union[Unset, "PlansSinglePatchRequestDataRelationships"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

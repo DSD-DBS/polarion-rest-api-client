@@ -33,9 +33,9 @@ class WorkflowActionsActionResponseBody:
     """
 
     meta: Union[Unset, "WorkflowActionsActionResponseBodyMeta"] = UNSET
-    data: Union[
-        Unset, List["WorkflowActionsActionResponseBodyDataItem"]
-    ] = UNSET
+    data: Union[Unset, List["WorkflowActionsActionResponseBodyDataItem"]] = (
+        UNSET
+    )
     links: Union[Unset, "WorkflowActionsActionResponseBodyLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict

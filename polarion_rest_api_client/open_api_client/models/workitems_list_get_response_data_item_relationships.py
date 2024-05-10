@@ -247,9 +247,9 @@ class WorkitemsListGetResponseDataItemRelationships:
         if comments is not UNSET:
             field_dict["comments"] = comments
         if externally_linked_work_items is not UNSET:
-            field_dict[
-                "externallyLinkedWorkItems"
-            ] = externally_linked_work_items
+            field_dict["externallyLinkedWorkItems"] = (
+                externally_linked_work_items
+            )
         if linked_oslc_resources is not UNSET:
             field_dict["linkedOslcResources"] = linked_oslc_resources
         if linked_revisions is not UNSET:

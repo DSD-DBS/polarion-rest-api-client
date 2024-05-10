@@ -22,9 +22,9 @@ class PlansSingleGetResponseDataAttributesDescription:
         value (Union[Unset, str]):  Example: My text value.
     """
 
-    type: Union[
-        Unset, PlansSingleGetResponseDataAttributesDescriptionType
-    ] = UNSET
+    type: Union[Unset, PlansSingleGetResponseDataAttributesDescriptionType] = (
+        UNSET
+    )
     value: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict

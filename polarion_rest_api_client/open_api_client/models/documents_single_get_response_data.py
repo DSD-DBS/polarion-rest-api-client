@@ -45,9 +45,9 @@ class DocumentsSingleGetResponseData:
     type: Union[Unset, DocumentsSingleGetResponseDataType] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "DocumentsSingleGetResponseDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "DocumentsSingleGetResponseDataAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "DocumentsSingleGetResponseDataRelationships"
     ] = UNSET

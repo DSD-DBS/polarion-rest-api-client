@@ -24,9 +24,9 @@ class LinkedoslcresourcesListPostRequest:
         data (Union[Unset, List['LinkedoslcresourcesListPostRequestDataItem']]):
     """
 
-    data: Union[
-        Unset, List["LinkedoslcresourcesListPostRequestDataItem"]
-    ] = UNSET
+    data: Union[Unset, List["LinkedoslcresourcesListPostRequestDataItem"]] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

@@ -31,9 +31,9 @@ class WorkrecordsSingleGetResponseDataRelationships:
     project: Union[
         Unset, "WorkrecordsSingleGetResponseDataRelationshipsProject"
     ] = UNSET
-    user: Union[
-        Unset, "WorkrecordsSingleGetResponseDataRelationshipsUser"
-    ] = UNSET
+    user: Union[Unset, "WorkrecordsSingleGetResponseDataRelationshipsUser"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

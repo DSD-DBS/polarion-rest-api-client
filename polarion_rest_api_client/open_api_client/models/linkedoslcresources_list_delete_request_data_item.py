@@ -24,9 +24,9 @@ class LinkedoslcresourcesListDeleteRequestDataItem:
             path/oslc/services/projects/MyProjectId/workitems/MyWorkItemId.
     """
 
-    type: Union[
-        Unset, LinkedoslcresourcesListDeleteRequestDataItemType
-    ] = UNSET
+    type: Union[Unset, LinkedoslcresourcesListDeleteRequestDataItemType] = (
+        UNSET
+    )
     id: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict

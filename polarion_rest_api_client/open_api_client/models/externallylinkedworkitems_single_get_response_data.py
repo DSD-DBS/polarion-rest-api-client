@@ -38,9 +38,9 @@ class ExternallylinkedworkitemsSingleGetResponseData:
         links (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataLinks]):
     """
 
-    type: Union[
-        Unset, ExternallylinkedworkitemsSingleGetResponseDataType
-    ] = UNSET
+    type: Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataType] = (
+        UNSET
+    )
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
     attributes: Union[

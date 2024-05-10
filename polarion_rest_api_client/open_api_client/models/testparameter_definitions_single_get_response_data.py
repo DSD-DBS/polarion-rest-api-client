@@ -38,17 +38,17 @@ class TestparameterDefinitionsSingleGetResponseData:
         links (Union[Unset, TestparameterDefinitionsSingleGetResponseDataLinks]):
     """
 
-    type: Union[
-        Unset, TestparameterDefinitionsSingleGetResponseDataType
-    ] = UNSET
+    type: Union[Unset, TestparameterDefinitionsSingleGetResponseDataType] = (
+        UNSET
+    )
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
     attributes: Union[
         Unset, "TestparameterDefinitionsSingleGetResponseDataAttributes"
     ] = UNSET
-    meta: Union[
-        Unset, "TestparameterDefinitionsSingleGetResponseDataMeta"
-    ] = UNSET
+    meta: Union[Unset, "TestparameterDefinitionsSingleGetResponseDataMeta"] = (
+        UNSET
+    )
     links: Union[
         Unset, "TestparameterDefinitionsSingleGetResponseDataLinks"
     ] = UNSET

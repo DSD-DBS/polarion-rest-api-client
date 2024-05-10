@@ -52,9 +52,9 @@ class WorkitemAttachmentsSingleGetResponseData:
         Unset, "WorkitemAttachmentsSingleGetResponseDataRelationships"
     ] = UNSET
     meta: Union[Unset, "WorkitemAttachmentsSingleGetResponseDataMeta"] = UNSET
-    links: Union[
-        Unset, "WorkitemAttachmentsSingleGetResponseDataLinks"
-    ] = UNSET
+    links: Union[Unset, "WorkitemAttachmentsSingleGetResponseDataLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

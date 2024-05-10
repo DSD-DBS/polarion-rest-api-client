@@ -31,9 +31,9 @@ class WorkitemCommentsListPostResponseDataItem:
 
     type: Union[Unset, WorkitemCommentsListPostResponseDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
-    links: Union[
-        Unset, "WorkitemCommentsListPostResponseDataItemLinks"
-    ] = UNSET
+    links: Union[Unset, "WorkitemCommentsListPostResponseDataItemLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

@@ -52,9 +52,9 @@ class FeatureselectionsListGetResponseDataItem:
         Unset, "FeatureselectionsListGetResponseDataItemRelationships"
     ] = UNSET
     meta: Union[Unset, "FeatureselectionsListGetResponseDataItemMeta"] = UNSET
-    links: Union[
-        Unset, "FeatureselectionsListGetResponseDataItemLinks"
-    ] = UNSET
+    links: Union[Unset, "FeatureselectionsListGetResponseDataItemLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

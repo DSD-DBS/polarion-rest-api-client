@@ -35,9 +35,9 @@ class WorkitemsSinglePatchRequestData:
 
     type: Union[Unset, WorkitemsSinglePatchRequestDataType] = UNSET
     id: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "WorkitemsSinglePatchRequestDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "WorkitemsSinglePatchRequestDataAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "WorkitemsSinglePatchRequestDataRelationships"
     ] = UNSET

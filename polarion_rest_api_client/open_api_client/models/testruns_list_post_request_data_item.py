@@ -33,9 +33,9 @@ class TestrunsListPostRequestDataItem:
     """
 
     type: Union[Unset, TestrunsListPostRequestDataItemType] = UNSET
-    attributes: Union[
-        Unset, "TestrunsListPostRequestDataItemAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "TestrunsListPostRequestDataItemAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "TestrunsListPostRequestDataItemRelationships"
     ] = UNSET

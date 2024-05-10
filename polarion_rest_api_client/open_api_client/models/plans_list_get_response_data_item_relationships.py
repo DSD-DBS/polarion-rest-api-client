@@ -44,12 +44,12 @@ class PlansListGetResponseDataItemRelationships:
         work_items (Union[Unset, PlansListGetResponseDataItemRelationshipsWorkItems]):
     """
 
-    author: Union[
-        Unset, "PlansListGetResponseDataItemRelationshipsAuthor"
-    ] = UNSET
-    parent: Union[
-        Unset, "PlansListGetResponseDataItemRelationshipsParent"
-    ] = UNSET
+    author: Union[Unset, "PlansListGetResponseDataItemRelationshipsAuthor"] = (
+        UNSET
+    )
+    parent: Union[Unset, "PlansListGetResponseDataItemRelationshipsParent"] = (
+        UNSET
+    )
     project: Union[
         Unset, "PlansListGetResponseDataItemRelationshipsProject"
     ] = UNSET

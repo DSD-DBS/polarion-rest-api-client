@@ -51,12 +51,12 @@ class WorkitemAttachmentsListGetResponseDataItem:
     relationships: Union[
         Unset, "WorkitemAttachmentsListGetResponseDataItemRelationships"
     ] = UNSET
-    meta: Union[
-        Unset, "WorkitemAttachmentsListGetResponseDataItemMeta"
-    ] = UNSET
-    links: Union[
-        Unset, "WorkitemAttachmentsListGetResponseDataItemLinks"
-    ] = UNSET
+    meta: Union[Unset, "WorkitemAttachmentsListGetResponseDataItemMeta"] = (
+        UNSET
+    )
+    links: Union[Unset, "WorkitemAttachmentsListGetResponseDataItemLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

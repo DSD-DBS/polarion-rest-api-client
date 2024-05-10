@@ -41,9 +41,9 @@ class EnumerationsSingleGetResponseData:
     type: Union[Unset, EnumerationsSingleGetResponseDataType] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "EnumerationsSingleGetResponseDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "EnumerationsSingleGetResponseDataAttributes"] = (
+        UNSET
+    )
     meta: Union[Unset, "EnumerationsSingleGetResponseDataMeta"] = UNSET
     links: Union[Unset, "EnumerationsSingleGetResponseDataLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(

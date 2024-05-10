@@ -34,15 +34,15 @@ class ExternallylinkedworkitemsSingleGetResponse:
         links (Union[Unset, ExternallylinkedworkitemsSingleGetResponseLinks]):
     """
 
-    data: Union[
-        Unset, "ExternallylinkedworkitemsSingleGetResponseData"
-    ] = UNSET
+    data: Union[Unset, "ExternallylinkedworkitemsSingleGetResponseData"] = (
+        UNSET
+    )
     included: Union[
         Unset, List["ExternallylinkedworkitemsSingleGetResponseIncludedItem"]
     ] = UNSET
-    links: Union[
-        Unset, "ExternallylinkedworkitemsSingleGetResponseLinks"
-    ] = UNSET
+    links: Union[Unset, "ExternallylinkedworkitemsSingleGetResponseLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

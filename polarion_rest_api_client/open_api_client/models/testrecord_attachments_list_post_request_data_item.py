@@ -29,9 +29,9 @@ class TestrecordAttachmentsListPostRequestDataItem:
         attributes (Union[Unset, TestrecordAttachmentsListPostRequestDataItemAttributes]):
     """
 
-    type: Union[
-        Unset, TestrecordAttachmentsListPostRequestDataItemType
-    ] = UNSET
+    type: Union[Unset, TestrecordAttachmentsListPostRequestDataItemType] = (
+        UNSET
+    )
     lid: Union[Unset, str] = UNSET
     attributes: Union[
         Unset, "TestrecordAttachmentsListPostRequestDataItemAttributes"

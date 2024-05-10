@@ -34,15 +34,15 @@ class TeststepresultAttachmentsSingleGetResponse:
         links (Union[Unset, TeststepresultAttachmentsSingleGetResponseLinks]):
     """
 
-    data: Union[
-        Unset, "TeststepresultAttachmentsSingleGetResponseData"
-    ] = UNSET
+    data: Union[Unset, "TeststepresultAttachmentsSingleGetResponseData"] = (
+        UNSET
+    )
     included: Union[
         Unset, List["TeststepresultAttachmentsSingleGetResponseIncludedItem"]
     ] = UNSET
-    links: Union[
-        Unset, "TeststepresultAttachmentsSingleGetResponseLinks"
-    ] = UNSET
+    links: Union[Unset, "TeststepresultAttachmentsSingleGetResponseLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

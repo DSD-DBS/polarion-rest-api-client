@@ -45,9 +45,9 @@ class RevisionsListGetResponseDataItem:
     type: Union[Unset, RevisionsListGetResponseDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "RevisionsListGetResponseDataItemAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "RevisionsListGetResponseDataItemAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "RevisionsListGetResponseDataItemRelationships"
     ] = UNSET

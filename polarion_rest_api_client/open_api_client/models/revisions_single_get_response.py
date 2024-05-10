@@ -35,9 +35,9 @@ class RevisionsSingleGetResponse:
     """
 
     data: Union[Unset, "RevisionsSingleGetResponseData"] = UNSET
-    included: Union[
-        Unset, List["RevisionsSingleGetResponseIncludedItem"]
-    ] = UNSET
+    included: Union[Unset, List["RevisionsSingleGetResponseIncludedItem"]] = (
+        UNSET
+    )
     links: Union[Unset, "RevisionsSingleGetResponseLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict

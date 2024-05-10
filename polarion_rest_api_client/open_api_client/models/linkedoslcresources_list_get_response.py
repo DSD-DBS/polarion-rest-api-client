@@ -35,9 +35,9 @@ class LinkedoslcresourcesListGetResponse:
     """
 
     meta: Union[Unset, "LinkedoslcresourcesListGetResponseMeta"] = UNSET
-    data: Union[
-        Unset, List["LinkedoslcresourcesListGetResponseDataItem"]
-    ] = UNSET
+    data: Union[Unset, List["LinkedoslcresourcesListGetResponseDataItem"]] = (
+        UNSET
+    )
     included: Union[
         Unset, List["LinkedoslcresourcesListGetResponseIncludedItem"]
     ] = UNSET

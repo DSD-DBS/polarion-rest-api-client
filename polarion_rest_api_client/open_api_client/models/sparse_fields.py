@@ -222,9 +222,9 @@ class SparseFields:
         if testrun_attachments is not UNSET:
             field_dict["testrun_attachments"] = testrun_attachments
         if teststepresult_attachments is not UNSET:
-            field_dict[
-                "teststepresult_attachments"
-            ] = teststepresult_attachments
+            field_dict["teststepresult_attachments"] = (
+                teststepresult_attachments
+            )
         if testrun_comments is not UNSET:
             field_dict["testrun_comments"] = testrun_comments
         if usergroups is not UNSET:

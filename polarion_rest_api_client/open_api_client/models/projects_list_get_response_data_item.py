@@ -45,9 +45,9 @@ class ProjectsListGetResponseDataItem:
     type: Union[Unset, ProjectsListGetResponseDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "ProjectsListGetResponseDataItemAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "ProjectsListGetResponseDataItemAttributes"] = (
+        UNSET
+    )
     relationships: Union[
         Unset, "ProjectsListGetResponseDataItemRelationships"
     ] = UNSET

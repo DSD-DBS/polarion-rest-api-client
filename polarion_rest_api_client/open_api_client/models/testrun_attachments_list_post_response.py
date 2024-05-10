@@ -24,9 +24,9 @@ class TestrunAttachmentsListPostResponse:
         data (Union[Unset, List['TestrunAttachmentsListPostResponseDataItem']]):
     """
 
-    data: Union[
-        Unset, List["TestrunAttachmentsListPostResponseDataItem"]
-    ] = UNSET
+    data: Union[Unset, List["TestrunAttachmentsListPostResponseDataItem"]] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

@@ -24,9 +24,9 @@ class UsersSingleGetResponseDataMeta:
         errors (Union[Unset, List['UsersSingleGetResponseDataMetaErrorsItem']]):
     """
 
-    errors: Union[
-        Unset, List["UsersSingleGetResponseDataMetaErrorsItem"]
-    ] = UNSET
+    errors: Union[Unset, List["UsersSingleGetResponseDataMetaErrorsItem"]] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

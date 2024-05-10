@@ -39,9 +39,9 @@ class DocumentAttachmentsListGetResponse:
     """
 
     meta: Union[Unset, "DocumentAttachmentsListGetResponseMeta"] = UNSET
-    data: Union[
-        Unset, List["DocumentAttachmentsListGetResponseDataItem"]
-    ] = UNSET
+    data: Union[Unset, List["DocumentAttachmentsListGetResponseDataItem"]] = (
+        UNSET
+    )
     included: Union[
         Unset, List["DocumentAttachmentsListGetResponseIncludedItem"]
     ] = UNSET

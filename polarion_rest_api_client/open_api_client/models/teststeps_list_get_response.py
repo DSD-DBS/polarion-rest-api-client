@@ -40,9 +40,9 @@ class TeststepsListGetResponse:
 
     meta: Union[Unset, "TeststepsListGetResponseMeta"] = UNSET
     data: Union[Unset, List["TeststepsListGetResponseDataItem"]] = UNSET
-    included: Union[
-        Unset, List["TeststepsListGetResponseIncludedItem"]
-    ] = UNSET
+    included: Union[Unset, List["TeststepsListGetResponseIncludedItem"]] = (
+        UNSET
+    )
     links: Union[Unset, "TeststepsListGetResponseLinks"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict

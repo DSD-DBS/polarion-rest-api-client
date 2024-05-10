@@ -29,9 +29,9 @@ class TeststepsListPostRequestDataItem:
     """
 
     type: Union[Unset, TeststepsListPostRequestDataItemType] = UNSET
-    attributes: Union[
-        Unset, "TeststepsListPostRequestDataItemAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "TeststepsListPostRequestDataItemAttributes"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

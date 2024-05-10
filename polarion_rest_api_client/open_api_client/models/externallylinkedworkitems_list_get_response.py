@@ -45,9 +45,9 @@ class ExternallylinkedworkitemsListGetResponse:
     included: Union[
         Unset, List["ExternallylinkedworkitemsListGetResponseIncludedItem"]
     ] = UNSET
-    links: Union[
-        Unset, "ExternallylinkedworkitemsListGetResponseLinks"
-    ] = UNSET
+    links: Union[Unset, "ExternallylinkedworkitemsListGetResponseLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

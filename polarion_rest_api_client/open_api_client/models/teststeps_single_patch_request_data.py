@@ -31,9 +31,9 @@ class TeststepsSinglePatchRequestData:
 
     type: Union[Unset, TeststepsSinglePatchRequestDataType] = UNSET
     id: Union[Unset, str] = UNSET
-    attributes: Union[
-        Unset, "TeststepsSinglePatchRequestDataAttributes"
-    ] = UNSET
+    attributes: Union[Unset, "TeststepsSinglePatchRequestDataAttributes"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

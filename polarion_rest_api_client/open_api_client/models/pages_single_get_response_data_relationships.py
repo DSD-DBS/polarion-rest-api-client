@@ -39,12 +39,12 @@ class PagesSingleGetResponseDataRelationships:
     attachments: Union[
         Unset, "PagesSingleGetResponseDataRelationshipsAttachments"
     ] = UNSET
-    author: Union[
-        Unset, "PagesSingleGetResponseDataRelationshipsAuthor"
-    ] = UNSET
-    project: Union[
-        Unset, "PagesSingleGetResponseDataRelationshipsProject"
-    ] = UNSET
+    author: Union[Unset, "PagesSingleGetResponseDataRelationshipsAuthor"] = (
+        UNSET
+    )
+    project: Union[Unset, "PagesSingleGetResponseDataRelationshipsProject"] = (
+        UNSET
+    )
     updated_by: Union[
         Unset, "PagesSingleGetResponseDataRelationshipsUpdatedBy"
     ] = UNSET

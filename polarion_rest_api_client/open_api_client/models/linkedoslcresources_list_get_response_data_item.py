@@ -46,12 +46,12 @@ class LinkedoslcresourcesListGetResponseDataItem:
     attributes: Union[
         Unset, "LinkedoslcresourcesListGetResponseDataItemAttributes"
     ] = UNSET
-    meta: Union[
-        Unset, "LinkedoslcresourcesListGetResponseDataItemMeta"
-    ] = UNSET
-    links: Union[
-        Unset, "LinkedoslcresourcesListGetResponseDataItemLinks"
-    ] = UNSET
+    meta: Union[Unset, "LinkedoslcresourcesListGetResponseDataItemMeta"] = (
+        UNSET
+    )
+    links: Union[Unset, "LinkedoslcresourcesListGetResponseDataItemLinks"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

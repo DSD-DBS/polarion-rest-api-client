@@ -38,9 +38,9 @@ class TestparameterDefinitionsListGetResponseDataItem:
         links (Union[Unset, TestparameterDefinitionsListGetResponseDataItemLinks]):
     """
 
-    type: Union[
-        Unset, TestparameterDefinitionsListGetResponseDataItemType
-    ] = UNSET
+    type: Union[Unset, TestparameterDefinitionsListGetResponseDataItemType] = (
+        UNSET
+    )
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
     attributes: Union[

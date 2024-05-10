@@ -36,9 +36,9 @@ class UsersSinglePatchRequestData:
     type: Union[Unset, UsersSinglePatchRequestDataType] = UNSET
     id: Union[Unset, str] = UNSET
     attributes: Union[Unset, "UsersSinglePatchRequestDataAttributes"] = UNSET
-    relationships: Union[
-        Unset, "UsersSinglePatchRequestDataRelationships"
-    ] = UNSET
+    relationships: Union[Unset, "UsersSinglePatchRequestDataRelationships"] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

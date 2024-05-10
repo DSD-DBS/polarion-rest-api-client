@@ -24,9 +24,9 @@ class DocumentCommentsListPostResponse:
         data (Union[Unset, List['DocumentCommentsListPostResponseDataItem']]):
     """
 
-    data: Union[
-        Unset, List["DocumentCommentsListPostResponseDataItem"]
-    ] = UNSET
+    data: Union[Unset, List["DocumentCommentsListPostResponseDataItem"]] = (
+        UNSET
+    )
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
