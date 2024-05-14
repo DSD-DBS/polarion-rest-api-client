@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "type": "testrecords",
+      "id": "elibrary/MyTestRunId/MyProjectId/MyTestcaseId/0",
+      "links": {
+        "self": "server-host-name/application-path/projects/elibrary/testruns/MyTestRunId/testrecords/MyProjectId/MyTestcaseId/0"
+      }
+    },
+    {
+      "type": "testrecords",
+      "id": "elibrary/MyTestRunId/MyProjectId/MyTestcaseId/1",
+      "links": {
+        "self": "server-host-name/application-path/projects/elibrary/testruns/MyTestRunId/testrecords/MyProjectId/MyTestcaseId/0"
+      }
+    }
+  ]
+}

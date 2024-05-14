@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "testruns",
+    "id": "PROJ/asdfg",
+    "attributes": {
+      "finishedOn": "1970-01-01T00:00:00",
+      "query": "Query",
+      "status": "passed",
+      "title": "Title",
+      "type": "manual",
+      "useReportFromTemplate": false
+    }
+  }
+}

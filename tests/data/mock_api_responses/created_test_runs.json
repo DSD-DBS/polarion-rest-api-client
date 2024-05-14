@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "type": "testruns",
+      "id": "MyProjectId/MyTestRunId",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId?revision=1234",
+        "portal": "server-host-name/application-path/polarion/redirect/project/MyProjectId/testrun?id=MyTestRunId&revision=1234"
+      }
+    },
+    {
+      "type": "testruns",
+      "id": "MyProjectId/MyTestRunId2",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId?revision=1234",
+        "portal": "server-host-name/application-path/polarion/redirect/project/MyProjectId/testrun?id=MyTestRunId&revision=1234"
+      }
+    }
+  ]
+}

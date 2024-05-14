@@ -68,6 +68,19 @@ TEST_ERROR_RESPONSE = TEST_RESPONSES / "error.json"
 TEST_FAULTS_ERROR_RESPONSES = TEST_RESPONSES / "faulty_errors.json"
 TEST_PROJECT_RESPONSE_JSON = TEST_RESPONSES / "project.json"
 
+TEST_TRUN_PATCH_REQUEST = TEST_REQUESTS / "patch_test_run_partially.json"
+TEST_TRUN_FULLY_PATCH_REQUEST = TEST_REQUESTS / "patch_test_run_fully.json"
+TEST_TRUN_POST_REQUEST = TEST_REQUESTS / "post_test_run.json"
+TEST_TREC_PATCH_REQUEST = TEST_REQUESTS / "patch_test_record.json"
+TEST_TREC_POST_REQUEST = TEST_REQUESTS / "post_test_records.json"
+
+TEST_TREC_CREATED_RESPONSE = TEST_RESPONSES / "created_test_records.json"
+TEST_TRUN_CREATED_RESPONSE = TEST_RESPONSES / "created_test_runs.json"
+TEST_TREC_NEXT_RESPONSE = TEST_RESPONSES / "test_records_next_page.json"
+TEST_TREC_NO_NEXT_RESPONSE = TEST_RESPONSES / "test_records_no_next_page.json"
+TEST_TRUN_NEXT_RESPONSE = TEST_RESPONSES / "test_runs_next_page.json"
+TEST_TRUN_NO_NEXT_RESPONSE = TEST_RESPONSES / "test_runs_no_next_page.json"
+
 
 class CustomWorkItem(polarion_api.WorkItem):
     capella_uuid: str | None
