@@ -82,13 +82,11 @@ def _build_sparse_fields(
 @t.overload
 def unset_to_none(value: oa_types.Unset) -> None:
     """Return None if value is Unset, else the value."""
-    ...
 
 
 @t.overload
 def unset_to_none(value: T) -> T:
     """Return None if value is Unset, else the value."""
-    ...
 
 
 def unset_to_none(value: t.Any) -> t.Any:
@@ -254,7 +252,7 @@ class OpenAPIPolarionProjectClient(
 
         attrs = api_models.WorkitemsListPostRequestDataItemAttributes(
             type=work_item.type,
-            description=api_models.WorkitemsListPostRequestDataItemAttributesDescription(
+            description=api_models.WorkitemsListPostRequestDataItemAttributesDescription(  # pylint: disable=line-too-long
                 type=api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description_type
                 ),
@@ -1340,6 +1338,7 @@ class OpenAPIPolarionProjectClient(
             self.project_id,
             test_run_id,
             client=self.client,
+            # pylint: disable=line-too-long
             body=api_models.TestrecordsListPostRequest(
                 [
                     api_models.TestrecordsListPostRequestDataItem(
@@ -1360,6 +1359,7 @@ class OpenAPIPolarionProjectClient(
                     for test_record in test_records
                 ]
             ),
+            # pylint: enable=line-too-long
         )
 
         if not self._check_response(response, not retry) and retry:
@@ -1389,6 +1389,7 @@ class OpenAPIPolarionProjectClient(
             test_record.work_item_id,
             str(test_record.iteration),
             client=self.client,
+            # pylint: disable=line-too-long
             body=api_models.TestrecordsSinglePatchRequest(
                 api_models.TestrecordsSinglePatchRequestData(
                     api_models.TestrecordsSinglePatchRequestDataType.TESTRECORDS,
@@ -1399,6 +1400,7 @@ class OpenAPIPolarionProjectClient(
                     ),
                 )
             ),
+            # pylint: enable=line-too-long
         )
 
         if not self._check_response(response, not retry) and retry:
