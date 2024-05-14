@@ -35,5 +35,5 @@ def test_check_non_existing_project(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    httpx_mock.add_response(status_code=404)
+    httpx_mock.add_response(status_code=404, json={})
     assert not client.project_exists()

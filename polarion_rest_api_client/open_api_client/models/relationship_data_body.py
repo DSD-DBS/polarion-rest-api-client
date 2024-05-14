@@ -16,36 +16,38 @@ T = TypeVar("T", bound="RelationshipDataBody")
 class RelationshipDataBody:
     """
     Attributes:
-        type (Union[Unset, RelationshipDataBodyType]):
         id (Union[Unset, str]):  Example: MyProjectId/MyResourceId.
+        type (Union[Unset, RelationshipDataBodyType]):
     """
 
-    type: Union[Unset, RelationshipDataBodyType] = UNSET
     id: Union[Unset, str] = UNSET
+    type: Union[Unset, RelationshipDataBodyType] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
+        id = self.id
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        id = self.id
-
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
         if id is not UNSET:
             field_dict["id"] = id
+        if type is not UNSET:
+            field_dict["type"] = type
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        id = d.pop("id", UNSET)
+
         _type = d.pop("type", UNSET)
         type: Union[Unset, RelationshipDataBodyType]
         if isinstance(_type, Unset):
@@ -53,11 +55,9 @@ class RelationshipDataBody:
         else:
             type = RelationshipDataBodyType(_type)
 
-        id = d.pop("id", UNSET)
-
         relationship_data_body_obj = cls(
-            type=type,
             id=id,
+            type=type,
         )
 
         relationship_data_body_obj.additional_properties = d

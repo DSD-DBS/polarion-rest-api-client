@@ -23,13 +23,12 @@ T = TypeVar(
 class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem:
     """
     Attributes:
-        type (Union[Unset, str]):  Example: task.
         label (Union[Unset, str]):  Example: My label.
         layouter (Union[Unset, str]):  Example: paragraph.
         properties (Union[Unset, List['DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesItem']]):
+        type (Union[Unset, str]):  Example: task.
     """
 
-    type: Union[Unset, str] = UNSET
     label: Union[Unset, str] = UNSET
     layouter: Union[Unset, str] = UNSET
     properties: Union[
@@ -38,13 +37,12 @@ class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem:
             "DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesItem"
         ],
     ] = UNSET
+    type: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        type = self.type
-
         label = self.label
 
         layouter = self.layouter
@@ -56,17 +54,19 @@ class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem:
                 properties_item = properties_item_data.to_dict()
                 properties.append(properties_item)
 
+        type = self.type
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
         if label is not UNSET:
             field_dict["label"] = label
         if layouter is not UNSET:
             field_dict["layouter"] = layouter
         if properties is not UNSET:
             field_dict["properties"] = properties
+        if type is not UNSET:
+            field_dict["type"] = type
 
         return field_dict
 
@@ -77,8 +77,6 @@ class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem:
         )
 
         d = src_dict.copy()
-        type = d.pop("type", UNSET)
-
         label = d.pop("label", UNSET)
 
         layouter = d.pop("layouter", UNSET)
@@ -92,11 +90,13 @@ class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem:
 
             properties.append(properties_item)
 
+        type = d.pop("type", UNSET)
+
         documents_list_post_request_data_item_attributes_rendering_layouts_item_obj = cls(
-            type=type,
             label=label,
             layouter=layouter,
             properties=properties,
+            type=type,
         )
 
         documents_list_post_request_data_item_attributes_rendering_layouts_item_obj.additional_properties = (

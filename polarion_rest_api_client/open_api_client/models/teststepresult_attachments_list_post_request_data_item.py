@@ -25,17 +25,17 @@ class TeststepresultAttachmentsListPostRequestDataItem:
     """
     Attributes:
         type (Union[Unset, TeststepresultAttachmentsListPostRequestDataItemType]):
-        lid (Union[Unset, str]):
         attributes (Union[Unset, TeststepresultAttachmentsListPostRequestDataItemAttributes]):
+        lid (Union[Unset, str]):
     """
 
     type: Union[
         Unset, TeststepresultAttachmentsListPostRequestDataItemType
     ] = UNSET
-    lid: Union[Unset, str] = UNSET
     attributes: Union[
         Unset, "TeststepresultAttachmentsListPostRequestDataItemAttributes"
     ] = UNSET
+    lid: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -45,21 +45,21 @@ class TeststepresultAttachmentsListPostRequestDataItem:
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        lid = self.lid
-
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
+
+        lid = self.lid
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
             field_dict["type"] = type
-        if lid is not UNSET:
-            field_dict["lid"] = lid
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
+        if lid is not UNSET:
+            field_dict["lid"] = lid
 
         return field_dict
 
@@ -79,8 +79,6 @@ class TeststepresultAttachmentsListPostRequestDataItem:
         else:
             type = TeststepresultAttachmentsListPostRequestDataItemType(_type)
 
-        lid = d.pop("lid", UNSET)
-
         _attributes = d.pop("attributes", UNSET)
         attributes: Union[
             Unset, TeststepresultAttachmentsListPostRequestDataItemAttributes
@@ -92,10 +90,12 @@ class TeststepresultAttachmentsListPostRequestDataItem:
                 _attributes
             )
 
+        lid = d.pop("lid", UNSET)
+
         teststepresult_attachments_list_post_request_data_item_obj = cls(
             type=type,
-            lid=lid,
             attributes=attributes,
+            lid=lid,
         )
 
         teststepresult_attachments_list_post_request_data_item_obj.additional_properties = (

@@ -23,14 +23,14 @@ T = TypeVar(
 class ProjecttemplatesListGetResponseDataItemMetaErrorsItemSource:
     """
     Attributes:
-        pointer (Union[Unset, str]): JSON Pointer to the associated entity in the request document. Example: $.data.
         parameter (Union[Unset, str]): String indicating which URI query parameter caused the error. Example: revision.
+        pointer (Union[Unset, str]): JSON Pointer to the associated entity in the request document. Example: $.data.
         resource (Union[Unset, ProjecttemplatesListGetResponseDataItemMetaErrorsItemSourceResource]): Resource causing
             the error.
     """
 
-    pointer: Union[Unset, str] = UNSET
     parameter: Union[Unset, str] = UNSET
+    pointer: Union[Unset, str] = UNSET
     resource: Union[
         Unset,
         "ProjecttemplatesListGetResponseDataItemMetaErrorsItemSourceResource",
@@ -40,9 +40,9 @@ class ProjecttemplatesListGetResponseDataItemMetaErrorsItemSource:
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        pointer = self.pointer
-
         parameter = self.parameter
+
+        pointer = self.pointer
 
         resource: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.resource, Unset):
@@ -51,10 +51,10 @@ class ProjecttemplatesListGetResponseDataItemMetaErrorsItemSource:
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if pointer is not UNSET:
-            field_dict["pointer"] = pointer
         if parameter is not UNSET:
             field_dict["parameter"] = parameter
+        if pointer is not UNSET:
+            field_dict["pointer"] = pointer
         if resource is not UNSET:
             field_dict["resource"] = resource
 
@@ -67,9 +67,9 @@ class ProjecttemplatesListGetResponseDataItemMetaErrorsItemSource:
         )
 
         d = src_dict.copy()
-        pointer = d.pop("pointer", UNSET)
-
         parameter = d.pop("parameter", UNSET)
+
+        pointer = d.pop("pointer", UNSET)
 
         _resource = d.pop("resource", UNSET)
         resource: Union[
@@ -84,8 +84,8 @@ class ProjecttemplatesListGetResponseDataItemMetaErrorsItemSource:
             )
 
         projecttemplates_list_get_response_data_item_meta_errors_item_source_obj = cls(
-            pointer=pointer,
             parameter=parameter,
+            pointer=pointer,
             resource=resource,
         )
 

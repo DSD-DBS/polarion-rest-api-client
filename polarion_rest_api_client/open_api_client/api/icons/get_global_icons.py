@@ -2,12 +2,13 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.errors import Errors
 from ...models.icons_list_get_response import IconsListGetResponse
 from ...models.sparse_fields import SparseFields
 from ...types import UNSET, Response, Unset
@@ -15,21 +16,21 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    fields: Union[Unset, "SparseFields"] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
 ) -> Dict[str, Any]:
     params: Dict[str, Any] = {}
+
+    params["page[size]"] = pagesize
+
+    params["page[number]"] = pagenumber
 
     json_fields: Union[Unset, Dict[str, Any]] = UNSET
     if not isinstance(fields, Unset):
         json_fields = fields.to_dict()
     if not isinstance(json_fields, Unset):
         params.update(json_fields)
-
-    params["page[size]"] = pagesize
-
-    params["page[number]"] = pagenumber
 
     params = {
         k: v for k, v in params.items() if v is not UNSET and v is not None
@@ -46,31 +47,38 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, IconsListGetResponse]]:
+) -> Optional[Union[Errors, IconsListGetResponse]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = IconsListGetResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == HTTPStatus.BAD_REQUEST:
-        response_400 = cast(Any, None)
+        response_400 = Errors.from_dict(response.json())
+
         return response_400
     if response.status_code == HTTPStatus.UNAUTHORIZED:
-        response_401 = cast(Any, None)
+        response_401 = Errors.from_dict(response.json())
+
         return response_401
     if response.status_code == HTTPStatus.FORBIDDEN:
-        response_403 = cast(Any, None)
+        response_403 = Errors.from_dict(response.json())
+
         return response_403
     if response.status_code == HTTPStatus.NOT_FOUND:
-        response_404 = cast(Any, None)
+        response_404 = Errors.from_dict(response.json())
+
         return response_404
     if response.status_code == HTTPStatus.NOT_ACCEPTABLE:
-        response_406 = cast(Any, None)
+        response_406 = Errors.from_dict(response.json())
+
         return response_406
     if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
-        response_500 = cast(Any, None)
+        response_500 = Errors.from_dict(response.json())
+
         return response_500
     if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
-        response_503 = cast(Any, None)
+        response_503 = Errors.from_dict(response.json())
+
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
@@ -80,7 +88,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, IconsListGetResponse]]:
+) -> Response[Union[Errors, IconsListGetResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -92,29 +100,29 @@ def _build_response(
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, "SparseFields"] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
-) -> Response[Union[Any, IconsListGetResponse]]:
+    fields: Union[Unset, "SparseFields"] = UNSET,
+) -> Response[Union[Errors, IconsListGetResponse]]:
     """Returns a list of Icons from the Global context.
 
     Args:
-        fields (Union[Unset, SparseFields]):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
+        fields (Union[Unset, SparseFields]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, IconsListGetResponse]]
+        Response[Union[Errors, IconsListGetResponse]]
     """
 
     kwargs = _get_kwargs(
-        fields=fields,
         pagesize=pagesize,
         pagenumber=pagenumber,
+        fields=fields,
     )
 
     response = client.get_httpx_client().request(
@@ -127,59 +135,59 @@ def sync_detailed(
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, "SparseFields"] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
-) -> Optional[Union[Any, IconsListGetResponse]]:
+    fields: Union[Unset, "SparseFields"] = UNSET,
+) -> Optional[Union[Errors, IconsListGetResponse]]:
     """Returns a list of Icons from the Global context.
 
     Args:
-        fields (Union[Unset, SparseFields]):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
+        fields (Union[Unset, SparseFields]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, IconsListGetResponse]
+        Union[Errors, IconsListGetResponse]
     """
 
     return sync_detailed(
         client=client,
-        fields=fields,
         pagesize=pagesize,
         pagenumber=pagenumber,
+        fields=fields,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, "SparseFields"] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
-) -> Response[Union[Any, IconsListGetResponse]]:
+    fields: Union[Unset, "SparseFields"] = UNSET,
+) -> Response[Union[Errors, IconsListGetResponse]]:
     """Returns a list of Icons from the Global context.
 
     Args:
-        fields (Union[Unset, SparseFields]):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
+        fields (Union[Unset, SparseFields]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, IconsListGetResponse]]
+        Response[Union[Errors, IconsListGetResponse]]
     """
 
     kwargs = _get_kwargs(
-        fields=fields,
         pagesize=pagesize,
         pagenumber=pagenumber,
+        fields=fields,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -190,30 +198,30 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, "SparseFields"] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
-) -> Optional[Union[Any, IconsListGetResponse]]:
+    fields: Union[Unset, "SparseFields"] = UNSET,
+) -> Optional[Union[Errors, IconsListGetResponse]]:
     """Returns a list of Icons from the Global context.
 
     Args:
-        fields (Union[Unset, SparseFields]):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
+        fields (Union[Unset, SparseFields]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, IconsListGetResponse]
+        Union[Errors, IconsListGetResponse]
     """
 
     return (
         await asyncio_detailed(
             client=client,
-            fields=fields,
             pagesize=pagesize,
             pagenumber=pagenumber,
+            fields=fields,
         )
     ).parsed

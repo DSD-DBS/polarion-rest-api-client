@@ -2,12 +2,13 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.errors import Errors
 from ...models.page_attachments_list_post_response import (
     PageAttachmentsListPostResponse,
 )
@@ -45,7 +46,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, PageAttachmentsListPostResponse]]:
+) -> Optional[Union[Errors, PageAttachmentsListPostResponse]]:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = PageAttachmentsListPostResponse.from_dict(
             response.json()
@@ -53,34 +54,44 @@ def _parse_response(
 
         return response_201
     if response.status_code == HTTPStatus.BAD_REQUEST:
-        response_400 = cast(Any, None)
+        response_400 = Errors.from_dict(response.json())
+
         return response_400
     if response.status_code == HTTPStatus.UNAUTHORIZED:
-        response_401 = cast(Any, None)
+        response_401 = Errors.from_dict(response.json())
+
         return response_401
     if response.status_code == HTTPStatus.FORBIDDEN:
-        response_403 = cast(Any, None)
+        response_403 = Errors.from_dict(response.json())
+
         return response_403
     if response.status_code == HTTPStatus.NOT_FOUND:
-        response_404 = cast(Any, None)
+        response_404 = Errors.from_dict(response.json())
+
         return response_404
     if response.status_code == HTTPStatus.NOT_ACCEPTABLE:
-        response_406 = cast(Any, None)
+        response_406 = Errors.from_dict(response.json())
+
         return response_406
     if response.status_code == HTTPStatus.CONFLICT:
-        response_409 = cast(Any, None)
+        response_409 = Errors.from_dict(response.json())
+
         return response_409
     if response.status_code == HTTPStatus.REQUEST_ENTITY_TOO_LARGE:
-        response_413 = cast(Any, None)
+        response_413 = Errors.from_dict(response.json())
+
         return response_413
     if response.status_code == HTTPStatus.UNSUPPORTED_MEDIA_TYPE:
-        response_415 = cast(Any, None)
+        response_415 = Errors.from_dict(response.json())
+
         return response_415
     if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
-        response_500 = cast(Any, None)
+        response_500 = Errors.from_dict(response.json())
+
         return response_500
     if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
-        response_503 = cast(Any, None)
+        response_503 = Errors.from_dict(response.json())
+
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
@@ -90,7 +101,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, PageAttachmentsListPostResponse]]:
+) -> Response[Union[Errors, PageAttachmentsListPostResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -106,12 +117,13 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PostPageAttachmentsRequestBody,
-) -> Response[Union[Any, PageAttachmentsListPostResponse]]:
+) -> Response[Union[Errors, PageAttachmentsListPostResponse]]:
     r"""Creates a list of Page Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
+    US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    API User Guide</a>.
 
     Args:
         project_id (str):
@@ -124,7 +136,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, PageAttachmentsListPostResponse]]
+        Response[Union[Errors, PageAttachmentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -148,12 +160,13 @@ def sync(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PostPageAttachmentsRequestBody,
-) -> Optional[Union[Any, PageAttachmentsListPostResponse]]:
+) -> Optional[Union[Errors, PageAttachmentsListPostResponse]]:
     r"""Creates a list of Page Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
+    US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    API User Guide</a>.
 
     Args:
         project_id (str):
@@ -166,7 +179,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, PageAttachmentsListPostResponse]
+        Union[Errors, PageAttachmentsListPostResponse]
     """
 
     return sync_detailed(
@@ -185,12 +198,13 @@ async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PostPageAttachmentsRequestBody,
-) -> Response[Union[Any, PageAttachmentsListPostResponse]]:
+) -> Response[Union[Errors, PageAttachmentsListPostResponse]]:
     r"""Creates a list of Page Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
+    US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    API User Guide</a>.
 
     Args:
         project_id (str):
@@ -203,7 +217,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, PageAttachmentsListPostResponse]]
+        Response[Union[Errors, PageAttachmentsListPostResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -225,12 +239,13 @@ async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PostPageAttachmentsRequestBody,
-) -> Optional[Union[Any, PageAttachmentsListPostResponse]]:
+) -> Optional[Union[Errors, PageAttachmentsListPostResponse]]:
     r"""Creates a list of Page Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20221020258116340.xid2134849/xid2134871\">Rest API User Guide</a>.
+    US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    API User Guide</a>.
 
     Args:
         project_id (str):
@@ -243,7 +258,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, PageAttachmentsListPostResponse]
+        Union[Errors, PageAttachmentsListPostResponse]
     """
 
     return (

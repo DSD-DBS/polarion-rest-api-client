@@ -944,8 +944,10 @@ from .enumerations_single_patch_request_data_type import (
 )
 from .errors import Errors
 from .errors_errors_item import ErrorsErrorsItem
-from .errors_errors_item_source import ErrorsErrorsItemSource
-from .errors_errors_item_source_resource import ErrorsErrorsItemSourceResource
+from .errors_errors_item_source_type_0 import ErrorsErrorsItemSourceType0
+from .errors_errors_item_source_type_0_resource_type_0 import (
+    ErrorsErrorsItemSourceType0ResourceType0,
+)
 from .export_test_cases_request_body import ExportTestCasesRequestBody
 from .externallylinkedworkitems_list_delete_request import (
     ExternallylinkedworkitemsListDeleteRequest,
@@ -1256,6 +1258,111 @@ from .icons_single_get_response_included_item import (
 )
 from .icons_single_get_response_links import IconsSingleGetResponseLinks
 from .import_test_results_request_body import ImportTestResultsRequestBody
+from .jobs_single_get_response import JobsSingleGetResponse
+from .jobs_single_get_response_data import JobsSingleGetResponseData
+from .jobs_single_get_response_data_attributes import (
+    JobsSingleGetResponseDataAttributes,
+)
+from .jobs_single_get_response_data_attributes_status import (
+    JobsSingleGetResponseDataAttributesStatus,
+)
+from .jobs_single_get_response_data_attributes_status_type import (
+    JobsSingleGetResponseDataAttributesStatusType,
+)
+from .jobs_single_get_response_data_links import JobsSingleGetResponseDataLinks
+from .jobs_single_get_response_data_meta import JobsSingleGetResponseDataMeta
+from .jobs_single_get_response_data_meta_errors_item import (
+    JobsSingleGetResponseDataMetaErrorsItem,
+)
+from .jobs_single_get_response_data_meta_errors_item_source import (
+    JobsSingleGetResponseDataMetaErrorsItemSource,
+)
+from .jobs_single_get_response_data_meta_errors_item_source_resource import (
+    JobsSingleGetResponseDataMetaErrorsItemSourceResource,
+)
+from .jobs_single_get_response_data_relationships import (
+    JobsSingleGetResponseDataRelationships,
+)
+from .jobs_single_get_response_data_relationships_document import (
+    JobsSingleGetResponseDataRelationshipsDocument,
+)
+from .jobs_single_get_response_data_relationships_document_data import (
+    JobsSingleGetResponseDataRelationshipsDocumentData,
+)
+from .jobs_single_get_response_data_relationships_document_data_type import (
+    JobsSingleGetResponseDataRelationshipsDocumentDataType,
+)
+from .jobs_single_get_response_data_relationships_documents import (
+    JobsSingleGetResponseDataRelationshipsDocuments,
+)
+from .jobs_single_get_response_data_relationships_documents_data_item import (
+    JobsSingleGetResponseDataRelationshipsDocumentsDataItem,
+)
+from .jobs_single_get_response_data_relationships_documents_data_item_type import (
+    JobsSingleGetResponseDataRelationshipsDocumentsDataItemType,
+)
+from .jobs_single_get_response_data_relationships_documents_meta import (
+    JobsSingleGetResponseDataRelationshipsDocumentsMeta,
+)
+from .jobs_single_get_response_data_relationships_project import (
+    JobsSingleGetResponseDataRelationshipsProject,
+)
+from .jobs_single_get_response_data_relationships_project_data import (
+    JobsSingleGetResponseDataRelationshipsProjectData,
+)
+from .jobs_single_get_response_data_relationships_project_data_type import (
+    JobsSingleGetResponseDataRelationshipsProjectDataType,
+)
+from .jobs_single_get_response_data_type import JobsSingleGetResponseDataType
+from .jobs_single_get_response_included_item import (
+    JobsSingleGetResponseIncludedItem,
+)
+from .jobs_single_get_response_links import JobsSingleGetResponseLinks
+from .jobs_single_post_response import JobsSinglePostResponse
+from .jobs_single_post_response_data import JobsSinglePostResponseData
+from .jobs_single_post_response_data_attributes import (
+    JobsSinglePostResponseDataAttributes,
+)
+from .jobs_single_post_response_data_attributes_status import (
+    JobsSinglePostResponseDataAttributesStatus,
+)
+from .jobs_single_post_response_data_attributes_status_type import (
+    JobsSinglePostResponseDataAttributesStatusType,
+)
+from .jobs_single_post_response_data_links import (
+    JobsSinglePostResponseDataLinks,
+)
+from .jobs_single_post_response_data_relationships import (
+    JobsSinglePostResponseDataRelationships,
+)
+from .jobs_single_post_response_data_relationships_document import (
+    JobsSinglePostResponseDataRelationshipsDocument,
+)
+from .jobs_single_post_response_data_relationships_document_data import (
+    JobsSinglePostResponseDataRelationshipsDocumentData,
+)
+from .jobs_single_post_response_data_relationships_document_data_type import (
+    JobsSinglePostResponseDataRelationshipsDocumentDataType,
+)
+from .jobs_single_post_response_data_relationships_documents import (
+    JobsSinglePostResponseDataRelationshipsDocuments,
+)
+from .jobs_single_post_response_data_relationships_documents_data_item import (
+    JobsSinglePostResponseDataRelationshipsDocumentsDataItem,
+)
+from .jobs_single_post_response_data_relationships_documents_data_item_type import (
+    JobsSinglePostResponseDataRelationshipsDocumentsDataItemType,
+)
+from .jobs_single_post_response_data_relationships_project import (
+    JobsSinglePostResponseDataRelationshipsProject,
+)
+from .jobs_single_post_response_data_relationships_project_data import (
+    JobsSinglePostResponseDataRelationshipsProjectData,
+)
+from .jobs_single_post_response_data_relationships_project_data_type import (
+    JobsSinglePostResponseDataRelationshipsProjectDataType,
+)
+from .jobs_single_post_response_data_type import JobsSinglePostResponseDataType
 from .linkedoslcresources_list_delete_request import (
     LinkedoslcresourcesListDeleteRequest,
 )
@@ -1466,6 +1573,7 @@ from .linkedworkitems_single_patch_request_data_attributes import (
 from .linkedworkitems_single_patch_request_data_type import (
     LinkedworkitemsSinglePatchRequestDataType,
 )
+from .merge_document_request_body import MergeDocumentRequestBody
 from .move_project_request_body import MoveProjectRequestBody
 from .move_work_item_to_document_request_body import (
     MoveWorkItemToDocumentRequestBody,
@@ -1623,8 +1731,14 @@ from .pagination import Pagination
 from .patch_document_attachments_request_body import (
     PatchDocumentAttachmentsRequestBody,
 )
+from .patch_test_record_attachments_request_body import (
+    PatchTestRecordAttachmentsRequestBody,
+)
 from .patch_test_run_attachments_request_body import (
     PatchTestRunAttachmentsRequestBody,
+)
+from .patch_test_step_result_attachments_request_body import (
+    PatchTestStepResultAttachmentsRequestBody,
 )
 from .patch_work_item_attachments_request_body import (
     PatchWorkItemAttachmentsRequestBody,
@@ -2238,6 +2352,15 @@ from .revisions_single_get_response_links import (
 from .set_license_request_body import SetLicenseRequestBody
 from .set_license_request_body_license import SetLicenseRequestBodyLicense
 from .sparse_fields import SparseFields
+from .testparameter_definitions_list_delete_request import (
+    TestparameterDefinitionsListDeleteRequest,
+)
+from .testparameter_definitions_list_delete_request_data_item import (
+    TestparameterDefinitionsListDeleteRequestDataItem,
+)
+from .testparameter_definitions_list_delete_request_data_item_type import (
+    TestparameterDefinitionsListDeleteRequestDataItemType,
+)
 from .testparameter_definitions_list_get_response import (
     TestparameterDefinitionsListGetResponse,
 )
@@ -2330,6 +2453,13 @@ from .testparameter_definitions_single_get_response_included_item import (
 )
 from .testparameter_definitions_single_get_response_links import (
     TestparameterDefinitionsSingleGetResponseLinks,
+)
+from .testparameters_list_delete_request import TestparametersListDeleteRequest
+from .testparameters_list_delete_request_data_item import (
+    TestparametersListDeleteRequestDataItem,
+)
+from .testparameters_list_delete_request_data_item_type import (
+    TestparametersListDeleteRequestDataItemType,
 )
 from .testparameters_list_get_response import TestparametersListGetResponse
 from .testparameters_list_get_response_data_item import (
@@ -2439,6 +2569,15 @@ from .testparameters_single_get_response_included_item import (
 )
 from .testparameters_single_get_response_links import (
     TestparametersSingleGetResponseLinks,
+)
+from .testrecord_attachments_list_delete_request import (
+    TestrecordAttachmentsListDeleteRequest,
+)
+from .testrecord_attachments_list_delete_request_data_item import (
+    TestrecordAttachmentsListDeleteRequestDataItem,
+)
+from .testrecord_attachments_list_delete_request_data_item_type import (
+    TestrecordAttachmentsListDeleteRequestDataItemType,
 )
 from .testrecord_attachments_list_get_response import (
     TestrecordAttachmentsListGetResponse,
@@ -2575,6 +2714,18 @@ from .testrecord_attachments_single_get_response_included_item import (
 from .testrecord_attachments_single_get_response_links import (
     TestrecordAttachmentsSingleGetResponseLinks,
 )
+from .testrecord_attachments_single_patch_request import (
+    TestrecordAttachmentsSinglePatchRequest,
+)
+from .testrecord_attachments_single_patch_request_data import (
+    TestrecordAttachmentsSinglePatchRequestData,
+)
+from .testrecord_attachments_single_patch_request_data_attributes import (
+    TestrecordAttachmentsSinglePatchRequestDataAttributes,
+)
+from .testrecord_attachments_single_patch_request_data_type import (
+    TestrecordAttachmentsSinglePatchRequestDataType,
+)
 from .testrecords_list_get_response import TestrecordsListGetResponse
 from .testrecords_list_get_response_data_item import (
     TestrecordsListGetResponseDataItem,
@@ -2643,6 +2794,43 @@ from .testrecords_list_get_response_links import (
     TestrecordsListGetResponseLinks,
 )
 from .testrecords_list_get_response_meta import TestrecordsListGetResponseMeta
+from .testrecords_list_patch_request import TestrecordsListPatchRequest
+from .testrecords_list_patch_request_data_item import (
+    TestrecordsListPatchRequestDataItem,
+)
+from .testrecords_list_patch_request_data_item_attributes import (
+    TestrecordsListPatchRequestDataItemAttributes,
+)
+from .testrecords_list_patch_request_data_item_attributes_comment import (
+    TestrecordsListPatchRequestDataItemAttributesComment,
+)
+from .testrecords_list_patch_request_data_item_attributes_comment_type import (
+    TestrecordsListPatchRequestDataItemAttributesCommentType,
+)
+from .testrecords_list_patch_request_data_item_relationships import (
+    TestrecordsListPatchRequestDataItemRelationships,
+)
+from .testrecords_list_patch_request_data_item_relationships_defect import (
+    TestrecordsListPatchRequestDataItemRelationshipsDefect,
+)
+from .testrecords_list_patch_request_data_item_relationships_defect_data import (
+    TestrecordsListPatchRequestDataItemRelationshipsDefectData,
+)
+from .testrecords_list_patch_request_data_item_relationships_defect_data_type import (
+    TestrecordsListPatchRequestDataItemRelationshipsDefectDataType,
+)
+from .testrecords_list_patch_request_data_item_relationships_executed_by import (
+    TestrecordsListPatchRequestDataItemRelationshipsExecutedBy,
+)
+from .testrecords_list_patch_request_data_item_relationships_executed_by_data import (
+    TestrecordsListPatchRequestDataItemRelationshipsExecutedByData,
+)
+from .testrecords_list_patch_request_data_item_relationships_executed_by_data_type import (
+    TestrecordsListPatchRequestDataItemRelationshipsExecutedByDataType,
+)
+from .testrecords_list_patch_request_data_item_type import (
+    TestrecordsListPatchRequestDataItemType,
+)
 from .testrecords_list_post_request import TestrecordsListPostRequest
 from .testrecords_list_post_request_data_item import (
     TestrecordsListPostRequestDataItem,
@@ -2802,6 +2990,15 @@ from .testrecords_single_patch_request_data_relationships_executed_by_data_type 
 )
 from .testrecords_single_patch_request_data_type import (
     TestrecordsSinglePatchRequestDataType,
+)
+from .testrun_attachments_list_delete_request import (
+    TestrunAttachmentsListDeleteRequest,
+)
+from .testrun_attachments_list_delete_request_data_item import (
+    TestrunAttachmentsListDeleteRequestDataItem,
+)
+from .testrun_attachments_list_delete_request_data_item_type import (
+    TestrunAttachmentsListDeleteRequestDataItemType,
 )
 from .testrun_attachments_list_get_response import (
     TestrunAttachmentsListGetResponse,
@@ -3032,6 +3229,18 @@ from .testrun_comments_list_get_response_links import (
 from .testrun_comments_list_get_response_meta import (
     TestrunCommentsListGetResponseMeta,
 )
+from .testrun_comments_list_patch_request import (
+    TestrunCommentsListPatchRequest,
+)
+from .testrun_comments_list_patch_request_data_item import (
+    TestrunCommentsListPatchRequestDataItem,
+)
+from .testrun_comments_list_patch_request_data_item_attributes import (
+    TestrunCommentsListPatchRequestDataItemAttributes,
+)
+from .testrun_comments_list_patch_request_data_item_type import (
+    TestrunCommentsListPatchRequestDataItemType,
+)
 from .testrun_comments_list_post_request import TestrunCommentsListPostRequest
 from .testrun_comments_list_post_request_data_item import (
     TestrunCommentsListPostRequestDataItem,
@@ -3174,6 +3383,13 @@ from .testrun_comments_single_patch_request_data_attributes import (
 from .testrun_comments_single_patch_request_data_type import (
     TestrunCommentsSinglePatchRequestDataType,
 )
+from .testruns_list_delete_request import TestrunsListDeleteRequest
+from .testruns_list_delete_request_data_item import (
+    TestrunsListDeleteRequestDataItem,
+)
+from .testruns_list_delete_request_data_item_type import (
+    TestrunsListDeleteRequestDataItemType,
+)
 from .testruns_list_get_response import TestrunsListGetResponse
 from .testruns_list_get_response_data_item import (
     TestrunsListGetResponseDataItem,
@@ -3273,6 +3489,55 @@ from .testruns_list_get_response_included_item import (
 )
 from .testruns_list_get_response_links import TestrunsListGetResponseLinks
 from .testruns_list_get_response_meta import TestrunsListGetResponseMeta
+from .testruns_list_patch_request import TestrunsListPatchRequest
+from .testruns_list_patch_request_data_item import (
+    TestrunsListPatchRequestDataItem,
+)
+from .testruns_list_patch_request_data_item_attributes import (
+    TestrunsListPatchRequestDataItemAttributes,
+)
+from .testruns_list_patch_request_data_item_attributes_home_page_content import (
+    TestrunsListPatchRequestDataItemAttributesHomePageContent,
+)
+from .testruns_list_patch_request_data_item_attributes_home_page_content_type import (
+    TestrunsListPatchRequestDataItemAttributesHomePageContentType,
+)
+from .testruns_list_patch_request_data_item_attributes_select_test_cases_by import (
+    TestrunsListPatchRequestDataItemAttributesSelectTestCasesBy,
+)
+from .testruns_list_patch_request_data_item_relationships import (
+    TestrunsListPatchRequestDataItemRelationships,
+)
+from .testruns_list_patch_request_data_item_relationships_document import (
+    TestrunsListPatchRequestDataItemRelationshipsDocument,
+)
+from .testruns_list_patch_request_data_item_relationships_document_data import (
+    TestrunsListPatchRequestDataItemRelationshipsDocumentData,
+)
+from .testruns_list_patch_request_data_item_relationships_document_data_type import (
+    TestrunsListPatchRequestDataItemRelationshipsDocumentDataType,
+)
+from .testruns_list_patch_request_data_item_relationships_project_span import (
+    TestrunsListPatchRequestDataItemRelationshipsProjectSpan,
+)
+from .testruns_list_patch_request_data_item_relationships_project_span_data_item import (
+    TestrunsListPatchRequestDataItemRelationshipsProjectSpanDataItem,
+)
+from .testruns_list_patch_request_data_item_relationships_project_span_data_item_type import (
+    TestrunsListPatchRequestDataItemRelationshipsProjectSpanDataItemType,
+)
+from .testruns_list_patch_request_data_item_relationships_summary_defect import (
+    TestrunsListPatchRequestDataItemRelationshipsSummaryDefect,
+)
+from .testruns_list_patch_request_data_item_relationships_summary_defect_data import (
+    TestrunsListPatchRequestDataItemRelationshipsSummaryDefectData,
+)
+from .testruns_list_patch_request_data_item_relationships_summary_defect_data_type import (
+    TestrunsListPatchRequestDataItemRelationshipsSummaryDefectDataType,
+)
+from .testruns_list_patch_request_data_item_type import (
+    TestrunsListPatchRequestDataItemType,
+)
 from .testruns_list_post_request import TestrunsListPostRequest
 from .testruns_list_post_request_data_item import (
     TestrunsListPostRequestDataItem,
@@ -3536,6 +3801,24 @@ from .teststep_results_list_get_response_links import (
 from .teststep_results_list_get_response_meta import (
     TeststepResultsListGetResponseMeta,
 )
+from .teststep_results_list_patch_request import (
+    TeststepResultsListPatchRequest,
+)
+from .teststep_results_list_patch_request_data_item import (
+    TeststepResultsListPatchRequestDataItem,
+)
+from .teststep_results_list_patch_request_data_item_attributes import (
+    TeststepResultsListPatchRequestDataItemAttributes,
+)
+from .teststep_results_list_patch_request_data_item_attributes_comment import (
+    TeststepResultsListPatchRequestDataItemAttributesComment,
+)
+from .teststep_results_list_patch_request_data_item_attributes_comment_type import (
+    TeststepResultsListPatchRequestDataItemAttributesCommentType,
+)
+from .teststep_results_list_patch_request_data_item_type import (
+    TeststepResultsListPatchRequestDataItemType,
+)
 from .teststep_results_list_post_request import TeststepResultsListPostRequest
 from .teststep_results_list_post_request_data_item import (
     TeststepResultsListPostRequestDataItem,
@@ -3614,6 +3897,33 @@ from .teststep_results_single_get_response_included_item import (
 )
 from .teststep_results_single_get_response_links import (
     TeststepResultsSingleGetResponseLinks,
+)
+from .teststep_results_single_patch_request import (
+    TeststepResultsSinglePatchRequest,
+)
+from .teststep_results_single_patch_request_data import (
+    TeststepResultsSinglePatchRequestData,
+)
+from .teststep_results_single_patch_request_data_attributes import (
+    TeststepResultsSinglePatchRequestDataAttributes,
+)
+from .teststep_results_single_patch_request_data_attributes_comment import (
+    TeststepResultsSinglePatchRequestDataAttributesComment,
+)
+from .teststep_results_single_patch_request_data_attributes_comment_type import (
+    TeststepResultsSinglePatchRequestDataAttributesCommentType,
+)
+from .teststep_results_single_patch_request_data_type import (
+    TeststepResultsSinglePatchRequestDataType,
+)
+from .teststepresult_attachments_list_delete_request import (
+    TeststepresultAttachmentsListDeleteRequest,
+)
+from .teststepresult_attachments_list_delete_request_data_item import (
+    TeststepresultAttachmentsListDeleteRequestDataItem,
+)
+from .teststepresult_attachments_list_delete_request_data_item_type import (
+    TeststepresultAttachmentsListDeleteRequestDataItemType,
 )
 from .teststepresult_attachments_list_get_response import (
     TeststepresultAttachmentsListGetResponse,
@@ -3749,6 +4059,18 @@ from .teststepresult_attachments_single_get_response_included_item import (
 )
 from .teststepresult_attachments_single_get_response_links import (
     TeststepresultAttachmentsSingleGetResponseLinks,
+)
+from .teststepresult_attachments_single_patch_request import (
+    TeststepresultAttachmentsSinglePatchRequest,
+)
+from .teststepresult_attachments_single_patch_request_data import (
+    TeststepresultAttachmentsSinglePatchRequestData,
+)
+from .teststepresult_attachments_single_patch_request_data_attributes import (
+    TeststepresultAttachmentsSinglePatchRequestDataAttributes,
+)
+from .teststepresult_attachments_single_patch_request_data_type import (
+    TeststepresultAttachmentsSinglePatchRequestDataType,
 )
 from .teststeps_list_delete_request import TeststepsListDeleteRequest
 from .teststeps_list_delete_request_data_item import (
@@ -5971,8 +6293,8 @@ __all__ = (
     "EnumOptionsActionResponseBodyMeta",
     "Errors",
     "ErrorsErrorsItem",
-    "ErrorsErrorsItemSource",
-    "ErrorsErrorsItemSourceResource",
+    "ErrorsErrorsItemSourceType0",
+    "ErrorsErrorsItemSourceType0ResourceType0",
     "ExportTestCasesRequestBody",
     "ExternallylinkedworkitemsListDeleteRequest",
     "ExternallylinkedworkitemsListDeleteRequestDataItem",
@@ -6087,6 +6409,47 @@ __all__ = (
     "IconsSingleGetResponseIncludedItem",
     "IconsSingleGetResponseLinks",
     "ImportTestResultsRequestBody",
+    "JobsSingleGetResponse",
+    "JobsSingleGetResponseData",
+    "JobsSingleGetResponseDataAttributes",
+    "JobsSingleGetResponseDataAttributesStatus",
+    "JobsSingleGetResponseDataAttributesStatusType",
+    "JobsSingleGetResponseDataLinks",
+    "JobsSingleGetResponseDataMeta",
+    "JobsSingleGetResponseDataMetaErrorsItem",
+    "JobsSingleGetResponseDataMetaErrorsItemSource",
+    "JobsSingleGetResponseDataMetaErrorsItemSourceResource",
+    "JobsSingleGetResponseDataRelationships",
+    "JobsSingleGetResponseDataRelationshipsDocument",
+    "JobsSingleGetResponseDataRelationshipsDocumentData",
+    "JobsSingleGetResponseDataRelationshipsDocumentDataType",
+    "JobsSingleGetResponseDataRelationshipsDocuments",
+    "JobsSingleGetResponseDataRelationshipsDocumentsDataItem",
+    "JobsSingleGetResponseDataRelationshipsDocumentsDataItemType",
+    "JobsSingleGetResponseDataRelationshipsDocumentsMeta",
+    "JobsSingleGetResponseDataRelationshipsProject",
+    "JobsSingleGetResponseDataRelationshipsProjectData",
+    "JobsSingleGetResponseDataRelationshipsProjectDataType",
+    "JobsSingleGetResponseDataType",
+    "JobsSingleGetResponseIncludedItem",
+    "JobsSingleGetResponseLinks",
+    "JobsSinglePostResponse",
+    "JobsSinglePostResponseData",
+    "JobsSinglePostResponseDataAttributes",
+    "JobsSinglePostResponseDataAttributesStatus",
+    "JobsSinglePostResponseDataAttributesStatusType",
+    "JobsSinglePostResponseDataLinks",
+    "JobsSinglePostResponseDataRelationships",
+    "JobsSinglePostResponseDataRelationshipsDocument",
+    "JobsSinglePostResponseDataRelationshipsDocumentData",
+    "JobsSinglePostResponseDataRelationshipsDocumentDataType",
+    "JobsSinglePostResponseDataRelationshipsDocuments",
+    "JobsSinglePostResponseDataRelationshipsDocumentsDataItem",
+    "JobsSinglePostResponseDataRelationshipsDocumentsDataItemType",
+    "JobsSinglePostResponseDataRelationshipsProject",
+    "JobsSinglePostResponseDataRelationshipsProjectData",
+    "JobsSinglePostResponseDataRelationshipsProjectDataType",
+    "JobsSinglePostResponseDataType",
     "LinkedoslcresourcesListDeleteRequest",
     "LinkedoslcresourcesListDeleteRequestDataItem",
     "LinkedoslcresourcesListDeleteRequestDataItemType",
@@ -6159,6 +6522,7 @@ __all__ = (
     "LinkedworkitemsSinglePatchRequestData",
     "LinkedworkitemsSinglePatchRequestDataAttributes",
     "LinkedworkitemsSinglePatchRequestDataType",
+    "MergeDocumentRequestBody",
     "MoveProjectRequestBody",
     "MoveWorkItemToDocumentRequestBody",
     "PageAttachmentsListPostRequest",
@@ -6218,7 +6582,9 @@ __all__ = (
     "PagesSinglePatchRequestDataType",
     "Pagination",
     "PatchDocumentAttachmentsRequestBody",
+    "PatchTestRecordAttachmentsRequestBody",
     "PatchTestRunAttachmentsRequestBody",
+    "PatchTestStepResultAttachmentsRequestBody",
     "PatchWorkItemAttachmentsRequestBody",
     "PlansListDeleteRequest",
     "PlansListDeleteRequestDataItem",
@@ -6453,6 +6819,9 @@ __all__ = (
     "SetLicenseRequestBody",
     "SetLicenseRequestBodyLicense",
     "SparseFields",
+    "TestparameterDefinitionsListDeleteRequest",
+    "TestparameterDefinitionsListDeleteRequestDataItem",
+    "TestparameterDefinitionsListDeleteRequestDataItemType",
     "TestparameterDefinitionsListGetResponse",
     "TestparameterDefinitionsListGetResponseDataItem",
     "TestparameterDefinitionsListGetResponseDataItemAttributes",
@@ -6484,6 +6853,9 @@ __all__ = (
     "TestparameterDefinitionsSingleGetResponseDataType",
     "TestparameterDefinitionsSingleGetResponseIncludedItem",
     "TestparameterDefinitionsSingleGetResponseLinks",
+    "TestparametersListDeleteRequest",
+    "TestparametersListDeleteRequestDataItem",
+    "TestparametersListDeleteRequestDataItemType",
     "TestparametersListGetResponse",
     "TestparametersListGetResponseDataItem",
     "TestparametersListGetResponseDataItemAttributes",
@@ -6523,6 +6895,9 @@ __all__ = (
     "TestparametersSingleGetResponseDataType",
     "TestparametersSingleGetResponseIncludedItem",
     "TestparametersSingleGetResponseLinks",
+    "TestrecordAttachmentsListDeleteRequest",
+    "TestrecordAttachmentsListDeleteRequestDataItem",
+    "TestrecordAttachmentsListDeleteRequestDataItemType",
     "TestrecordAttachmentsListGetResponse",
     "TestrecordAttachmentsListGetResponseDataItem",
     "TestrecordAttachmentsListGetResponseDataItemAttributes",
@@ -6568,6 +6943,10 @@ __all__ = (
     "TestrecordAttachmentsSingleGetResponseDataType",
     "TestrecordAttachmentsSingleGetResponseIncludedItem",
     "TestrecordAttachmentsSingleGetResponseLinks",
+    "TestrecordAttachmentsSinglePatchRequest",
+    "TestrecordAttachmentsSinglePatchRequestData",
+    "TestrecordAttachmentsSinglePatchRequestDataAttributes",
+    "TestrecordAttachmentsSinglePatchRequestDataType",
     "TestrecordsListGetResponse",
     "TestrecordsListGetResponseDataItem",
     "TestrecordsListGetResponseDataItemAttributes",
@@ -6592,6 +6971,19 @@ __all__ = (
     "TestrecordsListGetResponseIncludedItem",
     "TestrecordsListGetResponseLinks",
     "TestrecordsListGetResponseMeta",
+    "TestrecordsListPatchRequest",
+    "TestrecordsListPatchRequestDataItem",
+    "TestrecordsListPatchRequestDataItemAttributes",
+    "TestrecordsListPatchRequestDataItemAttributesComment",
+    "TestrecordsListPatchRequestDataItemAttributesCommentType",
+    "TestrecordsListPatchRequestDataItemRelationships",
+    "TestrecordsListPatchRequestDataItemRelationshipsDefect",
+    "TestrecordsListPatchRequestDataItemRelationshipsDefectData",
+    "TestrecordsListPatchRequestDataItemRelationshipsDefectDataType",
+    "TestrecordsListPatchRequestDataItemRelationshipsExecutedBy",
+    "TestrecordsListPatchRequestDataItemRelationshipsExecutedByData",
+    "TestrecordsListPatchRequestDataItemRelationshipsExecutedByDataType",
+    "TestrecordsListPatchRequestDataItemType",
     "TestrecordsListPostRequest",
     "TestrecordsListPostRequestDataItem",
     "TestrecordsListPostRequestDataItemAttributes",
@@ -6648,6 +7040,9 @@ __all__ = (
     "TestrecordsSinglePatchRequestDataRelationshipsExecutedByData",
     "TestrecordsSinglePatchRequestDataRelationshipsExecutedByDataType",
     "TestrecordsSinglePatchRequestDataType",
+    "TestrunAttachmentsListDeleteRequest",
+    "TestrunAttachmentsListDeleteRequestDataItem",
+    "TestrunAttachmentsListDeleteRequestDataItemType",
     "TestrunAttachmentsListGetResponse",
     "TestrunAttachmentsListGetResponseDataItem",
     "TestrunAttachmentsListGetResponseDataItemAttributes",
@@ -6725,6 +7120,10 @@ __all__ = (
     "TestrunCommentsListGetResponseIncludedItem",
     "TestrunCommentsListGetResponseLinks",
     "TestrunCommentsListGetResponseMeta",
+    "TestrunCommentsListPatchRequest",
+    "TestrunCommentsListPatchRequestDataItem",
+    "TestrunCommentsListPatchRequestDataItemAttributes",
+    "TestrunCommentsListPatchRequestDataItemType",
     "TestrunCommentsListPostRequest",
     "TestrunCommentsListPostRequestDataItem",
     "TestrunCommentsListPostRequestDataItemAttributes",
@@ -6773,6 +7172,9 @@ __all__ = (
     "TestrunCommentsSinglePatchRequestData",
     "TestrunCommentsSinglePatchRequestDataAttributes",
     "TestrunCommentsSinglePatchRequestDataType",
+    "TestrunsListDeleteRequest",
+    "TestrunsListDeleteRequestDataItem",
+    "TestrunsListDeleteRequestDataItemType",
     "TestrunsListGetResponse",
     "TestrunsListGetResponseDataItem",
     "TestrunsListGetResponseDataItemAttributes",
@@ -6808,6 +7210,23 @@ __all__ = (
     "TestrunsListGetResponseIncludedItem",
     "TestrunsListGetResponseLinks",
     "TestrunsListGetResponseMeta",
+    "TestrunsListPatchRequest",
+    "TestrunsListPatchRequestDataItem",
+    "TestrunsListPatchRequestDataItemAttributes",
+    "TestrunsListPatchRequestDataItemAttributesHomePageContent",
+    "TestrunsListPatchRequestDataItemAttributesHomePageContentType",
+    "TestrunsListPatchRequestDataItemAttributesSelectTestCasesBy",
+    "TestrunsListPatchRequestDataItemRelationships",
+    "TestrunsListPatchRequestDataItemRelationshipsDocument",
+    "TestrunsListPatchRequestDataItemRelationshipsDocumentData",
+    "TestrunsListPatchRequestDataItemRelationshipsDocumentDataType",
+    "TestrunsListPatchRequestDataItemRelationshipsProjectSpan",
+    "TestrunsListPatchRequestDataItemRelationshipsProjectSpanDataItem",
+    "TestrunsListPatchRequestDataItemRelationshipsProjectSpanDataItemType",
+    "TestrunsListPatchRequestDataItemRelationshipsSummaryDefect",
+    "TestrunsListPatchRequestDataItemRelationshipsSummaryDefectData",
+    "TestrunsListPatchRequestDataItemRelationshipsSummaryDefectDataType",
+    "TestrunsListPatchRequestDataItemType",
     "TestrunsListPostRequest",
     "TestrunsListPostRequestDataItem",
     "TestrunsListPostRequestDataItemAttributes",
@@ -6883,6 +7302,9 @@ __all__ = (
     "TestrunsSinglePatchRequestDataRelationshipsSummaryDefectData",
     "TestrunsSinglePatchRequestDataRelationshipsSummaryDefectDataType",
     "TestrunsSinglePatchRequestDataType",
+    "TeststepresultAttachmentsListDeleteRequest",
+    "TeststepresultAttachmentsListDeleteRequestDataItem",
+    "TeststepresultAttachmentsListDeleteRequestDataItemType",
     "TeststepresultAttachmentsListGetResponse",
     "TeststepresultAttachmentsListGetResponseDataItem",
     "TeststepresultAttachmentsListGetResponseDataItemAttributes",
@@ -6928,6 +7350,10 @@ __all__ = (
     "TeststepresultAttachmentsSingleGetResponseDataType",
     "TeststepresultAttachmentsSingleGetResponseIncludedItem",
     "TeststepresultAttachmentsSingleGetResponseLinks",
+    "TeststepresultAttachmentsSinglePatchRequest",
+    "TeststepresultAttachmentsSinglePatchRequestData",
+    "TeststepresultAttachmentsSinglePatchRequestDataAttributes",
+    "TeststepresultAttachmentsSinglePatchRequestDataType",
     "TeststepResultsListGetResponse",
     "TeststepResultsListGetResponseDataItem",
     "TeststepResultsListGetResponseDataItemAttributes",
@@ -6946,6 +7372,12 @@ __all__ = (
     "TeststepResultsListGetResponseIncludedItem",
     "TeststepResultsListGetResponseLinks",
     "TeststepResultsListGetResponseMeta",
+    "TeststepResultsListPatchRequest",
+    "TeststepResultsListPatchRequestDataItem",
+    "TeststepResultsListPatchRequestDataItemAttributes",
+    "TeststepResultsListPatchRequestDataItemAttributesComment",
+    "TeststepResultsListPatchRequestDataItemAttributesCommentType",
+    "TeststepResultsListPatchRequestDataItemType",
     "TeststepResultsListPostRequest",
     "TeststepResultsListPostRequestDataItem",
     "TeststepResultsListPostRequestDataItemAttributes",
@@ -6973,6 +7405,12 @@ __all__ = (
     "TeststepResultsSingleGetResponseDataType",
     "TeststepResultsSingleGetResponseIncludedItem",
     "TeststepResultsSingleGetResponseLinks",
+    "TeststepResultsSinglePatchRequest",
+    "TeststepResultsSinglePatchRequestData",
+    "TeststepResultsSinglePatchRequestDataAttributes",
+    "TeststepResultsSinglePatchRequestDataAttributesComment",
+    "TeststepResultsSinglePatchRequestDataAttributesCommentType",
+    "TeststepResultsSinglePatchRequestDataType",
     "TeststepsListDeleteRequest",
     "TeststepsListDeleteRequestDataItem",
     "TeststepsListDeleteRequestDataItemType",

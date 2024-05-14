@@ -17,20 +17,20 @@ class EnumOptionsActionResponseBodyLinks:
     Attributes:
         first (Union[Unset, str]):  Example: server-host-name/application-
             path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=1.
-        prev (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=4.
-        next_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=6.
         last (Union[Unset, str]):  Example: server-host-name/application-
             path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=9.
+        next_ (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=6.
+        prev (Union[Unset, str]):  Example: server-host-name/application-
+            path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=4.
         self_ (Union[Unset, str]):  Example: server-host-name/application-
             path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bsize%5D=10&page%5Bnumber%5D=5.
     """
 
     first: Union[Unset, str] = UNSET
-    prev: Union[Unset, str] = UNSET
-    next_: Union[Unset, str] = UNSET
     last: Union[Unset, str] = UNSET
+    next_: Union[Unset, str] = UNSET
+    prev: Union[Unset, str] = UNSET
     self_: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -39,11 +39,11 @@ class EnumOptionsActionResponseBodyLinks:
     def to_dict(self) -> Dict[str, Any]:
         first = self.first
 
-        prev = self.prev
+        last = self.last
 
         next_ = self.next_
 
-        last = self.last
+        prev = self.prev
 
         self_ = self.self_
 
@@ -52,12 +52,12 @@ class EnumOptionsActionResponseBodyLinks:
         field_dict.update({})
         if first is not UNSET:
             field_dict["first"] = first
-        if prev is not UNSET:
-            field_dict["prev"] = prev
-        if next_ is not UNSET:
-            field_dict["next"] = next_
         if last is not UNSET:
             field_dict["last"] = last
+        if next_ is not UNSET:
+            field_dict["next"] = next_
+        if prev is not UNSET:
+            field_dict["prev"] = prev
         if self_ is not UNSET:
             field_dict["self"] = self_
 
@@ -68,19 +68,19 @@ class EnumOptionsActionResponseBodyLinks:
         d = src_dict.copy()
         first = d.pop("first", UNSET)
 
-        prev = d.pop("prev", UNSET)
+        last = d.pop("last", UNSET)
 
         next_ = d.pop("next", UNSET)
 
-        last = d.pop("last", UNSET)
+        prev = d.pop("prev", UNSET)
 
         self_ = d.pop("self", UNSET)
 
         enum_options_action_response_body_links_obj = cls(
             first=first,
-            prev=prev,
-            next_=next_,
             last=last,
+            next_=next_,
+            prev=prev,
             self_=self_,
         )
 

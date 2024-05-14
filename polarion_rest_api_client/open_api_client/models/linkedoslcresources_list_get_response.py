@@ -27,29 +27,26 @@ T = TypeVar("T", bound="LinkedoslcresourcesListGetResponse")
 class LinkedoslcresourcesListGetResponse:
     """
     Attributes:
-        meta (Union[Unset, LinkedoslcresourcesListGetResponseMeta]):
         data (Union[Unset, List['LinkedoslcresourcesListGetResponseDataItem']]):
         included (Union[Unset, List['LinkedoslcresourcesListGetResponseIncludedItem']]): Related entities might be
             returned, see <a href="https://docs.sw.siemens.com/en-
-            US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API User Guide</a>.
+            US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
+            Guide</a>.
+        meta (Union[Unset, LinkedoslcresourcesListGetResponseMeta]):
     """
 
-    meta: Union[Unset, "LinkedoslcresourcesListGetResponseMeta"] = UNSET
     data: Union[Unset, List["LinkedoslcresourcesListGetResponseDataItem"]] = (
         UNSET
     )
     included: Union[
         Unset, List["LinkedoslcresourcesListGetResponseIncludedItem"]
     ] = UNSET
+    meta: Union[Unset, "LinkedoslcresourcesListGetResponseMeta"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         data: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.data, Unset):
             data = []
@@ -64,15 +61,19 @@ class LinkedoslcresourcesListGetResponse:
                 included_item = included_item_data.to_dict()
                 included.append(included_item)
 
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if data is not UNSET:
             field_dict["data"] = data
         if included is not UNSET:
             field_dict["included"] = included
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -89,13 +90,6 @@ class LinkedoslcresourcesListGetResponse:
         )
 
         d = src_dict.copy()
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, LinkedoslcresourcesListGetResponseMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = LinkedoslcresourcesListGetResponseMeta.from_dict(_meta)
-
         data = []
         _data = d.pop("data", UNSET)
         for data_item_data in _data or []:
@@ -116,10 +110,17 @@ class LinkedoslcresourcesListGetResponse:
 
             included.append(included_item)
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, LinkedoslcresourcesListGetResponseMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = LinkedoslcresourcesListGetResponseMeta.from_dict(_meta)
+
         linkedoslcresources_list_get_response_obj = cls(
-            meta=meta,
             data=data,
             included=included,
+            meta=meta,
         )
 
         linkedoslcresources_list_get_response_obj.additional_properties = d

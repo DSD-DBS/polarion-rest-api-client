@@ -153,9 +153,9 @@ pre-commit install
 ```
 
 ## Updating the auto generated part
-To update the auto generated part of the code, execute the `open_api_client_build/build_client_source.sh` script with `path` or `url` as first
-arg and the path to the OpenAPI-Specification as second arg from the project root directory. For Copyright reasons, we don't publish the Specification here,
-but we used the Specification of Polarion version 2023.04 to generate the code published here.
+To update the auto generated part of the code, execute the `open_api_client_build/build_client.py` script with `path` or `url` as first
+arg and the path to the OpenAPI-Specification as second arg from the project root directory. The publicly available [specification](https://developer.siemens.com/polarion/polarion-rest-apispec.json)
+from the Polarion developer Portal was used.
 
 # Contributing
 

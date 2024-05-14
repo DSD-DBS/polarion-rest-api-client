@@ -18,42 +18,46 @@ T = TypeVar("T", bound="SetLicenseRequestBody")
 class SetLicenseRequestBody:
     """
     Attributes:
-        license_ (Union[Unset, SetLicenseRequestBodyLicense]): User's license type
-        group (Union[Unset, str]): License group Example: Department.
         concurrent (Union[Unset, bool]): Is concurrent user Example: True.
+        group (Union[Unset, str]): License group Example: Department.
+        license_ (Union[Unset, SetLicenseRequestBodyLicense]): User's license type
     """
 
-    license_: Union[Unset, SetLicenseRequestBodyLicense] = UNSET
-    group: Union[Unset, str] = UNSET
     concurrent: Union[Unset, bool] = UNSET
+    group: Union[Unset, str] = UNSET
+    license_: Union[Unset, SetLicenseRequestBodyLicense] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
+        concurrent = self.concurrent
+
+        group = self.group
+
         license_: Union[Unset, str] = UNSET
         if not isinstance(self.license_, Unset):
             license_ = self.license_.value
 
-        group = self.group
-
-        concurrent = self.concurrent
-
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if license_ is not UNSET:
-            field_dict["license"] = license_
-        if group is not UNSET:
-            field_dict["group"] = group
         if concurrent is not UNSET:
             field_dict["concurrent"] = concurrent
+        if group is not UNSET:
+            field_dict["group"] = group
+        if license_ is not UNSET:
+            field_dict["license"] = license_
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        concurrent = d.pop("concurrent", UNSET)
+
+        group = d.pop("group", UNSET)
+
         _license_ = d.pop("license", UNSET)
         license_: Union[Unset, SetLicenseRequestBodyLicense]
         if isinstance(_license_, Unset):
@@ -61,14 +65,10 @@ class SetLicenseRequestBody:
         else:
             license_ = SetLicenseRequestBodyLicense(_license_)
 
-        group = d.pop("group", UNSET)
-
-        concurrent = d.pop("concurrent", UNSET)
-
         set_license_request_body_obj = cls(
-            license_=license_,
-            group=group,
             concurrent=concurrent,
+            group=group,
+            license_=license_,
         )
 
         set_license_request_body_obj.additional_properties = d

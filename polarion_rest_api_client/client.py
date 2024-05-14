@@ -197,28 +197,10 @@ class OpenAPIPolarionProjectClient(
             )
             return False
 
-        try:
-            decoded_content = json.loads(response.content.decode())
-        except json.JSONDecodeError as e:
-            raise unexpected_error() from e
-
-        # This is needed to fix erroneous error responses
-        def filter_none_values(data: dict[str, t.Any]):
-            result = {}
-            for k, v in data.items():
-                if v is None:
-                    continue
-                if isinstance(v, dict):
-                    v = filter_none_values(v)
-                result[k] = v
-            return result
-
-        decoded_content["errors"] = [
-            filter_none_values(er) for er in decoded_content.get("errors", [])
-        ]
-
-        error = api_models.Errors.from_dict(decoded_content)
-        if error.errors:
+        if (
+            isinstance(response.parsed, api_models.Errors)
+            and response.parsed.errors
+        ):
             raise errors.PolarionApiException(
                 *[
                     (
@@ -226,11 +208,14 @@ class OpenAPIPolarionProjectClient(
                         e.detail,
                         (
                             e.source.pointer
-                            if not isinstance(e.source, oa_types.Unset)
+                            if not (
+                                isinstance(e.source, oa_types.Unset)
+                                or e.source is None
+                            )
                             else "No error pointer"
                         ),
                     )
-                    for e in error.errors
+                    for e in response.parsed.errors
                 ]
             )
         raise unexpected_error()
@@ -244,12 +229,12 @@ class OpenAPIPolarionProjectClient(
         assert work_item.status is not None
 
         attrs = api_models.WorkitemsListPostRequestDataItemAttributes(
-            work_item.type,
-            api_models.WorkitemsListPostRequestDataItemAttributesDescription(
-                api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
+            type=work_item.type,
+            description=api_models.WorkitemsListPostRequestDataItemAttributesDescription(
+                type=api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description_type
                 ),
-                work_item.description,
+                value=work_item.description,
             ),
             status=work_item.status,
             title=work_item.title,
@@ -263,7 +248,8 @@ class OpenAPIPolarionProjectClient(
             )
 
         return api_models.WorkitemsListPostRequestDataItem(
-            api_models.WorkitemsListPostRequestDataItemType.WORKITEMS, attrs
+            type=api_models.WorkitemsListPostRequestDataItemType.WORKITEMS,
+            attributes=attrs,
         )
 
     def _build_work_item_patch_request(
@@ -276,10 +262,10 @@ class OpenAPIPolarionProjectClient(
 
         if work_item.description is not None:
             attrs.description = api_models.WorkitemsSinglePatchRequestDataAttributesDescription(  # pylint: disable=line-too-long
-                api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
+                type=api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description_type
                 ),
-                work_item.description,
+                value=work_item.description,
             )
 
         if work_item.status is not None:
@@ -293,10 +279,10 @@ class OpenAPIPolarionProjectClient(
             )
 
         return api_models.WorkitemsSinglePatchRequest(
-            api_models.WorkitemsSinglePatchRequestData(
-                api_models.WorkitemsSinglePatchRequestDataType.WORKITEMS,
-                f"{self.project_id}/{work_item.id}",
-                attrs,
+            data=api_models.WorkitemsSinglePatchRequestData(
+                type=api_models.WorkitemsSinglePatchRequestDataType.WORKITEMS,
+                id=f"{self.project_id}/{work_item.id}",
+                attributes=attrs,
             )
         )
 
@@ -314,7 +300,10 @@ class OpenAPIPolarionProjectClient(
             self._post_work_item_batch(work_item_batch, work_item_objs, False)
             return
 
-        assert response.parsed and response.parsed.data
+        assert (
+            isinstance(response.parsed, api_models.WorkitemsListPostResponse)
+            and response.parsed.data
+        )
         counter = 0
         for work_item_res in response.parsed.data:
             assert work_item_res.id
@@ -439,11 +428,11 @@ class OpenAPIPolarionProjectClient(
             attributes.title = work_item_attachment.title
 
         multipart = api_models.PatchWorkItemAttachmentsRequestBody(
-            api_models.WorkitemAttachmentsSinglePatchRequest(
-                api_models.WorkitemAttachmentsSinglePatchRequestData(
-                    api_models.WorkitemAttachmentsSinglePatchRequestDataType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
-                    f"{self.project_id}/{work_item_attachment.work_item_id}/{work_item_attachment.id}",  # pylint: disable=line-too-long
-                    attributes,
+            resource=api_models.WorkitemAttachmentsSinglePatchRequest(
+                data=api_models.WorkitemAttachmentsSinglePatchRequestData(
+                    type=api_models.WorkitemAttachmentsSinglePatchRequestDataType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
+                    id=f"{self.project_id}/{work_item_attachment.work_item_id}/{work_item_attachment.id}",  # pylint: disable=line-too-long
+                    attributes=attributes,
                 )
             )
         )
@@ -499,7 +488,7 @@ class OpenAPIPolarionProjectClient(
 
             attachment_attributes.append(
                 api_models.WorkitemAttachmentsListPostRequestDataItem(
-                    api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
+                    type=api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
                     attributes=attributes,
                 )
             )
@@ -513,10 +502,10 @@ class OpenAPIPolarionProjectClient(
             )
 
         multipart = api_models.PostWorkItemAttachmentsRequestBody(
-            api_models.WorkitemAttachmentsListPostRequest(
+            resource=api_models.WorkitemAttachmentsListPostRequest(
                 attachment_attributes
             ),
-            attachment_files,
+            files=attachment_files,
         )
 
         response = post_work_item_attachments.sync_detailed(
@@ -530,7 +519,12 @@ class OpenAPIPolarionProjectClient(
             self.create_work_item_attachments(work_item_attachments, False)
             return
 
-        assert response.parsed and response.parsed.data
+        assert (
+            isinstance(
+                response.parsed, api_models.WorkitemAttachmentsListPostResponse
+            )
+            and response.parsed.data
+        )
         counter = 0
         for work_item_attachment_res in response.parsed.data:
             assert work_item_attachment_res.id
@@ -624,7 +618,9 @@ class OpenAPIPolarionProjectClient(
             sleep_random_time()
             return self.get_work_item(work_item_id, False)
 
-        if response.parsed and isinstance(
+        if isinstance(
+            response.parsed, api_models.WorkitemsSingleGetResponse
+        ) and isinstance(
             response.parsed.data, api_models.WorkitemsSingleGetResponseData
         ):
             return self._generate_work_item(response.parsed.data)
@@ -792,7 +788,7 @@ class OpenAPIPolarionProjectClient(
 
     def create_work_items(self, work_items: list[base_client.WorkItemType]):
         """Create the given list of work items."""
-        current_batch = api_models.WorkitemsListPostRequest([])
+        current_batch = api_models.WorkitemsListPostRequest(data=[])
         content_size = min_wi_request_size
         batch_start_index = 0
         batch_end_index = 0
@@ -823,7 +819,7 @@ class OpenAPIPolarionProjectClient(
                 )
 
                 current_batch = api_models.WorkitemsListPostRequest(
-                    [work_item_data]
+                    data=[work_item_data]
                 )
                 content_size = _get_json_content_size(current_batch.to_dict())
                 batch_start_index = batch_end_index
@@ -844,10 +840,10 @@ class OpenAPIPolarionProjectClient(
             self.project_id,
             client=self.client,
             body=api_models.WorkitemsListDeleteRequest(
-                [
+                data=[
                     api_models.WorkitemsListDeleteRequestDataItem(
-                        api_models.WorkitemsListDeleteRequestDataItemType.WORKITEMS,  # pylint: disable=line-too-long
-                        f"{self.project_id}/{work_item_id}",
+                        type=api_models.WorkitemsListDeleteRequestDataItemType.WORKITEMS,  # pylint: disable=line-too-long
+                        id=f"{self.project_id}/{work_item_id}",
                     )
                     for work_item_id in work_item_ids
                 ]
@@ -979,18 +975,18 @@ class OpenAPIPolarionProjectClient(
             client=self.client,
             # pylint: disable=line-too-long
             body=api_models.LinkedworkitemsListPostRequest(
-                [
+                data=[
                     api_models.LinkedworkitemsListPostRequestDataItem(
-                        api_models.LinkedworkitemsListPostRequestDataItemType.LINKEDWORKITEMS,
-                        api_models.LinkedworkitemsListPostRequestDataItemAttributes(
+                        type=api_models.LinkedworkitemsListPostRequestDataItemType.LINKEDWORKITEMS,
+                        attributes=api_models.LinkedworkitemsListPostRequestDataItemAttributes(
                             role=work_item_link.role,
                             suspect=work_item_link.suspect or False,
                         ),
-                        api_models.LinkedworkitemsListPostRequestDataItemRelationships(
-                            api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem(
-                                api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemData(
-                                    api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemDataType.WORKITEMS,
-                                    f"{work_item_link.secondary_work_item_project}/{work_item_link.secondary_work_item_id}",
+                        relationships=api_models.LinkedworkitemsListPostRequestDataItemRelationships(
+                            work_item=api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem(
+                                data=api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemData(
+                                    type=api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemDataType.WORKITEMS,
+                                    id=f"{work_item_link.secondary_work_item_project}/{work_item_link.secondary_work_item_id}",
                                 )
                             )
                         ),
@@ -1014,10 +1010,10 @@ class OpenAPIPolarionProjectClient(
             client=self.client,
             # pylint: disable=line-too-long
             body=api_models.LinkedworkitemsListDeleteRequest(
-                [
+                data=[
                     api_models.LinkedworkitemsListDeleteRequestDataItem(
-                        api_models.LinkedworkitemsListDeleteRequestDataItemType.LINKEDWORKITEMS,
-                        f"{self.project_id}/{work_item_link.primary_work_item_id}/{work_item_link.role}/{work_item_link.secondary_work_item_project}/{work_item_link.secondary_work_item_id}",
+                        type=api_models.LinkedworkitemsListDeleteRequestDataItemType.LINKEDWORKITEMS,
+                        id=f"{self.project_id}/{work_item_link.primary_work_item_id}/{work_item_link.role}/{work_item_link.secondary_work_item_project}/{work_item_link.secondary_work_item_id}",
                     )
                     for work_item_link in work_item_links
                 ]

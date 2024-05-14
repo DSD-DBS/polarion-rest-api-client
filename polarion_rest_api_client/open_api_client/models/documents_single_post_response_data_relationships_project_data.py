@@ -20,38 +20,40 @@ T = TypeVar(
 class DocumentsSinglePostResponseDataRelationshipsProjectData:
     """
     Attributes:
-        type (Union[Unset, DocumentsSinglePostResponseDataRelationshipsProjectDataType]):
         id (Union[Unset, str]):  Example: MyProjectId.
+        type (Union[Unset, DocumentsSinglePostResponseDataRelationshipsProjectDataType]):
     """
 
+    id: Union[Unset, str] = UNSET
     type: Union[
         Unset, DocumentsSinglePostResponseDataRelationshipsProjectDataType
     ] = UNSET
-    id: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
+        id = self.id
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        id = self.id
-
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
         if id is not UNSET:
             field_dict["id"] = id
+        if type is not UNSET:
+            field_dict["type"] = type
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        id = d.pop("id", UNSET)
+
         _type = d.pop("type", UNSET)
         type: Union[
             Unset, DocumentsSinglePostResponseDataRelationshipsProjectDataType
@@ -63,12 +65,10 @@ class DocumentsSinglePostResponseDataRelationshipsProjectData:
                 _type
             )
 
-        id = d.pop("id", UNSET)
-
         documents_single_post_response_data_relationships_project_data_obj = (
             cls(
-                type=type,
                 id=id,
+                type=type,
             )
         )
 

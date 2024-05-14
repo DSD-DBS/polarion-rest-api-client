@@ -17,108 +17,108 @@ T = TypeVar(
 class EnumerationsSinglePatchRequestDataAttributesOptionsItem:
     """
     Attributes:
-        id (Union[Unset, str]):  Example: open.
-        name (Union[Unset, str]):  Example: Open.
         color (Union[Unset, str]):  Example: #F9FF4D.
+        column_width (Union[Unset, str]):  Example: 90%.
+        create_defect (Union[Unset, bool]):  Example: True.
+        default (Union[Unset, bool]):  Example: True.
         description (Union[Unset, str]):  Example: Description.
         hidden (Union[Unset, bool]):
-        default (Union[Unset, bool]):  Example: True.
-        parent (Union[Unset, bool]):  Example: True.
-        opposite_name (Union[Unset, str]):  Example: Opposite Name.
-        column_width (Union[Unset, str]):  Example: 90%.
         icon_url (Union[Unset, str]):  Example: /polarion/icons/default/enums/status_open.gif.
-        create_defect (Union[Unset, bool]):  Example: True.
-        template_work_item (Union[Unset, str]):  Example: exampleTemplate.
+        id (Union[Unset, str]):  Example: open.
         min_value (Union[Unset, float]):  Example: 30.0.
+        name (Union[Unset, str]):  Example: Open.
+        opposite_name (Union[Unset, str]):  Example: Opposite Name.
+        parent (Union[Unset, bool]):  Example: True.
         requires_signature_for_test_case_execution (Union[Unset, bool]):  Example: True.
+        template_work_item (Union[Unset, str]):  Example: exampleTemplate.
         terminal (Union[Unset, bool]):  Example: True.
     """
 
-    id: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
     color: Union[Unset, str] = UNSET
+    column_width: Union[Unset, str] = UNSET
+    create_defect: Union[Unset, bool] = UNSET
+    default: Union[Unset, bool] = UNSET
     description: Union[Unset, str] = UNSET
     hidden: Union[Unset, bool] = UNSET
-    default: Union[Unset, bool] = UNSET
-    parent: Union[Unset, bool] = UNSET
-    opposite_name: Union[Unset, str] = UNSET
-    column_width: Union[Unset, str] = UNSET
     icon_url: Union[Unset, str] = UNSET
-    create_defect: Union[Unset, bool] = UNSET
-    template_work_item: Union[Unset, str] = UNSET
+    id: Union[Unset, str] = UNSET
     min_value: Union[Unset, float] = UNSET
+    name: Union[Unset, str] = UNSET
+    opposite_name: Union[Unset, str] = UNSET
+    parent: Union[Unset, bool] = UNSET
     requires_signature_for_test_case_execution: Union[Unset, bool] = UNSET
+    template_work_item: Union[Unset, str] = UNSET
     terminal: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
-
-        name = self.name
-
         color = self.color
+
+        column_width = self.column_width
+
+        create_defect = self.create_defect
+
+        default = self.default
 
         description = self.description
 
         hidden = self.hidden
 
-        default = self.default
+        icon_url = self.icon_url
 
-        parent = self.parent
+        id = self.id
+
+        min_value = self.min_value
+
+        name = self.name
 
         opposite_name = self.opposite_name
 
-        column_width = self.column_width
-
-        icon_url = self.icon_url
-
-        create_defect = self.create_defect
-
-        template_work_item = self.template_work_item
-
-        min_value = self.min_value
+        parent = self.parent
 
         requires_signature_for_test_case_execution = (
             self.requires_signature_for_test_case_execution
         )
+
+        template_work_item = self.template_work_item
 
         terminal = self.terminal
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if id is not UNSET:
-            field_dict["id"] = id
-        if name is not UNSET:
-            field_dict["name"] = name
         if color is not UNSET:
             field_dict["color"] = color
+        if column_width is not UNSET:
+            field_dict["columnWidth"] = column_width
+        if create_defect is not UNSET:
+            field_dict["createDefect"] = create_defect
+        if default is not UNSET:
+            field_dict["default"] = default
         if description is not UNSET:
             field_dict["description"] = description
         if hidden is not UNSET:
             field_dict["hidden"] = hidden
-        if default is not UNSET:
-            field_dict["default"] = default
-        if parent is not UNSET:
-            field_dict["parent"] = parent
-        if opposite_name is not UNSET:
-            field_dict["oppositeName"] = opposite_name
-        if column_width is not UNSET:
-            field_dict["columnWidth"] = column_width
         if icon_url is not UNSET:
             field_dict["iconURL"] = icon_url
-        if create_defect is not UNSET:
-            field_dict["createDefect"] = create_defect
-        if template_work_item is not UNSET:
-            field_dict["templateWorkItem"] = template_work_item
+        if id is not UNSET:
+            field_dict["id"] = id
         if min_value is not UNSET:
             field_dict["minValue"] = min_value
+        if name is not UNSET:
+            field_dict["name"] = name
+        if opposite_name is not UNSET:
+            field_dict["oppositeName"] = opposite_name
+        if parent is not UNSET:
+            field_dict["parent"] = parent
         if requires_signature_for_test_case_execution is not UNSET:
             field_dict["requiresSignatureForTestCaseExecution"] = (
                 requires_signature_for_test_case_execution
             )
+        if template_work_item is not UNSET:
+            field_dict["templateWorkItem"] = template_work_item
         if terminal is not UNSET:
             field_dict["terminal"] = terminal
 
@@ -127,53 +127,53 @@ class EnumerationsSinglePatchRequestDataAttributesOptionsItem:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        id = d.pop("id", UNSET)
-
-        name = d.pop("name", UNSET)
-
         color = d.pop("color", UNSET)
+
+        column_width = d.pop("columnWidth", UNSET)
+
+        create_defect = d.pop("createDefect", UNSET)
+
+        default = d.pop("default", UNSET)
 
         description = d.pop("description", UNSET)
 
         hidden = d.pop("hidden", UNSET)
 
-        default = d.pop("default", UNSET)
+        icon_url = d.pop("iconURL", UNSET)
 
-        parent = d.pop("parent", UNSET)
+        id = d.pop("id", UNSET)
+
+        min_value = d.pop("minValue", UNSET)
+
+        name = d.pop("name", UNSET)
 
         opposite_name = d.pop("oppositeName", UNSET)
 
-        column_width = d.pop("columnWidth", UNSET)
-
-        icon_url = d.pop("iconURL", UNSET)
-
-        create_defect = d.pop("createDefect", UNSET)
-
-        template_work_item = d.pop("templateWorkItem", UNSET)
-
-        min_value = d.pop("minValue", UNSET)
+        parent = d.pop("parent", UNSET)
 
         requires_signature_for_test_case_execution = d.pop(
             "requiresSignatureForTestCaseExecution", UNSET
         )
 
+        template_work_item = d.pop("templateWorkItem", UNSET)
+
         terminal = d.pop("terminal", UNSET)
 
         enumerations_single_patch_request_data_attributes_options_item_obj = cls(
-            id=id,
-            name=name,
             color=color,
+            column_width=column_width,
+            create_defect=create_defect,
+            default=default,
             description=description,
             hidden=hidden,
-            default=default,
-            parent=parent,
-            opposite_name=opposite_name,
-            column_width=column_width,
             icon_url=icon_url,
-            create_defect=create_defect,
-            template_work_item=template_work_item,
+            id=id,
             min_value=min_value,
+            name=name,
+            opposite_name=opposite_name,
+            parent=parent,
             requires_signature_for_test_case_execution=requires_signature_for_test_case_execution,
+            template_work_item=template_work_item,
             terminal=terminal,
         )
 

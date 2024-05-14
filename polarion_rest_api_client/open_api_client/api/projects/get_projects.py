@@ -2,12 +2,13 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.errors import Errors
 from ...models.projects_list_get_response import ProjectsListGetResponse
 from ...models.sparse_fields import SparseFields
 from ...types import UNSET, Response, Unset
@@ -15,14 +16,19 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
     query: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
+    revision: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
     params: Dict[str, Any] = {}
+
+    params["page[size]"] = pagesize
+
+    params["page[number]"] = pagenumber
 
     json_fields: Union[Unset, Dict[str, Any]] = UNSET
     if not isinstance(fields, Unset):
@@ -32,13 +38,11 @@ def _get_kwargs(
 
     params["include"] = include
 
-    params["page[size]"] = pagesize
-
-    params["page[number]"] = pagenumber
-
     params["query"] = query
 
     params["sort"] = sort
+
+    params["revision"] = revision
 
     params = {
         k: v for k, v in params.items() if v is not UNSET and v is not None
@@ -55,31 +59,38 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, ProjectsListGetResponse]]:
+) -> Optional[Union[Errors, ProjectsListGetResponse]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = ProjectsListGetResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == HTTPStatus.BAD_REQUEST:
-        response_400 = cast(Any, None)
+        response_400 = Errors.from_dict(response.json())
+
         return response_400
     if response.status_code == HTTPStatus.UNAUTHORIZED:
-        response_401 = cast(Any, None)
+        response_401 = Errors.from_dict(response.json())
+
         return response_401
     if response.status_code == HTTPStatus.FORBIDDEN:
-        response_403 = cast(Any, None)
+        response_403 = Errors.from_dict(response.json())
+
         return response_403
     if response.status_code == HTTPStatus.NOT_FOUND:
-        response_404 = cast(Any, None)
+        response_404 = Errors.from_dict(response.json())
+
         return response_404
     if response.status_code == HTTPStatus.NOT_ACCEPTABLE:
-        response_406 = cast(Any, None)
+        response_406 = Errors.from_dict(response.json())
+
         return response_406
     if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
-        response_500 = cast(Any, None)
+        response_500 = Errors.from_dict(response.json())
+
         return response_500
     if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
-        response_503 = cast(Any, None)
+        response_503 = Errors.from_dict(response.json())
+
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
@@ -89,7 +100,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, ProjectsListGetResponse]]:
+) -> Response[Union[Errors, ProjectsListGetResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -101,38 +112,41 @@ def _build_response(
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
     query: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
-) -> Response[Union[Any, ProjectsListGetResponse]]:
+    revision: Union[Unset, str] = UNSET,
+) -> Response[Union[Errors, ProjectsListGetResponse]]:
     """Returns a list of Projects.
 
     Args:
-        fields (Union[Unset, SparseFields]):
-        include (Union[Unset, str]):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
         query (Union[Unset, str]):
         sort (Union[Unset, str]):
+        revision (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, ProjectsListGetResponse]]
+        Response[Union[Errors, ProjectsListGetResponse]]
     """
 
     kwargs = _get_kwargs(
-        fields=fields,
-        include=include,
         pagesize=pagesize,
         pagenumber=pagenumber,
+        fields=fields,
+        include=include,
         query=query,
         sort=sort,
+        revision=revision,
     )
 
     response = client.get_httpx_client().request(
@@ -145,77 +159,83 @@ def sync_detailed(
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
     query: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, ProjectsListGetResponse]]:
+    revision: Union[Unset, str] = UNSET,
+) -> Optional[Union[Errors, ProjectsListGetResponse]]:
     """Returns a list of Projects.
 
     Args:
-        fields (Union[Unset, SparseFields]):
-        include (Union[Unset, str]):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
         query (Union[Unset, str]):
         sort (Union[Unset, str]):
+        revision (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, ProjectsListGetResponse]
+        Union[Errors, ProjectsListGetResponse]
     """
 
     return sync_detailed(
         client=client,
-        fields=fields,
-        include=include,
         pagesize=pagesize,
         pagenumber=pagenumber,
+        fields=fields,
+        include=include,
         query=query,
         sort=sort,
+        revision=revision,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
     query: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
-) -> Response[Union[Any, ProjectsListGetResponse]]:
+    revision: Union[Unset, str] = UNSET,
+) -> Response[Union[Errors, ProjectsListGetResponse]]:
     """Returns a list of Projects.
 
     Args:
-        fields (Union[Unset, SparseFields]):
-        include (Union[Unset, str]):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
         query (Union[Unset, str]):
         sort (Union[Unset, str]):
+        revision (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, ProjectsListGetResponse]]
+        Response[Union[Errors, ProjectsListGetResponse]]
     """
 
     kwargs = _get_kwargs(
-        fields=fields,
-        include=include,
         pagesize=pagesize,
         pagenumber=pagenumber,
+        fields=fields,
+        include=include,
         query=query,
         sort=sort,
+        revision=revision,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -226,39 +246,42 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-    fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
+    fields: Union[Unset, "SparseFields"] = UNSET,
+    include: Union[Unset, str] = UNSET,
     query: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, ProjectsListGetResponse]]:
+    revision: Union[Unset, str] = UNSET,
+) -> Optional[Union[Errors, ProjectsListGetResponse]]:
     """Returns a list of Projects.
 
     Args:
-        fields (Union[Unset, SparseFields]):
-        include (Union[Unset, str]):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
+        fields (Union[Unset, SparseFields]):
+        include (Union[Unset, str]):
         query (Union[Unset, str]):
         sort (Union[Unset, str]):
+        revision (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, ProjectsListGetResponse]
+        Union[Errors, ProjectsListGetResponse]
     """
 
     return (
         await asyncio_detailed(
             client=client,
-            fields=fields,
-            include=include,
             pagesize=pagesize,
             pagenumber=pagenumber,
+            fields=fields,
+            include=include,
             query=query,
             sort=sort,
+            revision=revision,
         )
     ).parsed

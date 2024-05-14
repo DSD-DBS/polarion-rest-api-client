@@ -23,21 +23,17 @@ T = TypeVar("T", bound="PostTestRecordAttachmentsRequestBody")
 class PostTestRecordAttachmentsRequestBody:
     """
     Attributes:
-        resource (Union[Unset, TestrecordAttachmentsListPostRequest]):
         files (Union[Unset, List[File]]):
+        resource (Union[Unset, TestrecordAttachmentsListPostRequest]):
     """
 
-    resource: Union[Unset, "TestrecordAttachmentsListPostRequest"] = UNSET
     files: Union[Unset, List[File]] = UNSET
+    resource: Union[Unset, "TestrecordAttachmentsListPostRequest"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        resource: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.resource, Unset):
-            resource = self.resource.to_dict()
-
         files: Union[Unset, List[FileJsonType]] = UNSET
         if not isinstance(self.files, Unset):
             files = []
@@ -46,18 +42,27 @@ class PostTestRecordAttachmentsRequestBody:
 
                 files.append(files_item)
 
+        resource: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.resource, Unset):
+            resource = self.resource.to_dict()
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if resource is not UNSET:
-            field_dict["resource"] = resource
         if files is not UNSET:
             field_dict["files"] = files
+        if resource is not UNSET:
+            field_dict["resource"] = resource
 
         return field_dict
 
     def to_multipart(self) -> List[Tuple[str, Any]]:
         field_list: List[Tuple[str, Any]] = []
+        for cont in self.files or []:
+            files_item = cont.to_tuple()
+
+            field_list.append(("files", files_item))
+
         resource: Union[Unset, Tuple[None, bytes, str]] = UNSET
         if not isinstance(self.resource, Unset):
             resource = (
@@ -68,10 +73,6 @@ class PostTestRecordAttachmentsRequestBody:
 
         if resource is not UNSET:
             field_list.append(("resource", resource))
-        for cont in self.files or []:
-            files_item = cont.to_tuple()
-
-            field_list.append(("files", files_item))
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(
@@ -92,6 +93,13 @@ class PostTestRecordAttachmentsRequestBody:
         )
 
         d = src_dict.copy()
+        files = []
+        _files = d.pop("files", UNSET)
+        for files_item_data in _files or []:
+            files_item = File(payload=BytesIO(files_item_data))
+
+            files.append(files_item)
+
         _resource = d.pop("resource", UNSET)
         resource: Union[Unset, TestrecordAttachmentsListPostRequest]
         if isinstance(_resource, Unset):
@@ -101,16 +109,9 @@ class PostTestRecordAttachmentsRequestBody:
                 _resource
             )
 
-        files = []
-        _files = d.pop("files", UNSET)
-        for files_item_data in _files or []:
-            files_item = File(payload=BytesIO(files_item_data))
-
-            files.append(files_item)
-
         post_test_record_attachments_request_body_obj = cls(
-            resource=resource,
             files=files,
+            resource=resource,
         )
 
         post_test_record_attachments_request_body_obj.additional_properties = d

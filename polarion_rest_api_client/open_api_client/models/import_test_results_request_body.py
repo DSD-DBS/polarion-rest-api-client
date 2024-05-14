@@ -15,41 +15,41 @@ T = TypeVar("T", bound="ImportTestResultsRequestBody")
 class ImportTestResultsRequestBody:
     """
     Attributes:
-        retest (Union[Unset, bool]):
         defect_template_id (Union[Unset, str]):  Example: MyProjectId/MyDefectId.
+        retest (Union[Unset, bool]):
     """
 
-    retest: Union[Unset, bool] = UNSET
     defect_template_id: Union[Unset, str] = UNSET
+    retest: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        retest = self.retest
-
         defect_template_id = self.defect_template_id
+
+        retest = self.retest
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if retest is not UNSET:
-            field_dict["retest"] = retest
         if defect_template_id is not UNSET:
             field_dict["defectTemplateId"] = defect_template_id
+        if retest is not UNSET:
+            field_dict["retest"] = retest
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        retest = d.pop("retest", UNSET)
-
         defect_template_id = d.pop("defectTemplateId", UNSET)
 
+        retest = d.pop("retest", UNSET)
+
         import_test_results_request_body_obj = cls(
-            retest=retest,
             defect_template_id=defect_template_id,
+            retest=retest,
         )
 
         import_test_results_request_body_obj.additional_properties = d

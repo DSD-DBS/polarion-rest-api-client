@@ -25,17 +25,17 @@ class TestrecordAttachmentsListPostRequestDataItem:
     """
     Attributes:
         type (Union[Unset, TestrecordAttachmentsListPostRequestDataItemType]):
-        lid (Union[Unset, str]):
         attributes (Union[Unset, TestrecordAttachmentsListPostRequestDataItemAttributes]):
+        lid (Union[Unset, str]):
     """
 
     type: Union[Unset, TestrecordAttachmentsListPostRequestDataItemType] = (
         UNSET
     )
-    lid: Union[Unset, str] = UNSET
     attributes: Union[
         Unset, "TestrecordAttachmentsListPostRequestDataItemAttributes"
     ] = UNSET
+    lid: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -45,21 +45,21 @@ class TestrecordAttachmentsListPostRequestDataItem:
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        lid = self.lid
-
         attributes: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
+
+        lid = self.lid
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
             field_dict["type"] = type
-        if lid is not UNSET:
-            field_dict["lid"] = lid
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
+        if lid is not UNSET:
+            field_dict["lid"] = lid
 
         return field_dict
 
@@ -77,8 +77,6 @@ class TestrecordAttachmentsListPostRequestDataItem:
         else:
             type = TestrecordAttachmentsListPostRequestDataItemType(_type)
 
-        lid = d.pop("lid", UNSET)
-
         _attributes = d.pop("attributes", UNSET)
         attributes: Union[
             Unset, TestrecordAttachmentsListPostRequestDataItemAttributes
@@ -90,10 +88,12 @@ class TestrecordAttachmentsListPostRequestDataItem:
                 _attributes
             )
 
+        lid = d.pop("lid", UNSET)
+
         testrecord_attachments_list_post_request_data_item_obj = cls(
             type=type,
-            lid=lid,
             attributes=attributes,
+            lid=lid,
         )
 
         testrecord_attachments_list_post_request_data_item_obj.additional_properties = (

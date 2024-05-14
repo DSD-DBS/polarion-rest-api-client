@@ -30,29 +30,26 @@ T = TypeVar("T", bound="TeststepsListGetResponse")
 class TeststepsListGetResponse:
     """
     Attributes:
-        meta (Union[Unset, TeststepsListGetResponseMeta]):
         data (Union[Unset, List['TeststepsListGetResponseDataItem']]):
         included (Union[Unset, List['TeststepsListGetResponseIncludedItem']]): Related entities might be returned, see
-            <a href="https://docs.sw.siemens.com/en-US/doc/230235217/PL20221020258116340.xid2134849/xid2134871">Rest API
-            User Guide</a>.
+            <a href="https://docs.sw.siemens.com/en-
+            US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
+            Guide</a>.
         links (Union[Unset, TeststepsListGetResponseLinks]):
+        meta (Union[Unset, TeststepsListGetResponseMeta]):
     """
 
-    meta: Union[Unset, "TeststepsListGetResponseMeta"] = UNSET
     data: Union[Unset, List["TeststepsListGetResponseDataItem"]] = UNSET
     included: Union[Unset, List["TeststepsListGetResponseIncludedItem"]] = (
         UNSET
     )
     links: Union[Unset, "TeststepsListGetResponseLinks"] = UNSET
+    meta: Union[Unset, "TeststepsListGetResponseMeta"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         data: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.data, Unset):
             data = []
@@ -71,17 +68,21 @@ class TeststepsListGetResponse:
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if data is not UNSET:
             field_dict["data"] = data
         if included is not UNSET:
             field_dict["included"] = included
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -101,13 +102,6 @@ class TeststepsListGetResponse:
         )
 
         d = src_dict.copy()
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, TeststepsListGetResponseMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = TeststepsListGetResponseMeta.from_dict(_meta)
-
         data = []
         _data = d.pop("data", UNSET)
         for data_item_data in _data or []:
@@ -133,11 +127,18 @@ class TeststepsListGetResponse:
         else:
             links = TeststepsListGetResponseLinks.from_dict(_links)
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, TeststepsListGetResponseMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = TeststepsListGetResponseMeta.from_dict(_meta)
+
         teststeps_list_get_response_obj = cls(
-            meta=meta,
             data=data,
             included=included,
             links=links,
+            meta=meta,
         )
 
         teststeps_list_get_response_obj.additional_properties = d

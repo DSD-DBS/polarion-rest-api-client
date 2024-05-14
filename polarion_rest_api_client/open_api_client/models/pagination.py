@@ -15,50 +15,50 @@ T = TypeVar("T", bound="Pagination")
 class Pagination:
     """
     Attributes:
-        page_size (Union[Unset, int]):
-        page_number (Union[Unset, int]):
         calculated_offset (Union[Unset, int]):
+        page_number (Union[Unset, int]):
+        page_size (Union[Unset, int]):
     """
 
-    page_size: Union[Unset, int] = UNSET
-    page_number: Union[Unset, int] = UNSET
     calculated_offset: Union[Unset, int] = UNSET
+    page_number: Union[Unset, int] = UNSET
+    page_size: Union[Unset, int] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        page_size = self.page_size
+        calculated_offset = self.calculated_offset
 
         page_number = self.page_number
 
-        calculated_offset = self.calculated_offset
+        page_size = self.page_size
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if page_size is not UNSET:
-            field_dict["pageSize"] = page_size
-        if page_number is not UNSET:
-            field_dict["pageNumber"] = page_number
         if calculated_offset is not UNSET:
             field_dict["calculatedOffset"] = calculated_offset
+        if page_number is not UNSET:
+            field_dict["pageNumber"] = page_number
+        if page_size is not UNSET:
+            field_dict["pageSize"] = page_size
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        page_size = d.pop("pageSize", UNSET)
+        calculated_offset = d.pop("calculatedOffset", UNSET)
 
         page_number = d.pop("pageNumber", UNSET)
 
-        calculated_offset = d.pop("calculatedOffset", UNSET)
+        page_size = d.pop("pageSize", UNSET)
 
         pagination_obj = cls(
-            page_size=page_size,
-            page_number=page_number,
             calculated_offset=calculated_offset,
+            page_number=page_number,
+            page_size=page_size,
         )
 
         pagination_obj.additional_properties = d

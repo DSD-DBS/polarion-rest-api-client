@@ -29,7 +29,7 @@ class TestrunsSinglePatchRequestDataAttributes:
         finished_on (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
         group_id (Union[Unset, str]):  Example: Group ID.
         home_page_content (Union[Unset, TestrunsSinglePatchRequestDataAttributesHomePageContent]):
-        id_prefix (Union[Unset, str]):  Example: ID Prefix.
+        id_prefix (Union[Unset, str]):  Example: MyTestRunIdPrefix.
         keep_in_history (Union[Unset, bool]):
         query (Union[Unset, str]):  Example: Query.
         select_test_cases_by (Union[Unset, TestrunsSinglePatchRequestDataAttributesSelectTestCasesBy]):  Example:

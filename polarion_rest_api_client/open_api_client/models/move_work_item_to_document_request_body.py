@@ -15,50 +15,50 @@ T = TypeVar("T", bound="MoveWorkItemToDocumentRequestBody")
 class MoveWorkItemToDocumentRequestBody:
     """
     Attributes:
-        target_document (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
-        previous_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
         next_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+        previous_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+        target_document (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
     """
 
-    target_document: Union[Unset, str] = UNSET
-    previous_part: Union[Unset, str] = UNSET
     next_part: Union[Unset, str] = UNSET
+    previous_part: Union[Unset, str] = UNSET
+    target_document: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        target_document = self.target_document
+        next_part = self.next_part
 
         previous_part = self.previous_part
 
-        next_part = self.next_part
+        target_document = self.target_document
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if target_document is not UNSET:
-            field_dict["targetDocument"] = target_document
-        if previous_part is not UNSET:
-            field_dict["previousPart"] = previous_part
         if next_part is not UNSET:
             field_dict["nextPart"] = next_part
+        if previous_part is not UNSET:
+            field_dict["previousPart"] = previous_part
+        if target_document is not UNSET:
+            field_dict["targetDocument"] = target_document
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        target_document = d.pop("targetDocument", UNSET)
+        next_part = d.pop("nextPart", UNSET)
 
         previous_part = d.pop("previousPart", UNSET)
 
-        next_part = d.pop("nextPart", UNSET)
+        target_document = d.pop("targetDocument", UNSET)
 
         move_work_item_to_document_request_body_obj = cls(
-            target_document=target_document,
-            previous_part=previous_part,
             next_part=next_part,
+            previous_part=previous_part,
+            target_document=target_document,
         )
 
         move_work_item_to_document_request_body_obj.additional_properties = d

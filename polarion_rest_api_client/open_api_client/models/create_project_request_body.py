@@ -21,19 +21,19 @@ T = TypeVar("T", bound="CreateProjectRequestBody")
 class CreateProjectRequestBody:
     """
     Attributes:
-        project_id (Union[Unset, str]): Id of the new Project to be created. Example: MyProjectId.
-        tracker_prefix (Union[Unset, str]): Tracker prefix of the new Project to be created. Example: MyTrackerPrefix.
         location (Union[Unset, str]): Location of the new Project to be created. Example: MyLocation.
+        params (Union['CreateProjectRequestBodyParamsType0', None, Unset]): params of new Project to be created.
+        project_id (Union[Unset, str]): Id of the new Project to be created. Example: MyProjectId.
         template_id (Union[None, Unset, str]): Id of the template to create the new Project from. Example:
             MyProjectTemplateId.
-        params (Union['CreateProjectRequestBodyParamsType0', None, Unset]): params of new Project to be created.
+        tracker_prefix (Union[Unset, str]): Tracker prefix of the new Project to be created. Example: MyTrackerPrefix.
     """
 
-    project_id: Union[Unset, str] = UNSET
-    tracker_prefix: Union[Unset, str] = UNSET
     location: Union[Unset, str] = UNSET
-    template_id: Union[None, Unset, str] = UNSET
     params: Union["CreateProjectRequestBodyParamsType0", None, Unset] = UNSET
+    project_id: Union[Unset, str] = UNSET
+    template_id: Union[None, Unset, str] = UNSET
+    tracker_prefix: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -43,17 +43,7 @@ class CreateProjectRequestBody:
             CreateProjectRequestBodyParamsType0,
         )
 
-        project_id = self.project_id
-
-        tracker_prefix = self.tracker_prefix
-
         location = self.location
-
-        template_id: Union[None, Unset, str]
-        if isinstance(self.template_id, Unset):
-            template_id = UNSET
-        else:
-            template_id = self.template_id
 
         params: Union[Dict[str, Any], None, Unset]
         if isinstance(self.params, Unset):
@@ -63,19 +53,29 @@ class CreateProjectRequestBody:
         else:
             params = self.params
 
+        project_id = self.project_id
+
+        template_id: Union[None, Unset, str]
+        if isinstance(self.template_id, Unset):
+            template_id = UNSET
+        else:
+            template_id = self.template_id
+
+        tracker_prefix = self.tracker_prefix
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if project_id is not UNSET:
-            field_dict["projectId"] = project_id
-        if tracker_prefix is not UNSET:
-            field_dict["trackerPrefix"] = tracker_prefix
         if location is not UNSET:
             field_dict["location"] = location
-        if template_id is not UNSET:
-            field_dict["templateId"] = template_id
         if params is not UNSET:
             field_dict["params"] = params
+        if project_id is not UNSET:
+            field_dict["projectId"] = project_id
+        if template_id is not UNSET:
+            field_dict["templateId"] = template_id
+        if tracker_prefix is not UNSET:
+            field_dict["trackerPrefix"] = tracker_prefix
 
         return field_dict
 
@@ -86,20 +86,7 @@ class CreateProjectRequestBody:
         )
 
         d = src_dict.copy()
-        project_id = d.pop("projectId", UNSET)
-
-        tracker_prefix = d.pop("trackerPrefix", UNSET)
-
         location = d.pop("location", UNSET)
-
-        def _parse_template_id(data: object) -> Union[None, Unset, str]:
-            if data is None:
-                return data
-            if isinstance(data, Unset):
-                return data
-            return cast(Union[None, Unset, str], data)
-
-        template_id = _parse_template_id(d.pop("templateId", UNSET))
 
         def _parse_params(
             data: object,
@@ -124,12 +111,25 @@ class CreateProjectRequestBody:
 
         params = _parse_params(d.pop("params", UNSET))
 
+        project_id = d.pop("projectId", UNSET)
+
+        def _parse_template_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        template_id = _parse_template_id(d.pop("templateId", UNSET))
+
+        tracker_prefix = d.pop("trackerPrefix", UNSET)
+
         create_project_request_body_obj = cls(
-            project_id=project_id,
-            tracker_prefix=tracker_prefix,
             location=location,
-            template_id=template_id,
             params=params,
+            project_id=project_id,
+            template_id=template_id,
+            tracker_prefix=tracker_prefix,
         )
 
         create_project_request_body_obj.additional_properties = d

@@ -27,23 +27,19 @@ T = TypeVar("T", bound="EnumOptionsActionResponseBody")
 class EnumOptionsActionResponseBody:
     """
     Attributes:
-        meta (Union[Unset, EnumOptionsActionResponseBodyMeta]):
         data (Union[Unset, List['EnumOptionsActionResponseBodyDataItem']]):
         links (Union[Unset, EnumOptionsActionResponseBodyLinks]):
+        meta (Union[Unset, EnumOptionsActionResponseBodyMeta]):
     """
 
-    meta: Union[Unset, "EnumOptionsActionResponseBodyMeta"] = UNSET
     data: Union[Unset, List["EnumOptionsActionResponseBodyDataItem"]] = UNSET
     links: Union[Unset, "EnumOptionsActionResponseBodyLinks"] = UNSET
+    meta: Union[Unset, "EnumOptionsActionResponseBodyMeta"] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        meta: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.meta, Unset):
-            meta = self.meta.to_dict()
-
         data: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.data, Unset):
             data = []
@@ -55,15 +51,19 @@ class EnumOptionsActionResponseBody:
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
+        meta: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.meta, Unset):
+            meta = self.meta.to_dict()
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if meta is not UNSET:
-            field_dict["meta"] = meta
         if data is not UNSET:
             field_dict["data"] = data
         if links is not UNSET:
             field_dict["links"] = links
+        if meta is not UNSET:
+            field_dict["meta"] = meta
 
         return field_dict
 
@@ -80,13 +80,6 @@ class EnumOptionsActionResponseBody:
         )
 
         d = src_dict.copy()
-        _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, EnumOptionsActionResponseBodyMeta]
-        if isinstance(_meta, Unset):
-            meta = UNSET
-        else:
-            meta = EnumOptionsActionResponseBodyMeta.from_dict(_meta)
-
         data = []
         _data = d.pop("data", UNSET)
         for data_item_data in _data or []:
@@ -103,10 +96,17 @@ class EnumOptionsActionResponseBody:
         else:
             links = EnumOptionsActionResponseBodyLinks.from_dict(_links)
 
+        _meta = d.pop("meta", UNSET)
+        meta: Union[Unset, EnumOptionsActionResponseBodyMeta]
+        if isinstance(_meta, Unset):
+            meta = UNSET
+        else:
+            meta = EnumOptionsActionResponseBodyMeta.from_dict(_meta)
+
         enum_options_action_response_body_obj = cls(
-            meta=meta,
             data=data,
             links=links,
+            meta=meta,
         )
 
         enum_options_action_response_body_obj.additional_properties = d

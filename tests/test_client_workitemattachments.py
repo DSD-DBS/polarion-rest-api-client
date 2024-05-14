@@ -121,9 +121,20 @@ def test_create_single_work_item_attachment(
     assert isinstance(body, _multipart.MultipartStream)
     assert len(body.fields) == 2
 
-    assert body.fields[0].headers["Content-Type"] == "text/plain"
-    assert body.fields[0].name == "resource"
-    assert body.fields[0].file == json.dumps(
+    resource_index = None
+    files_index = None
+    for i in range(2):
+        if body.fields[i].name == "resource":
+            resource_index = i
+        if body.fields[i].name == "files":
+            files_index = i
+
+    assert resource_index is not None
+    assert files_index is not None
+
+    assert body.fields[resource_index].headers["Content-Type"] == "text/plain"
+    assert body.fields[resource_index].name == "resource"
+    assert body.fields[resource_index].file == json.dumps(
         {
             "data": [
                 {
@@ -134,10 +145,13 @@ def test_create_single_work_item_attachment(
         }
     ).encode("utf-8")
 
-    assert body.fields[1].headers["Content-Type"] == "text/plain"
-    assert body.fields[1].filename == "test.json"
-    assert body.fields[1].name == "files"
-    assert body.fields[1].file.read() == work_item_attachment.content_bytes
+    assert body.fields[files_index].headers["Content-Type"] == "text/plain"
+    assert body.fields[files_index].filename == "test.json"
+    assert body.fields[files_index].name == "files"
+    assert (
+        body.fields[files_index].file.read()
+        == work_item_attachment.content_bytes
+    )
 
 
 def test_create_multiple_work_item_attachments(
@@ -169,9 +183,18 @@ def test_create_multiple_work_item_attachments(
     assert isinstance(body, _multipart.MultipartStream)
     assert len(body.fields) == 4
 
-    assert body.fields[0].headers["Content-Type"] == "text/plain"
-    assert body.fields[0].name == "resource"
-    assert body.fields[0].file == json.dumps(
+    for i in range(0, 3):
+        assert body.fields[i].headers["Content-Type"] == "text/plain"
+        assert body.fields[i].filename == "test.json"
+        assert body.fields[i].name == "files"
+        assert (
+            body.fields[i].file.read()
+            == work_item_attachments[i - 1].content_bytes
+        )
+
+    assert body.fields[3].headers["Content-Type"] == "text/plain"
+    assert body.fields[3].name == "resource"
+    assert body.fields[3].file == json.dumps(
         {
             "data": 3
             * [
@@ -182,14 +205,6 @@ def test_create_multiple_work_item_attachments(
             ]
         }
     ).encode("utf-8")
-    for i in range(1, 4):
-        assert body.fields[i].headers["Content-Type"] == "text/plain"
-        assert body.fields[i].filename == "test.json"
-        assert body.fields[i].name == "files"
-        assert (
-            body.fields[i].file.read()
-            == work_item_attachments[i - 1].content_bytes
-        )
 
 
 def test_update_work_item_attachment_title(

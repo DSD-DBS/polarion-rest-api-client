@@ -20,44 +20,48 @@ T = TypeVar(
 class PlansSingleGetResponseDataRelationshipsProjectSpanDataItem:
     """
     Attributes:
-        type (Union[Unset, PlansSingleGetResponseDataRelationshipsProjectSpanDataItemType]):
         id (Union[Unset, str]):  Example: MyProjectId.
         revision (Union[Unset, str]):  Example: 1234.
+        type (Union[Unset, PlansSingleGetResponseDataRelationshipsProjectSpanDataItemType]):
     """
 
+    id: Union[Unset, str] = UNSET
+    revision: Union[Unset, str] = UNSET
     type: Union[
         Unset, PlansSingleGetResponseDataRelationshipsProjectSpanDataItemType
     ] = UNSET
-    id: Union[Unset, str] = UNSET
-    revision: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value
-
         id = self.id
 
         revision = self.revision
 
+        type: Union[Unset, str] = UNSET
+        if not isinstance(self.type, Unset):
+            type = self.type.value
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
         if id is not UNSET:
             field_dict["id"] = id
         if revision is not UNSET:
             field_dict["revision"] = revision
+        if type is not UNSET:
+            field_dict["type"] = type
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        id = d.pop("id", UNSET)
+
+        revision = d.pop("revision", UNSET)
+
         _type = d.pop("type", UNSET)
         type: Union[
             Unset,
@@ -72,14 +76,10 @@ class PlansSingleGetResponseDataRelationshipsProjectSpanDataItem:
                 )
             )
 
-        id = d.pop("id", UNSET)
-
-        revision = d.pop("revision", UNSET)
-
         plans_single_get_response_data_relationships_project_span_data_item_obj = cls(
-            type=type,
             id=id,
             revision=revision,
+            type=type,
         )
 
         plans_single_get_response_data_relationships_project_span_data_item_obj.additional_properties = (

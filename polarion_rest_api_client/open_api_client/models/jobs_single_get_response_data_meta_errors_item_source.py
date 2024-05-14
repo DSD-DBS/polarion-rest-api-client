@@ -9,34 +9,36 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.errors_errors_item_source_resource import (
-        ErrorsErrorsItemSourceResource,
+    from ..models.jobs_single_get_response_data_meta_errors_item_source_resource import (
+        JobsSingleGetResponseDataMetaErrorsItemSourceResource,
     )
 
 
-T = TypeVar("T", bound="ErrorsErrorsItemSource")
+T = TypeVar("T", bound="JobsSingleGetResponseDataMetaErrorsItemSource")
 
 
 @_attrs_define
-class ErrorsErrorsItemSource:
+class JobsSingleGetResponseDataMetaErrorsItemSource:
     """
     Attributes:
-        pointer (Union[Unset, str]): JSON Pointer to the associated entity in the request document. Example: $.data.
         parameter (Union[Unset, str]): String indicating which URI query parameter caused the error. Example: revision.
-        resource (Union[Unset, ErrorsErrorsItemSourceResource]): Resource causing the error.
+        pointer (Union[Unset, str]): JSON Pointer to the associated entity in the request document. Example: $.data.
+        resource (Union[Unset, JobsSingleGetResponseDataMetaErrorsItemSourceResource]): Resource causing the error.
     """
 
-    pointer: Union[Unset, str] = UNSET
     parameter: Union[Unset, str] = UNSET
-    resource: Union[Unset, "ErrorsErrorsItemSourceResource"] = UNSET
+    pointer: Union[Unset, str] = UNSET
+    resource: Union[
+        Unset, "JobsSingleGetResponseDataMetaErrorsItemSourceResource"
+    ] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        pointer = self.pointer
-
         parameter = self.parameter
+
+        pointer = self.pointer
 
         resource: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.resource, Unset):
@@ -45,10 +47,10 @@ class ErrorsErrorsItemSource:
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if pointer is not UNSET:
-            field_dict["pointer"] = pointer
         if parameter is not UNSET:
             field_dict["parameter"] = parameter
+        if pointer is not UNSET:
+            field_dict["pointer"] = pointer
         if resource is not UNSET:
             field_dict["resource"] = resource
 
@@ -56,30 +58,36 @@ class ErrorsErrorsItemSource:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.errors_errors_item_source_resource import (
-            ErrorsErrorsItemSourceResource,
+        from ..models.jobs_single_get_response_data_meta_errors_item_source_resource import (
+            JobsSingleGetResponseDataMetaErrorsItemSourceResource,
         )
 
         d = src_dict.copy()
-        pointer = d.pop("pointer", UNSET)
-
         parameter = d.pop("parameter", UNSET)
 
+        pointer = d.pop("pointer", UNSET)
+
         _resource = d.pop("resource", UNSET)
-        resource: Union[Unset, ErrorsErrorsItemSourceResource]
+        resource: Union[
+            Unset, JobsSingleGetResponseDataMetaErrorsItemSourceResource
+        ]
         if isinstance(_resource, Unset):
             resource = UNSET
         else:
-            resource = ErrorsErrorsItemSourceResource.from_dict(_resource)
+            resource = JobsSingleGetResponseDataMetaErrorsItemSourceResource.from_dict(
+                _resource
+            )
 
-        errors_errors_item_source_obj = cls(
-            pointer=pointer,
+        jobs_single_get_response_data_meta_errors_item_source_obj = cls(
             parameter=parameter,
+            pointer=pointer,
             resource=resource,
         )
 
-        errors_errors_item_source_obj.additional_properties = d
-        return errors_errors_item_source_obj
+        jobs_single_get_response_data_meta_errors_item_source_obj.additional_properties = (
+            d
+        )
+        return jobs_single_get_response_data_meta_errors_item_source_obj
 
     @property
     def additional_keys(self) -> List[str]:

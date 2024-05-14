@@ -21,45 +21,45 @@ T = TypeVar("T", bound="TestrunsListGetResponseDataItemMetaErrorsItem")
 class TestrunsListGetResponseDataItemMetaErrorsItem:
     """
     Attributes:
-        status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.
-        title (Union[Unset, str]): Short, human-readable summary of the problem. Example: Bad Request.
         detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
             Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).
         source (Union[Unset, TestrunsListGetResponseDataItemMetaErrorsItemSource]):
+        status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.
+        title (Union[Unset, str]): Short, human-readable summary of the problem. Example: Bad Request.
     """
 
-    status: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
     detail: Union[Unset, str] = UNSET
     source: Union[
         Unset, "TestrunsListGetResponseDataItemMetaErrorsItemSource"
     ] = UNSET
+    status: Union[Unset, str] = UNSET
+    title: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        status = self.status
-
-        title = self.title
-
         detail = self.detail
 
         source: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.source, Unset):
             source = self.source.to_dict()
 
+        status = self.status
+
+        title = self.title
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if status is not UNSET:
-            field_dict["status"] = status
-        if title is not UNSET:
-            field_dict["title"] = title
         if detail is not UNSET:
             field_dict["detail"] = detail
         if source is not UNSET:
             field_dict["source"] = source
+        if status is not UNSET:
+            field_dict["status"] = status
+        if title is not UNSET:
+            field_dict["title"] = title
 
         return field_dict
 
@@ -70,10 +70,6 @@ class TestrunsListGetResponseDataItemMetaErrorsItem:
         )
 
         d = src_dict.copy()
-        status = d.pop("status", UNSET)
-
-        title = d.pop("title", UNSET)
-
         detail = d.pop("detail", UNSET)
 
         _source = d.pop("source", UNSET)
@@ -89,11 +85,15 @@ class TestrunsListGetResponseDataItemMetaErrorsItem:
                 )
             )
 
+        status = d.pop("status", UNSET)
+
+        title = d.pop("title", UNSET)
+
         testruns_list_get_response_data_item_meta_errors_item_obj = cls(
-            status=status,
-            title=title,
             detail=detail,
             source=source,
+            status=status,
+            title=title,
         )
 
         testruns_list_get_response_data_item_meta_errors_item_obj.additional_properties = (
