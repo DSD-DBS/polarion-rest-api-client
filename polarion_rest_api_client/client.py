@@ -3,6 +3,7 @@
 """The actual implementation of the API client using an OpenAPIClient."""
 from __future__ import annotations
 
+import datetime
 import io
 import json
 import logging
@@ -50,6 +51,7 @@ from polarion_rest_api_client.open_api_client.api.work_items import (
 )
 
 logger = logging.getLogger(__name__)
+T = t.TypeVar("T", str, int, float, datetime.datetime, bool, None)
 
 
 def _get_json_content_size(data: dict):
@@ -77,7 +79,19 @@ def _build_sparse_fields(
     return api_models.SparseFields.from_dict(new_field_dict)
 
 
-def unset_str_builder(value: str | oa_types.Unset) -> str | None:
+@t.overload
+def unset_to_none(value: oa_types.Unset) -> None:
+    """Return None if value is Unset, else the value."""
+    ...
+
+
+@t.overload
+def unset_to_none(value: T) -> T:
+    """Return None if value is Unset, else the value."""
+    ...
+
+
+def unset_to_none(value: t.Any) -> t.Any:
     """Return None if value is Unset, else the value."""
     if isinstance(value, oa_types.Unset):
         return None
@@ -399,8 +413,8 @@ class OpenAPIPolarionProjectClient(
                     dm.WorkItemAttachment(
                         work_item_id,
                         attachment.attributes.id,
-                        unset_str_builder(attachment.attributes.title),
-                        file_name=unset_str_builder(
+                        unset_to_none(attachment.attributes.title),
+                        file_name=unset_to_none(
                             attachment.attributes.file_name
                         ),
                     )
@@ -688,16 +702,16 @@ class OpenAPIPolarionProjectClient(
         desctype = None
         desc = None
         if work_item.attributes.description:
-            desctype = unset_str_builder(work_item.attributes.description.type)
-            desc = unset_str_builder(work_item.attributes.description.value)
+            desctype = unset_to_none(work_item.attributes.description.type)
+            desc = unset_to_none(work_item.attributes.description.value)
 
         work_item_obj = self._work_item(
             work_item_id,
-            unset_str_builder(work_item.attributes.title),
+            unset_to_none(work_item.attributes.title),
             desctype,
             desc,
-            unset_str_builder(work_item.attributes.type),
-            unset_str_builder(work_item.attributes.status),
+            unset_to_none(work_item.attributes.type),
+            unset_to_none(work_item.attributes.status),
             work_item.attributes.additional_properties,
             work_item_links,
             work_item_attachments,
@@ -763,20 +777,22 @@ class OpenAPIPolarionProjectClient(
 
                 return dm.Document(
                     id=data.id,
-                    module_folder=unset_str_builder(attributes.module_folder),
-                    module_name=unset_str_builder(attributes.module_name),
-                    type=unset_str_builder(attributes.type),
-                    status=unset_str_builder(attributes.status),
+                    module_folder=unset_to_none(attributes.module_folder),
+                    module_name=unset_to_none(attributes.module_name),
+                    type=unset_to_none(attributes.type),
+                    status=unset_to_none(attributes.status),
                     home_page_content=home_page_content,
                 )
         return None
 
     def _handle_text_content(
         self,
-        polarion_content: api_models.DocumentsSingleGetResponseDataAttributesHomePageContent  # pylint: disable=line-too-long
-        | api_models.TestrecordsListGetResponseDataItemAttributesComment
-        | api_models.TestrunsListGetResponseDataItemAttributesHomePageContent
-        | oa_types.Unset,
+        polarion_content: (
+            api_models.DocumentsSingleGetResponseDataAttributesHomePageContent  # pylint: disable=line-too-long
+            | api_models.TestrecordsListGetResponseDataItemAttributesComment
+            | api_models.TestrunsListGetResponseDataItemAttributesHomePageContent
+            | oa_types.Unset
+        ),
     ) -> dm.TextContent | None:
         if not polarion_content:
             return None
@@ -1059,9 +1075,12 @@ class OpenAPIPolarionProjectClient(
             )
 
         parsed_response = response.parsed
-        assert parsed_response
+        assert isinstance(
+            parsed_response, api_models.TestrecordsListGetResponse
+        )
 
         test_records = []
+
         for data in parsed_response.data or []:
             assert isinstance(data.id, str)
             assert isinstance(
@@ -1073,11 +1092,18 @@ class OpenAPIPolarionProjectClient(
                 dm.TestRecord(
                     project_id,
                     work_item,
-                    data.attributes.test_case_revision or None,
+                    unset_to_none(data.attributes.test_case_revision),
                     int(iteration),
-                    data.attributes.duration or -1,
-                    data.attributes.result or None,
+                    (
+                        data.attributes.duration
+                        if not isinstance(
+                            data.attributes.duration, oa_types.Unset
+                        )
+                        else -1
+                    ),
+                    unset_to_none(data.attributes.result),
                     self._handle_text_content(data.attributes.comment),
+                    unset_to_none(data.attributes.executed),
                     data.additional_properties or {},
                 )
             )
@@ -1090,7 +1116,7 @@ class OpenAPIPolarionProjectClient(
 
     def get_test_runs(
         self,
-        query: str,
+        query: str = "",
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
@@ -1122,7 +1148,7 @@ class OpenAPIPolarionProjectClient(
             )
 
         parsed_response = response.parsed
-        assert parsed_response
+        assert isinstance(parsed_response, api_models.TestrunsListGetResponse)
 
         test_runs = []
         for data in parsed_response.data or []:
@@ -1134,17 +1160,26 @@ class OpenAPIPolarionProjectClient(
             test_runs.append(
                 dm.TestRun(
                     data.id.split("/")[-1],
-                    data.attributes.type or None,
-                    data.attributes.status or None,
-                    data.attributes.title or None,
+                    unset_to_none(data.attributes.type),
+                    unset_to_none(data.attributes.status),
+                    unset_to_none(data.attributes.title),
                     self._handle_text_content(
                         data.attributes.home_page_content
                     ),
-                    dm.SelectTestCasesBy(
-                        str(data.attributes.select_test_cases_by)
-                    )
-                    if data.attributes.select_test_cases_by
-                    else None,
+                    unset_to_none(data.attributes.finished_on),
+                    unset_to_none(data.attributes.group_id),
+                    unset_to_none(data.attributes.id_prefix),
+                    unset_to_none(data.attributes.is_template),
+                    unset_to_none(data.attributes.keep_in_history),
+                    unset_to_none(data.attributes.query),
+                    unset_to_none(data.attributes.keep_in_history),
+                    (
+                        dm.SelectTestCasesBy(
+                            str(data.attributes.select_test_cases_by)
+                        )
+                        if data.attributes.select_test_cases_by
+                        else None
+                    ),
                     data.attributes.additional_properties or {},
                 )
             )
@@ -1213,20 +1248,38 @@ class OpenAPIPolarionProjectClient(
     ):
         type_prefix = attributes_type.__name__
         attributes = attributes_type()
-        if test_run.type:
+        if test_run.type is not None:
             attributes.type = test_run.type
         if test_run.id and hasattr(attributes, "id"):
             attributes.id = test_run.id
-        if test_run.status:
+        if test_run.status is not None:
             attributes.status = test_run.status
-        if test_run.title:
+        if test_run.title is not None:
             attributes.title = test_run.title
+        if test_run.finished_on is not None:
+            attributes.finished_on = test_run.finished_on
+        if test_run.group_id is not None:
+            attributes.group_id = test_run.group_id
+        if test_run.id_prefix is not None:
+            attributes.id_prefix = test_run.id_prefix
+        if test_run.is_template is not None and hasattr(
+            attributes, "is_template"
+        ):
+            attributes.is_template = test_run.is_template
+        if test_run.keep_in_history is not None:
+            attributes.keep_in_history = test_run.keep_in_history
+        if test_run.query is not None:
+            attributes.query = test_run.query
+        if test_run.use_report_from_template is not None:
+            attributes.use_report_from_template = (
+                test_run.use_report_from_template
+            )
         if test_run.additional_attributes:
             attributes.additional_properties = test_run.additional_attributes
         if test_run.select_test_cases_by:
             attributes.select_test_cases_by = getattr(
                 api_models, f"{type_prefix}SelectTestCasesBy"
-            )(str(test_run.select_test_cases_by))
+            )(test_run.select_test_cases_by.value)
         if test_run.home_page_content:
             attributes.home_page_content = getattr(
                 api_models, f"{type_prefix}HomePageContent"
@@ -1264,10 +1317,12 @@ class OpenAPIPolarionProjectClient(
                 )(test_record.comment.type)
             if test_record.comment.value:
                 attributes.comment.value = test_record.comment.value
-        if test_record.duration:
+        if test_record.duration != -1:
             attributes.duration = test_record.duration
         if test_record.work_item_revision:
             attributes.test_case_revision = test_record.work_item_revision
+        if test_record.executed:
+            attributes.executed = test_record.executed
         if test_record.additional_attributes:
             attributes.additional_properties = (
                 test_record.additional_attributes
@@ -1296,8 +1351,8 @@ class OpenAPIPolarionProjectClient(
                         api_models.TestrecordsListPostRequestDataItemRelationships(
                             test_case=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCase(
                                 api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseData(
-                                    api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseDataType.WORKITEMS,
-                                    f"{test_record.work_item_project_id}/{test_record.work_item_id}",
+                                    type=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseDataType.WORKITEMS,
+                                    id=f"{test_record.work_item_project_id}/{test_record.work_item_id}",
                                 )
                             )
                         ),
@@ -1310,6 +1365,18 @@ class OpenAPIPolarionProjectClient(
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
             self.create_test_records(test_run_id, test_records, False)
+
+        assert (
+            isinstance(response.parsed, api_models.TestrecordsListPostResponse)
+            and response.parsed.data
+        )
+        counter = 0
+        for response_item in response.parsed.data:
+            if response_item.id:
+                test_records[counter].iteration = int(
+                    response_item.id.split("/")[-1]
+                )
+                counter += 1
 
     def update_test_record(
         self, test_run_id: str, test_record: dm.TestRecord, retry: bool = True

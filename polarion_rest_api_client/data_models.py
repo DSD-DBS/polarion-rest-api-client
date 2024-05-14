@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import base64
 import dataclasses
+import datetime
 import enum
 import hashlib
 import json
@@ -235,6 +236,13 @@ class TestRun(BaseItem):
 
     title: str | None = None
     home_page_content: TextContent | None = None
+    finished_on: datetime.datetime | None = None
+    group_id: str | None = None
+    id_prefix: str | None = None
+    is_template: bool | None = None
+    keep_in_history: bool | None = None
+    query: str | None = None
+    use_report_from_template: bool | None = None
     select_test_cases_by: SelectTestCasesBy | None = None
     additional_attributes: dict[str, t.Any] = dataclasses.field(
         default_factory=dict
@@ -248,10 +256,11 @@ class TestRecord:
     work_item_project_id: str
     work_item_id: str
     work_item_revision: str | None = None
-    iteration: int = 0
-    duration: float = 0
+    iteration: int = -1
+    duration: float = -1
     result: str | None = None
     comment: TextContent | None = None
+    executed: datetime.datetime | None = None
     additional_attributes: dict[str, t.Any] = dataclasses.field(
         default_factory=dict
     )

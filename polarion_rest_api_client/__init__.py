@@ -14,6 +14,7 @@ from polarion_rest_api_client.data_models import (
     SelectTestCasesBy,
     TestRecord,
     TestRun,
+    TextContent,
     WorkItem,
     WorkItemAttachment,
     WorkItemLink,

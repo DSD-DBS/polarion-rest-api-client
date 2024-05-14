@@ -385,7 +385,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
 
     def get_all_test_runs(
         self,
-        query: str,
+        query: str = "",
         fields: dict[str, str] | None = None,
     ) -> list[dm.TestRun]:
         """Get all test runs matching the given query.
@@ -401,7 +401,7 @@ class AbstractPolarionProjectApi(abc.ABC, t.Generic[WorkItemType]):
     @abc.abstractmethod
     def get_test_runs(
         self,
-        query: str,
+        query: str = "",
         fields: dict[str, str] | None = None,
         page_size: int = 100,
         page_number: int = 1,
