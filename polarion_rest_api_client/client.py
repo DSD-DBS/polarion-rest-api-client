@@ -59,7 +59,7 @@ def _get_json_content_size(data: dict):
 
 
 min_wi_request_size = _get_json_content_size(
-    api_models.WorkitemsListPostRequest([]).to_dict()
+    api_models.WorkitemsListPostRequest(data=[]).to_dict()
 )
 
 
@@ -1194,8 +1194,8 @@ class OpenAPIPolarionProjectClient(
         """Create the given list of test runs."""
         polarion_test_runs = [
             api_models.TestrunsListPostRequestDataItem(
-                api_models.TestrunsListPostRequestDataItemType.TESTRUNS,
-                self._fill_test_run_attributes(
+                type=api_models.TestrunsListPostRequestDataItemType.TESTRUNS,
+                attributes=self._fill_test_run_attributes(
                     api_models.TestrunsListPostRequestDataItemAttributes,
                     test_run,
                 ),
@@ -1221,10 +1221,10 @@ class OpenAPIPolarionProjectClient(
             test_run.id,
             client=self.client,
             body=api_models.TestrunsSinglePatchRequest(
-                api_models.TestrunsSinglePatchRequestData(
-                    api_models.TestrunsSinglePatchRequestDataType.TESTRUNS,
-                    f"{self.project_id}/{test_run.id}",
-                    self._fill_test_run_attributes(
+                data=api_models.TestrunsSinglePatchRequestData(
+                    type=api_models.TestrunsSinglePatchRequestDataType.TESTRUNS,  # pylint: disable=line-too-long
+                    id=f"{self.project_id}/{test_run.id}",
+                    attributes=self._fill_test_run_attributes(
                         api_models.TestrunsSinglePatchRequestDataAttributes,
                         test_run,
                     ),
@@ -1342,14 +1342,14 @@ class OpenAPIPolarionProjectClient(
             body=api_models.TestrecordsListPostRequest(
                 [
                     api_models.TestrecordsListPostRequestDataItem(
-                        api_models.TestrecordsListPostRequestDataItemType.TESTRECORDS,
-                        self._fill_test_record_attributes(
+                        type=api_models.TestrecordsListPostRequestDataItemType.TESTRECORDS,
+                        attributes=self._fill_test_record_attributes(
                             api_models.TestrecordsListPostRequestDataItemAttributes,
                             test_record,
                         ),
-                        api_models.TestrecordsListPostRequestDataItemRelationships(
+                        relationships=api_models.TestrecordsListPostRequestDataItemRelationships(
                             test_case=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCase(
-                                api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseData(
+                                data=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseData(
                                     type=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseDataType.WORKITEMS,
                                     id=f"{test_record.work_item_project_id}/{test_record.work_item_id}",
                                 )
@@ -1391,10 +1391,10 @@ class OpenAPIPolarionProjectClient(
             client=self.client,
             # pylint: disable=line-too-long
             body=api_models.TestrecordsSinglePatchRequest(
-                api_models.TestrecordsSinglePatchRequestData(
-                    api_models.TestrecordsSinglePatchRequestDataType.TESTRECORDS,
-                    f"{self.project_id}/{test_run_id}/{test_record.work_item_project_id}/{test_record.work_item_id}/{test_record.iteration}",
-                    self._fill_test_record_attributes(
+                data=api_models.TestrecordsSinglePatchRequestData(
+                    type=api_models.TestrecordsSinglePatchRequestDataType.TESTRECORDS,
+                    id=f"{self.project_id}/{test_run_id}/{test_record.work_item_project_id}/{test_record.work_item_id}/{test_record.iteration}",
+                    attributes=self._fill_test_record_attributes(
                         api_models.TestrecordsSinglePatchRequestDataAttributes,
                         test_record,
                     ),
