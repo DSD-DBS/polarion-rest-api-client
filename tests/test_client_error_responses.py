@@ -28,6 +28,6 @@ def test_faulty_error_message(
     assert len(e.args) == 5
     assert e.args[0][0] == "400"
     assert (
-        e.args[0][1]
-        == "Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data)"
+        e.args[0][1] == "Unexpected token, BEGIN_ARRAY expected, but was : "
+        "BEGIN_OBJECT (at $.data)"
     )
