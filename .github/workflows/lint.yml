@@ -39,4 +39,4 @@ jobs:
           python -m pip install pylint
       - name: Run pylint
         run: |-
-          pylint -dfixme polarion_rest_api_client || exit $(($? & ~24))
+          pylint -dfixme polarion_rest_api_client tests || exit $(($? & ~24))
