@@ -10,7 +10,7 @@ import pytest_httpx
 from httpx import _multipart
 
 import polarion_rest_api_client as polarion_api
-from tests import (
+from tests.conftest import (
     TEST_WIA_CREATED_RESPONSE,
     TEST_WIA_MULTI_CREATED_RESPONSE,
     TEST_WIA_NEXT_PAGE_RESPONSE,
@@ -32,14 +32,13 @@ def test_get_work_item_attachments_single_page(
         "MyWorkItemId",
         fields={"fields[workitem_attachments]": "id,title"},
     )
+
     query = {
         "fields[workitem_attachments]": "id,title",
         "page[size]": "100",
         "page[number]": "1",
     }
-
     reqs = httpx_mock.get_requests()
-
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
     assert len(work_item_attachments) == 1
@@ -67,13 +66,13 @@ def test_get_work_item_attachments_multi_page(
     work_items_attachments = client.get_all_work_item_attachments(
         "MyWorkItemId"
     )
+
     query = {
         "fields[workitem_attachments]": "@basic",
         "page[size]": "100",
         "page[number]": "1",
     }
     reqs = httpx_mock.get_requests()
-
     assert len(reqs) == 2
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query

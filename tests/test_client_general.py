@@ -7,7 +7,7 @@ import json
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
-from tests import TEST_PROJECT_RESPONSE_JSON
+from tests.conftest import TEST_PROJECT_RESPONSE_JSON
 
 
 def test_api_authentication(
@@ -19,7 +19,8 @@ def test_api_authentication(
             match_headers={"Authorization": "Bearer PAT123"},
             json=json.load(f),
         )
-    client.project_exists()
+
+    assert client.project_exists()
 
 
 def test_check_existing_project(
@@ -28,6 +29,7 @@ def test_check_existing_project(
 ):
     with open(TEST_PROJECT_RESPONSE_JSON, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
+
     assert client.project_exists()
 
 
@@ -36,4 +38,5 @@ def test_check_non_existing_project(
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(status_code=404, json={})
+
     assert not client.project_exists()
