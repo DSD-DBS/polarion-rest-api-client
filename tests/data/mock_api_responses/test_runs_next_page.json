@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "totalCount": 0
+  },
+  "data": [
+    {
+      "type": "testruns",
+      "id": "MyProjectId/MyTestRunId2",
+      "revision": "1234",
+      "attributes": {
+        "created": "1970-01-01T00:00:00Z",
+        "finishedOn": "1970-01-01T00:00:00Z",
+        "groupId": "Group ID",
+        "homePageContent": {
+          "type": "text/html",
+          "value": "My text value"
+        },
+        "id": "ID",
+        "idPrefix": "ID Prefix",
+        "isTemplate": true,
+        "keepInHistory": true,
+        "query": "Query",
+        "selectTestCasesBy": "manualSelection",
+        "status": "open",
+        "title": "Title",
+        "type": "manual",
+        "updated": "1970-01-01T00:00:00Z",
+        "useReportFromTemplate": true
+      },
+      "relationships": {
+        "author": {
+          "data": {
+            "type": "users",
+            "id": "MyUserId",
+            "revision": "1234"
+          }
+        },
+        "document": {
+          "data": {
+            "type": "documents",
+            "id": "MyProjectId/MySpaceId/MyDocumentId",
+            "revision": "1234"
+          }
+        },
+        "project": {
+          "data": {
+            "type": "projects",
+            "id": "MyProjectId",
+            "revision": "1234"
+          }
+        },
+        "projectSpan": {
+          "data": [
+            {
+              "type": "projects",
+              "id": "MyProjectId",
+              "revision": "1234"
+            }
+          ],
+          "meta": {
+            "totalCount": 0
+          }
+        },
+        "summaryDefect": {
+          "data": {
+            "type": "workitems",
+            "id": "MyProjectId/MyWorkItemId",
+            "revision": "1234"
+          }
+        },
+        "template": {
+          "data": {
+            "type": "testruns",
+            "id": "MyProjectId/MyTestRunId",
+            "revision": "1234"
+          }
+        }
+      },
+      "meta": {
+        "errors": [
+        ]
+      },
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId?revision=1234",
+        "portal": "server-host-name/application-path/polarion/redirect/project/MyProjectId/testrun?id=MyTestRunId&revision=1234"
+      }
+    }
+  ],
+  "included": [
+    {}
+  ],
+  "links": {
+    "self": "server-host-name/application-path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=5",
+    "first": "server-host-name/application-path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=1",
+    "prev": "server-host-name/application-path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=4",
+    "next": "server-host-name/application-path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=6",
+    "last": "server-host-name/application-path/projects/MyProjectId/testruns?page%5Bsize%5D=10&page%5Bnumber%5D=9",
+    "portal": "server-host-name/application-path/polarion/redirect/project/MyProjectId/testruns"
+  }
+}

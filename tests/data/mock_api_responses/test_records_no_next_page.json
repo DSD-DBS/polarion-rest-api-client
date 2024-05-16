@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "totalCount": 0
+  },
+  "data": [
+    {
+      "type": "testrecords",
+      "id": "elibrary/MyTestRunId/MyProjectId/MyTestcaseId/0",
+      "revision": "1234",
+      "attributes": {
+        "comment": {
+          "type": "text/html",
+          "value": "My text value"
+        },
+        "duration": 0,
+        "executed": "1970-01-01T00:00:00Z",
+        "iteration": 0,
+        "result": "passed",
+        "testCaseRevision": "Test Case Revision"
+      },
+      "relationships": {
+        "defect": {
+          "data": {
+            "type": "workitems",
+            "id": "MyProjectId/MyWorkItemId",
+            "revision": "1234"
+          }
+        },
+        "executedBy": {
+          "data": {
+            "type": "users",
+            "id": "MyUserId",
+            "revision": "1234"
+          }
+        },
+        "testCase": {
+          "data": {
+            "type": "workitems",
+            "id": "MyProjectId/MyWorkItemId",
+            "revision": "1234"
+          }
+        }
+      },
+      "meta": {},
+      "links": {
+        "self": "server-host-name/application-path/projects/elibrary/testruns/MyTestRunId/testrecords/MyProjectId/MyTestcaseId/0"
+      }
+    }
+  ],
+  "included": [
+    {}
+  ],
+  "links": {
+    "self": "server-host-name/application-path/projects/elibrary/testruns/MyTestRunId/testrecords/MyProjectId/MyTestcaseId?page%5Bsize%5D=10&page%5Bnumber%5D=5",
+    "first": "server-host-name/application-path/projects/elibrary/testruns/MyTestRunId/testrecords/MyProjectId/MyTestcaseId?page%5Bsize%5D=10&page%5Bnumber%5D=1",
+    "prev": "server-host-name/application-path/projects/elibrary/testruns/MyTestRunId/testrecords/MyProjectId/MyTestcaseId?page%5Bsize%5D=10&page%5Bnumber%5D=4",
+    "last": "server-host-name/application-path/projects/elibrary/testruns/MyTestRunId/testrecords/MyProjectId/MyTestcaseId?page%5Bsize%5D=10&page%5Bnumber%5D=9"
+  }
+}

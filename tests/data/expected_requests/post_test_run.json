@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "type": "testruns",
+      "attributes": {
+        "finishedOn": "1970-01-01T00:00:00",
+        "groupId": "Group ID",
+        "homePageContent": {
+          "type": "text/html",
+          "value": "My text value"
+        },
+        "id": "ID",
+        "idPrefix": "ID Prefix",
+        "isTemplate": true,
+        "keepInHistory": true,
+        "query": "Query",
+        "selectTestCasesBy": "manualSelection",
+        "status": "open",
+        "title": "Title",
+        "type": "manual",
+        "useReportFromTemplate": true
+      }
+    },
+    {
+      "type": "testruns",
+      "attributes": {
+        "finishedOn": "1970-01-01T00:00:00",
+        "groupId": "Group ID",
+        "homePageContent": {
+          "type": "text/html",
+          "value": "My text value 2"
+        },
+        "id": "ID2",
+        "idPrefix": "ID Prefix",
+        "isTemplate": true,
+        "keepInHistory": true,
+        "query": "Query",
+        "selectTestCasesBy": "manualSelection",
+        "status": "open",
+        "title": "Title",
+        "type": "manual",
+        "useReportFromTemplate": true
+      }
+    }
+  ]
+}
