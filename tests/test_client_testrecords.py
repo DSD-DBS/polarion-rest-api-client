@@ -7,7 +7,7 @@ import json
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
-from tests import (
+from tests.conftest import (
     TEST_TREC_CREATED_RESPONSE,
     TEST_TREC_NEXT_RESPONSE,
     TEST_TREC_NO_NEXT_RESPONSE,
@@ -44,7 +44,6 @@ def test_get_test_records_multi_page(
     assert dict(reqs[1].url.params) == query
     query["page[number]"] = "3"
     assert dict(reqs[2].url.params) == query
-
     assert len(test_records) == 3
     assert test_records[0].result == "passed"
     assert test_records[0].iteration == 0
@@ -60,7 +59,7 @@ def test_create_test_records(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_TREC_CREATED_RESPONSE) as f:
+    with open(TEST_TREC_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
     test_run_id = "asdfg"
@@ -89,7 +88,7 @@ def test_create_test_records(
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
     req_data = json.loads(reqs[0].content.decode("utf-8"))
-    with open(TEST_TREC_POST_REQUEST) as f:
+    with open(TEST_TREC_POST_REQUEST, encoding="utf8") as f:
         expected_req = json.load(f)
 
     assert req_data == expected_req
@@ -125,7 +124,7 @@ def test_update_test_record(
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
     req_data = json.loads(reqs[0].content.decode("utf-8"))
-    with open(TEST_TREC_PATCH_REQUEST) as f:
+    with open(TEST_TREC_PATCH_REQUEST, encoding="utf8") as f:
         expected_req = json.load(f)
 
     assert req_data == expected_req

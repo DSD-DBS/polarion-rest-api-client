@@ -8,7 +8,7 @@ import json
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
-from tests import (
+from tests.conftest import (
     TEST_WI_CREATED_RESPONSE,
     TEST_WI_NO_NEXT_PAGE_RESPONSE,
     TEST_WI_POST_REQUEST,
@@ -24,6 +24,7 @@ def test_get_all_work_items_single_page_custom_work_item(
         httpx_mock.add_response(json=json.load(f))
 
     work_items = client_custom_work_item.get_all_work_items("")
+
     assert isinstance(work_items[0], CustomWorkItem)
     assert work_items[0].capella_uuid == "asdfgh"
 

@@ -8,7 +8,7 @@ import json
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
-from tests import TEST_DOCUMENT_RESPONSE
+from tests.conftest import TEST_DOCUMENT_RESPONSE
 
 
 def test_get_document_with_all_fields(

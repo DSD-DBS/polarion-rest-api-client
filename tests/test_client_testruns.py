@@ -7,7 +7,7 @@ import json
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
-from tests import (
+from tests.conftest import (
     TEST_TRUN_CREATED_RESPONSE,
     TEST_TRUN_FULLY_PATCH_REQUEST,
     TEST_TRUN_NEXT_RESPONSE,
@@ -38,7 +38,6 @@ def test_get_test_runs_multi_page(
         "query": "123",
     }
     reqs = httpx_mock.get_requests()
-
     assert len(reqs) == 3
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
@@ -46,7 +45,6 @@ def test_get_test_runs_multi_page(
     assert dict(reqs[1].url.params) == query
     query["page[number]"] = "3"
     assert dict(reqs[2].url.params) == query
-
     assert len(test_runs) == 3
     assert test_runs[0].id == "MyTestRunId2"
     assert test_runs[0].type == "manual"
@@ -65,7 +63,7 @@ def test_create_test_runs(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_TRUN_CREATED_RESPONSE) as f:
+    with open(TEST_TRUN_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
     tr_1 = polarion_api.TestRun(
@@ -106,7 +104,7 @@ def test_create_test_runs(
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
     req_data = json.loads(reqs[0].content.decode("utf-8"))
-    with open(TEST_TRUN_POST_REQUEST) as f:
+    with open(TEST_TRUN_POST_REQUEST, encoding="utf8") as f:
         expected_req = json.load(f)
 
     assert req_data == expected_req
@@ -118,9 +116,7 @@ def test_update_test_run(
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
-
     test_run_id = "asdfg"
-
     tr = polarion_api.TestRun(
         test_run_id,
         "manual",
@@ -136,7 +132,7 @@ def test_update_test_run(
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
     req_data = json.loads(reqs[0].content.decode("utf-8"))
-    with open(TEST_TRUN_PATCH_REQUEST) as f:
+    with open(TEST_TRUN_PATCH_REQUEST, encoding="utf8") as f:
         expected_req = json.load(f)
 
     assert req_data == expected_req
@@ -151,7 +147,6 @@ def test_update_test_run_fully(
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
-
     tr = polarion_api.TestRun(
         "ID",
         "manual",
@@ -174,7 +169,7 @@ def test_update_test_run_fully(
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
     req_data = json.loads(reqs[0].content.decode("utf-8"))
-    with open(TEST_TRUN_FULLY_PATCH_REQUEST) as f:
+    with open(TEST_TRUN_FULLY_PATCH_REQUEST, encoding="utf8") as f:
         expected_req = json.load(f)
 
     assert req_data == expected_req

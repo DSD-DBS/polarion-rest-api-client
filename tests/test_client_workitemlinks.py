@@ -9,7 +9,7 @@ import pytest
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
-from tests import (
+from tests.conftest import (
     TEST_WIL_CREATED_RESPONSE,
     TEST_WIL_DELETE2_REQUEST,
     TEST_WIL_DELETE_REQUEST,
@@ -36,15 +36,14 @@ def test_get_work_item_links_single_page(
         include="workitem",
         fields={"fields[linkedworkitems]": "id,role"},
     )
+
     query = {
         "fields[linkedworkitems]": "id,role",
         "page[size]": "100",
         "page[number]": "1",
         "include": "workitem",
     }
-
     reqs = httpx_mock.get_requests()
-
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
     assert len(work_item_links) == 1

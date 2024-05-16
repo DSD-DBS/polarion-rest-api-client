@@ -12,7 +12,7 @@ import pytest_mock as mock
 
 import polarion_rest_api_client as polarion_api
 from polarion_rest_api_client.open_api_client import models as api_models
-from tests import (
+from tests.conftest import (
     TEST_ERROR_RESPONSE,
     TEST_WI_CREATED_RESPONSE,
     TEST_WI_DELETE_REQUEST,
@@ -46,11 +46,9 @@ def test_get_one_work_item(
         "fields[linkedworkitems]": "@all",
     }
     reqs = httpx_mock.get_requests()
-
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
     assert len(reqs) == 1
-
     assert work_item is not None
     assert len(work_item.linked_work_items) == 1
     assert len(work_item.attachments) == 1
@@ -74,7 +72,6 @@ def test_get_one_work_item_not_truncated(
         "fields[linkedworkitems]": "@all",
     }
     reqs = httpx_mock.get_requests()
-
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
     assert len(reqs) == 1
@@ -100,6 +97,7 @@ def test_get_all_work_items_multi_page(
         "",
         {"fields[workitems]": "id"},
     )
+
     query = {
         "fields[workitems]": "id",
         "page[size]": "100",
@@ -107,7 +105,6 @@ def test_get_all_work_items_multi_page(
         "query": "",
     }
     reqs = httpx_mock.get_requests()
-
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
     assert reqs[1].method == "GET"
@@ -212,7 +209,6 @@ def test_create_work_item_checksum(
     client.create_work_item(work_item)
 
     req = httpx_mock.get_request()
-
     with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
@@ -305,7 +301,6 @@ def test_create_work_items_content_exceed_successfully(
     client.create_work_items(work_items)
 
     reqs = httpx_mock.get_requests()
-
     assert len(reqs) == 3
     assert reqs[0] is not None and reqs[0].method == "POST"
     assert len(json.loads(reqs[0].content.decode("utf-8"))["data"]) == 3
@@ -313,8 +308,7 @@ def test_create_work_items_content_exceed_successfully(
     assert len(json.loads(reqs[1].content.decode("utf-8"))["data"]) == 2
     assert reqs[2] is not None and reqs[2].method == "POST"
     assert len(json.loads(reqs[2].content.decode("utf-8"))["data"]) == 1
-
-    assert all([wi.id == "MyWorkItemId" for wi in work_items])
+    assert all(wi.id == "MyWorkItemId" for wi in work_items)
 
 
 def test_create_work_items_content_exceed_error(
@@ -357,7 +351,6 @@ def test_work_item_single_request_size(
     client.create_work_items([work_item])
 
     req = httpx_mock.get_request()
-
     assert len(req.content) == size
 
 
@@ -390,7 +383,6 @@ def test_work_item_multi_request_size(
     client.create_work_items(2 * [work_item])
 
     req = httpx_mock.get_request()
-
     assert len(req.content) == size
 
 
@@ -463,7 +455,6 @@ def test_update_work_item_completely_checksum(
     client.update_work_item(work_item_patch)
 
     req = httpx_mock.get_request()
-
     with open(TEST_WI_PATCH_COMPLETELY_REQUEST, encoding="utf8") as f:
         request = json.load(f)
 
@@ -487,7 +478,6 @@ def test_update_work_item_description(
     )
 
     req = httpx_mock.get_request()
-
     assert req is not None
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
@@ -509,7 +499,6 @@ def test_update_work_item_title(
     )
 
     req = httpx_mock.get_request()
-
     assert req is not None
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
@@ -555,7 +544,6 @@ def test_update_work_item_type(
     )
 
     req = httpx_mock.get_request()
-
     assert req is not None
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.url.params["changeTypeTo"] == "newType"
@@ -573,7 +561,6 @@ def test_delete_work_item_status_mode(
     client.delete_work_item("MyWorkItemId")
 
     req = httpx_mock.get_request()
-
     assert req is not None and req.method == "PATCH"
     with open(TEST_WI_PATCH_STATUS_DELETED_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
@@ -590,7 +577,6 @@ def test_delete_work_item_delete_mode(
     client.delete_work_item("MyWorkItemId")
 
     req = httpx_mock.get_request()
-
     assert req is not None and req.method == "DELETE"
     with open(TEST_WI_DELETE_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
