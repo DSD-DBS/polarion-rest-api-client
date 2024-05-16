@@ -93,8 +93,8 @@ def test_create_test_records(
 
     assert req_data == expected_req
     assert (
-        reqs[0].url.path
-        == f"/api/projects/{client.project_id}/testruns/{test_run_id}/testrecords"
+        reqs[0].url.path == f"/api/projects/{client.project_id}/testruns"
+        f"/{test_run_id}/testrecords"
     )
     assert tr_1.iteration == 0
     assert tr_2.iteration == 1
@@ -128,7 +128,7 @@ def test_update_test_record(
         expected_req = json.load(f)
 
     assert req_data == expected_req
-    assert (
-        reqs[0].url.path
-        == f"/api/projects/{client.project_id}/testruns/{test_run_id}/testrecords/{work_item_project}/{work_item_id}/4"
+    assert reqs[0].url.path == (
+        f"/api/projects/{client.project_id}/testruns/{test_run_id}"
+        f"/testrecords/{work_item_project}/{work_item_id}/4"
     )
