@@ -128,6 +128,7 @@ ignore-paths = "polarion_rest_api_client/open_api_client/*"
 
 [tool.pylint.messages_control]
 disable = [
+  "duplicate-code", # XXX: We should remove this again!
   "broad-except",
   "global-statement",
   "import-outside-toplevel",
