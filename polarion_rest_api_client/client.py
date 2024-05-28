@@ -16,6 +16,7 @@ import urllib.parse
 from polarion_rest_api_client import base_client
 from polarion_rest_api_client import data_models as dm
 from polarion_rest_api_client import errors
+from polarion_rest_api_client.base_client import WorkItemType
 from polarion_rest_api_client.open_api_client import client as oa_client
 from polarion_rest_api_client.open_api_client import models as api_models
 from polarion_rest_api_client.open_api_client import types as oa_types
@@ -101,11 +102,12 @@ def sleep_random_time(_min: int = 5, _max: int = 15):
     time.sleep(random.uniform(_min, _max))
 
 
-class OpenAPIPolarionProjectClient(
-    base_client.AbstractPolarionProjectApi[base_client.WorkItemType]
-):
+class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
     """A Polarion Project Client using an auto generated OpenAPI-Client."""
 
+    _batch_size: int = 5
+    _page_size: int = 100
+    delete_status: str = "deleted"
     client: oa_client.AuthenticatedClient
 
     @t.overload
@@ -178,14 +180,13 @@ class OpenAPIPolarionProjectClient(
         httpx_args: t.Optional[dict[str, t.Any]], default None
             Additional parameters, which will be passed to the httpx client.
         """
-        super().__init__(
-            project_id,
-            delete_polarion_work_items,
-            custom_work_item,
-            batch_size,
-            page_size,
-            add_work_item_checksum,
-        )
+        self.project_id = project_id
+        self.delete_polarion_work_items = delete_polarion_work_items
+        self.default_fields = base_client.DefaultFields()
+        self._batch_size = batch_size
+        self._page_size = page_size
+        self._work_item = custom_work_item
+        self.add_work_item_checksum = add_work_item_checksum
 
         if httpx_args is None:
             httpx_args = {}
@@ -1406,3 +1407,177 @@ class OpenAPIPolarionProjectClient(
         if not self._check_response(response, not retry) and retry:
             sleep_random_time()
             self.update_test_record(test_run_id, test_record, False)
+
+    def _request_all_items(self, call: t.Callable, **kwargs) -> list[t.Any]:
+        page = 1
+        items, next_page = call(
+            **kwargs, page_size=self._page_size, page_number=page
+        )
+        while next_page:
+            page += 1
+            _items, next_page = call(
+                **kwargs, page_size=self._page_size, page_number=page
+            )
+            items += _items
+        return items
+
+    def get_all_work_item_attachments(
+        self, work_item_id: str, fields: dict[str, str] | None = None
+    ) -> list[dm.WorkItemAttachment]:
+        """Get all work item attachments for a given work item.
+
+        Will handle pagination automatically. Define a fields dictionary
+        as described in the Polarion API documentation to get certain
+        fields.
+        """
+        return self._request_all_items(
+            self.get_work_item_attachments,
+            fields=fields,
+            work_item_id=work_item_id,
+        )
+
+    def create_work_item_attachment(
+        self, work_item_attachment: dm.WorkItemAttachment, retry: bool = True
+    ):
+        """Update the given work item attachment in Polarion."""
+        self.create_work_item_attachments([work_item_attachment], retry)
+
+    def get_all_work_items(
+        self, query: str = "", fields: dict[str, str] | None = None
+    ) -> list[WorkItemType]:
+        """Get all work items matching the given query.
+
+        Will handle pagination automatically. Define a fields dictionary
+        as described in the Polarion API documentation to get certain
+        fields.
+        """
+        return self._request_all_items(
+            self.get_work_items, fields=fields, query=query
+        )
+
+    def create_work_item(self, work_item: WorkItemType):
+        """Create a single given work item."""
+        self.create_work_items([work_item])
+
+    def delete_work_items(self, work_item_ids: list[str]):
+        """Delete or mark the defined work items as deleted."""
+        if self.delete_polarion_work_items:
+            return self._delete_work_items(work_item_ids)
+        return self._mark_delete_work_items(work_item_ids)
+
+    def delete_work_item(self, work_item_id: str):
+        """Delete or mark the defined work item as deleted."""
+        return self.delete_work_items([work_item_id])
+
+    def _mark_delete_work_items(self, work_item_ids: list[str]):
+        """Set the status for all given work items to self.delete_status."""
+        for work_item_id in work_item_ids:
+            self.update_work_item(
+                self._work_item(id=work_item_id, status=self.delete_status)
+            )
+
+    def get_all_work_item_links(
+        self,
+        work_item_id: str,
+        fields: dict[str, str] | None = None,
+        include: str | None = None,
+    ) -> list[dm.WorkItemLink]:
+        """Get all work item links for the given work item.
+
+        Define a fields dictionary as described in the Polarion API
+        documentation to get certain fields.
+        """
+        return self._request_all_items(
+            self.get_work_item_links,
+            work_item_id=work_item_id,
+            fields=fields,
+            include=include,
+        )
+
+    def create_work_item_links(self, work_item_links: list[dm.WorkItemLink]):
+        """Create the links between the work items in work_item_links."""
+        for split_work_item_links in self._group_links(
+            work_item_links
+        ).values():
+            for i in range(0, len(split_work_item_links), self._batch_size):
+                self._create_work_item_links(
+                    split_work_item_links[i : i + self._batch_size]
+                )
+
+    def _set_project(self, work_item_link: dm.WorkItemLink):
+        if work_item_link.secondary_work_item_project is None:
+            work_item_link.secondary_work_item_project = self.project_id
+
+    def _group_links(
+        self,
+        work_item_links: list[dm.WorkItemLink],
+    ) -> dict[str, list[dm.WorkItemLink]]:
+        """Group a list of work item links by their primary work item.
+
+        Returns a dict with the primary work items as keys.
+        """
+        work_item_link_dict: dict[str, list[dm.WorkItemLink]] = {}
+        for work_item_link in work_item_links:
+            self._set_project(work_item_link)
+            if work_item_link.primary_work_item_id not in work_item_link_dict:
+                work_item_link_dict[work_item_link.primary_work_item_id] = []
+
+            work_item_link_dict[work_item_link.primary_work_item_id].append(
+                work_item_link
+            )
+        return work_item_link_dict
+
+    def create_work_item_link(self, work_item_link: dm.WorkItemLink):
+        """Create the link between the work items in work_item_link."""
+        self._set_project(work_item_link)
+        self._create_work_item_links([work_item_link])
+
+    def delete_work_item_links(self, work_item_links: list[dm.WorkItemLink]):
+        """Delete the links between the work items in work_item_link."""
+        for split_work_item_links in self._group_links(
+            work_item_links
+        ).values():
+            self._delete_work_item_links(split_work_item_links)
+
+    def delete_work_item_link(self, work_item_link: dm.WorkItemLink):
+        """Delete the links between the work items in work_item_link."""
+        self._set_project(work_item_link)
+        self._delete_work_item_links([work_item_link])
+
+    def get_all_test_runs(
+        self,
+        query: str = "",
+        fields: dict[str, str] | None = None,
+    ) -> list[dm.TestRun]:
+        """Get all test runs matching the given query.
+
+        Will handle pagination automatically. Define a fields dictionary
+        as described in the Polarion API documentation to get certain
+        fields.
+        """
+        return self._request_all_items(
+            self.get_test_runs, fields=fields, query=query
+        )
+
+    def get_all_test_records(
+        self,
+        test_run_id: str,
+        fields: dict[str, str] | None = None,
+    ) -> list[dm.TestRecord]:
+        """Get all test records matching the given query.
+
+        Will handle pagination automatically. Define a fields dictionary
+        as described in the Polarion API documentation to get certain
+        fields.
+        """
+        return self._request_all_items(
+            self.get_test_records, fields=fields, test_run_id=test_run_id
+        )
+
+    def create_test_run(self, test_run: dm.TestRun):
+        """Create the given test run."""
+        self.create_test_runs([test_run])
+
+    def create_test_record(self, test_run_id: str, test_record: dm.TestRecord):
+        """Create the given list of test records."""
+        self.create_test_records(test_run_id, [test_record])
