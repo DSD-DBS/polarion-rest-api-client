@@ -55,24 +55,24 @@ def fix_spec(src: str, path: str | os.PathLike):
             "you have to provide a file or url keyword as 1st arg."
         )
     spec_paths = spec["paths"]
-    if (
-        octet_schema := spec_paths.get(
-            "/projects/{projectId}/testruns/{testRunId}/actions/importXUnitTestResults",
-            {},
-        )
-        .get("post", {})
-        .get("requestBody", {})
-        .get("content", {})
-        .get("application/octet-stream", {})
-        .get("schema")
+    if octet_schema := spec_paths._get_multi(
+        "/projects/{projectId}/testruns/{testRunId}/actions/importXUnitTestResults",
+        {},
+        page_size=100,
+        page_number=1,
     ):
-        if octet_schema.get("type") == "object":
+        if (
+            octet_schema._get_multi("type", page_size=100, page_number=1)
+            == "object"
+        ):
             octet_schema["type"] = "string"
             octet_schema["format"] = "binary"
 
     for spec_path in spec_paths.values():
         for operation_description in spec_path.values():
-            if responses := operation_description.get("responses"):
+            if responses := operation_description._get_multi(
+                "responses", page_size=100, page_number=1
+            ):
                 if "4XX-5XX" in responses:
                     for code, resp in responses.items():
                         if error_code_pattern.fullmatch(code):
@@ -80,40 +80,33 @@ def fix_spec(src: str, path: str | os.PathLike):
                     del responses["4XX-5XX"]
 
     schemas = spec["components"]["schemas"]
-    if (
-        downloads := schemas.get("jobsSingleGetResponse", {})
-        .get("properties", {})
-        .get("data", {})
-        .get("properties", {})
-        .get("links", {})
-        .get("properties", {})
-        .get("downloads")
+    if downloads := schemas._get_multi(
+        "jobsSingleGetResponse", {}, page_size=100, page_number=1
     ):
-        if "items" not in downloads and downloads.get("type") == "array":
+        if (
+            "items" not in downloads
+            and downloads._get_multi("type", page_size=100, page_number=1)
+            == "array"
+        ):
             downloads["items"] = {"type": "string"}
 
-    if (
-        downloads := schemas.get("jobsSinglePostResponse", {})
-        .get("properties", {})
-        .get("data", {})
-        .get("properties", {})
-        .get("links", {})
-        .get("properties", {})
-        .get("downloads")
+    if downloads := schemas._get_multi(
+        "jobsSinglePostResponse", {}, page_size=100, page_number=1
     ):
-        if "items" not in downloads and downloads.get("type") == "array":
+        if (
+            "items" not in downloads
+            and downloads._get_multi("type", page_size=100, page_number=1)
+            == "array"
+        ):
             downloads["items"] = {"type": "string"}
 
-    if (
-        error_source := schemas.get("errors", {})
-        .get("properties", {})
-        .get("errors", {})
-        .get("items", {})
-        .get("properties", {})
-        .get("source")
+    if error_source := schemas._get_multi(
+        "errors", {}, page_size=100, page_number=1
     ):
         error_source["nullable"] = True
-        if resource := error_source.get("properties", {}).get("resource"):
+        if resource := error_source._get_multi(
+            "properties", {}, page_size=100, page_number=1
+        )._get_multi("resource", page_size=100, page_number=1):
             resource["nullable"] = True
 
     with tempfile.NamedTemporaryFile("w", delete=False) as f:

@@ -126,7 +126,9 @@ def test_delete_work_item_links(
 
     assert req is not None and req.method == "DELETE"
     with open(TEST_WIL_DELETE_REQUEST, encoding="utf8") as f:
-        assert json.loads(req.content.decode()) == json.load(f)
+        expected_request = json.load(f)
+
+    assert json.loads(req.content.decode()) == expected_request
 
 
 def test_delete_work_item_links_multi_primary(
@@ -152,9 +154,13 @@ def test_delete_work_item_links_multi_primary(
     assert reqs[0].method == "DELETE"
     assert reqs[1].method == "DELETE"
     with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
-        assert json.loads(reqs[0].content.decode()) == json.load(f)
+        expected_request = json.load(f)
+
+    assert json.loads(reqs[0].content.decode()) == expected_request
     with open(TEST_WIL_DELETE2_REQUEST, encoding="utf8") as f:
-        assert json.loads(reqs[1].content.decode()) == json.load(f)
+        expected_request = json.load(f)
+
+    assert json.loads(reqs[1].content.decode()) == expected_request
 
 
 def test_create_work_item_link(
@@ -272,7 +278,11 @@ def test_get_work_item_links_error_first_request(
     assert len(caplog.record_tuples) == 1
     _, level, message = caplog.record_tuples[0]
     assert level == 30
-    assert message == "Received error response code 502 with content b'Test'."
+    assert (
+        message == "Will retry after failing on first attempt, due to "
+        "the following error "
+        "(<HTTPStatus.BAD_GATEWAY: 502>, b'Test')"
+    )
     assert len(reqs) == 2
     assert work_item_links[0] == polarion_api.WorkItemLink(
         "MyWorkItemId", "MyWorkItemId2", "relates_to", True, "MyProjectId"

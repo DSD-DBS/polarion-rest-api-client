@@ -13,7 +13,7 @@ import typing as t
 
 
 @dataclasses.dataclass
-class BaseItem:
+class StatusItem:
     """A parent data class for WorkItem and Document."""
 
     id: str | None = None
@@ -22,8 +22,8 @@ class BaseItem:
     _checksum: str | None = dataclasses.field(init=False, default=None)
 
     def __eq__(self, other: object) -> bool:
-        """Compare only BaseItem attributes."""
-        if not isinstance(other, BaseItem):
+        """Compare only StatusItem attributes."""
+        if not isinstance(other, StatusItem):
             return NotImplemented
         if self.get_current_checksum() is None:
             self.calculate_checksum()
@@ -33,7 +33,7 @@ class BaseItem:
         return self.get_current_checksum() == other.get_current_checksum()
 
     def to_dict(self) -> dict[str, t.Any]:
-        """Return the content of the BaseItem as dictionary."""
+        """Return the content of the StatusItem as dictionary."""
         return {
             "id": self.id,
             "type": self.type,
@@ -42,7 +42,7 @@ class BaseItem:
         }
 
     def calculate_checksum(self) -> str:
-        """Calculate and return a checksum for this BaseItem.
+        """Calculate and return a checksum for this StatusItem.
 
         In addition, the checksum will be written to self._checksum.
         """
@@ -61,7 +61,7 @@ class BaseItem:
         return self._checksum
 
 
-class WorkItem(BaseItem):
+class WorkItem(StatusItem):
     """A data class containing all relevant data of a Polarion WorkItem."""
 
     title: str | None = None
@@ -208,7 +208,7 @@ class WorkItemAttachment:
     file_name: str | None = None
 
 
-class Document(BaseItem):
+class Document(StatusItem):
     """A data class containing all relevant data of a Polarion Document."""
 
     module_folder: str | None = None
@@ -231,7 +231,7 @@ class Document(BaseItem):
 
 
 @dataclasses.dataclass
-class TestRun(BaseItem):
+class TestRun(StatusItem):
     """A data class for all data of a test run."""
 
     title: str | None = None
@@ -253,6 +253,7 @@ class TestRun(BaseItem):
 class TestRecord:
     """A data class for test record data."""
 
+    test_run_id: str
     work_item_project_id: str
     work_item_id: str
     work_item_revision: str | None = None

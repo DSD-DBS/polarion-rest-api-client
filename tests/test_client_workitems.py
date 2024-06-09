@@ -122,7 +122,9 @@ def test_get_all_work_items_single_page(
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    client.default_fields.workitems = "@basic,description"
+    client.project_client._client.default_fields.workitems = (
+        "@basic,description"
+    )
 
     work_items = client.get_all_work_items("")
 
@@ -205,7 +207,7 @@ def test_create_work_item_checksum(
 
     checksum = work_item.calculate_checksum()
 
-    client.add_work_item_checksum = True
+    client.project_client.work_items.add_work_item_checksum = True
     client.create_work_item(work_item)
 
     req = httpx_mock.get_request()
@@ -345,8 +347,16 @@ def test_work_item_single_request_size(
 
     httpx_mock.add_response(201, json=mock_response)
 
-    work_item_data = client._build_work_item_post_request(work_item)
-    size, _ = client._calculate_post_work_item_request_sizes(work_item_data)
+    work_item_data = (
+        client.project_client.work_items._build_work_item_post_request(
+            work_item
+        )
+    )
+    size, _ = (
+        client.project_client.work_items._calculate_post_work_item_request_sizes(
+            work_item_data
+        )
+    )
 
     client.create_work_items([work_item])
 
@@ -371,13 +381,21 @@ def test_work_item_multi_request_size(
         )
     )
 
-    work_item_data = client._build_work_item_post_request(work_item)
-
-    size, _ = client._calculate_post_work_item_request_sizes(
-        work_item_data, size
+    work_item_data = (
+        client.project_client.work_items._build_work_item_post_request(
+            work_item
+        )
     )
-    size, _ = client._calculate_post_work_item_request_sizes(
-        work_item_data, size
+
+    size, _ = (
+        client.project_client.work_items._calculate_post_work_item_request_sizes(
+            work_item_data, size
+        )
+    )
+    size, _ = (
+        client.project_client.work_items._calculate_post_work_item_request_sizes(
+            work_item_data, size
+        )
     )
 
     client.create_work_items(2 * [work_item])
@@ -451,7 +469,7 @@ def test_update_work_item_completely_checksum(
     spy = mocker.spy(work_item_patch, "calculate_checksum")
 
     checksum = work_item_patch.calculate_checksum()
-    client.add_work_item_checksum = True
+    client.project_client.work_items.add_work_item_checksum = True
     client.update_work_item(work_item_patch)
 
     req = httpx_mock.get_request()
@@ -572,7 +590,7 @@ def test_delete_work_item_delete_mode(
 ):
     httpx_mock.add_response(204)
 
-    client.delete_polarion_work_items = True
+    client.project_client.work_items.delete_status = None
 
     client.delete_work_item("MyWorkItemId")
 
