@@ -125,24 +125,6 @@ class WorkItemAttachments(bc.UpdatableItemsClient[dm.WorkItemAttachment]):
 
     def _create(self, work_item_attachments: list[dm.WorkItemAttachment]):
         """Create the given work item attachment in Polarion."""
-        response = self._retry_on_error(
-            self._perform_creation, work_item_attachments
-        )
-        assert (
-            isinstance(
-                response.parsed, api_models.WorkitemAttachmentsListPostResponse
-            )
-            and response.parsed.data
-        )
-        counter = 0
-        for work_item_attachment_res in response.parsed.data:
-            assert work_item_attachment_res.id
-            work_item_attachments[counter].id = (
-                work_item_attachment_res.id.split("/")[-1]
-            )
-            counter += 1
-
-    def _perform_creation(self, work_item_attachments):
         attachment_attributes = []
         attachment_files = []
         assert len(work_item_attachments), "No attachments were provided."
@@ -195,8 +177,21 @@ class WorkItemAttachments(bc.UpdatableItemsClient[dm.WorkItemAttachment]):
             client=self._client.client,
             body=multipart,
         )
+
         self._raise_on_error(response)
-        return response
+        assert (
+            isinstance(
+                response.parsed, api_models.WorkitemAttachmentsListPostResponse
+            )
+            and response.parsed.data
+        )
+        counter = 0
+        for work_item_attachment_res in response.parsed.data:
+            assert work_item_attachment_res.id
+            work_item_attachments[counter].id = (
+                work_item_attachment_res.id.split("/")[-1]
+            )
+            counter += 1
 
     def _delete(
         self, items: dm.WorkItemAttachment | list[dm.WorkItemAttachment]
