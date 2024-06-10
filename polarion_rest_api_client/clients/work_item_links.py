@@ -18,18 +18,12 @@ from .base_classes import T
 
 
 class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
-    def _get(self, *args, **kwargs) -> tuple[list[T], bool]:
+    def _get(self, *args, **kwargs) -> dm.WorkItemLink:
         raise NotImplementedError
 
-    def _get_multi(
-        self,
-        work_item_id: str,
-        fields: dict[str, str] | None = None,
-        include: str | None | oa_types.Unset = None,
-        page_size: int = 100,
-        page_number: int = 1,
-        retry: bool = True,
-    ) -> tuple[list[dm.WorkItemLink], bool]:
+    def _get_multi(self, work_item_id: str, *, page_size: int = 100,
+                   page_number: int = 1, fields: dict[str, str] | None = None,
+                   include: str | None | oa_types.Unset = None) -> tuple[list[dm.WorkItemLink], bool]:
         """Get the work item links for the given work item on a page.
 
         In addition, a flag whether a next page is available is

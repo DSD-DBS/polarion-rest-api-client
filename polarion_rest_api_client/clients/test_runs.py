@@ -12,6 +12,9 @@ from polarion_rest_api_client.open_api_client.api.test_runs import (
 from . import base_classes as bc
 from . import test_records
 from .base_classes import T
+import typing as t
+if t.TYPE_CHECKING:
+    from polarion_rest_api_client import client as polarion_client
 
 
 class TestRuns(bc.UpdatableItemsClient[dm.TestRun]):
@@ -52,10 +55,10 @@ class TestRuns(bc.UpdatableItemsClient[dm.TestRun]):
     def _get_multi(
         self,
         query: str = "",
-        fields: dict[str, str] | None = None,
+        *,
         page_size: int = 100,
         page_number: int = 1,
-        retry: bool = True,
+        fields: dict[str, str] | None = None,
     ) -> tuple[list[dm.TestRun], bool]:
         """Return the test runs on a defined page matching the given query.
 
@@ -121,7 +124,7 @@ class TestRuns(bc.UpdatableItemsClient[dm.TestRun]):
 
         return test_runs, next_page
 
-    def _create(self, test_runs: list[dm.TestRun], retry: bool = True):
+    def _create(self, test_runs: list[dm.TestRun]):
         """Create the given list of test runs."""
         polarion_test_runs = [
             api_models.TestrunsListPostRequestDataItem(

@@ -52,10 +52,10 @@ class TestRecords(bc.UpdatableItemsClient[dm.TestRecord]):
     def _get_multi(
         self,
         test_run_id: str,
-        fields: dict[str, str] | None = None,
+        *,
         page_size: int = 100,
         page_number: int = 1,
-        retry: bool = True,
+        fields: dict[str, str] | None = None,
     ) -> tuple[list[dm.TestRecord], bool]:
         """Return the test records on a defined page matching the given query.
 

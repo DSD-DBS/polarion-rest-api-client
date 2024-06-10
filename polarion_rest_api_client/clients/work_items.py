@@ -22,6 +22,9 @@ from . import work_item_attachments, work_item_links
 
 WorkItemType = t.TypeVar("WorkItemType", bound=dm.WorkItem)
 logger = logging.getLogger(__name__)
+if t.TYPE_CHECKING:
+    from polarion_rest_api_client import client as polarion_client
+
 
 
 def _get_json_content_size(data: dict):
@@ -73,10 +76,11 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
     def _get_multi(
         self,
         query: str = "",
-        fields: dict[str, str] | None = None,
-        work_item_cls: type[WorkItemType] = dm.WorkItem,
+        *,
         page_size: int = 100,
         page_number: int = 1,
+        fields: dict[str, str] | None = None,
+        work_item_cls: type[WorkItemType] = dm.WorkItem,
     ) -> tuple[list[WorkItemType], bool]:
         """Return the work items on a defined page matching the given query.
 
@@ -164,6 +168,8 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
         raise NotImplementedError("We have a custom create instead.")
 
     def create(self, items: WorkItemType | list[WorkItemType]):
+        if not isinstance(items, list):
+            items = [items]
         current_batch = api_models.WorkitemsListPostRequest(data=[])
         content_size = min_wi_request_size
         batch_start_index = 0
@@ -341,7 +347,7 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
             api_models.WorkitemsListGetResponseDataItem
             | api_models.WorkitemsSingleGetResponseData
         ),
-        work_item_cls: t.Type[WorkItemType] = dm.WorkItem,
+        work_item_cls: t.Type[dm.WorkItem] = dm.WorkItem,
     ) -> WorkItemType:
         assert work_item.attributes
         assert isinstance(work_item.id, str)
@@ -354,8 +360,8 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
         links_truncated = True
         attachments_truncated = True
         if work_item.relationships:
-            if links := work_item.relationships.linked_work_items:
-                if not links.meta or links.meta.total_count is oa_types.UNSET:
+            if link_data := work_item.relationships.linked_work_items:
+                if not link_data.meta or link_data.meta.total_count is oa_types.UNSET:
                     links_truncated = False
 
                 links = [
@@ -364,7 +370,7 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
                         link.additional_properties.get("suspect", False),
                         work_item_id,
                     )
-                    for link in links.data or []
+                    for link in link_data.data or []
                 ]
 
             if attachment_data := work_item.relationships.attachments:

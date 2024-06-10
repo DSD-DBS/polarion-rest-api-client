@@ -5,6 +5,9 @@ from polarion_rest_api_client.clients import base_classes as bc
 from polarion_rest_api_client.open_api_client.api.projects import get_project
 
 from . import documents, test_runs, work_items
+import typing as t
+if t.TYPE_CHECKING:
+    from polarion_rest_api_client import client as polarion_client
 
 
 class ProjectClient(bc.BaseClient):

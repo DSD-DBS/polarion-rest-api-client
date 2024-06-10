@@ -63,10 +63,10 @@ class WorkItemAttachments(bc.UpdatableItemsClient[dm.WorkItemAttachment]):
     def _get_multi(
         self,
         work_item_id: str,
-        fields: dict[str, str] | None = None,
+        *,
         page_size: int = 100,
         page_number: int = 1,
-        retry: bool = True,
+        fields: dict[str, str] | None = None,
     ) -> tuple[list[dm.WorkItemAttachment], bool]:
         """Return the attachments for a given work item on a defined page.
 

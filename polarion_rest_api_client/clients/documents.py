@@ -19,7 +19,6 @@ class Documents(bc.UpdatableItemsClient[dm.Document]):
         fields: dict[str, str] | None = None,
         include: str | None | oa_types.Unset = None,
         revision: str | None | oa_types.Unset = None,
-        retry: bool = True,
     ) -> dm.Document | None:
         """Return the document with the given document_name and space_id."""
         if include is None:

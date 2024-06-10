@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import abc
+import datetime
 import logging
 import random
 import time
@@ -12,11 +13,16 @@ from polarion_rest_api_client import errors
 from polarion_rest_api_client.open_api_client import models as api_models
 from polarion_rest_api_client.open_api_client import types as oa_types
 
+if t.TYPE_CHECKING:
+    from polarion_rest_api_client import client as polarion_client
+
 T = t.TypeVar("T")
 ST = t.TypeVar("ST", bound=dm.StatusItem)
 logger = logging.getLogger(__name__)
 _min_sleep = 5
 _max_sleep = 15
+
+UT = t.TypeVar("UT", str, int, float, datetime.datetime, bool, None)
 
 
 class BaseClient(abc.ABC):
@@ -63,7 +69,7 @@ class BaseClient(abc.ABC):
         """Return None if value is Unset, else the value."""
 
     @t.overload
-    def unset_to_none(self, value: T) -> T:
+    def unset_to_none(self, value: UT) -> UT:
         """Return None if value is Unset, else the value."""
 
     def unset_to_none(self, value: t.Any) -> t.Any:

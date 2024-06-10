@@ -151,7 +151,7 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
     ) -> dm.Document | None:
         """Return the document with the given document_name and space_id."""
         return self.project_client.documents.get(
-            space_id, document_name, fields, include, revision
+            space_id, document_name, fields=fields, include=include, revision=revision
         )
 
     def create_work_items(self, work_items: list[client.WorkItemType]):
@@ -182,10 +182,11 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
         """
         return self.project_client.work_items.links.get_multi(
             work_item_id,
-            fields,
-            include,
             page_size=page_size,
             page_number=page_number,
+            fields=fields,
+            include=include,
+
         )
 
     def get_test_records(
@@ -202,7 +203,7 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
         Polarion API documentation to get certain fields.
         """
         return self.project_client.test_runs.records.get_multi(
-            test_run_id, fields, page_size=page_size, page_number=page_number
+            test_run_id, fields=fields, page_size=page_size, page_number=page_number
         )
 
     def get_test_runs(
@@ -219,7 +220,7 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
         Polarion API documentation to get certain fields.
         """
         return self.project_client.test_runs.get_multi(
-            query, fields, page_size=page_size, page_number=page_number
+            query, fields=fields, page_size=page_size, page_number=page_number
         )
 
     def create_test_runs(self, test_runs: list[dm.TestRun]):
@@ -255,7 +256,7 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
         fields.
         """
         return self.project_client.work_items.attachments.get_all(
-            work_item_id, fields
+            work_item_id, fields=fields
         )
 
     def create_work_item_attachment(
@@ -274,7 +275,7 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
         fields.
         """
         return self.project_client.work_items.get_all(
-            query, fields, self.custom_work_item
+            query, fields=fields, work_item_cls=self.custom_work_item
         )
 
     def create_work_item(self, work_item: WorkItemType):
@@ -335,7 +336,7 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
         as described in the Polarion API documentation to get certain
         fields.
         """
-        return self.project_client.test_runs.get_all(query, fields)
+        return self.project_client.test_runs.get_all(query, fields=fields)
 
     def get_all_test_records(
         self,
@@ -349,7 +350,7 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
         fields.
         """
         return self.project_client.test_runs.records.get_all(
-            test_run_id, fields
+            test_run_id, fields=fields
         )
 
     def create_test_run(self, test_run: dm.TestRun):
