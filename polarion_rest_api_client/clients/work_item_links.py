@@ -1,6 +1,6 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
-
+"""Implementation of LinkedWorkItems operations."""
 import itertools
 import typing as t
 
@@ -18,18 +18,43 @@ from .base_classes import T
 
 
 class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
+    """A client providing LinkedWorkItems functions."""
+
     def _get(self, *args, **kwargs) -> dm.WorkItemLink:
         raise NotImplementedError
 
-    def _get_multi(self, work_item_id: str, *, page_size: int = 100,
-                   page_number: int = 1, fields: dict[str, str] | None = None,
-                   include: str | None | oa_types.Unset = None) -> tuple[list[dm.WorkItemLink], bool]:
+    def get_multi(  # type: ignore[override]
+        self,
+        work_item_id: str,
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: dict[str, str] | None = None,
+        include: str | None | oa_types.Unset = None,
+    ) -> tuple[list[dm.WorkItemLink], bool]:
         """Get the work item links for the given work item on a page.
 
         In addition, a flag whether a next page is available is
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
+        return super().get_multi(
+            work_item_id,
+            page_size=page_size,
+            page_number=page_number,
+            fields=fields,
+            include=include,
+        )
+
+    def _get_multi(  # type: ignore[override]
+        self,
+        work_item_id: str,
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: dict[str, str] | None = None,
+        include: str | None | oa_types.Unset = None,
+    ) -> tuple[list[dm.WorkItemLink], bool]:
         if fields is None:
             fields = self._client.default_fields.linkedworkitems
 

@@ -1,6 +1,6 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Base class for a polarion project client to easily rewrite the client."""
+"""The overall Polarion Client which handles the HTTP session, auth etc."""
 from __future__ import annotations
 
 import typing as t
@@ -90,11 +90,13 @@ class DefaultFields:
 
 
 class PolarionClient:
+    """The overall, project independent Polarion client."""
+
     def __init__(
         self,
         polarion_api_endpoint: str,
         polarion_access_token: str,
-        httpx_args: t.Optional[dict[str, t.Any]] = ...,
+        httpx_args: t.Optional[dict[str, t.Any]] = None,
         batch_size: int = 100,
         page_size: int = 100,
         max_content_size: int = 2 * 1024**2,
@@ -109,25 +111,13 @@ class PolarionClient:
         self.max_content_size = max_content_size
         self.default_fields = DefaultFields()
 
-    def request_all_items(self, call: t.Callable, **kwargs) -> list[t.Any]:
-        page = 1
-        items, next_page = call(
-            **kwargs, page_size=self.page_size, page_number=page
-        )
-        while next_page:
-            page += 1
-            _items, next_page = call(
-                **kwargs, page_size=self.page_size, page_number=page
-            )
-            items += _items
-        return items
-
     def get_project_client(
         self,
         project_id: str,
         delete_status: str | None = None,
         add_work_item_checksum: bool = False,
     ):
+        """Return a client for a specific project."""
         return projects.ProjectClient(
             project_id, self, delete_status, add_work_item_checksum
         )

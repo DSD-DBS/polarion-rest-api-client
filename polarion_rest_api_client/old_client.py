@@ -1,6 +1,6 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""The actual implementation of the API client using an OpenAPIClient."""
+"""The old client, which is deprecated, but uses the new client."""
 from __future__ import annotations
 
 import typing as t
@@ -151,7 +151,11 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
     ) -> dm.Document | None:
         """Return the document with the given document_name and space_id."""
         return self.project_client.documents.get(
-            space_id, document_name, fields=fields, include=include, revision=revision
+            space_id,
+            document_name,
+            fields=fields,
+            include=include,
+            revision=revision,
         )
 
     def create_work_items(self, work_items: list[client.WorkItemType]):
@@ -186,7 +190,6 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
             page_number=page_number,
             fields=fields,
             include=include,
-
         )
 
     def get_test_records(
@@ -203,7 +206,10 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
         Polarion API documentation to get certain fields.
         """
         return self.project_client.test_runs.records.get_multi(
-            test_run_id, fields=fields, page_size=page_size, page_number=page_number
+            test_run_id,
+            fields=fields,
+            page_size=page_size,
+            page_number=page_number,
         )
 
     def get_test_runs(

@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
-
+"""Implementations of WorkItemAttachment relates functions."""
 import io
+import typing as t
 
 from polarion_rest_api_client import data_models as dm
 from polarion_rest_api_client.open_api_client import models as api_models
@@ -17,12 +18,12 @@ from . import base_classes as bc
 
 
 class WorkItemAttachments(bc.UpdatableItemsClient[dm.WorkItemAttachment]):
+    """A class to handle WorkItemAttachments."""
+
     def _get(self, *args, **kwargs) -> dm.WorkItemAttachment:
         raise NotImplementedError
 
-    def _update(
-        self, items: dm.WorkItemAttachment | list[dm.WorkItemAttachment]
-    ):
+    def _update(self, items: list[dm.WorkItemAttachment]):
         for work_item_attachment in items:
             self._retry_on_error(self._update_single, work_item_attachment)
 
@@ -60,13 +61,13 @@ class WorkItemAttachments(bc.UpdatableItemsClient[dm.WorkItemAttachment]):
         )
         self._raise_on_error(response)
 
-    def _get_multi(
+    def get_multi(  # type: ignore[override]
         self,
         work_item_id: str,
         *,
         page_size: int = 100,
         page_number: int = 1,
-        fields: dict[str, str] | None = None,
+        fields: t.Optional[dict[str, str]] = None,
     ) -> tuple[list[dm.WorkItemAttachment], bool]:
         """Return the attachments for a given work item on a defined page.
 
@@ -74,6 +75,21 @@ class WorkItemAttachments(bc.UpdatableItemsClient[dm.WorkItemAttachment]):
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
+        return super().get_multi(
+            work_item_id,
+            page_size=page_size,
+            page_number=page_number,
+            fields=fields,
+        )
+
+    def _get_multi(  # type: ignore[override]
+        self,
+        work_item_id: str,
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: t.Optional[dict[str, str]] = None,
+    ) -> tuple[list[dm.WorkItemAttachment], bool]:
         if fields is None:
             fields = self._client.default_fields.workitem_attachments
 
@@ -193,9 +209,7 @@ class WorkItemAttachments(bc.UpdatableItemsClient[dm.WorkItemAttachment]):
             )
             counter += 1
 
-    def _delete(
-        self, items: dm.WorkItemAttachment | list[dm.WorkItemAttachment]
-    ):
+    def _delete(self, items: list[dm.WorkItemAttachment]):
         for item in items:
             self._retry_on_error(self._single_delete, item)
 

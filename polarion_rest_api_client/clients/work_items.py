@@ -1,6 +1,6 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
-
+"""Implementation of a client providing work item specific functions."""
 import json
 import logging
 import typing as t
@@ -20,11 +20,10 @@ from polarion_rest_api_client.open_api_client.api.work_items import (
 from . import base_classes as bc
 from . import work_item_attachments, work_item_links
 
-WorkItemType = t.TypeVar("WorkItemType", bound=dm.WorkItem)
+WT = t.TypeVar("WT", bound=dm.WorkItem)
 logger = logging.getLogger(__name__)
 if t.TYPE_CHECKING:
     from polarion_rest_api_client import client as polarion_client
-
 
 
 def _get_json_content_size(data: dict):
@@ -36,7 +35,9 @@ min_wi_request_size = _get_json_content_size(
 )
 
 
-class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
+class WorkItems(bc.StatusItemClient):
+    """A project specific client for work item operations."""
+
     def __init__(
         self,
         project_id: str,
@@ -51,7 +52,7 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
         self.links = work_item_links.WorkItemLinks(project_id, client)
         self.add_work_item_checksum = add_work_item_checksum
 
-    def _update_single(self, work_item: WorkItemType):
+    def _update_single(self, work_item: dm.WorkItem):
         assert work_item.id is not None
         if work_item.type:
             logger.warning(
@@ -69,9 +70,87 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
         )
         self._raise_on_error(response)
 
-    def _update(self, items: list[WorkItemType]):
+    def _update(self, items: list[dm.WorkItem]):
         for work_item in items:
             self._retry_on_error(self._update_single, work_item)
+
+    @t.overload  # type: ignore[override]
+    def get_multi(
+        self,
+        query: str = "",
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: dict[str, str] | None = None,
+        work_item_cls: type[WT],
+    ) -> tuple[list[WT], bool]:
+        """Return the work items on a defined page matching the given query.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields. This function
+        will use the provided WorkItemClass as return type.
+        """
+
+    @t.overload
+    def get_multi(
+        self,
+        query: str = "",
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: dict[str, str] | None = None,
+    ) -> tuple[list[dm.WorkItem], bool]:
+        """Return the work items on a defined page matching the given query.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+
+    def get_multi(
+        self,
+        query: str = "",
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: dict[str, str] | None = None,
+        work_item_cls=dm.WorkItem,
+    ) -> tuple[list[dm.WorkItem], bool] | tuple[list[WT], bool]:
+        """Return the work items on a defined page matching the given query.
+
+        In addition, a flag whether a next page is available is
+        returned. Define a fields dictionary as described in the
+        Polarion API documentation to get certain fields.
+        """
+        return super().get_multi(
+            query,
+            page_size=page_size,
+            page_number=page_number,
+            fields=fields,
+            work_item_cls=work_item_cls,
+        )
+
+    @t.overload  # type: ignore[override]
+    def _get_multi(
+        self,
+        query: str = "",
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: dict[str, str] | None = None,
+        work_item_cls: type[WT],
+    ) -> tuple[list[WT], bool]: ...
+
+    @t.overload
+    def _get_multi(
+        self,
+        query: str = "",
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: dict[str, str] | None = None,
+    ) -> tuple[list[dm.WorkItem], bool]: ...
 
     def _get_multi(
         self,
@@ -80,14 +159,8 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
         page_size: int = 100,
         page_number: int = 1,
         fields: dict[str, str] | None = None,
-        work_item_cls: type[WorkItemType] = dm.WorkItem,
-    ) -> tuple[list[WorkItemType], bool]:
-        """Return the work items on a defined page matching the given query.
-
-        In addition, a flag whether a next page is available is
-        returned. Define a fields dictionary as described in the
-        Polarion API documentation to get certain fields.
-        """
+        work_item_cls=dm.WorkItem,
+    ) -> tuple[list[dm.WorkItem], bool] | tuple[list[WT], bool]:
         if fields is None:
             fields = self._client.default_fields.workitems
 
@@ -105,7 +178,7 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
 
         work_items_response = response.parsed
 
-        work_items: list[WorkItemType] = []
+        work_items: list[WT] = []
 
         next_page = False
         if (
@@ -127,11 +200,26 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
 
         return work_items, next_page
 
-    def _get(
+    @t.overload
+    def get(
         self,
         work_item_id: str,
-        work_item_cls: type[WorkItemType] = dm.WorkItem,
-    ) -> WorkItemType | None:
+        work_item_cls: type[WT],
+    ) -> WT | None:
+        """Return one specific work item with all fields.
+
+        This also includes all linked work items and attachments. If
+        there are to many of these to get them in one request, the
+        truncated flags for linked_work_items and attachments will be
+        set to True. This function will use the provided WorkItemClass
+        as return type.
+        """
+
+    @t.overload
+    def get(
+        self,
+        work_item_id: str,
+    ) -> dm.WorkItem | None:
         """Return one specific work item with all fields.
 
         This also includes all linked work items and attachments. If
@@ -139,6 +227,39 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
         truncated flags for linked_work_items and attachments will be
         set to True.
         """
+
+    def get(
+        self,
+        work_item_id: str,
+        work_item_cls=dm.WorkItem,
+    ) -> WT | dm.WorkItem | None:
+        """Return one specific work item with all fields.
+
+        This also includes all linked work items and attachments. If
+        there are to many of these to get them in one request, the
+        truncated flags for linked_work_items and attachments will be
+        set to True.
+        """
+        return super().get(work_item_id, work_item_cls)
+
+    @t.overload
+    def _get(
+        self,
+        work_item_id: str,
+        work_item_cls: type[WT],
+    ) -> WT | None: ...
+
+    @t.overload
+    def _get(
+        self,
+        work_item_id: str,
+    ) -> dm.WorkItem | None: ...
+
+    def _get(
+        self,
+        work_item_id: str,
+        work_item_cls=dm.WorkItem,
+    ) -> WT | dm.WorkItem | None:
         response = get_work_item.sync_detailed(
             self._project_id,
             work_item_id,
@@ -164,10 +285,11 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
 
         return None
 
-    def _create(self, items: list[WorkItemType]):
+    def _create(self, items: list[dm.WorkItem]):
         raise NotImplementedError("We have a custom create instead.")
 
-    def create(self, items: WorkItemType | list[WorkItemType]):
+    def create(self, items: dm.WorkItem | list[dm.WorkItem]):
+        """Create WorkItems and respect the max body size of the server."""
         if not isinstance(items, list):
             items = [items]
         current_batch = api_models.WorkitemsListPostRequest(data=[])
@@ -220,7 +342,7 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
                 items[batch_start_index:],
             )
 
-    def _delete(self, items: WorkItemType | list[WorkItemType]):
+    def _delete(self, items: list[dm.WorkItem]):
         work_item_ids = [work_item.id for work_item in items]
         response = delete_work_items.sync_detailed(
             self._project_id,
@@ -238,7 +360,7 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
         self._raise_on_error(response)
 
     def _build_work_item_post_request(
-        self, work_item: WorkItemType
+        self, work_item: dm.WorkItem
     ) -> api_models.WorkitemsListPostRequestDataItem:
         assert work_item.type is not None
         assert work_item.title is not None
@@ -270,7 +392,7 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
         )
 
     def _build_work_item_patch_request(
-        self, work_item: WorkItemType
+        self, work_item: dm.WorkItem
     ) -> api_models.WorkitemsSinglePatchRequest:
         attrs = api_models.WorkitemsSinglePatchRequestDataAttributes()
 
@@ -306,7 +428,7 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
     def _post_work_item_batch(
         self,
         work_item_batch: api_models.WorkitemsListPostRequest,
-        work_item_objs: list[WorkItemType],
+        work_item_objs: list[dm.WorkItem],
     ):
         response = post_work_items.sync_detailed(
             self._project_id, client=self._client.client, body=work_item_batch
@@ -347,8 +469,8 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
             api_models.WorkitemsListGetResponseDataItem
             | api_models.WorkitemsSingleGetResponseData
         ),
-        work_item_cls: t.Type[dm.WorkItem] = dm.WorkItem,
-    ) -> WorkItemType:
+        work_item_cls: type[WT],
+    ) -> WT:
         assert work_item.attributes
         assert isinstance(work_item.id, str)
         work_item_id = work_item.id.split("/")[-1]
@@ -361,7 +483,10 @@ class WorkItems(bc.StatusItemClient, t.Generic[WorkItemType]):
         attachments_truncated = True
         if work_item.relationships:
             if link_data := work_item.relationships.linked_work_items:
-                if not link_data.meta or link_data.meta.total_count is oa_types.UNSET:
+                if (
+                    not link_data.meta
+                    or link_data.meta.total_count is oa_types.UNSET
+                ):
                     links_truncated = False
 
                 links = [

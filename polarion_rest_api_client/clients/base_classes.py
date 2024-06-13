@@ -1,6 +1,6 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
-
+"""Base classes for client implementations on project Level."""
 import abc
 import datetime
 import logging
@@ -26,6 +26,8 @@ UT = t.TypeVar("UT", str, int, float, datetime.datetime, bool, None)
 
 
 class BaseClient(abc.ABC):
+    """The overall base client for all project related clients."""
+
     def __init__(
         self, project_id: str, client: "polarion_client.PolarionClient"
     ):
@@ -124,14 +126,29 @@ class BaseClient(abc.ABC):
 
 
 class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
+    """A client for items of a project, which can be created or requested."""
+
     @abc.abstractmethod
     def _get_multi(
-        self, *args, page_size: int, page_number: int, **kwargs
+        self,
+        *args: t.Any,
+        page_size: int = 100,
+        page_number: int = 1,
+        **kwargs: t.Any,
     ) -> tuple[list[T], bool]: ...
 
     def get_multi(
-        self, *args, page_size: int, page_number: int, **kwargs
+        self,
+        *args: t.Any,
+        page_size: int = 100,
+        page_number: int = 1,
+        **kwargs: t.Any,
     ) -> tuple[list[T], bool]:
+        """Get multiple matching items for a specific page.
+
+        In addition, a flag whether a next page is available is
+        returned.
+        """
         return self._retry_on_error(
             self._get_multi,
             *args,
@@ -141,12 +158,14 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
         )
 
     @abc.abstractmethod
-    def _get(self, *args, **kwargs) -> T: ...
+    def _get(self, *args, **kwargs) -> T | None: ...
 
-    def get(self, *args, **kwargs) -> tuple[list[T], bool]:
+    def get(self, *args, **kwargs) -> T | None:
+        """Get a specific single item."""
         return self._retry_on_error(self._get, *args, **kwargs)
 
     def get_all(self, *args, **kwargs) -> list[T]:
+        """Return all matching items using get_multi with auto pagination."""
         page = 1
         items, next_page = self.get_multi(
             *args, page_size=self._client.page_size, page_number=page, **kwargs
@@ -172,6 +191,7 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
             yield items[i : i + self._client.batch_size]
 
     def create(self, items: T | list[T]):
+        """Create one or multiple items."""
         if not isinstance(items, list):
             items = [items]
 
@@ -182,6 +202,7 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
     def _delete(self, items: list[T]): ...
 
     def delete(self, items: T | list[T]):
+        """Delete one or multiple items."""
         if not isinstance(items, list):
             items = [items]
         for batch in self._split_into_batches(items):
@@ -189,10 +210,13 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
 
 
 class UpdatableItemsClient(ItemsClient, t.Generic[T], abc.ABC):
+    """A client for items which can also be updated."""
+
     @abc.abstractmethod
     def _update(self, items: list[T]): ...
 
     def update(self, items: T | list[T]):
+        """Update the provided item or items."""
         if not isinstance(items, list):
             items = [items]
 
@@ -200,6 +224,12 @@ class UpdatableItemsClient(ItemsClient, t.Generic[T], abc.ABC):
 
 
 class StatusItemClient(UpdatableItemsClient, t.Generic[ST], abc.ABC):
+    """A client for items, which have a status.
+
+    We support to set a specific status for these instead of deleting
+    them. This status has to be provided on initialization.
+    """
+
     def __init__(
         self,
         project_id: str,
@@ -210,6 +240,7 @@ class StatusItemClient(UpdatableItemsClient, t.Generic[ST], abc.ABC):
         self.delete_status = delete_status
 
     def delete(self, items: ST | list[ST]):
+        """Delete the item if no delete_status was set, else update status."""
         if self.delete_status is None:
             super().delete(items)
         else:

@@ -1,6 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
+import typing as t
+
 from polarion_rest_api_client import data_models as dm
 from polarion_rest_api_client.open_api_client import models as api_models
 from polarion_rest_api_client.open_api_client.api.test_runs import (
@@ -11,14 +13,13 @@ from polarion_rest_api_client.open_api_client.api.test_runs import (
 
 from . import base_classes as bc
 from . import test_records
-from .base_classes import T
-import typing as t
+
 if t.TYPE_CHECKING:
     from polarion_rest_api_client import client as polarion_client
 
 
 class TestRuns(bc.UpdatableItemsClient[dm.TestRun]):
-    def _get(self, *args, **kwargs) -> T:
+    def _get(self, *args, **kwargs) -> dm.TestRun:
         raise NotImplementedError
 
     def __init__(
@@ -52,13 +53,13 @@ class TestRuns(bc.UpdatableItemsClient[dm.TestRun]):
 
         self._raise_on_error(response)
 
-    def _get_multi(
+    def get_multi(  # type: ignore[override]
         self,
         query: str = "",
         *,
         page_size: int = 100,
         page_number: int = 1,
-        fields: dict[str, str] | None = None,
+        fields: t.Optional[dict[str, str]] = None,
     ) -> tuple[list[dm.TestRun], bool]:
         """Return the test runs on a defined page matching the given query.
 
@@ -66,6 +67,18 @@ class TestRuns(bc.UpdatableItemsClient[dm.TestRun]):
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
+        return super().get_multi(
+            query, page_size=page_size, page_number=page_number, fields=fields
+        )
+
+    def _get_multi(  # type: ignore[override]
+        self,
+        query: str = "",
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: t.Optional[dict[str, str]] = None,
+    ) -> tuple[list[dm.TestRun], bool]:
         if fields is None:
             fields = self._client.default_fields.testruns
 

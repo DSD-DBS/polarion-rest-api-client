@@ -18,7 +18,7 @@ from .base_classes import T
 
 
 class TestRecords(bc.UpdatableItemsClient[dm.TestRecord]):
-    def _get(self, *args, **kwargs) -> T:
+    def _get(self, *args, **kwargs) -> dm.TestRecord:
         raise NotImplementedError
 
     def _update(self, items: list[dm.TestRecord]):
@@ -49,7 +49,7 @@ class TestRecords(bc.UpdatableItemsClient[dm.TestRecord]):
         )
         self._raise_on_error(response)
 
-    def _get_multi(
+    def get_multi(  # type: ignore[override]
         self,
         test_run_id: str,
         *,
@@ -63,6 +63,21 @@ class TestRecords(bc.UpdatableItemsClient[dm.TestRecord]):
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
+        return super().get_multi(
+            test_run_id,
+            page_size=page_size,
+            page_number=page_number,
+            fields=fields,
+        )
+
+    def _get_multi(  # type: ignore[override]
+        self,
+        test_run_id: str,
+        *,
+        page_size: int = 100,
+        page_number: int = 1,
+        fields: dict[str, str] | None = None,
+    ) -> tuple[list[dm.TestRecord], bool]:
         if fields is None:
             fields = self._client.default_fields.testrecords
 
