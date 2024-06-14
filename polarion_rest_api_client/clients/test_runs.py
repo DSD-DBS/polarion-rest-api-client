@@ -18,8 +18,11 @@ if t.TYPE_CHECKING:
     from polarion_rest_api_client import client as polarion_client
 
 
-class TestRuns(bc.UpdatableItemsClient[dm.TestRun]):
-    def _get(self, *args, **kwargs) -> dm.TestRun:
+class TestRuns(
+    bc.SingleUpdatableItemsMixin[dm.TestRun],
+    bc.UpdatableItemsClient[dm.TestRun],
+):
+    def get(self, *args, **kwargs) -> dm.TestRun:
         raise NotImplementedError
 
     def __init__(
@@ -28,12 +31,9 @@ class TestRuns(bc.UpdatableItemsClient[dm.TestRun]):
         super().__init__(project_id, client)
         self.records = test_records.TestRecords(project_id, client)
 
-    def _update(self, items: list[dm.TestRun]):
-        for item in items:
-            self._retry_on_error(self._update_single, item)
-
-    def _update_single(self, test_run: dm.TestRun):
+    def _update(self, test_run: list[dm.TestRun] | dm.TestRun):
         """Create the given list of test runs."""
+        assert not isinstance(test_run, list), "Expected only one item"
         assert test_run.id
         response = patch_test_run.sync_detailed(
             self._project_id,
@@ -67,18 +67,6 @@ class TestRuns(bc.UpdatableItemsClient[dm.TestRun]):
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
-        return super().get_multi(
-            query, page_size=page_size, page_number=page_number, fields=fields
-        )
-
-    def _get_multi(  # type: ignore[override]
-        self,
-        query: str = "",
-        *,
-        page_size: int = 100,
-        page_number: int = 1,
-        fields: t.Optional[dict[str, str]] = None,
-    ) -> tuple[list[dm.TestRun], bool]:
         if fields is None:
             fields = self._client.default_fields.testruns
 

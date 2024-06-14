@@ -20,7 +20,8 @@ from .base_classes import T
 class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
     """A client providing LinkedWorkItems functions."""
 
-    def _get(self, *args, **kwargs) -> dm.WorkItemLink:
+    def get(self, *args, **kwargs) -> dm.WorkItemLink:
+        """Return a specific link - not implemented yet."""
         raise NotImplementedError
 
     def get_multi(  # type: ignore[override]
@@ -38,23 +39,6 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
-        return super().get_multi(
-            work_item_id,
-            page_size=page_size,
-            page_number=page_number,
-            fields=fields,
-            include=include,
-        )
-
-    def _get_multi(  # type: ignore[override]
-        self,
-        work_item_id: str,
-        *,
-        page_size: int = 100,
-        page_number: int = 1,
-        fields: dict[str, str] | None = None,
-        include: str | None | oa_types.Unset = None,
-    ) -> tuple[list[dm.WorkItemLink], bool]:
         if fields is None:
             fields = self._client.default_fields.linkedworkitems
 

@@ -3,6 +3,7 @@
 """Base classes for client implementations on project Level."""
 import abc
 import datetime
+import functools
 import logging
 import random
 import time
@@ -28,11 +29,24 @@ UT = t.TypeVar("UT", str, int, float, datetime.datetime, bool, None)
 class BaseClient(abc.ABC):
     """The overall base client for all project related clients."""
 
+    _retry_methods: list[str] = []
+
     def __init__(
         self, project_id: str, client: "polarion_client.PolarionClient"
     ):
         self._project_id = project_id
         self._client = client
+
+    def __getattribute__(self, name):
+        """Retry method calls defined in _retry_methods."""
+        attr = super().__getattribute__(name)
+        retry_methods = super().__getattribute__("_retry_methods")
+        if name in retry_methods and callable(attr):
+            return functools.partial(
+                super().__getattribute__("_retry_on_error"), attr
+            )
+
+        return attr
 
     def _handle_text_content(
         self,
@@ -128,15 +142,9 @@ class BaseClient(abc.ABC):
 class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
     """A client for items of a project, which can be created or requested."""
 
-    @abc.abstractmethod
-    def _get_multi(
-        self,
-        *args: t.Any,
-        page_size: int = 100,
-        page_number: int = 1,
-        **kwargs: t.Any,
-    ) -> tuple[list[T], bool]: ...
+    _retry_methods = ["get_multi", "get", "_create", "_delete"]
 
+    @abc.abstractmethod
     def get_multi(
         self,
         *args: t.Any,
@@ -149,20 +157,11 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
         In addition, a flag whether a next page is available is
         returned.
         """
-        return self._retry_on_error(
-            self._get_multi,
-            *args,
-            page_size=page_size,
-            page_number=page_number,
-            **kwargs,
-        )
 
     @abc.abstractmethod
-    def _get(self, *args, **kwargs) -> T | None: ...
-
     def get(self, *args, **kwargs) -> T | None:
         """Get a specific single item."""
-        return self._retry_on_error(self._get, *args, **kwargs)
+        return self._retry_on_error(self.get, *args, **kwargs)
 
     def get_all(self, *args, **kwargs) -> list[T]:
         """Return all matching items using get_multi with auto pagination."""
@@ -196,7 +195,7 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
             items = [items]
 
         for batch in self._split_into_batches(items):
-            self._retry_on_error(self._create, batch)
+            self._create(batch)
 
     @abc.abstractmethod
     def _delete(self, items: list[T]): ...
@@ -206,21 +205,39 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
         if not isinstance(items, list):
             items = [items]
         for batch in self._split_into_batches(items):
-            self._retry_on_error(self._delete, batch)
+            self._delete(batch)
 
 
 class UpdatableItemsClient(ItemsClient, t.Generic[T], abc.ABC):
     """A client for items which can also be updated."""
 
+    _retry_methods = ["get_multi", "get", "_create", "_delete", "_update"]
+
+    def _split_into_update_batches(
+        self, items: list[T]
+    ) -> t.Generator[list[T], None, None] | t.Generator[T, None, None]:
+        yield from self._split_into_batches(items)
+
     @abc.abstractmethod
-    def _update(self, items: list[T]): ...
+    def _update(self, items: T | list[T]): ...
 
     def update(self, items: T | list[T]):
         """Update the provided item or items."""
         if not isinstance(items, list):
             items = [items]
 
-        self._update(items)
+        for batch in self._split_into_update_batches(items):
+            self._update(batch)
+
+
+class SingleUpdatableItemsMixin(t.Generic[T]):
+    """Mixin to split batches into single items."""
+
+    def _split_into_update_batches(
+        self, items: list[T]
+    ) -> t.Generator[T, None, None]:
+        for item in items:
+            yield item
 
 
 class StatusItemClient(UpdatableItemsClient, t.Generic[ST], abc.ABC):

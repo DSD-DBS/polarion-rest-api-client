@@ -17,16 +17,15 @@ from . import base_classes as bc
 from .base_classes import T
 
 
-class TestRecords(bc.UpdatableItemsClient[dm.TestRecord]):
-    def _get(self, *args, **kwargs) -> dm.TestRecord:
+class TestRecords(
+    bc.SingleUpdatableItemsMixin[dm.TestRecord],
+    bc.UpdatableItemsClient[dm.TestRecord],
+):
+    def get(self, *args, **kwargs) -> dm.TestRecord:
         raise NotImplementedError
 
-    def _update(self, items: list[dm.TestRecord]):
-        """Create the given list of test records."""
-        for item in items:
-            self._update_single(item)
-
-    def _update_single(self, test_record: dm.TestRecord):
+    def _update(self, test_record: list[dm.TestRecord] | dm.TestRecord):
+        assert not isinstance(test_record, list), "Expected only one item"
         response = patch_test_record.sync_detailed(
             self._project_id,
             test_record.test_run_id,
@@ -50,27 +49,6 @@ class TestRecords(bc.UpdatableItemsClient[dm.TestRecord]):
         self._raise_on_error(response)
 
     def get_multi(  # type: ignore[override]
-        self,
-        test_run_id: str,
-        *,
-        page_size: int = 100,
-        page_number: int = 1,
-        fields: dict[str, str] | None = None,
-    ) -> tuple[list[dm.TestRecord], bool]:
-        """Return the test records on a defined page matching the given query.
-
-        In addition, a flag whether a next page is available is
-        returned. Define a fields dictionary as described in the
-        Polarion API documentation to get certain fields.
-        """
-        return super().get_multi(
-            test_run_id,
-            page_size=page_size,
-            page_number=page_number,
-            fields=fields,
-        )
-
-    def _get_multi(  # type: ignore[override]
         self,
         test_run_id: str,
         *,

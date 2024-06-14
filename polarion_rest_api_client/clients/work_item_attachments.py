@@ -17,18 +17,26 @@ from polarion_rest_api_client.open_api_client.api.work_item_attachments import (
 from . import base_classes as bc
 
 
-class WorkItemAttachments(bc.UpdatableItemsClient[dm.WorkItemAttachment]):
+class WorkItemAttachments(
+    bc.SingleUpdatableItemsMixin[dm.WorkItemAttachment],
+    bc.UpdatableItemsClient[dm.WorkItemAttachment],
+):
     """A class to handle WorkItemAttachments."""
 
-    def _get(self, *args, **kwargs) -> dm.WorkItemAttachment:
+    def get(self, *args, **kwargs) -> dm.WorkItemAttachment:
+        """Return a specific attachment - not Implemented yet."""
         raise NotImplementedError
 
-    def _update(self, items: list[dm.WorkItemAttachment]):
-        for work_item_attachment in items:
-            self._retry_on_error(self._update_single, work_item_attachment)
-
-    def _update_single(self, work_item_attachment: dm.WorkItemAttachment):
+    def _update(
+        self,
+        work_item_attachment: (
+            dm.WorkItemAttachment | list[dm.WorkItemAttachment]
+        ),
+    ):
         """Update the given work item attachment in Polarion."""
+        assert not isinstance(
+            work_item_attachment, list
+        ), "Expected only one item"
         attributes = (
             api_models.WorkitemAttachmentsSinglePatchRequestDataAttributes()
         )
@@ -75,21 +83,6 @@ class WorkItemAttachments(bc.UpdatableItemsClient[dm.WorkItemAttachment]):
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
-        return super().get_multi(
-            work_item_id,
-            page_size=page_size,
-            page_number=page_number,
-            fields=fields,
-        )
-
-    def _get_multi(  # type: ignore[override]
-        self,
-        work_item_id: str,
-        *,
-        page_size: int = 100,
-        page_number: int = 1,
-        fields: t.Optional[dict[str, str]] = None,
-    ) -> tuple[list[dm.WorkItemAttachment], bool]:
         if fields is None:
             fields = self._client.default_fields.workitem_attachments
 

@@ -35,7 +35,7 @@ min_wi_request_size = _get_json_content_size(
 )
 
 
-class WorkItems(bc.StatusItemClient):
+class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
     """A project specific client for work item operations."""
 
     def __init__(
@@ -52,7 +52,8 @@ class WorkItems(bc.StatusItemClient):
         self.links = work_item_links.WorkItemLinks(project_id, client)
         self.add_work_item_checksum = add_work_item_checksum
 
-    def _update_single(self, work_item: dm.WorkItem):
+    def _update(self, work_item: list[dm.WorkItem] | dm.WorkItem):
+        assert not isinstance(work_item, list), "Expected only one item"
         assert work_item.id is not None
         if work_item.type:
             logger.warning(
@@ -69,10 +70,6 @@ class WorkItems(bc.StatusItemClient):
             body=self._build_work_item_patch_request(work_item),
         )
         self._raise_on_error(response)
-
-    def _update(self, items: list[dm.WorkItem]):
-        for work_item in items:
-            self._retry_on_error(self._update_single, work_item)
 
     @t.overload  # type: ignore[override]
     def get_multi(
@@ -123,44 +120,6 @@ class WorkItems(bc.StatusItemClient):
         returned. Define a fields dictionary as described in the
         Polarion API documentation to get certain fields.
         """
-        return super().get_multi(
-            query,
-            page_size=page_size,
-            page_number=page_number,
-            fields=fields,
-            work_item_cls=work_item_cls,
-        )
-
-    @t.overload  # type: ignore[override]
-    def _get_multi(
-        self,
-        query: str = "",
-        *,
-        page_size: int = 100,
-        page_number: int = 1,
-        fields: dict[str, str] | None = None,
-        work_item_cls: type[WT],
-    ) -> tuple[list[WT], bool]: ...
-
-    @t.overload
-    def _get_multi(
-        self,
-        query: str = "",
-        *,
-        page_size: int = 100,
-        page_number: int = 1,
-        fields: dict[str, str] | None = None,
-    ) -> tuple[list[dm.WorkItem], bool]: ...
-
-    def _get_multi(
-        self,
-        query: str = "",
-        *,
-        page_size: int = 100,
-        page_number: int = 1,
-        fields: dict[str, str] | None = None,
-        work_item_cls=dm.WorkItem,
-    ) -> tuple[list[dm.WorkItem], bool] | tuple[list[WT], bool]:
         if fields is None:
             fields = self._client.default_fields.workitems
 
@@ -240,26 +199,6 @@ class WorkItems(bc.StatusItemClient):
         truncated flags for linked_work_items and attachments will be
         set to True.
         """
-        return super().get(work_item_id, work_item_cls)
-
-    @t.overload
-    def _get(
-        self,
-        work_item_id: str,
-        work_item_cls: type[WT],
-    ) -> WT | None: ...
-
-    @t.overload
-    def _get(
-        self,
-        work_item_id: str,
-    ) -> dm.WorkItem | None: ...
-
-    def _get(
-        self,
-        work_item_id: str,
-        work_item_cls=dm.WorkItem,
-    ) -> WT | dm.WorkItem | None:
         response = get_work_item.sync_detailed(
             self._project_id,
             work_item_id,
@@ -515,18 +454,18 @@ class WorkItems(bc.StatusItemClient):
                     if attachment.id
                 ]
 
-        desctype = None
+        desc_type = None
         desc = None
         if work_item.attributes.description:
-            desctype = self.unset_to_none(
+            desc_type = self.unset_to_none(
                 work_item.attributes.description.type
             )
             desc = self.unset_to_none(work_item.attributes.description.value)
 
-        work_item_obj = work_item_cls(
+        return work_item_cls(
             work_item_id,
             self.unset_to_none(work_item.attributes.title),
-            desctype,
+            desc_type,
             desc,
             self.unset_to_none(work_item.attributes.type),
             self.unset_to_none(work_item.attributes.status),
@@ -536,4 +475,3 @@ class WorkItems(bc.StatusItemClient):
             links_truncated,
             attachments_truncated,
         )
-        return work_item_obj

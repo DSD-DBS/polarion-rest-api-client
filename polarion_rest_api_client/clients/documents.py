@@ -23,16 +23,6 @@ class Documents(bc.UpdatableItemsClient[dm.Document]):
         revision: str | None | oa_types.Unset = None,
     ) -> dm.Document | None:
         """Return the document with the given document_name and space_id."""
-        return super().get(space_id, document_name, fields, include, revision)
-
-    def _get(
-        self,
-        space_id: str,
-        document_name: str,
-        fields: dict[str, str] | None = None,
-        include: str | None | oa_types.Unset = None,
-        revision: str | None | oa_types.Unset = None,
-    ) -> dm.Document | None:
         if include is None:
             include = oa_types.UNSET
 
@@ -87,9 +77,10 @@ class Documents(bc.UpdatableItemsClient[dm.Document]):
     def _update(self, items: dm.Document | list[dm.Document]):
         raise NotImplementedError
 
-    def _get_multi(
+    def get_multi(
         self, *args, page_size=100, page_number=1, **kwargs
     ) -> tuple[list[dm.Document], bool]:
+        """Return a list of documents - Not implemented yet."""
         raise NotImplementedError
 
     def _create(self, items: dm.Document | list[dm.Document]):
