@@ -28,42 +28,37 @@ class WorkItemAttachments(
         raise NotImplementedError
 
     def _update(
-        self,
-        work_item_attachment: (
-            dm.WorkItemAttachment | list[dm.WorkItemAttachment]
-        ),
+        self, to_update: dm.WorkItemAttachment | list[dm.WorkItemAttachment]
     ):
         """Update the given work item attachment in Polarion."""
-        assert not isinstance(
-            work_item_attachment, list
-        ), "Expected only one item"
+        assert not isinstance(to_update, list), "Expected only one item"
         attributes = (
             api_models.WorkitemAttachmentsSinglePatchRequestDataAttributes()
         )
-        if work_item_attachment.title:
-            attributes.title = work_item_attachment.title
+        if to_update.title:
+            attributes.title = to_update.title
 
         multipart = api_models.PatchWorkItemAttachmentsRequestBody(
             resource=api_models.WorkitemAttachmentsSinglePatchRequest(
                 data=api_models.WorkitemAttachmentsSinglePatchRequestData(
                     type=api_models.WorkitemAttachmentsSinglePatchRequestDataType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
-                    id=f"{self._project_id}/{work_item_attachment.work_item_id}/{work_item_attachment.id}",  # pylint: disable=line-too-long
+                    id=f"{self._project_id}/{to_update.work_item_id}/{to_update.id}",  # pylint: disable=line-too-long
                     attributes=attributes,
                 )
             )
         )
 
-        if work_item_attachment.content_bytes:
+        if to_update.content_bytes:
             multipart.content = oa_types.File(
-                io.BytesIO(work_item_attachment.content_bytes),
-                work_item_attachment.file_name,
-                work_item_attachment.mime_type,
+                io.BytesIO(to_update.content_bytes),
+                to_update.file_name,
+                to_update.mime_type,
             )
 
         response = patch_work_item_attachment.sync_detailed(
             self._project_id,
-            work_item_attachment.work_item_id,
-            work_item_attachment.id,
+            to_update.work_item_id,
+            to_update.id,
             client=self._client.client,
             body=multipart,
         )
@@ -132,16 +127,15 @@ class WorkItemAttachments(
 
         return work_item_attachments, next_page
 
-    def _create(self, work_item_attachments: list[dm.WorkItemAttachment]):
+    def _create(self, items: list[dm.WorkItemAttachment]):
         """Create the given work item attachment in Polarion."""
         attachment_attributes = []
         attachment_files = []
-        assert len(work_item_attachments), "No attachments were provided."
+        assert len(items), "No attachments were provided."
         assert all(
-            [wia.work_item_id == work_item_attachments[0].work_item_id]
-            for wia in work_item_attachments
+            [wia.work_item_id == items[0].work_item_id] for wia in items
         ), "All attachments must belong to the same WorkItem."
-        for work_item_attachment in work_item_attachments:
+        for work_item_attachment in items:
             assert (
                 work_item_attachment.file_name
             ), "You have to define a FileName."
@@ -152,8 +146,7 @@ class WorkItemAttachments(
                 work_item_attachment.mime_type
             ), "You have to provide a mime_type."
 
-            attributes = api_models.WorkitemAttachmentsListPostRequestDataItemAttributes(
-                # pylint: disable=line-too-long
+            attributes = api_models.WorkitemAttachmentsListPostRequestDataItemAttributes(  # pylint: disable=line-too-long
                 file_name=work_item_attachment.file_name
             )
             if work_item_attachment.title:
@@ -161,8 +154,7 @@ class WorkItemAttachments(
 
             attachment_attributes.append(
                 api_models.WorkitemAttachmentsListPostRequestDataItem(
-                    type=api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,
-                    # pylint: disable=line-too-long
+                    type=api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
                     attributes=attributes,
                 )
             )
@@ -182,7 +174,7 @@ class WorkItemAttachments(
         )
         response = post_work_item_attachments.sync_detailed(
             self._project_id,
-            work_item_attachments[0].work_item_id,
+            items[0].work_item_id,
             client=self._client.client,
             body=multipart,
         )
@@ -197,9 +189,7 @@ class WorkItemAttachments(
         counter = 0
         for work_item_attachment_res in response.parsed.data:
             assert work_item_attachment_res.id
-            work_item_attachments[counter].id = (
-                work_item_attachment_res.id.split("/")[-1]
-            )
+            items[counter].id = work_item_attachment_res.id.split("/")[-1]
             counter += 1
 
     def _delete(self, items: list[dm.WorkItemAttachment]):

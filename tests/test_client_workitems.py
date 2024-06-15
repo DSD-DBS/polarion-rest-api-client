@@ -353,7 +353,7 @@ def test_work_item_single_request_size(
         )
     )
     size, _ = (
-        client.project_client.work_items._calculate_post_work_item_request_sizes(
+        client.project_client.work_items._calculate_post_work_item_request_sizes(  # pylint: disable=line-too-long
             work_item_data
         )
     )
@@ -388,12 +388,12 @@ def test_work_item_multi_request_size(
     )
 
     size, _ = (
-        client.project_client.work_items._calculate_post_work_item_request_sizes(
+        client.project_client.work_items._calculate_post_work_item_request_sizes(  # pylint: disable=line-too-long
             work_item_data, size
         )
     )
     size, _ = (
-        client.project_client.work_items._calculate_post_work_item_request_sizes(
+        client.project_client.work_items._calculate_post_work_item_request_sizes(  # pylint: disable=line-too-long
             work_item_data, size
         )
     )

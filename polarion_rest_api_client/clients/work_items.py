@@ -52,22 +52,22 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         self.links = work_item_links.WorkItemLinks(project_id, client)
         self.add_work_item_checksum = add_work_item_checksum
 
-    def _update(self, work_item: list[dm.WorkItem] | dm.WorkItem):
-        assert not isinstance(work_item, list), "Expected only one item"
-        assert work_item.id is not None
-        if work_item.type:
+    def _update(self, to_update: list[dm.WorkItem] | dm.WorkItem):
+        assert not isinstance(to_update, list), "Expected only one item"
+        assert to_update.id is not None
+        if to_update.type:
             logger.warning(
                 "Attempting to change the type of Work Item %s to %s.",
-                work_item.id,
-                work_item.type,
+                to_update.id,
+                to_update.type,
             )
 
         response = patch_work_item.sync_detailed(
             self._project_id,
-            work_item.id,
+            to_update.id,
             client=self._client.client,
-            change_type_to=work_item.type or oa_types.UNSET,
-            body=self._build_work_item_patch_request(work_item),
+            change_type_to=to_update.type or oa_types.UNSET,
+            body=self._build_work_item_patch_request(to_update),
         )
         self._raise_on_error(response)
 

@@ -31,21 +31,21 @@ class TestRuns(
         super().__init__(project_id, client)
         self.records = test_records.TestRecords(project_id, client)
 
-    def _update(self, test_run: list[dm.TestRun] | dm.TestRun):
+    def _update(self, to_update: list[dm.TestRun] | dm.TestRun):
         """Create the given list of test runs."""
-        assert not isinstance(test_run, list), "Expected only one item"
-        assert test_run.id
+        assert not isinstance(to_update, list), "Expected only one item"
+        assert to_update.id
         response = patch_test_run.sync_detailed(
             self._project_id,
-            test_run.id,
+            to_update.id,
             client=self._client.client,
             body=api_models.TestrunsSinglePatchRequest(
                 data=api_models.TestrunsSinglePatchRequestData(
                     type=api_models.TestrunsSinglePatchRequestDataType.TESTRUNS,  # pylint: disable=line-too-long
-                    id=f"{self._project_id}/{test_run.id}",
+                    id=f"{self._project_id}/{to_update.id}",
                     attributes=self._fill_test_run_attributes(
                         api_models.TestrunsSinglePatchRequestDataAttributes,
-                        test_run,
+                        to_update,
                     ),
                 )
             ),
@@ -125,7 +125,7 @@ class TestRuns(
 
         return test_runs, next_page
 
-    def _create(self, test_runs: list[dm.TestRun]):
+    def _create(self, items: list[dm.TestRun]):
         """Create the given list of test runs."""
         polarion_test_runs = [
             api_models.TestrunsListPostRequestDataItem(
@@ -135,7 +135,7 @@ class TestRuns(
                     test_run,
                 ),
             )
-            for test_run in test_runs
+            for test_run in items
         ]
 
         response = post_test_runs.sync_detailed(

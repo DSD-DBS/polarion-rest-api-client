@@ -74,7 +74,7 @@ class Documents(bc.UpdatableItemsClient[dm.Document]):
                 )
         return None
 
-    def _update(self, items: dm.Document | list[dm.Document]):
+    def _update(self, to_update: dm.Document | list[dm.Document]):
         raise NotImplementedError
 
     def get_multi(

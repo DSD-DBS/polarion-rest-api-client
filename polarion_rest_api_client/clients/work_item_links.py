@@ -14,7 +14,6 @@ from polarion_rest_api_client.open_api_client.api.linked_work_items import (
 )
 
 from . import base_classes as bc
-from .base_classes import T
 
 
 class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
@@ -112,10 +111,10 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
         ):
             yield from super()._split_into_batches(list(group))
 
-    def _create(self, work_item_links: list[dm.WorkItemLink]):
+    def _create(self, items: list[dm.WorkItemLink]):
         response = post_linked_work_items.sync_detailed(
             self._project_id,
-            work_item_links[0].primary_work_item_id,
+            items[0].primary_work_item_id,
             client=self._client.client,
             # pylint: disable=line-too-long
             body=api_models.LinkedworkitemsListPostRequest(
@@ -135,7 +134,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
                             )
                         ),
                     )
-                    for work_item_link in work_item_links
+                    for work_item_link in items
                 ]
             ),
             # pylint: enable=line-too-long
@@ -143,10 +142,10 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
 
         self._raise_on_error(response)
 
-    def _delete(self, work_item_links: list[dm.WorkItemLink]):
+    def _delete(self, items: list[dm.WorkItemLink]):
         response = delete_linked_work_items.sync_detailed(
             self._project_id,
-            work_item_links[0].primary_work_item_id,
+            items[0].primary_work_item_id,
             client=self._client.client,
             # pylint: disable=line-too-long
             body=api_models.LinkedworkitemsListDeleteRequest(
@@ -155,7 +154,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
                         type=api_models.LinkedworkitemsListDeleteRequestDataItemType.LINKEDWORKITEMS,
                         id=f"{self._project_id}/{work_item_link.primary_work_item_id}/{work_item_link.role}/{work_item_link.secondary_work_item_project or self._project_id}/{work_item_link.secondary_work_item_id}",
                     )
-                    for work_item_link in work_item_links
+                    for work_item_link in items
                 ]
             ),
             # pylint: enable=line-too-long

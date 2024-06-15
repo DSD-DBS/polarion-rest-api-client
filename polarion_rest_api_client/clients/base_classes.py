@@ -219,7 +219,7 @@ class UpdatableItemsClient(ItemsClient, t.Generic[T], abc.ABC):
         yield from self._split_into_batches(items)
 
     @abc.abstractmethod
-    def _update(self, items: T | list[T]): ...
+    def _update(self, to_update: T | list[T]): ...
 
     def update(self, items: T | list[T]):
         """Update the provided item or items."""
@@ -236,8 +236,7 @@ class SingleUpdatableItemsMixin(t.Generic[T]):
     def _split_into_update_batches(
         self, items: list[T]
     ) -> t.Generator[T, None, None]:
-        for item in items:
-            yield item
+        yield from items
 
 
 class StatusItemClient(UpdatableItemsClient, t.Generic[ST], abc.ABC):

@@ -14,7 +14,6 @@ from polarion_rest_api_client.open_api_client.api.test_records import (
 )
 
 from . import base_classes as bc
-from .base_classes import T
 
 
 class TestRecords(
@@ -24,23 +23,23 @@ class TestRecords(
     def get(self, *args, **kwargs) -> dm.TestRecord:
         raise NotImplementedError
 
-    def _update(self, test_record: list[dm.TestRecord] | dm.TestRecord):
-        assert not isinstance(test_record, list), "Expected only one item"
+    def _update(self, to_update: list[dm.TestRecord] | dm.TestRecord):
+        assert not isinstance(to_update, list), "Expected only one item"
         response = patch_test_record.sync_detailed(
             self._project_id,
-            test_record.test_run_id,
-            test_record.work_item_project_id,
-            test_record.work_item_id,
-            str(test_record.iteration),
+            to_update.test_run_id,
+            to_update.work_item_project_id,
+            to_update.work_item_id,
+            str(to_update.iteration),
             client=self._client.client,
             # pylint: disable=line-too-long
             body=api_models.TestrecordsSinglePatchRequest(
                 data=api_models.TestrecordsSinglePatchRequestData(
                     type=api_models.TestrecordsSinglePatchRequestDataType.TESTRECORDS,
-                    id=f"{self._project_id}/{test_record.test_run_id}/{test_record.work_item_project_id}/{test_record.work_item_id}/{test_record.iteration}",
+                    id=f"{self._project_id}/{to_update.test_run_id}/{to_update.work_item_project_id}/{to_update.work_item_id}/{to_update.iteration}",
                     attributes=self._fill_test_record_attributes(
                         api_models.TestrecordsSinglePatchRequestDataAttributes,
-                        test_record,
+                        to_update,
                     ),
                 )
             ),
@@ -120,12 +119,12 @@ class TestRecords(
 
     def _create(
         self,
-        test_records: list[dm.TestRecord],
+        items: list[dm.TestRecord],
     ):
         """Create the given list of test records."""
         response = post_test_records.sync_detailed(
             self._project_id,
-            test_records[0].test_run_id,
+            items[0].test_run_id,
             client=self._client.client,
             # pylint: disable=line-too-long
             body=api_models.TestrecordsListPostRequest(
@@ -145,7 +144,7 @@ class TestRecords(
                             )
                         ),
                     )
-                    for test_record in test_records
+                    for test_record in items
                 ]
             ),
             # pylint: enable=line-too-long
@@ -160,9 +159,7 @@ class TestRecords(
         counter = 0
         for response_item in response.parsed.data:
             if response_item.id:
-                test_records[counter].iteration = int(
-                    response_item.id.split("/")[-1]
-                )
+                items[counter].iteration = int(response_item.id.split("/")[-1])
                 counter += 1
 
     def _delete(self, items: dm.TestRecord | list[dm.TestRecord]):
