@@ -93,7 +93,7 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
             page_size,
             max_content_size,
         )
-        self.project_client = polarion_client.get_project_client(
+        self.project_client = polarion_client.generate_project_client(
             project_id,
             None if delete_polarion_work_items else "deleted",
             add_work_item_checksum,

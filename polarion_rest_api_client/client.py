@@ -111,7 +111,7 @@ class PolarionClient:
         self.max_content_size = max_content_size
         self.default_fields = DefaultFields()
 
-    def get_project_client(
+    def generate_project_client(
         self,
         project_id: str,
         delete_status: str | None = None,
