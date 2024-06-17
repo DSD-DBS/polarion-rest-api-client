@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import typing as t
+import warnings
 
 from polarion_rest_api_client import client
 from polarion_rest_api_client import data_models as dm
@@ -85,6 +86,12 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
         httpx_args: t.Optional[dict[str, t.Any]], default None
             Additional parameters, which will be passed to the httpx client.
         """
+        warnings.warn(
+            f"{self.__class__.__name__} will be deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
         polarion_client = client.PolarionClient(
             polarion_api_endpoint,
             polarion_access_token,
