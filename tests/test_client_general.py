@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import warnings
 
-import pytest
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
@@ -44,11 +43,9 @@ def test_check_non_existing_project(
     assert not client.project_exists()
 
 
-def test_check_deprecation_warning(
-    caplog: pytest.LogCaptureFixture,
-):
+def test_check_deprecation_warning():
     with warnings.catch_warnings(record=True) as w:
-        client = polarion_api.OpenAPIPolarionProjectClient(
+        polarion_api.OpenAPIPolarionProjectClient(
             "P", False, "http://localhost", "123"
         )
         assert len(w) == 1
