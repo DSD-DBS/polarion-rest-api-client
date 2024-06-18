@@ -48,5 +48,6 @@ def test_check_deprecation_warning():
         polarion_api.OpenAPIPolarionProjectClient(
             "P", False, "http://localhost", "123"
         )
+        
         assert len(w) == 1
         assert issubclass(w[-1].category, DeprecationWarning)

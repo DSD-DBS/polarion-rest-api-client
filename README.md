@@ -14,7 +14,7 @@ version of the client and a feature complete low level API client, which was gen
 Therefor the OpenAPI Specification of Polarion was used.
 
 ## Usage of the High Level Client
-The high level client is an abstraction of the fine-grained, auto-generated client. It is non project specific, however, for most operation, you need to create a project specific one from the generic one. All created created project clients share the client session of the generic client.
+The high level client is an abstraction of the fine-grained, auto-generated client. It is non project specific, however, for most operations, you need to create a project specific one from the generic one. All created created project clients share the client session of the generic client.
 To get started, create a client and check, if the project exists. In the end, to get all Work Items of a project with an empty query, you can simply run the following code and our client will automatically take care of the paging:
 
 ```python
