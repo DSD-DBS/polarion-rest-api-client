@@ -11,7 +11,6 @@ import pytest_httpx
 import pytest_mock as mock
 
 import polarion_rest_api_client as polarion_api
-from polarion_rest_api_client.open_api_client import models as api_models
 from tests.conftest import (
     TEST_ERROR_RESPONSE,
     TEST_WI_CREATED_RESPONSE,
