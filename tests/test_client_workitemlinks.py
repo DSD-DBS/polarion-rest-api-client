@@ -149,18 +149,17 @@ def test_delete_work_item_links_multi_primary(
     )
 
     reqs = httpx_mock.get_requests()
+    with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
+
+    with open(TEST_WIL_DELETE2_REQUEST, encoding="utf8") as f:
+        expected_request2 = json.load(f)
 
     assert len(reqs) == 2
     assert reqs[0].method == "DELETE"
     assert reqs[1].method == "DELETE"
-    with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
-        expected_request = json.load(f)
-
     assert json.loads(reqs[0].content.decode()) == expected_request
-    with open(TEST_WIL_DELETE2_REQUEST, encoding="utf8") as f:
-        expected_request = json.load(f)
-
-    assert json.loads(reqs[1].content.decode()) == expected_request
+    assert json.loads(reqs[1].content.decode()) == expected_request2
 
 
 def test_create_work_item_link(

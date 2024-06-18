@@ -266,7 +266,7 @@ def test_create_work_items_batch_exceed_successfully(
     assert json.loads(reqs[1].content.decode()) == expected
 
 
-def test_create_work_items_content_exceed_successfully(
+def test_create_work_items_slit_by_content_size_successfully(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
@@ -311,6 +311,7 @@ def test_create_work_items_content_exceed_successfully(
     assert reqs[2] is not None and reqs[2].method == "POST"
     assert len(json.loads(reqs[2].content.decode("utf-8"))["data"]) == 1
     assert all(wi.id == "MyWorkItemId" for wi in work_items)
+    assert all(len(req.content) <= 2 * 1024**2 for req in reqs)
 
 
 def test_create_work_items_content_exceed_error(
@@ -335,73 +336,6 @@ def test_create_work_items_content_exceed_error(
         == "A WorkItem is too large to create. (WorkItem Title: Title)"
     )
     assert len(httpx_mock.get_requests()) == 0
-
-
-def test_work_item_single_request_size(
-    client: polarion_api.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-    work_item: polarion_api.WorkItem,
-):
-    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        mock_response = json.load(f)
-
-    httpx_mock.add_response(201, json=mock_response)
-
-    work_item_data = (
-        client.project_client.work_items._build_work_item_post_request(
-            work_item
-        )
-    )
-    size, _ = (
-        client.project_client.work_items._calculate_post_work_item_request_sizes(  # pylint: disable=line-too-long
-            work_item_data
-        )
-    )
-
-    client.create_work_items([work_item])
-
-    req = httpx_mock.get_request()
-    assert len(req.content) == size
-
-
-def test_work_item_multi_request_size(
-    client: polarion_api.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-    work_item: polarion_api.WorkItem,
-):
-    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        mock_response = json.load(f)
-
-    mock_response["data"] *= 2
-    httpx_mock.add_response(201, json=mock_response)
-
-    size = len(
-        json.dumps(api_models.WorkitemsListPostRequest([]).to_dict()).encode(
-            "utf-8"
-        )
-    )
-
-    work_item_data = (
-        client.project_client.work_items._build_work_item_post_request(
-            work_item
-        )
-    )
-
-    size, _ = (
-        client.project_client.work_items._calculate_post_work_item_request_sizes(  # pylint: disable=line-too-long
-            work_item_data, size
-        )
-    )
-    size, _ = (
-        client.project_client.work_items._calculate_post_work_item_request_sizes(  # pylint: disable=line-too-long
-            work_item_data, size
-        )
-    )
-
-    client.create_work_items(2 * [work_item])
-
-    req = httpx_mock.get_request()
-    assert len(req.content) == size
 
 
 def test_create_work_items_failed(
