@@ -8,10 +8,13 @@ import pathlib
 import pytest
 
 import polarion_rest_api_client as polarion_api
+from polarion_rest_api_client.clients import base_classes
 
 
 @pytest.fixture(name="client")
 def fixture_client():
+    base_classes._max_sleep = 0
+    base_classes._min_sleep = 0
     yield polarion_api.OpenAPIPolarionProjectClient(
         project_id="PROJ",
         delete_polarion_work_items=False,

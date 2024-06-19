@@ -65,6 +65,7 @@ def test_create_test_records(
     test_run_id = "asdfg"
 
     tr_1 = polarion_api.TestRecord(
+        test_run_id,
         "MyProjectId",
         "MyWorkItemId",
         "0",
@@ -74,6 +75,7 @@ def test_create_test_records(
         comment=polarion_api.TextContent("text/html", "My text value"),
     )
     tr_2 = polarion_api.TestRecord(
+        test_run_id,
         "MyProjectId",
         "MyWorkItemId",
         "1234",
@@ -111,6 +113,7 @@ def test_update_test_record(
     work_item_project = "MyProjectId"
 
     tr_1 = polarion_api.TestRecord(
+        test_run_id,
         work_item_project,
         work_item_id,
         iteration=4,

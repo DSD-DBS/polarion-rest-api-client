@@ -9,7 +9,7 @@ except metadata.PackageNotFoundError:  # pragma: no cover
     __version__ = "0.0.0+unknown"
 del metadata
 
-from polarion_rest_api_client.client import OpenAPIPolarionProjectClient
+from polarion_rest_api_client.client import PolarionClient
 from polarion_rest_api_client.data_models import (
     SelectTestCasesBy,
     TestRecord,
@@ -26,3 +26,4 @@ from polarion_rest_api_client.errors import (
     PolarionApiUnexpectedException,
     PolarionWorkItemException,
 )
+from polarion_rest_api_client.old_client import OpenAPIPolarionProjectClient

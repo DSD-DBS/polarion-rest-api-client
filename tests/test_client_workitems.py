@@ -11,7 +11,6 @@ import pytest_httpx
 import pytest_mock as mock
 
 import polarion_rest_api_client as polarion_api
-from polarion_rest_api_client.open_api_client import models as api_models
 from tests.conftest import (
     TEST_ERROR_RESPONSE,
     TEST_WI_CREATED_RESPONSE,
@@ -122,7 +121,9 @@ def test_get_all_work_items_single_page(
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    client.default_fields.workitems = "@basic,description"
+    client.project_client._client.default_fields.workitems = (
+        "@basic,description"
+    )
 
     work_items = client.get_all_work_items("")
 
@@ -205,7 +206,7 @@ def test_create_work_item_checksum(
 
     checksum = work_item.calculate_checksum()
 
-    client.add_work_item_checksum = True
+    client.project_client.work_items.add_work_item_checksum = True
     client.create_work_item(work_item)
 
     req = httpx_mock.get_request()
@@ -264,7 +265,7 @@ def test_create_work_items_batch_exceed_successfully(
     assert json.loads(reqs[1].content.decode()) == expected
 
 
-def test_create_work_items_content_exceed_successfully(
+def test_create_work_items_slit_by_content_size_successfully(
     client: polarion_api.OpenAPIPolarionProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
@@ -309,6 +310,7 @@ def test_create_work_items_content_exceed_successfully(
     assert reqs[2] is not None and reqs[2].method == "POST"
     assert len(json.loads(reqs[2].content.decode("utf-8"))["data"]) == 1
     assert all(wi.id == "MyWorkItemId" for wi in work_items)
+    assert all(len(req.content) <= 2 * 1024**2 for req in reqs)
 
 
 def test_create_work_items_content_exceed_error(
@@ -333,57 +335,6 @@ def test_create_work_items_content_exceed_error(
         == "A WorkItem is too large to create. (WorkItem Title: Title)"
     )
     assert len(httpx_mock.get_requests()) == 0
-
-
-def test_work_item_single_request_size(
-    client: polarion_api.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-    work_item: polarion_api.WorkItem,
-):
-    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        mock_response = json.load(f)
-
-    httpx_mock.add_response(201, json=mock_response)
-
-    work_item_data = client._build_work_item_post_request(work_item)
-    size, _ = client._calculate_post_work_item_request_sizes(work_item_data)
-
-    client.create_work_items([work_item])
-
-    req = httpx_mock.get_request()
-    assert len(req.content) == size
-
-
-def test_work_item_multi_request_size(
-    client: polarion_api.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-    work_item: polarion_api.WorkItem,
-):
-    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        mock_response = json.load(f)
-
-    mock_response["data"] *= 2
-    httpx_mock.add_response(201, json=mock_response)
-
-    size = len(
-        json.dumps(api_models.WorkitemsListPostRequest([]).to_dict()).encode(
-            "utf-8"
-        )
-    )
-
-    work_item_data = client._build_work_item_post_request(work_item)
-
-    size, _ = client._calculate_post_work_item_request_sizes(
-        work_item_data, size
-    )
-    size, _ = client._calculate_post_work_item_request_sizes(
-        work_item_data, size
-    )
-
-    client.create_work_items(2 * [work_item])
-
-    req = httpx_mock.get_request()
-    assert len(req.content) == size
 
 
 def test_create_work_items_failed(
@@ -451,7 +402,7 @@ def test_update_work_item_completely_checksum(
     spy = mocker.spy(work_item_patch, "calculate_checksum")
 
     checksum = work_item_patch.calculate_checksum()
-    client.add_work_item_checksum = True
+    client.project_client.work_items.add_work_item_checksum = True
     client.update_work_item(work_item_patch)
 
     req = httpx_mock.get_request()
@@ -572,7 +523,7 @@ def test_delete_work_item_delete_mode(
 ):
     httpx_mock.add_response(204)
 
-    client.delete_polarion_work_items = True
+    client.project_client.work_items.delete_status = None
 
     client.delete_work_item("MyWorkItemId")
 
