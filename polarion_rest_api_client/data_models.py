@@ -214,6 +214,7 @@ class Document(StatusItem):
     module_folder: str | None = None
     module_name: str | None = None
     home_page_content: TextContent | None = None
+    title: str | None = None
 
     def __init__(
         self,
@@ -223,11 +224,13 @@ class Document(StatusItem):
         type: str | None = None,
         status: str | None = None,
         home_page_content: TextContent | None = None,
+        title: str | None = None,
     ):
         super().__init__(id, type, status)
         self.module_folder = module_folder
         self.module_name = module_name
         self.home_page_content = home_page_content
+        self.title = title
 
 
 @dataclasses.dataclass

@@ -1,17 +1,26 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Implementation of the documents client."""
+import itertools
+import typing as t
 import urllib.parse
 
 from polarion_rest_api_client import data_models as dm
 from polarion_rest_api_client.open_api_client import models as api_models
 from polarion_rest_api_client.open_api_client import types as oa_types
-from polarion_rest_api_client.open_api_client.api.documents import get_document
+from polarion_rest_api_client.open_api_client.api.documents import (
+    get_document,
+    patch_document,
+    post_documents,
+)
 
 from . import base_classes as bc
 
 
-class Documents(bc.UpdatableItemsClient[dm.Document]):
+class Documents(
+    bc.SingleUpdatableItemsMixin[dm.Document],
+    bc.UpdatableItemsClient[dm.Document],
+):
     """A client to work with documents in Polarion."""
 
     def get(
@@ -71,11 +80,52 @@ class Documents(bc.UpdatableItemsClient[dm.Document]):
                     type=self.unset_to_none(attributes.type),
                     status=self.unset_to_none(attributes.status),
                     home_page_content=home_page_content,
+                    title=self.unset_to_none(attributes.title),
                 )
         return None
 
+    def _split_into_batches(
+        self, items: list[dm.Document]
+    ) -> t.Generator[list[dm.Document], None, None]:
+        for _, group in itertools.groupby(items, lambda x: x.module_folder):
+            yield from super()._split_into_batches(list(group))
+
     def _update(self, to_update: dm.Document | list[dm.Document]):
-        raise NotImplementedError
+        assert not isinstance(to_update, list), "Expected only one item"
+        assert to_update.module_folder is not None, "module folder must be set"
+        assert to_update.module_name is not None, "module name must be set"
+        req = api_models.DocumentsSinglePatchRequest(
+            data=api_models.DocumentsSinglePatchRequestData(
+                api_models.DocumentsSinglePatchRequestDataType.DOCUMENTS,
+                id=f"{self._project_id}/{to_update.module_folder}/{to_update.module_name}",
+                attributes=api_models.DocumentsSinglePatchRequestDataAttributes(
+                    home_page_content=(
+                        api_models.DocumentsSinglePatchRequestDataAttributesHomePageContent(
+                            type=api_models.DocumentsSinglePatchRequestDataAttributesHomePageContentType(
+                                to_update.home_page_content.type
+                            ),
+                            value=to_update.home_page_content.value
+                            or oa_types.UNSET,
+                        )
+                        if to_update.home_page_content
+                        else oa_types.UNSET
+                    ),
+                    status=to_update.status or oa_types.UNSET,
+                    title=to_update.title or oa_types.UNSET,
+                    type=to_update.type or oa_types.UNSET,
+                ),
+            )
+        )
+
+        res = patch_document.sync_detailed(
+            project_id=self._project_id,
+            space_id=to_update.module_folder,
+            document_name=to_update.module_name,
+            client=self._client.client,
+            body=req,
+        )
+
+        self._raise_on_error(res)
 
     def get_multi(
         self, *args, page_size=100, page_number=1, **kwargs
@@ -83,8 +133,43 @@ class Documents(bc.UpdatableItemsClient[dm.Document]):
         """Return a list of documents - Not implemented yet."""
         raise NotImplementedError
 
-    def _create(self, items: dm.Document | list[dm.Document]):
-        raise NotImplementedError
+    def _create(self, items: list[dm.Document]):
+        assert items[0].module_folder is not None, "module folder must be set"
 
-    def _delete(self, items: dm.Document | list[dm.Document]):
+        req = api_models.DocumentsListPostRequest(
+            data=[
+                api_models.DocumentsListPostRequestDataItem(
+                    type=api_models.DocumentsListPostRequestDataItemType.DOCUMENTS,
+                    attributes=api_models.DocumentsListPostRequestDataItemAttributes(
+                        home_page_content=(
+                            api_models.DocumentsListPostRequestDataItemAttributesHomePageContent(
+                                type=api_models.DocumentsListPostRequestDataItemAttributesHomePageContentType(
+                                    document.home_page_content.type
+                                ),
+                                value=document.home_page_content.value
+                                or oa_types.UNSET,
+                            )
+                            if document.home_page_content
+                            else oa_types.UNSET
+                        ),
+                        module_name=document.module_name or oa_types.UNSET,
+                        status=document.status or oa_types.UNSET,
+                        title=document.title or oa_types.UNSET,
+                        type=document.type or oa_types.UNSET,
+                    ),
+                )
+                for document in items
+            ]
+        )
+
+        res = post_documents.sync_detailed(
+            self._project_id,
+            items[0].module_folder,
+            client=self._client.client,
+            body=req,
+        )
+
+        self._raise_on_error(res)
+
+    def _delete(self, items: list[dm.Document]):
         raise NotImplementedError
