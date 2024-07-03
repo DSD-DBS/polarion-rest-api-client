@@ -13,6 +13,7 @@ from polarion_rest_api_client.client import PolarionClient
 from polarion_rest_api_client.clients.projects import ProjectClient
 from polarion_rest_api_client.data_models import (
     Document,
+    RenderingLayout,
     SelectTestCasesBy,
     TestRecord,
     TestRun,

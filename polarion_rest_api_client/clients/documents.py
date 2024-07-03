@@ -73,6 +73,22 @@ class Documents(
                     attributes.home_page_content
                 )
 
+                rendering_layouts = None
+                if attributes.rendering_layouts:
+                    rendering_layouts = [
+                        dm.RenderingLayout(
+                            self.unset_to_none(layout.label),
+                            self.unset_to_none(layout.layouter),
+                            (
+                                [p.to_dict() for p in layout.properties]
+                                if layout.properties
+                                else None
+                            ),
+                            self.unset_to_none(layout.type),
+                        )
+                        for layout in attributes.rendering_layouts
+                    ]
+
                 return dm.Document(
                     id=data.id,
                     module_folder=self.unset_to_none(attributes.module_folder),
@@ -81,7 +97,9 @@ class Documents(
                     status=self.unset_to_none(attributes.status),
                     home_page_content=home_page_content,
                     title=self.unset_to_none(attributes.title),
+                    rendering_layouts=rendering_layouts,
                 )
+
         return None
 
     def _split_into_batches(
@@ -113,6 +131,28 @@ class Documents(
                     status=to_update.status or oa_types.UNSET,
                     title=to_update.title or oa_types.UNSET,
                     type=to_update.type or oa_types.UNSET,
+                    rendering_layouts=(
+                        [
+                            api_models.DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem(
+                                label=layout.label or oa_types.UNSET,
+                                layouter=layout.layouter or oa_types.UNSET,
+                                type=layout.type or oa_types.UNSET,
+                                properties=(
+                                    [
+                                        api_models.DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesItem.from_dict(
+                                            p
+                                        )
+                                        for p in layout.properties
+                                    ]
+                                    if layout.properties
+                                    else oa_types.UNSET
+                                ),
+                            )
+                            for layout in to_update.rendering_layouts
+                        ]
+                        if to_update.rendering_layouts
+                        else oa_types.UNSET
+                    ),
                 ),
             )
         )
@@ -156,6 +196,28 @@ class Documents(
                         status=document.status or oa_types.UNSET,
                         title=document.title or oa_types.UNSET,
                         type=document.type or oa_types.UNSET,
+                        rendering_layouts=(
+                            [
+                                api_models.DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem(
+                                    label=layout.label or oa_types.UNSET,
+                                    layouter=layout.layouter or oa_types.UNSET,
+                                    type=layout.type or oa_types.UNSET,
+                                    properties=(
+                                        [
+                                            api_models.DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesItem.from_dict(
+                                                p
+                                            )
+                                            for p in layout.properties
+                                        ]
+                                        if layout.properties
+                                        else oa_types.UNSET
+                                    ),
+                                )
+                                for layout in document.rendering_layouts
+                            ]
+                            if document.rendering_layouts
+                            else oa_types.UNSET
+                        ),
                     ),
                 )
                 for document in items
