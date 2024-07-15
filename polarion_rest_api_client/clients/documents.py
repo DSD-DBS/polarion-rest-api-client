@@ -174,6 +174,7 @@ class Documents(
         raise NotImplementedError
 
     def _create(self, items: list[dm.Document]):
+        # due to grouping in _split_into_batches all module folders are equal
         assert items[0].module_folder is not None, "module folder must be set"
 
         req = api_models.DocumentsListPostRequest(
