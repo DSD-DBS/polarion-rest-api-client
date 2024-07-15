@@ -24,6 +24,20 @@ def fixture_client():
     )
 
 
+@pytest.fixture(name="new_client")
+def fixture_new_client():
+    base_classes._max_sleep = 0
+    base_classes._min_sleep = 0
+    client = polarion_api.PolarionClient(
+        polarion_api_endpoint="http://127.0.0.1/api",
+        polarion_access_token="PAT123",
+        batch_size=3,
+    )
+    yield client.generate_project_client(
+        project_id="PROJ", delete_status="deleted"
+    )
+
+
 @pytest.fixture(name="client_custom_work_item")
 def fixture_client_custom_work_item():
     yield polarion_api.OpenAPIPolarionProjectClient(
@@ -127,6 +141,8 @@ TEST_WI_NOT_TRUNCATED_RESPONSE = (
     TEST_RESPONSES / "get_work_item_not_truncated.json"
 )
 TEST_DOCUMENT_RESPONSE = TEST_RESPONSES / "get_document.json"
+TEST_DOCUMENT_POST_REQUEST = TEST_REQUESTS / "create_document.json"
+TEST_DOCUMENT_PATCH_REQUEST = TEST_REQUESTS / "update_document.json"
 TEST_ERROR_RESPONSE = TEST_RESPONSES / "error.json"
 TEST_FAULTS_ERROR_RESPONSES = TEST_RESPONSES / "faulty_errors.json"
 TEST_PROJECT_RESPONSE_JSON = TEST_RESPONSES / "project.json"

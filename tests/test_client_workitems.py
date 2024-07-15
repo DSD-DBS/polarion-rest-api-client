@@ -353,8 +353,8 @@ def test_create_work_items_failed(
         client.create_work_items(3 * [work_item])
 
     assert exc_info.type is polarion_api.PolarionApiException
-    assert exc_info.value.args[0][0] == "400"
-    assert exc_info.value.args[0][1] == expected
+    assert exc_info.value.args[0] == 400
+    assert exc_info.value.args[1][1] == expected
     assert len(httpx_mock.get_requests()) == 2
 
 

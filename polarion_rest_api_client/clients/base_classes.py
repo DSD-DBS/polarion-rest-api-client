@@ -108,6 +108,7 @@ class BaseClient(abc.ABC):
             and response.parsed.errors
         ):
             raise errors.PolarionApiException(
+                response.status_code,
                 *[
                     (
                         e.status,
@@ -122,7 +123,7 @@ class BaseClient(abc.ABC):
                         ),
                     )
                     for e in response.parsed.errors
-                ]
+                ],
             )
         raise unexpected_error()
 
@@ -130,6 +131,9 @@ class BaseClient(abc.ABC):
         try:
             return call(*args, **kwargs)
         except Exception as e:
+            if isinstance(e, errors.PolarionApiException):
+                if e.args[0] == 404:
+                    raise e
             logger.warning(
                 "Will retry after failing on first attempt, "
                 "due to the following error %s",
