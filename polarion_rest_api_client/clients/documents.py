@@ -112,6 +112,7 @@ class Documents(
         assert not isinstance(to_update, list), "Expected only one item"
         assert to_update.module_folder is not None, "module folder must be set"
         assert to_update.module_name is not None, "module name must be set"
+        # pylint: disable=line-too-long
         req = api_models.DocumentsSinglePatchRequest(
             data=api_models.DocumentsSinglePatchRequestData(
                 api_models.DocumentsSinglePatchRequestDataType.DOCUMENTS,
@@ -156,6 +157,7 @@ class Documents(
                 ),
             )
         )
+        # pylint: enable=line-too-long
 
         res = patch_document.sync_detailed(
             project_id=self._project_id,
@@ -178,6 +180,7 @@ class Documents(
         assert items[0].module_folder is not None, "module folder must be set"
 
         req = api_models.DocumentsListPostRequest(
+            # pylint: disable=line-too-long
             data=[
                 api_models.DocumentsListPostRequestDataItem(
                     type=api_models.DocumentsListPostRequestDataItemType.DOCUMENTS,
@@ -223,6 +226,7 @@ class Documents(
                 )
                 for document in items
             ]
+            # pylint: enable=line-too-long
         )
 
         res = post_documents.sync_detailed(

@@ -62,7 +62,7 @@ def test_create_new_document(
                     "type": "documents",
                     "id": "PROJ/folder/name",
                     "links": {
-                        "self": "server-host-name/application-path/projects/PROJ/spaces/folder/documents/name?revision=1234"
+                        "self": "server-host-name/application-path/projects/PROJ/spaces/folder/documents/name?revision=1234"  # pylint: disable=line-too-long
                     },
                 }
             ]
