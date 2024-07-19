@@ -246,6 +246,17 @@ class RenderingLayout:
 
 
 @dataclasses.dataclass
+class DocumentPart:
+    """A data class for all data of a document part."""
+
+    id: str | None = None
+    type: str | None = None
+    level: int | None = None
+    home_page_content: TextContent | None = None
+    external: bool | None = None
+
+
+@dataclasses.dataclass
 class TestRun(StatusItem):
     """A data class for all data of a test run."""
 

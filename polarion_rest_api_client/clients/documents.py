@@ -8,6 +8,9 @@ import urllib.parse
 from polarion_rest_api_client import data_models as dm
 from polarion_rest_api_client.open_api_client import models as api_models
 from polarion_rest_api_client.open_api_client import types as oa_types
+from polarion_rest_api_client.open_api_client.api.document_parts import (
+    get_document_parts,
+)
 from polarion_rest_api_client.open_api_client.api.documents import (
     get_document,
     patch_document,
@@ -172,6 +175,69 @@ class Documents(
     ) -> tuple[list[dm.Document], bool]:
         """Return a list of documents - Not implemented yet."""
         raise NotImplementedError
+
+    def get_parts(
+        self,
+        space_id: str,
+        document_name: str,
+        fields: dict[str, str] | None = None,
+        include: str | None | oa_types.Unset = None,
+        revision: str | None | oa_types.Unset = None,
+    ) -> list[dm.DocumentPart]:
+        if include is None:
+            include = oa_types.UNSET
+
+        if revision is None:
+            revision = oa_types.UNSET
+
+        if " " in space_id or " " in document_name:
+            space_id = urllib.parse.quote(
+                space_id, safe="/", encoding=None, errors=None
+            )
+            document_name = urllib.parse.quote(
+                document_name, safe="/", encoding=None, errors=None
+            )
+        if fields is None:
+            fields = self._client.default_fields.documents
+
+        sparse_fields = self._build_sparse_fields(fields)
+        response = get_document_parts.sync_detailed(
+            self._project_id,
+            space_id,
+            document_name,
+            client=self._client.client,
+            fields=sparse_fields,
+            include=include,
+            revision=revision,
+        )
+
+        self._raise_on_error(response)
+
+        document_part_response = response.parsed
+        if isinstance(
+            document_part_response, api_models.DocumentPartsListGetResponse
+        ) and (data := document_part_response.data):
+            parts: list[dm.DocumentPart] = []
+            for item in data:
+                if not getattr(item.meta, "errors", []):
+                    assert (attributes := item.attributes)
+                    type = self.unset_to_none(attributes.type)
+
+                    home_page_content = dm.TextContent(
+                        type=str(type) if type else None,
+                        value=attributes.content or None,
+                    )
+
+                    parts.append(
+                        dm.DocumentPart(
+                            self.unset_to_none(attributes.id),
+                            type,
+                            self.unset_to_none(attributes.level),
+                            home_page_content,
+                            self.unset_to_none(attributes.external),
+                        )
+                    )
+        return parts
 
     def _create(self, items: list[dm.Document]):
         assert items[0].module_folder is not None, "module folder must be set"
