@@ -213,6 +213,18 @@ class Documents(
 
         self._raise_on_error(response)
 
+        def create_home_page_content(attributes):
+            type = self.unset_to_none(attributes.type)
+            return dm.TextContent(
+                type=str(type) if type else None,
+                value=attributes.content or None,
+            )
+
+        def get_work_item_data(item):
+            if work_item := self.unset_to_none(item.relationships.work_item):
+                return self.unset_to_none(work_item.data)
+            return None
+
         document_part_response = response.parsed
         if isinstance(
             document_part_response, api_models.DocumentPartsListGetResponse
@@ -223,17 +235,8 @@ class Documents(
                     assert (attributes := item.attributes)
                     type = self.unset_to_none(attributes.type)
 
-                    home_page_content = dm.TextContent(
-                        type=str(type) if type else None,
-                        value=attributes.content or None,
-                    )
-
-                    work_item: (
-                        api_models.DocumentPartsListGetResponseDataItemRelationshipsWorkItem
-                        | None
-                    ) = None
-                    if relationships := self.unset_to_none(item.relationships):
-                        work_item = self.unset_to_none(relationships.work_item)
+                    home_page_content = create_home_page_content(attributes)
+                    work_item_data = get_work_item_data(item)
 
                     parts.append(
                         dm.DocumentPart(
@@ -242,7 +245,7 @@ class Documents(
                             self.unset_to_none(attributes.level),
                             home_page_content,
                             self.unset_to_none(attributes.external),
-                            work_item.id if work_item is not None else None,
+                            work_item_data.id if work_item_data else None,
                         )
                     )
         return parts
