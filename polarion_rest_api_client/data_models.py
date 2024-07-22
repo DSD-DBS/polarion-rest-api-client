@@ -254,6 +254,7 @@ class DocumentPart:
     level: int | None = None
     home_page_content: TextContent | None = None
     external: bool | None = None
+    work_item: str | None = None
 
 
 @dataclasses.dataclass

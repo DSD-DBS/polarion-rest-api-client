@@ -228,6 +228,13 @@ class Documents(
                         value=attributes.content or None,
                     )
 
+                    work_item: (
+                        api_models.DocumentPartsListGetResponseDataItemRelationshipsWorkItem
+                        | None
+                    ) = None
+                    if relationships := self.unset_to_none(item.relationships):
+                        work_item = self.unset_to_none(relationships.work_item)
+
                     parts.append(
                         dm.DocumentPart(
                             self.unset_to_none(attributes.id),
@@ -235,6 +242,7 @@ class Documents(
                             self.unset_to_none(attributes.level),
                             home_page_content,
                             self.unset_to_none(attributes.external),
+                            work_item.id if work_item is not None else None,
                         )
                     )
         return parts
