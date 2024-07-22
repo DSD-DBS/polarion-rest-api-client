@@ -98,6 +98,14 @@ class Documents(
                     home_page_content=home_page_content,
                     title=self.unset_to_none(attributes.title),
                     rendering_layouts=rendering_layouts,
+                    outline_numbering=self.unset_to_none(
+                        attributes.uses_outline_numbering
+                    ),
+                    outline_numbering_prefix=(
+                        self.unset_to_none(attributes.outline_numbering.prefix)
+                        if attributes.outline_numbering
+                        else None
+                    ),
                 )
 
         return None
@@ -143,7 +151,7 @@ class Documents(
                                         api_models.DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesItem.from_dict(
                                             p
                                         )
-                                        for p in layout.properties
+                                        for p in layout.properties.serialize()
                                     ]
                                     if layout.properties
                                     else oa_types.UNSET
@@ -152,6 +160,15 @@ class Documents(
                             for layout in to_update.rendering_layouts
                         ]
                         if to_update.rendering_layouts
+                        else oa_types.UNSET
+                    ),
+                    uses_outline_numbering=to_update.outline_numbering
+                    or oa_types.UNSET,
+                    outline_numbering=(
+                        api_models.DocumentsSinglePatchRequestDataAttributesOutlineNumbering(
+                            prefix=to_update.outline_numbering_prefix
+                        )
+                        if to_update.outline_numbering_prefix
                         else oa_types.UNSET
                     ),
                 ),
@@ -211,7 +228,7 @@ class Documents(
                                             api_models.DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesItem.from_dict(
                                                 p
                                             )
-                                            for p in layout.properties
+                                            for p in layout.properties.serialize()
                                         ]
                                         if layout.properties
                                         else oa_types.UNSET
@@ -220,6 +237,15 @@ class Documents(
                                 for layout in document.rendering_layouts
                             ]
                             if document.rendering_layouts
+                            else oa_types.UNSET
+                        ),
+                        uses_outline_numbering=document.outline_numbering
+                        or oa_types.UNSET,
+                        outline_numbering=(
+                            api_models.DocumentsListPostRequestDataItemAttributesOutlineNumbering(
+                                prefix=document.outline_numbering_prefix
+                            )
+                            if document.outline_numbering_prefix
                             else oa_types.UNSET
                         ),
                     ),

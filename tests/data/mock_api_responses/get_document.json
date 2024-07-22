@@ -11,8 +11,34 @@
             },
             "moduleFolder": "MySpaceId",
             "moduleName": "MyDocumentName",
-            "outlineNumbering": {},
-            "renderingLayouts": [],
+            "outlineNumbering": {
+            "prefix": "PREFIX"
+            },
+            "renderingLayouts": [
+                {
+                  "type": "task",
+                  "label": "My label",
+                  "layouter": "paragraph",
+                  "properties": [
+                    {
+                      "key": "fieldsAtStart",
+                      "value": "id"
+                    },
+                    {
+                      "key": "fieldsAtEnd",
+                      "value": "custom,bla"
+                    },
+                    {
+                      "key": "sidebarWorkItemFields",
+                      "value": "id"
+                    },
+                    {
+                      "key": "fieldsAtEndAsTable",
+                      "value": "true"
+                    }
+                  ]
+                }
+            ],
             "status": "open",
             "structureLinkRole": "parent",
             "title": "MyDocumentName",
