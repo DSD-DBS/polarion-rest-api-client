@@ -295,14 +295,15 @@ class RenderingLayout:
         self.type = type
 
 
-class Layouter(enum.StrEnum):
+class Layouter(enum.Enum):
     """Layout selection for work items in documents."""
 
-    default = "default"
-    paragraph = "paragraph"
-    section = "section"
-    titleTestSteps = "titleTestSteps"
-    titleDescTestSteps = "titleDescTestSteps"
+    DEFAULT = "default"  # Seems to be title only
+    TITLE = "title"  # Title only
+    PARAGRAPH = "paragraph"  # Description only
+    SECTION = "section"  # Title and description
+    TITLE_TEST_STEPS = "titleTestSteps"  # Title and testSteps
+    TITLE_DESC_TEST_STEPS = "titleDescTestSteps"  # Title,description,testSteps
 
 
 @dataclasses.dataclass

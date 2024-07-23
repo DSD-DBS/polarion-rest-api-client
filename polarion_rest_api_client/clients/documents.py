@@ -144,7 +144,11 @@ class Documents(
                         [
                             api_models.DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem(
                                 label=layout.label or oa_types.UNSET,
-                                layouter=layout.layouter or oa_types.UNSET,
+                                layouter=(
+                                    layout.layouter.value
+                                    if layout.layouter is not None
+                                    else oa_types.UNSET
+                                ),
                                 type=layout.type or oa_types.UNSET,
                                 properties=(
                                     [
@@ -221,7 +225,11 @@ class Documents(
                             [
                                 api_models.DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem(
                                     label=layout.label or oa_types.UNSET,
-                                    layouter=layout.layouter or oa_types.UNSET,
+                                    layouter=(
+                                        layout.layouter.value
+                                        if layout.layouter is not None
+                                        else oa_types.UNSET
+                                    ),
                                     type=layout.type or oa_types.UNSET,
                                     properties=(
                                         [
