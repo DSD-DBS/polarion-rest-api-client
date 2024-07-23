@@ -282,7 +282,7 @@ class RenderingLayout:
             properties = RenderingProperties()
             for prop in _properties:
                 key = prop["key"]
-                value = prop["value"]
+                value = prop.get("value", "")
                 if key in ["fieldsAtEndAsTable", "hidden"]:
                     value = value == "true"
                 else:
