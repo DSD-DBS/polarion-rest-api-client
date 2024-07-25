@@ -11,11 +11,7 @@ import hashlib
 import json
 import typing as t
 
-field_at_start: list[str] | None = None
-fields_at_end: list[str] | None = None
-sidebar_work_item_fields: list[str] | None = None
-fields_at_end_as_table: bool = False
-
+BOOLEAN_RENDERING_PROPERTIES = ["fieldsAtEndAsTable", "hidden"]
 RENDERING_LAYOUT_FIELDS = {
     "fieldsAtEndAsTable": "fields_at_end_as_table",
     "fieldsAtStart": "fields_at_start",
@@ -283,7 +279,7 @@ class RenderingLayout:
             for prop in _properties:
                 key = prop["key"]
                 value = prop.get("value", "")
-                if key in ["fieldsAtEndAsTable", "hidden"]:
+                if key in BOOLEAN_RENDERING_PROPERTIES:
                     value = value == "true"
                 else:
                     value = value.split(",")
