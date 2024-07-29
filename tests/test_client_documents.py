@@ -10,6 +10,7 @@ import pytest_httpx
 import polarion_rest_api_client as polarion_api
 from tests.conftest import (
     TEST_DOCUMENT_PATCH_REQUEST,
+    TEST_DOCUMENT_PATCH_REQUEST2,
     TEST_DOCUMENT_POST_REQUEST,
     TEST_DOCUMENT_RESPONSE,
 )
@@ -39,6 +40,22 @@ def test_get_document_with_all_fields(
         polarion_api.data_models.TextContent(
             type="text/html", value="<h1>My text value</h1>"
         ),
+        "MyDocumentName",
+        [
+            polarion_api.data_models.RenderingLayout(
+                type="task",
+                label="My label",
+                layouter=polarion_api.data_models.Layouter("paragraph"),
+                properties=polarion_api.data_models.RenderingProperties(
+                    fields_at_start=["id"],
+                    fields_at_end=["custom", "bla"],
+                    sidebar_work_item_fields=["id"],
+                    fields_at_end_as_table=True,
+                ),
+            ),
+        ],
+        True,
+        "PREFIX",
     )
 
 
@@ -49,9 +66,32 @@ def test_create_new_document(
         module_folder="folder",
         module_name="name",
         home_page_content=polarion_api.TextContent(
-            type="text/html", value="super Value"
+            type="text/html", value="<p>super Value</p>"
         ),
         title="Fancy Title",
+        outline_numbering=False,
+        outline_numbering_prefix="TEST",
+        rendering_layouts=[
+            polarion_api.data_models.RenderingLayout(
+                type="task",
+                label="My label",
+                layouter=polarion_api.data_models.Layouter("paragraph"),
+                properties=polarion_api.data_models.RenderingProperties(
+                    fields_at_start=["id"],
+                    fields_at_end=["custom"],
+                    sidebar_work_item_fields=["id"],
+                    fields_at_end_as_table=True,
+                ),
+            ),
+            polarion_api.data_models.RenderingLayout(
+                type="task2",
+                label="My label",
+                layouter=polarion_api.data_models.Layouter("paragraph"),
+                properties=polarion_api.data_models.RenderingProperties(
+                    fields_at_start=["id"],
+                ),
+            ),
+        ],
     )
 
     httpx_mock.add_response(
@@ -87,24 +127,63 @@ def test_update_document(
 ):
     document = polarion_api.Document(
         module_folder="folder",
-        module_name="name",
+        module_name="name1",
         home_page_content=polarion_api.TextContent(
-            type="text/html", value="super Value"
+            type="text/html", value="<p>super Value</p>"
         ),
         title="Fancy Title",
     )
 
+    document2 = polarion_api.Document(
+        module_folder="folder",
+        module_name="name",
+        home_page_content=polarion_api.TextContent(
+            type="text/html", value="<p>super Value</p>"
+        ),
+        title="Fancy Title",
+        rendering_layouts=[
+            polarion_api.data_models.RenderingLayout(
+                type="task",
+                label="My label",
+                layouter=polarion_api.data_models.Layouter("paragraph"),
+                properties=polarion_api.data_models.RenderingProperties(
+                    fields_at_start=["id"],
+                    fields_at_end=["custom"],
+                    sidebar_work_item_fields=["id"],
+                    hidden=True,
+                ),
+            ),
+            polarion_api.data_models.RenderingLayout(
+                type="task2",
+                label="My label",
+                layouter=polarion_api.data_models.Layouter("paragraph"),
+                properties=polarion_api.data_models.RenderingProperties(
+                    fields_at_start=["id"],
+                ),
+            ),
+        ],
+    )
+
     httpx_mock.add_response(204)
-    new_client.documents.update(document)
+    httpx_mock.add_response(204)
+    new_client.documents.update([document, document2])
 
     with open(TEST_DOCUMENT_PATCH_REQUEST, "r", encoding="utf-8") as f:
         expected_request = json.load(f)
+    with open(TEST_DOCUMENT_PATCH_REQUEST2, "r", encoding="utf-8") as f:
+        expected_request_2 = json.load(f)
+    reqs = httpx_mock.get_requests()
 
-    assert len(httpx_mock.get_requests()) == 1
-    req = httpx_mock.get_request()
-    assert req.method == "PATCH"
+    assert len(reqs) == 2
+    assert reqs[0].method == "PATCH"
     assert (
-        req.url
+        reqs[0].url
+        == "http://127.0.0.1/api/projects/PROJ/spaces/folder/documents/name1"
+    )
+    assert json.loads(reqs[0].content.decode("utf-8")) == expected_request
+    assert reqs[1].method == "PATCH"
+    assert (
+        reqs[1].url
         == "http://127.0.0.1/api/projects/PROJ/spaces/folder/documents/name"
     )
-    assert json.loads(req.content.decode("utf-8")) == expected_request
+    assert json.loads(reqs[1].content.decode("utf-8")) == expected_request_2

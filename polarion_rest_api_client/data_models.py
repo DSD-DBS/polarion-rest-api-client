@@ -11,6 +11,15 @@ import hashlib
 import json
 import typing as t
 
+BOOLEAN_RENDERING_PROPERTIES = ["fieldsAtEndAsTable", "hidden"]
+RENDERING_LAYOUT_FIELDS = {
+    "fieldsAtEndAsTable": "fields_at_end_as_table",
+    "fieldsAtStart": "fields_at_start",
+    "fieldsAtEnd": "fields_at_end",
+    "sidebarWorkItemFields": "sidebar_work_item_fields",
+    "hidden": "hidden",
+}
+
 
 @dataclasses.dataclass
 class StatusItem:
@@ -215,6 +224,8 @@ class Document(StatusItem):
     module_name: str | None = None
     home_page_content: TextContent | None = None
     title: str | None = None
+    outline_numbering: bool | None = None
+    outline_numbering_prefix: str | None = None
 
     def __init__(
         self,
@@ -226,6 +237,8 @@ class Document(StatusItem):
         home_page_content: TextContent | None = None,
         title: str | None = None,
         rendering_layouts: list[RenderingLayout] | None = None,
+        outline_numbering: bool | None = None,
+        outline_numbering_prefix: str | None = None,
     ):
         super().__init__(id, type, status)
         self.module_folder = module_folder
@@ -233,6 +246,12 @@ class Document(StatusItem):
         self.home_page_content = home_page_content
         self.title = title
         self.rendering_layouts = rendering_layouts
+        self.outline_numbering = outline_numbering
+        self.outline_numbering_prefix = outline_numbering_prefix
+
+    def __eq__(self, other):
+        """Compare dicts instead of hashes."""
+        return self.__dict__ == other.__dict__
 
 
 @dataclasses.dataclass
@@ -240,9 +259,70 @@ class RenderingLayout:
     """A class to describe how a work item should be rendered in a document."""
 
     label: str | None = None
-    layouter: str | None = None
-    properties: list[dict[str, t.Any]] | None = None
+    layouter: Layouter | None = None
+    properties: RenderingProperties | None = None
     type: str | None = None
+
+    def __init__(
+        self,
+        label: str | None = None,
+        layouter: Layouter | str | None = None,
+        properties: list[dict[str, t.Any]] | RenderingProperties | None = None,
+        type: str | None = None,
+    ):
+        if isinstance(layouter, str):
+            layouter = Layouter(layouter)
+
+        if isinstance(properties, list):
+            _properties: list[dict[str, t.Any]] = properties
+            properties = RenderingProperties()
+            for prop in _properties:
+                key = prop["key"]
+                value = prop.get("value", "")
+                if key in BOOLEAN_RENDERING_PROPERTIES:
+                    value = value == "true"
+                else:
+                    value = value.split(",")
+                setattr(properties, RENDERING_LAYOUT_FIELDS[key], value)
+
+        self.label = label
+        self.layouter = layouter
+        self.properties = properties
+        self.type = type
+
+
+class Layouter(enum.Enum):
+    """Layout selection for work items in documents."""
+
+    DEFAULT = "default"  # Seems to be title only
+    TITLE = "title"  # Title only
+    PARAGRAPH = "paragraph"  # Description only
+    SECTION = "section"  # Title and description
+    TITLE_TEST_STEPS = "titleTestSteps"  # Title and testSteps
+    TITLE_DESC_TEST_STEPS = "titleDescTestSteps"  # Title,description,testSteps
+
+
+@dataclasses.dataclass
+class RenderingProperties:
+    """Properties for custom field rendering of workitems in documents."""
+
+    fields_at_start: list[str] | None = None
+    fields_at_end: list[str] | None = None
+    sidebar_work_item_fields: list[str] | None = None
+    fields_at_end_as_table: bool = False
+    hidden: bool = False
+
+    def serialize(self) -> list[dict[str, t.Any]]:
+        """Serialize an instance of this class to be sent via the API."""
+        result = []
+        for pol_key, key in RENDERING_LAYOUT_FIELDS.items():
+            if (value := getattr(self, key)) is not None:
+                if isinstance(value, list):
+                    value = ",".join(value)
+                else:
+                    value = str(value).lower()
+                result.append({"key": pol_key, "value": value})
+        return result
 
 
 @dataclasses.dataclass
