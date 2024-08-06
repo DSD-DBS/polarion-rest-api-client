@@ -164,6 +164,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         self,
         work_item_id: str,
         work_item_cls: type[WT],
+        revision: str | None = None,
     ) -> WT | None:
         """Return one specific work item with all fields.
 
@@ -176,8 +177,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
 
     @t.overload
     def get(
-        self,
-        work_item_id: str,
+        self, work_item_id: str, *, revision: str | None = None
     ) -> dm.WorkItem | None:
         """Return one specific work item with all fields.
 
@@ -191,6 +191,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         self,
         work_item_id: str,
         work_item_cls=dm.WorkItem,
+        revision: str | None = None,
     ) -> WT | dm.WorkItem | None:
         """Return one specific work item with all fields.
 
@@ -210,6 +211,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                     "linkedworkitems": "@all",
                 }
             ),
+            revision=revision or oa_types.UNSET,
         )
         self._raise_on_error(response)
 
