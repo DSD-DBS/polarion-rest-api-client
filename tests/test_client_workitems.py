@@ -8,7 +8,6 @@ import json
 
 import pytest
 import pytest_httpx
-import pytest_mock as mock
 
 import polarion_rest_api_client as polarion_api
 from tests.conftest import (
