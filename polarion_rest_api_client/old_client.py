@@ -101,9 +101,7 @@ class OpenAPIPolarionProjectClient(t.Generic[WorkItemType]):
             max_content_size,
         )
         self.project_client = polarion_client.generate_project_client(
-            project_id,
-            None if delete_polarion_work_items else "deleted",
-            add_work_item_checksum,
+            project_id, None if delete_polarion_work_items else "deleted"
         )
         self.project_id = project_id
         self.custom_work_item = custom_work_item

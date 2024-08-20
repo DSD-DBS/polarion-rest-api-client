@@ -160,10 +160,10 @@ def test_get_all_work_items_single_page(
         ],
         [polarion_api.WorkItemAttachment("MyWorkItemId2", "MyAttachmentId")],
     )
-    assert "checksum" not in work_items[0].additional_attributes
     assert work_items[0].get_current_checksum() == "123"
     assert work_items[0].home_document.module_folder == "MySpaceId"
     assert work_items[0].home_document.module_name == "MyDocumentId"
+    assert "checksum" in work_items[0].additional_attributes
 
 
 def test_get_all_work_items_faulty_item(
@@ -198,27 +198,6 @@ def test_create_work_item(
     with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
-    assert json.loads(req.content.decode()) == expected
-
-
-def test_create_work_item_checksum(
-    client: polarion_api.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-    work_item: polarion_api.WorkItem,
-):
-    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        httpx_mock.add_response(201, json=json.load(f))
-
-    checksum = work_item.calculate_checksum()
-
-    client.project_client.work_items.add_work_item_checksum = True
-    client.create_work_item(work_item)
-
-    req = httpx_mock.get_request()
-    with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
-    expected["data"][0]["attributes"]["checksum"] = checksum
     assert json.loads(req.content.decode()) == expected
 
 
@@ -418,29 +397,6 @@ def test_update_work_item_completely(
     assert req.method == "PATCH"
     with open(TEST_WI_PATCH_COMPLETELY_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
-
-
-def test_update_work_item_completely_checksum(
-    client: polarion_api.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-    work_item_patch: polarion_api.WorkItem,
-    mocker: mock.MockerFixture,
-):
-    httpx_mock.add_response(204)
-
-    spy = mocker.spy(work_item_patch, "calculate_checksum")
-
-    checksum = work_item_patch.calculate_checksum()
-    client.project_client.work_items.add_work_item_checksum = True
-    client.update_work_item(work_item_patch)
-
-    req = httpx_mock.get_request()
-    with open(TEST_WI_PATCH_COMPLETELY_REQUEST, encoding="utf8") as f:
-        request = json.load(f)
-
-    request["data"]["attributes"]["checksum"] = checksum
-    assert json.loads(req.content.decode()) == request
-    spy.assert_called_once()
 
 
 def test_update_work_item_description(

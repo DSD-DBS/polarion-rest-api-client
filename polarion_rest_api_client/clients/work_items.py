@@ -43,14 +43,12 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         project_id: str,
         client: "polarion_client.PolarionClient",
         delete_status: str | None = None,
-        add_work_item_checksum: bool = False,
     ):
         super().__init__(project_id, client, delete_status)
         self.attachments = work_item_attachments.WorkItemAttachments(
             project_id, client
         )
         self.links = work_item_links.WorkItemLinks(project_id, client)
-        self.add_work_item_checksum = add_work_item_checksum
 
     def _update(self, to_update: list[dm.WorkItem] | dm.WorkItem):
         assert not isinstance(to_update, list), "Expected only one item"
@@ -322,11 +320,6 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
 
         attrs.additional_properties.update(work_item.additional_attributes)
 
-        if self.add_work_item_checksum:
-            attrs.additional_properties["checksum"] = (
-                work_item.calculate_checksum()
-            )
-
         return api_models.WorkitemsListPostRequestDataItem(
             type=api_models.WorkitemsListPostRequestDataItemType.WORKITEMS,
             attributes=attrs,
@@ -370,11 +363,6 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             attrs.status = work_item.status
 
         attrs.additional_properties.update(work_item.additional_attributes)
-
-        if self.add_work_item_checksum:
-            attrs.additional_properties["checksum"] = (
-                work_item.get_current_checksum()
-            )
 
         return api_models.WorkitemsSinglePatchRequest(
             data=api_models.WorkitemsSinglePatchRequestData(

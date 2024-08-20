@@ -115,9 +115,6 @@ class PolarionClient:
         self,
         project_id: str,
         delete_status: str | None = None,
-        add_work_item_checksum: bool = False,
     ):
         """Return a client for a specific project."""
-        return projects.ProjectClient(
-            project_id, self, delete_status, add_work_item_checksum
-        )
+        return projects.ProjectClient(project_id, self, delete_status)

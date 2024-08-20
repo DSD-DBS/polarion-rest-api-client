@@ -3,12 +3,9 @@
 """Data model classes returned by the client."""
 from __future__ import annotations
 
-import base64
 import dataclasses
 import datetime
 import enum
-import hashlib
-import json
 import typing as t
 
 __all__ = [
@@ -44,18 +41,6 @@ class StatusItem:
     id: str | None = None
     type: str | None = None
     status: str | None = None
-    _checksum: str | None = dataclasses.field(init=False, default=None)
-
-    def __eq__(self, other: object) -> bool:
-        """Compare only StatusItem attributes."""
-        if not isinstance(other, StatusItem):
-            return NotImplemented
-        if self.get_current_checksum() is None:
-            self.calculate_checksum()
-        if other.get_current_checksum() is None:
-            other.calculate_checksum()
-
-        return self.get_current_checksum() == other.get_current_checksum()
 
     def to_dict(self) -> dict[str, t.Any]:
         """Return the content of the StatusItem as dictionary."""
@@ -63,27 +48,7 @@ class StatusItem:
             "id": self.id,
             "type": self.type,
             "status": self.status,
-            "checksum": self._checksum,
         }
-
-    def calculate_checksum(self) -> str:
-        """Calculate and return a checksum for this StatusItem.
-
-        In addition, the checksum will be written to self._checksum.
-        """
-        data = self.to_dict()
-        del data["checksum"]
-        del data["id"]
-
-        data = dict(sorted(data.items()))
-
-        converted = json.dumps(data).encode("utf8")
-        self._checksum = hashlib.sha256(converted).hexdigest()
-        return self._checksum
-
-    def get_current_checksum(self) -> str | None:
-        """Return the checksum currently set without calculation."""
-        return self._checksum
 
 
 @dataclasses.dataclass
@@ -128,7 +93,6 @@ class WorkItem(StatusItem):
         self.description_type = description_type
         self.description = description
         self.additional_attributes = (additional_attributes or {}) | kwargs
-        self._checksum = self.additional_attributes.pop("checksum", None)
         self.linked_work_items = linked_work_items or []
         self.attachments = attachments or []
         self.linked_work_items_truncated = linked_work_items_truncated
@@ -147,17 +111,6 @@ class WorkItem(StatusItem):
             super().__setattr__(key, value)
         else:
             self.additional_attributes[key] = value
-
-    def __eq__(self, other: object) -> bool:
-        """Compare only WorkItem attributes."""
-        if not isinstance(other, WorkItem):
-            return NotImplemented
-        if self.get_current_checksum() is None:
-            self.calculate_checksum()
-        if other.get_current_checksum() is None:
-            other.calculate_checksum()
-
-        return self.get_current_checksum() == other.get_current_checksum()
 
     def to_dict(self) -> dict[str, t.Any]:
         """Return the content of the WorkItem as dictionary."""
@@ -180,7 +133,6 @@ class WorkItem(StatusItem):
             "additional_attributes": dict(
                 sorted(self.additional_attributes.items())
             ),
-            "checksum": self._checksum,
             "linked_work_items": [
                 dataclasses.asdict(lwi) for lwi in sorted_links
             ],
@@ -193,31 +145,6 @@ class WorkItem(StatusItem):
                 else None
             ),
         }
-
-    def calculate_checksum(self) -> str:
-        """Calculate and return a checksum for this WorkItem.
-
-        In addition, the checksum will be written to self._checksum.
-        """
-        data = self.to_dict()
-        del data["checksum"]
-        del data["id"]
-
-        for attachment in data["attachments"]:
-            try:
-                attachment["content_bytes"] = base64.b64encode(
-                    attachment["content_bytes"]
-                ).decode("utf8")
-            except TypeError:
-                pass
-
-            del attachment["id"]
-
-        data = dict(sorted(data.items()))
-
-        converted = json.dumps(data).encode("utf8")
-        self._checksum = hashlib.sha256(converted).hexdigest()
-        return self._checksum
 
 
 @dataclasses.dataclass
