@@ -15,19 +15,6 @@ from polarion_rest_api_client.clients import base_classes
 def fixture_client():
     base_classes._max_sleep = 0
     base_classes._min_sleep = 0
-    yield polarion_api.OpenAPIPolarionProjectClient(
-        project_id="PROJ",
-        delete_polarion_work_items=False,
-        polarion_api_endpoint="http://127.0.0.1/api",
-        polarion_access_token="PAT123",
-        batch_size=3,
-    )
-
-
-@pytest.fixture(name="new_client")
-def fixture_new_client():
-    base_classes._max_sleep = 0
-    base_classes._min_sleep = 0
     client = polarion_api.PolarionClient(
         polarion_api_endpoint="http://127.0.0.1/api",
         polarion_access_token="PAT123",
@@ -35,18 +22,6 @@ def fixture_new_client():
     )
     yield client.generate_project_client(
         project_id="PROJ", delete_status="deleted"
-    )
-
-
-@pytest.fixture(name="client_custom_work_item")
-def fixture_client_custom_work_item():
-    yield polarion_api.OpenAPIPolarionProjectClient(
-        project_id="PROJ",
-        delete_polarion_work_items=False,
-        polarion_api_endpoint="http://127.0.0.1/api",
-        polarion_access_token="PAT123",
-        batch_size=3,
-        custom_work_item=CustomWorkItem,
     )
 
 

@@ -19,7 +19,7 @@ from tests.conftest import (
 
 
 def test_get_work_item_attachments_single_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(
@@ -28,7 +28,7 @@ def test_get_work_item_attachments_single_page(
     ) as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_item_attachments = client.get_all_work_item_attachments(
+    work_item_attachments = client.work_items.attachments.get_all(
         "MyWorkItemId",
         fields={"fields[workitem_attachments]": "id,title"},
     )
@@ -49,7 +49,7 @@ def test_get_work_item_attachments_single_page(
 
 
 def test_get_work_item_attachments_multi_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(
@@ -63,7 +63,7 @@ def test_get_work_item_attachments_multi_page(
     ) as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_items_attachments = client.get_all_work_item_attachments(
+    work_items_attachments = client.work_items.attachments.get_all(
         "MyWorkItemId"
     )
 
@@ -83,12 +83,12 @@ def test_get_work_item_attachments_multi_page(
 
 
 def test_delete_work_item_attachment(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.delete_work_item_attachment(
+    client.work_items.attachments.delete(
         polarion_api.WorkItemAttachment("MyWorkItemId", "Attachment", "Title")
     )
 
@@ -101,14 +101,14 @@ def test_delete_work_item_attachment(
 
 
 def test_create_single_work_item_attachment(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item_attachment: polarion_api.WorkItemAttachment,
 ):
     with open(TEST_WIA_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
-    client.create_work_item_attachment(work_item_attachment)
+    client.work_items.attachments.create(work_item_attachment)
 
     req = httpx_mock.get_request()
 
@@ -154,7 +154,7 @@ def test_create_single_work_item_attachment(
 
 
 def test_create_multiple_work_item_attachments(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item_attachment: polarion_api.WorkItemAttachment,
 ):
@@ -167,7 +167,7 @@ def test_create_multiple_work_item_attachments(
         copy.deepcopy(work_item_attachment),
     ]
 
-    client.create_work_item_attachments(work_item_attachments)
+    client.work_items.attachments.create(work_item_attachments)
 
     req = httpx_mock.get_request()
 
@@ -207,7 +207,7 @@ def test_create_multiple_work_item_attachments(
 
 
 def test_update_work_item_attachment_title(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item_attachment: polarion_api.WorkItemAttachment,
 ):
@@ -219,7 +219,7 @@ def test_update_work_item_attachment_title(
     work_item_attachment.content_bytes = None
     work_item_attachment.file_name = None
 
-    client.update_work_item_attachment(work_item_attachment)
+    client.work_items.attachments.update(work_item_attachment)
 
     req = httpx_mock.get_request()
 
@@ -241,7 +241,7 @@ def test_update_work_item_attachment_title(
 
 
 def test_update_work_item_attachment_content(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item_attachment: polarion_api.WorkItemAttachment,
 ):
@@ -250,7 +250,7 @@ def test_update_work_item_attachment_content(
     work_item_attachment.id = "MyAttachmentId"
     work_item_attachment.title = None
 
-    client.update_work_item_attachment(work_item_attachment)
+    client.work_items.attachments.update(work_item_attachment)
 
     req = httpx_mock.get_request()
 
