@@ -7,6 +7,7 @@ import dataclasses
 import datetime
 import enum
 import typing as t
+import warnings
 
 __all__ = [
     "Document",
@@ -63,8 +64,7 @@ class WorkItem(StatusItem):
     """A data class containing all relevant data of a Polarion WorkItem."""
 
     title: str | None = None
-    description_type: str | None = None
-    description: str | None = None
+    description: TextContent | None = None
     additional_attributes: dict[str, t.Any] = {}
     linked_work_items: list[WorkItemLink] = []
     attachments: list[WorkItemAttachment] = []
@@ -77,7 +77,7 @@ class WorkItem(StatusItem):
         id: str | None = None,
         title: str | None = None,
         description_type: str | None = None,
-        description: str | None = None,
+        description: TextContent | str | None = None,
         type: str | None = None,
         status: str | None = None,
         additional_attributes: dict[str, t.Any] | None = None,
@@ -90,7 +90,18 @@ class WorkItem(StatusItem):
     ):
         super().__init__(id, type, status)
         self.title = title
-        self.description_type = description_type
+        if description_type or isinstance(description, str):
+            warnings.warn(
+                "Using description as str or description_type is "
+                "deprecated. Use TextContent instead.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+
+            assert not isinstance(
+                description, TextContent
+            ), "Don't use description_type when setting description as TextContent"
+            description = TextContent(description_type, description)
         self.description = description
         self.additional_attributes = (additional_attributes or {}) | kwargs
         self.linked_work_items = linked_work_items or []
@@ -126,8 +137,7 @@ class WorkItem(StatusItem):
         return {
             "id": self.id,
             "title": self.title,
-            "description_type": self.description_type,
-            "description": self.description,
+            "description": self.description.__dict__,
             "type": self.type,
             "status": self.status,
             "additional_attributes": dict(
@@ -323,10 +333,17 @@ class TestRecord:
 
 @dataclasses.dataclass
 class TextContent:
-    """A data class for home_page_content of a Polarion Document."""
+    """A data class for text content in Polarion."""
 
     type: str | None = None
     value: str | None = None
+
+
+class HtmlContent(TextContent):
+    """A specialized class for HTML based TextContent."""
+
+    def __init__(self, value: str):
+        super().__init__(type="text/html", value=value)
 
 
 class SelectTestCasesBy(str, enum.Enum):

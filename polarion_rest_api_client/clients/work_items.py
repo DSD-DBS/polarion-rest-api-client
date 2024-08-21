@@ -310,9 +310,9 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             type=work_item.type,
             description=api_models.WorkitemsListPostRequestDataItemAttributesDescription(  # pylint: disable=line-too-long
                 type=api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
-                    work_item.description_type
+                    work_item.description.type
                 ),
-                value=work_item.description,
+                value=work_item.description.value or oa_types.UNSET,
             ),
             status=work_item.status,
             title=work_item.title,
@@ -354,9 +354,9 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         if work_item.description is not None:
             attrs.description = api_models.WorkitemsSinglePatchRequestDataAttributesDescription(  # pylint: disable=line-too-long
                 type=api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
-                    work_item.description_type
+                    work_item.description.type
                 ),
-                value=work_item.description,
+                value=work_item.description.value or oa_types.UNSET,
             )
 
         if work_item.status is not None:
