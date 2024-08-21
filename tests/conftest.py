@@ -29,10 +29,9 @@ def fixture_client():
 def fixture_dummy_work_item():
     return polarion_api.WorkItem(
         title="Title",
-        description_type="text/html",
-        description="My text value",
-        status="open",
+        description=polarion_api.HtmlContent("My text value"),
         type="task",
+        status="open",
         additional_attributes={"capella_uuid": "asdfg"},
     )
 
@@ -41,9 +40,8 @@ def fixture_dummy_work_item():
 def fixture_dummy_work_item_patch():
     return polarion_api.WorkItem(
         id="MyWorkItemId",
-        description_type="text/html",
-        description="My text value",
         title="Title",
+        description=polarion_api.HtmlContent("My text value"),
         status="open",
         additional_attributes={"capella_uuid": "qwertz"},
     )

@@ -37,8 +37,7 @@ def test_create_work_item_custom_work_item(
         httpx_mock.add_response(201, json=json.load(f))
     work_item = CustomWorkItem(
         title="Title",
-        description_type="text/html",
-        description="My text value",
+        description=polarion_api.HtmlContent("My text value"),
         status="open",
         type="task",
         capella_uuid="asdfgh",

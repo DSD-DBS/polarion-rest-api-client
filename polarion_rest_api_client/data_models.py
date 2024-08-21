@@ -75,6 +75,7 @@ class WorkItem(StatusItem):
     def __init__(
         self,
         id: str | None = None,
+        *,
         title: str | None = None,
         description_type: str | None = None,
         description: TextContent | str | None = None,

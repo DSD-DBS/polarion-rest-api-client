@@ -140,13 +140,12 @@ def test_get_all_work_items_single_page(
     assert dict(reqs[0].url.params) == query
     assert work_items[0] == polarion_api.WorkItem(
         "MyWorkItemId2",
-        "Title",
-        "text/html",
-        "My text value",
-        "task",
-        "open",
-        {"capella_uuid": "asdfgh", "checksum": "123"},
-        [
+        title="Title",
+        description=polarion_api.HtmlContent("My text value"),
+        type="task",
+        status="open",
+        additional_attributes={"capella_uuid": "asdfgh", "checksum": "123"},
+        linked_work_items=[
             polarion_api.WorkItemLink(
                 "MyWorkItemId2",
                 "MyLinkedWorkItemId",
@@ -155,7 +154,9 @@ def test_get_all_work_items_single_page(
                 "MyProjectId",
             )
         ],
-        [polarion_api.WorkItemAttachment("MyWorkItemId2", "MyAttachmentId")],
+        attachments=[
+            polarion_api.WorkItemAttachment("MyWorkItemId2", "MyAttachmentId")
+        ],
     )
     assert work_items[0].get_current_checksum() == "123"
     assert work_items[0].home_document.module_folder == "MySpaceId"
@@ -288,10 +289,9 @@ def test_create_work_items_slit_by_content_size_successfully(
 
     work_item_long = polarion_api.WorkItem(
         title="Title",
-        description_type="text/html",
-        description="AB" * 512 * 1024,
-        status="open",
+        description=polarion_api.HtmlContent("AB" * 512 * 1024),
         type="task",
+        status="open",
         additional_attributes={"capella_uuid": "asdfg"},
     )
 
@@ -325,10 +325,9 @@ def test_create_work_items_content_exceed_error(
 ):
     work_item_long = polarion_api.WorkItem(
         title="Title",
-        description_type="text/html",
-        description="AB" * 1024 * 1024,
-        status="open",
+        description=polarion_api.HtmlContent("AB" * 1024 * 1024),
         type="task",
+        status="open",
         additional_attributes={"capella_uuid": "asdfg"},
     )
     with pytest.raises(polarion_api.PolarionWorkItemException) as exc_info:
@@ -405,8 +404,7 @@ def test_update_work_item_description(
     client.work_items.update(
         polarion_api.WorkItem(
             id="MyWorkItemId",
-            description_type="text/html",
-            description="My text value",
+            description=polarion_api.HtmlContent("My text value"),
         )
     )
 
@@ -425,10 +423,7 @@ def test_update_work_item_title(
     httpx_mock.add_response(204)
 
     client.work_items.update(
-        polarion_api.WorkItem(
-            id="MyWorkItemId",
-            title="Title",
-        )
+        polarion_api.WorkItem(id="MyWorkItemId", title="Title")
     )
 
     req = httpx_mock.get_request()
@@ -446,10 +441,7 @@ def test_update_work_item_status(
     httpx_mock.add_response(204)
 
     client.work_items.update(
-        polarion_api.WorkItem(
-            id="MyWorkItemId",
-            status="open",
-        )
+        polarion_api.WorkItem(id="MyWorkItemId", status="open")
     )
 
     req = httpx_mock.get_request()
@@ -469,11 +461,7 @@ def test_update_work_item_type(
     httpx_mock.add_response(204)
 
     client.work_items.update(
-        polarion_api.WorkItem(
-            id="MyWorkItemId",
-            type="newType",
-            status="open",
-        )
+        polarion_api.WorkItem(id="MyWorkItemId", type="newType", status="open")
     )
 
     req = httpx_mock.get_request()
