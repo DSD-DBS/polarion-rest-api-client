@@ -99,9 +99,10 @@ class WorkItem(StatusItem):
                 stacklevel=2,
             )
 
-            assert not isinstance(
-                description, TextContent
-            ), "Don't use description_type when setting description as TextContent"
+            assert not isinstance(description, TextContent), (
+                "Don't use description_type when setting description as "
+                "TextContent"
+            )
             description = TextContent(description_type, description)
         self.description = description
         self.additional_attributes = (additional_attributes or {}) | kwargs
@@ -332,12 +333,29 @@ class TestRecord:
     )
 
 
-@dataclasses.dataclass
-class TextContent:
+class TextContent(dict):
     """A data class for text content in Polarion."""
 
-    type: str | None = None
-    value: str | None = None
+    def __init__(self, type: str | None, value: str | None):
+        super().__init__(type=type, value=value)
+
+    @property
+    def type(self):
+        """Return type of the TextContent."""
+        return self["type"]
+
+    @type.setter
+    def type(self, type: str):
+        self["type"] = type
+
+    @property
+    def value(self):
+        """Return value of the TextContent."""
+        return self["value"]
+
+    @value.setter
+    def value(self, value: str):
+        self["value"] = value
 
 
 class HtmlContent(TextContent):
