@@ -11,22 +11,6 @@ del metadata
 
 from polarion_rest_api_client.client import PolarionClient
 from polarion_rest_api_client.clients.projects import ProjectClient
-from polarion_rest_api_client.data_models import (
-    Document,
-    RenderingLayout,
-    SelectTestCasesBy,
-    TestRecord,
-    TestRun,
-    TextContent,
-    WorkItem,
-    WorkItemAttachment,
-    WorkItemLink,
-)
-from polarion_rest_api_client.errors import (
-    PolarionApiBaseException,
-    PolarionApiException,
-    PolarionApiInternalException,
-    PolarionApiUnexpectedException,
-    PolarionWorkItemException,
-)
+from polarion_rest_api_client.data_models import *
+from polarion_rest_api_client.errors import *
 from polarion_rest_api_client.old_client import OpenAPIPolarionProjectClient

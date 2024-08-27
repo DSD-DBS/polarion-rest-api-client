@@ -5,6 +5,14 @@ from __future__ import annotations
 
 from . import data_models as dm
 
+__all__ = [
+    "PolarionApiBaseException",
+    "PolarionApiException",
+    "PolarionApiInternalException",
+    "PolarionApiUnexpectedException",
+    "PolarionWorkItemException",
+]
+
 
 class PolarionApiBaseException(Exception):
     """Base exception, which is raised, if an API error occurs."""
