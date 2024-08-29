@@ -13,6 +13,7 @@ import typing as t
 
 __all__ = [
     "Document",
+    "DocumentReference",
     "Layouter",
     "RenderingLayout",
     "RenderingProperties",
@@ -85,6 +86,14 @@ class StatusItem:
         return self._checksum
 
 
+@dataclasses.dataclass
+class DocumentReference:
+    """A reference to a document to be used in relations."""
+
+    module_folder: str
+    module_name: str
+
+
 class WorkItem(StatusItem):
     """A data class containing all relevant data of a Polarion WorkItem."""
 
@@ -96,6 +105,7 @@ class WorkItem(StatusItem):
     attachments: list[WorkItemAttachment] = []
     linked_work_items_truncated: bool = False
     attachments_truncated: bool = False
+    home_document: DocumentReference | None = None
 
     def __init__(
         self,
@@ -110,6 +120,7 @@ class WorkItem(StatusItem):
         attachments: list[WorkItemAttachment] | None = None,
         linked_work_items_truncated: bool = False,
         attachments_truncated: bool = False,
+        home_document: DocumentReference | None = None,
         **kwargs,
     ):
         super().__init__(id, type, status)
@@ -122,6 +133,7 @@ class WorkItem(StatusItem):
         self.attachments = attachments or []
         self.linked_work_items_truncated = linked_work_items_truncated
         self.attachments_truncated = attachments_truncated
+        self.home_document = home_document
 
     def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
@@ -175,6 +187,11 @@ class WorkItem(StatusItem):
             "attachments": [
                 dataclasses.asdict(at) for at in sorted_attachments
             ],
+            "home_document": (
+                dataclasses.asdict(self.home_document)
+                if self.home_document
+                else None
+            ),
         }
 
     def calculate_checksum(self) -> str:

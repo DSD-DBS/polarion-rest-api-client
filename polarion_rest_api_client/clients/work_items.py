@@ -330,12 +330,30 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         return api_models.WorkitemsListPostRequestDataItem(
             type=api_models.WorkitemsListPostRequestDataItemType.WORKITEMS,
             attributes=attrs,
+            # pylint: disable=line-too-long
+            relationships=(
+                api_models.WorkitemsListPostRequestDataItemRelationships(
+                    module=api_models.WorkitemsListPostRequestDataItemRelationshipsModule(
+                        data=api_models.WorkitemsListPostRequestDataItemRelationshipsModuleData(
+                            id=f"{self._project_id}/{doc_ref.module_folder}/{doc_ref.module_name}",
+                            type=api_models.WorkitemsListPostRequestDataItemRelationshipsModuleDataType.DOCUMENTS,
+                        ),
+                    )
+                )
+                if (doc_ref := work_item.home_document) is not None
+                else oa_types.UNSET
+            ),
+            # pylint: enable=line-too-long
         )
 
     def _build_work_item_patch_request(
         self, work_item: dm.WorkItem
     ) -> api_models.WorkitemsSinglePatchRequest:
         attrs = api_models.WorkitemsSinglePatchRequestDataAttributes()
+        if work_item.home_document:
+            logger.warning(
+                "Changing the work items home document is not supported."
+            )
 
         if work_item.title is not None:
             attrs.title = work_item.title
@@ -417,12 +435,18 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         work_item_id = work_item.id.split("/")[-1]
         links = []
         attachments = []
+        home_document: dm.DocumentReference | None = None
 
         # We set both truncated flags to True and will only set them to False,
         # if the corresponding fields were requested and returned completely
         links_truncated = True
         attachments_truncated = True
         if work_item.relationships:
+            if home_document_data := work_item.relationships.module:
+                if home_document_data.data and home_document_data.data.id:
+                    _, folder, name = home_document_data.data.id.split("/")
+                    home_document = dm.DocumentReference(folder, name)
+
             if link_data := work_item.relationships.linked_work_items:
                 if (
                     not link_data.meta
@@ -476,4 +500,5 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             attachments,
             links_truncated,
             attachments_truncated,
+            home_document,
         )

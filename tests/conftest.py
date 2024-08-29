@@ -129,6 +129,7 @@ TEST_WI_PATCH_COMPLETELY_REQUEST = (
     TEST_REQUESTS / "patch_work_item_completely.json"
 )
 TEST_WI_MULTI_POST_REQUEST = TEST_REQUESTS / "post_workitems.json"
+TEST_WI_MULTI_POST_REQUEST_IN_DOC = TEST_REQUESTS / "post_workitem_in_doc.json"
 TEST_WI_POST_REQUEST = TEST_REQUESTS / "post_workitem.json"
 TEST_WI_NO_NEXT_PAGE_RESPONSE = TEST_RESPONSES / "workitems_no_next_page.json"
 TEST_WI_CREATED_RESPONSE = TEST_RESPONSES / "created_work_items.json"
