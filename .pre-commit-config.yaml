@@ -26,7 +26,7 @@ repos:
       - id: fix-byte-order-marker
       - id: trailing-whitespace
   - repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 24.8.0
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/isort
@@ -47,7 +47,7 @@ repos:
         additional_dependencies:
           - pydocstyle[toml]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+    rev: v1.11.2
     hooks:
       - id: mypy
         additional_dependencies:
@@ -99,7 +99,7 @@ repos:
           - --comment-style
           - '..|  |'
   - repo: https://github.com/fsfe/reuse-tool
-    rev: v3.0.2
+    rev: v4.0.3
     hooks:
       - id: reuse
   - repo: https://github.com/qoomon/git-conventional-commits
