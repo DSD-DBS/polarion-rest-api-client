@@ -17,6 +17,7 @@ from tests.conftest import (
     TEST_WI_DELETE_REQUEST,
     TEST_WI_ERROR_NEXT_PAGE_RESPONSE,
     TEST_WI_MULTI_POST_REQUEST,
+    TEST_WI_MULTI_POST_REQUEST_IN_DOC,
     TEST_WI_NEXT_PAGE_RESPONSE,
     TEST_WI_NO_NEXT_PAGE_RESPONSE,
     TEST_WI_NOT_TRUNCATED_RESPONSE,
@@ -54,6 +55,8 @@ def test_get_one_work_item(
     assert "test_custom_field" in work_item.additional_attributes
     assert work_item.attachments_truncated is True
     assert work_item.linked_work_items_truncated is True
+    assert work_item.home_document.module_folder == "MySpaceId"
+    assert work_item.home_document.module_name == "MyDocumentId"
 
 
 def test_get_one_work_item_not_truncated(
@@ -159,6 +162,8 @@ def test_get_all_work_items_single_page(
     )
     assert "checksum" not in work_items[0].additional_attributes
     assert work_items[0].get_current_checksum() == "123"
+    assert work_items[0].home_document.module_folder == "MySpaceId"
+    assert work_items[0].home_document.module_name == "MyDocumentId"
 
 
 def test_get_all_work_items_faulty_item(
@@ -234,6 +239,30 @@ def test_create_work_items_successfully(
 
     assert req is not None and req.method == "POST"
     with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
+
+    assert json.loads(req.content.decode()) == expected
+
+
+def test_create_work_item_in_document(
+    client: polarion_api.OpenAPIPolarionProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+    work_item: polarion_api.WorkItem,
+):
+    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
+        mock_response = json.load(f)
+
+    httpx_mock.add_response(201, json=mock_response)
+
+    work_item.home_document = polarion_api.DocumentReference(
+        "space", "document"
+    )
+    client.create_work_items([work_item])
+
+    req = httpx_mock.get_request()
+
+    assert req is not None and req.method == "POST"
+    with open(TEST_WI_MULTI_POST_REQUEST_IN_DOC, encoding="utf8") as f:
         expected = json.load(f)
 
     assert json.loads(req.content.decode()) == expected
