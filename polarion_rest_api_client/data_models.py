@@ -12,6 +12,7 @@ import warnings
 __all__ = [
     "Document",
     "DocumentReference",
+    "HtmlContent",
     "Layouter",
     "RenderingLayout",
     "RenderingProperties",

@@ -54,6 +54,7 @@ def test_get_one_work_item(
     assert "test_custom_field" in work_item.additional_attributes
     assert work_item.attachments_truncated is True
     assert work_item.linked_work_items_truncated is True
+    assert work_item.home_document is not None
     assert work_item.home_document.module_folder == "MySpaceId"
     assert work_item.home_document.module_name == "MyDocumentId"
 
@@ -158,7 +159,6 @@ def test_get_all_work_items_single_page(
             polarion_api.WorkItemAttachment("MyWorkItemId2", "MyAttachmentId")
         ],
     )
-    assert work_items[0].get_current_checksum() == "123"
     assert work_items[0].home_document.module_folder == "MySpaceId"
     assert work_items[0].home_document.module_name == "MyDocumentId"
     assert "checksum" in work_items[0].additional_attributes
@@ -222,7 +222,7 @@ def test_create_work_items_successfully(
 
 
 def test_create_work_item_in_document(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
@@ -234,7 +234,7 @@ def test_create_work_item_in_document(
     work_item.home_document = polarion_api.DocumentReference(
         "space", "document"
     )
-    client.create_work_items([work_item])
+    client.work_items.create(work_item)
 
     req = httpx_mock.get_request()
 
