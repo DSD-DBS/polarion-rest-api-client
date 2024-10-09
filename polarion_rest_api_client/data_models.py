@@ -115,13 +115,13 @@ class WorkItem(StatusItem):
 
     def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
-        if item.startswith("__") or item in dir(WorkItem):
+        if item.startswith("__") or item in dir(self.__class__):
             return super().__getattribute__(item)
         return self.additional_attributes.get(item)
 
     def __setattr__(self, key: str, value: t.Any):
         """Set all non WorkItem attributes in additional_properties."""
-        if key in dir(WorkItem):
+        if key in dir(self.__class__):
             super().__setattr__(key, value)
         else:
             self.additional_attributes[key] = value
@@ -140,7 +140,9 @@ class WorkItem(StatusItem):
         return {
             "id": self.id,
             "title": self.title,
-            "description": self.description.__dict__,
+            "description": (
+                self.description.__dict__ if self.description else None
+            ),
             "type": self.type,
             "status": self.status,
             "additional_attributes": dict(
