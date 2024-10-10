@@ -100,6 +100,10 @@ class WorkItem(StatusItem):
                 stacklevel=2,
             )
 
+            assert description_type, (
+                "You have to set a description_type when using a string as"
+                " description"
+            )
             assert not isinstance(description, TextContent), (
                 "Don't use description_type when setting description as "
                 "TextContent"
@@ -140,9 +144,7 @@ class WorkItem(StatusItem):
         return {
             "id": self.id,
             "title": self.title,
-            "description": (
-                self.description.__dict__ if self.description else None
-            ),
+            "description": self.description,
             "type": self.type,
             "status": self.status,
             "additional_attributes": dict(

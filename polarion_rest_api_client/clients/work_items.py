@@ -468,18 +468,17 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                     if attachment.id
                 ]
 
-        desc_type = None
-        desc = None
+        description = None
         if work_item.attributes.description:
-            desc_type = self.unset_to_none(
-                work_item.attributes.description.type
+            description = dm.TextContent(
+                self.unset_to_none(work_item.attributes.description.type),
+                self.unset_to_none(work_item.attributes.description.value),
             )
-            desc = self.unset_to_none(work_item.attributes.description.value)
 
         return work_item_cls(
             work_item_id,
             title=self.unset_to_none(work_item.attributes.title),
-            description=dm.TextContent(desc_type, desc) if desc_type else None,
+            description=description,
             type=self.unset_to_none(work_item.attributes.type),
             status=self.unset_to_none(work_item.attributes.status),
             additional_attributes=work_item.attributes.additional_properties,
