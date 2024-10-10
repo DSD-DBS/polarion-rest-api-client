@@ -13,14 +13,14 @@ from tests.conftest import TEST_FAULTS_ERROR_RESPONSES
 
 
 def test_faulty_error_message(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_FAULTS_ERROR_RESPONSES, encoding="utf8") as f:
         httpx_mock.add_response(400, json=json.load(f))
 
     with pytest.raises(polarion_api.PolarionApiException) as e_info:
-        client.get_document(
+        client.documents.get(
             "MySpaceId", "MyDocumentName", {"fields[documents]": "@all"}
         )
 
@@ -35,14 +35,14 @@ def test_faulty_error_message(
 
 
 def test_dont_retry_on_404(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_FAULTS_ERROR_RESPONSES, encoding="utf8") as f:
         httpx_mock.add_response(404, json=json.load(f))
 
     with pytest.raises(polarion_api.PolarionApiException) as e_info:
-        client.get_document(
+        client.documents.get(
             "MySpaceId", "MyDocumentName", {"fields[documents]": "@all"}
         )
 

@@ -20,7 +20,7 @@ jobs:
           python -m pip install -U pip
       - name: Install pre-commit
         run: |-
-          python -m pip install pre-commit types-docutils
+          python -m pip install 'pre-commit>=3,<4' types-docutils
       - name: Run Pre-Commit
         run: |-
           pre-commit run --all-files

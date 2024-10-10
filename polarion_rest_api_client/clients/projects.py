@@ -20,12 +20,11 @@ class ProjectClient(bc.BaseClient):
         project_id: str,
         client: "polarion_client.PolarionClient",
         delete_status: str | None = None,
-        add_work_item_checksum: bool = False,
     ):
         super().__init__(project_id, client)
 
         self.work_items = work_items.WorkItems(
-            project_id, client, delete_status, add_work_item_checksum
+            project_id, client, delete_status
         )
         self.test_runs = test_runs.TestRuns(project_id, client)
         self.documents = documents.Documents(project_id, client)

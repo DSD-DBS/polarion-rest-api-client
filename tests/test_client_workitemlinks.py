@@ -22,7 +22,7 @@ from tests.conftest import (
 
 
 def test_get_work_item_links_single_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(
@@ -31,7 +31,7 @@ def test_get_work_item_links_single_page(
     ) as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_item_links = client.get_all_work_item_links(
+    work_item_links = client.work_items.links.get_all(
         "MyWorkItemId",
         include="workitem",
         fields={"fields[linkedworkitems]": "id,role"},
@@ -54,7 +54,7 @@ def test_get_work_item_links_single_page(
 
 
 def test_get_work_item_links_multi_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(
@@ -68,7 +68,7 @@ def test_get_work_item_links_multi_page(
     ) as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_items = client.get_all_work_item_links("MyWorkItemId")
+    work_items = client.work_items.links.get_all("MyWorkItemId")
     query = {
         "fields[linkedworkitems]": "id,role,suspect",
         "page[size]": "100",
@@ -87,12 +87,12 @@ def test_get_work_item_links_multi_page(
 
 
 def test_delete_work_item_link(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.delete_work_item_link(
+    client.work_items.links.delete(
         polarion_api.WorkItemLink(
             "MyWorkItemId", "MyWorkItemId2", "parent", True, "MyProjectId"
         )
@@ -106,12 +106,12 @@ def test_delete_work_item_link(
 
 
 def test_delete_work_item_links(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.delete_work_item_links(
+    client.work_items.links.delete(
         [
             polarion_api.WorkItemLink(
                 "MyWorkItemId", "MyWorkItemId2", "parent", True, "MyProjectId"
@@ -132,12 +132,12 @@ def test_delete_work_item_links(
 
 
 def test_delete_work_item_links_multi_primary(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.delete_work_item_links(
+    client.work_items.links.delete(
         [
             polarion_api.WorkItemLink(
                 "MyWorkItemId", "MyWorkItemId2", "parent", True, "MyProjectId"
@@ -163,13 +163,13 @@ def test_delete_work_item_links_multi_primary(
 
 
 def test_create_work_item_link(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_WIL_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
-    client.create_work_item_link(
+    client.work_items.links.create(
         polarion_api.WorkItemLink(
             "MyWorkItemId", "MyWorkItemId2", "relates_to", True
         )
@@ -186,7 +186,7 @@ def test_create_work_item_link(
 
 
 def test_create_work_item_links_different_primaries(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_WIL_CREATED_RESPONSE, encoding="utf8") as f:
@@ -195,7 +195,7 @@ def test_create_work_item_links_different_primaries(
     httpx_mock.add_response(201, json=content)
     httpx_mock.add_response(201, json=content)
 
-    client.create_work_item_links(
+    client.work_items.links.create(
         [
             polarion_api.WorkItemLink(
                 "MyWorkItemId", "MyWorkItemId2", "relates_to", True
@@ -227,13 +227,13 @@ def test_create_work_item_links_different_primaries(
 
 
 def test_create_work_item_links_same_primaries(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_WIL_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
-    client.create_work_item_links(
+    client.work_items.links.create(
         [
             polarion_api.WorkItemLink(
                 "MyWorkItemId",
@@ -258,7 +258,7 @@ def test_create_work_item_links_same_primaries(
 
 
 def test_get_work_item_links_error_first_request(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     caplog: pytest.LogCaptureFixture,
 ):
@@ -269,7 +269,7 @@ def test_get_work_item_links_error_first_request(
     ) as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_item_links = client.get_all_work_item_links(
+    work_item_links = client.work_items.links.get_all(
         "MyWorkItemId",
     )
 
