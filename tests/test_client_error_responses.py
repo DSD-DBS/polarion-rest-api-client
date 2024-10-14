@@ -17,7 +17,10 @@ def test_faulty_error_message(
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_FAULTS_ERROR_RESPONSES, encoding="utf8") as f:
-        httpx_mock.add_response(400, json=json.load(f))
+        response = json.load(f)
+
+    httpx_mock.add_response(400, json=response)
+    httpx_mock.add_response(400, json=response)
 
     with pytest.raises(polarion_api.PolarionApiException) as e_info:
         client.documents.get(

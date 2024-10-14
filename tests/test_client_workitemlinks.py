@@ -136,6 +136,7 @@ def test_delete_work_item_links_multi_primary(
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
+    httpx_mock.add_response(204)
 
     client.work_items.links.delete(
         [

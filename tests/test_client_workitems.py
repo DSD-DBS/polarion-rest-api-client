@@ -351,7 +351,10 @@ def test_create_work_items_failed(
         " : BEGIN_OBJECT (at $.data)"
     )
     with open(TEST_ERROR_RESPONSE, encoding="utf8") as f:
-        httpx_mock.add_response(400, json=json.load(f))
+        response = json.load(f)
+
+    httpx_mock.add_response(400, json=response)
+    httpx_mock.add_response(400, json=response)
 
     with pytest.raises(polarion_api.PolarionApiException) as exc_info:
         client.work_items.create(3 * [work_item])
@@ -367,6 +370,7 @@ def test_create_work_items_failed_no_error(
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
+    httpx_mock.add_response(501, content=b"asdfg")
     httpx_mock.add_response(501, content=b"asdfg")
 
     with pytest.raises(polarion_api.PolarionApiBaseException) as exc_info:
