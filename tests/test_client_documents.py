@@ -17,13 +17,13 @@ from tests.conftest import (
 
 
 def test_get_document_with_all_fields(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_DOCUMENT_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    document = client.get_document(
+    document = client.documents.get(
         "MySpaceId", "MyDocumentName", {"fields[documents]": "@all"}
     )
 
@@ -60,7 +60,7 @@ def test_get_document_with_all_fields(
 
 
 def test_create_new_document(
-    new_client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     document = polarion_api.Document(
         module_folder="folder",
@@ -108,7 +108,7 @@ def test_create_new_document(
             ]
         },
     )
-    new_client.documents.create(document)
+    client.documents.create(document)
 
     with open(TEST_DOCUMENT_POST_REQUEST, "r", encoding="utf-8") as f:
         expected_request = json.load(f)
@@ -123,7 +123,7 @@ def test_create_new_document(
 
 
 def test_update_document(
-    new_client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     document = polarion_api.Document(
         module_folder="folder",
@@ -166,7 +166,7 @@ def test_update_document(
 
     httpx_mock.add_response(204)
     httpx_mock.add_response(204)
-    new_client.documents.update([document, document2])
+    client.documents.update([document, document2])
 
     with open(TEST_DOCUMENT_PATCH_REQUEST, "r", encoding="utf-8") as f:
         expected_request = json.load(f)

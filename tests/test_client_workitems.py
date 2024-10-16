@@ -8,7 +8,6 @@ import json
 
 import pytest
 import pytest_httpx
-import pytest_mock as mock
 
 import polarion_rest_api_client as polarion_api
 from tests.conftest import (
@@ -32,13 +31,13 @@ from tests.conftest import (
 
 
 def test_get_one_work_item(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_WI_SINGLE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_item = client.get_work_item("MyWorkItemId")
+    work_item = client.work_items.get("MyWorkItemId")
 
     query = {
         "fields[workitems]": "@all",
@@ -55,18 +54,19 @@ def test_get_one_work_item(
     assert "test_custom_field" in work_item.additional_attributes
     assert work_item.attachments_truncated is True
     assert work_item.linked_work_items_truncated is True
+    assert work_item.home_document is not None
     assert work_item.home_document.module_folder == "MySpaceId"
     assert work_item.home_document.module_name == "MyDocumentId"
 
 
 def test_get_one_work_item_not_truncated(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_WI_NOT_TRUNCATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_item = client.get_work_item("MyWorkItemId")
+    work_item = client.work_items.get("MyWorkItemId")
 
     query = {
         "fields[workitems]": "@all",
@@ -87,7 +87,7 @@ def test_get_one_work_item_not_truncated(
 
 
 def test_get_all_work_items_multi_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_WI_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
@@ -95,9 +95,9 @@ def test_get_all_work_items_multi_page(
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_items = client.get_all_work_items(
+    work_items = client.work_items.get_all(
         "",
-        {"fields[workitems]": "id"},
+        fields={"fields[workitems]": "id"},
     )
 
     query = {
@@ -118,17 +118,15 @@ def test_get_all_work_items_multi_page(
 
 
 def test_get_all_work_items_single_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    client.project_client._client.default_fields.workitems = (
-        "@basic,description"
-    )
+    client._client.default_fields.workitems = "@basic,description"
 
-    work_items = client.get_all_work_items("")
+    work_items = client.work_items.get_all("")
 
     query = {
         "fields[workitems]": "@basic,description",
@@ -143,13 +141,12 @@ def test_get_all_work_items_single_page(
     assert dict(reqs[0].url.params) == query
     assert work_items[0] == polarion_api.WorkItem(
         "MyWorkItemId2",
-        "Title",
-        "text/html",
-        "My text value",
-        "task",
-        "open",
-        {"capella_uuid": "asdfgh", "checksum": "123"},
-        [
+        title="Title",
+        description=polarion_api.HtmlContent("My text value"),
+        type="task",
+        status="open",
+        additional_attributes={"capella_uuid": "asdfgh", "checksum": "123"},
+        linked_work_items=[
             polarion_api.WorkItemLink(
                 "MyWorkItemId2",
                 "MyLinkedWorkItemId",
@@ -158,16 +155,17 @@ def test_get_all_work_items_single_page(
                 "MyProjectId",
             )
         ],
-        [polarion_api.WorkItemAttachment("MyWorkItemId2", "MyAttachmentId")],
+        attachments=[
+            polarion_api.WorkItemAttachment("MyWorkItemId2", "MyAttachmentId")
+        ],
     )
-    assert "checksum" not in work_items[0].additional_attributes
-    assert work_items[0].get_current_checksum() == "123"
     assert work_items[0].home_document.module_folder == "MySpaceId"
     assert work_items[0].home_document.module_name == "MyDocumentId"
+    assert "checksum" in work_items[0].additional_attributes
 
 
 def test_get_all_work_items_faulty_item(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_WI_ERROR_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
@@ -176,7 +174,7 @@ def test_get_all_work_items_faulty_item(
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_items = client.get_all_work_items("")
+    work_items = client.work_items.get_all("")
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert len(work_items) == 1
@@ -184,14 +182,14 @@ def test_get_all_work_items_faulty_item(
 
 
 def test_create_work_item(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
     with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
-    client.create_work_item(work_item)
+    client.work_items.create(work_item)
 
     req = httpx_mock.get_request()
     assert req is not None and req.method == "POST"
@@ -201,29 +199,8 @@ def test_create_work_item(
     assert json.loads(req.content.decode()) == expected
 
 
-def test_create_work_item_checksum(
-    client: polarion_api.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-    work_item: polarion_api.WorkItem,
-):
-    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        httpx_mock.add_response(201, json=json.load(f))
-
-    checksum = work_item.calculate_checksum()
-
-    client.project_client.work_items.add_work_item_checksum = True
-    client.create_work_item(work_item)
-
-    req = httpx_mock.get_request()
-    with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
-    expected["data"][0]["attributes"]["checksum"] = checksum
-    assert json.loads(req.content.decode()) == expected
-
-
 def test_create_work_items_successfully(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
@@ -233,7 +210,7 @@ def test_create_work_items_successfully(
     mock_response["data"] *= 3
     httpx_mock.add_response(201, json=mock_response)
 
-    client.create_work_items(3 * [work_item])
+    client.work_items.create(3 * [work_item])
 
     req = httpx_mock.get_request()
 
@@ -245,7 +222,7 @@ def test_create_work_items_successfully(
 
 
 def test_create_work_item_in_document(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
@@ -257,7 +234,7 @@ def test_create_work_item_in_document(
     work_item.home_document = polarion_api.DocumentReference(
         "space", "document"
     )
-    client.create_work_items([work_item])
+    client.work_items.create(work_item)
 
     req = httpx_mock.get_request()
 
@@ -269,7 +246,7 @@ def test_create_work_item_in_document(
 
 
 def test_create_work_items_batch_exceed_successfully(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
@@ -280,7 +257,7 @@ def test_create_work_items_batch_exceed_successfully(
     httpx_mock.add_response(201, json=mock_response)
     httpx_mock.add_response(201, json=mock_response)
 
-    client.create_work_items(6 * [work_item])
+    client.work_items.create(6 * [work_item])
 
     reqs = httpx_mock.get_requests()
 
@@ -295,7 +272,7 @@ def test_create_work_items_batch_exceed_successfully(
 
 
 def test_create_work_items_slit_by_content_size_successfully(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
@@ -312,10 +289,9 @@ def test_create_work_items_slit_by_content_size_successfully(
 
     work_item_long = polarion_api.WorkItem(
         title="Title",
-        description_type="text/html",
-        description="AB" * 512 * 1024,
-        status="open",
+        description=polarion_api.HtmlContent("AB" * 512 * 1024),
         type="task",
+        status="open",
         additional_attributes={"capella_uuid": "asdfg"},
     )
 
@@ -328,7 +304,7 @@ def test_create_work_items_slit_by_content_size_successfully(
         copy.deepcopy(work_item_long),
     ]
 
-    client.create_work_items(work_items)
+    client.work_items.create(work_items)
 
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 3
@@ -343,20 +319,19 @@ def test_create_work_items_slit_by_content_size_successfully(
 
 
 def test_create_work_items_content_exceed_error(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
     work_item_long = polarion_api.WorkItem(
         title="Title",
-        description_type="text/html",
-        description="AB" * 1024 * 1024,
-        status="open",
+        description=polarion_api.HtmlContent("AB" * 1024 * 1024),
         type="task",
+        status="open",
         additional_attributes={"capella_uuid": "asdfg"},
     )
     with pytest.raises(polarion_api.PolarionWorkItemException) as exc_info:
-        client.create_work_items(3 * [work_item, work_item_long])
+        client.work_items.create(3 * [work_item, work_item_long])
 
     assert exc_info.value.work_item == work_item_long
     assert (
@@ -367,7 +342,7 @@ def test_create_work_items_content_exceed_error(
 
 
 def test_create_work_items_failed(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
@@ -376,10 +351,13 @@ def test_create_work_items_failed(
         " : BEGIN_OBJECT (at $.data)"
     )
     with open(TEST_ERROR_RESPONSE, encoding="utf8") as f:
-        httpx_mock.add_response(400, json=json.load(f))
+        response = json.load(f)
+
+    httpx_mock.add_response(400, json=response)
+    httpx_mock.add_response(400, json=response)
 
     with pytest.raises(polarion_api.PolarionApiException) as exc_info:
-        client.create_work_items(3 * [work_item])
+        client.work_items.create(3 * [work_item])
 
     assert exc_info.type is polarion_api.PolarionApiException
     assert exc_info.value.args[0] == 400
@@ -388,14 +366,15 @@ def test_create_work_items_failed(
 
 
 def test_create_work_items_failed_no_error(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
     httpx_mock.add_response(501, content=b"asdfg")
+    httpx_mock.add_response(501, content=b"asdfg")
 
     with pytest.raises(polarion_api.PolarionApiBaseException) as exc_info:
-        client.create_work_items(3 * [work_item])
+        client.work_items.create(3 * [work_item])
 
     assert exc_info.type is polarion_api.PolarionApiUnexpectedException
     assert exc_info.value.args[0] == 501
@@ -403,13 +382,13 @@ def test_create_work_items_failed_no_error(
 
 
 def test_update_work_item_completely(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item_patch: polarion_api.WorkItem,
 ):
     httpx_mock.add_response(204)
 
-    client.update_work_item(work_item_patch)
+    client.work_items.update(work_item_patch)
 
     req = httpx_mock.get_request()
 
@@ -420,40 +399,16 @@ def test_update_work_item_completely(
         assert json.loads(req.content.decode()) == json.load(f)
 
 
-def test_update_work_item_completely_checksum(
-    client: polarion_api.OpenAPIPolarionProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
-    work_item_patch: polarion_api.WorkItem,
-    mocker: mock.MockerFixture,
-):
-    httpx_mock.add_response(204)
-
-    spy = mocker.spy(work_item_patch, "calculate_checksum")
-
-    checksum = work_item_patch.calculate_checksum()
-    client.project_client.work_items.add_work_item_checksum = True
-    client.update_work_item(work_item_patch)
-
-    req = httpx_mock.get_request()
-    with open(TEST_WI_PATCH_COMPLETELY_REQUEST, encoding="utf8") as f:
-        request = json.load(f)
-
-    request["data"]["attributes"]["checksum"] = checksum
-    assert json.loads(req.content.decode()) == request
-    spy.assert_called_once()
-
-
 def test_update_work_item_description(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.update_work_item(
+    client.work_items.update(
         polarion_api.WorkItem(
             id="MyWorkItemId",
-            description_type="text/html",
-            description="My text value",
+            description=polarion_api.HtmlContent("My text value"),
         )
     )
 
@@ -466,16 +421,13 @@ def test_update_work_item_description(
 
 
 def test_update_work_item_title(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.update_work_item(
-        polarion_api.WorkItem(
-            id="MyWorkItemId",
-            title="Title",
-        )
+    client.work_items.update(
+        polarion_api.WorkItem(id="MyWorkItemId", title="Title")
     )
 
     req = httpx_mock.get_request()
@@ -487,16 +439,13 @@ def test_update_work_item_title(
 
 
 def test_update_work_item_status(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.update_work_item(
-        polarion_api.WorkItem(
-            id="MyWorkItemId",
-            status="open",
-        )
+    client.work_items.update(
+        polarion_api.WorkItem(id="MyWorkItemId", status="open")
     )
 
     req = httpx_mock.get_request()
@@ -510,17 +459,13 @@ def test_update_work_item_status(
 
 
 def test_update_work_item_type(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.update_work_item(
-        polarion_api.WorkItem(
-            id="MyWorkItemId",
-            type="newType",
-            status="open",
-        )
+    client.work_items.update(
+        polarion_api.WorkItem(id="MyWorkItemId", type="newType", status="open")
     )
 
     req = httpx_mock.get_request()
@@ -533,12 +478,12 @@ def test_update_work_item_type(
 
 
 def test_delete_work_item_status_mode(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.delete_work_item("MyWorkItemId")
+    client.work_items.delete(polarion_api.WorkItem("MyWorkItemId"))
 
     req = httpx_mock.get_request()
     assert req is not None and req.method == "PATCH"
@@ -547,14 +492,14 @@ def test_delete_work_item_status_mode(
 
 
 def test_delete_work_item_delete_mode(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.project_client.work_items.delete_status = None
+    client.work_items.delete_status = None
 
-    client.delete_work_item("MyWorkItemId")
+    client.work_items.delete(polarion_api.WorkItem("MyWorkItemId"))
 
     req = httpx_mock.get_request()
     assert req is not None and req.method == "DELETE"

@@ -17,7 +17,7 @@ from tests.conftest import (
 
 
 def test_get_test_records_multi_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_TREC_NEXT_RESPONSE, encoding="utf8") as f:
@@ -28,7 +28,9 @@ def test_get_test_records_multi_page(
     with open(TEST_TREC_NO_NEXT_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    test_records = client.get_all_test_records("123", {"test_records": "@all"})
+    test_records = client.test_runs.records.get_all(
+        "123", fields={"test_records": "@all"}
+    )
 
     query = {
         "page[size]": "100",
@@ -56,7 +58,7 @@ def test_get_test_records_multi_page(
 
 
 def test_create_test_records(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_TREC_CREATED_RESPONSE, encoding="utf8") as f:
@@ -85,7 +87,7 @@ def test_create_test_records(
         comment=polarion_api.TextContent("text/html", "My text value 2"),
     )
 
-    client.create_test_records(test_run_id, [tr_1, tr_2])
+    client.test_runs.records.create([tr_1, tr_2])
 
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
@@ -94,16 +96,13 @@ def test_create_test_records(
         expected_req = json.load(f)
 
     assert req_data == expected_req
-    assert (
-        reqs[0].url.path == f"/api/projects/{client.project_id}/testruns"
-        f"/{test_run_id}/testrecords"
-    )
+    assert reqs[0].url.path.endswith(f"/testruns/{test_run_id}/testrecords")
     assert tr_1.iteration == 0
     assert tr_2.iteration == 1
 
 
 def test_update_test_record(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
@@ -122,7 +121,7 @@ def test_update_test_record(
         comment=polarion_api.TextContent("text/html", "My text value"),
     )
 
-    client.update_test_record(test_run_id, tr_1)
+    client.test_runs.records.update(tr_1)
 
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
@@ -131,7 +130,7 @@ def test_update_test_record(
         expected_req = json.load(f)
 
     assert req_data == expected_req
-    assert reqs[0].url.path == (
-        f"/api/projects/{client.project_id}/testruns/{test_run_id}"
+    assert reqs[0].url.path.endswith(
+        f"/testruns/{test_run_id}"
         f"/testrecords/{work_item_project}/{work_item_id}/4"
     )

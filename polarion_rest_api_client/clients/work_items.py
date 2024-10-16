@@ -43,14 +43,12 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         project_id: str,
         client: "polarion_client.PolarionClient",
         delete_status: str | None = None,
-        add_work_item_checksum: bool = False,
     ):
         super().__init__(project_id, client, delete_status)
         self.attachments = work_item_attachments.WorkItemAttachments(
             project_id, client
         )
         self.links = work_item_links.WorkItemLinks(project_id, client)
-        self.add_work_item_checksum = add_work_item_checksum
 
     def _update(self, to_update: list[dm.WorkItem] | dm.WorkItem):
         assert not isinstance(to_update, list), "Expected only one item"
@@ -312,20 +310,15 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             type=work_item.type,
             description=api_models.WorkitemsListPostRequestDataItemAttributesDescription(  # pylint: disable=line-too-long
                 type=api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
-                    work_item.description_type
+                    work_item.description.type
                 ),
-                value=work_item.description,
+                value=work_item.description.value or oa_types.UNSET,
             ),
             status=work_item.status,
             title=work_item.title,
         )
 
         attrs.additional_properties.update(work_item.additional_attributes)
-
-        if self.add_work_item_checksum:
-            attrs.additional_properties["checksum"] = (
-                work_item.calculate_checksum()
-            )
 
         return api_models.WorkitemsListPostRequestDataItem(
             type=api_models.WorkitemsListPostRequestDataItemType.WORKITEMS,
@@ -361,20 +354,15 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         if work_item.description is not None:
             attrs.description = api_models.WorkitemsSinglePatchRequestDataAttributesDescription(  # pylint: disable=line-too-long
                 type=api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
-                    work_item.description_type
+                    work_item.description.type
                 ),
-                value=work_item.description,
+                value=work_item.description.value or oa_types.UNSET,
             )
 
         if work_item.status is not None:
             attrs.status = work_item.status
 
         attrs.additional_properties.update(work_item.additional_attributes)
-
-        if self.add_work_item_checksum:
-            attrs.additional_properties["checksum"] = (
-                work_item.get_current_checksum()
-            )
 
         return api_models.WorkitemsSinglePatchRequest(
             data=api_models.WorkitemsSinglePatchRequestData(
@@ -399,11 +387,9 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             isinstance(response.parsed, api_models.WorkitemsListPostResponse)
             and response.parsed.data
         )
-        counter = 0
-        for work_item_res in response.parsed.data:
+        for index, work_item_res in enumerate(response.parsed.data):
             assert work_item_res.id
-            work_item_objs[counter].id = work_item_res.id.split("/")[-1]
-            counter += 1
+            work_item_objs[index].id = work_item_res.id.split("/")[-1]
 
     def _calculate_post_work_item_request_sizes(
         self,
@@ -480,25 +466,23 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                     if attachment.id
                 ]
 
-        desc_type = None
-        desc = None
+        description = None
         if work_item.attributes.description:
-            desc_type = self.unset_to_none(
-                work_item.attributes.description.type
+            description = dm.TextContent(
+                self.unset_to_none(work_item.attributes.description.type),
+                self.unset_to_none(work_item.attributes.description.value),
             )
-            desc = self.unset_to_none(work_item.attributes.description.value)
 
         return work_item_cls(
             work_item_id,
-            self.unset_to_none(work_item.attributes.title),
-            desc_type,
-            desc,
-            self.unset_to_none(work_item.attributes.type),
-            self.unset_to_none(work_item.attributes.status),
-            work_item.attributes.additional_properties,
-            links,
-            attachments,
-            links_truncated,
-            attachments_truncated,
-            home_document,
+            title=self.unset_to_none(work_item.attributes.title),
+            description=description,
+            type=self.unset_to_none(work_item.attributes.type),
+            status=self.unset_to_none(work_item.attributes.status),
+            additional_attributes=work_item.attributes.additional_properties,
+            linked_work_items=links,
+            attachments=attachments,
+            linked_work_items_truncated=links_truncated,
+            attachments_truncated=attachments_truncated,
+            home_document=home_document,
         )

@@ -4,10 +4,12 @@
 from __future__ import annotations
 
 import copy
+import email
 import json
+from email import message
 
+import httpx
 import pytest_httpx
-from httpx import _multipart
 
 import polarion_rest_api_client as polarion_api
 from tests.conftest import (
@@ -18,8 +20,23 @@ from tests.conftest import (
 )
 
 
+def _extract_data_from_request(
+    req: httpx.Request,
+) -> dict[str, list[message.Message]]:
+    headers = f"Content-Type: {req.headers['Content-Type']}\r\n\r\n"
+    msg = email.message_from_bytes(
+        headers.encode(req.headers.encoding) + req.content
+    )
+    fields: dict[str, list[message.Message]] = {}
+    for part in msg.walk():
+        field_name = part.get_param("name", header="Content-Disposition")
+        if isinstance(field_name, str):
+            fields.setdefault(field_name, []).append(part)
+    return fields
+
+
 def test_get_work_item_attachments_single_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(
@@ -28,7 +45,7 @@ def test_get_work_item_attachments_single_page(
     ) as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_item_attachments = client.get_all_work_item_attachments(
+    work_item_attachments = client.work_items.attachments.get_all(
         "MyWorkItemId",
         fields={"fields[workitem_attachments]": "id,title"},
     )
@@ -49,7 +66,7 @@ def test_get_work_item_attachments_single_page(
 
 
 def test_get_work_item_attachments_multi_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(
@@ -63,7 +80,7 @@ def test_get_work_item_attachments_multi_page(
     ) as f:
         httpx_mock.add_response(json=json.load(f))
 
-    work_items_attachments = client.get_all_work_item_attachments(
+    work_items_attachments = client.work_items.attachments.get_all(
         "MyWorkItemId"
     )
 
@@ -83,12 +100,12 @@ def test_get_work_item_attachments_multi_page(
 
 
 def test_delete_work_item_attachment(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
 
-    client.delete_work_item_attachment(
+    client.work_items.attachments.delete(
         polarion_api.WorkItemAttachment("MyWorkItemId", "Attachment", "Title")
     )
 
@@ -101,39 +118,30 @@ def test_delete_work_item_attachment(
 
 
 def test_create_single_work_item_attachment(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item_attachment: polarion_api.WorkItemAttachment,
 ):
     with open(TEST_WIA_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
-    client.create_work_item_attachment(work_item_attachment)
+    client.work_items.attachments.create(work_item_attachment)
 
     req = httpx_mock.get_request()
+    fields = _extract_data_from_request(req)
+    resource = fields["resource"][0]
+    files = fields["files"]
 
     assert req is not None and req.method == "POST"
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId/attachments")
     assert work_item_attachment.id == "MyAttachmentId"
+    assert work_item_attachment.content_bytes is not None
 
-    body = req.stream
-    assert isinstance(body, _multipart.MultipartStream)
-    assert len(body.fields) == 2
+    assert resource is not None
+    assert len(files) == 1
 
-    resource_index = None
-    files_index = None
-    for i in range(2):
-        if body.fields[i].name == "resource":
-            resource_index = i
-        if body.fields[i].name == "files":
-            files_index = i
-
-    assert resource_index is not None
-    assert files_index is not None
-
-    assert body.fields[resource_index].headers["Content-Type"] == "text/plain"
-    assert body.fields[resource_index].name == "resource"
-    assert body.fields[resource_index].file == json.dumps(
+    assert resource.get_content_type() == "text/plain"
+    assert resource.get_payload() == json.dumps(
         {
             "data": [
                 {
@@ -142,19 +150,17 @@ def test_create_single_work_item_attachment(
                 }
             ]
         }
-    ).encode("utf-8")
+    )
 
-    assert body.fields[files_index].headers["Content-Type"] == "text/plain"
-    assert body.fields[files_index].filename == "test.json"
-    assert body.fields[files_index].name == "files"
-    assert (
-        body.fields[files_index].file.read()
-        == work_item_attachment.content_bytes
+    assert files[0].get_content_type() == "text/plain"
+    assert files[0].get_filename() == "test.json"
+    assert files[0].get_payload() == work_item_attachment.content_bytes.decode(
+        "utf-8"
     )
 
 
 def test_create_multiple_work_item_attachments(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item_attachment: polarion_api.WorkItemAttachment,
 ):
@@ -167,7 +173,7 @@ def test_create_multiple_work_item_attachments(
         copy.deepcopy(work_item_attachment),
     ]
 
-    client.create_work_item_attachments(work_item_attachments)
+    client.work_items.attachments.create(work_item_attachments)
 
     req = httpx_mock.get_request()
 
@@ -178,22 +184,22 @@ def test_create_multiple_work_item_attachments(
     assert work_item_attachments[1].id == "MyAttachmentId2"
     assert work_item_attachments[2].id == "MyAttachmentId3"
 
-    body = req.stream
-    assert isinstance(body, _multipart.MultipartStream)
-    assert len(body.fields) == 4
+    fields = _extract_data_from_request(req)
+    resource = fields["resource"][0]
+    files = fields["files"]
 
-    for i in range(0, 3):
-        assert body.fields[i].headers["Content-Type"] == "text/plain"
-        assert body.fields[i].filename == "test.json"
-        assert body.fields[i].name == "files"
+    assert len(files) == 3
+
+    for index, file in enumerate(files):
         assert (
-            body.fields[i].file.read()
-            == work_item_attachments[i - 1].content_bytes
-        )
+            content := work_item_attachments[index - 1].content_bytes
+        ) is not None
+        assert file.get_content_type() == "text/plain"
+        assert file.get_filename() == "test.json"
+        assert content.decode("utf-8")
 
-    assert body.fields[3].headers["Content-Type"] == "text/plain"
-    assert body.fields[3].name == "resource"
-    assert body.fields[3].file == json.dumps(
+    assert resource.get_content_type() == "text/plain"
+    assert resource.get_payload() == json.dumps(
         {
             "data": 3
             * [
@@ -203,11 +209,11 @@ def test_create_multiple_work_item_attachments(
                 }
             ]
         }
-    ).encode("utf-8")
+    )
 
 
 def test_update_work_item_attachment_title(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item_attachment: polarion_api.WorkItemAttachment,
 ):
@@ -219,17 +225,16 @@ def test_update_work_item_attachment_title(
     work_item_attachment.content_bytes = None
     work_item_attachment.file_name = None
 
-    client.update_work_item_attachment(work_item_attachment)
+    client.work_items.attachments.update(work_item_attachment)
 
     req = httpx_mock.get_request()
 
-    body = req.stream
-    assert isinstance(body, _multipart.MultipartStream)
-    assert len(body.fields) == 1
+    fields = _extract_data_from_request(req)
+    resource = fields["resource"][0]
 
-    assert body.fields[0].headers["Content-Type"] == "text/plain"
-    assert body.fields[0].name == "resource"
-    assert body.fields[0].file == json.dumps(
+    assert "files" not in fields
+    assert resource.get_content_type() == "text/plain"
+    assert resource.get_payload() == json.dumps(
         {
             "data": {
                 "type": "workitem_attachments",
@@ -237,11 +242,11 @@ def test_update_work_item_attachment_title(
                 "attributes": {"title": "TestTitle"},
             }
         }
-    ).encode("utf-8")
+    )
 
 
 def test_update_work_item_attachment_content(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item_attachment: polarion_api.WorkItemAttachment,
 ):
@@ -250,17 +255,16 @@ def test_update_work_item_attachment_content(
     work_item_attachment.id = "MyAttachmentId"
     work_item_attachment.title = None
 
-    client.update_work_item_attachment(work_item_attachment)
+    client.work_items.attachments.update(work_item_attachment)
 
     req = httpx_mock.get_request()
 
-    body = req.stream
-    assert isinstance(body, _multipart.MultipartStream)
-    assert len(body.fields) == 2
+    fields = _extract_data_from_request(req)
+    resource = fields["resource"][0]
+    content = fields["content"][0]
 
-    assert body.fields[0].headers["Content-Type"] == "text/plain"
-    assert body.fields[0].name == "resource"
-    assert body.fields[0].file == json.dumps(
+    assert resource.get_content_type() == "text/plain"
+    assert resource.get_payload() == json.dumps(
         {
             "data": {
                 "type": "workitem_attachments",
@@ -268,9 +272,11 @@ def test_update_work_item_attachment_content(
                 "attributes": {},
             }
         }
-    ).encode("utf-8")
+    )
 
-    assert body.fields[1].headers["Content-Type"] == "text/plain"
-    assert body.fields[1].filename == "test.json"
-    assert body.fields[1].name == "content"
-    assert body.fields[1].file.read() == work_item_attachment.content_bytes
+    assert content.get_content_type() == "text/plain"
+    assert content.get_filename() == "test.json"
+    assert work_item_attachment.content_bytes is not None
+    assert content.get_payload() == work_item_attachment.content_bytes.decode(
+        "utf-8"
+    )

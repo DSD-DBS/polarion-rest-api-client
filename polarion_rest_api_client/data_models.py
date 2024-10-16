@@ -3,17 +3,16 @@
 """Data model classes returned by the client."""
 from __future__ import annotations
 
-import base64
 import dataclasses
 import datetime
 import enum
-import hashlib
-import json
 import typing as t
+import warnings
 
 __all__ = [
     "Document",
     "DocumentReference",
+    "HtmlContent",
     "Layouter",
     "RenderingLayout",
     "RenderingProperties",
@@ -44,18 +43,6 @@ class StatusItem:
     id: str | None = None
     type: str | None = None
     status: str | None = None
-    _checksum: str | None = dataclasses.field(init=False, default=None)
-
-    def __eq__(self, other: object) -> bool:
-        """Compare only StatusItem attributes."""
-        if not isinstance(other, StatusItem):
-            return NotImplemented
-        if self.get_current_checksum() is None:
-            self.calculate_checksum()
-        if other.get_current_checksum() is None:
-            other.calculate_checksum()
-
-        return self.get_current_checksum() == other.get_current_checksum()
 
     def to_dict(self) -> dict[str, t.Any]:
         """Return the content of the StatusItem as dictionary."""
@@ -63,27 +50,7 @@ class StatusItem:
             "id": self.id,
             "type": self.type,
             "status": self.status,
-            "checksum": self._checksum,
         }
-
-    def calculate_checksum(self) -> str:
-        """Calculate and return a checksum for this StatusItem.
-
-        In addition, the checksum will be written to self._checksum.
-        """
-        data = self.to_dict()
-        del data["checksum"]
-        del data["id"]
-
-        data = dict(sorted(data.items()))
-
-        converted = json.dumps(data).encode("utf8")
-        self._checksum = hashlib.sha256(converted).hexdigest()
-        return self._checksum
-
-    def get_current_checksum(self) -> str | None:
-        """Return the checksum currently set without calculation."""
-        return self._checksum
 
 
 @dataclasses.dataclass
@@ -98,8 +65,7 @@ class WorkItem(StatusItem):
     """A data class containing all relevant data of a Polarion WorkItem."""
 
     title: str | None = None
-    description_type: str | None = None
-    description: str | None = None
+    description: TextContent | None = None
     additional_attributes: dict[str, t.Any] = {}
     linked_work_items: list[WorkItemLink] = []
     attachments: list[WorkItemAttachment] = []
@@ -110,9 +76,10 @@ class WorkItem(StatusItem):
     def __init__(
         self,
         id: str | None = None,
+        *,
         title: str | None = None,
         description_type: str | None = None,
-        description: str | None = None,
+        description: TextContent | str | None = None,
         type: str | None = None,
         status: str | None = None,
         additional_attributes: dict[str, t.Any] | None = None,
@@ -125,10 +92,25 @@ class WorkItem(StatusItem):
     ):
         super().__init__(id, type, status)
         self.title = title
-        self.description_type = description_type
+        if description_type or isinstance(description, str):
+            warnings.warn(
+                "Using description as str or description_type is "
+                "deprecated. Use TextContent instead.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+
+            assert description_type, (
+                "You have to set a description_type when using a string as"
+                " description"
+            )
+            assert not isinstance(description, TextContent), (
+                "Don't use description_type when setting description as "
+                "TextContent"
+            )
+            description = TextContent(description_type, description)
         self.description = description
         self.additional_attributes = (additional_attributes or {}) | kwargs
-        self._checksum = self.additional_attributes.pop("checksum", None)
         self.linked_work_items = linked_work_items or []
         self.attachments = attachments or []
         self.linked_work_items_truncated = linked_work_items_truncated
@@ -137,27 +119,16 @@ class WorkItem(StatusItem):
 
     def __getattribute__(self, item: str) -> t.Any:
         """Return all non WorkItem attributes from additional_properties."""
-        if item.startswith("__") or item in dir(WorkItem):
+        if item.startswith("__") or item in dir(self.__class__):
             return super().__getattribute__(item)
         return self.additional_attributes.get(item)
 
     def __setattr__(self, key: str, value: t.Any):
         """Set all non WorkItem attributes in additional_properties."""
-        if key in dir(WorkItem):
+        if key in dir(self.__class__):
             super().__setattr__(key, value)
         else:
             self.additional_attributes[key] = value
-
-    def __eq__(self, other: object) -> bool:
-        """Compare only WorkItem attributes."""
-        if not isinstance(other, WorkItem):
-            return NotImplemented
-        if self.get_current_checksum() is None:
-            self.calculate_checksum()
-        if other.get_current_checksum() is None:
-            other.calculate_checksum()
-
-        return self.get_current_checksum() == other.get_current_checksum()
 
     def to_dict(self) -> dict[str, t.Any]:
         """Return the content of the WorkItem as dictionary."""
@@ -173,14 +144,12 @@ class WorkItem(StatusItem):
         return {
             "id": self.id,
             "title": self.title,
-            "description_type": self.description_type,
             "description": self.description,
             "type": self.type,
             "status": self.status,
             "additional_attributes": dict(
                 sorted(self.additional_attributes.items())
             ),
-            "checksum": self._checksum,
             "linked_work_items": [
                 dataclasses.asdict(lwi) for lwi in sorted_links
             ],
@@ -193,31 +162,6 @@ class WorkItem(StatusItem):
                 else None
             ),
         }
-
-    def calculate_checksum(self) -> str:
-        """Calculate and return a checksum for this WorkItem.
-
-        In addition, the checksum will be written to self._checksum.
-        """
-        data = self.to_dict()
-        del data["checksum"]
-        del data["id"]
-
-        for attachment in data["attachments"]:
-            try:
-                attachment["content_bytes"] = base64.b64encode(
-                    attachment["content_bytes"]
-                ).decode("utf8")
-            except TypeError:
-                pass
-
-            del attachment["id"]
-
-        data = dict(sorted(data.items()))
-
-        converted = json.dumps(data).encode("utf8")
-        self._checksum = hashlib.sha256(converted).hexdigest()
-        return self._checksum
 
 
 @dataclasses.dataclass
@@ -394,12 +338,36 @@ class TestRecord:
     )
 
 
-@dataclasses.dataclass
-class TextContent:
-    """A data class for home_page_content of a Polarion Document."""
+class TextContent(dict):
+    """A data class for text content in Polarion."""
 
-    type: str | None = None
-    value: str | None = None
+    def __init__(self, type: str | None, value: str | None):
+        super().__init__(type=type, value=value)
+
+    @property
+    def type(self):
+        """Return type of the TextContent."""
+        return self["type"]
+
+    @type.setter
+    def type(self, type: str):
+        self["type"] = type
+
+    @property
+    def value(self):
+        """Return value of the TextContent."""
+        return self["value"]
+
+    @value.setter
+    def value(self, value: str):
+        self["value"] = value
+
+
+class HtmlContent(TextContent):
+    """A specialized class for HTML based TextContent."""
+
+    def __init__(self, value: str):
+        super().__init__(type="text/html", value=value)
 
 
 class SelectTestCasesBy(str, enum.Enum):

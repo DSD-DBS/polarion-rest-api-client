@@ -18,7 +18,7 @@ from tests.conftest import (
 
 
 def test_get_test_runs_multi_page(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_TRUN_NEXT_RESPONSE, encoding="utf8") as f:
@@ -29,7 +29,7 @@ def test_get_test_runs_multi_page(
     with open(TEST_TRUN_NO_NEXT_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    test_runs = client.get_all_test_runs("123", {"test_runs": "@all"})
+    test_runs = client.test_runs.get_all("123", fields={"test_runs": "@all"})
 
     query = {
         "page[size]": "100",
@@ -60,7 +60,7 @@ def test_get_test_runs_multi_page(
 
 
 def test_create_test_runs(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     with open(TEST_TRUN_CREATED_RESPONSE, encoding="utf8") as f:
@@ -99,7 +99,7 @@ def test_create_test_runs(
         {},
     )
 
-    client.create_test_runs([tr_1, tr_2])
+    client.test_runs.create([tr_1, tr_2])
 
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
@@ -108,11 +108,12 @@ def test_create_test_runs(
         expected_req = json.load(f)
 
     assert req_data == expected_req
-    assert reqs[0].url.path == f"/api/projects/{client.project_id}/testruns"
+    assert tr_1.id == "MyTestRunId"
+    assert tr_2.id == "MyTestRunId2"
 
 
 def test_update_test_run(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
@@ -127,7 +128,7 @@ def test_update_test_run(
         use_report_from_template=False,
     )
 
-    client.update_test_run(tr)
+    client.test_runs.update(tr)
 
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
@@ -136,14 +137,11 @@ def test_update_test_run(
         expected_req = json.load(f)
 
     assert req_data == expected_req
-    assert (
-        reqs[0].url.path
-        == f"/api/projects/{client.project_id}/testruns/{test_run_id}"
-    )
+    assert reqs[0].url.path.endswith(f"/testruns/{test_run_id}")
 
 
 def test_update_test_run_fully(
-    client: polarion_api.OpenAPIPolarionProjectClient,
+    client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
@@ -164,7 +162,7 @@ def test_update_test_run_fully(
         {},
     )
 
-    client.update_test_run(tr)
+    client.test_runs.update(tr)
 
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
