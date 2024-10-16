@@ -387,11 +387,9 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             isinstance(response.parsed, api_models.WorkitemsListPostResponse)
             and response.parsed.data
         )
-        counter = 0
-        for work_item_res in response.parsed.data:
+        for index, work_item_res in enumerate(response.parsed.data):
             assert work_item_res.id
-            work_item_objs[counter].id = work_item_res.id.split("/")[-1]
-            counter += 1
+            work_item_objs[index].id = work_item_res.id.split("/")[-1]
 
     def _calculate_post_work_item_request_sizes(
         self,

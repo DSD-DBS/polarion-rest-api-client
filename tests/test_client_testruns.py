@@ -108,6 +108,8 @@ def test_create_test_runs(
         expected_req = json.load(f)
 
     assert req_data == expected_req
+    assert tr_1.id == "MyTestRunId"
+    assert tr_2.id == "MyTestRunId2"
 
 
 def test_update_test_run(
