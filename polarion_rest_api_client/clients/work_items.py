@@ -356,7 +356,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                 type=api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description.type
                 ),
-                value=work_item.description.value or oa_types.UNSET,
+                value=work_item.description.value or "",
             )
 
         if work_item.status is not None:
