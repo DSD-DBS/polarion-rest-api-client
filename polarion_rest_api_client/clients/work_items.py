@@ -312,7 +312,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                 type=api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description.type
                 ),
-                value=work_item.description.value or oa_types.UNSET,
+                value=work_item.description.value or "",
             ),
             status=work_item.status,
             title=work_item.title,
