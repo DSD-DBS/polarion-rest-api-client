@@ -131,8 +131,7 @@ class Documents(
                             type=api_models.DocumentsSinglePatchRequestDataAttributesHomePageContentType(
                                 to_update.home_page_content.type
                             ),
-                            value=to_update.home_page_content.value
-                            or oa_types.UNSET,
+                            value=to_update.home_page_content.value or "",
                         )
                         if to_update.home_page_content
                         else oa_types.UNSET
@@ -211,8 +210,7 @@ class Documents(
                                 type=api_models.DocumentsListPostRequestDataItemAttributesHomePageContentType(
                                     document.home_page_content.type
                                 ),
-                                value=document.home_page_content.value
-                                or oa_types.UNSET,
+                                value=document.home_page_content.value or "",
                             )
                             if document.home_page_content
                             else oa_types.UNSET

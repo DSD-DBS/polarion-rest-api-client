@@ -302,20 +302,21 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         self, work_item: dm.WorkItem
     ) -> api_models.WorkitemsListPostRequestDataItem:
         assert work_item.type is not None
-        assert work_item.title is not None
-        assert work_item.description is not None
-        assert work_item.status is not None
 
         attrs = api_models.WorkitemsListPostRequestDataItemAttributes(
             type=work_item.type,
-            description=api_models.WorkitemsListPostRequestDataItemAttributesDescription(  # pylint: disable=line-too-long
-                type=api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
-                    work_item.description.type
-                ),
-                value=work_item.description.value or oa_types.UNSET,
+            description=(
+                api_models.WorkitemsListPostRequestDataItemAttributesDescription(  # pylint: disable=line-too-long
+                    type=api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
+                        work_item.description.type
+                    ),
+                    value=work_item.description.value or "",
+                )
+                if work_item.description
+                else oa_types.UNSET
             ),
-            status=work_item.status,
-            title=work_item.title,
+            status=work_item.status or oa_types.UNSET,
+            title=work_item.title or oa_types.UNSET,
         )
 
         attrs.additional_properties.update(work_item.additional_attributes)
@@ -356,7 +357,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                 type=api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description.type
                 ),
-                value=work_item.description.value or oa_types.UNSET,
+                value=work_item.description.value or "",
             )
 
         if work_item.status is not None:
