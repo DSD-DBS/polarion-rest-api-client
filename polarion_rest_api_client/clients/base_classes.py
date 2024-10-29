@@ -250,6 +250,8 @@ class StatusItemClient(UpdatableItemsClient, t.Generic[ST], abc.ABC):
     them. This status has to be provided on initialization.
     """
 
+    item_cls: type[ST]
+
     def __init__(
         self,
         project_id: str,
@@ -266,6 +268,10 @@ class StatusItemClient(UpdatableItemsClient, t.Generic[ST], abc.ABC):
         else:
             if not isinstance(items, list):
                 items = [items]
+            delete_items: list[ST] = []
             for item in items:
                 item.status = self.delete_status
-            self.update(items)
+                delete_items.append(
+                    self.item_cls(id=item.id, status=self.delete_status)
+                )
+            self.update(delete_items)

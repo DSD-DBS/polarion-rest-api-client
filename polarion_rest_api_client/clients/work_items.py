@@ -49,6 +49,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             project_id, client
         )
         self.links = work_item_links.WorkItemLinks(project_id, client)
+        self.item_cls = dm.WorkItem
 
     def _update(self, to_update: list[dm.WorkItem] | dm.WorkItem):
         assert not isinstance(to_update, list), "Expected only one item"
