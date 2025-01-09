@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "totalCount": 0
+  },
+  "data": [
+    {
+      "type": "teststeps",
+      "id": "MyProjectId/MyWorkItemId/1",
+      "revision": "1234",
+      "attributes": {
+        "index": "1",
+        "keys": [
+          "string"
+        ],
+        "values": [
+          {
+            "type": "text/html",
+            "value": "My text value"
+          }
+        ]
+      },
+      "meta": {
+        "errors": [
+          {
+            "status": "400",
+            "title": "Bad Request",
+            "detail": "Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data)",
+            "source": {
+              "pointer": "$.data",
+              "parameter": "revision",
+              "resource": {
+                "id": "MyProjectId/id",
+                "type": "type"
+              }
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/teststeps/MyTestStepIndex?revision=1234"
+      }
+    }
+  ],
+  "included": [
+    {}
+  ],
+  "links": {
+    "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/teststeps?page%5Bsize%5D=10&page%5Bnumber%5D=5",
+    "first": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/teststeps?page%5Bsize%5D=10&page%5Bnumber%5D=1",
+    "prev": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/teststeps?page%5Bsize%5D=10&page%5Bnumber%5D=4",
+    "next": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/teststeps?page%5Bsize%5D=10&page%5Bnumber%5D=6",
+    "last": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/teststeps?page%5Bsize%5D=10&page%5Bnumber%5D=9"
+  }
+}
