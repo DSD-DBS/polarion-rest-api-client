@@ -133,6 +133,12 @@ TEST_TREC_NO_NEXT_RESPONSE = TEST_RESPONSES / "test_records_no_next_page.json"
 TEST_TRUN_NEXT_RESPONSE = TEST_RESPONSES / "test_runs_next_page.json"
 TEST_TRUN_NO_NEXT_RESPONSE = TEST_RESPONSES / "test_runs_no_next_page.json"
 
+TEST_STEPS_CREATED_RESPONSE = TEST_RESPONSES / "created_test_steps.json"
+TEST_STEPS_NEXT_RESPONSE = TEST_RESPONSES / "test_steps_next_page.json"
+TEST_STEPS_NO_NEXT_RESPONSE = TEST_RESPONSES / "test_steps_no_next_page.json"
+TEST_STEPS_PATCH_REQUEST = TEST_REQUESTS / "patch_test_steps.json"
+TEST_STEPS_POST_REQUEST = TEST_REQUESTS / "post_test_steps.json"
+
 
 class CustomWorkItem(polarion_api.WorkItem):
     capella_uuid: str | None

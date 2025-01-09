@@ -21,6 +21,7 @@ class DefaultFields:
     _documents: str = "@basic"
     _testrecords: str = "@basic"
     _testruns: str = "@basic"
+    _teststeps: str = "@basic"
 
     @property
     def workitems(self):
@@ -75,6 +76,15 @@ class DefaultFields:
     @testrecords.setter
     def testrecords(self, value):
         self._testrecords = value
+
+    @property
+    def teststeps(self):
+        """Return the fields dict for document."""
+        return {"teststeps": self._teststeps}
+
+    @teststeps.setter
+    def teststeps(self, value):
+        self._teststeps = value
 
     @property
     def all_types(self):
