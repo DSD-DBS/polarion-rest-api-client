@@ -116,6 +116,8 @@ def test_update_test_run(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
+    with open(TEST_TRUN_PATCH_REQUEST, encoding="utf8") as f:
+        expected_req = json.load(f)
     httpx_mock.add_response(204)
     test_run_id = "asdfg"
     tr = polarion_api.TestRun(
@@ -132,19 +134,15 @@ def test_update_test_run(
 
     client.test_runs.update(tr)
 
-    reqs = httpx_mock.get_requests()
+    assert (reqs := httpx_mock.get_requests())
     assert len(reqs) == 1
-    req_data = json.loads(reqs[0].content.decode("utf-8"))
-    with open(TEST_TRUN_PATCH_REQUEST, encoding="utf8") as f:
-        expected_req = json.load(f)
-
+    assert (req_data := json.loads(reqs[0].content.decode("utf-8")))
     assert req_data == expected_req
     assert reqs[0].url.path.endswith(f"/testruns/{test_run_id}")
 
 
 def test_update_test_run_fully(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
     tr = polarion_api.TestRun(

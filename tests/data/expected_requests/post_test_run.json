@@ -3,7 +3,7 @@
     {
       "type": "testruns",
       "attributes": {
-        "finishedOn": "1970-01-01T00:00:00",
+        "finishedOn": "1970-01-01T00:00:00+00:00",
         "groupId": "Group ID",
         "homePageContent": {
           "type": "text/html",
@@ -24,7 +24,7 @@
     {
       "type": "testruns",
       "attributes": {
-        "finishedOn": "1970-01-01T00:00:00",
+        "finishedOn": "1970-01-01T00:00:00+00:00",
         "groupId": "Group ID",
         "homePageContent": {
           "type": "text/html",
