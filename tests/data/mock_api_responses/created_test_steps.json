@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "type": "teststeps",
+      "id": "MyProjectId/MyWorkItemId/0",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/teststeps/MyTestStepIndex?revision=1234"
+      }
+    },
+    {
+      "type": "teststeps",
+      "id": "MyProjectId/MyWorkItemId/1",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/teststeps/MyTestStepIndex?revision=1234"
+      }
+    }
+  ]
+}
