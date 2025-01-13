@@ -3,7 +3,7 @@
 
 import json
 from io import BytesIO
-from typing import TYPE_CHECKING, Any, Dict, List, Tuple, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,26 +21,25 @@ T = TypeVar("T", bound="PatchTestStepResultAttachmentsRequestBody")
 
 @_attrs_define
 class PatchTestStepResultAttachmentsRequestBody:
-    """
-    Attributes:
-        resource (TeststepresultAttachmentsSinglePatchRequest):
-        content (Union[Unset, File]): attachments content
+    """Attributes
+    resource (TeststepresultAttachmentsSinglePatchRequest):
+    content (Union[Unset, File]): attachments content
     """
 
     resource: "TeststepresultAttachmentsSinglePatchRequest"
-    content: Union[Unset, File] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    content: Unset | File = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         resource = self.resource.to_dict()
 
-        content: Union[Unset, FileJsonType] = UNSET
+        content: Unset | FileJsonType = UNSET
         if not isinstance(self.content, Unset):
             content = self.content.to_tuple()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -52,8 +51,8 @@ class PatchTestStepResultAttachmentsRequestBody:
 
         return field_dict
 
-    def to_multipart(self) -> List[Tuple[str, Any]]:
-        field_list: List[Tuple[str, Any]] = []
+    def to_multipart(self) -> list[tuple[str, Any]]:
+        field_list: list[tuple[str, Any]] = []
         resource = (
             None,
             json.dumps(self.resource.to_dict()).encode(),
@@ -61,14 +60,14 @@ class PatchTestStepResultAttachmentsRequestBody:
         )
 
         field_list.append(("resource", resource))
-        content: Union[Unset, FileJsonType] = UNSET
+        content: Unset | FileJsonType = UNSET
         if not isinstance(self.content, Unset):
             content = self.content.to_tuple()
 
         if content is not UNSET:
             field_list.append(("content", content))
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(
             {
                 key: (None, str(value).encode(), "text/plain")
@@ -81,7 +80,7 @@ class PatchTestStepResultAttachmentsRequestBody:
         return field_list
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.teststepresult_attachments_single_patch_request import (
             TeststepresultAttachmentsSinglePatchRequest,
         )
@@ -92,7 +91,7 @@ class PatchTestStepResultAttachmentsRequestBody:
         )
 
         _content = d.pop("content", UNSET)
-        content: Union[Unset, File]
+        content: Unset | File
         if isinstance(_content, Unset):
             content = UNSET
         else:
@@ -103,13 +102,11 @@ class PatchTestStepResultAttachmentsRequestBody:
             content=content,
         )
 
-        patch_test_step_result_attachments_request_body_obj.additional_properties = (
-            d
-        )
+        patch_test_step_result_attachments_request_body_obj.additional_properties = d
         return patch_test_step_result_attachments_request_body_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

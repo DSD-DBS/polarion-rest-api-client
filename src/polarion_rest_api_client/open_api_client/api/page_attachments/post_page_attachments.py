@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -24,16 +24,12 @@ def _get_kwargs(
     page_name: str,
     *,
     body: PostPageAttachmentsRequestBody,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/spaces/{spaceId}/pages/{pageName}/attachments".format(
-            projectId=project_id,
-            spaceId=space_id,
-            pageName=page_name,
-        ),
+        "url": f"/projects/{project_id}/spaces/{space_id}/pages/{page_name}/attachments",
     }
 
     _body = body.to_multipart()
@@ -45,8 +41,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, PageAttachmentsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | PageAttachmentsListPostResponse | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = PageAttachmentsListPostResponse.from_dict(
             response.json()
@@ -95,13 +91,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, PageAttachmentsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | PageAttachmentsListPostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -115,9 +110,9 @@ def sync_detailed(
     space_id: str,
     page_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostPageAttachmentsRequestBody,
-) -> Response[Union[Errors, PageAttachmentsListPostResponse]]:
+) -> Response[Errors | PageAttachmentsListPostResponse]:
     r"""Creates a list of Page Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -131,11 +126,13 @@ def sync_detailed(
         page_name (str):
         body (PostPageAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, PageAttachmentsListPostResponse]]
     """
 
@@ -158,9 +155,9 @@ def sync(
     space_id: str,
     page_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostPageAttachmentsRequestBody,
-) -> Optional[Union[Errors, PageAttachmentsListPostResponse]]:
+) -> Errors | PageAttachmentsListPostResponse | None:
     r"""Creates a list of Page Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -174,11 +171,13 @@ def sync(
         page_name (str):
         body (PostPageAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, PageAttachmentsListPostResponse]
     """
 
@@ -196,9 +195,9 @@ async def asyncio_detailed(
     space_id: str,
     page_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostPageAttachmentsRequestBody,
-) -> Response[Union[Errors, PageAttachmentsListPostResponse]]:
+) -> Response[Errors | PageAttachmentsListPostResponse]:
     r"""Creates a list of Page Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -212,11 +211,13 @@ async def asyncio_detailed(
         page_name (str):
         body (PostPageAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, PageAttachmentsListPostResponse]]
     """
 
@@ -237,9 +238,9 @@ async def asyncio(
     space_id: str,
     page_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostPageAttachmentsRequestBody,
-) -> Optional[Union[Errors, PageAttachmentsListPostResponse]]:
+) -> Errors | PageAttachmentsListPostResponse | None:
     r"""Creates a list of Page Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -253,11 +254,13 @@ async def asyncio(
         page_name (str):
         body (PostPageAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, PageAttachmentsListPostResponse]
     """
 

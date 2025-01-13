@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,26 +15,25 @@ T = TypeVar("T", bound="RevisionsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class RevisionsSingleGetResponseDataAttributes:
-    """
-    Attributes:
-        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        id (Union[Unset, str]):
-        internal_commit (Union[Unset, bool]):
-        message (Union[Unset, str]):  Example: Message.
-        repository_name (Union[Unset, str]):  Example: Repository name.
+    """Attributes
+    created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    id (Union[Unset, str]):
+    internal_commit (Union[Unset, bool]):
+    message (Union[Unset, str]):  Example: Message.
+    repository_name (Union[Unset, str]):  Example: Repository name.
     """
 
-    created: Union[Unset, datetime.datetime] = UNSET
-    id: Union[Unset, str] = UNSET
-    internal_commit: Union[Unset, bool] = UNSET
-    message: Union[Unset, str] = UNSET
-    repository_name: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    created: Unset | datetime.datetime = UNSET
+    id: Unset | str = UNSET
+    internal_commit: Unset | bool = UNSET
+    message: Unset | str = UNSET
+    repository_name: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        created: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        created: Unset | str = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
 
@@ -46,7 +45,7 @@ class RevisionsSingleGetResponseDataAttributes:
 
         repository_name = self.repository_name
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if created is not UNSET:
@@ -63,10 +62,10 @@ class RevisionsSingleGetResponseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         _created = d.pop("created", UNSET)
-        created: Union[Unset, datetime.datetime]
+        created: Unset | datetime.datetime
         if isinstance(_created, Unset):
             created = UNSET
         else:
@@ -88,13 +87,11 @@ class RevisionsSingleGetResponseDataAttributes:
             repository_name=repository_name,
         )
 
-        revisions_single_get_response_data_attributes_obj.additional_properties = (
-            d
-        )
+        revisions_single_get_response_data_attributes_obj.additional_properties = d
         return revisions_single_get_response_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

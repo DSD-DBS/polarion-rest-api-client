@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,24 +19,23 @@ T = TypeVar("T", bound="WorkrecordsListGetResponseDataItemRelationshipsUser")
 
 @_attrs_define
 class WorkrecordsListGetResponseDataItemRelationshipsUser:
-    """
-    Attributes:
-        data (Union[Unset, WorkrecordsListGetResponseDataItemRelationshipsUserData]):
+    """Attributes
+    data (Union[Unset, WorkrecordsListGetResponseDataItemRelationshipsUserData]):
     """
 
     data: Union[
         Unset, "WorkrecordsListGetResponseDataItemRelationshipsUserData"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        data: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        data: Unset | dict[str, Any] = UNSET
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if data is not UNSET:
@@ -45,16 +44,14 @@ class WorkrecordsListGetResponseDataItemRelationshipsUser:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workrecords_list_get_response_data_item_relationships_user_data import (
             WorkrecordsListGetResponseDataItemRelationshipsUserData,
         )
 
         d = src_dict.copy()
         _data = d.pop("data", UNSET)
-        data: Union[
-            Unset, WorkrecordsListGetResponseDataItemRelationshipsUserData
-        ]
+        data: Unset | WorkrecordsListGetResponseDataItemRelationshipsUserData
         if isinstance(_data, Unset):
             data = UNSET
         else:
@@ -66,13 +63,11 @@ class WorkrecordsListGetResponseDataItemRelationshipsUser:
             data=data,
         )
 
-        workrecords_list_get_response_data_item_relationships_user_obj.additional_properties = (
-            d
-        )
+        workrecords_list_get_response_data_item_relationships_user_obj.additional_properties = d
         return workrecords_list_get_response_data_item_relationships_user_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

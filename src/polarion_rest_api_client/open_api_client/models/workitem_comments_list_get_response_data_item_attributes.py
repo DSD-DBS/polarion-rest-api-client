@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,28 +21,27 @@ T = TypeVar("T", bound="WorkitemCommentsListGetResponseDataItemAttributes")
 
 @_attrs_define
 class WorkitemCommentsListGetResponseDataItemAttributes:
-    """
-    Attributes:
-        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        id (Union[Unset, str]):  Example: MyCommentId.
-        resolved (Union[Unset, bool]):
-        text (Union[Unset, WorkitemCommentsListGetResponseDataItemAttributesText]):
-        title (Union[Unset, str]):  Example: Title.
+    """Attributes
+    created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    id (Union[Unset, str]):  Example: MyCommentId.
+    resolved (Union[Unset, bool]):
+    text (Union[Unset, WorkitemCommentsListGetResponseDataItemAttributesText]):
+    title (Union[Unset, str]):  Example: Title.
     """
 
-    created: Union[Unset, datetime.datetime] = UNSET
-    id: Union[Unset, str] = UNSET
-    resolved: Union[Unset, bool] = UNSET
+    created: Unset | datetime.datetime = UNSET
+    id: Unset | str = UNSET
+    resolved: Unset | bool = UNSET
     text: Union[
         Unset, "WorkitemCommentsListGetResponseDataItemAttributesText"
     ] = UNSET
-    title: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    title: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        created: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        created: Unset | str = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
 
@@ -50,13 +49,13 @@ class WorkitemCommentsListGetResponseDataItemAttributes:
 
         resolved = self.resolved
 
-        text: Union[Unset, Dict[str, Any]] = UNSET
+        text: Unset | dict[str, Any] = UNSET
         if not isinstance(self.text, Unset):
             text = self.text.to_dict()
 
         title = self.title
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if created is not UNSET:
@@ -73,14 +72,14 @@ class WorkitemCommentsListGetResponseDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workitem_comments_list_get_response_data_item_attributes_text import (
             WorkitemCommentsListGetResponseDataItemAttributesText,
         )
 
         d = src_dict.copy()
         _created = d.pop("created", UNSET)
-        created: Union[Unset, datetime.datetime]
+        created: Unset | datetime.datetime
         if isinstance(_created, Unset):
             created = UNSET
         else:
@@ -91,9 +90,7 @@ class WorkitemCommentsListGetResponseDataItemAttributes:
         resolved = d.pop("resolved", UNSET)
 
         _text = d.pop("text", UNSET)
-        text: Union[
-            Unset, WorkitemCommentsListGetResponseDataItemAttributesText
-        ]
+        text: Unset | WorkitemCommentsListGetResponseDataItemAttributesText
         if isinstance(_text, Unset):
             text = UNSET
         else:
@@ -111,13 +108,11 @@ class WorkitemCommentsListGetResponseDataItemAttributes:
             title=title,
         )
 
-        workitem_comments_list_get_response_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        workitem_comments_list_get_response_data_item_attributes_obj.additional_properties = d
         return workitem_comments_list_get_response_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

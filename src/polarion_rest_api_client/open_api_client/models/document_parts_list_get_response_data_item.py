@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,20 +32,19 @@ T = TypeVar("T", bound="DocumentPartsListGetResponseDataItem")
 
 @_attrs_define
 class DocumentPartsListGetResponseDataItem:
-    """
-    Attributes:
-        type (Union[Unset, DocumentPartsListGetResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, DocumentPartsListGetResponseDataItemAttributes]):
-        relationships (Union[Unset, DocumentPartsListGetResponseDataItemRelationships]):
-        links (Union[Unset, DocumentPartsListGetResponseDataItemLinks]):
-        meta (Union[Unset, DocumentPartsListGetResponseDataItemMeta]):
+    """Attributes
+    type (Union[Unset, DocumentPartsListGetResponseDataItemType]):
+    id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+    revision (Union[Unset, str]):  Example: 1234.
+    attributes (Union[Unset, DocumentPartsListGetResponseDataItemAttributes]):
+    relationships (Union[Unset, DocumentPartsListGetResponseDataItemRelationships]):
+    links (Union[Unset, DocumentPartsListGetResponseDataItemLinks]):
+    meta (Union[Unset, DocumentPartsListGetResponseDataItemMeta]):
     """
 
-    type: Union[Unset, DocumentPartsListGetResponseDataItemType] = UNSET
-    id: Union[Unset, str] = UNSET
-    revision: Union[Unset, str] = UNSET
+    type: Unset | DocumentPartsListGetResponseDataItemType = UNSET
+    id: Unset | str = UNSET
+    revision: Unset | str = UNSET
     attributes: Union[
         Unset, "DocumentPartsListGetResponseDataItemAttributes"
     ] = UNSET
@@ -53,12 +53,12 @@ class DocumentPartsListGetResponseDataItem:
     ] = UNSET
     links: Union[Unset, "DocumentPartsListGetResponseDataItemLinks"] = UNSET
     meta: Union[Unset, "DocumentPartsListGetResponseDataItemMeta"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
@@ -66,23 +66,23 @@ class DocumentPartsListGetResponseDataItem:
 
         revision = self.revision
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Unset | dict[str, Any] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        relationships: Union[Unset, Dict[str, Any]] = UNSET
+        relationships: Unset | dict[str, Any] = UNSET
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        links: Union[Unset, Dict[str, Any]] = UNSET
+        links: Unset | dict[str, Any] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
+        meta: Unset | dict[str, Any] = UNSET
         if not isinstance(self.meta, Unset):
             meta = self.meta.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
@@ -103,7 +103,7 @@ class DocumentPartsListGetResponseDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         from ..models.document_parts_list_get_response_data_item_attributes import (
             DocumentPartsListGetResponseDataItemAttributes,
         )
@@ -119,7 +119,7 @@ class DocumentPartsListGetResponseDataItem:
 
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Union[Unset, DocumentPartsListGetResponseDataItemType]
+        type: Unset | DocumentPartsListGetResponseDataItemType
         if isinstance(_type, Unset):
             type = UNSET
         else:
@@ -130,9 +130,7 @@ class DocumentPartsListGetResponseDataItem:
         revision = d.pop("revision", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Union[
-            Unset, DocumentPartsListGetResponseDataItemAttributes
-        ]
+        attributes: Unset | DocumentPartsListGetResponseDataItemAttributes
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:
@@ -143,9 +141,7 @@ class DocumentPartsListGetResponseDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Union[
-            Unset, DocumentPartsListGetResponseDataItemRelationships
-        ]
+        relationships: Unset | DocumentPartsListGetResponseDataItemRelationships
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:
@@ -156,14 +152,14 @@ class DocumentPartsListGetResponseDataItem:
             )
 
         _links = d.pop("links", UNSET)
-        links: Union[Unset, DocumentPartsListGetResponseDataItemLinks]
+        links: Unset | DocumentPartsListGetResponseDataItemLinks
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = DocumentPartsListGetResponseDataItemLinks.from_dict(_links)
 
         _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, DocumentPartsListGetResponseDataItemMeta]
+        meta: Unset | DocumentPartsListGetResponseDataItemMeta
         if isinstance(_meta, Unset):
             meta = UNSET
         else:
@@ -179,13 +175,11 @@ class DocumentPartsListGetResponseDataItem:
             meta=meta,
         )
 
-        document_parts_list_get_response_data_item_obj.additional_properties = (
-            d
-        )
+        document_parts_list_get_response_data_item_obj.additional_properties = d
         return document_parts_list_get_response_data_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

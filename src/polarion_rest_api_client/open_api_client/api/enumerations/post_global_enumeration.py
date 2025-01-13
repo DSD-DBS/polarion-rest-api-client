@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -21,10 +21,10 @@ from ...types import Response
 def _get_kwargs(
     *,
     body: EnumerationsListPostRequest,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/enumerations",
     }
@@ -39,8 +39,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[EnumerationsListPostResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> EnumerationsListPostResponse | Errors | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = EnumerationsListPostResponse.from_dict(response.json())
 
@@ -87,13 +87,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[EnumerationsListPostResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[EnumerationsListPostResponse | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -104,19 +103,21 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: EnumerationsListPostRequest,
-) -> Response[Union[EnumerationsListPostResponse, Errors]]:
+) -> Response[EnumerationsListPostResponse | Errors]:
     """Creates a list of Enumerations in the Global context.
 
     Args:
         body (EnumerationsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[EnumerationsListPostResponse, Errors]]
     """
 
@@ -133,19 +134,21 @@ def sync_detailed(
 
 def sync(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: EnumerationsListPostRequest,
-) -> Optional[Union[EnumerationsListPostResponse, Errors]]:
+) -> EnumerationsListPostResponse | Errors | None:
     """Creates a list of Enumerations in the Global context.
 
     Args:
         body (EnumerationsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[EnumerationsListPostResponse, Errors]
     """
 
@@ -157,19 +160,21 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: EnumerationsListPostRequest,
-) -> Response[Union[EnumerationsListPostResponse, Errors]]:
+) -> Response[EnumerationsListPostResponse | Errors]:
     """Creates a list of Enumerations in the Global context.
 
     Args:
         body (EnumerationsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[EnumerationsListPostResponse, Errors]]
     """
 
@@ -184,19 +189,21 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: EnumerationsListPostRequest,
-) -> Optional[Union[EnumerationsListPostResponse, Errors]]:
+) -> EnumerationsListPostResponse | Errors | None:
     """Creates a list of Enumerations in the Global context.
 
     Args:
         body (EnumerationsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[EnumerationsListPostResponse, Errors]
     """
 

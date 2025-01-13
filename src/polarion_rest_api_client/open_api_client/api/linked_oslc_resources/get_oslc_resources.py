@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -20,21 +20,21 @@ def _get_kwargs(
     project_id: str,
     work_item_id: str,
     *,
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    query: Union[Unset, str] = UNSET,
-    sort: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    include: Unset | str = UNSET,
+    query: Unset | str = UNSET,
+    sort: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["page[size]"] = pagesize
 
     params["page[number]"] = pagenumber
 
-    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    json_fields: Unset | dict[str, Any] = UNSET
     if not isinstance(fields, Unset):
         json_fields = fields.to_dict()
     if not isinstance(json_fields, Unset):
@@ -52,12 +52,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/workitems/{workItemId}/linkedoslcresources".format(
-            projectId=project_id,
-            workItemId=work_item_id,
-        ),
+        "url": f"/projects/{project_id}/workitems/{work_item_id}/linkedoslcresources",
         "params": params,
     }
 
@@ -65,8 +62,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, LinkedoslcresourcesListGetResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | LinkedoslcresourcesListGetResponse | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = LinkedoslcresourcesListGetResponse.from_dict(
             response.json()
@@ -103,13 +100,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, LinkedoslcresourcesListGetResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | LinkedoslcresourcesListGetResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -122,15 +118,15 @@ def sync_detailed(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    query: Union[Unset, str] = UNSET,
-    sort: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, LinkedoslcresourcesListGetResponse]]:
+    include: Unset | str = UNSET,
+    query: Unset | str = UNSET,
+    sort: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[Errors | LinkedoslcresourcesListGetResponse]:
     """Returns a list of instances.
 
     Args:
@@ -144,11 +140,13 @@ def sync_detailed(
         sort (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, LinkedoslcresourcesListGetResponse]]
     """
 
@@ -175,15 +173,15 @@ def sync(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    query: Union[Unset, str] = UNSET,
-    sort: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, LinkedoslcresourcesListGetResponse]]:
+    include: Unset | str = UNSET,
+    query: Unset | str = UNSET,
+    sort: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | LinkedoslcresourcesListGetResponse | None:
     """Returns a list of instances.
 
     Args:
@@ -197,11 +195,13 @@ def sync(
         sort (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, LinkedoslcresourcesListGetResponse]
     """
 
@@ -223,15 +223,15 @@ async def asyncio_detailed(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    query: Union[Unset, str] = UNSET,
-    sort: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, LinkedoslcresourcesListGetResponse]]:
+    include: Unset | str = UNSET,
+    query: Unset | str = UNSET,
+    sort: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[Errors | LinkedoslcresourcesListGetResponse]:
     """Returns a list of instances.
 
     Args:
@@ -245,11 +245,13 @@ async def asyncio_detailed(
         sort (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, LinkedoslcresourcesListGetResponse]]
     """
 
@@ -274,15 +276,15 @@ async def asyncio(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    query: Union[Unset, str] = UNSET,
-    sort: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, LinkedoslcresourcesListGetResponse]]:
+    include: Unset | str = UNSET,
+    query: Unset | str = UNSET,
+    sort: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | LinkedoslcresourcesListGetResponse | None:
     """Returns a list of instances.
 
     Args:
@@ -296,11 +298,13 @@ async def asyncio(
         sort (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, LinkedoslcresourcesListGetResponse]
     """
 

@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -22,10 +22,9 @@ T = TypeVar("T", bound="WorkrecordsListGetResponseDataItemRelationships")
 
 @_attrs_define
 class WorkrecordsListGetResponseDataItemRelationships:
-    """
-    Attributes:
-        project (Union[Unset, WorkrecordsListGetResponseDataItemRelationshipsProject]):
-        user (Union[Unset, WorkrecordsListGetResponseDataItemRelationshipsUser]):
+    """Attributes
+    project (Union[Unset, WorkrecordsListGetResponseDataItemRelationshipsProject]):
+    user (Union[Unset, WorkrecordsListGetResponseDataItemRelationshipsUser]):
     """
 
     project: Union[
@@ -34,20 +33,20 @@ class WorkrecordsListGetResponseDataItemRelationships:
     user: Union[
         Unset, "WorkrecordsListGetResponseDataItemRelationshipsUser"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        project: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        project: Unset | dict[str, Any] = UNSET
         if not isinstance(self.project, Unset):
             project = self.project.to_dict()
 
-        user: Union[Unset, Dict[str, Any]] = UNSET
+        user: Unset | dict[str, Any] = UNSET
         if not isinstance(self.user, Unset):
             user = self.user.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if project is not UNSET:
@@ -58,7 +57,7 @@ class WorkrecordsListGetResponseDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workrecords_list_get_response_data_item_relationships_project import (
             WorkrecordsListGetResponseDataItemRelationshipsProject,
         )
@@ -68,9 +67,7 @@ class WorkrecordsListGetResponseDataItemRelationships:
 
         d = src_dict.copy()
         _project = d.pop("project", UNSET)
-        project: Union[
-            Unset, WorkrecordsListGetResponseDataItemRelationshipsProject
-        ]
+        project: Unset | WorkrecordsListGetResponseDataItemRelationshipsProject
         if isinstance(_project, Unset):
             project = UNSET
         else:
@@ -79,7 +76,7 @@ class WorkrecordsListGetResponseDataItemRelationships:
             )
 
         _user = d.pop("user", UNSET)
-        user: Union[Unset, WorkrecordsListGetResponseDataItemRelationshipsUser]
+        user: Unset | WorkrecordsListGetResponseDataItemRelationshipsUser
         if isinstance(_user, Unset):
             user = UNSET
         else:
@@ -94,13 +91,11 @@ class WorkrecordsListGetResponseDataItemRelationships:
             user=user,
         )
 
-        workrecords_list_get_response_data_item_relationships_obj.additional_properties = (
-            d
-        )
+        workrecords_list_get_response_data_item_relationships_obj.additional_properties = d
         return workrecords_list_get_response_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

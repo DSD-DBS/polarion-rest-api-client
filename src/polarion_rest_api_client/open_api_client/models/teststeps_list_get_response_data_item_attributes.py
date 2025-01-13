@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,37 +19,34 @@ T = TypeVar("T", bound="TeststepsListGetResponseDataItemAttributes")
 
 @_attrs_define
 class TeststepsListGetResponseDataItemAttributes:
-    """
-    Attributes:
-        index (Union[Unset, str]):
-        keys (Union[Unset, List[str]]):
-        values (Union[Unset, List['TeststepsListGetResponseDataItemAttributesValuesItem']]):
+    """Attributes
+    index (Union[Unset, str]):
+    keys (Union[Unset, List[str]]):
+    values (Union[Unset, List['TeststepsListGetResponseDataItemAttributesValuesItem']]):
     """
 
-    index: Union[Unset, str] = UNSET
-    keys: Union[Unset, List[str]] = UNSET
-    values: Union[
-        Unset, List["TeststepsListGetResponseDataItemAttributesValuesItem"]
-    ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    index: Unset | str = UNSET
+    keys: Unset | list[str] = UNSET
+    values: Unset | list["TeststepsListGetResponseDataItemAttributesValuesItem"] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         index = self.index
 
-        keys: Union[Unset, List[str]] = UNSET
+        keys: Unset | list[str] = UNSET
         if not isinstance(self.keys, Unset):
             keys = self.keys
 
-        values: Union[Unset, List[Dict[str, Any]]] = UNSET
+        values: Unset | list[dict[str, Any]] = UNSET
         if not isinstance(self.values, Unset):
             values = []
             for values_item_data in self.values:
                 values_item = values_item_data.to_dict()
                 values.append(values_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if index is not UNSET:
@@ -62,7 +59,7 @@ class TeststepsListGetResponseDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.teststeps_list_get_response_data_item_attributes_values_item import (
             TeststepsListGetResponseDataItemAttributesValuesItem,
         )
@@ -70,7 +67,7 @@ class TeststepsListGetResponseDataItemAttributes:
         d = src_dict.copy()
         index = d.pop("index", UNSET)
 
-        keys = cast(List[str], d.pop("keys", UNSET))
+        keys = cast(list[str], d.pop("keys", UNSET))
 
         values = []
         _values = d.pop("values", UNSET)
@@ -89,13 +86,11 @@ class TeststepsListGetResponseDataItemAttributes:
             values=values,
         )
 
-        teststeps_list_get_response_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        teststeps_list_get_response_data_item_attributes_obj.additional_properties = d
         return teststeps_list_get_response_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

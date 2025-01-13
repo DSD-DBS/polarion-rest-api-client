@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -19,11 +19,11 @@ def _get_kwargs(
     project_id: str,
     test_run_id: str,
     *,
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["page[size]"] = pagesize
 
@@ -35,12 +35,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/testruns/{testRunId}/actions/getWorkflowActions".format(
-            projectId=project_id,
-            testRunId=test_run_id,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/actions/getWorkflowActions",
         "params": params,
     }
 
@@ -48,8 +45,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, WorkflowActionsActionResponseBody]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | WorkflowActionsActionResponseBody | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = WorkflowActionsActionResponseBody.from_dict(
             response.json()
@@ -86,13 +83,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, WorkflowActionsActionResponseBody]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | WorkflowActionsActionResponseBody]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -105,11 +101,11 @@ def sync_detailed(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, WorkflowActionsActionResponseBody]]:
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[Errors | WorkflowActionsActionResponseBody]:
     """Returns a list of Workflow Actions.
 
     Args:
@@ -119,11 +115,13 @@ def sync_detailed(
         pagenumber (Union[Unset, int]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, WorkflowActionsActionResponseBody]]
     """
 
@@ -146,11 +144,11 @@ def sync(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, WorkflowActionsActionResponseBody]]:
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | WorkflowActionsActionResponseBody | None:
     """Returns a list of Workflow Actions.
 
     Args:
@@ -160,11 +158,13 @@ def sync(
         pagenumber (Union[Unset, int]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, WorkflowActionsActionResponseBody]
     """
 
@@ -182,11 +182,11 @@ async def asyncio_detailed(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, WorkflowActionsActionResponseBody]]:
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[Errors | WorkflowActionsActionResponseBody]:
     """Returns a list of Workflow Actions.
 
     Args:
@@ -196,11 +196,13 @@ async def asyncio_detailed(
         pagenumber (Union[Unset, int]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, WorkflowActionsActionResponseBody]]
     """
 
@@ -221,11 +223,11 @@ async def asyncio(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, WorkflowActionsActionResponseBody]]:
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | WorkflowActionsActionResponseBody | None:
     """Returns a list of Workflow Actions.
 
     Args:
@@ -235,11 +237,13 @@ async def asyncio(
         pagenumber (Union[Unset, int]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, WorkflowActionsActionResponseBody]
     """
 

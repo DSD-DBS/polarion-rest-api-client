@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,11 +25,10 @@ T = TypeVar("T", bound="TestrecordsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class TestrecordsSingleGetResponseDataRelationships:
-    """
-    Attributes:
-        defect (Union[Unset, TestrecordsSingleGetResponseDataRelationshipsDefect]):
-        executed_by (Union[Unset, TestrecordsSingleGetResponseDataRelationshipsExecutedBy]):
-        test_case (Union[Unset, TestrecordsSingleGetResponseDataRelationshipsTestCase]):
+    """Attributes
+    defect (Union[Unset, TestrecordsSingleGetResponseDataRelationshipsDefect]):
+    executed_by (Union[Unset, TestrecordsSingleGetResponseDataRelationshipsExecutedBy]):
+    test_case (Union[Unset, TestrecordsSingleGetResponseDataRelationshipsTestCase]):
     """
 
     defect: Union[
@@ -41,24 +40,24 @@ class TestrecordsSingleGetResponseDataRelationships:
     test_case: Union[
         Unset, "TestrecordsSingleGetResponseDataRelationshipsTestCase"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        defect: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        defect: Unset | dict[str, Any] = UNSET
         if not isinstance(self.defect, Unset):
             defect = self.defect.to_dict()
 
-        executed_by: Union[Unset, Dict[str, Any]] = UNSET
+        executed_by: Unset | dict[str, Any] = UNSET
         if not isinstance(self.executed_by, Unset):
             executed_by = self.executed_by.to_dict()
 
-        test_case: Union[Unset, Dict[str, Any]] = UNSET
+        test_case: Unset | dict[str, Any] = UNSET
         if not isinstance(self.test_case, Unset):
             test_case = self.test_case.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if defect is not UNSET:
@@ -71,7 +70,7 @@ class TestrecordsSingleGetResponseDataRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.testrecords_single_get_response_data_relationships_defect import (
             TestrecordsSingleGetResponseDataRelationshipsDefect,
         )
@@ -84,9 +83,7 @@ class TestrecordsSingleGetResponseDataRelationships:
 
         d = src_dict.copy()
         _defect = d.pop("defect", UNSET)
-        defect: Union[
-            Unset, TestrecordsSingleGetResponseDataRelationshipsDefect
-        ]
+        defect: Unset | TestrecordsSingleGetResponseDataRelationshipsDefect
         if isinstance(_defect, Unset):
             defect = UNSET
         else:
@@ -97,9 +94,7 @@ class TestrecordsSingleGetResponseDataRelationships:
             )
 
         _executed_by = d.pop("executedBy", UNSET)
-        executed_by: Union[
-            Unset, TestrecordsSingleGetResponseDataRelationshipsExecutedBy
-        ]
+        executed_by: Unset | TestrecordsSingleGetResponseDataRelationshipsExecutedBy
         if isinstance(_executed_by, Unset):
             executed_by = UNSET
         else:
@@ -108,9 +103,7 @@ class TestrecordsSingleGetResponseDataRelationships:
             )
 
         _test_case = d.pop("testCase", UNSET)
-        test_case: Union[
-            Unset, TestrecordsSingleGetResponseDataRelationshipsTestCase
-        ]
+        test_case: Unset | TestrecordsSingleGetResponseDataRelationshipsTestCase
         if isinstance(_test_case, Unset):
             test_case = UNSET
         else:
@@ -124,13 +117,11 @@ class TestrecordsSingleGetResponseDataRelationships:
             test_case=test_case,
         )
 
-        testrecords_single_get_response_data_relationships_obj.additional_properties = (
-            d
-        )
+        testrecords_single_get_response_data_relationships_obj.additional_properties = d
         return testrecords_single_get_response_data_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

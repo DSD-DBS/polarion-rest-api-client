@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -23,15 +23,12 @@ def _get_kwargs(
     work_item_id: str,
     *,
     body: LinkedworkitemsListPostRequest,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/workitems/{workItemId}/linkedworkitems".format(
-            projectId=project_id,
-            workItemId=work_item_id,
-        ),
+        "url": f"/projects/{project_id}/workitems/{work_item_id}/linkedworkitems",
     }
 
     _body = body.to_dict()
@@ -44,8 +41,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, LinkedworkitemsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | LinkedworkitemsListPostResponse | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = LinkedworkitemsListPostResponse.from_dict(
             response.json()
@@ -94,13 +91,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, LinkedworkitemsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | LinkedworkitemsListPostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -113,9 +109,9 @@ def sync_detailed(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: LinkedworkitemsListPostRequest,
-) -> Response[Union[Errors, LinkedworkitemsListPostResponse]]:
+) -> Response[Errors | LinkedworkitemsListPostResponse]:
     """Creates a list of Linked Work Items.
 
      Creates the direct outgoing links to other Work Items. (The same as the corresponding Java API
@@ -126,11 +122,13 @@ def sync_detailed(
         work_item_id (str):
         body (LinkedworkitemsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, LinkedworkitemsListPostResponse]]
     """
 
@@ -151,9 +149,9 @@ def sync(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: LinkedworkitemsListPostRequest,
-) -> Optional[Union[Errors, LinkedworkitemsListPostResponse]]:
+) -> Errors | LinkedworkitemsListPostResponse | None:
     """Creates a list of Linked Work Items.
 
      Creates the direct outgoing links to other Work Items. (The same as the corresponding Java API
@@ -164,11 +162,13 @@ def sync(
         work_item_id (str):
         body (LinkedworkitemsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, LinkedworkitemsListPostResponse]
     """
 
@@ -184,9 +184,9 @@ async def asyncio_detailed(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: LinkedworkitemsListPostRequest,
-) -> Response[Union[Errors, LinkedworkitemsListPostResponse]]:
+) -> Response[Errors | LinkedworkitemsListPostResponse]:
     """Creates a list of Linked Work Items.
 
      Creates the direct outgoing links to other Work Items. (The same as the corresponding Java API
@@ -197,11 +197,13 @@ async def asyncio_detailed(
         work_item_id (str):
         body (LinkedworkitemsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, LinkedworkitemsListPostResponse]]
     """
 
@@ -220,9 +222,9 @@ async def asyncio(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: LinkedworkitemsListPostRequest,
-) -> Optional[Union[Errors, LinkedworkitemsListPostResponse]]:
+) -> Errors | LinkedworkitemsListPostResponse | None:
     """Creates a list of Linked Work Items.
 
      Creates the direct outgoing links to other Work Items. (The same as the corresponding Java API
@@ -233,11 +235,13 @@ async def asyncio(
         work_item_id (str):
         body (LinkedworkitemsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, LinkedworkitemsListPostResponse]
     """
 

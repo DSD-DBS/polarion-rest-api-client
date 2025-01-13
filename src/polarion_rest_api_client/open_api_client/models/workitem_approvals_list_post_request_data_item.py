@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,38 +26,37 @@ T = TypeVar("T", bound="WorkitemApprovalsListPostRequestDataItem")
 
 @_attrs_define
 class WorkitemApprovalsListPostRequestDataItem:
-    """
-    Attributes:
-        type (Union[Unset, WorkitemApprovalsListPostRequestDataItemType]):
-        attributes (Union[Unset, WorkitemApprovalsListPostRequestDataItemAttributes]):
-        relationships (Union[Unset, WorkitemApprovalsListPostRequestDataItemRelationships]):
+    """Attributes
+    type (Union[Unset, WorkitemApprovalsListPostRequestDataItemType]):
+    attributes (Union[Unset, WorkitemApprovalsListPostRequestDataItemAttributes]):
+    relationships (Union[Unset, WorkitemApprovalsListPostRequestDataItemRelationships]):
     """
 
-    type: Union[Unset, WorkitemApprovalsListPostRequestDataItemType] = UNSET
+    type: Unset | WorkitemApprovalsListPostRequestDataItemType = UNSET
     attributes: Union[
         Unset, "WorkitemApprovalsListPostRequestDataItemAttributes"
     ] = UNSET
     relationships: Union[
         Unset, "WorkitemApprovalsListPostRequestDataItemRelationships"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Unset | dict[str, Any] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        relationships: Union[Unset, Dict[str, Any]] = UNSET
+        relationships: Unset | dict[str, Any] = UNSET
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
@@ -69,7 +69,7 @@ class WorkitemApprovalsListPostRequestDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workitem_approvals_list_post_request_data_item_attributes import (
             WorkitemApprovalsListPostRequestDataItemAttributes,
         )
@@ -79,16 +79,14 @@ class WorkitemApprovalsListPostRequestDataItem:
 
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Union[Unset, WorkitemApprovalsListPostRequestDataItemType]
+        type: Unset | WorkitemApprovalsListPostRequestDataItemType
         if isinstance(_type, Unset):
             type = UNSET
         else:
             type = WorkitemApprovalsListPostRequestDataItemType(_type)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Union[
-            Unset, WorkitemApprovalsListPostRequestDataItemAttributes
-        ]
+        attributes: Unset | WorkitemApprovalsListPostRequestDataItemAttributes
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:
@@ -99,9 +97,7 @@ class WorkitemApprovalsListPostRequestDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Union[
-            Unset, WorkitemApprovalsListPostRequestDataItemRelationships
-        ]
+        relationships: Unset | WorkitemApprovalsListPostRequestDataItemRelationships
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:
@@ -115,13 +111,11 @@ class WorkitemApprovalsListPostRequestDataItem:
             relationships=relationships,
         )
 
-        workitem_approvals_list_post_request_data_item_obj.additional_properties = (
-            d
-        )
+        workitem_approvals_list_post_request_data_item_obj.additional_properties = d
         return workitem_approvals_list_post_request_data_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

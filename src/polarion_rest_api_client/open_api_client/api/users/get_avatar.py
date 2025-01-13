@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, cast
 
 import httpx
 
@@ -14,20 +14,18 @@ from ...types import Response
 
 def _get_kwargs(
     user_id: str,
-) -> Dict[str, Any]:
-    _kwargs: Dict[str, Any] = {
+) -> dict[str, Any]:
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/users/{userId}/actions/getAvatar".format(
-            userId=user_id,
-        ),
+        "url": f"/users/{user_id}/actions/getAvatar",
     }
 
     return _kwargs
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Any | Errors | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = cast(Any, None)
         return response_200
@@ -61,13 +59,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Any | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -79,18 +76,20 @@ def _build_response(
 def sync_detailed(
     user_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-) -> Response[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+) -> Response[Any | Errors]:
     """Returns the specified User Avatar.
 
     Args:
         user_id (str):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -108,18 +107,20 @@ def sync_detailed(
 def sync(
     user_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+) -> Any | Errors | None:
     """Returns the specified User Avatar.
 
     Args:
         user_id (str):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 
@@ -132,18 +133,20 @@ def sync(
 async def asyncio_detailed(
     user_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-) -> Response[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+) -> Response[Any | Errors]:
     """Returns the specified User Avatar.
 
     Args:
         user_id (str):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -159,18 +162,20 @@ async def asyncio_detailed(
 async def asyncio(
     user_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+) -> Any | Errors | None:
     """Returns the specified User Avatar.
 
     Args:
         user_id (str):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 

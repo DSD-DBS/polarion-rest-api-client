@@ -59,7 +59,7 @@ class TestRuns(
         *,
         page_size: int = 100,
         page_number: int = 1,
-        fields: t.Optional[dict[str, str]] = None,
+        fields: dict[str, str] | None = None,
     ) -> tuple[list[dm.TestRun], bool]:
         """Return the test runs on a defined page matching the given query.
 

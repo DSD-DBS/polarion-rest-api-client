@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Implementation of a client providing work item specific functions."""
+
 import json
 import logging
 import typing as t
@@ -397,7 +398,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         self,
         work_item_data: api_models.WorkitemsListPostRequestDataItem,
         current_content_size: int = min_wi_request_size,
-    ) -> t.Tuple[int, bool]:
+    ) -> tuple[int, bool]:
         work_item_size = _get_json_content_size(work_item_data.to_dict())
 
         proj_content_size = current_content_size + work_item_size

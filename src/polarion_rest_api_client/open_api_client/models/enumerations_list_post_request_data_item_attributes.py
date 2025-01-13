@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,30 +19,27 @@ T = TypeVar("T", bound="EnumerationsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class EnumerationsListPostRequestDataItemAttributes:
-    """
-    Attributes:
-        enum_context (Union[Unset, str]):  Example: id.
-        enum_name (Union[Unset, str]):  Example: id.
-        options (Union[Unset, List['EnumerationsListPostRequestDataItemAttributesOptionsItem']]):
-        target_type (Union[Unset, str]):  Example: id.
+    """Attributes
+    enum_context (Union[Unset, str]):  Example: id.
+    enum_name (Union[Unset, str]):  Example: id.
+    options (Union[Unset, List['EnumerationsListPostRequestDataItemAttributesOptionsItem']]):
+    target_type (Union[Unset, str]):  Example: id.
     """
 
-    enum_context: Union[Unset, str] = UNSET
-    enum_name: Union[Unset, str] = UNSET
-    options: Union[
-        Unset, List["EnumerationsListPostRequestDataItemAttributesOptionsItem"]
-    ] = UNSET
-    target_type: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    enum_context: Unset | str = UNSET
+    enum_name: Unset | str = UNSET
+    options: Unset | list["EnumerationsListPostRequestDataItemAttributesOptionsItem"] = UNSET
+    target_type: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         enum_context = self.enum_context
 
         enum_name = self.enum_name
 
-        options: Union[Unset, List[Dict[str, Any]]] = UNSET
+        options: Unset | list[dict[str, Any]] = UNSET
         if not isinstance(self.options, Unset):
             options = []
             for options_item_data in self.options:
@@ -51,7 +48,7 @@ class EnumerationsListPostRequestDataItemAttributes:
 
         target_type = self.target_type
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if enum_context is not UNSET:
@@ -66,7 +63,7 @@ class EnumerationsListPostRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.enumerations_list_post_request_data_item_attributes_options_item import (
             EnumerationsListPostRequestDataItemAttributesOptionsItem,
         )
@@ -94,13 +91,11 @@ class EnumerationsListPostRequestDataItemAttributes:
             target_type=target_type,
         )
 
-        enumerations_list_post_request_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        enumerations_list_post_request_data_item_attributes_obj.additional_properties = d
         return enumerations_list_post_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

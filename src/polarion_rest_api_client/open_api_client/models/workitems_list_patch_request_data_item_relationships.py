@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,13 +31,12 @@ T = TypeVar("T", bound="WorkitemsListPatchRequestDataItemRelationships")
 
 @_attrs_define
 class WorkitemsListPatchRequestDataItemRelationships:
-    """
-    Attributes:
-        assignee (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsAssignee]):
-        categories (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsCategories]):
-        linked_revisions (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsLinkedRevisions]):
-        votes (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsVotes]):
-        watches (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsWatches]):
+    """Attributes
+    assignee (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsAssignee]):
+    categories (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsCategories]):
+    linked_revisions (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsLinkedRevisions]):
+    votes (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsVotes]):
+    watches (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsWatches]):
     """
 
     assignee: Union[
@@ -55,32 +54,32 @@ class WorkitemsListPatchRequestDataItemRelationships:
     watches: Union[
         Unset, "WorkitemsListPatchRequestDataItemRelationshipsWatches"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        assignee: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        assignee: Unset | dict[str, Any] = UNSET
         if not isinstance(self.assignee, Unset):
             assignee = self.assignee.to_dict()
 
-        categories: Union[Unset, Dict[str, Any]] = UNSET
+        categories: Unset | dict[str, Any] = UNSET
         if not isinstance(self.categories, Unset):
             categories = self.categories.to_dict()
 
-        linked_revisions: Union[Unset, Dict[str, Any]] = UNSET
+        linked_revisions: Unset | dict[str, Any] = UNSET
         if not isinstance(self.linked_revisions, Unset):
             linked_revisions = self.linked_revisions.to_dict()
 
-        votes: Union[Unset, Dict[str, Any]] = UNSET
+        votes: Unset | dict[str, Any] = UNSET
         if not isinstance(self.votes, Unset):
             votes = self.votes.to_dict()
 
-        watches: Union[Unset, Dict[str, Any]] = UNSET
+        watches: Unset | dict[str, Any] = UNSET
         if not isinstance(self.watches, Unset):
             watches = self.watches.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if assignee is not UNSET:
@@ -97,7 +96,7 @@ class WorkitemsListPatchRequestDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workitems_list_patch_request_data_item_relationships_assignee import (
             WorkitemsListPatchRequestDataItemRelationshipsAssignee,
         )
@@ -116,9 +115,7 @@ class WorkitemsListPatchRequestDataItemRelationships:
 
         d = src_dict.copy()
         _assignee = d.pop("assignee", UNSET)
-        assignee: Union[
-            Unset, WorkitemsListPatchRequestDataItemRelationshipsAssignee
-        ]
+        assignee: Unset | WorkitemsListPatchRequestDataItemRelationshipsAssignee
         if isinstance(_assignee, Unset):
             assignee = UNSET
         else:
@@ -127,9 +124,7 @@ class WorkitemsListPatchRequestDataItemRelationships:
             )
 
         _categories = d.pop("categories", UNSET)
-        categories: Union[
-            Unset, WorkitemsListPatchRequestDataItemRelationshipsCategories
-        ]
+        categories: Unset | WorkitemsListPatchRequestDataItemRelationshipsCategories
         if isinstance(_categories, Unset):
             categories = UNSET
         else:
@@ -138,10 +133,7 @@ class WorkitemsListPatchRequestDataItemRelationships:
             )
 
         _linked_revisions = d.pop("linkedRevisions", UNSET)
-        linked_revisions: Union[
-            Unset,
-            WorkitemsListPatchRequestDataItemRelationshipsLinkedRevisions,
-        ]
+        linked_revisions: Unset | WorkitemsListPatchRequestDataItemRelationshipsLinkedRevisions
         if isinstance(_linked_revisions, Unset):
             linked_revisions = UNSET
         else:
@@ -150,9 +142,7 @@ class WorkitemsListPatchRequestDataItemRelationships:
             )
 
         _votes = d.pop("votes", UNSET)
-        votes: Union[
-            Unset, WorkitemsListPatchRequestDataItemRelationshipsVotes
-        ]
+        votes: Unset | WorkitemsListPatchRequestDataItemRelationshipsVotes
         if isinstance(_votes, Unset):
             votes = UNSET
         else:
@@ -163,9 +153,7 @@ class WorkitemsListPatchRequestDataItemRelationships:
             )
 
         _watches = d.pop("watches", UNSET)
-        watches: Union[
-            Unset, WorkitemsListPatchRequestDataItemRelationshipsWatches
-        ]
+        watches: Unset | WorkitemsListPatchRequestDataItemRelationshipsWatches
         if isinstance(_watches, Unset):
             watches = UNSET
         else:
@@ -181,13 +169,11 @@ class WorkitemsListPatchRequestDataItemRelationships:
             watches=watches,
         )
 
-        workitems_list_patch_request_data_item_relationships_obj.additional_properties = (
-            d
-        )
+        workitems_list_patch_request_data_item_relationships_obj.additional_properties = d
         return workitems_list_patch_request_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

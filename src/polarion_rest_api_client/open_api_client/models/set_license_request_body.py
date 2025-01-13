@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -16,30 +16,29 @@ T = TypeVar("T", bound="SetLicenseRequestBody")
 
 @_attrs_define
 class SetLicenseRequestBody:
-    """
-    Attributes:
-        concurrent (Union[Unset, bool]): Is concurrent user Example: True.
-        group (Union[Unset, str]): License group Example: Department.
-        license_ (Union[Unset, SetLicenseRequestBodyLicense]): User's license type
+    """Attributes
+    concurrent (Union[Unset, bool]): Is concurrent user Example: True.
+    group (Union[Unset, str]): License group Example: Department.
+    license_ (Union[Unset, SetLicenseRequestBodyLicense]): User's license type
     """
 
-    concurrent: Union[Unset, bool] = UNSET
-    group: Union[Unset, str] = UNSET
-    license_: Union[Unset, SetLicenseRequestBodyLicense] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    concurrent: Unset | bool = UNSET
+    group: Unset | str = UNSET
+    license_: Unset | SetLicenseRequestBodyLicense = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         concurrent = self.concurrent
 
         group = self.group
 
-        license_: Union[Unset, str] = UNSET
+        license_: Unset | str = UNSET
         if not isinstance(self.license_, Unset):
             license_ = self.license_.value
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if concurrent is not UNSET:
@@ -52,14 +51,14 @@ class SetLicenseRequestBody:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         concurrent = d.pop("concurrent", UNSET)
 
         group = d.pop("group", UNSET)
 
         _license_ = d.pop("license", UNSET)
-        license_: Union[Unset, SetLicenseRequestBodyLicense]
+        license_: Unset | SetLicenseRequestBodyLicense
         if isinstance(_license_, Unset):
             license_ = UNSET
         else:
@@ -75,7 +74,7 @@ class SetLicenseRequestBody:
         return set_license_request_body_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

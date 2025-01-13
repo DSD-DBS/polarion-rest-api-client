@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,46 +21,45 @@ T = TypeVar("T", bound="ProjectsListGetResponseDataItemAttributes")
 
 @_attrs_define
 class ProjectsListGetResponseDataItemAttributes:
-    """
-    Attributes:
-        active (Union[Unset, bool]):
-        color (Union[Unset, str]):  Example: Color.
-        description (Union[Unset, ProjectsListGetResponseDataItemAttributesDescription]):
-        finish (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        icon (Union[Unset, str]):  Example: Icon.
-        id (Union[Unset, str]):  Example: MyProjectId.
-        lock_work_records_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        name (Union[Unset, str]):  Example: Name.
-        start (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        tracker_prefix (Union[Unset, str]):  Example: Tracker Prefix.
+    """Attributes
+    active (Union[Unset, bool]):
+    color (Union[Unset, str]):  Example: Color.
+    description (Union[Unset, ProjectsListGetResponseDataItemAttributesDescription]):
+    finish (Union[Unset, datetime.date]):  Example: 1970-01-01.
+    icon (Union[Unset, str]):  Example: Icon.
+    id (Union[Unset, str]):  Example: MyProjectId.
+    lock_work_records_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
+    name (Union[Unset, str]):  Example: Name.
+    start (Union[Unset, datetime.date]):  Example: 1970-01-01.
+    tracker_prefix (Union[Unset, str]):  Example: Tracker Prefix.
     """
 
-    active: Union[Unset, bool] = UNSET
-    color: Union[Unset, str] = UNSET
+    active: Unset | bool = UNSET
+    color: Unset | str = UNSET
     description: Union[
         Unset, "ProjectsListGetResponseDataItemAttributesDescription"
     ] = UNSET
-    finish: Union[Unset, datetime.date] = UNSET
-    icon: Union[Unset, str] = UNSET
-    id: Union[Unset, str] = UNSET
-    lock_work_records_date: Union[Unset, datetime.date] = UNSET
-    name: Union[Unset, str] = UNSET
-    start: Union[Unset, datetime.date] = UNSET
-    tracker_prefix: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    finish: Unset | datetime.date = UNSET
+    icon: Unset | str = UNSET
+    id: Unset | str = UNSET
+    lock_work_records_date: Unset | datetime.date = UNSET
+    name: Unset | str = UNSET
+    start: Unset | datetime.date = UNSET
+    tracker_prefix: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         active = self.active
 
         color = self.color
 
-        description: Union[Unset, Dict[str, Any]] = UNSET
+        description: Unset | dict[str, Any] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
-        finish: Union[Unset, str] = UNSET
+        finish: Unset | str = UNSET
         if not isinstance(self.finish, Unset):
             finish = self.finish.isoformat()
 
@@ -68,19 +67,19 @@ class ProjectsListGetResponseDataItemAttributes:
 
         id = self.id
 
-        lock_work_records_date: Union[Unset, str] = UNSET
+        lock_work_records_date: Unset | str = UNSET
         if not isinstance(self.lock_work_records_date, Unset):
             lock_work_records_date = self.lock_work_records_date.isoformat()
 
         name = self.name
 
-        start: Union[Unset, str] = UNSET
+        start: Unset | str = UNSET
         if not isinstance(self.start, Unset):
             start = self.start.isoformat()
 
         tracker_prefix = self.tracker_prefix
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if active is not UNSET:
@@ -107,7 +106,7 @@ class ProjectsListGetResponseDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.projects_list_get_response_data_item_attributes_description import (
             ProjectsListGetResponseDataItemAttributesDescription,
         )
@@ -118,9 +117,7 @@ class ProjectsListGetResponseDataItemAttributes:
         color = d.pop("color", UNSET)
 
         _description = d.pop("description", UNSET)
-        description: Union[
-            Unset, ProjectsListGetResponseDataItemAttributesDescription
-        ]
+        description: Unset | ProjectsListGetResponseDataItemAttributesDescription
         if isinstance(_description, Unset):
             description = UNSET
         else:
@@ -131,7 +128,7 @@ class ProjectsListGetResponseDataItemAttributes:
             )
 
         _finish = d.pop("finish", UNSET)
-        finish: Union[Unset, datetime.date]
+        finish: Unset | datetime.date
         if isinstance(_finish, Unset):
             finish = UNSET
         else:
@@ -142,7 +139,7 @@ class ProjectsListGetResponseDataItemAttributes:
         id = d.pop("id", UNSET)
 
         _lock_work_records_date = d.pop("lockWorkRecordsDate", UNSET)
-        lock_work_records_date: Union[Unset, datetime.date]
+        lock_work_records_date: Unset | datetime.date
         if isinstance(_lock_work_records_date, Unset):
             lock_work_records_date = UNSET
         else:
@@ -151,7 +148,7 @@ class ProjectsListGetResponseDataItemAttributes:
         name = d.pop("name", UNSET)
 
         _start = d.pop("start", UNSET)
-        start: Union[Unset, datetime.date]
+        start: Unset | datetime.date
         if isinstance(_start, Unset):
             start = UNSET
         else:
@@ -172,13 +169,11 @@ class ProjectsListGetResponseDataItemAttributes:
             tracker_prefix=tracker_prefix,
         )
 
-        projects_list_get_response_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        projects_list_get_response_data_item_attributes_obj.additional_properties = d
         return projects_list_get_response_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

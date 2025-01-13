@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,36 +26,35 @@ T = TypeVar("T", bound="PlansListPostRequestDataItem")
 
 @_attrs_define
 class PlansListPostRequestDataItem:
-    """
-    Attributes:
-        type (Union[Unset, PlansListPostRequestDataItemType]):
-        attributes (Union[Unset, PlansListPostRequestDataItemAttributes]):
-        relationships (Union[Unset, PlansListPostRequestDataItemRelationships]):
+    """Attributes
+    type (Union[Unset, PlansListPostRequestDataItemType]):
+    attributes (Union[Unset, PlansListPostRequestDataItemAttributes]):
+    relationships (Union[Unset, PlansListPostRequestDataItemRelationships]):
     """
 
-    type: Union[Unset, PlansListPostRequestDataItemType] = UNSET
+    type: Unset | PlansListPostRequestDataItemType = UNSET
     attributes: Union[Unset, "PlansListPostRequestDataItemAttributes"] = UNSET
     relationships: Union[
         Unset, "PlansListPostRequestDataItemRelationships"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Unset | dict[str, Any] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        relationships: Union[Unset, Dict[str, Any]] = UNSET
+        relationships: Unset | dict[str, Any] = UNSET
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
@@ -67,7 +67,7 @@ class PlansListPostRequestDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         from ..models.plans_list_post_request_data_item_attributes import (
             PlansListPostRequestDataItemAttributes,
         )
@@ -77,14 +77,14 @@ class PlansListPostRequestDataItem:
 
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Union[Unset, PlansListPostRequestDataItemType]
+        type: Unset | PlansListPostRequestDataItemType
         if isinstance(_type, Unset):
             type = UNSET
         else:
             type = PlansListPostRequestDataItemType(_type)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Union[Unset, PlansListPostRequestDataItemAttributes]
+        attributes: Unset | PlansListPostRequestDataItemAttributes
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:
@@ -93,7 +93,7 @@ class PlansListPostRequestDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Union[Unset, PlansListPostRequestDataItemRelationships]
+        relationships: Unset | PlansListPostRequestDataItemRelationships
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:
@@ -113,7 +113,7 @@ class PlansListPostRequestDataItem:
         return plans_list_post_request_data_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

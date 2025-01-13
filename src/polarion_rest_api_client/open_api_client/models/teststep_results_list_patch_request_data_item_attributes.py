@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,28 +19,27 @@ T = TypeVar("T", bound="TeststepResultsListPatchRequestDataItemAttributes")
 
 @_attrs_define
 class TeststepResultsListPatchRequestDataItemAttributes:
-    """
-    Attributes:
-        comment (Union[Unset, TeststepResultsListPatchRequestDataItemAttributesComment]):
-        result (Union[Unset, str]):  Example: passed.
+    """Attributes
+    comment (Union[Unset, TeststepResultsListPatchRequestDataItemAttributesComment]):
+    result (Union[Unset, str]):  Example: passed.
     """
 
     comment: Union[
         Unset, "TeststepResultsListPatchRequestDataItemAttributesComment"
     ] = UNSET
-    result: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    result: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        comment: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        comment: Unset | dict[str, Any] = UNSET
         if not isinstance(self.comment, Unset):
             comment = self.comment.to_dict()
 
         result = self.result
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if comment is not UNSET:
@@ -51,16 +50,14 @@ class TeststepResultsListPatchRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.teststep_results_list_patch_request_data_item_attributes_comment import (
             TeststepResultsListPatchRequestDataItemAttributesComment,
         )
 
         d = src_dict.copy()
         _comment = d.pop("comment", UNSET)
-        comment: Union[
-            Unset, TeststepResultsListPatchRequestDataItemAttributesComment
-        ]
+        comment: Unset | TeststepResultsListPatchRequestDataItemAttributesComment
         if isinstance(_comment, Unset):
             comment = UNSET
         else:
@@ -75,13 +72,11 @@ class TeststepResultsListPatchRequestDataItemAttributes:
             result=result,
         )
 
-        teststep_results_list_patch_request_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        teststep_results_list_patch_request_data_item_attributes_obj.additional_properties = d
         return teststep_results_list_patch_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

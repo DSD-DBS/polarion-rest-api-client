@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -28,12 +28,11 @@ T = TypeVar("T", bound="PlansListPostRequestDataItemRelationships")
 
 @_attrs_define
 class PlansListPostRequestDataItemRelationships:
-    """
-    Attributes:
-        parent (Union[Unset, PlansListPostRequestDataItemRelationshipsParent]):
-        project_span (Union[Unset, PlansListPostRequestDataItemRelationshipsProjectSpan]):
-        template (Union[Unset, PlansListPostRequestDataItemRelationshipsTemplate]):
-        work_items (Union[Unset, PlansListPostRequestDataItemRelationshipsWorkItems]):
+    """Attributes
+    parent (Union[Unset, PlansListPostRequestDataItemRelationshipsParent]):
+    project_span (Union[Unset, PlansListPostRequestDataItemRelationshipsProjectSpan]):
+    template (Union[Unset, PlansListPostRequestDataItemRelationshipsTemplate]):
+    work_items (Union[Unset, PlansListPostRequestDataItemRelationshipsWorkItems]):
     """
 
     parent: Union[Unset, "PlansListPostRequestDataItemRelationshipsParent"] = (
@@ -48,28 +47,28 @@ class PlansListPostRequestDataItemRelationships:
     work_items: Union[
         Unset, "PlansListPostRequestDataItemRelationshipsWorkItems"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        parent: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        parent: Unset | dict[str, Any] = UNSET
         if not isinstance(self.parent, Unset):
             parent = self.parent.to_dict()
 
-        project_span: Union[Unset, Dict[str, Any]] = UNSET
+        project_span: Unset | dict[str, Any] = UNSET
         if not isinstance(self.project_span, Unset):
             project_span = self.project_span.to_dict()
 
-        template: Union[Unset, Dict[str, Any]] = UNSET
+        template: Unset | dict[str, Any] = UNSET
         if not isinstance(self.template, Unset):
             template = self.template.to_dict()
 
-        work_items: Union[Unset, Dict[str, Any]] = UNSET
+        work_items: Unset | dict[str, Any] = UNSET
         if not isinstance(self.work_items, Unset):
             work_items = self.work_items.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if parent is not UNSET:
@@ -84,7 +83,7 @@ class PlansListPostRequestDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.plans_list_post_request_data_item_relationships_parent import (
             PlansListPostRequestDataItemRelationshipsParent,
         )
@@ -100,7 +99,7 @@ class PlansListPostRequestDataItemRelationships:
 
         d = src_dict.copy()
         _parent = d.pop("parent", UNSET)
-        parent: Union[Unset, PlansListPostRequestDataItemRelationshipsParent]
+        parent: Unset | PlansListPostRequestDataItemRelationshipsParent
         if isinstance(_parent, Unset):
             parent = UNSET
         else:
@@ -109,9 +108,7 @@ class PlansListPostRequestDataItemRelationships:
             )
 
         _project_span = d.pop("projectSpan", UNSET)
-        project_span: Union[
-            Unset, PlansListPostRequestDataItemRelationshipsProjectSpan
-        ]
+        project_span: Unset | PlansListPostRequestDataItemRelationshipsProjectSpan
         if isinstance(_project_span, Unset):
             project_span = UNSET
         else:
@@ -122,9 +119,7 @@ class PlansListPostRequestDataItemRelationships:
             )
 
         _template = d.pop("template", UNSET)
-        template: Union[
-            Unset, PlansListPostRequestDataItemRelationshipsTemplate
-        ]
+        template: Unset | PlansListPostRequestDataItemRelationshipsTemplate
         if isinstance(_template, Unset):
             template = UNSET
         else:
@@ -135,9 +130,7 @@ class PlansListPostRequestDataItemRelationships:
             )
 
         _work_items = d.pop("workItems", UNSET)
-        work_items: Union[
-            Unset, PlansListPostRequestDataItemRelationshipsWorkItems
-        ]
+        work_items: Unset | PlansListPostRequestDataItemRelationshipsWorkItems
         if isinstance(_work_items, Unset):
             work_items = UNSET
         else:
@@ -154,13 +147,11 @@ class PlansListPostRequestDataItemRelationships:
             work_items=work_items,
         )
 
-        plans_list_post_request_data_item_relationships_obj.additional_properties = (
-            d
-        )
+        plans_list_post_request_data_item_relationships_obj.additional_properties = d
         return plans_list_post_request_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

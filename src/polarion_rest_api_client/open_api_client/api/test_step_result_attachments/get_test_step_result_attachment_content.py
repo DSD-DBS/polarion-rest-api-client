@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, cast
 
 import httpx
 
@@ -21,9 +21,9 @@ def _get_kwargs(
     test_step_index: str,
     attachment_id: str,
     *,
-    revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    revision: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["revision"] = revision
 
@@ -31,17 +31,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/testruns/{testRunId}/testrecords/{testCaseProjectId}/{testCaseId}/{iteration}/teststepresults/{testStepIndex}/attachments/{attachmentId}/content".format(
-            projectId=project_id,
-            testRunId=test_run_id,
-            testCaseProjectId=test_case_project_id,
-            testCaseId=test_case_id,
-            iteration=iteration,
-            testStepIndex=test_step_index,
-            attachmentId=attachment_id,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/teststepresults/{test_step_index}/attachments/{attachment_id}/content",
         "params": params,
     }
 
@@ -49,8 +41,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Any | Errors | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = cast(Any, None)
         return response_200
@@ -84,13 +76,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Any | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -108,9 +99,9 @@ def sync_detailed(
     test_step_index: str,
     attachment_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+    revision: Unset | str = UNSET,
+) -> Response[Any | Errors]:
     """Downloads the file content for a specified Test Step Result Attachment
     for the specified Test Record.
 
@@ -124,11 +115,13 @@ def sync_detailed(
         attachment_id (str):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -159,9 +152,9 @@ def sync(
     test_step_index: str,
     attachment_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+    revision: Unset | str = UNSET,
+) -> Any | Errors | None:
     """Downloads the file content for a specified Test Step Result Attachment
     for the specified Test Record.
 
@@ -175,11 +168,13 @@ def sync(
         attachment_id (str):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 
@@ -205,9 +200,9 @@ async def asyncio_detailed(
     test_step_index: str,
     attachment_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+    revision: Unset | str = UNSET,
+) -> Response[Any | Errors]:
     """Downloads the file content for a specified Test Step Result Attachment
     for the specified Test Record.
 
@@ -221,11 +216,13 @@ async def asyncio_detailed(
         attachment_id (str):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -254,9 +251,9 @@ async def asyncio(
     test_step_index: str,
     attachment_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+    revision: Unset | str = UNSET,
+) -> Any | Errors | None:
     """Downloads the file content for a specified Test Step Result Attachment
     for the specified Test Record.
 
@@ -270,11 +267,13 @@ async def asyncio(
         attachment_id (str):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 

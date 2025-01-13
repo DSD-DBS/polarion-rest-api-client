@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,28 +19,25 @@ T = TypeVar(
 
 @_attrs_define
 class PlansListPostRequestDataItemRelationshipsProjectSpanDataItem:
-    """
-    Attributes:
-        id (Union[Unset, str]):  Example: MyProjectId.
-        type (Union[Unset, PlansListPostRequestDataItemRelationshipsProjectSpanDataItemType]):
+    """Attributes
+    id (Union[Unset, str]):  Example: MyProjectId.
+    type (Union[Unset, PlansListPostRequestDataItemRelationshipsProjectSpanDataItemType]):
     """
 
-    id: Union[Unset, str] = UNSET
-    type: Union[
-        Unset, PlansListPostRequestDataItemRelationshipsProjectSpanDataItemType
-    ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    id: Unset | str = UNSET
+    type: Unset | PlansListPostRequestDataItemRelationshipsProjectSpanDataItemType = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type: Union[Unset, str] = UNSET
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if id is not UNSET:
@@ -50,15 +48,12 @@ class PlansListPostRequestDataItemRelationshipsProjectSpanDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         id = d.pop("id", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Union[
-            Unset,
-            PlansListPostRequestDataItemRelationshipsProjectSpanDataItemType,
-        ]
+        type: Unset | PlansListPostRequestDataItemRelationshipsProjectSpanDataItemType
         if isinstance(_type, Unset):
             type = UNSET
         else:
@@ -71,13 +66,11 @@ class PlansListPostRequestDataItemRelationshipsProjectSpanDataItem:
             type=type,
         )
 
-        plans_list_post_request_data_item_relationships_project_span_data_item_obj.additional_properties = (
-            d
-        )
+        plans_list_post_request_data_item_relationships_project_span_data_item_obj.additional_properties = d
         return plans_list_post_request_data_item_relationships_project_span_data_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

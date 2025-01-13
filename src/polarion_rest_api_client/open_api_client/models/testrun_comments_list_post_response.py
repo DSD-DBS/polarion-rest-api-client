@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,25 +19,24 @@ T = TypeVar("T", bound="TestrunCommentsListPostResponse")
 
 @_attrs_define
 class TestrunCommentsListPostResponse:
-    """
-    Attributes:
-        data (Union[Unset, List['TestrunCommentsListPostResponseDataItem']]):
+    """Attributes
+    data (Union[Unset, List['TestrunCommentsListPostResponseDataItem']]):
     """
 
-    data: Union[Unset, List["TestrunCommentsListPostResponseDataItem"]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    data: Unset | list["TestrunCommentsListPostResponseDataItem"] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        data: Union[Unset, List[Dict[str, Any]]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        data: Unset | list[dict[str, Any]] = UNSET
         if not isinstance(self.data, Unset):
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
                 data.append(data_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if data is not UNSET:
@@ -46,7 +45,7 @@ class TestrunCommentsListPostResponse:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.testrun_comments_list_post_response_data_item import (
             TestrunCommentsListPostResponseDataItem,
         )
@@ -69,7 +68,7 @@ class TestrunCommentsListPostResponse:
         return testrun_comments_list_post_response_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

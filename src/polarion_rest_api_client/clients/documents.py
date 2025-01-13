@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Implementation of the documents client."""
+
 import itertools
 import typing as t
 import urllib.parse

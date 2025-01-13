@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,32 +19,31 @@ T = TypeVar("T", bound="UsersListPostRequestDataItemAttributes")
 
 @_attrs_define
 class UsersListPostRequestDataItemAttributes:
-    """
-    Attributes:
-        id (str):  Example: MyUserId.
-        description (Union[Unset, UsersListPostRequestDataItemAttributesDescription]):
-        disabled_notifications (Union[Unset, bool]):
-        email (Union[Unset, str]):  Example: Email.
-        initials (Union[Unset, str]):  Example: Initials.
-        name (Union[Unset, str]):  Example: Name.
+    """Attributes
+    id (str):  Example: MyUserId.
+    description (Union[Unset, UsersListPostRequestDataItemAttributesDescription]):
+    disabled_notifications (Union[Unset, bool]):
+    email (Union[Unset, str]):  Example: Email.
+    initials (Union[Unset, str]):  Example: Initials.
+    name (Union[Unset, str]):  Example: Name.
     """
 
     id: str
     description: Union[
         Unset, "UsersListPostRequestDataItemAttributesDescription"
     ] = UNSET
-    disabled_notifications: Union[Unset, bool] = UNSET
-    email: Union[Unset, str] = UNSET
-    initials: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    disabled_notifications: Unset | bool = UNSET
+    email: Unset | str = UNSET
+    initials: Unset | str = UNSET
+    name: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        description: Union[Unset, Dict[str, Any]] = UNSET
+        description: Unset | dict[str, Any] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -56,7 +55,7 @@ class UsersListPostRequestDataItemAttributes:
 
         name = self.name
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -77,7 +76,7 @@ class UsersListPostRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.users_list_post_request_data_item_attributes_description import (
             UsersListPostRequestDataItemAttributesDescription,
         )
@@ -86,9 +85,7 @@ class UsersListPostRequestDataItemAttributes:
         id = d.pop("id")
 
         _description = d.pop("description", UNSET)
-        description: Union[
-            Unset, UsersListPostRequestDataItemAttributesDescription
-        ]
+        description: Unset | UsersListPostRequestDataItemAttributesDescription
         if isinstance(_description, Unset):
             description = UNSET
         else:
@@ -115,13 +112,11 @@ class UsersListPostRequestDataItemAttributes:
             name=name,
         )
 
-        users_list_post_request_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        users_list_post_request_data_item_attributes_obj.additional_properties = d
         return users_list_post_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

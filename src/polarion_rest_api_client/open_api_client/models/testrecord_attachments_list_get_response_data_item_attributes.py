@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,25 +17,24 @@ T = TypeVar(
 
 @_attrs_define
 class TestrecordAttachmentsListGetResponseDataItemAttributes:
-    """
-    Attributes:
-        file_name (Union[Unset, str]):  Example: File Name.
-        id (Union[Unset, str]):  Example: MyAttachmentId.
-        length (Union[Unset, int]):
-        title (Union[Unset, str]):  Example: Title.
-        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    """Attributes
+    file_name (Union[Unset, str]):  Example: File Name.
+    id (Union[Unset, str]):  Example: MyAttachmentId.
+    length (Union[Unset, int]):
+    title (Union[Unset, str]):  Example: Title.
+    updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
     """
 
-    file_name: Union[Unset, str] = UNSET
-    id: Union[Unset, str] = UNSET
-    length: Union[Unset, int] = UNSET
-    title: Union[Unset, str] = UNSET
-    updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    file_name: Unset | str = UNSET
+    id: Unset | str = UNSET
+    length: Unset | int = UNSET
+    title: Unset | str = UNSET
+    updated: Unset | datetime.datetime = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         file_name = self.file_name
 
         id = self.id
@@ -44,11 +43,11 @@ class TestrecordAttachmentsListGetResponseDataItemAttributes:
 
         title = self.title
 
-        updated: Union[Unset, str] = UNSET
+        updated: Unset | str = UNSET
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if file_name is not UNSET:
@@ -65,7 +64,7 @@ class TestrecordAttachmentsListGetResponseDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         file_name = d.pop("fileName", UNSET)
 
@@ -76,7 +75,7 @@ class TestrecordAttachmentsListGetResponseDataItemAttributes:
         title = d.pop("title", UNSET)
 
         _updated = d.pop("updated", UNSET)
-        updated: Union[Unset, datetime.datetime]
+        updated: Unset | datetime.datetime
         if isinstance(_updated, Unset):
             updated = UNSET
         else:
@@ -92,15 +91,13 @@ class TestrecordAttachmentsListGetResponseDataItemAttributes:
             )
         )
 
-        testrecord_attachments_list_get_response_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        testrecord_attachments_list_get_response_data_item_attributes_obj.additional_properties = d
         return (
             testrecord_attachments_list_get_response_data_item_attributes_obj
         )
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

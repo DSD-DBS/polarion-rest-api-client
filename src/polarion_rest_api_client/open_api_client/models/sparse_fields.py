@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,89 +13,88 @@ T = TypeVar("T", bound="SparseFields")
 
 @_attrs_define
 class SparseFields:
-    """
-    Attributes:
-        categories (Union[Unset, str]): Requested fields Example: @all.
-        document_attachments (Union[Unset, str]): Requested fields Example: @all.
-        document_comments (Union[Unset, str]): Requested fields Example: @all.
-        document_parts (Union[Unset, str]): Requested fields Example: @all.
-        documents (Union[Unset, str]): Requested fields Example: @all.
-        enumerations (Union[Unset, str]): Requested fields Example: @all.
-        externallylinkedworkitems (Union[Unset, str]): Requested fields Example: @all.
-        featureselections (Union[Unset, str]): Requested fields Example: @all.
-        globalroles (Union[Unset, str]): Requested fields Example: @all.
-        icons (Union[Unset, str]): Requested fields Example: @all.
-        jobs (Union[Unset, str]): Requested fields Example: @all.
-        linkedoslcresources (Union[Unset, str]): Requested fields Example: @all.
-        linkedworkitems (Union[Unset, str]): Requested fields Example: @all.
-        page_attachments (Union[Unset, str]): Requested fields Example: @all.
-        pages (Union[Unset, str]): Requested fields Example: @all.
-        plans (Union[Unset, str]): Requested fields Example: @all.
-        projectroles (Union[Unset, str]): Requested fields Example: @all.
-        projects (Union[Unset, str]): Requested fields Example: @all.
-        projecttemplates (Union[Unset, str]): Requested fields Example: @all.
-        revisions (Union[Unset, str]): Requested fields Example: @all.
-        testparameter_definitions (Union[Unset, str]): Requested fields Example: @all.
-        testparameters (Union[Unset, str]): Requested fields Example: @all.
-        testrecord_attachments (Union[Unset, str]): Requested fields Example: @all.
-        testrecords (Union[Unset, str]): Requested fields Example: @all.
-        testrun_attachments (Union[Unset, str]): Requested fields Example: @all.
-        testrun_comments (Union[Unset, str]): Requested fields Example: @all.
-        testruns (Union[Unset, str]): Requested fields Example: @all.
-        teststep_results (Union[Unset, str]): Requested fields Example: @all.
-        teststepresult_attachments (Union[Unset, str]): Requested fields Example: @all.
-        teststeps (Union[Unset, str]): Requested fields Example: @all.
-        usergroups (Union[Unset, str]): Requested fields Example: @all.
-        users (Union[Unset, str]): Requested fields Example: @all.
-        workitem_approvals (Union[Unset, str]): Requested fields Example: @all.
-        workitem_attachments (Union[Unset, str]): Requested fields Example: @all.
-        workitem_comments (Union[Unset, str]): Requested fields Example: @all.
-        workitems (Union[Unset, str]): Requested fields Example: @all.
-        workrecords (Union[Unset, str]): Requested fields Example: @all.
+    """Attributes
+    categories (Union[Unset, str]): Requested fields Example: @all.
+    document_attachments (Union[Unset, str]): Requested fields Example: @all.
+    document_comments (Union[Unset, str]): Requested fields Example: @all.
+    document_parts (Union[Unset, str]): Requested fields Example: @all.
+    documents (Union[Unset, str]): Requested fields Example: @all.
+    enumerations (Union[Unset, str]): Requested fields Example: @all.
+    externallylinkedworkitems (Union[Unset, str]): Requested fields Example: @all.
+    featureselections (Union[Unset, str]): Requested fields Example: @all.
+    globalroles (Union[Unset, str]): Requested fields Example: @all.
+    icons (Union[Unset, str]): Requested fields Example: @all.
+    jobs (Union[Unset, str]): Requested fields Example: @all.
+    linkedoslcresources (Union[Unset, str]): Requested fields Example: @all.
+    linkedworkitems (Union[Unset, str]): Requested fields Example: @all.
+    page_attachments (Union[Unset, str]): Requested fields Example: @all.
+    pages (Union[Unset, str]): Requested fields Example: @all.
+    plans (Union[Unset, str]): Requested fields Example: @all.
+    projectroles (Union[Unset, str]): Requested fields Example: @all.
+    projects (Union[Unset, str]): Requested fields Example: @all.
+    projecttemplates (Union[Unset, str]): Requested fields Example: @all.
+    revisions (Union[Unset, str]): Requested fields Example: @all.
+    testparameter_definitions (Union[Unset, str]): Requested fields Example: @all.
+    testparameters (Union[Unset, str]): Requested fields Example: @all.
+    testrecord_attachments (Union[Unset, str]): Requested fields Example: @all.
+    testrecords (Union[Unset, str]): Requested fields Example: @all.
+    testrun_attachments (Union[Unset, str]): Requested fields Example: @all.
+    testrun_comments (Union[Unset, str]): Requested fields Example: @all.
+    testruns (Union[Unset, str]): Requested fields Example: @all.
+    teststep_results (Union[Unset, str]): Requested fields Example: @all.
+    teststepresult_attachments (Union[Unset, str]): Requested fields Example: @all.
+    teststeps (Union[Unset, str]): Requested fields Example: @all.
+    usergroups (Union[Unset, str]): Requested fields Example: @all.
+    users (Union[Unset, str]): Requested fields Example: @all.
+    workitem_approvals (Union[Unset, str]): Requested fields Example: @all.
+    workitem_attachments (Union[Unset, str]): Requested fields Example: @all.
+    workitem_comments (Union[Unset, str]): Requested fields Example: @all.
+    workitems (Union[Unset, str]): Requested fields Example: @all.
+    workrecords (Union[Unset, str]): Requested fields Example: @all.
     """
 
-    categories: Union[Unset, str] = UNSET
-    document_attachments: Union[Unset, str] = UNSET
-    document_comments: Union[Unset, str] = UNSET
-    document_parts: Union[Unset, str] = UNSET
-    documents: Union[Unset, str] = UNSET
-    enumerations: Union[Unset, str] = UNSET
-    externallylinkedworkitems: Union[Unset, str] = UNSET
-    featureselections: Union[Unset, str] = UNSET
-    globalroles: Union[Unset, str] = UNSET
-    icons: Union[Unset, str] = UNSET
-    jobs: Union[Unset, str] = UNSET
-    linkedoslcresources: Union[Unset, str] = UNSET
-    linkedworkitems: Union[Unset, str] = UNSET
-    page_attachments: Union[Unset, str] = UNSET
-    pages: Union[Unset, str] = UNSET
-    plans: Union[Unset, str] = UNSET
-    projectroles: Union[Unset, str] = UNSET
-    projects: Union[Unset, str] = UNSET
-    projecttemplates: Union[Unset, str] = UNSET
-    revisions: Union[Unset, str] = UNSET
-    testparameter_definitions: Union[Unset, str] = UNSET
-    testparameters: Union[Unset, str] = UNSET
-    testrecord_attachments: Union[Unset, str] = UNSET
-    testrecords: Union[Unset, str] = UNSET
-    testrun_attachments: Union[Unset, str] = UNSET
-    testrun_comments: Union[Unset, str] = UNSET
-    testruns: Union[Unset, str] = UNSET
-    teststep_results: Union[Unset, str] = UNSET
-    teststepresult_attachments: Union[Unset, str] = UNSET
-    teststeps: Union[Unset, str] = UNSET
-    usergroups: Union[Unset, str] = UNSET
-    users: Union[Unset, str] = UNSET
-    workitem_approvals: Union[Unset, str] = UNSET
-    workitem_attachments: Union[Unset, str] = UNSET
-    workitem_comments: Union[Unset, str] = UNSET
-    workitems: Union[Unset, str] = UNSET
-    workrecords: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    categories: Unset | str = UNSET
+    document_attachments: Unset | str = UNSET
+    document_comments: Unset | str = UNSET
+    document_parts: Unset | str = UNSET
+    documents: Unset | str = UNSET
+    enumerations: Unset | str = UNSET
+    externallylinkedworkitems: Unset | str = UNSET
+    featureselections: Unset | str = UNSET
+    globalroles: Unset | str = UNSET
+    icons: Unset | str = UNSET
+    jobs: Unset | str = UNSET
+    linkedoslcresources: Unset | str = UNSET
+    linkedworkitems: Unset | str = UNSET
+    page_attachments: Unset | str = UNSET
+    pages: Unset | str = UNSET
+    plans: Unset | str = UNSET
+    projectroles: Unset | str = UNSET
+    projects: Unset | str = UNSET
+    projecttemplates: Unset | str = UNSET
+    revisions: Unset | str = UNSET
+    testparameter_definitions: Unset | str = UNSET
+    testparameters: Unset | str = UNSET
+    testrecord_attachments: Unset | str = UNSET
+    testrecords: Unset | str = UNSET
+    testrun_attachments: Unset | str = UNSET
+    testrun_comments: Unset | str = UNSET
+    testruns: Unset | str = UNSET
+    teststep_results: Unset | str = UNSET
+    teststepresult_attachments: Unset | str = UNSET
+    teststeps: Unset | str = UNSET
+    usergroups: Unset | str = UNSET
+    users: Unset | str = UNSET
+    workitem_approvals: Unset | str = UNSET
+    workitem_attachments: Unset | str = UNSET
+    workitem_comments: Unset | str = UNSET
+    workitems: Unset | str = UNSET
+    workrecords: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         categories = self.categories
 
         document_attachments = self.document_attachments
@@ -170,7 +169,7 @@ class SparseFields:
 
         workrecords = self.workrecords
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if categories is not UNSET:
@@ -253,7 +252,7 @@ class SparseFields:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         categories = d.pop("categories", UNSET)
 
@@ -373,7 +372,7 @@ class SparseFields:
         return sparse_fields_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

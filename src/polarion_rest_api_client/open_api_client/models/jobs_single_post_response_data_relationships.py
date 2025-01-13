@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,11 +25,10 @@ T = TypeVar("T", bound="JobsSinglePostResponseDataRelationships")
 
 @_attrs_define
 class JobsSinglePostResponseDataRelationships:
-    """
-    Attributes:
-        document (Union[Unset, JobsSinglePostResponseDataRelationshipsDocument]):
-        documents (Union[Unset, JobsSinglePostResponseDataRelationshipsDocuments]):
-        project (Union[Unset, JobsSinglePostResponseDataRelationshipsProject]):
+    """Attributes
+    document (Union[Unset, JobsSinglePostResponseDataRelationshipsDocument]):
+    documents (Union[Unset, JobsSinglePostResponseDataRelationshipsDocuments]):
+    project (Union[Unset, JobsSinglePostResponseDataRelationshipsProject]):
     """
 
     document: Union[
@@ -41,24 +40,24 @@ class JobsSinglePostResponseDataRelationships:
     project: Union[Unset, "JobsSinglePostResponseDataRelationshipsProject"] = (
         UNSET
     )
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        document: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        document: Unset | dict[str, Any] = UNSET
         if not isinstance(self.document, Unset):
             document = self.document.to_dict()
 
-        documents: Union[Unset, Dict[str, Any]] = UNSET
+        documents: Unset | dict[str, Any] = UNSET
         if not isinstance(self.documents, Unset):
             documents = self.documents.to_dict()
 
-        project: Union[Unset, Dict[str, Any]] = UNSET
+        project: Unset | dict[str, Any] = UNSET
         if not isinstance(self.project, Unset):
             project = self.project.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if document is not UNSET:
@@ -71,7 +70,7 @@ class JobsSinglePostResponseDataRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.jobs_single_post_response_data_relationships_document import (
             JobsSinglePostResponseDataRelationshipsDocument,
         )
@@ -84,7 +83,7 @@ class JobsSinglePostResponseDataRelationships:
 
         d = src_dict.copy()
         _document = d.pop("document", UNSET)
-        document: Union[Unset, JobsSinglePostResponseDataRelationshipsDocument]
+        document: Unset | JobsSinglePostResponseDataRelationshipsDocument
         if isinstance(_document, Unset):
             document = UNSET
         else:
@@ -95,9 +94,7 @@ class JobsSinglePostResponseDataRelationships:
             )
 
         _documents = d.pop("documents", UNSET)
-        documents: Union[
-            Unset, JobsSinglePostResponseDataRelationshipsDocuments
-        ]
+        documents: Unset | JobsSinglePostResponseDataRelationshipsDocuments
         if isinstance(_documents, Unset):
             documents = UNSET
         else:
@@ -108,7 +105,7 @@ class JobsSinglePostResponseDataRelationships:
             )
 
         _project = d.pop("project", UNSET)
-        project: Union[Unset, JobsSinglePostResponseDataRelationshipsProject]
+        project: Unset | JobsSinglePostResponseDataRelationshipsProject
         if isinstance(_project, Unset):
             project = UNSET
         else:
@@ -122,13 +119,11 @@ class JobsSinglePostResponseDataRelationships:
             project=project,
         )
 
-        jobs_single_post_response_data_relationships_obj.additional_properties = (
-            d
-        )
+        jobs_single_post_response_data_relationships_obj.additional_properties = d
         return jobs_single_post_response_data_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -22,36 +22,32 @@ T = TypeVar("T", bound="WorkitemsSingleGetResponseDataRelationshipsWatches")
 
 @_attrs_define
 class WorkitemsSingleGetResponseDataRelationshipsWatches:
-    """
-    Attributes:
-        data (Union[Unset, List['WorkitemsSingleGetResponseDataRelationshipsWatchesDataItem']]):
-        meta (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsWatchesMeta]):
+    """Attributes
+    data (Union[Unset, List['WorkitemsSingleGetResponseDataRelationshipsWatchesDataItem']]):
+    meta (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsWatchesMeta]):
     """
 
-    data: Union[
-        Unset,
-        List["WorkitemsSingleGetResponseDataRelationshipsWatchesDataItem"],
-    ] = UNSET
+    data: Unset | list["WorkitemsSingleGetResponseDataRelationshipsWatchesDataItem"] = UNSET
     meta: Union[
         Unset, "WorkitemsSingleGetResponseDataRelationshipsWatchesMeta"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        data: Union[Unset, List[Dict[str, Any]]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        data: Unset | list[dict[str, Any]] = UNSET
         if not isinstance(self.data, Unset):
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
                 data.append(data_item)
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
+        meta: Unset | dict[str, Any] = UNSET
         if not isinstance(self.meta, Unset):
             meta = self.meta.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if data is not UNSET:
@@ -62,7 +58,7 @@ class WorkitemsSingleGetResponseDataRelationshipsWatches:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workitems_single_get_response_data_relationships_watches_data_item import (
             WorkitemsSingleGetResponseDataRelationshipsWatchesDataItem,
         )
@@ -81,9 +77,7 @@ class WorkitemsSingleGetResponseDataRelationshipsWatches:
             data.append(data_item)
 
         _meta = d.pop("meta", UNSET)
-        meta: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsWatchesMeta
-        ]
+        meta: Unset | WorkitemsSingleGetResponseDataRelationshipsWatchesMeta
         if isinstance(_meta, Unset):
             meta = UNSET
         else:
@@ -96,13 +90,11 @@ class WorkitemsSingleGetResponseDataRelationshipsWatches:
             meta=meta,
         )
 
-        workitems_single_get_response_data_relationships_watches_obj.additional_properties = (
-            d
-        )
+        workitems_single_get_response_data_relationships_watches_obj.additional_properties = d
         return workitems_single_get_response_data_relationships_watches_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,8 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Implementations of WorkItemAttachment relates functions."""
+
 import io
-import typing as t
 
 from polarion_rest_api_client import data_models as dm
 from polarion_rest_api_client.open_api_client import models as api_models
@@ -70,7 +70,7 @@ class WorkItemAttachments(
         *,
         page_size: int = 100,
         page_number: int = 1,
-        fields: t.Optional[dict[str, str]] = None,
+        fields: dict[str, str] | None = None,
     ) -> tuple[list[dm.WorkItemAttachment], bool]:
         """Return the attachments for a given work item on a defined page.
 

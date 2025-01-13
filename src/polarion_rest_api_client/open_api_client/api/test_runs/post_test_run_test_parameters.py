@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -23,15 +23,12 @@ def _get_kwargs(
     test_run_id: str,
     *,
     body: TestparametersListPostRequest,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/testruns/{testRunId}/testparameters".format(
-            projectId=project_id,
-            testRunId=test_run_id,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/testparameters",
     }
 
     _body = body.to_dict()
@@ -44,8 +41,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, TestparametersListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | TestparametersListPostResponse | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = TestparametersListPostResponse.from_dict(
             response.json()
@@ -94,13 +91,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, TestparametersListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | TestparametersListPostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -113,9 +109,9 @@ def sync_detailed(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: TestparametersListPostRequest,
-) -> Response[Union[Errors, TestparametersListPostResponse]]:
+) -> Response[Errors | TestparametersListPostResponse]:
     """Creates a list of Test Parameters for the specified Test Run.
 
     Args:
@@ -123,11 +119,13 @@ def sync_detailed(
         test_run_id (str):
         body (TestparametersListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, TestparametersListPostResponse]]
     """
 
@@ -148,9 +146,9 @@ def sync(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: TestparametersListPostRequest,
-) -> Optional[Union[Errors, TestparametersListPostResponse]]:
+) -> Errors | TestparametersListPostResponse | None:
     """Creates a list of Test Parameters for the specified Test Run.
 
     Args:
@@ -158,11 +156,13 @@ def sync(
         test_run_id (str):
         body (TestparametersListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, TestparametersListPostResponse]
     """
 
@@ -178,9 +178,9 @@ async def asyncio_detailed(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: TestparametersListPostRequest,
-) -> Response[Union[Errors, TestparametersListPostResponse]]:
+) -> Response[Errors | TestparametersListPostResponse]:
     """Creates a list of Test Parameters for the specified Test Run.
 
     Args:
@@ -188,11 +188,13 @@ async def asyncio_detailed(
         test_run_id (str):
         body (TestparametersListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, TestparametersListPostResponse]]
     """
 
@@ -211,9 +213,9 @@ async def asyncio(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: TestparametersListPostRequest,
-) -> Optional[Union[Errors, TestparametersListPostResponse]]:
+) -> Errors | TestparametersListPostResponse | None:
     """Creates a list of Test Parameters for the specified Test Run.
 
     Args:
@@ -221,11 +223,13 @@ async def asyncio(
         test_run_id (str):
         body (TestparametersListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, TestparametersListPostResponse]
     """
 

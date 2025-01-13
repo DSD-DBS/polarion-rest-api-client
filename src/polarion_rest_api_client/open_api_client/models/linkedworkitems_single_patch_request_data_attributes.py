@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,24 +13,23 @@ T = TypeVar("T", bound="LinkedworkitemsSinglePatchRequestDataAttributes")
 
 @_attrs_define
 class LinkedworkitemsSinglePatchRequestDataAttributes:
-    """
-    Attributes:
-        revision (Union[Unset, str]):  Example: 1234.
-        suspect (Union[Unset, bool]):
+    """Attributes
+    revision (Union[Unset, str]):  Example: 1234.
+    suspect (Union[Unset, bool]):
     """
 
-    revision: Union[Unset, str] = UNSET
-    suspect: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    revision: Unset | str = UNSET
+    suspect: Unset | bool = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         revision = self.revision
 
         suspect = self.suspect
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if revision is not UNSET:
@@ -41,7 +40,7 @@ class LinkedworkitemsSinglePatchRequestDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         revision = d.pop("revision", UNSET)
 
@@ -52,13 +51,11 @@ class LinkedworkitemsSinglePatchRequestDataAttributes:
             suspect=suspect,
         )
 
-        linkedworkitems_single_patch_request_data_attributes_obj.additional_properties = (
-            d
-        )
+        linkedworkitems_single_patch_request_data_attributes_obj.additional_properties = d
         return linkedworkitems_single_patch_request_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -22,12 +22,12 @@ def _get_kwargs(
     comment_id: str,
     *,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
-    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    json_fields: Unset | dict[str, Any] = UNSET
     if not isinstance(fields, Unset):
         json_fields = fields.to_dict()
     if not isinstance(json_fields, Unset):
@@ -41,13 +41,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/testruns/{testRunId}/comments/{commentId}".format(
-            projectId=project_id,
-            testRunId=test_run_id,
-            commentId=comment_id,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/comments/{comment_id}",
         "params": params,
     }
 
@@ -55,8 +51,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, TestrunCommentsSingleGetResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | TestrunCommentsSingleGetResponse | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = TestrunCommentsSingleGetResponse.from_dict(
             response.json()
@@ -93,13 +89,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, TestrunCommentsSingleGetResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | TestrunCommentsSingleGetResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -113,11 +108,11 @@ def sync_detailed(
     test_run_id: str,
     comment_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, TestrunCommentsSingleGetResponse]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[Errors | TestrunCommentsSingleGetResponse]:
     """Returns the specified Test Run Comment.
 
     Args:
@@ -128,11 +123,13 @@ def sync_detailed(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, TestrunCommentsSingleGetResponse]]
     """
 
@@ -157,11 +154,11 @@ def sync(
     test_run_id: str,
     comment_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, TestrunCommentsSingleGetResponse]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | TestrunCommentsSingleGetResponse | None:
     """Returns the specified Test Run Comment.
 
     Args:
@@ -172,11 +169,13 @@ def sync(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, TestrunCommentsSingleGetResponse]
     """
 
@@ -196,11 +195,11 @@ async def asyncio_detailed(
     test_run_id: str,
     comment_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, TestrunCommentsSingleGetResponse]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[Errors | TestrunCommentsSingleGetResponse]:
     """Returns the specified Test Run Comment.
 
     Args:
@@ -211,11 +210,13 @@ async def asyncio_detailed(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, TestrunCommentsSingleGetResponse]]
     """
 
@@ -238,11 +239,11 @@ async def asyncio(
     test_run_id: str,
     comment_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, TestrunCommentsSingleGetResponse]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | TestrunCommentsSingleGetResponse | None:
     """Returns the specified Test Run Comment.
 
     Args:
@@ -253,11 +254,13 @@ async def asyncio(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, TestrunCommentsSingleGetResponse]
     """
 

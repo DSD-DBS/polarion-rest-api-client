@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,23 +16,24 @@ T = TypeVar("T", bound="ErrorsErrorsItemSourceType0ResourceType0")
 class ErrorsErrorsItemSourceType0ResourceType0:
     """Resource causing the error.
 
-    Attributes:
+    Attributes
+    ----------
         id (Union[Unset, str]):  Example: MyProjectId/id.
         type (Union[Unset, str]):  Example: type.
     """
 
-    id: Union[Unset, str] = UNSET
-    type: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    id: Unset | str = UNSET
+    type: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         type = self.type
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if id is not UNSET:
@@ -42,7 +44,7 @@ class ErrorsErrorsItemSourceType0ResourceType0:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         id = d.pop("id", UNSET)
 
@@ -53,13 +55,11 @@ class ErrorsErrorsItemSourceType0ResourceType0:
             type=type,
         )
 
-        errors_errors_item_source_type_0_resource_type_0_obj.additional_properties = (
-            d
-        )
+        errors_errors_item_source_type_0_resource_type_0_obj.additional_properties = d
         return errors_errors_item_source_type_0_resource_type_0_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

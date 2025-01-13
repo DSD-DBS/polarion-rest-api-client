@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,26 +15,25 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataAttributes")
 
 @_attrs_define
 class PagesSingleGetResponseDataAttributes:
-    """
-    Attributes:
-        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        page_name (Union[Unset, str]):  Example: MyRichPageId.
-        space_id (Union[Unset, str]):  Example: MySpaceId.
-        title (Union[Unset, str]):  Example: Title.
-        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    """Attributes
+    created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    page_name (Union[Unset, str]):  Example: MyRichPageId.
+    space_id (Union[Unset, str]):  Example: MySpaceId.
+    title (Union[Unset, str]):  Example: Title.
+    updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
     """
 
-    created: Union[Unset, datetime.datetime] = UNSET
-    page_name: Union[Unset, str] = UNSET
-    space_id: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    created: Unset | datetime.datetime = UNSET
+    page_name: Unset | str = UNSET
+    space_id: Unset | str = UNSET
+    title: Unset | str = UNSET
+    updated: Unset | datetime.datetime = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        created: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        created: Unset | str = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
 
@@ -44,11 +43,11 @@ class PagesSingleGetResponseDataAttributes:
 
         title = self.title
 
-        updated: Union[Unset, str] = UNSET
+        updated: Unset | str = UNSET
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if created is not UNSET:
@@ -65,10 +64,10 @@ class PagesSingleGetResponseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         _created = d.pop("created", UNSET)
-        created: Union[Unset, datetime.datetime]
+        created: Unset | datetime.datetime
         if isinstance(_created, Unset):
             created = UNSET
         else:
@@ -81,7 +80,7 @@ class PagesSingleGetResponseDataAttributes:
         title = d.pop("title", UNSET)
 
         _updated = d.pop("updated", UNSET)
-        updated: Union[Unset, datetime.datetime]
+        updated: Unset | datetime.datetime
         if isinstance(_updated, Unset):
             updated = UNSET
         else:
@@ -99,7 +98,7 @@ class PagesSingleGetResponseDataAttributes:
         return pages_single_get_response_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

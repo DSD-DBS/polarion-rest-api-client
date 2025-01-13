@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -24,19 +24,19 @@ def _get_kwargs(
     plan_id: str,
     relationship_id: str,
     *,
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["page[size]"] = pagesize
 
     params["page[number]"] = pagenumber
 
-    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    json_fields: Unset | dict[str, Any] = UNSET
     if not isinstance(fields, Unset):
         json_fields = fields.to_dict()
     if not isinstance(json_fields, Unset):
@@ -50,13 +50,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/plans/{planId}/relationships/{relationshipId}".format(
-            projectId=project_id,
-            planId=plan_id,
-            relationshipId=relationship_id,
-        ),
+        "url": f"/projects/{project_id}/plans/{plan_id}/relationships/{relationship_id}",
         "params": params,
     }
 
@@ -64,15 +60,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[
-    Union[
-        Errors,
-        Union[
-            "RelationshipDataListResponse", "RelationshipDataSingleResponse"
-        ],
-    ]
-]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"] | None:
     if response.status_code == HTTPStatus.OK:
 
         def _parse_response_200(
@@ -131,19 +120,13 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+    *, client: AuthenticatedClient | Client, response: httpx.Response
 ) -> Response[
-    Union[
-        Errors,
-        Union[
-            "RelationshipDataListResponse", "RelationshipDataSingleResponse"
-        ],
-    ]
+    Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
 ]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -158,19 +141,14 @@ def sync_detailed(
     plan_id: str,
     relationship_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
 ) -> Response[
-    Union[
-        Errors,
-        Union[
-            "RelationshipDataListResponse", "RelationshipDataSingleResponse"
-        ],
-    ]
+    Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
 ]:
     """Returns a list of Plan Relationships.
 
@@ -184,11 +162,13 @@ def sync_detailed(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, Union['RelationshipDataListResponse', 'RelationshipDataSingleResponse']]]
     """
 
@@ -215,20 +195,13 @@ def sync(
     plan_id: str,
     relationship_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[
-    Union[
-        Errors,
-        Union[
-            "RelationshipDataListResponse", "RelationshipDataSingleResponse"
-        ],
-    ]
-]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"] | None:
     """Returns a list of Plan Relationships.
 
     Args:
@@ -241,11 +214,13 @@ def sync(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, Union['RelationshipDataListResponse', 'RelationshipDataSingleResponse']]
     """
 
@@ -267,19 +242,14 @@ async def asyncio_detailed(
     plan_id: str,
     relationship_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
 ) -> Response[
-    Union[
-        Errors,
-        Union[
-            "RelationshipDataListResponse", "RelationshipDataSingleResponse"
-        ],
-    ]
+    Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
 ]:
     """Returns a list of Plan Relationships.
 
@@ -293,11 +263,13 @@ async def asyncio_detailed(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, Union['RelationshipDataListResponse', 'RelationshipDataSingleResponse']]]
     """
 
@@ -322,20 +294,13 @@ async def asyncio(
     plan_id: str,
     relationship_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[
-    Union[
-        Errors,
-        Union[
-            "RelationshipDataListResponse", "RelationshipDataSingleResponse"
-        ],
-    ]
-]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"] | None:
     """Returns a list of Plan Relationships.
 
     Args:
@@ -348,11 +313,13 @@ async def asyncio(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, Union['RelationshipDataListResponse', 'RelationshipDataSingleResponse']]
     """
 

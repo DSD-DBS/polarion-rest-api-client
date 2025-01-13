@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -23,11 +23,11 @@ def _get_kwargs(
     target_type: str,
     *,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    include: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
-    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    json_fields: Unset | dict[str, Any] = UNSET
     if not isinstance(fields, Unset):
         json_fields = fields.to_dict()
     if not isinstance(json_fields, Unset):
@@ -39,14 +39,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/enumerations/{enumContext}/{enumName}/{targetType}".format(
-            projectId=project_id,
-            enumContext=enum_context,
-            enumName=enum_name,
-            targetType=target_type,
-        ),
+        "url": f"/projects/{project_id}/enumerations/{enum_context}/{enum_name}/{target_type}",
         "params": params,
     }
 
@@ -54,8 +49,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[EnumerationsSingleGetResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> EnumerationsSingleGetResponse | Errors | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = EnumerationsSingleGetResponse.from_dict(response.json())
 
@@ -90,13 +85,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[EnumerationsSingleGetResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[EnumerationsSingleGetResponse | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -111,10 +105,10 @@ def sync_detailed(
     enum_name: str,
     target_type: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-) -> Response[Union[EnumerationsSingleGetResponse, Errors]]:
+    include: Unset | str = UNSET,
+) -> Response[EnumerationsSingleGetResponse | Errors]:
     """Returns the specified Enumeration from the Project context.
 
     Args:
@@ -125,11 +119,13 @@ def sync_detailed(
         fields (Union[Unset, SparseFields]):
         include (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[EnumerationsSingleGetResponse, Errors]]
     """
 
@@ -155,10 +151,10 @@ def sync(
     enum_name: str,
     target_type: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-) -> Optional[Union[EnumerationsSingleGetResponse, Errors]]:
+    include: Unset | str = UNSET,
+) -> EnumerationsSingleGetResponse | Errors | None:
     """Returns the specified Enumeration from the Project context.
 
     Args:
@@ -169,11 +165,13 @@ def sync(
         fields (Union[Unset, SparseFields]):
         include (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[EnumerationsSingleGetResponse, Errors]
     """
 
@@ -194,10 +192,10 @@ async def asyncio_detailed(
     enum_name: str,
     target_type: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-) -> Response[Union[EnumerationsSingleGetResponse, Errors]]:
+    include: Unset | str = UNSET,
+) -> Response[EnumerationsSingleGetResponse | Errors]:
     """Returns the specified Enumeration from the Project context.
 
     Args:
@@ -208,11 +206,13 @@ async def asyncio_detailed(
         fields (Union[Unset, SparseFields]):
         include (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[EnumerationsSingleGetResponse, Errors]]
     """
 
@@ -236,10 +236,10 @@ async def asyncio(
     enum_name: str,
     target_type: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-) -> Optional[Union[EnumerationsSingleGetResponse, Errors]]:
+    include: Unset | str = UNSET,
+) -> EnumerationsSingleGetResponse | Errors | None:
     """Returns the specified Enumeration from the Project context.
 
     Args:
@@ -250,11 +250,13 @@ async def asyncio(
         fields (Union[Unset, SparseFields]):
         include (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[EnumerationsSingleGetResponse, Errors]
     """
 

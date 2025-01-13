@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,20 +32,19 @@ T = TypeVar("T", bound="TestparametersListGetResponseDataItem")
 
 @_attrs_define
 class TestparametersListGetResponseDataItem:
-    """
-    Attributes:
-        type (Union[Unset, TestparametersListGetResponseDataItemType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyTestParameter.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, TestparametersListGetResponseDataItemAttributes]):
-        relationships (Union[Unset, TestparametersListGetResponseDataItemRelationships]):
-        links (Union[Unset, TestparametersListGetResponseDataItemLinks]):
-        meta (Union[Unset, TestparametersListGetResponseDataItemMeta]):
+    """Attributes
+    type (Union[Unset, TestparametersListGetResponseDataItemType]):
+    id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyTestParameter.
+    revision (Union[Unset, str]):  Example: 1234.
+    attributes (Union[Unset, TestparametersListGetResponseDataItemAttributes]):
+    relationships (Union[Unset, TestparametersListGetResponseDataItemRelationships]):
+    links (Union[Unset, TestparametersListGetResponseDataItemLinks]):
+    meta (Union[Unset, TestparametersListGetResponseDataItemMeta]):
     """
 
-    type: Union[Unset, TestparametersListGetResponseDataItemType] = UNSET
-    id: Union[Unset, str] = UNSET
-    revision: Union[Unset, str] = UNSET
+    type: Unset | TestparametersListGetResponseDataItemType = UNSET
+    id: Unset | str = UNSET
+    revision: Unset | str = UNSET
     attributes: Union[
         Unset, "TestparametersListGetResponseDataItemAttributes"
     ] = UNSET
@@ -53,12 +53,12 @@ class TestparametersListGetResponseDataItem:
     ] = UNSET
     links: Union[Unset, "TestparametersListGetResponseDataItemLinks"] = UNSET
     meta: Union[Unset, "TestparametersListGetResponseDataItemMeta"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
@@ -66,23 +66,23 @@ class TestparametersListGetResponseDataItem:
 
         revision = self.revision
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Unset | dict[str, Any] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        relationships: Union[Unset, Dict[str, Any]] = UNSET
+        relationships: Unset | dict[str, Any] = UNSET
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        links: Union[Unset, Dict[str, Any]] = UNSET
+        links: Unset | dict[str, Any] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
+        meta: Unset | dict[str, Any] = UNSET
         if not isinstance(self.meta, Unset):
             meta = self.meta.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
@@ -103,7 +103,7 @@ class TestparametersListGetResponseDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         from ..models.testparameters_list_get_response_data_item_attributes import (
             TestparametersListGetResponseDataItemAttributes,
         )
@@ -119,7 +119,7 @@ class TestparametersListGetResponseDataItem:
 
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Union[Unset, TestparametersListGetResponseDataItemType]
+        type: Unset | TestparametersListGetResponseDataItemType
         if isinstance(_type, Unset):
             type = UNSET
         else:
@@ -130,9 +130,7 @@ class TestparametersListGetResponseDataItem:
         revision = d.pop("revision", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Union[
-            Unset, TestparametersListGetResponseDataItemAttributes
-        ]
+        attributes: Unset | TestparametersListGetResponseDataItemAttributes
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:
@@ -143,9 +141,7 @@ class TestparametersListGetResponseDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Union[
-            Unset, TestparametersListGetResponseDataItemRelationships
-        ]
+        relationships: Unset | TestparametersListGetResponseDataItemRelationships
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:
@@ -156,7 +152,7 @@ class TestparametersListGetResponseDataItem:
             )
 
         _links = d.pop("links", UNSET)
-        links: Union[Unset, TestparametersListGetResponseDataItemLinks]
+        links: Unset | TestparametersListGetResponseDataItemLinks
         if isinstance(_links, Unset):
             links = UNSET
         else:
@@ -165,7 +161,7 @@ class TestparametersListGetResponseDataItem:
             )
 
         _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, TestparametersListGetResponseDataItemMeta]
+        meta: Unset | TestparametersListGetResponseDataItemMeta
         if isinstance(_meta, Unset):
             meta = UNSET
         else:
@@ -181,13 +177,11 @@ class TestparametersListGetResponseDataItem:
             meta=meta,
         )
 
-        testparameters_list_get_response_data_item_obj.additional_properties = (
-            d
-        )
+        testparameters_list_get_response_data_item_obj.additional_properties = d
         return testparameters_list_get_response_data_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

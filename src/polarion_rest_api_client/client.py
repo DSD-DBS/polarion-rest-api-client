@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """The overall Polarion Client which handles the HTTP session, auth etc."""
+
 from __future__ import annotations
 
 import typing as t
@@ -96,7 +97,7 @@ class PolarionClient:
         self,
         polarion_api_endpoint: str,
         polarion_access_token: str,
-        httpx_args: t.Optional[dict[str, t.Any]] = None,
+        httpx_args: dict[str, t.Any] | None = None,
         batch_size: int = 100,
         page_size: int = 100,
         max_content_size: int = 2 * 1024**2,

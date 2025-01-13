@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,28 +19,27 @@ T = TypeVar("T", bound="UsersSinglePatchRequestDataAttributes")
 
 @_attrs_define
 class UsersSinglePatchRequestDataAttributes:
-    """
-    Attributes:
-        description (Union[Unset, UsersSinglePatchRequestDataAttributesDescription]):
-        disabled_notifications (Union[Unset, bool]):
-        email (Union[Unset, str]):  Example: Email.
-        initials (Union[Unset, str]):  Example: Initials.
-        name (Union[Unset, str]):  Example: Name.
+    """Attributes
+    description (Union[Unset, UsersSinglePatchRequestDataAttributesDescription]):
+    disabled_notifications (Union[Unset, bool]):
+    email (Union[Unset, str]):  Example: Email.
+    initials (Union[Unset, str]):  Example: Initials.
+    name (Union[Unset, str]):  Example: Name.
     """
 
     description: Union[
         Unset, "UsersSinglePatchRequestDataAttributesDescription"
     ] = UNSET
-    disabled_notifications: Union[Unset, bool] = UNSET
-    email: Union[Unset, str] = UNSET
-    initials: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    disabled_notifications: Unset | bool = UNSET
+    email: Unset | str = UNSET
+    initials: Unset | str = UNSET
+    name: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        description: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        description: Unset | dict[str, Any] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -52,7 +51,7 @@ class UsersSinglePatchRequestDataAttributes:
 
         name = self.name
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if description is not UNSET:
@@ -69,16 +68,14 @@ class UsersSinglePatchRequestDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.users_single_patch_request_data_attributes_description import (
             UsersSinglePatchRequestDataAttributesDescription,
         )
 
         d = src_dict.copy()
         _description = d.pop("description", UNSET)
-        description: Union[
-            Unset, UsersSinglePatchRequestDataAttributesDescription
-        ]
+        description: Unset | UsersSinglePatchRequestDataAttributesDescription
         if isinstance(_description, Unset):
             description = UNSET
         else:
@@ -104,13 +101,11 @@ class UsersSinglePatchRequestDataAttributes:
             name=name,
         )
 
-        users_single_patch_request_data_attributes_obj.additional_properties = (
-            d
-        )
+        users_single_patch_request_data_attributes_obj.additional_properties = d
         return users_single_patch_request_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -26,18 +26,12 @@ def _get_kwargs(
     iteration: str,
     *,
     body: PostTestRecordAttachmentsRequestBody,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/testruns/{testRunId}/testrecords/{testCaseProjectId}/{testCaseId}/{iteration}/attachments".format(
-            projectId=project_id,
-            testRunId=test_run_id,
-            testCaseProjectId=test_case_project_id,
-            testCaseId=test_case_id,
-            iteration=iteration,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/attachments",
     }
 
     _body = body.to_multipart()
@@ -49,8 +43,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, TestrecordAttachmentsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | TestrecordAttachmentsListPostResponse | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = TestrecordAttachmentsListPostResponse.from_dict(
             response.json()
@@ -99,13 +93,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, TestrecordAttachmentsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | TestrecordAttachmentsListPostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -121,9 +114,9 @@ def sync_detailed(
     test_case_id: str,
     iteration: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostTestRecordAttachmentsRequestBody,
-) -> Response[Union[Errors, TestrecordAttachmentsListPostResponse]]:
+) -> Response[Errors | TestrecordAttachmentsListPostResponse]:
     r"""Creates a list of Test Record Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -139,11 +132,13 @@ def sync_detailed(
         iteration (str):
         body (PostTestRecordAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, TestrecordAttachmentsListPostResponse]]
     """
 
@@ -170,9 +165,9 @@ def sync(
     test_case_id: str,
     iteration: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostTestRecordAttachmentsRequestBody,
-) -> Optional[Union[Errors, TestrecordAttachmentsListPostResponse]]:
+) -> Errors | TestrecordAttachmentsListPostResponse | None:
     r"""Creates a list of Test Record Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -188,11 +183,13 @@ def sync(
         iteration (str):
         body (PostTestRecordAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, TestrecordAttachmentsListPostResponse]
     """
 
@@ -214,9 +211,9 @@ async def asyncio_detailed(
     test_case_id: str,
     iteration: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostTestRecordAttachmentsRequestBody,
-) -> Response[Union[Errors, TestrecordAttachmentsListPostResponse]]:
+) -> Response[Errors | TestrecordAttachmentsListPostResponse]:
     r"""Creates a list of Test Record Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -232,11 +229,13 @@ async def asyncio_detailed(
         iteration (str):
         body (PostTestRecordAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, TestrecordAttachmentsListPostResponse]]
     """
 
@@ -261,9 +260,9 @@ async def asyncio(
     test_case_id: str,
     iteration: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostTestRecordAttachmentsRequestBody,
-) -> Optional[Union[Errors, TestrecordAttachmentsListPostResponse]]:
+) -> Errors | TestrecordAttachmentsListPostResponse | None:
     r"""Creates a list of Test Record Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -279,11 +278,13 @@ async def asyncio(
         iteration (str):
         body (PostTestRecordAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, TestrecordAttachmentsListPostResponse]
     """
 

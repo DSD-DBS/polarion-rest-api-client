@@ -1,8 +1,9 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
+import builtins
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,61 +25,58 @@ T = TypeVar("T", bound="TestrunsListGetResponseDataItemAttributes")
 
 @_attrs_define
 class TestrunsListGetResponseDataItemAttributes:
-    """
-    Attributes:
-        created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        finished_on (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        group_id (Union[Unset, str]):  Example: Group ID.
-        home_page_content (Union[Unset, TestrunsListGetResponseDataItemAttributesHomePageContent]):
-        id (Union[Unset, str]):  Example: ID.
-        id_prefix (Union[Unset, str]):  Example: MyTestRunIdPrefix.
-        is_template (Union[Unset, bool]):
-        keep_in_history (Union[Unset, bool]):
-        query (Union[Unset, str]):  Example: Query.
-        select_test_cases_by (Union[Unset, TestrunsListGetResponseDataItemAttributesSelectTestCasesBy]):  Example:
-            manualSelection.
-        status (Union[Unset, str]):  Example: open.
-        title (Union[Unset, str]):  Example: Title.
-        type (Union[Unset, str]):  Example: manual.
-        updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        use_report_from_template (Union[Unset, bool]):
+    """Attributes
+    created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    finished_on (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    group_id (Union[Unset, str]):  Example: Group ID.
+    home_page_content (Union[Unset, TestrunsListGetResponseDataItemAttributesHomePageContent]):
+    id (Union[Unset, str]):  Example: ID.
+    id_prefix (Union[Unset, str]):  Example: MyTestRunIdPrefix.
+    is_template (Union[Unset, bool]):
+    keep_in_history (Union[Unset, bool]):
+    query (Union[Unset, str]):  Example: Query.
+    select_test_cases_by (Union[Unset, TestrunsListGetResponseDataItemAttributesSelectTestCasesBy]):  Example:
+        manualSelection.
+    status (Union[Unset, str]):  Example: open.
+    title (Union[Unset, str]):  Example: Title.
+    type (Union[Unset, str]):  Example: manual.
+    updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    use_report_from_template (Union[Unset, bool]):
     """
 
-    created: Union[Unset, datetime.datetime] = UNSET
-    finished_on: Union[Unset, datetime.datetime] = UNSET
-    group_id: Union[Unset, str] = UNSET
+    created: Unset | datetime.datetime = UNSET
+    finished_on: Unset | datetime.datetime = UNSET
+    group_id: Unset | str = UNSET
     home_page_content: Union[
         Unset, "TestrunsListGetResponseDataItemAttributesHomePageContent"
     ] = UNSET
-    id: Union[Unset, str] = UNSET
-    id_prefix: Union[Unset, str] = UNSET
-    is_template: Union[Unset, bool] = UNSET
-    keep_in_history: Union[Unset, bool] = UNSET
-    query: Union[Unset, str] = UNSET
-    select_test_cases_by: Union[
-        Unset, TestrunsListGetResponseDataItemAttributesSelectTestCasesBy
-    ] = UNSET
-    status: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    type: Union[Unset, str] = UNSET
-    updated: Union[Unset, datetime.datetime] = UNSET
-    use_report_from_template: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    id: Unset | str = UNSET
+    id_prefix: Unset | str = UNSET
+    is_template: Unset | bool = UNSET
+    keep_in_history: Unset | bool = UNSET
+    query: Unset | str = UNSET
+    select_test_cases_by: Unset | TestrunsListGetResponseDataItemAttributesSelectTestCasesBy = UNSET
+    status: Unset | str = UNSET
+    title: Unset | str = UNSET
+    type: Unset | str = UNSET
+    updated: Unset | datetime.datetime = UNSET
+    use_report_from_template: Unset | bool = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        created: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        created: Unset | str = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
 
-        finished_on: Union[Unset, str] = UNSET
+        finished_on: Unset | str = UNSET
         if not isinstance(self.finished_on, Unset):
             finished_on = self.finished_on.isoformat()
 
         group_id = self.group_id
 
-        home_page_content: Union[Unset, Dict[str, Any]] = UNSET
+        home_page_content: Unset | dict[str, Any] = UNSET
         if not isinstance(self.home_page_content, Unset):
             home_page_content = self.home_page_content.to_dict()
 
@@ -92,7 +90,7 @@ class TestrunsListGetResponseDataItemAttributes:
 
         query = self.query
 
-        select_test_cases_by: Union[Unset, str] = UNSET
+        select_test_cases_by: Unset | str = UNSET
         if not isinstance(self.select_test_cases_by, Unset):
             select_test_cases_by = self.select_test_cases_by.value
 
@@ -102,13 +100,13 @@ class TestrunsListGetResponseDataItemAttributes:
 
         type = self.type
 
-        updated: Union[Unset, str] = UNSET
+        updated: Unset | str = UNSET
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()
 
         use_report_from_template = self.use_report_from_template
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if created is not UNSET:
@@ -145,21 +143,21 @@ class TestrunsListGetResponseDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         from ..models.testruns_list_get_response_data_item_attributes_home_page_content import (
             TestrunsListGetResponseDataItemAttributesHomePageContent,
         )
 
         d = src_dict.copy()
         _created = d.pop("created", UNSET)
-        created: Union[Unset, datetime.datetime]
+        created: Unset | datetime.datetime
         if isinstance(_created, Unset):
             created = UNSET
         else:
             created = isoparse(_created)
 
         _finished_on = d.pop("finishedOn", UNSET)
-        finished_on: Union[Unset, datetime.datetime]
+        finished_on: Unset | datetime.datetime
         if isinstance(_finished_on, Unset):
             finished_on = UNSET
         else:
@@ -168,9 +166,7 @@ class TestrunsListGetResponseDataItemAttributes:
         group_id = d.pop("groupId", UNSET)
 
         _home_page_content = d.pop("homePageContent", UNSET)
-        home_page_content: Union[
-            Unset, TestrunsListGetResponseDataItemAttributesHomePageContent
-        ]
+        home_page_content: Unset | TestrunsListGetResponseDataItemAttributesHomePageContent
         if isinstance(_home_page_content, Unset):
             home_page_content = UNSET
         else:
@@ -189,9 +185,7 @@ class TestrunsListGetResponseDataItemAttributes:
         query = d.pop("query", UNSET)
 
         _select_test_cases_by = d.pop("selectTestCasesBy", UNSET)
-        select_test_cases_by: Union[
-            Unset, TestrunsListGetResponseDataItemAttributesSelectTestCasesBy
-        ]
+        select_test_cases_by: Unset | TestrunsListGetResponseDataItemAttributesSelectTestCasesBy
         if isinstance(_select_test_cases_by, Unset):
             select_test_cases_by = UNSET
         else:
@@ -208,7 +202,7 @@ class TestrunsListGetResponseDataItemAttributes:
         type = d.pop("type", UNSET)
 
         _updated = d.pop("updated", UNSET)
-        updated: Union[Unset, datetime.datetime]
+        updated: Unset | datetime.datetime
         if isinstance(_updated, Unset):
             updated = UNSET
         else:
@@ -234,13 +228,11 @@ class TestrunsListGetResponseDataItemAttributes:
             use_report_from_template=use_report_from_template,
         )
 
-        testruns_list_get_response_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        testruns_list_get_response_data_item_attributes_obj.additional_properties = d
         return testruns_list_get_response_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

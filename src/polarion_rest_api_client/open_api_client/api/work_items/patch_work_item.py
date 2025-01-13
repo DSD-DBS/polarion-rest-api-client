@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, cast
 
 import httpx
 
@@ -20,12 +20,12 @@ def _get_kwargs(
     work_item_id: str,
     *,
     body: WorkitemsSinglePatchRequest,
-    workflow_action: Union[Unset, str] = UNSET,
-    change_type_to: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+    workflow_action: Unset | str = UNSET,
+    change_type_to: Unset | str = UNSET,
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    params: Dict[str, Any] = {}
+    params: dict[str, Any] = {}
 
     params["workflowAction"] = workflow_action
 
@@ -35,12 +35,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/projects/{projectId}/workitems/{workItemId}".format(
-            projectId=project_id,
-            workItemId=work_item_id,
-        ),
+        "url": f"/projects/{project_id}/workitems/{work_item_id}",
         "params": params,
     }
 
@@ -54,8 +51,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Any | Errors | None:
     if response.status_code == HTTPStatus.NO_CONTENT:
         response_204 = cast(Any, None)
         return response_204
@@ -97,13 +94,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Any | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -116,11 +112,11 @@ def sync_detailed(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemsSinglePatchRequest,
-    workflow_action: Union[Unset, str] = UNSET,
-    change_type_to: Union[Unset, str] = UNSET,
-) -> Response[Union[Any, Errors]]:
+    workflow_action: Unset | str = UNSET,
+    change_type_to: Unset | str = UNSET,
+) -> Response[Any | Errors]:
     """Updates the specified Work Item.
 
     Args:
@@ -130,11 +126,13 @@ def sync_detailed(
         change_type_to (Union[Unset, str]):
         body (WorkitemsSinglePatchRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -157,11 +155,11 @@ def sync(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemsSinglePatchRequest,
-    workflow_action: Union[Unset, str] = UNSET,
-    change_type_to: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, Errors]]:
+    workflow_action: Unset | str = UNSET,
+    change_type_to: Unset | str = UNSET,
+) -> Any | Errors | None:
     """Updates the specified Work Item.
 
     Args:
@@ -171,11 +169,13 @@ def sync(
         change_type_to (Union[Unset, str]):
         body (WorkitemsSinglePatchRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 
@@ -193,11 +193,11 @@ async def asyncio_detailed(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemsSinglePatchRequest,
-    workflow_action: Union[Unset, str] = UNSET,
-    change_type_to: Union[Unset, str] = UNSET,
-) -> Response[Union[Any, Errors]]:
+    workflow_action: Unset | str = UNSET,
+    change_type_to: Unset | str = UNSET,
+) -> Response[Any | Errors]:
     """Updates the specified Work Item.
 
     Args:
@@ -207,11 +207,13 @@ async def asyncio_detailed(
         change_type_to (Union[Unset, str]):
         body (WorkitemsSinglePatchRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -232,11 +234,11 @@ async def asyncio(
     project_id: str,
     work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemsSinglePatchRequest,
-    workflow_action: Union[Unset, str] = UNSET,
-    change_type_to: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, Errors]]:
+    workflow_action: Unset | str = UNSET,
+    change_type_to: Unset | str = UNSET,
+) -> Any | Errors | None:
     """Updates the specified Work Item.
 
     Args:
@@ -246,11 +248,13 @@ async def asyncio(
         change_type_to (Union[Unset, str]):
         body (WorkitemsSinglePatchRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 

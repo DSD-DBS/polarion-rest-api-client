@@ -7,6 +7,7 @@ second one is the path to the Open API Spec. E.g.
 ./build_client_source.sh path /download/spec.json will take the spec
 from the given path
 """
+
 import json
 import os
 import pathlib
@@ -45,7 +46,7 @@ isort_commands = [
 def fix_spec(src: str, path: str | os.PathLike):
     """Fix errors in the specification."""
     if src == "path":
-        with open(path, "r") as f:
+        with open(path) as f:
             spec = json.load(f)
     elif src == "url":
         response = httpx.get(path)

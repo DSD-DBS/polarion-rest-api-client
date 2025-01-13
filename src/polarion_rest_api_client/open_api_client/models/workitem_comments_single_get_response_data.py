@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,20 +32,19 @@ T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseData")
 
 @_attrs_define
 class WorkitemCommentsSingleGetResponseData:
-    """
-    Attributes:
-        type (Union[Unset, WorkitemCommentsSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyCommentId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, WorkitemCommentsSingleGetResponseDataAttributes]):
-        relationships (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationships]):
-        links (Union[Unset, WorkitemCommentsSingleGetResponseDataLinks]):
-        meta (Union[Unset, WorkitemCommentsSingleGetResponseDataMeta]):
+    """Attributes
+    type (Union[Unset, WorkitemCommentsSingleGetResponseDataType]):
+    id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyCommentId.
+    revision (Union[Unset, str]):  Example: 1234.
+    attributes (Union[Unset, WorkitemCommentsSingleGetResponseDataAttributes]):
+    relationships (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationships]):
+    links (Union[Unset, WorkitemCommentsSingleGetResponseDataLinks]):
+    meta (Union[Unset, WorkitemCommentsSingleGetResponseDataMeta]):
     """
 
-    type: Union[Unset, WorkitemCommentsSingleGetResponseDataType] = UNSET
-    id: Union[Unset, str] = UNSET
-    revision: Union[Unset, str] = UNSET
+    type: Unset | WorkitemCommentsSingleGetResponseDataType = UNSET
+    id: Unset | str = UNSET
+    revision: Unset | str = UNSET
     attributes: Union[
         Unset, "WorkitemCommentsSingleGetResponseDataAttributes"
     ] = UNSET
@@ -53,12 +53,12 @@ class WorkitemCommentsSingleGetResponseData:
     ] = UNSET
     links: Union[Unset, "WorkitemCommentsSingleGetResponseDataLinks"] = UNSET
     meta: Union[Unset, "WorkitemCommentsSingleGetResponseDataMeta"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
@@ -66,23 +66,23 @@ class WorkitemCommentsSingleGetResponseData:
 
         revision = self.revision
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Unset | dict[str, Any] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        relationships: Union[Unset, Dict[str, Any]] = UNSET
+        relationships: Unset | dict[str, Any] = UNSET
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        links: Union[Unset, Dict[str, Any]] = UNSET
+        links: Unset | dict[str, Any] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
+        meta: Unset | dict[str, Any] = UNSET
         if not isinstance(self.meta, Unset):
             meta = self.meta.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
@@ -103,7 +103,7 @@ class WorkitemCommentsSingleGetResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workitem_comments_single_get_response_data_attributes import (
             WorkitemCommentsSingleGetResponseDataAttributes,
         )
@@ -119,7 +119,7 @@ class WorkitemCommentsSingleGetResponseData:
 
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Union[Unset, WorkitemCommentsSingleGetResponseDataType]
+        type: Unset | WorkitemCommentsSingleGetResponseDataType
         if isinstance(_type, Unset):
             type = UNSET
         else:
@@ -130,9 +130,7 @@ class WorkitemCommentsSingleGetResponseData:
         revision = d.pop("revision", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Union[
-            Unset, WorkitemCommentsSingleGetResponseDataAttributes
-        ]
+        attributes: Unset | WorkitemCommentsSingleGetResponseDataAttributes
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:
@@ -143,9 +141,7 @@ class WorkitemCommentsSingleGetResponseData:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Union[
-            Unset, WorkitemCommentsSingleGetResponseDataRelationships
-        ]
+        relationships: Unset | WorkitemCommentsSingleGetResponseDataRelationships
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:
@@ -156,7 +152,7 @@ class WorkitemCommentsSingleGetResponseData:
             )
 
         _links = d.pop("links", UNSET)
-        links: Union[Unset, WorkitemCommentsSingleGetResponseDataLinks]
+        links: Unset | WorkitemCommentsSingleGetResponseDataLinks
         if isinstance(_links, Unset):
             links = UNSET
         else:
@@ -165,7 +161,7 @@ class WorkitemCommentsSingleGetResponseData:
             )
 
         _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, WorkitemCommentsSingleGetResponseDataMeta]
+        meta: Unset | WorkitemCommentsSingleGetResponseDataMeta
         if isinstance(_meta, Unset):
             meta = UNSET
         else:
@@ -181,13 +177,11 @@ class WorkitemCommentsSingleGetResponseData:
             meta=meta,
         )
 
-        workitem_comments_single_get_response_data_obj.additional_properties = (
-            d
-        )
+        workitem_comments_single_get_response_data_obj.additional_properties = d
         return workitem_comments_single_get_response_data_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

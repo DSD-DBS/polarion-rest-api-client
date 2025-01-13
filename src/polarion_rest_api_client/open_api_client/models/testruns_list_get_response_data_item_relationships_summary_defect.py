@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,24 +21,23 @@ T = TypeVar(
 
 @_attrs_define
 class TestrunsListGetResponseDataItemRelationshipsSummaryDefect:
-    """
-    Attributes:
-        data (Union[Unset, TestrunsListGetResponseDataItemRelationshipsSummaryDefectData]):
+    """Attributes
+    data (Union[Unset, TestrunsListGetResponseDataItemRelationshipsSummaryDefectData]):
     """
 
     data: Union[
         Unset, "TestrunsListGetResponseDataItemRelationshipsSummaryDefectData"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        data: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        data: Unset | dict[str, Any] = UNSET
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if data is not UNSET:
@@ -47,17 +46,14 @@ class TestrunsListGetResponseDataItemRelationshipsSummaryDefect:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.testruns_list_get_response_data_item_relationships_summary_defect_data import (
             TestrunsListGetResponseDataItemRelationshipsSummaryDefectData,
         )
 
         d = src_dict.copy()
         _data = d.pop("data", UNSET)
-        data: Union[
-            Unset,
-            TestrunsListGetResponseDataItemRelationshipsSummaryDefectData,
-        ]
+        data: Unset | TestrunsListGetResponseDataItemRelationshipsSummaryDefectData
         if isinstance(_data, Unset):
             data = UNSET
         else:
@@ -69,13 +65,11 @@ class TestrunsListGetResponseDataItemRelationshipsSummaryDefect:
             data=data,
         )
 
-        testruns_list_get_response_data_item_relationships_summary_defect_obj.additional_properties = (
-            d
-        )
+        testruns_list_get_response_data_item_relationships_summary_defect_obj.additional_properties = d
         return testruns_list_get_response_data_item_relationships_summary_defect_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

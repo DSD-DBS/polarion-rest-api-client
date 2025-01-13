@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -40,16 +40,15 @@ T = TypeVar("T", bound="DocumentsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class DocumentsSingleGetResponseDataRelationships:
-    """
-    Attributes:
-        attachments (Union[Unset, DocumentsSingleGetResponseDataRelationshipsAttachments]):
-        author (Union[Unset, DocumentsSingleGetResponseDataRelationshipsAuthor]):
-        branched_from (Union[Unset, DocumentsSingleGetResponseDataRelationshipsBranchedFrom]):
-        comments (Union[Unset, DocumentsSingleGetResponseDataRelationshipsComments]):
-        derived_from (Union[Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFrom]):
-        project (Union[Unset, DocumentsSingleGetResponseDataRelationshipsProject]):
-        updated_by (Union[Unset, DocumentsSingleGetResponseDataRelationshipsUpdatedBy]):
-        variant (Union[Unset, DocumentsSingleGetResponseDataRelationshipsVariant]):
+    """Attributes
+    attachments (Union[Unset, DocumentsSingleGetResponseDataRelationshipsAttachments]):
+    author (Union[Unset, DocumentsSingleGetResponseDataRelationshipsAuthor]):
+    branched_from (Union[Unset, DocumentsSingleGetResponseDataRelationshipsBranchedFrom]):
+    comments (Union[Unset, DocumentsSingleGetResponseDataRelationshipsComments]):
+    derived_from (Union[Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFrom]):
+    project (Union[Unset, DocumentsSingleGetResponseDataRelationshipsProject]):
+    updated_by (Union[Unset, DocumentsSingleGetResponseDataRelationshipsUpdatedBy]):
+    variant (Union[Unset, DocumentsSingleGetResponseDataRelationshipsVariant]):
     """
 
     attachments: Union[
@@ -76,44 +75,44 @@ class DocumentsSingleGetResponseDataRelationships:
     variant: Union[
         Unset, "DocumentsSingleGetResponseDataRelationshipsVariant"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        attachments: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        attachments: Unset | dict[str, Any] = UNSET
         if not isinstance(self.attachments, Unset):
             attachments = self.attachments.to_dict()
 
-        author: Union[Unset, Dict[str, Any]] = UNSET
+        author: Unset | dict[str, Any] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
-        branched_from: Union[Unset, Dict[str, Any]] = UNSET
+        branched_from: Unset | dict[str, Any] = UNSET
         if not isinstance(self.branched_from, Unset):
             branched_from = self.branched_from.to_dict()
 
-        comments: Union[Unset, Dict[str, Any]] = UNSET
+        comments: Unset | dict[str, Any] = UNSET
         if not isinstance(self.comments, Unset):
             comments = self.comments.to_dict()
 
-        derived_from: Union[Unset, Dict[str, Any]] = UNSET
+        derived_from: Unset | dict[str, Any] = UNSET
         if not isinstance(self.derived_from, Unset):
             derived_from = self.derived_from.to_dict()
 
-        project: Union[Unset, Dict[str, Any]] = UNSET
+        project: Unset | dict[str, Any] = UNSET
         if not isinstance(self.project, Unset):
             project = self.project.to_dict()
 
-        updated_by: Union[Unset, Dict[str, Any]] = UNSET
+        updated_by: Unset | dict[str, Any] = UNSET
         if not isinstance(self.updated_by, Unset):
             updated_by = self.updated_by.to_dict()
 
-        variant: Union[Unset, Dict[str, Any]] = UNSET
+        variant: Unset | dict[str, Any] = UNSET
         if not isinstance(self.variant, Unset):
             variant = self.variant.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if attachments is not UNSET:
@@ -136,7 +135,7 @@ class DocumentsSingleGetResponseDataRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.documents_single_get_response_data_relationships_attachments import (
             DocumentsSingleGetResponseDataRelationshipsAttachments,
         )
@@ -164,9 +163,7 @@ class DocumentsSingleGetResponseDataRelationships:
 
         d = src_dict.copy()
         _attachments = d.pop("attachments", UNSET)
-        attachments: Union[
-            Unset, DocumentsSingleGetResponseDataRelationshipsAttachments
-        ]
+        attachments: Unset | DocumentsSingleGetResponseDataRelationshipsAttachments
         if isinstance(_attachments, Unset):
             attachments = UNSET
         else:
@@ -175,7 +172,7 @@ class DocumentsSingleGetResponseDataRelationships:
             )
 
         _author = d.pop("author", UNSET)
-        author: Union[Unset, DocumentsSingleGetResponseDataRelationshipsAuthor]
+        author: Unset | DocumentsSingleGetResponseDataRelationshipsAuthor
         if isinstance(_author, Unset):
             author = UNSET
         else:
@@ -186,9 +183,7 @@ class DocumentsSingleGetResponseDataRelationships:
             )
 
         _branched_from = d.pop("branchedFrom", UNSET)
-        branched_from: Union[
-            Unset, DocumentsSingleGetResponseDataRelationshipsBranchedFrom
-        ]
+        branched_from: Unset | DocumentsSingleGetResponseDataRelationshipsBranchedFrom
         if isinstance(_branched_from, Unset):
             branched_from = UNSET
         else:
@@ -197,9 +192,7 @@ class DocumentsSingleGetResponseDataRelationships:
             )
 
         _comments = d.pop("comments", UNSET)
-        comments: Union[
-            Unset, DocumentsSingleGetResponseDataRelationshipsComments
-        ]
+        comments: Unset | DocumentsSingleGetResponseDataRelationshipsComments
         if isinstance(_comments, Unset):
             comments = UNSET
         else:
@@ -210,9 +203,7 @@ class DocumentsSingleGetResponseDataRelationships:
             )
 
         _derived_from = d.pop("derivedFrom", UNSET)
-        derived_from: Union[
-            Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFrom
-        ]
+        derived_from: Unset | DocumentsSingleGetResponseDataRelationshipsDerivedFrom
         if isinstance(_derived_from, Unset):
             derived_from = UNSET
         else:
@@ -221,9 +212,7 @@ class DocumentsSingleGetResponseDataRelationships:
             )
 
         _project = d.pop("project", UNSET)
-        project: Union[
-            Unset, DocumentsSingleGetResponseDataRelationshipsProject
-        ]
+        project: Unset | DocumentsSingleGetResponseDataRelationshipsProject
         if isinstance(_project, Unset):
             project = UNSET
         else:
@@ -234,9 +223,7 @@ class DocumentsSingleGetResponseDataRelationships:
             )
 
         _updated_by = d.pop("updatedBy", UNSET)
-        updated_by: Union[
-            Unset, DocumentsSingleGetResponseDataRelationshipsUpdatedBy
-        ]
+        updated_by: Unset | DocumentsSingleGetResponseDataRelationshipsUpdatedBy
         if isinstance(_updated_by, Unset):
             updated_by = UNSET
         else:
@@ -247,9 +234,7 @@ class DocumentsSingleGetResponseDataRelationships:
             )
 
         _variant = d.pop("variant", UNSET)
-        variant: Union[
-            Unset, DocumentsSingleGetResponseDataRelationshipsVariant
-        ]
+        variant: Unset | DocumentsSingleGetResponseDataRelationshipsVariant
         if isinstance(_variant, Unset):
             variant = UNSET
         else:
@@ -270,13 +255,11 @@ class DocumentsSingleGetResponseDataRelationships:
             variant=variant,
         )
 
-        documents_single_get_response_data_relationships_obj.additional_properties = (
-            d
-        )
+        documents_single_get_response_data_relationships_obj.additional_properties = d
         return documents_single_get_response_data_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

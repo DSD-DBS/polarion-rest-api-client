@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -28,12 +28,11 @@ T = TypeVar("T", bound="WorkitemCommentsListGetResponseDataItemRelationships")
 
 @_attrs_define
 class WorkitemCommentsListGetResponseDataItemRelationships:
-    """
-    Attributes:
-        author (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsAuthor]):
-        child_comments (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsChildComments]):
-        parent_comment (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsParentComment]):
-        project (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsProject]):
+    """Attributes
+    author (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsAuthor]):
+    child_comments (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsChildComments]):
+    parent_comment (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsParentComment]):
+    project (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsProject]):
     """
 
     author: Union[
@@ -50,28 +49,28 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
     project: Union[
         Unset, "WorkitemCommentsListGetResponseDataItemRelationshipsProject"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        author: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        author: Unset | dict[str, Any] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
-        child_comments: Union[Unset, Dict[str, Any]] = UNSET
+        child_comments: Unset | dict[str, Any] = UNSET
         if not isinstance(self.child_comments, Unset):
             child_comments = self.child_comments.to_dict()
 
-        parent_comment: Union[Unset, Dict[str, Any]] = UNSET
+        parent_comment: Unset | dict[str, Any] = UNSET
         if not isinstance(self.parent_comment, Unset):
             parent_comment = self.parent_comment.to_dict()
 
-        project: Union[Unset, Dict[str, Any]] = UNSET
+        project: Unset | dict[str, Any] = UNSET
         if not isinstance(self.project, Unset):
             project = self.project.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if author is not UNSET:
@@ -86,7 +85,7 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workitem_comments_list_get_response_data_item_relationships_author import (
             WorkitemCommentsListGetResponseDataItemRelationshipsAuthor,
         )
@@ -102,9 +101,7 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
 
         d = src_dict.copy()
         _author = d.pop("author", UNSET)
-        author: Union[
-            Unset, WorkitemCommentsListGetResponseDataItemRelationshipsAuthor
-        ]
+        author: Unset | WorkitemCommentsListGetResponseDataItemRelationshipsAuthor
         if isinstance(_author, Unset):
             author = UNSET
         else:
@@ -113,10 +110,7 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
             )
 
         _child_comments = d.pop("childComments", UNSET)
-        child_comments: Union[
-            Unset,
-            WorkitemCommentsListGetResponseDataItemRelationshipsChildComments,
-        ]
+        child_comments: Unset | WorkitemCommentsListGetResponseDataItemRelationshipsChildComments
         if isinstance(_child_comments, Unset):
             child_comments = UNSET
         else:
@@ -125,10 +119,7 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
             )
 
         _parent_comment = d.pop("parentComment", UNSET)
-        parent_comment: Union[
-            Unset,
-            WorkitemCommentsListGetResponseDataItemRelationshipsParentComment,
-        ]
+        parent_comment: Unset | WorkitemCommentsListGetResponseDataItemRelationshipsParentComment
         if isinstance(_parent_comment, Unset):
             parent_comment = UNSET
         else:
@@ -137,9 +128,7 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
             )
 
         _project = d.pop("project", UNSET)
-        project: Union[
-            Unset, WorkitemCommentsListGetResponseDataItemRelationshipsProject
-        ]
+        project: Unset | WorkitemCommentsListGetResponseDataItemRelationshipsProject
         if isinstance(_project, Unset):
             project = UNSET
         else:
@@ -154,13 +143,11 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
             project=project,
         )
 
-        workitem_comments_list_get_response_data_item_relationships_obj.additional_properties = (
-            d
-        )
+        workitem_comments_list_get_response_data_item_relationships_obj.additional_properties = d
         return workitem_comments_list_get_response_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

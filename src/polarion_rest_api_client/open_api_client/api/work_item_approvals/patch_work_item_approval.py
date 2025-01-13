@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, cast
 
 import httpx
 
@@ -21,16 +21,12 @@ def _get_kwargs(
     user_id: str,
     *,
     body: WorkitemApprovalsSinglePatchRequest,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/projects/{projectId}/workitems/{workItemId}/approvals/{userId}".format(
-            projectId=project_id,
-            workItemId=work_item_id,
-            userId=user_id,
-        ),
+        "url": f"/projects/{project_id}/workitems/{work_item_id}/approvals/{user_id}",
     }
 
     _body = body.to_dict()
@@ -43,8 +39,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Any | Errors | None:
     if response.status_code == HTTPStatus.NO_CONTENT:
         response_204 = cast(Any, None)
         return response_204
@@ -86,13 +82,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Any | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -106,9 +101,9 @@ def sync_detailed(
     work_item_id: str,
     user_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemApprovalsSinglePatchRequest,
-) -> Response[Union[Any, Errors]]:
+) -> Response[Any | Errors]:
     """Updates the specified instance.
 
     Args:
@@ -117,11 +112,13 @@ def sync_detailed(
         user_id (str):
         body (WorkitemApprovalsSinglePatchRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -144,9 +141,9 @@ def sync(
     work_item_id: str,
     user_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemApprovalsSinglePatchRequest,
-) -> Optional[Union[Any, Errors]]:
+) -> Any | Errors | None:
     """Updates the specified instance.
 
     Args:
@@ -155,11 +152,13 @@ def sync(
         user_id (str):
         body (WorkitemApprovalsSinglePatchRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 
@@ -177,9 +176,9 @@ async def asyncio_detailed(
     work_item_id: str,
     user_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemApprovalsSinglePatchRequest,
-) -> Response[Union[Any, Errors]]:
+) -> Response[Any | Errors]:
     """Updates the specified instance.
 
     Args:
@@ -188,11 +187,13 @@ async def asyncio_detailed(
         user_id (str):
         body (WorkitemApprovalsSinglePatchRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -213,9 +214,9 @@ async def asyncio(
     work_item_id: str,
     user_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemApprovalsSinglePatchRequest,
-) -> Optional[Union[Any, Errors]]:
+) -> Any | Errors | None:
     """Updates the specified instance.
 
     Args:
@@ -224,11 +225,13 @@ async def asyncio(
         user_id (str):
         body (WorkitemApprovalsSinglePatchRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 

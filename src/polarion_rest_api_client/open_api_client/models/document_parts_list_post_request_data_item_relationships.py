@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,11 +25,10 @@ T = TypeVar("T", bound="DocumentPartsListPostRequestDataItemRelationships")
 
 @_attrs_define
 class DocumentPartsListPostRequestDataItemRelationships:
-    """
-    Attributes:
-        next_part (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsNextPart]):
-        previous_part (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsPreviousPart]):
-        work_item (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsWorkItem]):
+    """Attributes
+    next_part (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsNextPart]):
+    previous_part (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsPreviousPart]):
+    work_item (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsWorkItem]):
     """
 
     next_part: Union[
@@ -41,24 +40,24 @@ class DocumentPartsListPostRequestDataItemRelationships:
     work_item: Union[
         Unset, "DocumentPartsListPostRequestDataItemRelationshipsWorkItem"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        next_part: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        next_part: Unset | dict[str, Any] = UNSET
         if not isinstance(self.next_part, Unset):
             next_part = self.next_part.to_dict()
 
-        previous_part: Union[Unset, Dict[str, Any]] = UNSET
+        previous_part: Unset | dict[str, Any] = UNSET
         if not isinstance(self.previous_part, Unset):
             previous_part = self.previous_part.to_dict()
 
-        work_item: Union[Unset, Dict[str, Any]] = UNSET
+        work_item: Unset | dict[str, Any] = UNSET
         if not isinstance(self.work_item, Unset):
             work_item = self.work_item.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if next_part is not UNSET:
@@ -71,7 +70,7 @@ class DocumentPartsListPostRequestDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.document_parts_list_post_request_data_item_relationships_next_part import (
             DocumentPartsListPostRequestDataItemRelationshipsNextPart,
         )
@@ -84,9 +83,7 @@ class DocumentPartsListPostRequestDataItemRelationships:
 
         d = src_dict.copy()
         _next_part = d.pop("nextPart", UNSET)
-        next_part: Union[
-            Unset, DocumentPartsListPostRequestDataItemRelationshipsNextPart
-        ]
+        next_part: Unset | DocumentPartsListPostRequestDataItemRelationshipsNextPart
         if isinstance(_next_part, Unset):
             next_part = UNSET
         else:
@@ -95,10 +92,7 @@ class DocumentPartsListPostRequestDataItemRelationships:
             )
 
         _previous_part = d.pop("previousPart", UNSET)
-        previous_part: Union[
-            Unset,
-            DocumentPartsListPostRequestDataItemRelationshipsPreviousPart,
-        ]
+        previous_part: Unset | DocumentPartsListPostRequestDataItemRelationshipsPreviousPart
         if isinstance(_previous_part, Unset):
             previous_part = UNSET
         else:
@@ -107,9 +101,7 @@ class DocumentPartsListPostRequestDataItemRelationships:
             )
 
         _work_item = d.pop("workItem", UNSET)
-        work_item: Union[
-            Unset, DocumentPartsListPostRequestDataItemRelationshipsWorkItem
-        ]
+        work_item: Unset | DocumentPartsListPostRequestDataItemRelationshipsWorkItem
         if isinstance(_work_item, Unset):
             work_item = UNSET
         else:
@@ -123,13 +115,11 @@ class DocumentPartsListPostRequestDataItemRelationships:
             work_item=work_item,
         )
 
-        document_parts_list_post_request_data_item_relationships_obj.additional_properties = (
-            d
-        )
+        document_parts_list_post_request_data_item_relationships_obj.additional_properties = d
         return document_parts_list_post_request_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

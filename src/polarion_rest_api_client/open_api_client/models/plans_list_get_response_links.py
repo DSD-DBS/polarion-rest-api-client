@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,33 +13,32 @@ T = TypeVar("T", bound="PlansListGetResponseLinks")
 
 @_attrs_define
 class PlansListGetResponseLinks:
-    """
-    Attributes:
-        first (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=1.
-        last (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=9.
-        next_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=6.
-        portal (Union[Unset, str]):  Example: server-host-name/application-
-            path/polarion/redirect/project/MyProjectId/plans.
-        prev (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=4.
-        self_ (Union[Unset, str]):  Example: server-host-name/application-
-            path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=5.
+    """Attributes
+    first (Union[Unset, str]):  Example: server-host-name/application-
+        path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=1.
+    last (Union[Unset, str]):  Example: server-host-name/application-
+        path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=9.
+    next_ (Union[Unset, str]):  Example: server-host-name/application-
+        path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=6.
+    portal (Union[Unset, str]):  Example: server-host-name/application-
+        path/polarion/redirect/project/MyProjectId/plans.
+    prev (Union[Unset, str]):  Example: server-host-name/application-
+        path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=4.
+    self_ (Union[Unset, str]):  Example: server-host-name/application-
+        path/projects/MyProjectId/plans?page%5Bsize%5D=10&page%5Bnumber%5D=5.
     """
 
-    first: Union[Unset, str] = UNSET
-    last: Union[Unset, str] = UNSET
-    next_: Union[Unset, str] = UNSET
-    portal: Union[Unset, str] = UNSET
-    prev: Union[Unset, str] = UNSET
-    self_: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    first: Unset | str = UNSET
+    last: Unset | str = UNSET
+    next_: Unset | str = UNSET
+    portal: Unset | str = UNSET
+    prev: Unset | str = UNSET
+    self_: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         first = self.first
 
         last = self.last
@@ -52,7 +51,7 @@ class PlansListGetResponseLinks:
 
         self_ = self.self_
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if first is not UNSET:
@@ -71,7 +70,7 @@ class PlansListGetResponseLinks:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         first = d.pop("first", UNSET)
 
@@ -98,7 +97,7 @@ class PlansListGetResponseLinks:
         return plans_list_get_response_links_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

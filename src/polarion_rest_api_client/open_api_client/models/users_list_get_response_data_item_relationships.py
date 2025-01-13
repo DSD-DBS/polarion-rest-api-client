@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,11 +25,10 @@ T = TypeVar("T", bound="UsersListGetResponseDataItemRelationships")
 
 @_attrs_define
 class UsersListGetResponseDataItemRelationships:
-    """
-    Attributes:
-        global_roles (Union[Unset, UsersListGetResponseDataItemRelationshipsGlobalRoles]):
-        project_roles (Union[Unset, UsersListGetResponseDataItemRelationshipsProjectRoles]):
-        user_groups (Union[Unset, UsersListGetResponseDataItemRelationshipsUserGroups]):
+    """Attributes
+    global_roles (Union[Unset, UsersListGetResponseDataItemRelationshipsGlobalRoles]):
+    project_roles (Union[Unset, UsersListGetResponseDataItemRelationshipsProjectRoles]):
+    user_groups (Union[Unset, UsersListGetResponseDataItemRelationshipsUserGroups]):
     """
 
     global_roles: Union[
@@ -41,24 +40,24 @@ class UsersListGetResponseDataItemRelationships:
     user_groups: Union[
         Unset, "UsersListGetResponseDataItemRelationshipsUserGroups"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        global_roles: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        global_roles: Unset | dict[str, Any] = UNSET
         if not isinstance(self.global_roles, Unset):
             global_roles = self.global_roles.to_dict()
 
-        project_roles: Union[Unset, Dict[str, Any]] = UNSET
+        project_roles: Unset | dict[str, Any] = UNSET
         if not isinstance(self.project_roles, Unset):
             project_roles = self.project_roles.to_dict()
 
-        user_groups: Union[Unset, Dict[str, Any]] = UNSET
+        user_groups: Unset | dict[str, Any] = UNSET
         if not isinstance(self.user_groups, Unset):
             user_groups = self.user_groups.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if global_roles is not UNSET:
@@ -71,7 +70,7 @@ class UsersListGetResponseDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.users_list_get_response_data_item_relationships_global_roles import (
             UsersListGetResponseDataItemRelationshipsGlobalRoles,
         )
@@ -84,9 +83,7 @@ class UsersListGetResponseDataItemRelationships:
 
         d = src_dict.copy()
         _global_roles = d.pop("globalRoles", UNSET)
-        global_roles: Union[
-            Unset, UsersListGetResponseDataItemRelationshipsGlobalRoles
-        ]
+        global_roles: Unset | UsersListGetResponseDataItemRelationshipsGlobalRoles
         if isinstance(_global_roles, Unset):
             global_roles = UNSET
         else:
@@ -97,9 +94,7 @@ class UsersListGetResponseDataItemRelationships:
             )
 
         _project_roles = d.pop("projectRoles", UNSET)
-        project_roles: Union[
-            Unset, UsersListGetResponseDataItemRelationshipsProjectRoles
-        ]
+        project_roles: Unset | UsersListGetResponseDataItemRelationshipsProjectRoles
         if isinstance(_project_roles, Unset):
             project_roles = UNSET
         else:
@@ -108,9 +103,7 @@ class UsersListGetResponseDataItemRelationships:
             )
 
         _user_groups = d.pop("userGroups", UNSET)
-        user_groups: Union[
-            Unset, UsersListGetResponseDataItemRelationshipsUserGroups
-        ]
+        user_groups: Unset | UsersListGetResponseDataItemRelationshipsUserGroups
         if isinstance(_user_groups, Unset):
             user_groups = UNSET
         else:
@@ -126,13 +119,11 @@ class UsersListGetResponseDataItemRelationships:
             user_groups=user_groups,
         )
 
-        users_list_get_response_data_item_relationships_obj.additional_properties = (
-            d
-        )
+        users_list_get_response_data_item_relationships_obj.additional_properties = d
         return users_list_get_response_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

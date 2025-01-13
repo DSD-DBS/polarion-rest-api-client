@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """A client for a specific project, using the session of PolarionClient."""
+
 import typing as t
 
 from polarion_rest_api_client.clients import base_classes as bc

@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,33 +20,29 @@ T = TypeVar(
 
 @_attrs_define
 class WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorData:
-    """
-    Attributes:
-        id (Union[Unset, str]):  Example: MyUserId.
-        revision (Union[Unset, str]):  Example: 1234.
-        type (Union[Unset, WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorDataType]):
+    """Attributes
+    id (Union[Unset, str]):  Example: MyUserId.
+    revision (Union[Unset, str]):  Example: 1234.
+    type (Union[Unset, WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorDataType]):
     """
 
-    id: Union[Unset, str] = UNSET
-    revision: Union[Unset, str] = UNSET
-    type: Union[
-        Unset,
-        WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorDataType,
-    ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    id: Unset | str = UNSET
+    revision: Unset | str = UNSET
+    type: Unset | WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorDataType = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         revision = self.revision
 
-        type: Union[Unset, str] = UNSET
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if id is not UNSET:
@@ -58,17 +55,14 @@ class WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         id = d.pop("id", UNSET)
 
         revision = d.pop("revision", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Union[
-            Unset,
-            WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorDataType,
-        ]
+        type: Unset | WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorDataType
         if isinstance(_type, Unset):
             type = UNSET
         else:
@@ -82,13 +76,11 @@ class WorkitemAttachmentsSingleGetResponseDataRelationshipsAuthorData:
             type=type,
         )
 
-        workitem_attachments_single_get_response_data_relationships_author_data_obj.additional_properties = (
-            d
-        )
+        workitem_attachments_single_get_response_data_relationships_author_data_obj.additional_properties = d
         return workitem_attachments_single_get_response_data_relationships_author_data_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

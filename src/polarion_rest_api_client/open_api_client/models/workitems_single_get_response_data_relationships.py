@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -70,27 +70,26 @@ T = TypeVar("T", bound="WorkitemsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class WorkitemsSingleGetResponseDataRelationships:
-    """
-    Attributes:
-        approvals (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsApprovals]):
-        assignee (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAssignee]):
-        attachments (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAttachments]):
-        author (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAuthor]):
-        backlinked_work_items (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItems]):
-        categories (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsCategories]):
-        comments (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsComments]):
-        externally_linked_work_items (Union[Unset,
-            WorkitemsSingleGetResponseDataRelationshipsExternallyLinkedWorkItems]):
-        linked_oslc_resources (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResources]):
-        linked_revisions (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsLinkedRevisions]):
-        linked_work_items (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsLinkedWorkItems]):
-        module (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsModule]):
-        planned_in (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsPlannedIn]):
-        project (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsProject]):
-        test_steps (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsTestSteps]):
-        votes (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsVotes]):
-        watches (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsWatches]):
-        work_records (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsWorkRecords]):
+    """Attributes
+    approvals (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsApprovals]):
+    assignee (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAssignee]):
+    attachments (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAttachments]):
+    author (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAuthor]):
+    backlinked_work_items (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItems]):
+    categories (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsCategories]):
+    comments (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsComments]):
+    externally_linked_work_items (Union[Unset,
+        WorkitemsSingleGetResponseDataRelationshipsExternallyLinkedWorkItems]):
+    linked_oslc_resources (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResources]):
+    linked_revisions (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsLinkedRevisions]):
+    linked_work_items (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsLinkedWorkItems]):
+    module (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsModule]):
+    planned_in (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsPlannedIn]):
+    project (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsProject]):
+    test_steps (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsTestSteps]):
+    votes (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsVotes]):
+    watches (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsWatches]):
+    work_records (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsWorkRecords]):
     """
 
     approvals: Union[
@@ -148,86 +147,86 @@ class WorkitemsSingleGetResponseDataRelationships:
     work_records: Union[
         Unset, "WorkitemsSingleGetResponseDataRelationshipsWorkRecords"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        approvals: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        approvals: Unset | dict[str, Any] = UNSET
         if not isinstance(self.approvals, Unset):
             approvals = self.approvals.to_dict()
 
-        assignee: Union[Unset, Dict[str, Any]] = UNSET
+        assignee: Unset | dict[str, Any] = UNSET
         if not isinstance(self.assignee, Unset):
             assignee = self.assignee.to_dict()
 
-        attachments: Union[Unset, Dict[str, Any]] = UNSET
+        attachments: Unset | dict[str, Any] = UNSET
         if not isinstance(self.attachments, Unset):
             attachments = self.attachments.to_dict()
 
-        author: Union[Unset, Dict[str, Any]] = UNSET
+        author: Unset | dict[str, Any] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
-        backlinked_work_items: Union[Unset, Dict[str, Any]] = UNSET
+        backlinked_work_items: Unset | dict[str, Any] = UNSET
         if not isinstance(self.backlinked_work_items, Unset):
             backlinked_work_items = self.backlinked_work_items.to_dict()
 
-        categories: Union[Unset, Dict[str, Any]] = UNSET
+        categories: Unset | dict[str, Any] = UNSET
         if not isinstance(self.categories, Unset):
             categories = self.categories.to_dict()
 
-        comments: Union[Unset, Dict[str, Any]] = UNSET
+        comments: Unset | dict[str, Any] = UNSET
         if not isinstance(self.comments, Unset):
             comments = self.comments.to_dict()
 
-        externally_linked_work_items: Union[Unset, Dict[str, Any]] = UNSET
+        externally_linked_work_items: Unset | dict[str, Any] = UNSET
         if not isinstance(self.externally_linked_work_items, Unset):
             externally_linked_work_items = (
                 self.externally_linked_work_items.to_dict()
             )
 
-        linked_oslc_resources: Union[Unset, Dict[str, Any]] = UNSET
+        linked_oslc_resources: Unset | dict[str, Any] = UNSET
         if not isinstance(self.linked_oslc_resources, Unset):
             linked_oslc_resources = self.linked_oslc_resources.to_dict()
 
-        linked_revisions: Union[Unset, Dict[str, Any]] = UNSET
+        linked_revisions: Unset | dict[str, Any] = UNSET
         if not isinstance(self.linked_revisions, Unset):
             linked_revisions = self.linked_revisions.to_dict()
 
-        linked_work_items: Union[Unset, Dict[str, Any]] = UNSET
+        linked_work_items: Unset | dict[str, Any] = UNSET
         if not isinstance(self.linked_work_items, Unset):
             linked_work_items = self.linked_work_items.to_dict()
 
-        module: Union[Unset, Dict[str, Any]] = UNSET
+        module: Unset | dict[str, Any] = UNSET
         if not isinstance(self.module, Unset):
             module = self.module.to_dict()
 
-        planned_in: Union[Unset, Dict[str, Any]] = UNSET
+        planned_in: Unset | dict[str, Any] = UNSET
         if not isinstance(self.planned_in, Unset):
             planned_in = self.planned_in.to_dict()
 
-        project: Union[Unset, Dict[str, Any]] = UNSET
+        project: Unset | dict[str, Any] = UNSET
         if not isinstance(self.project, Unset):
             project = self.project.to_dict()
 
-        test_steps: Union[Unset, Dict[str, Any]] = UNSET
+        test_steps: Unset | dict[str, Any] = UNSET
         if not isinstance(self.test_steps, Unset):
             test_steps = self.test_steps.to_dict()
 
-        votes: Union[Unset, Dict[str, Any]] = UNSET
+        votes: Unset | dict[str, Any] = UNSET
         if not isinstance(self.votes, Unset):
             votes = self.votes.to_dict()
 
-        watches: Union[Unset, Dict[str, Any]] = UNSET
+        watches: Unset | dict[str, Any] = UNSET
         if not isinstance(self.watches, Unset):
             watches = self.watches.to_dict()
 
-        work_records: Union[Unset, Dict[str, Any]] = UNSET
+        work_records: Unset | dict[str, Any] = UNSET
         if not isinstance(self.work_records, Unset):
             work_records = self.work_records.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if approvals is not UNSET:
@@ -272,7 +271,7 @@ class WorkitemsSingleGetResponseDataRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workitems_single_get_response_data_relationships_approvals import (
             WorkitemsSingleGetResponseDataRelationshipsApprovals,
         )
@@ -330,9 +329,7 @@ class WorkitemsSingleGetResponseDataRelationships:
 
         d = src_dict.copy()
         _approvals = d.pop("approvals", UNSET)
-        approvals: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsApprovals
-        ]
+        approvals: Unset | WorkitemsSingleGetResponseDataRelationshipsApprovals
         if isinstance(_approvals, Unset):
             approvals = UNSET
         else:
@@ -343,9 +340,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _assignee = d.pop("assignee", UNSET)
-        assignee: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsAssignee
-        ]
+        assignee: Unset | WorkitemsSingleGetResponseDataRelationshipsAssignee
         if isinstance(_assignee, Unset):
             assignee = UNSET
         else:
@@ -356,9 +351,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _attachments = d.pop("attachments", UNSET)
-        attachments: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsAttachments
-        ]
+        attachments: Unset | WorkitemsSingleGetResponseDataRelationshipsAttachments
         if isinstance(_attachments, Unset):
             attachments = UNSET
         else:
@@ -367,7 +360,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _author = d.pop("author", UNSET)
-        author: Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAuthor]
+        author: Unset | WorkitemsSingleGetResponseDataRelationshipsAuthor
         if isinstance(_author, Unset):
             author = UNSET
         else:
@@ -378,10 +371,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _backlinked_work_items = d.pop("backlinkedWorkItems", UNSET)
-        backlinked_work_items: Union[
-            Unset,
-            WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItems,
-        ]
+        backlinked_work_items: Unset | WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItems
         if isinstance(_backlinked_work_items, Unset):
             backlinked_work_items = UNSET
         else:
@@ -390,9 +380,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _categories = d.pop("categories", UNSET)
-        categories: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsCategories
-        ]
+        categories: Unset | WorkitemsSingleGetResponseDataRelationshipsCategories
         if isinstance(_categories, Unset):
             categories = UNSET
         else:
@@ -401,9 +389,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _comments = d.pop("comments", UNSET)
-        comments: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsComments
-        ]
+        comments: Unset | WorkitemsSingleGetResponseDataRelationshipsComments
         if isinstance(_comments, Unset):
             comments = UNSET
         else:
@@ -416,10 +402,7 @@ class WorkitemsSingleGetResponseDataRelationships:
         _externally_linked_work_items = d.pop(
             "externallyLinkedWorkItems", UNSET
         )
-        externally_linked_work_items: Union[
-            Unset,
-            WorkitemsSingleGetResponseDataRelationshipsExternallyLinkedWorkItems,
-        ]
+        externally_linked_work_items: Unset | WorkitemsSingleGetResponseDataRelationshipsExternallyLinkedWorkItems
         if isinstance(_externally_linked_work_items, Unset):
             externally_linked_work_items = UNSET
         else:
@@ -428,10 +411,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _linked_oslc_resources = d.pop("linkedOslcResources", UNSET)
-        linked_oslc_resources: Union[
-            Unset,
-            WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResources,
-        ]
+        linked_oslc_resources: Unset | WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResources
         if isinstance(_linked_oslc_resources, Unset):
             linked_oslc_resources = UNSET
         else:
@@ -440,9 +420,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _linked_revisions = d.pop("linkedRevisions", UNSET)
-        linked_revisions: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsLinkedRevisions
-        ]
+        linked_revisions: Unset | WorkitemsSingleGetResponseDataRelationshipsLinkedRevisions
         if isinstance(_linked_revisions, Unset):
             linked_revisions = UNSET
         else:
@@ -451,9 +429,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _linked_work_items = d.pop("linkedWorkItems", UNSET)
-        linked_work_items: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsLinkedWorkItems
-        ]
+        linked_work_items: Unset | WorkitemsSingleGetResponseDataRelationshipsLinkedWorkItems
         if isinstance(_linked_work_items, Unset):
             linked_work_items = UNSET
         else:
@@ -462,7 +438,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _module = d.pop("module", UNSET)
-        module: Union[Unset, WorkitemsSingleGetResponseDataRelationshipsModule]
+        module: Unset | WorkitemsSingleGetResponseDataRelationshipsModule
         if isinstance(_module, Unset):
             module = UNSET
         else:
@@ -473,9 +449,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _planned_in = d.pop("plannedIn", UNSET)
-        planned_in: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsPlannedIn
-        ]
+        planned_in: Unset | WorkitemsSingleGetResponseDataRelationshipsPlannedIn
         if isinstance(_planned_in, Unset):
             planned_in = UNSET
         else:
@@ -486,9 +460,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _project = d.pop("project", UNSET)
-        project: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsProject
-        ]
+        project: Unset | WorkitemsSingleGetResponseDataRelationshipsProject
         if isinstance(_project, Unset):
             project = UNSET
         else:
@@ -499,9 +471,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _test_steps = d.pop("testSteps", UNSET)
-        test_steps: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsTestSteps
-        ]
+        test_steps: Unset | WorkitemsSingleGetResponseDataRelationshipsTestSteps
         if isinstance(_test_steps, Unset):
             test_steps = UNSET
         else:
@@ -512,7 +482,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _votes = d.pop("votes", UNSET)
-        votes: Union[Unset, WorkitemsSingleGetResponseDataRelationshipsVotes]
+        votes: Unset | WorkitemsSingleGetResponseDataRelationshipsVotes
         if isinstance(_votes, Unset):
             votes = UNSET
         else:
@@ -521,9 +491,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _watches = d.pop("watches", UNSET)
-        watches: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsWatches
-        ]
+        watches: Unset | WorkitemsSingleGetResponseDataRelationshipsWatches
         if isinstance(_watches, Unset):
             watches = UNSET
         else:
@@ -534,9 +502,7 @@ class WorkitemsSingleGetResponseDataRelationships:
             )
 
         _work_records = d.pop("workRecords", UNSET)
-        work_records: Union[
-            Unset, WorkitemsSingleGetResponseDataRelationshipsWorkRecords
-        ]
+        work_records: Unset | WorkitemsSingleGetResponseDataRelationshipsWorkRecords
         if isinstance(_work_records, Unset):
             work_records = UNSET
         else:
@@ -565,13 +531,11 @@ class WorkitemsSingleGetResponseDataRelationships:
             work_records=work_records,
         )
 
-        workitems_single_get_response_data_relationships_obj.additional_properties = (
-            d
-        )
+        workitems_single_get_response_data_relationships_obj.additional_properties = d
         return workitems_single_get_response_data_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

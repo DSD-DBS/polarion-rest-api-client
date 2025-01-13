@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -21,11 +21,11 @@ def _get_kwargs(
     document_name: str,
     field_id: str,
     *,
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["page[size]"] = pagesize
 
@@ -37,14 +37,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/fields/{fieldId}/actions/getCurrentOptions".format(
-            projectId=project_id,
-            spaceId=space_id,
-            documentName=document_name,
-            fieldId=field_id,
-        ),
+        "url": f"/projects/{project_id}/spaces/{space_id}/documents/{document_name}/fields/{field_id}/actions/getCurrentOptions",
         "params": params,
     }
 
@@ -52,8 +47,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[EnumOptionsActionResponseBody, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> EnumOptionsActionResponseBody | Errors | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = EnumOptionsActionResponseBody.from_dict(response.json())
 
@@ -88,13 +83,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[EnumOptionsActionResponseBody, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[EnumOptionsActionResponseBody | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -109,11 +103,11 @@ def sync_detailed(
     document_name: str,
     field_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[EnumOptionsActionResponseBody, Errors]]:
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[EnumOptionsActionResponseBody | Errors]:
     """Returns a list of selected options for the requested field in the
     specified Document.
 
@@ -126,11 +120,13 @@ def sync_detailed(
         pagenumber (Union[Unset, int]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[EnumOptionsActionResponseBody, Errors]]
     """
 
@@ -157,11 +153,11 @@ def sync(
     document_name: str,
     field_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[EnumOptionsActionResponseBody, Errors]]:
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> EnumOptionsActionResponseBody | Errors | None:
     """Returns a list of selected options for the requested field in the
     specified Document.
 
@@ -174,11 +170,13 @@ def sync(
         pagenumber (Union[Unset, int]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[EnumOptionsActionResponseBody, Errors]
     """
 
@@ -200,11 +198,11 @@ async def asyncio_detailed(
     document_name: str,
     field_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[EnumOptionsActionResponseBody, Errors]]:
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[EnumOptionsActionResponseBody | Errors]:
     """Returns a list of selected options for the requested field in the
     specified Document.
 
@@ -217,11 +215,13 @@ async def asyncio_detailed(
         pagenumber (Union[Unset, int]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[EnumOptionsActionResponseBody, Errors]]
     """
 
@@ -246,11 +246,11 @@ async def asyncio(
     document_name: str,
     field_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[EnumOptionsActionResponseBody, Errors]]:
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
+    revision: Unset | str = UNSET,
+) -> EnumOptionsActionResponseBody | Errors | None:
     """Returns a list of selected options for the requested field in the
     specified Document.
 
@@ -263,11 +263,13 @@ async def asyncio(
         pagenumber (Union[Unset, int]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[EnumOptionsActionResponseBody, Errors]
     """
 

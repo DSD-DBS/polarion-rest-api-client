@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,28 +13,27 @@ T = TypeVar("T", bound="LinkedoslcresourcesListPostRequestDataItemAttributes")
 
 @_attrs_define
 class LinkedoslcresourcesListPostRequestDataItemAttributes:
-    """
-    Attributes:
-        label (Union[Unset, str]):  Example: Label.
-        role (Union[Unset, str]):  Example: http://open-services.net/ns/cm#relatedChangeRequest.
-        uri (Union[Unset, str]):  Example: Uri.
+    """Attributes
+    label (Union[Unset, str]):  Example: Label.
+    role (Union[Unset, str]):  Example: http://open-services.net/ns/cm#relatedChangeRequest.
+    uri (Union[Unset, str]):  Example: Uri.
     """
 
-    label: Union[Unset, str] = UNSET
-    role: Union[Unset, str] = UNSET
-    uri: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    label: Unset | str = UNSET
+    role: Unset | str = UNSET
+    uri: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         label = self.label
 
         role = self.role
 
         uri = self.uri
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if label is not UNSET:
@@ -47,7 +46,7 @@ class LinkedoslcresourcesListPostRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         label = d.pop("label", UNSET)
 
@@ -61,13 +60,11 @@ class LinkedoslcresourcesListPostRequestDataItemAttributes:
             uri=uri,
         )
 
-        linkedoslcresources_list_post_request_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        linkedoslcresources_list_post_request_data_item_attributes_obj.additional_properties = d
         return linkedoslcresources_list_post_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

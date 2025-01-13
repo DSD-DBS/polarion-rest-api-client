@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,36 +21,35 @@ T = TypeVar("T", bound="TestrecordsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class TestrecordsSingleGetResponseDataAttributes:
-    """
-    Attributes:
-        comment (Union[Unset, TestrecordsSingleGetResponseDataAttributesComment]):
-        duration (Union[Unset, float]):
-        executed (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        iteration (Union[Unset, int]):
-        result (Union[Unset, str]):  Example: passed.
-        test_case_revision (Union[Unset, str]):  Example: Test Case Revision.
+    """Attributes
+    comment (Union[Unset, TestrecordsSingleGetResponseDataAttributesComment]):
+    duration (Union[Unset, float]):
+    executed (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    iteration (Union[Unset, int]):
+    result (Union[Unset, str]):  Example: passed.
+    test_case_revision (Union[Unset, str]):  Example: Test Case Revision.
     """
 
     comment: Union[
         Unset, "TestrecordsSingleGetResponseDataAttributesComment"
     ] = UNSET
-    duration: Union[Unset, float] = UNSET
-    executed: Union[Unset, datetime.datetime] = UNSET
-    iteration: Union[Unset, int] = UNSET
-    result: Union[Unset, str] = UNSET
-    test_case_revision: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    duration: Unset | float = UNSET
+    executed: Unset | datetime.datetime = UNSET
+    iteration: Unset | int = UNSET
+    result: Unset | str = UNSET
+    test_case_revision: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        comment: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        comment: Unset | dict[str, Any] = UNSET
         if not isinstance(self.comment, Unset):
             comment = self.comment.to_dict()
 
         duration = self.duration
 
-        executed: Union[Unset, str] = UNSET
+        executed: Unset | str = UNSET
         if not isinstance(self.executed, Unset):
             executed = self.executed.isoformat()
 
@@ -60,7 +59,7 @@ class TestrecordsSingleGetResponseDataAttributes:
 
         test_case_revision = self.test_case_revision
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if comment is not UNSET:
@@ -79,16 +78,14 @@ class TestrecordsSingleGetResponseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.testrecords_single_get_response_data_attributes_comment import (
             TestrecordsSingleGetResponseDataAttributesComment,
         )
 
         d = src_dict.copy()
         _comment = d.pop("comment", UNSET)
-        comment: Union[
-            Unset, TestrecordsSingleGetResponseDataAttributesComment
-        ]
+        comment: Unset | TestrecordsSingleGetResponseDataAttributesComment
         if isinstance(_comment, Unset):
             comment = UNSET
         else:
@@ -101,7 +98,7 @@ class TestrecordsSingleGetResponseDataAttributes:
         duration = d.pop("duration", UNSET)
 
         _executed = d.pop("executed", UNSET)
-        executed: Union[Unset, datetime.datetime]
+        executed: Unset | datetime.datetime
         if isinstance(_executed, Unset):
             executed = UNSET
         else:
@@ -122,13 +119,11 @@ class TestrecordsSingleGetResponseDataAttributes:
             test_case_revision=test_case_revision,
         )
 
-        testrecords_single_get_response_data_attributes_obj.additional_properties = (
-            d
-        )
+        testrecords_single_get_response_data_attributes_obj.additional_properties = d
         return testrecords_single_get_response_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

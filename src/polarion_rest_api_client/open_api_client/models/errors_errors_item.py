@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,24 +19,23 @@ T = TypeVar("T", bound="ErrorsErrorsItem")
 
 @_attrs_define
 class ErrorsErrorsItem:
-    """
-    Attributes:
-        status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.
-        title (Union[Unset, str]): Short, human-readable summary of the problem. Example: Bad Request.
-        detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
-            Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).
-        source (Union['ErrorsErrorsItemSourceType0', None, Unset]):
+    """Attributes
+    status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.
+    title (Union[Unset, str]): Short, human-readable summary of the problem. Example: Bad Request.
+    detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
+        Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).
+    source (Union['ErrorsErrorsItemSourceType0', None, Unset]):
     """
 
-    status: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    detail: Union[Unset, str] = UNSET
+    status: Unset | str = UNSET
+    title: Unset | str = UNSET
+    detail: Unset | str = UNSET
     source: Union["ErrorsErrorsItemSourceType0", None, Unset] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.errors_errors_item_source_type_0 import (
             ErrorsErrorsItemSourceType0,
         )
@@ -47,7 +46,7 @@ class ErrorsErrorsItem:
 
         detail = self.detail
 
-        source: Union[Dict[str, Any], None, Unset]
+        source: dict[str, Any] | None | Unset
         if isinstance(self.source, Unset):
             source = UNSET
         elif isinstance(self.source, ErrorsErrorsItemSourceType0):
@@ -55,7 +54,7 @@ class ErrorsErrorsItem:
         else:
             source = self.source
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if status is not UNSET:
@@ -70,7 +69,7 @@ class ErrorsErrorsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.errors_errors_item_source_type_0 import (
             ErrorsErrorsItemSourceType0,
         )
@@ -114,7 +113,7 @@ class ErrorsErrorsItem:
         return errors_errors_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

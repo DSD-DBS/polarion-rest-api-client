@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -18,14 +18,12 @@ def _get_kwargs(
     project_id: str,
     *,
     body: WorkitemsListPostRequest,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/workitems".format(
-            projectId=project_id,
-        ),
+        "url": f"/projects/{project_id}/workitems",
     }
 
     _body = body.to_dict()
@@ -38,8 +36,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, WorkitemsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | WorkitemsListPostResponse | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = WorkitemsListPostResponse.from_dict(response.json())
 
@@ -86,13 +84,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, WorkitemsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | WorkitemsListPostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -104,20 +101,22 @@ def _build_response(
 def sync_detailed(
     project_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemsListPostRequest,
-) -> Response[Union[Errors, WorkitemsListPostResponse]]:
+) -> Response[Errors | WorkitemsListPostResponse]:
     """Creates a list of Work Items.
 
     Args:
         project_id (str):
         body (WorkitemsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, WorkitemsListPostResponse]]
     """
 
@@ -136,20 +135,22 @@ def sync_detailed(
 def sync(
     project_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemsListPostRequest,
-) -> Optional[Union[Errors, WorkitemsListPostResponse]]:
+) -> Errors | WorkitemsListPostResponse | None:
     """Creates a list of Work Items.
 
     Args:
         project_id (str):
         body (WorkitemsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, WorkitemsListPostResponse]
     """
 
@@ -163,20 +164,22 @@ def sync(
 async def asyncio_detailed(
     project_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemsListPostRequest,
-) -> Response[Union[Errors, WorkitemsListPostResponse]]:
+) -> Response[Errors | WorkitemsListPostResponse]:
     """Creates a list of Work Items.
 
     Args:
         project_id (str):
         body (WorkitemsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, WorkitemsListPostResponse]]
     """
 
@@ -193,20 +196,22 @@ async def asyncio_detailed(
 async def asyncio(
     project_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: WorkitemsListPostRequest,
-) -> Optional[Union[Errors, WorkitemsListPostResponse]]:
+) -> Errors | WorkitemsListPostResponse | None:
     """Creates a list of Work Items.
 
     Args:
         project_id (str):
         body (WorkitemsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, WorkitemsListPostResponse]
     """
 

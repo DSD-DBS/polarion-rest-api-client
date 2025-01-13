@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -18,14 +18,12 @@ def _get_kwargs(
     project_id: str,
     *,
     body: PlansListPostRequest,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/plans".format(
-            projectId=project_id,
-        ),
+        "url": f"/projects/{project_id}/plans",
     }
 
     _body = body.to_dict()
@@ -38,8 +36,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, PlansListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | PlansListPostResponse | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = PlansListPostResponse.from_dict(response.json())
 
@@ -86,13 +84,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, PlansListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | PlansListPostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -104,20 +101,22 @@ def _build_response(
 def sync_detailed(
     project_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PlansListPostRequest,
-) -> Response[Union[Errors, PlansListPostResponse]]:
+) -> Response[Errors | PlansListPostResponse]:
     """Creates a list of Plans.
 
     Args:
         project_id (str):
         body (PlansListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, PlansListPostResponse]]
     """
 
@@ -136,20 +135,22 @@ def sync_detailed(
 def sync(
     project_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PlansListPostRequest,
-) -> Optional[Union[Errors, PlansListPostResponse]]:
+) -> Errors | PlansListPostResponse | None:
     """Creates a list of Plans.
 
     Args:
         project_id (str):
         body (PlansListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, PlansListPostResponse]
     """
 
@@ -163,20 +164,22 @@ def sync(
 async def asyncio_detailed(
     project_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PlansListPostRequest,
-) -> Response[Union[Errors, PlansListPostResponse]]:
+) -> Response[Errors | PlansListPostResponse]:
     """Creates a list of Plans.
 
     Args:
         project_id (str):
         body (PlansListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, PlansListPostResponse]]
     """
 
@@ -193,20 +196,22 @@ async def asyncio_detailed(
 async def asyncio(
     project_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PlansListPostRequest,
-) -> Optional[Union[Errors, PlansListPostResponse]]:
+) -> Errors | PlansListPostResponse | None:
     """Creates a list of Plans.
 
     Args:
         project_id (str):
         body (PlansListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, PlansListPostResponse]
     """
 

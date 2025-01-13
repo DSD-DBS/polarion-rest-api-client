@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -22,11 +22,11 @@ def _get_kwargs(
     document_name: str,
     *,
     body: CopyDocumentRequestBody,
-    revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+    revision: Unset | str = UNSET,
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    params: Dict[str, Any] = {}
+    params: dict[str, Any] = {}
 
     params["revision"] = revision
 
@@ -34,13 +34,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/actions/copy".format(
-            projectId=project_id,
-            spaceId=space_id,
-            documentName=document_name,
-        ),
+        "url": f"/projects/{project_id}/spaces/{space_id}/documents/{document_name}/actions/copy",
         "params": params,
     }
 
@@ -54,8 +50,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[DocumentsSinglePostResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> DocumentsSinglePostResponse | Errors | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = DocumentsSinglePostResponse.from_dict(response.json())
 
@@ -102,13 +98,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[DocumentsSinglePostResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[DocumentsSinglePostResponse | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -122,10 +117,10 @@ def sync_detailed(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: CopyDocumentRequestBody,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[DocumentsSinglePostResponse, Errors]]:
+    revision: Unset | str = UNSET,
+) -> Response[DocumentsSinglePostResponse | Errors]:
     """Creates a copy of the Document.
 
     Args:
@@ -135,11 +130,13 @@ def sync_detailed(
         revision (Union[Unset, str]):
         body (CopyDocumentRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[DocumentsSinglePostResponse, Errors]]
     """
 
@@ -163,10 +160,10 @@ def sync(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: CopyDocumentRequestBody,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[DocumentsSinglePostResponse, Errors]]:
+    revision: Unset | str = UNSET,
+) -> DocumentsSinglePostResponse | Errors | None:
     """Creates a copy of the Document.
 
     Args:
@@ -176,11 +173,13 @@ def sync(
         revision (Union[Unset, str]):
         body (CopyDocumentRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[DocumentsSinglePostResponse, Errors]
     """
 
@@ -199,10 +198,10 @@ async def asyncio_detailed(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: CopyDocumentRequestBody,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[DocumentsSinglePostResponse, Errors]]:
+    revision: Unset | str = UNSET,
+) -> Response[DocumentsSinglePostResponse | Errors]:
     """Creates a copy of the Document.
 
     Args:
@@ -212,11 +211,13 @@ async def asyncio_detailed(
         revision (Union[Unset, str]):
         body (CopyDocumentRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[DocumentsSinglePostResponse, Errors]]
     """
 
@@ -238,10 +239,10 @@ async def asyncio(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: CopyDocumentRequestBody,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[DocumentsSinglePostResponse, Errors]]:
+    revision: Unset | str = UNSET,
+) -> DocumentsSinglePostResponse | Errors | None:
     """Creates a copy of the Document.
 
     Args:
@@ -251,11 +252,13 @@ async def asyncio(
         revision (Union[Unset, str]):
         body (CopyDocumentRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[DocumentsSinglePostResponse, Errors]
     """
 

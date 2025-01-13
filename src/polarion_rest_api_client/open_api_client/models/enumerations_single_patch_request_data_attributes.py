@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,27 +19,24 @@ T = TypeVar("T", bound="EnumerationsSinglePatchRequestDataAttributes")
 
 @_attrs_define
 class EnumerationsSinglePatchRequestDataAttributes:
-    """
-    Attributes:
-        options (Union[Unset, List['EnumerationsSinglePatchRequestDataAttributesOptionsItem']]):
+    """Attributes
+    options (Union[Unset, List['EnumerationsSinglePatchRequestDataAttributesOptionsItem']]):
     """
 
-    options: Union[
-        Unset, List["EnumerationsSinglePatchRequestDataAttributesOptionsItem"]
-    ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    options: Unset | list["EnumerationsSinglePatchRequestDataAttributesOptionsItem"] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        options: Union[Unset, List[Dict[str, Any]]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        options: Unset | list[dict[str, Any]] = UNSET
         if not isinstance(self.options, Unset):
             options = []
             for options_item_data in self.options:
                 options_item = options_item_data.to_dict()
                 options.append(options_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if options is not UNSET:
@@ -48,7 +45,7 @@ class EnumerationsSinglePatchRequestDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.enumerations_single_patch_request_data_attributes_options_item import (
             EnumerationsSinglePatchRequestDataAttributesOptionsItem,
         )
@@ -67,13 +64,11 @@ class EnumerationsSinglePatchRequestDataAttributes:
             options=options,
         )
 
-        enumerations_single_patch_request_data_attributes_obj.additional_properties = (
-            d
-        )
+        enumerations_single_patch_request_data_attributes_obj.additional_properties = d
         return enumerations_single_patch_request_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

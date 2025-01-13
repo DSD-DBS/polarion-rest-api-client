@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -22,36 +23,35 @@ T = TypeVar("T", bound="TeststepresultAttachmentsSinglePatchRequestData")
 
 @_attrs_define
 class TeststepresultAttachmentsSinglePatchRequestData:
-    """
-    Attributes:
-        type (Union[Unset, TeststepresultAttachmentsSinglePatchRequestDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/1/MyAttachmentId.
-        attributes (Union[Unset, TeststepresultAttachmentsSinglePatchRequestDataAttributes]):
+    """Attributes
+    type (Union[Unset, TeststepresultAttachmentsSinglePatchRequestDataType]):
+    id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/1/MyAttachmentId.
+    attributes (Union[Unset, TeststepresultAttachmentsSinglePatchRequestDataAttributes]):
     """
 
-    type: Union[Unset, TeststepresultAttachmentsSinglePatchRequestDataType] = (
+    type: Unset | TeststepresultAttachmentsSinglePatchRequestDataType = (
         UNSET
     )
-    id: Union[Unset, str] = UNSET
+    id: Unset | str = UNSET
     attributes: Union[
         Unset, "TeststepresultAttachmentsSinglePatchRequestDataAttributes"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
         id = self.id
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Unset | dict[str, Any] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
@@ -64,14 +64,14 @@ class TeststepresultAttachmentsSinglePatchRequestData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         from ..models.teststepresult_attachments_single_patch_request_data_attributes import (
             TeststepresultAttachmentsSinglePatchRequestDataAttributes,
         )
 
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Union[Unset, TeststepresultAttachmentsSinglePatchRequestDataType]
+        type: Unset | TeststepresultAttachmentsSinglePatchRequestDataType
         if isinstance(_type, Unset):
             type = UNSET
         else:
@@ -80,9 +80,7 @@ class TeststepresultAttachmentsSinglePatchRequestData:
         id = d.pop("id", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Union[
-            Unset, TeststepresultAttachmentsSinglePatchRequestDataAttributes
-        ]
+        attributes: Unset | TeststepresultAttachmentsSinglePatchRequestDataAttributes
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:
@@ -96,13 +94,11 @@ class TeststepresultAttachmentsSinglePatchRequestData:
             attributes=attributes,
         )
 
-        teststepresult_attachments_single_patch_request_data_obj.additional_properties = (
-            d
-        )
+        teststepresult_attachments_single_patch_request_data_obj.additional_properties = d
         return teststepresult_attachments_single_patch_request_data_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

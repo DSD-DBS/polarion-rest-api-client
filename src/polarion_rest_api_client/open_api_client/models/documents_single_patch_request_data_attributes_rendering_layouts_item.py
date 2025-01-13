@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,33 +22,27 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem:
-    """
-    Attributes:
-        label (Union[Unset, str]):  Example: My label.
-        layouter (Union[Unset, str]):  Example: paragraph.
-        properties (Union[Unset, List['DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesItem']]):
-        type (Union[Unset, str]):  Example: task.
+    """Attributes
+    label (Union[Unset, str]):  Example: My label.
+    layouter (Union[Unset, str]):  Example: paragraph.
+    properties (Union[Unset, List['DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesItem']]):
+    type (Union[Unset, str]):  Example: task.
     """
 
-    label: Union[Unset, str] = UNSET
-    layouter: Union[Unset, str] = UNSET
-    properties: Union[
-        Unset,
-        List[
-            "DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesItem"
-        ],
-    ] = UNSET
-    type: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    label: Unset | str = UNSET
+    layouter: Unset | str = UNSET
+    properties: Unset | list["DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesItem"] = UNSET
+    type: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         label = self.label
 
         layouter = self.layouter
 
-        properties: Union[Unset, List[Dict[str, Any]]] = UNSET
+        properties: Unset | list[dict[str, Any]] = UNSET
         if not isinstance(self.properties, Unset):
             properties = []
             for properties_item_data in self.properties:
@@ -56,7 +51,7 @@ class DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem:
 
         type = self.type
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if label is not UNSET:
@@ -71,7 +66,7 @@ class DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         from ..models.documents_single_patch_request_data_attributes_rendering_layouts_item_properties_item import (
             DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesItem,
         )
@@ -99,13 +94,11 @@ class DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem:
             type=type,
         )
 
-        documents_single_patch_request_data_attributes_rendering_layouts_item_obj.additional_properties = (
-            d
-        )
+        documents_single_patch_request_data_attributes_rendering_layouts_item_obj.additional_properties = d
         return documents_single_patch_request_data_attributes_rendering_layouts_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,13 +31,12 @@ T = TypeVar("T", bound="WorkitemsListPostRequestDataItemRelationships")
 
 @_attrs_define
 class WorkitemsListPostRequestDataItemRelationships:
-    """
-    Attributes:
-        assignee (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAssignee]):
-        author (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAuthor]):
-        categories (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsCategories]):
-        linked_revisions (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions]):
-        module (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsModule]):
+    """Attributes
+    assignee (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAssignee]):
+    author (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsAuthor]):
+    categories (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsCategories]):
+    linked_revisions (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions]):
+    module (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsModule]):
     """
 
     assignee: Union[
@@ -55,32 +54,32 @@ class WorkitemsListPostRequestDataItemRelationships:
     module: Union[
         Unset, "WorkitemsListPostRequestDataItemRelationshipsModule"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        assignee: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        assignee: Unset | dict[str, Any] = UNSET
         if not isinstance(self.assignee, Unset):
             assignee = self.assignee.to_dict()
 
-        author: Union[Unset, Dict[str, Any]] = UNSET
+        author: Unset | dict[str, Any] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
-        categories: Union[Unset, Dict[str, Any]] = UNSET
+        categories: Unset | dict[str, Any] = UNSET
         if not isinstance(self.categories, Unset):
             categories = self.categories.to_dict()
 
-        linked_revisions: Union[Unset, Dict[str, Any]] = UNSET
+        linked_revisions: Unset | dict[str, Any] = UNSET
         if not isinstance(self.linked_revisions, Unset):
             linked_revisions = self.linked_revisions.to_dict()
 
-        module: Union[Unset, Dict[str, Any]] = UNSET
+        module: Unset | dict[str, Any] = UNSET
         if not isinstance(self.module, Unset):
             module = self.module.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if assignee is not UNSET:
@@ -97,7 +96,7 @@ class WorkitemsListPostRequestDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workitems_list_post_request_data_item_relationships_assignee import (
             WorkitemsListPostRequestDataItemRelationshipsAssignee,
         )
@@ -116,9 +115,7 @@ class WorkitemsListPostRequestDataItemRelationships:
 
         d = src_dict.copy()
         _assignee = d.pop("assignee", UNSET)
-        assignee: Union[
-            Unset, WorkitemsListPostRequestDataItemRelationshipsAssignee
-        ]
+        assignee: Unset | WorkitemsListPostRequestDataItemRelationshipsAssignee
         if isinstance(_assignee, Unset):
             assignee = UNSET
         else:
@@ -127,9 +124,7 @@ class WorkitemsListPostRequestDataItemRelationships:
             )
 
         _author = d.pop("author", UNSET)
-        author: Union[
-            Unset, WorkitemsListPostRequestDataItemRelationshipsAuthor
-        ]
+        author: Unset | WorkitemsListPostRequestDataItemRelationshipsAuthor
         if isinstance(_author, Unset):
             author = UNSET
         else:
@@ -140,9 +135,7 @@ class WorkitemsListPostRequestDataItemRelationships:
             )
 
         _categories = d.pop("categories", UNSET)
-        categories: Union[
-            Unset, WorkitemsListPostRequestDataItemRelationshipsCategories
-        ]
+        categories: Unset | WorkitemsListPostRequestDataItemRelationshipsCategories
         if isinstance(_categories, Unset):
             categories = UNSET
         else:
@@ -151,9 +144,7 @@ class WorkitemsListPostRequestDataItemRelationships:
             )
 
         _linked_revisions = d.pop("linkedRevisions", UNSET)
-        linked_revisions: Union[
-            Unset, WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions
-        ]
+        linked_revisions: Unset | WorkitemsListPostRequestDataItemRelationshipsLinkedRevisions
         if isinstance(_linked_revisions, Unset):
             linked_revisions = UNSET
         else:
@@ -162,9 +153,7 @@ class WorkitemsListPostRequestDataItemRelationships:
             )
 
         _module = d.pop("module", UNSET)
-        module: Union[
-            Unset, WorkitemsListPostRequestDataItemRelationshipsModule
-        ]
+        module: Unset | WorkitemsListPostRequestDataItemRelationshipsModule
         if isinstance(_module, Unset):
             module = UNSET
         else:
@@ -182,13 +171,11 @@ class WorkitemsListPostRequestDataItemRelationships:
             module=module,
         )
 
-        workitems_list_post_request_data_item_relationships_obj.additional_properties = (
-            d
-        )
+        workitems_list_post_request_data_item_relationships_obj.additional_properties = d
         return workitems_list_post_request_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

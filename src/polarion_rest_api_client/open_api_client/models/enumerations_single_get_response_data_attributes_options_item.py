@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,45 +15,44 @@ T = TypeVar(
 
 @_attrs_define
 class EnumerationsSingleGetResponseDataAttributesOptionsItem:
-    """
-    Attributes:
-        color (Union[Unset, str]):  Example: #F9FF4D.
-        column_width (Union[Unset, str]):  Example: 90%.
-        create_defect (Union[Unset, bool]):  Example: True.
-        default (Union[Unset, bool]):  Example: True.
-        description (Union[Unset, str]):  Example: Description.
-        hidden (Union[Unset, bool]):
-        icon_url (Union[Unset, str]):  Example: /polarion/icons/default/enums/status_open.gif.
-        id (Union[Unset, str]):  Example: open.
-        min_value (Union[Unset, float]):  Example: 30.0.
-        name (Union[Unset, str]):  Example: Open.
-        opposite_name (Union[Unset, str]):  Example: Opposite Name.
-        parent (Union[Unset, bool]):  Example: True.
-        requires_signature_for_test_case_execution (Union[Unset, bool]):  Example: True.
-        template_work_item (Union[Unset, str]):  Example: exampleTemplate.
-        terminal (Union[Unset, bool]):  Example: True.
+    """Attributes
+    color (Union[Unset, str]):  Example: #F9FF4D.
+    column_width (Union[Unset, str]):  Example: 90%.
+    create_defect (Union[Unset, bool]):  Example: True.
+    default (Union[Unset, bool]):  Example: True.
+    description (Union[Unset, str]):  Example: Description.
+    hidden (Union[Unset, bool]):
+    icon_url (Union[Unset, str]):  Example: /polarion/icons/default/enums/status_open.gif.
+    id (Union[Unset, str]):  Example: open.
+    min_value (Union[Unset, float]):  Example: 30.0.
+    name (Union[Unset, str]):  Example: Open.
+    opposite_name (Union[Unset, str]):  Example: Opposite Name.
+    parent (Union[Unset, bool]):  Example: True.
+    requires_signature_for_test_case_execution (Union[Unset, bool]):  Example: True.
+    template_work_item (Union[Unset, str]):  Example: exampleTemplate.
+    terminal (Union[Unset, bool]):  Example: True.
     """
 
-    color: Union[Unset, str] = UNSET
-    column_width: Union[Unset, str] = UNSET
-    create_defect: Union[Unset, bool] = UNSET
-    default: Union[Unset, bool] = UNSET
-    description: Union[Unset, str] = UNSET
-    hidden: Union[Unset, bool] = UNSET
-    icon_url: Union[Unset, str] = UNSET
-    id: Union[Unset, str] = UNSET
-    min_value: Union[Unset, float] = UNSET
-    name: Union[Unset, str] = UNSET
-    opposite_name: Union[Unset, str] = UNSET
-    parent: Union[Unset, bool] = UNSET
-    requires_signature_for_test_case_execution: Union[Unset, bool] = UNSET
-    template_work_item: Union[Unset, str] = UNSET
-    terminal: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    color: Unset | str = UNSET
+    column_width: Unset | str = UNSET
+    create_defect: Unset | bool = UNSET
+    default: Unset | bool = UNSET
+    description: Unset | str = UNSET
+    hidden: Unset | bool = UNSET
+    icon_url: Unset | str = UNSET
+    id: Unset | str = UNSET
+    min_value: Unset | float = UNSET
+    name: Unset | str = UNSET
+    opposite_name: Unset | str = UNSET
+    parent: Unset | bool = UNSET
+    requires_signature_for_test_case_execution: Unset | bool = UNSET
+    template_work_item: Unset | str = UNSET
+    terminal: Unset | bool = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         color = self.color
 
         column_width = self.column_width
@@ -86,7 +85,7 @@ class EnumerationsSingleGetResponseDataAttributesOptionsItem:
 
         terminal = self.terminal
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if color is not UNSET:
@@ -125,7 +124,7 @@ class EnumerationsSingleGetResponseDataAttributesOptionsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         color = d.pop("color", UNSET)
 
@@ -177,15 +176,13 @@ class EnumerationsSingleGetResponseDataAttributesOptionsItem:
             terminal=terminal,
         )
 
-        enumerations_single_get_response_data_attributes_options_item_obj.additional_properties = (
-            d
-        )
+        enumerations_single_get_response_data_attributes_options_item_obj.additional_properties = d
         return (
             enumerations_single_get_response_data_attributes_options_item_obj
         )
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

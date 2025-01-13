@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,28 +19,27 @@ T = TypeVar("T", bound="UsergroupsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class UsergroupsSingleGetResponseDataAttributes:
-    """
-    Attributes:
-        description (Union[Unset, UsergroupsSingleGetResponseDataAttributesDescription]):
-        id (Union[Unset, str]):  Example: MyUserGroupId.
-        ldap_search_filter (Union[Unset, str]):  Example: LDAP Search Filter.
-        name (Union[Unset, str]):  Example: Name.
-        sso_synchronization_allowed (Union[Unset, bool]):
+    """Attributes
+    description (Union[Unset, UsergroupsSingleGetResponseDataAttributesDescription]):
+    id (Union[Unset, str]):  Example: MyUserGroupId.
+    ldap_search_filter (Union[Unset, str]):  Example: LDAP Search Filter.
+    name (Union[Unset, str]):  Example: Name.
+    sso_synchronization_allowed (Union[Unset, bool]):
     """
 
     description: Union[
         Unset, "UsergroupsSingleGetResponseDataAttributesDescription"
     ] = UNSET
-    id: Union[Unset, str] = UNSET
-    ldap_search_filter: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    sso_synchronization_allowed: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    id: Unset | str = UNSET
+    ldap_search_filter: Unset | str = UNSET
+    name: Unset | str = UNSET
+    sso_synchronization_allowed: Unset | bool = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        description: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        description: Unset | dict[str, Any] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -52,7 +51,7 @@ class UsergroupsSingleGetResponseDataAttributes:
 
         sso_synchronization_allowed = self.sso_synchronization_allowed
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if description is not UNSET:
@@ -71,16 +70,14 @@ class UsergroupsSingleGetResponseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.usergroups_single_get_response_data_attributes_description import (
             UsergroupsSingleGetResponseDataAttributesDescription,
         )
 
         d = src_dict.copy()
         _description = d.pop("description", UNSET)
-        description: Union[
-            Unset, UsergroupsSingleGetResponseDataAttributesDescription
-        ]
+        description: Unset | UsergroupsSingleGetResponseDataAttributesDescription
         if isinstance(_description, Unset):
             description = UNSET
         else:
@@ -106,13 +103,11 @@ class UsergroupsSingleGetResponseDataAttributes:
             sso_synchronization_allowed=sso_synchronization_allowed,
         )
 
-        usergroups_single_get_response_data_attributes_obj.additional_properties = (
-            d
-        )
+        usergroups_single_get_response_data_attributes_obj.additional_properties = d
         return usergroups_single_get_response_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

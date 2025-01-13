@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, cast
 
 import httpx
 
@@ -19,25 +19,18 @@ def _get_kwargs(
     hostname: str,
     target_project_id: str,
     linked_work_item_id: str,
-) -> Dict[str, Any]:
-    _kwargs: Dict[str, Any] = {
+) -> dict[str, Any]:
+    _kwargs: dict[str, Any] = {
         "method": "delete",
-        "url": "/projects/{projectId}/workitems/{workItemId}/externallylinkedworkitems/{roleId}/{hostname}/{targetProjectId}/{linkedWorkItemId}".format(
-            projectId=project_id,
-            workItemId=work_item_id,
-            roleId=role_id,
-            hostname=hostname,
-            targetProjectId=target_project_id,
-            linkedWorkItemId=linked_work_item_id,
-        ),
+        "url": f"/projects/{project_id}/workitems/{work_item_id}/externallylinkedworkitems/{role_id}/{hostname}/{target_project_id}/{linked_work_item_id}",
     }
 
     return _kwargs
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Any | Errors | None:
     if response.status_code == HTTPStatus.NO_CONTENT:
         response_204 = cast(Any, None)
         return response_204
@@ -71,13 +64,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Any | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -94,8 +86,8 @@ def sync_detailed(
     target_project_id: str,
     linked_work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-) -> Response[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+) -> Response[Any | Errors]:
     """Deletes the specified Externally Linked Work Item.
 
     Args:
@@ -106,11 +98,13 @@ def sync_detailed(
         target_project_id (str):
         linked_work_item_id (str):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -138,8 +132,8 @@ def sync(
     target_project_id: str,
     linked_work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+) -> Any | Errors | None:
     """Deletes the specified Externally Linked Work Item.
 
     Args:
@@ -150,11 +144,13 @@ def sync(
         target_project_id (str):
         linked_work_item_id (str):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 
@@ -177,8 +173,8 @@ async def asyncio_detailed(
     target_project_id: str,
     linked_work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-) -> Response[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+) -> Response[Any | Errors]:
     """Deletes the specified Externally Linked Work Item.
 
     Args:
@@ -189,11 +185,13 @@ async def asyncio_detailed(
         target_project_id (str):
         linked_work_item_id (str):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Any, Errors]]
     """
 
@@ -219,8 +217,8 @@ async def asyncio(
     target_project_id: str,
     linked_work_item_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Any, Errors]]:
+    client: AuthenticatedClient | Client,
+) -> Any | Errors | None:
     """Deletes the specified Externally Linked Work Item.
 
     Args:
@@ -231,11 +229,13 @@ async def asyncio(
         target_project_id (str):
         linked_work_item_id (str):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Any, Errors]
     """
 

@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -28,21 +29,20 @@ T = TypeVar("T", bound="ExternallylinkedworkitemsSingleGetResponseData")
 
 @_attrs_define
 class ExternallylinkedworkitemsSingleGetResponseData:
-    """
-    Attributes:
-        type (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataType]):
-        id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/hostname/MyProjectId/MyLinkedWorkItemId.
-        revision (Union[Unset, str]):  Example: 1234.
-        attributes (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataAttributes]):
-        links (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataLinks]):
-        meta (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataMeta]):
+    """Attributes
+    type (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataType]):
+    id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/hostname/MyProjectId/MyLinkedWorkItemId.
+    revision (Union[Unset, str]):  Example: 1234.
+    attributes (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataAttributes]):
+    links (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataLinks]):
+    meta (Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataMeta]):
     """
 
-    type: Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataType] = (
+    type: Unset | ExternallylinkedworkitemsSingleGetResponseDataType = (
         UNSET
     )
-    id: Union[Unset, str] = UNSET
-    revision: Union[Unset, str] = UNSET
+    id: Unset | str = UNSET
+    revision: Unset | str = UNSET
     attributes: Union[
         Unset, "ExternallylinkedworkitemsSingleGetResponseDataAttributes"
     ] = UNSET
@@ -52,12 +52,12 @@ class ExternallylinkedworkitemsSingleGetResponseData:
     meta: Union[
         Unset, "ExternallylinkedworkitemsSingleGetResponseDataMeta"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
@@ -65,19 +65,19 @@ class ExternallylinkedworkitemsSingleGetResponseData:
 
         revision = self.revision
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Unset | dict[str, Any] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        links: Union[Unset, Dict[str, Any]] = UNSET
+        links: Unset | dict[str, Any] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
+        meta: Unset | dict[str, Any] = UNSET
         if not isinstance(self.meta, Unset):
             meta = self.meta.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
@@ -96,7 +96,7 @@ class ExternallylinkedworkitemsSingleGetResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         from ..models.externallylinkedworkitems_single_get_response_data_attributes import (
             ExternallylinkedworkitemsSingleGetResponseDataAttributes,
         )
@@ -109,7 +109,7 @@ class ExternallylinkedworkitemsSingleGetResponseData:
 
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataType]
+        type: Unset | ExternallylinkedworkitemsSingleGetResponseDataType
         if isinstance(_type, Unset):
             type = UNSET
         else:
@@ -120,9 +120,7 @@ class ExternallylinkedworkitemsSingleGetResponseData:
         revision = d.pop("revision", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Union[
-            Unset, ExternallylinkedworkitemsSingleGetResponseDataAttributes
-        ]
+        attributes: Unset | ExternallylinkedworkitemsSingleGetResponseDataAttributes
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:
@@ -131,9 +129,7 @@ class ExternallylinkedworkitemsSingleGetResponseData:
             )
 
         _links = d.pop("links", UNSET)
-        links: Union[
-            Unset, ExternallylinkedworkitemsSingleGetResponseDataLinks
-        ]
+        links: Unset | ExternallylinkedworkitemsSingleGetResponseDataLinks
         if isinstance(_links, Unset):
             links = UNSET
         else:
@@ -144,7 +140,7 @@ class ExternallylinkedworkitemsSingleGetResponseData:
             )
 
         _meta = d.pop("meta", UNSET)
-        meta: Union[Unset, ExternallylinkedworkitemsSingleGetResponseDataMeta]
+        meta: Unset | ExternallylinkedworkitemsSingleGetResponseDataMeta
         if isinstance(_meta, Unset):
             meta = UNSET
         else:
@@ -163,13 +159,11 @@ class ExternallylinkedworkitemsSingleGetResponseData:
             meta=meta,
         )
 
-        externallylinkedworkitems_single_get_response_data_obj.additional_properties = (
-            d
-        )
+        externallylinkedworkitems_single_get_response_data_obj.additional_properties = d
         return externallylinkedworkitems_single_get_response_data_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

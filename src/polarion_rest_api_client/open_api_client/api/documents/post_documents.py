@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -19,15 +19,12 @@ def _get_kwargs(
     space_id: str,
     *,
     body: DocumentsListPostRequest,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/spaces/{spaceId}/documents".format(
-            projectId=project_id,
-            spaceId=space_id,
-        ),
+        "url": f"/projects/{project_id}/spaces/{space_id}/documents",
     }
 
     _body = body.to_dict()
@@ -40,8 +37,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[DocumentsListPostResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> DocumentsListPostResponse | Errors | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = DocumentsListPostResponse.from_dict(response.json())
 
@@ -88,13 +85,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[DocumentsListPostResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[DocumentsListPostResponse | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -107,9 +103,9 @@ def sync_detailed(
     project_id: str,
     space_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: DocumentsListPostRequest,
-) -> Response[Union[DocumentsListPostResponse, Errors]]:
+) -> Response[DocumentsListPostResponse | Errors]:
     """Creates a list of Documents.
 
     Args:
@@ -117,11 +113,13 @@ def sync_detailed(
         space_id (str):
         body (DocumentsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[DocumentsListPostResponse, Errors]]
     """
 
@@ -142,9 +140,9 @@ def sync(
     project_id: str,
     space_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: DocumentsListPostRequest,
-) -> Optional[Union[DocumentsListPostResponse, Errors]]:
+) -> DocumentsListPostResponse | Errors | None:
     """Creates a list of Documents.
 
     Args:
@@ -152,11 +150,13 @@ def sync(
         space_id (str):
         body (DocumentsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[DocumentsListPostResponse, Errors]
     """
 
@@ -172,9 +172,9 @@ async def asyncio_detailed(
     project_id: str,
     space_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: DocumentsListPostRequest,
-) -> Response[Union[DocumentsListPostResponse, Errors]]:
+) -> Response[DocumentsListPostResponse | Errors]:
     """Creates a list of Documents.
 
     Args:
@@ -182,11 +182,13 @@ async def asyncio_detailed(
         space_id (str):
         body (DocumentsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[DocumentsListPostResponse, Errors]]
     """
 
@@ -205,9 +207,9 @@ async def asyncio(
     project_id: str,
     space_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: DocumentsListPostRequest,
-) -> Optional[Union[DocumentsListPostResponse, Errors]]:
+) -> DocumentsListPostResponse | Errors | None:
     """Creates a list of Documents.
 
     Args:
@@ -215,11 +217,13 @@ async def asyncio(
         space_id (str):
         body (DocumentsListPostRequest):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[DocumentsListPostResponse, Errors]
     """
 

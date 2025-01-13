@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -17,11 +17,11 @@ def _get_kwargs(
     project_id: str,
     test_run_id: str,
     *,
-    query: Union[Unset, str] = UNSET,
-    sort_by: Union[Unset, str] = UNSET,
-    template: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    query: Unset | str = UNSET,
+    sort_by: Unset | str = UNSET,
+    template: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["query"] = query
 
@@ -33,12 +33,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/testruns/{testRunId}/actions/exportTestsToExcel".format(
-            projectId=project_id,
-            testRunId=test_run_id,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/actions/exportTestsToExcel",
         "params": params,
     }
 
@@ -46,8 +43,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, JobsSinglePostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | JobsSinglePostResponse | None:
     if response.status_code == HTTPStatus.ACCEPTED:
         response_202 = JobsSinglePostResponse.from_dict(response.json())
 
@@ -90,13 +87,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, JobsSinglePostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | JobsSinglePostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -109,11 +105,11 @@ def sync_detailed(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    query: Union[Unset, str] = UNSET,
-    sort_by: Union[Unset, str] = UNSET,
-    template: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, JobsSinglePostResponse]]:
+    client: AuthenticatedClient | Client,
+    query: Unset | str = UNSET,
+    sort_by: Unset | str = UNSET,
+    template: Unset | str = UNSET,
+) -> Response[Errors | JobsSinglePostResponse]:
     """Exports tests to Excel.
 
     Args:
@@ -123,11 +119,13 @@ def sync_detailed(
         sort_by (Union[Unset, str]):
         template (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, JobsSinglePostResponse]]
     """
 
@@ -150,11 +148,11 @@ def sync(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    query: Union[Unset, str] = UNSET,
-    sort_by: Union[Unset, str] = UNSET,
-    template: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, JobsSinglePostResponse]]:
+    client: AuthenticatedClient | Client,
+    query: Unset | str = UNSET,
+    sort_by: Unset | str = UNSET,
+    template: Unset | str = UNSET,
+) -> Errors | JobsSinglePostResponse | None:
     """Exports tests to Excel.
 
     Args:
@@ -164,11 +162,13 @@ def sync(
         sort_by (Union[Unset, str]):
         template (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, JobsSinglePostResponse]
     """
 
@@ -186,11 +186,11 @@ async def asyncio_detailed(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    query: Union[Unset, str] = UNSET,
-    sort_by: Union[Unset, str] = UNSET,
-    template: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, JobsSinglePostResponse]]:
+    client: AuthenticatedClient | Client,
+    query: Unset | str = UNSET,
+    sort_by: Unset | str = UNSET,
+    template: Unset | str = UNSET,
+) -> Response[Errors | JobsSinglePostResponse]:
     """Exports tests to Excel.
 
     Args:
@@ -200,11 +200,13 @@ async def asyncio_detailed(
         sort_by (Union[Unset, str]):
         template (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, JobsSinglePostResponse]]
     """
 
@@ -225,11 +227,11 @@ async def asyncio(
     project_id: str,
     test_run_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
-    query: Union[Unset, str] = UNSET,
-    sort_by: Union[Unset, str] = UNSET,
-    template: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, JobsSinglePostResponse]]:
+    client: AuthenticatedClient | Client,
+    query: Unset | str = UNSET,
+    sort_by: Unset | str = UNSET,
+    template: Unset | str = UNSET,
+) -> Errors | JobsSinglePostResponse | None:
     """Exports tests to Excel.
 
     Args:
@@ -239,11 +241,13 @@ async def asyncio(
         sort_by (Union[Unset, str]):
         template (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, JobsSinglePostResponse]
     """
 

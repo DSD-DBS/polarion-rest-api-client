@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -28,12 +28,11 @@ T = TypeVar("T", bound="TestrunsListPostRequestDataItemRelationships")
 
 @_attrs_define
 class TestrunsListPostRequestDataItemRelationships:
-    """
-    Attributes:
-        document (Union[Unset, TestrunsListPostRequestDataItemRelationshipsDocument]):
-        project_span (Union[Unset, TestrunsListPostRequestDataItemRelationshipsProjectSpan]):
-        summary_defect (Union[Unset, TestrunsListPostRequestDataItemRelationshipsSummaryDefect]):
-        template (Union[Unset, TestrunsListPostRequestDataItemRelationshipsTemplate]):
+    """Attributes
+    document (Union[Unset, TestrunsListPostRequestDataItemRelationshipsDocument]):
+    project_span (Union[Unset, TestrunsListPostRequestDataItemRelationshipsProjectSpan]):
+    summary_defect (Union[Unset, TestrunsListPostRequestDataItemRelationshipsSummaryDefect]):
+    template (Union[Unset, TestrunsListPostRequestDataItemRelationshipsTemplate]):
     """
 
     document: Union[
@@ -48,28 +47,28 @@ class TestrunsListPostRequestDataItemRelationships:
     template: Union[
         Unset, "TestrunsListPostRequestDataItemRelationshipsTemplate"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        document: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        document: Unset | dict[str, Any] = UNSET
         if not isinstance(self.document, Unset):
             document = self.document.to_dict()
 
-        project_span: Union[Unset, Dict[str, Any]] = UNSET
+        project_span: Unset | dict[str, Any] = UNSET
         if not isinstance(self.project_span, Unset):
             project_span = self.project_span.to_dict()
 
-        summary_defect: Union[Unset, Dict[str, Any]] = UNSET
+        summary_defect: Unset | dict[str, Any] = UNSET
         if not isinstance(self.summary_defect, Unset):
             summary_defect = self.summary_defect.to_dict()
 
-        template: Union[Unset, Dict[str, Any]] = UNSET
+        template: Unset | dict[str, Any] = UNSET
         if not isinstance(self.template, Unset):
             template = self.template.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if document is not UNSET:
@@ -84,7 +83,7 @@ class TestrunsListPostRequestDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.testruns_list_post_request_data_item_relationships_document import (
             TestrunsListPostRequestDataItemRelationshipsDocument,
         )
@@ -100,9 +99,7 @@ class TestrunsListPostRequestDataItemRelationships:
 
         d = src_dict.copy()
         _document = d.pop("document", UNSET)
-        document: Union[
-            Unset, TestrunsListPostRequestDataItemRelationshipsDocument
-        ]
+        document: Unset | TestrunsListPostRequestDataItemRelationshipsDocument
         if isinstance(_document, Unset):
             document = UNSET
         else:
@@ -113,9 +110,7 @@ class TestrunsListPostRequestDataItemRelationships:
             )
 
         _project_span = d.pop("projectSpan", UNSET)
-        project_span: Union[
-            Unset, TestrunsListPostRequestDataItemRelationshipsProjectSpan
-        ]
+        project_span: Unset | TestrunsListPostRequestDataItemRelationshipsProjectSpan
         if isinstance(_project_span, Unset):
             project_span = UNSET
         else:
@@ -124,9 +119,7 @@ class TestrunsListPostRequestDataItemRelationships:
             )
 
         _summary_defect = d.pop("summaryDefect", UNSET)
-        summary_defect: Union[
-            Unset, TestrunsListPostRequestDataItemRelationshipsSummaryDefect
-        ]
+        summary_defect: Unset | TestrunsListPostRequestDataItemRelationshipsSummaryDefect
         if isinstance(_summary_defect, Unset):
             summary_defect = UNSET
         else:
@@ -135,9 +128,7 @@ class TestrunsListPostRequestDataItemRelationships:
             )
 
         _template = d.pop("template", UNSET)
-        template: Union[
-            Unset, TestrunsListPostRequestDataItemRelationshipsTemplate
-        ]
+        template: Unset | TestrunsListPostRequestDataItemRelationshipsTemplate
         if isinstance(_template, Unset):
             template = UNSET
         else:
@@ -154,13 +145,11 @@ class TestrunsListPostRequestDataItemRelationships:
             template=template,
         )
 
-        testruns_list_post_request_data_item_relationships_obj.additional_properties = (
-            d
-        )
+        testruns_list_post_request_data_item_relationships_obj.additional_properties = d
         return testruns_list_post_request_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

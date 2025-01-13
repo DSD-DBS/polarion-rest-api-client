@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -27,19 +27,12 @@ def _get_kwargs(
     test_step_index: str,
     *,
     body: PostTestStepResultAttachmentsRequestBody,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/testruns/{testRunId}/testrecords/{testCaseProjectId}/{testCaseId}/{iteration}/teststepresults/{testStepIndex}/attachments".format(
-            projectId=project_id,
-            testRunId=test_run_id,
-            testCaseProjectId=test_case_project_id,
-            testCaseId=test_case_id,
-            iteration=iteration,
-            testStepIndex=test_step_index,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/teststepresults/{test_step_index}/attachments",
     }
 
     _body = body.to_multipart()
@@ -51,8 +44,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, TeststepresultAttachmentsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | TeststepresultAttachmentsListPostResponse | None:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = TeststepresultAttachmentsListPostResponse.from_dict(
             response.json()
@@ -101,13 +94,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, TeststepresultAttachmentsListPostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | TeststepresultAttachmentsListPostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -124,9 +116,9 @@ def sync_detailed(
     iteration: str,
     test_step_index: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostTestStepResultAttachmentsRequestBody,
-) -> Response[Union[Errors, TeststepresultAttachmentsListPostResponse]]:
+) -> Response[Errors | TeststepresultAttachmentsListPostResponse]:
     r"""Creates a list of Test Step Result Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -143,11 +135,13 @@ def sync_detailed(
         test_step_index (str):
         body (PostTestStepResultAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, TeststepresultAttachmentsListPostResponse]]
     """
 
@@ -176,9 +170,9 @@ def sync(
     iteration: str,
     test_step_index: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostTestStepResultAttachmentsRequestBody,
-) -> Optional[Union[Errors, TeststepresultAttachmentsListPostResponse]]:
+) -> Errors | TeststepresultAttachmentsListPostResponse | None:
     r"""Creates a list of Test Step Result Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -195,11 +189,13 @@ def sync(
         test_step_index (str):
         body (PostTestStepResultAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, TeststepresultAttachmentsListPostResponse]
     """
 
@@ -223,9 +219,9 @@ async def asyncio_detailed(
     iteration: str,
     test_step_index: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostTestStepResultAttachmentsRequestBody,
-) -> Response[Union[Errors, TeststepresultAttachmentsListPostResponse]]:
+) -> Response[Errors | TeststepresultAttachmentsListPostResponse]:
     r"""Creates a list of Test Step Result Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -242,11 +238,13 @@ async def asyncio_detailed(
         test_step_index (str):
         body (PostTestStepResultAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, TeststepresultAttachmentsListPostResponse]]
     """
 
@@ -273,9 +271,9 @@ async def asyncio(
     iteration: str,
     test_step_index: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: PostTestStepResultAttachmentsRequestBody,
-) -> Optional[Union[Errors, TeststepresultAttachmentsListPostResponse]]:
+) -> Errors | TeststepresultAttachmentsListPostResponse | None:
     r"""Creates a list of Test Step Result Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
@@ -292,11 +290,13 @@ async def asyncio(
         test_step_index (str):
         body (PostTestStepResultAttachmentsRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, TeststepresultAttachmentsListPostResponse]
     """
 

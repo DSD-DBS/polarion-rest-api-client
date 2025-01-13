@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from io import BytesIO
-from typing import Any, Dict, List, Tuple, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,22 +14,21 @@ T = TypeVar("T", bound="UpdateAvatarRequestBody")
 
 @_attrs_define
 class UpdateAvatarRequestBody:
-    """
-    Attributes:
-        content (Union[Unset, File]): avatar content
+    """Attributes
+    content (Union[Unset, File]): avatar content
     """
 
-    content: Union[Unset, File] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    content: Unset | File = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        content: Union[Unset, FileJsonType] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        content: Unset | FileJsonType = UNSET
         if not isinstance(self.content, Unset):
             content = self.content.to_tuple()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if content is not UNSET:
@@ -37,16 +36,16 @@ class UpdateAvatarRequestBody:
 
         return field_dict
 
-    def to_multipart(self) -> List[Tuple[str, Any]]:
-        field_list: List[Tuple[str, Any]] = []
-        content: Union[Unset, FileJsonType] = UNSET
+    def to_multipart(self) -> list[tuple[str, Any]]:
+        field_list: list[tuple[str, Any]] = []
+        content: Unset | FileJsonType = UNSET
         if not isinstance(self.content, Unset):
             content = self.content.to_tuple()
 
         if content is not UNSET:
             field_list.append(("content", content))
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(
             {
                 key: (None, str(value).encode(), "text/plain")
@@ -59,10 +58,10 @@ class UpdateAvatarRequestBody:
         return field_list
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         _content = d.pop("content", UNSET)
-        content: Union[Unset, File]
+        content: Unset | File
         if isinstance(_content, Unset):
             content = UNSET
         else:
@@ -76,7 +75,7 @@ class UpdateAvatarRequestBody:
         return update_avatar_request_body_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

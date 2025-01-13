@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -22,12 +22,12 @@ def _get_kwargs(
     work_record_id: str,
     *,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
-    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    json_fields: Unset | dict[str, Any] = UNSET
     if not isinstance(fields, Unset):
         json_fields = fields.to_dict()
     if not isinstance(json_fields, Unset):
@@ -41,13 +41,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/workitems/{workItemId}/workrecords/{workRecordId}".format(
-            projectId=project_id,
-            workItemId=work_item_id,
-            workRecordId=work_record_id,
-        ),
+        "url": f"/projects/{project_id}/workitems/{work_item_id}/workrecords/{work_record_id}",
         "params": params,
     }
 
@@ -55,8 +51,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, WorkrecordsSingleGetResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | WorkrecordsSingleGetResponse | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = WorkrecordsSingleGetResponse.from_dict(response.json())
 
@@ -91,13 +87,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, WorkrecordsSingleGetResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | WorkrecordsSingleGetResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -111,11 +106,11 @@ def sync_detailed(
     work_item_id: str,
     work_record_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, WorkrecordsSingleGetResponse]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[Errors | WorkrecordsSingleGetResponse]:
     """Returns the specified instance.
 
     Args:
@@ -126,11 +121,13 @@ def sync_detailed(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, WorkrecordsSingleGetResponse]]
     """
 
@@ -155,11 +152,11 @@ def sync(
     work_item_id: str,
     work_record_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, WorkrecordsSingleGetResponse]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | WorkrecordsSingleGetResponse | None:
     """Returns the specified instance.
 
     Args:
@@ -170,11 +167,13 @@ def sync(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, WorkrecordsSingleGetResponse]
     """
 
@@ -194,11 +193,11 @@ async def asyncio_detailed(
     work_item_id: str,
     work_record_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[Errors, WorkrecordsSingleGetResponse]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[Errors | WorkrecordsSingleGetResponse]:
     """Returns the specified instance.
 
     Args:
@@ -209,11 +208,13 @@ async def asyncio_detailed(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, WorkrecordsSingleGetResponse]]
     """
 
@@ -236,11 +237,11 @@ async def asyncio(
     work_item_id: str,
     work_record_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, WorkrecordsSingleGetResponse]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Errors | WorkrecordsSingleGetResponse | None:
     """Returns the specified instance.
 
     Args:
@@ -251,11 +252,13 @@ async def asyncio(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, WorkrecordsSingleGetResponse]
     """
 

@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,33 +19,32 @@ T = TypeVar("T", bound="CreateProjectRequestBody")
 
 @_attrs_define
 class CreateProjectRequestBody:
-    """
-    Attributes:
-        location (Union[Unset, str]): Location of the new Project to be created. Example: MyLocation.
-        params (Union['CreateProjectRequestBodyParamsType0', None, Unset]): params of new Project to be created.
-        project_id (Union[Unset, str]): Id of the new Project to be created. Example: MyProjectId.
-        template_id (Union[None, Unset, str]): Id of the template to create the new Project from. Example:
-            MyProjectTemplateId.
-        tracker_prefix (Union[Unset, str]): Tracker prefix of the new Project to be created. Example: MyTrackerPrefix.
+    """Attributes
+    location (Union[Unset, str]): Location of the new Project to be created. Example: MyLocation.
+    params (Union['CreateProjectRequestBodyParamsType0', None, Unset]): params of new Project to be created.
+    project_id (Union[Unset, str]): Id of the new Project to be created. Example: MyProjectId.
+    template_id (Union[None, Unset, str]): Id of the template to create the new Project from. Example:
+        MyProjectTemplateId.
+    tracker_prefix (Union[Unset, str]): Tracker prefix of the new Project to be created. Example: MyTrackerPrefix.
     """
 
-    location: Union[Unset, str] = UNSET
+    location: Unset | str = UNSET
     params: Union["CreateProjectRequestBodyParamsType0", None, Unset] = UNSET
-    project_id: Union[Unset, str] = UNSET
-    template_id: Union[None, Unset, str] = UNSET
-    tracker_prefix: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    project_id: Unset | str = UNSET
+    template_id: None | Unset | str = UNSET
+    tracker_prefix: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.create_project_request_body_params_type_0 import (
             CreateProjectRequestBodyParamsType0,
         )
 
         location = self.location
 
-        params: Union[Dict[str, Any], None, Unset]
+        params: dict[str, Any] | None | Unset
         if isinstance(self.params, Unset):
             params = UNSET
         elif isinstance(self.params, CreateProjectRequestBodyParamsType0):
@@ -55,7 +54,7 @@ class CreateProjectRequestBody:
 
         project_id = self.project_id
 
-        template_id: Union[None, Unset, str]
+        template_id: None | Unset | str
         if isinstance(self.template_id, Unset):
             template_id = UNSET
         else:
@@ -63,7 +62,7 @@ class CreateProjectRequestBody:
 
         tracker_prefix = self.tracker_prefix
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if location is not UNSET:
@@ -80,7 +79,7 @@ class CreateProjectRequestBody:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.create_project_request_body_params_type_0 import (
             CreateProjectRequestBodyParamsType0,
         )
@@ -113,12 +112,12 @@ class CreateProjectRequestBody:
 
         project_id = d.pop("projectId", UNSET)
 
-        def _parse_template_id(data: object) -> Union[None, Unset, str]:
+        def _parse_template_id(data: object) -> None | Unset | str:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(Union[None, Unset, str], data)
+            return cast(None | Unset | str, data)
 
         template_id = _parse_template_id(d.pop("templateId", UNSET))
 
@@ -136,7 +135,7 @@ class CreateProjectRequestBody:
         return create_project_request_body_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

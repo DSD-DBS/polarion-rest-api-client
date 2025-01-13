@@ -2,14 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 """Contains some shared types for properties."""
 
+from collections.abc import MutableMapping
 from http import HTTPStatus
 from typing import (
     BinaryIO,
     Generic,
     Literal,
-    MutableMapping,
-    Optional,
-    Tuple,
     TypeVar,
 )
 
@@ -23,7 +21,7 @@ class Unset:
 
 UNSET: Unset = Unset()
 
-FileJsonType = Tuple[Optional[str], BinaryIO, Optional[str]]
+FileJsonType = tuple[str | None, BinaryIO, str | None]
 
 
 @define
@@ -31,12 +29,13 @@ class File:
     """Contains information for file uploads."""
 
     payload: BinaryIO
-    file_name: Optional[str] = None
-    mime_type: Optional[str] = None
+    file_name: str | None = None
+    mime_type: str | None = None
 
     def to_tuple(self) -> FileJsonType:
         """Return a tuple representation that httpx will accept for
-        multipart/form-data."""
+        multipart/form-data.
+        """
         return self.file_name, self.payload, self.mime_type
 
 
@@ -50,7 +49,7 @@ class Response(Generic[T]):
     status_code: HTTPStatus
     content: bytes
     headers: MutableMapping[str, str]
-    parsed: Optional[T]
+    parsed: T | None
 
 
-__all__ = ["File", "Response", "FileJsonType", "Unset", "UNSET"]
+__all__ = ["UNSET", "File", "FileJsonType", "Response", "Unset"]

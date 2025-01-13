@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -20,12 +20,12 @@ def _get_kwargs(
     document_name: str,
     *,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
-    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    json_fields: Unset | dict[str, Any] = UNSET
     if not isinstance(fields, Unset):
         json_fields = fields.to_dict()
     if not isinstance(json_fields, Unset):
@@ -39,13 +39,9 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}".format(
-            projectId=project_id,
-            spaceId=space_id,
-            documentName=document_name,
-        ),
+        "url": f"/projects/{project_id}/spaces/{space_id}/documents/{document_name}",
         "params": params,
     }
 
@@ -53,8 +49,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[DocumentsSingleGetResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> DocumentsSingleGetResponse | Errors | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = DocumentsSingleGetResponse.from_dict(response.json())
 
@@ -89,13 +85,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[DocumentsSingleGetResponse, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[DocumentsSingleGetResponse | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -109,11 +104,11 @@ def sync_detailed(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[DocumentsSingleGetResponse, Errors]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[DocumentsSingleGetResponse | Errors]:
     """Returns the specified Document.
 
     Args:
@@ -124,11 +119,13 @@ def sync_detailed(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[DocumentsSingleGetResponse, Errors]]
     """
 
@@ -153,11 +150,11 @@ def sync(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[DocumentsSingleGetResponse, Errors]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> DocumentsSingleGetResponse | Errors | None:
     """Returns the specified Document.
 
     Args:
@@ -168,11 +165,13 @@ def sync(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[DocumentsSingleGetResponse, Errors]
     """
 
@@ -192,11 +191,11 @@ async def asyncio_detailed(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Response[Union[DocumentsSingleGetResponse, Errors]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> Response[DocumentsSingleGetResponse | Errors]:
     """Returns the specified Document.
 
     Args:
@@ -207,11 +206,13 @@ async def asyncio_detailed(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[DocumentsSingleGetResponse, Errors]]
     """
 
@@ -234,11 +235,11 @@ async def asyncio(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     fields: Union[Unset, "SparseFields"] = UNSET,
-    include: Union[Unset, str] = UNSET,
-    revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[DocumentsSingleGetResponse, Errors]]:
+    include: Unset | str = UNSET,
+    revision: Unset | str = UNSET,
+) -> DocumentsSingleGetResponse | Errors | None:
     """Returns the specified Document.
 
     Args:
@@ -249,11 +250,13 @@ async def asyncio(
         include (Union[Unset, str]):
         revision (Union[Unset, str]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[DocumentsSingleGetResponse, Errors]
     """
 

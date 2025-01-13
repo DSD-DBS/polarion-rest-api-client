@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,53 +24,49 @@ T = TypeVar("T", bound="WorkitemsListPatchRequestDataItemAttributes")
 
 @_attrs_define
 class WorkitemsListPatchRequestDataItemAttributes:
-    """
-    Attributes:
-        description (Union[Unset, WorkitemsListPatchRequestDataItemAttributesDescription]):
-        due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        hyperlinks (Union[Unset, List['WorkitemsListPatchRequestDataItemAttributesHyperlinksItem']]):
-        initial_estimate (Union[Unset, str]):  Example: 5 1/2d.
-        priority (Union[Unset, str]):  Example: 90.0.
-        remaining_estimate (Union[Unset, str]):  Example: 5 1/2d.
-        resolution (Union[Unset, str]):  Example: done.
-        resolved_on (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-        severity (Union[Unset, str]):  Example: blocker.
-        status (Union[Unset, str]):  Example: open.
-        time_spent (Union[Unset, str]):  Example: 5 1/2d.
-        title (Union[Unset, str]):  Example: Title.
+    """Attributes
+    description (Union[Unset, WorkitemsListPatchRequestDataItemAttributesDescription]):
+    due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
+    hyperlinks (Union[Unset, List['WorkitemsListPatchRequestDataItemAttributesHyperlinksItem']]):
+    initial_estimate (Union[Unset, str]):  Example: 5 1/2d.
+    priority (Union[Unset, str]):  Example: 90.0.
+    remaining_estimate (Union[Unset, str]):  Example: 5 1/2d.
+    resolution (Union[Unset, str]):  Example: done.
+    resolved_on (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    severity (Union[Unset, str]):  Example: blocker.
+    status (Union[Unset, str]):  Example: open.
+    time_spent (Union[Unset, str]):  Example: 5 1/2d.
+    title (Union[Unset, str]):  Example: Title.
     """
 
     description: Union[
         Unset, "WorkitemsListPatchRequestDataItemAttributesDescription"
     ] = UNSET
-    due_date: Union[Unset, datetime.date] = UNSET
-    hyperlinks: Union[
-        Unset,
-        List["WorkitemsListPatchRequestDataItemAttributesHyperlinksItem"],
-    ] = UNSET
-    initial_estimate: Union[Unset, str] = UNSET
-    priority: Union[Unset, str] = UNSET
-    remaining_estimate: Union[Unset, str] = UNSET
-    resolution: Union[Unset, str] = UNSET
-    resolved_on: Union[Unset, datetime.datetime] = UNSET
-    severity: Union[Unset, str] = UNSET
-    status: Union[Unset, str] = UNSET
-    time_spent: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    due_date: Unset | datetime.date = UNSET
+    hyperlinks: Unset | list["WorkitemsListPatchRequestDataItemAttributesHyperlinksItem"] = UNSET
+    initial_estimate: Unset | str = UNSET
+    priority: Unset | str = UNSET
+    remaining_estimate: Unset | str = UNSET
+    resolution: Unset | str = UNSET
+    resolved_on: Unset | datetime.datetime = UNSET
+    severity: Unset | str = UNSET
+    status: Unset | str = UNSET
+    time_spent: Unset | str = UNSET
+    title: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        description: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        description: Unset | dict[str, Any] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
-        due_date: Union[Unset, str] = UNSET
+        due_date: Unset | str = UNSET
         if not isinstance(self.due_date, Unset):
             due_date = self.due_date.isoformat()
 
-        hyperlinks: Union[Unset, List[Dict[str, Any]]] = UNSET
+        hyperlinks: Unset | list[dict[str, Any]] = UNSET
         if not isinstance(self.hyperlinks, Unset):
             hyperlinks = []
             for hyperlinks_item_data in self.hyperlinks:
@@ -85,7 +81,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
 
         resolution = self.resolution
 
-        resolved_on: Union[Unset, str] = UNSET
+        resolved_on: Unset | str = UNSET
         if not isinstance(self.resolved_on, Unset):
             resolved_on = self.resolved_on.isoformat()
 
@@ -97,7 +93,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
 
         title = self.title
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if description is not UNSET:
@@ -128,7 +124,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.workitems_list_patch_request_data_item_attributes_description import (
             WorkitemsListPatchRequestDataItemAttributesDescription,
         )
@@ -138,9 +134,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
 
         d = src_dict.copy()
         _description = d.pop("description", UNSET)
-        description: Union[
-            Unset, WorkitemsListPatchRequestDataItemAttributesDescription
-        ]
+        description: Unset | WorkitemsListPatchRequestDataItemAttributesDescription
         if isinstance(_description, Unset):
             description = UNSET
         else:
@@ -149,7 +143,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
             )
 
         _due_date = d.pop("dueDate", UNSET)
-        due_date: Union[Unset, datetime.date]
+        due_date: Unset | datetime.date
         if isinstance(_due_date, Unset):
             due_date = UNSET
         else:
@@ -173,7 +167,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
         resolution = d.pop("resolution", UNSET)
 
         _resolved_on = d.pop("resolvedOn", UNSET)
-        resolved_on: Union[Unset, datetime.datetime]
+        resolved_on: Unset | datetime.datetime
         if isinstance(_resolved_on, Unset):
             resolved_on = UNSET
         else:
@@ -202,13 +196,11 @@ class WorkitemsListPatchRequestDataItemAttributes:
             title=title,
         )
 
-        workitems_list_patch_request_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        workitems_list_patch_request_data_item_attributes_obj.additional_properties = d
         return workitems_list_patch_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

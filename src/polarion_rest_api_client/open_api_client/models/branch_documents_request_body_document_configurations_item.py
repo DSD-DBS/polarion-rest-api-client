@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,48 +13,47 @@ T = TypeVar("T", bound="BranchDocumentsRequestBodyDocumentConfigurationsItem")
 
 @_attrs_define
 class BranchDocumentsRequestBodyDocumentConfigurationsItem:
-    """
-    Attributes:
-        source_document (str): Reference path of the source Document. Example: MyProjectId/MySpaceId/MyDocumentId.
-        copy_workflow_status_and_signatures (Union[Unset, bool]): Specifies that workflow status and signatures should
-            be copied to the branched document.
-        initialized_fields (Union[Unset, List[str]]): Specifies fields of overwritten Work Items that should be
-            initialized (instead of being copied from source Work Items).
-        overwrite_work_items (Union[Unset, bool]): Specifies that Work Items in the branched Document should be
-            overwritten (instead of being referenced).
-        query (Union[Unset, str]): Specifies optional filtering query. Example: status:open.
-        source_revision (Union[Unset, str]): Revision of the source Document. Example: 1234.
-        target_document_name (Union[Unset, str]): Name for new Document. Example: MyDocumentId.
-        target_document_title (Union[Unset, str]): Title for new Document. Example: My Document Title.
-        target_project_id (Union[Unset, str]): Project where new document will be created. Example: MyProjectId.
-        target_space_id (Union[Unset, str]): Space where new document will be created. Example: MySpaceId.
-        update_title_heading (Union[Unset, bool]): Specifies that title heading of the target Document should be set to
-            the new Document's title.
+    """Attributes
+    source_document (str): Reference path of the source Document. Example: MyProjectId/MySpaceId/MyDocumentId.
+    copy_workflow_status_and_signatures (Union[Unset, bool]): Specifies that workflow status and signatures should
+        be copied to the branched document.
+    initialized_fields (Union[Unset, List[str]]): Specifies fields of overwritten Work Items that should be
+        initialized (instead of being copied from source Work Items).
+    overwrite_work_items (Union[Unset, bool]): Specifies that Work Items in the branched Document should be
+        overwritten (instead of being referenced).
+    query (Union[Unset, str]): Specifies optional filtering query. Example: status:open.
+    source_revision (Union[Unset, str]): Revision of the source Document. Example: 1234.
+    target_document_name (Union[Unset, str]): Name for new Document. Example: MyDocumentId.
+    target_document_title (Union[Unset, str]): Title for new Document. Example: My Document Title.
+    target_project_id (Union[Unset, str]): Project where new document will be created. Example: MyProjectId.
+    target_space_id (Union[Unset, str]): Space where new document will be created. Example: MySpaceId.
+    update_title_heading (Union[Unset, bool]): Specifies that title heading of the target Document should be set to
+        the new Document's title.
     """
 
     source_document: str
-    copy_workflow_status_and_signatures: Union[Unset, bool] = UNSET
-    initialized_fields: Union[Unset, List[str]] = UNSET
-    overwrite_work_items: Union[Unset, bool] = UNSET
-    query: Union[Unset, str] = UNSET
-    source_revision: Union[Unset, str] = UNSET
-    target_document_name: Union[Unset, str] = UNSET
-    target_document_title: Union[Unset, str] = UNSET
-    target_project_id: Union[Unset, str] = UNSET
-    target_space_id: Union[Unset, str] = UNSET
-    update_title_heading: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    copy_workflow_status_and_signatures: Unset | bool = UNSET
+    initialized_fields: Unset | list[str] = UNSET
+    overwrite_work_items: Unset | bool = UNSET
+    query: Unset | str = UNSET
+    source_revision: Unset | str = UNSET
+    target_document_name: Unset | str = UNSET
+    target_document_title: Unset | str = UNSET
+    target_project_id: Unset | str = UNSET
+    target_space_id: Unset | str = UNSET
+    update_title_heading: Unset | bool = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         source_document = self.source_document
 
         copy_workflow_status_and_signatures = (
             self.copy_workflow_status_and_signatures
         )
 
-        initialized_fields: Union[Unset, List[str]] = UNSET
+        initialized_fields: Unset | list[str] = UNSET
         if not isinstance(self.initialized_fields, Unset):
             initialized_fields = self.initialized_fields
 
@@ -74,7 +73,7 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
 
         update_title_heading = self.update_title_heading
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -107,7 +106,7 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         source_document = d.pop("sourceDocument")
 
@@ -115,7 +114,7 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
             "copyWorkflowStatusAndSignatures", UNSET
         )
 
-        initialized_fields = cast(List[str], d.pop("initializedFields", UNSET))
+        initialized_fields = cast(list[str], d.pop("initializedFields", UNSET))
 
         overwrite_work_items = d.pop("overwriteWorkItems", UNSET)
 
@@ -147,13 +146,11 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
             update_title_heading=update_title_heading,
         )
 
-        branch_documents_request_body_document_configurations_item_obj.additional_properties = (
-            d
-        )
+        branch_documents_request_body_document_configurations_item_obj.additional_properties = d
         return branch_documents_request_body_document_configurations_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

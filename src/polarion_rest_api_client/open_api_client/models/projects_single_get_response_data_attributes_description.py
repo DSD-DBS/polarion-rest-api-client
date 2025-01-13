@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+import builtins
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -16,28 +17,25 @@ T = TypeVar("T", bound="ProjectsSingleGetResponseDataAttributesDescription")
 
 @_attrs_define
 class ProjectsSingleGetResponseDataAttributesDescription:
-    """
-    Attributes:
-        type (Union[Unset, ProjectsSingleGetResponseDataAttributesDescriptionType]):
-        value (Union[Unset, str]):  Example: My text value.
+    """Attributes
+    type (Union[Unset, ProjectsSingleGetResponseDataAttributesDescriptionType]):
+    value (Union[Unset, str]):  Example: My text value.
     """
 
-    type: Union[
-        Unset, ProjectsSingleGetResponseDataAttributesDescriptionType
-    ] = UNSET
-    value: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    type: Unset | ProjectsSingleGetResponseDataAttributesDescriptionType = UNSET
+    value: Unset | str = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        type: Unset | str = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
         value = self.value
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if type is not UNSET:
@@ -48,12 +46,10 @@ class ProjectsSingleGetResponseDataAttributesDescription:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Union[
-            Unset, ProjectsSingleGetResponseDataAttributesDescriptionType
-        ]
+        type: Unset | ProjectsSingleGetResponseDataAttributesDescriptionType
         if isinstance(_type, Unset):
             type = UNSET
         else:
@@ -68,13 +64,11 @@ class ProjectsSingleGetResponseDataAttributesDescription:
             value=value,
         )
 
-        projects_single_get_response_data_attributes_description_obj.additional_properties = (
-            d
-        )
+        projects_single_get_response_data_attributes_description_obj.additional_properties = d
         return projects_single_get_response_data_attributes_description_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

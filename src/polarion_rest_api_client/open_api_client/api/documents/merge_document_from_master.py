@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -20,16 +20,12 @@ def _get_kwargs(
     document_name: str,
     *,
     body: MergeDocumentRequestBody,
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/actions/mergeFromMaster".format(
-            projectId=project_id,
-            spaceId=space_id,
-            documentName=document_name,
-        ),
+        "url": f"/projects/{project_id}/spaces/{space_id}/documents/{document_name}/actions/mergeFromMaster",
     }
 
     _body = body.to_dict()
@@ -42,8 +38,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, JobsSinglePostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | JobsSinglePostResponse | None:
     if response.status_code == HTTPStatus.ACCEPTED:
         response_202 = JobsSinglePostResponse.from_dict(response.json())
 
@@ -90,13 +86,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, JobsSinglePostResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | JobsSinglePostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -110,9 +105,9 @@ def sync_detailed(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: MergeDocumentRequestBody,
-) -> Response[Union[Errors, JobsSinglePostResponse]]:
+) -> Response[Errors | JobsSinglePostResponse]:
     """Merges Master Work Items changes to specified Branched Document.
 
     Args:
@@ -121,11 +116,13 @@ def sync_detailed(
         document_name (str):
         body (MergeDocumentRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, JobsSinglePostResponse]]
     """
 
@@ -148,9 +145,9 @@ def sync(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: MergeDocumentRequestBody,
-) -> Optional[Union[Errors, JobsSinglePostResponse]]:
+) -> Errors | JobsSinglePostResponse | None:
     """Merges Master Work Items changes to specified Branched Document.
 
     Args:
@@ -159,11 +156,13 @@ def sync(
         document_name (str):
         body (MergeDocumentRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, JobsSinglePostResponse]
     """
 
@@ -181,9 +180,9 @@ async def asyncio_detailed(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: MergeDocumentRequestBody,
-) -> Response[Union[Errors, JobsSinglePostResponse]]:
+) -> Response[Errors | JobsSinglePostResponse]:
     """Merges Master Work Items changes to specified Branched Document.
 
     Args:
@@ -192,11 +191,13 @@ async def asyncio_detailed(
         document_name (str):
         body (MergeDocumentRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, JobsSinglePostResponse]]
     """
 
@@ -217,9 +218,9 @@ async def asyncio(
     space_id: str,
     document_name: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: MergeDocumentRequestBody,
-) -> Optional[Union[Errors, JobsSinglePostResponse]]:
+) -> Errors | JobsSinglePostResponse | None:
     """Merges Master Work Items changes to specified Branched Document.
 
     Args:
@@ -228,11 +229,13 @@ async def asyncio(
         document_name (str):
         body (MergeDocumentRequestBody):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, JobsSinglePostResponse]
     """
 

@@ -1,7 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,11 +25,10 @@ T = TypeVar("T", bound="PlansSinglePatchRequestDataRelationships")
 
 @_attrs_define
 class PlansSinglePatchRequestDataRelationships:
-    """
-    Attributes:
-        parent (Union[Unset, PlansSinglePatchRequestDataRelationshipsParent]):
-        project_span (Union[Unset, PlansSinglePatchRequestDataRelationshipsProjectSpan]):
-        work_items (Union[Unset, PlansSinglePatchRequestDataRelationshipsWorkItems]):
+    """Attributes
+    parent (Union[Unset, PlansSinglePatchRequestDataRelationshipsParent]):
+    project_span (Union[Unset, PlansSinglePatchRequestDataRelationshipsProjectSpan]):
+    work_items (Union[Unset, PlansSinglePatchRequestDataRelationshipsWorkItems]):
     """
 
     parent: Union[Unset, "PlansSinglePatchRequestDataRelationshipsParent"] = (
@@ -41,24 +40,24 @@ class PlansSinglePatchRequestDataRelationships:
     work_items: Union[
         Unset, "PlansSinglePatchRequestDataRelationshipsWorkItems"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        parent: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        parent: Unset | dict[str, Any] = UNSET
         if not isinstance(self.parent, Unset):
             parent = self.parent.to_dict()
 
-        project_span: Union[Unset, Dict[str, Any]] = UNSET
+        project_span: Unset | dict[str, Any] = UNSET
         if not isinstance(self.project_span, Unset):
             project_span = self.project_span.to_dict()
 
-        work_items: Union[Unset, Dict[str, Any]] = UNSET
+        work_items: Unset | dict[str, Any] = UNSET
         if not isinstance(self.work_items, Unset):
             work_items = self.work_items.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if parent is not UNSET:
@@ -71,7 +70,7 @@ class PlansSinglePatchRequestDataRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.plans_single_patch_request_data_relationships_parent import (
             PlansSinglePatchRequestDataRelationshipsParent,
         )
@@ -84,7 +83,7 @@ class PlansSinglePatchRequestDataRelationships:
 
         d = src_dict.copy()
         _parent = d.pop("parent", UNSET)
-        parent: Union[Unset, PlansSinglePatchRequestDataRelationshipsParent]
+        parent: Unset | PlansSinglePatchRequestDataRelationshipsParent
         if isinstance(_parent, Unset):
             parent = UNSET
         else:
@@ -93,9 +92,7 @@ class PlansSinglePatchRequestDataRelationships:
             )
 
         _project_span = d.pop("projectSpan", UNSET)
-        project_span: Union[
-            Unset, PlansSinglePatchRequestDataRelationshipsProjectSpan
-        ]
+        project_span: Unset | PlansSinglePatchRequestDataRelationshipsProjectSpan
         if isinstance(_project_span, Unset):
             project_span = UNSET
         else:
@@ -106,9 +103,7 @@ class PlansSinglePatchRequestDataRelationships:
             )
 
         _work_items = d.pop("workItems", UNSET)
-        work_items: Union[
-            Unset, PlansSinglePatchRequestDataRelationshipsWorkItems
-        ]
+        work_items: Unset | PlansSinglePatchRequestDataRelationshipsWorkItems
         if isinstance(_work_items, Unset):
             work_items = UNSET
         else:
@@ -124,13 +119,11 @@ class PlansSinglePatchRequestDataRelationships:
             work_items=work_items,
         )
 
-        plans_single_patch_request_data_relationships_obj.additional_properties = (
-            d
-        )
+        plans_single_patch_request_data_relationships_obj.additional_properties = d
         return plans_single_patch_request_data_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

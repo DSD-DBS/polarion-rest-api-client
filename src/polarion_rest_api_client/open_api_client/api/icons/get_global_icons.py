@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -16,17 +16,17 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["page[size]"] = pagesize
 
     params["page[number]"] = pagenumber
 
-    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    json_fields: Unset | dict[str, Any] = UNSET
     if not isinstance(fields, Unset):
         json_fields = fields.to_dict()
     if not isinstance(json_fields, Unset):
@@ -36,7 +36,7 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/enumerations/icons",
         "params": params,
@@ -46,8 +46,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, IconsListGetResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | IconsListGetResponse | None:
     if response.status_code == HTTPStatus.OK:
         response_200 = IconsListGetResponse.from_dict(response.json())
 
@@ -82,13 +82,12 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, IconsListGetResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | IconsListGetResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -99,11 +98,11 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-) -> Response[Union[Errors, IconsListGetResponse]]:
+) -> Response[Errors | IconsListGetResponse]:
     """Returns a list of Icons from the Global context.
 
     Args:
@@ -111,11 +110,13 @@ def sync_detailed(
         pagenumber (Union[Unset, int]):
         fields (Union[Unset, SparseFields]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, IconsListGetResponse]]
     """
 
@@ -134,11 +135,11 @@ def sync_detailed(
 
 def sync(
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-) -> Optional[Union[Errors, IconsListGetResponse]]:
+) -> Errors | IconsListGetResponse | None:
     """Returns a list of Icons from the Global context.
 
     Args:
@@ -146,11 +147,13 @@ def sync(
         pagenumber (Union[Unset, int]):
         fields (Union[Unset, SparseFields]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, IconsListGetResponse]
     """
 
@@ -164,11 +167,11 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-) -> Response[Union[Errors, IconsListGetResponse]]:
+) -> Response[Errors | IconsListGetResponse]:
     """Returns a list of Icons from the Global context.
 
     Args:
@@ -176,11 +179,13 @@ async def asyncio_detailed(
         pagenumber (Union[Unset, int]):
         fields (Union[Unset, SparseFields]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Response[Union[Errors, IconsListGetResponse]]
     """
 
@@ -197,11 +202,11 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: Union[AuthenticatedClient, Client],
-    pagesize: Union[Unset, int] = UNSET,
-    pagenumber: Union[Unset, int] = UNSET,
+    client: AuthenticatedClient | Client,
+    pagesize: Unset | int = UNSET,
+    pagenumber: Unset | int = UNSET,
     fields: Union[Unset, "SparseFields"] = UNSET,
-) -> Optional[Union[Errors, IconsListGetResponse]]:
+) -> Errors | IconsListGetResponse | None:
     """Returns a list of Icons from the Global context.
 
     Args:
@@ -209,11 +214,13 @@ async def asyncio(
         pagenumber (Union[Unset, int]):
         fields (Union[Unset, SparseFields]):
 
-    Raises:
+    Raises
+    ------
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
-    Returns:
+    Returns
+    -------
         Union[Errors, IconsListGetResponse]
     """
 
