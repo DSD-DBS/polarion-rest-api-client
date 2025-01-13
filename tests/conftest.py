@@ -20,7 +20,7 @@ def fixture_client():
         polarion_access_token="PAT123",
         batch_size=3,
     )
-    yield client.generate_project_client(
+    return client.generate_project_client(
         project_id="PROJ", delete_status="deleted"
     )
 
