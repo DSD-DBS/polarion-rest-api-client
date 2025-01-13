@@ -6,7 +6,7 @@ import typing as t
 
 from polarion_rest_api_client import data_models as dm
 from polarion_rest_api_client.open_api_client import models as api_models
-from polarion_rest_api_client.open_api_client import types as oa_types
+from polarion_rest_api_client.open_api_client import types
 from polarion_rest_api_client.open_api_client.api.test_steps import (
     delete_test_steps,
     get_test_steps,
@@ -17,38 +17,22 @@ from polarion_rest_api_client.open_api_client.api.test_steps import (
 from . import base_classes as bc
 
 
-class TestSteps(
-    bc.UpdatableItemsClient[dm.TestStep],
-):
+class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
     def get(self, *args, **kwargs) -> dm.TestStep:
         raise NotImplementedError
 
     def _update(self, to_update: list[dm.TestStep] | dm.TestStep):
         if not isinstance(to_update, list):
             to_update = [to_update]
+
+        body_data = self._build_patch_request_data(to_update)
+        body = api_models.TeststepsListPatchRequest(data=body_data)
+
         response = patch_test_steps.sync_detailed(
             self._project_id,
             to_update[0].work_item_id,
             client=self._client.client,
-            # pylint: disable=line-too-long
-            body=api_models.TeststepsListPatchRequest(
-                data=[
-                    api_models.TeststepsListPatchRequestDataItem(
-                        type=api_models.TeststepsListPatchRequestDataItemType.TESTSTEPS,
-                        id=(
-                            f"{self._project_id}/{item.work_item_id}/{item.step_index}"
-                            if item.step_index
-                            else oa_types.UNSET
-                        ),
-                        attributes=self._fill_test_step_attributes(
-                            api_models.TeststepsListPatchRequestDataItemAttributes,
-                            item,
-                        ),
-                    )
-                    for item in to_update
-                ]
-            ),
-            # pylint: enable=line-too-long
+            body=body,
         )
         self._raise_on_error(response)
 
@@ -78,100 +62,85 @@ class TestSteps(
         parsed_response = response.parsed
         assert isinstance(parsed_response, api_models.TeststepsListGetResponse)
 
-        test_steps = []
+        test_steps = [
+            dm.TestStep(
+                work_item_id=data.id.split("/")[1],
+                step_index=int(data.id.split("/")[2]),
+                revision=data.revision if data.revision else None,
+                step_columns=self._make_step_columns(data.attributes),
+            )
+            for data in parsed_response.data or []
+            if isinstance(data.id, str)
+        ]
 
-        for data in parsed_response.data or []:
-            assert isinstance(data.id, str)
-            assert isinstance(
-                data.attributes,
-                api_models.TeststepsListGetResponseDataItemAttributes,
-            )
-            _, work_item, index = data.id.split("/")
-            attribute_values = (
-                dm.TextContent(
-                    val.type.value if val.type else "text/plain",
-                    val.value or None,
-                )
-                for val in data.attributes.values or []
-            )
-            test_steps.append(
-                dm.TestStep(
-                    work_item_id=work_item,
-                    step_index=int(index),
-                    revision=data.revision if data.revision else None,
-                    step_columns=dict(
-                        zip(data.attributes.keys or [], attribute_values)
-                    ),
-                )
-            )
         next_page = isinstance(
-            parsed_response.links,
-            api_models.TeststepsListGetResponseLinks,
+            parsed_response.links, api_models.TeststepsListGetResponseLinks
         ) and bool(parsed_response.links.next_)
 
         return test_steps, next_page
+
+    def _make_step_columns(
+        self,
+        attributes: (
+            api_models.TeststepsListGetResponseDataItemAttributes | types.Unset
+        ),
+    ) -> dict[str, dm.TextContent]:
+        if isinstance(attributes, types.Unset):
+            return {}
+
+        keys = attributes.keys or []
+        values = [
+            dm.TextContent(
+                val.type.value if val.type else "text/plain",
+                val.value or None,
+            )
+            for val in attributes.values or []
+        ]
+        return {key: val for key, val in zip(keys, values)}
 
     def _split_into_batches(
         self, items: list[dm.TestStep]
     ) -> t.Generator[list[dm.TestStep], None, None]:
         for _, group in itertools.groupby(items, lambda x: x.work_item_id):
-            yield from super()._split_into_batches(list(group))
+            yield list(group)
 
-    def _create(
-        self,
-        items: list[dm.TestStep],
-    ):
-        """Create the given list of test records."""
+    def _create(self, items: list[dm.TestStep]):
+        body_data = self._build_post_request_data(items)
+        body = api_models.TeststepsListPostRequest(data=body_data)  # type: ignore[arg-type]
+
         response = post_test_steps.sync_detailed(
             self._project_id,
             items[0].work_item_id,
             client=self._client.client,
-            # pylint: disable=line-too-long
-            body=api_models.TeststepsListPostRequest(
-                [
-                    api_models.TeststepsListPostRequestDataItem(
-                        type=api_models.TeststepsListPostRequestDataItemType.TESTSTEPS,
-                        attributes=self._fill_test_step_attributes(
-                            api_models.TeststepsListPostRequestDataItemAttributes,
-                            test_step,
-                        ),
-                    )
-                    for test_step in items
-                ]
-            ),
-            # pylint: enable=line-too-long
+            body=body,
         )
-
         self._raise_on_error(response)
 
         assert (
             isinstance(response.parsed, api_models.TeststepsListPostResponse)
             and response.parsed.data
         )
-        counter = 0
-        for response_item in response.parsed.data:
+        for idx, response_item in enumerate(response.parsed.data):
             if response_item.id:
-                items[counter].step_index = int(
-                    response_item.id.split("/")[-1]
-                )
-                counter += 1
+                items[idx].step_index = int(response_item.id.split("/")[-1])
 
     def _delete(self, items: dm.TestStep | list[dm.TestStep]):
         if not isinstance(items, list):
             items = [items]
+        body_data = [
+            api_models.TeststepsListDeleteRequestDataItem(
+                type=api_models.TeststepsListDeleteRequestDataItemType.TESTSTEPS,
+                id=f"{self._project_id}/{step.work_item_id}/{step.step_index}",
+            )
+            for step in items
+        ]
+        body = api_models.TeststepsListDeleteRequest(data=body_data)
+
         response = delete_test_steps.sync_detailed(
             self._project_id,
             items[0].work_item_id,
             client=self._client.client,
-            body=api_models.TeststepsListDeleteRequest(
-                data=[
-                    api_models.TeststepsListDeleteRequestDataItem(
-                        type=api_models.TeststepsListDeleteRequestDataItemType.TESTSTEPS,
-                        id=f"{self._project_id}/{step.work_item_id}/{step.step_index}",
-                    )
-                    for step in items
-                ]
-            ),
+            body=body,
         )
         self._raise_on_error(response)
 
@@ -182,10 +151,16 @@ class TestSteps(
             | api_models.TeststepsListPatchRequestDataItemAttributes
         ],
         test_step: dm.TestStep,
+    ) -> (
+        api_models.TeststepsListPostRequestDataItemAttributes
+        | api_models.TeststepsListPatchRequestDataItemAttributes
     ):
-        value_item_name = attributes_type.__name__ + "ValuesItem"
-        value_item_cls = getattr(api_models, value_item_name)
-        value_item_type = getattr(api_models, value_item_name + "Type")
+        value_item_cls = getattr(
+            api_models, f"{attributes_type.__name__}ValuesItem"
+        )
+        value_item_type = getattr(
+            api_models, f"{attributes_type.__name__}ValuesItemType"
+        )
 
         return attributes_type(
             keys=list(test_step.step_columns.keys()),
@@ -193,11 +168,50 @@ class TestSteps(
                 value_item_cls(
                     type=(
                         value_item_type.TEXTHTML
-                        if column.type == "text/html"
+                        if col.type == "text/html"
                         else value_item_type.TEXTPLAIN
                     ),
-                    value=column.value,
+                    value=col.value,
                 )
-                for column in test_step.step_columns.values()
+                for col in test_step.step_columns.values()
             ],
         )
+
+    def _build_patch_request_data(
+        self, items: list[dm.TestStep]
+    ) -> list[api_models.TeststepsListPatchRequestDataItem]:
+        return [
+            api_models.TeststepsListPatchRequestDataItem(
+                type=api_models.TeststepsListPatchRequestDataItemType.TESTSTEPS,
+                id=(
+                    f"{self._project_id}/{step.work_item_id}/{step.step_index}"
+                    if step.step_index
+                    else types.UNSET
+                ),
+                attributes=t.cast(
+                    api_models.TeststepsListPatchRequestDataItemAttributes,
+                    self._fill_test_step_attributes(
+                        api_models.TeststepsListPatchRequestDataItemAttributes,
+                        step,
+                    ),
+                ),
+            )
+            for step in items
+        ]
+
+    def _build_post_request_data(
+        self, items: list[dm.TestStep]
+    ) -> list[api_models.TeststepsListPostRequestDataItem]:
+        return [
+            api_models.TeststepsListPostRequestDataItem(
+                type=api_models.TeststepsListPostRequestDataItemType.TESTSTEPS,
+                attributes=t.cast(
+                    api_models.TeststepsListPostRequestDataItemAttributes,
+                    self._fill_test_step_attributes(
+                        api_models.TeststepsListPostRequestDataItemAttributes,
+                        step,
+                    ),
+                ),
+            )
+            for step in items
+        ]
