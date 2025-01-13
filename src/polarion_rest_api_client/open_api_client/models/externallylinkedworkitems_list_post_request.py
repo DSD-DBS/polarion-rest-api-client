@@ -19,11 +19,13 @@ T = TypeVar("T", bound="ExternallylinkedworkitemsListPostRequest")
 
 @_attrs_define
 class ExternallylinkedworkitemsListPostRequest:
-    """Attributes
-    data (Union[Unset, List['ExternallylinkedworkitemsListPostRequestDataItem']]):
+    """Attributes data (Union[Unset,
+    List['ExternallylinkedworkitemsListPostRequestDataItem']]):
     """
 
-    data: Unset | list["ExternallylinkedworkitemsListPostRequestDataItem"] = UNSET
+    data: Unset | list["ExternallylinkedworkitemsListPostRequestDataItem"] = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

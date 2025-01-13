@@ -23,8 +23,9 @@ T = TypeVar("T", bound="DocumentAttachmentsSinglePatchRequestData")
 
 @_attrs_define
 class DocumentAttachmentsSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, DocumentAttachmentsSinglePatchRequestDataType]):
+    """Attributes type (Union[Unset,
+    DocumentAttachmentsSinglePatchRequestDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/MyAttachmentId.
     attributes (Union[Unset, DocumentAttachmentsSinglePatchRequestDataAttributes]):
     """

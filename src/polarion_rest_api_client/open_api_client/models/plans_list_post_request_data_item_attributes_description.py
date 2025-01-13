@@ -17,8 +17,9 @@ T = TypeVar("T", bound="PlansListPostRequestDataItemAttributesDescription")
 
 @_attrs_define
 class PlansListPostRequestDataItemAttributesDescription:
-    """Attributes
-    type (Union[Unset, PlansListPostRequestDataItemAttributesDescriptionType]):
+    """Attributes type (Union[Unset,
+    PlansListPostRequestDataItemAttributesDescriptionType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 

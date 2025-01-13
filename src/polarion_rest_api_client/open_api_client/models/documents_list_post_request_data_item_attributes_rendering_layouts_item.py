@@ -22,8 +22,8 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem:
-    """Attributes
-    label (Union[Unset, str]):  Example: My label.
+    """Attributes label (Union[Unset, str]):  Example: My label.
+
     layouter (Union[Unset, str]):  Example: paragraph.
     properties (Union[Unset, List['DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesItem']]):
     type (Union[Unset, str]):  Example: task.
@@ -31,7 +31,12 @@ class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem:
 
     label: Unset | str = UNSET
     layouter: Unset | str = UNSET
-    properties: Unset | list["DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesItem"] = UNSET
+    properties: (
+        Unset
+        | list[
+            "DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesItem"
+        ]
+    ) = UNSET
     type: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

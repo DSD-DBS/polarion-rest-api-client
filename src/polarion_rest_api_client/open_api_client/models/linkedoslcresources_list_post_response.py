@@ -19,13 +19,11 @@ T = TypeVar("T", bound="LinkedoslcresourcesListPostResponse")
 
 @_attrs_define
 class LinkedoslcresourcesListPostResponse:
-    """Attributes
-    data (Union[Unset, List['LinkedoslcresourcesListPostResponseDataItem']]):
+    """Attributes data (Union[Unset,
+    List['LinkedoslcresourcesListPostResponseDataItem']]):
     """
 
-    data: Unset | list["LinkedoslcresourcesListPostResponseDataItem"] = (
-        UNSET
-    )
+    data: Unset | list["LinkedoslcresourcesListPostResponseDataItem"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

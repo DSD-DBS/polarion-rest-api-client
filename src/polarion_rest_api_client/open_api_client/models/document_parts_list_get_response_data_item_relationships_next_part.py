@@ -21,8 +21,8 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentPartsListGetResponseDataItemRelationshipsNextPart:
-    """Attributes
-    data (Union[Unset, DocumentPartsListGetResponseDataItemRelationshipsNextPartData]):
+    """Attributes data (Union[Unset,
+    DocumentPartsListGetResponseDataItemRelationshipsNextPartData]):
     """
 
     data: Union[
@@ -53,7 +53,10 @@ class DocumentPartsListGetResponseDataItemRelationshipsNextPart:
 
         d = src_dict.copy()
         _data = d.pop("data", UNSET)
-        data: Unset | DocumentPartsListGetResponseDataItemRelationshipsNextPartData
+        data: (
+            Unset
+            | DocumentPartsListGetResponseDataItemRelationshipsNextPartData
+        )
         if isinstance(_data, Unset):
             data = UNSET
         else:

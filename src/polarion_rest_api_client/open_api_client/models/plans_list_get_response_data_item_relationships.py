@@ -34,8 +34,9 @@ T = TypeVar("T", bound="PlansListGetResponseDataItemRelationships")
 
 @_attrs_define
 class PlansListGetResponseDataItemRelationships:
-    """Attributes
-    author (Union[Unset, PlansListGetResponseDataItemRelationshipsAuthor]):
+    """Attributes author (Union[Unset,
+    PlansListGetResponseDataItemRelationshipsAuthor]):
+
     parent (Union[Unset, PlansListGetResponseDataItemRelationshipsParent]):
     project (Union[Unset, PlansListGetResponseDataItemRelationshipsProject]):
     project_span (Union[Unset, PlansListGetResponseDataItemRelationshipsProjectSpan]):
@@ -160,7 +161,9 @@ class PlansListGetResponseDataItemRelationships:
             )
 
         _project_span = d.pop("projectSpan", UNSET)
-        project_span: Unset | PlansListGetResponseDataItemRelationshipsProjectSpan
+        project_span: (
+            Unset | PlansListGetResponseDataItemRelationshipsProjectSpan
+        )
         if isinstance(_project_span, Unset):
             project_span = UNSET
         else:

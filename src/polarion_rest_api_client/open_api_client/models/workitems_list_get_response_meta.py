@@ -13,9 +13,7 @@ T = TypeVar("T", bound="WorkitemsListGetResponseMeta")
 
 @_attrs_define
 class WorkitemsListGetResponseMeta:
-    """Attributes
-    total_count (Union[Unset, int]):
-    """
+    """Attributes total_count (Union[Unset, int]):"""
 
     total_count: Unset | int = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

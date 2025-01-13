@@ -21,12 +21,13 @@ T = TypeVar("T", bound="TestrecordsListPatchRequestDataItemAttributes")
 
 @_attrs_define
 class TestrecordsListPatchRequestDataItemAttributes:
-    """Attributes
-    comment (Union[Unset, TestrecordsListPatchRequestDataItemAttributesComment]):
-    duration (Union[Unset, float]):
-    executed (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-    result (Union[Unset, str]):  Example: passed.
-    test_case_revision (Union[Unset, str]):  Example: Test Case Revision.
+    """Attributes comment (Union[Unset,
+    TestrecordsListPatchRequestDataItemAttributesComment]):
+
+    duration (Union[Unset, float]): executed (Union[Unset,
+    datetime.datetime]):  Example: 1970-01-01T00:00:00Z. result
+    (Union[Unset, str]):  Example: passed. test_case_revision
+    (Union[Unset, str]):  Example: Test Case Revision.
     """
 
     comment: Union[

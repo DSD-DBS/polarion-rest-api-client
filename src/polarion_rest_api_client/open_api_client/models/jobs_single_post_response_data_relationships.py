@@ -25,8 +25,9 @@ T = TypeVar("T", bound="JobsSinglePostResponseDataRelationships")
 
 @_attrs_define
 class JobsSinglePostResponseDataRelationships:
-    """Attributes
-    document (Union[Unset, JobsSinglePostResponseDataRelationshipsDocument]):
+    """Attributes document (Union[Unset,
+    JobsSinglePostResponseDataRelationshipsDocument]):
+
     documents (Union[Unset, JobsSinglePostResponseDataRelationshipsDocuments]):
     project (Union[Unset, JobsSinglePostResponseDataRelationshipsProject]):
     """

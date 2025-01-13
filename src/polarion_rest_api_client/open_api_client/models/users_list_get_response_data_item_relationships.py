@@ -25,8 +25,9 @@ T = TypeVar("T", bound="UsersListGetResponseDataItemRelationships")
 
 @_attrs_define
 class UsersListGetResponseDataItemRelationships:
-    """Attributes
-    global_roles (Union[Unset, UsersListGetResponseDataItemRelationshipsGlobalRoles]):
+    """Attributes global_roles (Union[Unset,
+    UsersListGetResponseDataItemRelationshipsGlobalRoles]):
+
     project_roles (Union[Unset, UsersListGetResponseDataItemRelationshipsProjectRoles]):
     user_groups (Union[Unset, UsersListGetResponseDataItemRelationshipsUserGroups]):
     """
@@ -83,7 +84,9 @@ class UsersListGetResponseDataItemRelationships:
 
         d = src_dict.copy()
         _global_roles = d.pop("globalRoles", UNSET)
-        global_roles: Unset | UsersListGetResponseDataItemRelationshipsGlobalRoles
+        global_roles: (
+            Unset | UsersListGetResponseDataItemRelationshipsGlobalRoles
+        )
         if isinstance(_global_roles, Unset):
             global_roles = UNSET
         else:
@@ -94,7 +97,9 @@ class UsersListGetResponseDataItemRelationships:
             )
 
         _project_roles = d.pop("projectRoles", UNSET)
-        project_roles: Unset | UsersListGetResponseDataItemRelationshipsProjectRoles
+        project_roles: (
+            Unset | UsersListGetResponseDataItemRelationshipsProjectRoles
+        )
         if isinstance(_project_roles, Unset):
             project_roles = UNSET
         else:
@@ -103,7 +108,9 @@ class UsersListGetResponseDataItemRelationships:
             )
 
         _user_groups = d.pop("userGroups", UNSET)
-        user_groups: Unset | UsersListGetResponseDataItemRelationshipsUserGroups
+        user_groups: (
+            Unset | UsersListGetResponseDataItemRelationshipsUserGroups
+        )
         if isinstance(_user_groups, Unset):
             user_groups = UNSET
         else:

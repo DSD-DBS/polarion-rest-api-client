@@ -13,9 +13,9 @@ T = TypeVar("T", bound="WorkrecordsSingleGetResponseLinks")
 
 @_attrs_define
 class WorkrecordsSingleGetResponseLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/workitems/MyWorkItemId/workrecords/MyWorkRecordId?revision=1234.
+    """Attributes.
+
+    Example: server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItemId/workrecords/MyWorkRecordId?revision=1234.
     """
 
     self_: Unset | str = UNSET

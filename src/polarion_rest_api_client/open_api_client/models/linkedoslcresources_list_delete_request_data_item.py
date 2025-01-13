@@ -17,16 +17,15 @@ T = TypeVar("T", bound="LinkedoslcresourcesListDeleteRequestDataItem")
 
 @_attrs_define
 class LinkedoslcresourcesListDeleteRequestDataItem:
-    """Attributes
-    type (Union[Unset, LinkedoslcresourcesListDeleteRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    LinkedoslcresourcesListDeleteRequestDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/http://server-host-
         name/ns/cm#relatedChangeRequest/http://server-host-name/application-
         path/oslc/services/projects/MyProjectId/workitems/MyWorkItemId.
     """
 
-    type: Unset | LinkedoslcresourcesListDeleteRequestDataItemType = (
-        UNSET
-    )
+    type: Unset | LinkedoslcresourcesListDeleteRequestDataItemType = UNSET
     id: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

@@ -19,8 +19,8 @@ T = TypeVar("T", bound="RelationshipsListDeleteRequest")
 
 @_attrs_define
 class RelationshipsListDeleteRequest:
-    """Attributes
-    data (Union[Unset, List['RelationshipsListDeleteRequestDataItem']]):
+    """Attributes data (Union[Unset,
+    List['RelationshipsListDeleteRequestDataItem']]):
     """
 
     data: Unset | list["RelationshipsListDeleteRequestDataItem"] = UNSET

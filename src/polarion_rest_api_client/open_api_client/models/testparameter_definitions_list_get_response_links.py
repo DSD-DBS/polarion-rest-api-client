@@ -13,9 +13,10 @@ T = TypeVar("T", bound="TestparameterDefinitionsListGetResponseLinks")
 
 @_attrs_define
 class TestparameterDefinitionsListGetResponseLinks:
-    """Attributes
-    first (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/testparameterdefinitions?page%5Bsize%5D=10&page%5Bnumber%5D=1.
+    """Attributes first (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/testparameterdefinitions?page%5
+    Bsize%5D=10&page%5Bnumber%5D=1.
+
     last (Union[Unset, str]):  Example: server-host-name/application-
         path/projects/MyProjectId/testparameterdefinitions?page%5Bsize%5D=10&page%5Bnumber%5D=9.
     next_ (Union[Unset, str]):  Example: server-host-name/application-

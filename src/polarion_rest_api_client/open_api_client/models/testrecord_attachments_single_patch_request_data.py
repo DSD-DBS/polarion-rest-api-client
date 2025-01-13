@@ -23,8 +23,9 @@ T = TypeVar("T", bound="TestrecordAttachmentsSinglePatchRequestData")
 
 @_attrs_define
 class TestrecordAttachmentsSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, TestrecordAttachmentsSinglePatchRequestDataType]):
+    """Attributes type (Union[Unset,
+    TestrecordAttachmentsSinglePatchRequestDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/MyAttachmentId.
     attributes (Union[Unset, TestrecordAttachmentsSinglePatchRequestDataAttributes]):
     """
@@ -78,7 +79,9 @@ class TestrecordAttachmentsSinglePatchRequestData:
         id = d.pop("id", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Unset | TestrecordAttachmentsSinglePatchRequestDataAttributes
+        attributes: (
+            Unset | TestrecordAttachmentsSinglePatchRequestDataAttributes
+        )
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:

@@ -22,13 +22,15 @@ from tests.conftest import (
 
 
 def test_get_work_item_links_single_page(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
-    with open(
-        TEST_WIL_NO_NEXT_PAGE_RESPONSE,
-        encoding="utf8",
-    ) as f:
+    query = {
+        "fields[linkedworkitems]": "id,role",
+        "page[size]": "100",
+        "page[number]": "1",
+        "include": "workitem",
+    }
+    with open(TEST_WIL_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
     work_item_links = client.work_items.links.get_all(
@@ -37,12 +39,6 @@ def test_get_work_item_links_single_page(
         fields={"fields[linkedworkitems]": "id,role"},
     )
 
-    query = {
-        "fields[linkedworkitems]": "id,role",
-        "page[size]": "100",
-        "page[number]": "1",
-        "include": "workitem",
-    }
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
@@ -54,28 +50,20 @@ def test_get_work_item_links_single_page(
 
 
 def test_get_work_item_links_multi_page(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
-    with open(
-        TEST_WIL_NEXT_PAGE_RESPONSE,
-        encoding="utf8",
-    ) as f:
-        httpx_mock.add_response(json=json.load(f))
-    with open(
-        TEST_WIL_NO_NEXT_PAGE_RESPONSE,
-        encoding="utf8",
-    ) as f:
-        httpx_mock.add_response(json=json.load(f))
-
-    work_items = client.work_items.links.get_all("MyWorkItemId")
     query = {
         "fields[linkedworkitems]": "id,role,suspect",
         "page[size]": "100",
         "page[number]": "1",
     }
-    reqs = httpx_mock.get_requests()
+    with open(TEST_WIL_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
+        httpx_mock.add_response(json=json.load(f))
+    with open(TEST_WIL_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
+        httpx_mock.add_response(json=json.load(f))
 
+    work_items = client.work_items.links.get_all("MyWorkItemId")
+    reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
     assert reqs[1].method == "GET"
@@ -87,10 +75,11 @@ def test_get_work_item_links_multi_page(
 
 
 def test_delete_work_item_link(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
+    with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
 
     client.work_items.links.delete(
         polarion_api.WorkItemLink(
@@ -98,18 +87,17 @@ def test_delete_work_item_link(
         )
     )
 
-    req = httpx_mock.get_request()
-
-    assert req is not None and req.method == "DELETE"
-    with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
-        assert json.loads(req.content.decode()) == json.load(f)
+    assert (req := httpx_mock.get_request())
+    assert req.method == "DELETE"
+    assert json.loads(req.content.decode()) == expected
 
 
 def test_delete_work_item_links(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
+    with open(TEST_WIL_DELETE_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
 
     client.work_items.links.delete(
         [
@@ -122,21 +110,20 @@ def test_delete_work_item_links(
         ]
     )
 
-    req = httpx_mock.get_request()
-
-    assert req is not None and req.method == "DELETE"
-    with open(TEST_WIL_DELETE_REQUEST, encoding="utf8") as f:
-        expected_request = json.load(f)
-
+    assert (req := httpx_mock.get_request())
+    assert req.method == "DELETE"
     assert json.loads(req.content.decode()) == expected_request
 
 
 def test_delete_work_item_links_multi_primary(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
     httpx_mock.add_response(204)
+    with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
+    with open(TEST_WIL_DELETE2_REQUEST, encoding="utf8") as f:
+        expected_request2 = json.load(f)
 
     client.work_items.links.delete(
         [
@@ -150,12 +137,6 @@ def test_delete_work_item_links_multi_primary(
     )
 
     reqs = httpx_mock.get_requests()
-    with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
-        expected_request = json.load(f)
-
-    with open(TEST_WIL_DELETE2_REQUEST, encoding="utf8") as f:
-        expected_request2 = json.load(f)
-
     assert len(reqs) == 2
     assert reqs[0].method == "DELETE"
     assert reqs[1].method == "DELETE"
@@ -164,9 +145,10 @@ def test_delete_work_item_links_multi_primary(
 
 
 def test_create_work_item_link(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
+    with open(TEST_WIL_POSTED_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
     with open(TEST_WIL_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
@@ -176,20 +158,17 @@ def test_create_work_item_link(
         )
     )
 
-    req = httpx_mock.get_request()
-
-    assert req is not None and req.method == "POST"
+    assert (req := httpx_mock.get_request())
+    assert req.method == "POST"
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId/linkedworkitems")
-    with open(TEST_WIL_POSTED_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
     assert json.loads(req.content.decode()) == expected
 
 
 def test_create_work_item_links_different_primaries(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
+    with open(TEST_WIL_POSTED_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
     with open(TEST_WIL_CREATED_RESPONSE, encoding="utf8") as f:
         content = json.load(f)
 
@@ -208,29 +187,24 @@ def test_create_work_item_links_different_primaries(
     )
 
     reqs = httpx_mock.get_requests()
-
     assert len(reqs) == 2
     assert reqs[0].method == "POST"
     assert reqs[1].method == "POST"
-
     assert reqs[0].url.path.endswith(
         "PROJ/workitems/MyWorkItemId/linkedworkitems"
     )
     assert reqs[1].url.path.endswith(
         "PROJ/workitems/MyWorkItemId3/linkedworkitems"
     )
-
-    with open(TEST_WIL_POSTED_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
     assert json.loads(reqs[0].content.decode()) == expected
     assert json.loads(reqs[1].content.decode()) == expected
 
 
 def test_create_work_item_links_same_primaries(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
+    with open(TEST_WIL_MULTI_POST_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
     with open(TEST_WIL_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
@@ -249,12 +223,8 @@ def test_create_work_item_links_same_primaries(
         ]
     )
 
-    req = httpx_mock.get_request()
-
-    assert req is not None and req.method == "POST"
-    with open(TEST_WIL_MULTI_POST_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
+    assert (req := httpx_mock.get_request())
+    assert req.method == "POST"
     assert json.loads(req.content.decode()) == expected
 
 

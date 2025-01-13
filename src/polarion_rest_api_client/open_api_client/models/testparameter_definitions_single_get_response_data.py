@@ -29,8 +29,9 @@ T = TypeVar("T", bound="TestparameterDefinitionsSingleGetResponseData")
 
 @_attrs_define
 class TestparameterDefinitionsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, TestparameterDefinitionsSingleGetResponseDataType]):
+    """Attributes type (Union[Unset,
+    TestparameterDefinitionsSingleGetResponseDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestParamDefinition.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, TestparameterDefinitionsSingleGetResponseDataAttributes]):
@@ -38,9 +39,7 @@ class TestparameterDefinitionsSingleGetResponseData:
     meta (Union[Unset, TestparameterDefinitionsSingleGetResponseDataMeta]):
     """
 
-    type: Unset | TestparameterDefinitionsSingleGetResponseDataType = (
-        UNSET
-    )
+    type: Unset | TestparameterDefinitionsSingleGetResponseDataType = UNSET
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
     attributes: Union[
@@ -120,7 +119,9 @@ class TestparameterDefinitionsSingleGetResponseData:
         revision = d.pop("revision", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Unset | TestparameterDefinitionsSingleGetResponseDataAttributes
+        attributes: (
+            Unset | TestparameterDefinitionsSingleGetResponseDataAttributes
+        )
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:

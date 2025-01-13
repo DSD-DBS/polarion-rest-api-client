@@ -29,13 +29,14 @@ T = TypeVar("T", bound="TeststepsSingleGetResponseData")
 
 @_attrs_define
 class TeststepsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, TeststepsSingleGetResponseDataType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyTestStepIndex.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, TeststepsSingleGetResponseDataAttributes]):
-    links (Union[Unset, TeststepsSingleGetResponseDataLinks]):
-    meta (Union[Unset, TeststepsSingleGetResponseDataMeta]):
+    """Attributes type (Union[Unset, TeststepsSingleGetResponseDataType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MyWorkItemId/MyTestStepIndex. revision (Union[Unset,
+    str]):  Example: 1234. attributes (Union[Unset,
+    TeststepsSingleGetResponseDataAttributes]): links (Union[Unset,
+    TeststepsSingleGetResponseDataLinks]): meta (Union[Unset,
+    TeststepsSingleGetResponseDataMeta]):
     """
 
     type: Unset | TeststepsSingleGetResponseDataType = UNSET

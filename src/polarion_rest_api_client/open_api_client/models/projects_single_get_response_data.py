@@ -32,14 +32,14 @@ T = TypeVar("T", bound="ProjectsSingleGetResponseData")
 
 @_attrs_define
 class ProjectsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, ProjectsSingleGetResponseDataType]):
-    id (Union[Unset, str]):  Example: MyProjectId.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, ProjectsSingleGetResponseDataAttributes]):
-    relationships (Union[Unset, ProjectsSingleGetResponseDataRelationships]):
-    links (Union[Unset, ProjectsSingleGetResponseDataLinks]):
-    meta (Union[Unset, ProjectsSingleGetResponseDataMeta]):
+    """Attributes type (Union[Unset, ProjectsSingleGetResponseDataType]):
+
+    id (Union[Unset, str]):  Example: MyProjectId. revision
+    (Union[Unset, str]):  Example: 1234. attributes (Union[Unset,
+    ProjectsSingleGetResponseDataAttributes]): relationships
+    (Union[Unset, ProjectsSingleGetResponseDataRelationships]): links
+    (Union[Unset, ProjectsSingleGetResponseDataLinks]): meta
+    (Union[Unset, ProjectsSingleGetResponseDataMeta]):
     """
 
     type: Unset | ProjectsSingleGetResponseDataType = UNSET

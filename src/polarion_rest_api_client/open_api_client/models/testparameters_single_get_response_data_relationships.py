@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestparametersSingleGetResponseDataRelationships")
 
 @_attrs_define
 class TestparametersSingleGetResponseDataRelationships:
-    """Attributes
-    definition (Union[Unset, TestparametersSingleGetResponseDataRelationshipsDefinition]):
+    """Attributes definition (Union[Unset,
+    TestparametersSingleGetResponseDataRelationshipsDefinition]):
     """
 
     definition: Union[
@@ -51,7 +51,9 @@ class TestparametersSingleGetResponseDataRelationships:
 
         d = src_dict.copy()
         _definition = d.pop("definition", UNSET)
-        definition: Unset | TestparametersSingleGetResponseDataRelationshipsDefinition
+        definition: (
+            Unset | TestparametersSingleGetResponseDataRelationshipsDefinition
+        )
         if isinstance(_definition, Unset):
             definition = UNSET
         else:

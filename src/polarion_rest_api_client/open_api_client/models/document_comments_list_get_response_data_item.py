@@ -32,8 +32,9 @@ T = TypeVar("T", bound="DocumentCommentsListGetResponseDataItem")
 
 @_attrs_define
 class DocumentCommentsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, DocumentCommentsListGetResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    DocumentCommentsListGetResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/MyCommentId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, DocumentCommentsListGetResponseDataItemAttributes]):
@@ -141,7 +142,9 @@ class DocumentCommentsListGetResponseDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | DocumentCommentsListGetResponseDataItemRelationships
+        relationships: (
+            Unset | DocumentCommentsListGetResponseDataItemRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

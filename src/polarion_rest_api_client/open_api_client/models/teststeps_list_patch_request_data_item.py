@@ -23,10 +23,11 @@ T = TypeVar("T", bound="TeststepsListPatchRequestDataItem")
 
 @_attrs_define
 class TeststepsListPatchRequestDataItem:
-    """Attributes
-    type (Union[Unset, TeststepsListPatchRequestDataItemType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyTestStepIndex.
-    attributes (Union[Unset, TeststepsListPatchRequestDataItemAttributes]):
+    """Attributes type (Union[Unset, TeststepsListPatchRequestDataItemType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MyWorkItemId/MyTestStepIndex. attributes (Union[Unset,
+    TeststepsListPatchRequestDataItemAttributes]):
     """
 
     type: Unset | TeststepsListPatchRequestDataItemType = UNSET

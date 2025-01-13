@@ -15,12 +15,13 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataAttributes")
 
 @_attrs_define
 class PagesSingleGetResponseDataAttributes:
-    """Attributes
-    created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-    page_name (Union[Unset, str]):  Example: MyRichPageId.
-    space_id (Union[Unset, str]):  Example: MySpaceId.
-    title (Union[Unset, str]):  Example: Title.
-    updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    """Attributes created (Union[Unset, datetime.datetime]):  Example:
+    1970-01-01T00:00:00Z.
+
+    page_name (Union[Unset, str]):  Example: MyRichPageId. space_id
+    (Union[Unset, str]):  Example: MySpaceId. title (Union[Unset, str]):
+    Example: Title. updated (Union[Unset, datetime.datetime]):  Example:
+    1970-01-01T00:00:00Z.
     """
 
     created: Unset | datetime.datetime = UNSET

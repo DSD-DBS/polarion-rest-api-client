@@ -19,8 +19,9 @@ T = TypeVar("T", bound="TeststepResultsListPatchRequestDataItemAttributes")
 
 @_attrs_define
 class TeststepResultsListPatchRequestDataItemAttributes:
-    """Attributes
-    comment (Union[Unset, TeststepResultsListPatchRequestDataItemAttributesComment]):
+    """Attributes comment (Union[Unset,
+    TeststepResultsListPatchRequestDataItemAttributesComment]):
+
     result (Union[Unset, str]):  Example: passed.
     """
 
@@ -57,7 +58,9 @@ class TeststepResultsListPatchRequestDataItemAttributes:
 
         d = src_dict.copy()
         _comment = d.pop("comment", UNSET)
-        comment: Unset | TeststepResultsListPatchRequestDataItemAttributesComment
+        comment: (
+            Unset | TeststepResultsListPatchRequestDataItemAttributesComment
+        )
         if isinstance(_comment, Unset):
             comment = UNSET
         else:

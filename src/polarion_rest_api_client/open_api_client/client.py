@@ -1,5 +1,6 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
+from __future__ import annotations
 
 import ssl
 from typing import Any
@@ -49,11 +50,9 @@ class Client:
     _follow_redirects: bool = field(default=False, kw_only=True)
     _httpx_args: dict[str, Any] = field(factory=dict, kw_only=True)
     _client: httpx.Client | None = field(default=None, init=False)
-    _async_client: httpx.AsyncClient | None = field(
-        default=None, init=False
-    )
+    _async_client: httpx.AsyncClient | None = field(default=None, init=False)
 
-    def with_headers(self, headers: dict[str, str]) -> "Client":
+    def with_headers(self, headers: dict[str, str]) -> Client:
         """Get a new client matching this one with additional headers."""
         if self._client is not None:
             self._client.headers.update(headers)
@@ -61,7 +60,7 @@ class Client:
             self._async_client.headers.update(headers)
         return evolve(self, headers={**self._headers, **headers})
 
-    def with_cookies(self, cookies: dict[str, str]) -> "Client":
+    def with_cookies(self, cookies: dict[str, str]) -> Client:
         """Get a new client matching this one with additional cookies."""
         if self._client is not None:
             self._client.cookies.update(cookies)
@@ -69,28 +68,29 @@ class Client:
             self._async_client.cookies.update(cookies)
         return evolve(self, cookies={**self._cookies, **cookies})
 
-    def with_timeout(self, timeout: httpx.Timeout) -> "Client":
-        """Get a new client matching this one with a new timeout (in
-        seconds)
-        """
+    def with_timeout(self, timeout: httpx.Timeout) -> Client:
+        """Get a new client matching this one with a new timeout."""
         if self._client is not None:
             self._client.timeout = timeout
         if self._async_client is not None:
             self._async_client.timeout = timeout
         return evolve(self, timeout=timeout)
 
-    def set_httpx_client(self, client: httpx.Client) -> "Client":
+    def set_httpx_client(self, client: httpx.Client) -> Client:
         """Manually the underlying httpx.Client.
 
-        **NOTE**: This will override any other settings on the client,
-        including cookies, headers, and timeout.
+        Notes
+        -----
+        This will override any other settings on the client, including
+        cookies, headers, and timeout.
         """
         self._client = client
         return self
 
     def get_httpx_client(self) -> httpx.Client:
-        """Get the underlying httpx.Client, constructing a new one if not
-        previously set.
+        """Get the underlying httpx.Client.
+
+        Constructing a new one if not previously set.
         """
         if self._client is None:
             self._client = httpx.Client(
@@ -104,31 +104,32 @@ class Client:
             )
         return self._client
 
-    def __enter__(self) -> "Client":
-        """Enter a context manager for self.client—you cannot enter twice (see
-        httpx docs)
-        """
+    def __enter__(self) -> Client:
+        """Enter a context manager for self.client."""
         self.get_httpx_client().__enter__()
         return self
 
     def __exit__(self, *args: Any, **kwargs: Any) -> None:
-        """Exit a context manager for internal httpx.Client (see httpx docs)"""
+        """Exit a context manager for internal httpx.Client."""
         self.get_httpx_client().__exit__(*args, **kwargs)
 
     def set_async_httpx_client(
         self, async_client: httpx.AsyncClient
-    ) -> "Client":
+    ) -> Client:
         """Manually the underlying httpx.AsyncClient.
 
-        **NOTE**: This will override any other settings on the client,
-        including cookies, headers, and timeout.
+        Notes
+        -----
+        This will override any other settings on the client, including
+        cookies, headers, and timeout.
         """
         self._async_client = async_client
         return self
 
     def get_async_httpx_client(self) -> httpx.AsyncClient:
-        """Get the underlying httpx.AsyncClient, constructing a new one if not
-        previously set.
+        """Get the underlying httpx.AsyncClient.
+
+        Constructing a new one if not previously set.
         """
         if self._async_client is None:
             self._async_client = httpx.AsyncClient(
@@ -142,17 +143,13 @@ class Client:
             )
         return self._async_client
 
-    async def __aenter__(self) -> "Client":
-        """Enter a context manager for underlying httpx.AsyncClient—you cannot
-        enter twice (see httpx docs)
-        """
+    async def __aenter__(self) -> Client:
+        """Enter a context manager for underlying httpx.AsyncClient."""
         await self.get_async_httpx_client().__aenter__()
         return self
 
     async def __aexit__(self, *args: Any, **kwargs: Any) -> None:
-        """Exit a context manager for underlying httpx.AsyncClient (see httpx
-        docs)
-        """
+        """Exit a context manager for underlying httpx.AsyncClient."""
         await self.get_async_httpx_client().__aexit__(*args, **kwargs)
 
 
@@ -200,15 +197,13 @@ class AuthenticatedClient:
     _follow_redirects: bool = field(default=False, kw_only=True)
     _httpx_args: dict[str, Any] = field(factory=dict, kw_only=True)
     _client: httpx.Client | None = field(default=None, init=False)
-    _async_client: httpx.AsyncClient | None = field(
-        default=None, init=False
-    )
+    _async_client: httpx.AsyncClient | None = field(default=None, init=False)
 
     token: str
     prefix: str = "Bearer"
     auth_header_name: str = "Authorization"
 
-    def with_headers(self, headers: dict[str, str]) -> "AuthenticatedClient":
+    def with_headers(self, headers: dict[str, str]) -> AuthenticatedClient:
         """Get a new client matching this one with additional headers."""
         if self._client is not None:
             self._client.headers.update(headers)
@@ -216,7 +211,7 @@ class AuthenticatedClient:
             self._async_client.headers.update(headers)
         return evolve(self, headers={**self._headers, **headers})
 
-    def with_cookies(self, cookies: dict[str, str]) -> "AuthenticatedClient":
+    def with_cookies(self, cookies: dict[str, str]) -> AuthenticatedClient:
         """Get a new client matching this one with additional cookies."""
         if self._client is not None:
             self._client.cookies.update(cookies)
@@ -224,9 +219,10 @@ class AuthenticatedClient:
             self._async_client.cookies.update(cookies)
         return evolve(self, cookies={**self._cookies, **cookies})
 
-    def with_timeout(self, timeout: httpx.Timeout) -> "AuthenticatedClient":
-        """Get a new client matching this one with a new timeout (in
-        seconds)
+    def with_timeout(self, timeout: httpx.Timeout) -> AuthenticatedClient:
+        """Get a new client matching this one with a new timeout.
+
+        Returns in seconds.
         """
         if self._client is not None:
             self._client.timeout = timeout
@@ -234,18 +230,21 @@ class AuthenticatedClient:
             self._async_client.timeout = timeout
         return evolve(self, timeout=timeout)
 
-    def set_httpx_client(self, client: httpx.Client) -> "AuthenticatedClient":
+    def set_httpx_client(self, client: httpx.Client) -> AuthenticatedClient:
         """Manually the underlying httpx.Client.
 
-        **NOTE**: This will override any other settings on the client,
-        including cookies, headers, and timeout.
+        Notes
+        -----
+        This will override any other settings on the client, including
+        cookies, headers, and timeout.
         """
         self._client = client
         return self
 
     def get_httpx_client(self) -> httpx.Client:
-        """Get the underlying httpx.Client, constructing a new one if not
-        previously set.
+        """Get the underlying httpx.Client.
+
+        Constructing a new one if not previously set.
         """
         if self._client is None:
             self._headers[self.auth_header_name] = (
@@ -262,31 +261,37 @@ class AuthenticatedClient:
             )
         return self._client
 
-    def __enter__(self) -> "AuthenticatedClient":
-        """Enter a context manager for self.client—you cannot enter twice (see
-        httpx docs)
+    def __enter__(self) -> AuthenticatedClient:
+        """Enter a context manager for self.client.
+
+        See Also
+        --------
+        You cannot enter twice (see httpx docs)
         """
         self.get_httpx_client().__enter__()
         return self
 
     def __exit__(self, *args: Any, **kwargs: Any) -> None:
-        """Exit a context manager for internal httpx.Client (see httpx docs)"""
+        """Exit a context manager for internal httpx.Client."""
         self.get_httpx_client().__exit__(*args, **kwargs)
 
     def set_async_httpx_client(
         self, async_client: httpx.AsyncClient
-    ) -> "AuthenticatedClient":
+    ) -> AuthenticatedClient:
         """Manually the underlying httpx.AsyncClient.
 
-        **NOTE**: This will override any other settings on the client,
-        including cookies, headers, and timeout.
+        Notes
+        -----
+        This will override any other settings on the client, including
+        cookies, headers, and timeout.
         """
         self._async_client = async_client
         return self
 
     def get_async_httpx_client(self) -> httpx.AsyncClient:
-        """Get the underlying httpx.AsyncClient, constructing a new one if not
-        previously set.
+        """Get the underlying httpx.AsyncClient.
+
+        Constructing a new one if not previously set.
         """
         if self._async_client is None:
             self._headers[self.auth_header_name] = (
@@ -303,15 +308,16 @@ class AuthenticatedClient:
             )
         return self._async_client
 
-    async def __aenter__(self) -> "AuthenticatedClient":
-        """Enter a context manager for underlying httpx.AsyncClient—you cannot
-        enter twice (see httpx docs)
+    async def __aenter__(self) -> AuthenticatedClient:
+        """Enter a context manager for underlying httpx.AsyncClient.
+
+        See Also
+        --------
+        You cannot enter twice (see httpx docs)
         """
         await self.get_async_httpx_client().__aenter__()
         return self
 
     async def __aexit__(self, *args: Any, **kwargs: Any) -> None:
-        """Exit a context manager for underlying httpx.AsyncClient (see httpx
-        docs)
-        """
+        """Exit a context manager for underlying httpx.AsyncClient."""
         await self.get_async_httpx_client().__aexit__(*args, **kwargs)

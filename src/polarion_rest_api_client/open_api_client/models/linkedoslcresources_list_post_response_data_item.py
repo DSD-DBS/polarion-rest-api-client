@@ -23,8 +23,9 @@ T = TypeVar("T", bound="LinkedoslcresourcesListPostResponseDataItem")
 
 @_attrs_define
 class LinkedoslcresourcesListPostResponseDataItem:
-    """Attributes
-    type (Union[Unset, LinkedoslcresourcesListPostResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    LinkedoslcresourcesListPostResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/http://server-host-
         name/ns/cm#relatedChangeRequest/http://server-host-name/application-
         path/oslc/services/projects/MyProjectId/workitems/MyWorkItemId.

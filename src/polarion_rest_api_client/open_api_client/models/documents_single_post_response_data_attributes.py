@@ -28,8 +28,8 @@ T = TypeVar("T", bound="DocumentsSinglePostResponseDataAttributes")
 
 @_attrs_define
 class DocumentsSinglePostResponseDataAttributes:
-    """Attributes
-    auto_suspect (Union[Unset, bool]):
+    """Attributes auto_suspect (Union[Unset, bool]):
+
     branched_with_initialized_fields (Union[Unset, List[str]]):
     branched_with_query (Union[Unset, str]):  Example: Branched with Query.
     created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
@@ -59,7 +59,10 @@ class DocumentsSinglePostResponseDataAttributes:
     outline_numbering: Union[
         Unset, "DocumentsSinglePostResponseDataAttributesOutlineNumbering"
     ] = UNSET
-    rendering_layouts: Unset | list["DocumentsSinglePostResponseDataAttributesRenderingLayoutsItem"] = UNSET
+    rendering_layouts: (
+        Unset
+        | list["DocumentsSinglePostResponseDataAttributesRenderingLayoutsItem"]
+    ) = UNSET
     status: Unset | str = UNSET
     title: Unset | str = UNSET
     type: Unset | str = UNSET
@@ -190,7 +193,9 @@ class DocumentsSinglePostResponseDataAttributes:
         derived_from_link_role = d.pop("derivedFromLinkRole", UNSET)
 
         _home_page_content = d.pop("homePageContent", UNSET)
-        home_page_content: Unset | DocumentsSinglePostResponseDataAttributesHomePageContent
+        home_page_content: (
+            Unset | DocumentsSinglePostResponseDataAttributesHomePageContent
+        )
         if isinstance(_home_page_content, Unset):
             home_page_content = UNSET
         else:
@@ -201,7 +206,9 @@ class DocumentsSinglePostResponseDataAttributes:
         module_folder = d.pop("moduleFolder", UNSET)
 
         _outline_numbering = d.pop("outlineNumbering", UNSET)
-        outline_numbering: Unset | DocumentsSinglePostResponseDataAttributesOutlineNumbering
+        outline_numbering: (
+            Unset | DocumentsSinglePostResponseDataAttributesOutlineNumbering
+        )
         if isinstance(_outline_numbering, Unset):
             outline_numbering = UNSET
         else:

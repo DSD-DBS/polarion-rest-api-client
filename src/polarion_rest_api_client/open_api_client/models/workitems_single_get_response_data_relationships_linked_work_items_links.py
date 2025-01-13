@@ -16,9 +16,9 @@ T = TypeVar(
 
 @_attrs_define
 class WorkitemsSingleGetResponseDataRelationshipsLinkedWorkItemsLinks:
-    """Attributes
-    related (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/workitems/MyWorkItemId/linkedworkitems?revision=1234.
+    """Attributes related (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/workitems/MyWorkItemId/linkedwo
+    rkitems?revision=1234.
     """
 
     related: Unset | str = UNSET

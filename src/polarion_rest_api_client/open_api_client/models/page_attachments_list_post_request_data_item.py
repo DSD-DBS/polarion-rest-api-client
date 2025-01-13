@@ -23,8 +23,9 @@ T = TypeVar("T", bound="PageAttachmentsListPostRequestDataItem")
 
 @_attrs_define
 class PageAttachmentsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, PageAttachmentsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    PageAttachmentsListPostRequestDataItemType]):
+
     attributes (Union[Unset, PageAttachmentsListPostRequestDataItemAttributes]):
     lid (Union[Unset, str]):
     """

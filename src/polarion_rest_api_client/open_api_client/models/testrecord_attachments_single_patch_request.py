@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestrecordAttachmentsSinglePatchRequest")
 
 @_attrs_define
 class TestrecordAttachmentsSinglePatchRequest:
-    """Attributes
-    data (Union[Unset, TestrecordAttachmentsSinglePatchRequestData]):
+    """Attributes data (Union[Unset,
+    TestrecordAttachmentsSinglePatchRequestData]):
     """
 
     data: Union[Unset, "TestrecordAttachmentsSinglePatchRequestData"] = UNSET

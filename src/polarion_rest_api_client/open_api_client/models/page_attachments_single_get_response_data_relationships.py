@@ -22,8 +22,9 @@ T = TypeVar("T", bound="PageAttachmentsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class PageAttachmentsSingleGetResponseDataRelationships:
-    """Attributes
-    author (Union[Unset, PageAttachmentsSingleGetResponseDataRelationshipsAuthor]):
+    """Attributes author (Union[Unset,
+    PageAttachmentsSingleGetResponseDataRelationshipsAuthor]):
+
     project (Union[Unset, PageAttachmentsSingleGetResponseDataRelationshipsProject]):
     """
 
@@ -76,7 +77,9 @@ class PageAttachmentsSingleGetResponseDataRelationships:
             )
 
         _project = d.pop("project", UNSET)
-        project: Unset | PageAttachmentsSingleGetResponseDataRelationshipsProject
+        project: (
+            Unset | PageAttachmentsSingleGetResponseDataRelationshipsProject
+        )
         if isinstance(_project, Unset):
             project = UNSET
         else:

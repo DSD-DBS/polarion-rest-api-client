@@ -13,8 +13,8 @@ T = TypeVar("T", bound="TestrunAttachmentsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class TestrunAttachmentsListPostRequestDataItemAttributes:
-    """Attributes
-    file_name (Union[Unset, str]):  Example: File Name.
+    """Attributes file_name (Union[Unset, str]):  Example: File Name.
+
     title (Union[Unset, str]):  Example: Title.
     """
 

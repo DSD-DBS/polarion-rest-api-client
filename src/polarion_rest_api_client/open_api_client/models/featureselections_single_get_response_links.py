@@ -13,9 +13,9 @@ T = TypeVar("T", bound="FeatureselectionsSingleGetResponseLinks")
 
 @_attrs_define
 class FeatureselectionsSingleGetResponseLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItem
-        Id/featureselections/included/MyProjectId/MyWorkItemId?revision=1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application-path/projects/MyProjectId/workitems/MyWorkItem
+    Id/featureselections/included/MyProjectId/MyWorkItemId?revision=1234.
     """
 
     self_: Unset | str = UNSET

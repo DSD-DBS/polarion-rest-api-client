@@ -16,8 +16,8 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentsSingleGetResponseDataAttributesRenderingLayoutsItemPropertiesItem:
-    """Attributes
-    key (Union[Unset, str]):  Example: fieldsAtStart.
+    """Attributes key (Union[Unset, str]):  Example: fieldsAtStart.
+
     value (Union[Unset, str]):  Example: id.
     """
 

@@ -13,9 +13,10 @@ T = TypeVar("T", bound="DocumentPartsListGetResponseLinks")
 
 @_attrs_define
 class DocumentPartsListGetResponseLinks:
-    """Attributes
-    first (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/spaces/MySpaceId/documents/MyDocumentId/parts?page%5Bsize%5D=10&page%5Bnumber%5D=1.
+    """Attributes first (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/spaces/MySpaceId/documents/MyDo
+    cumentId/parts?page%5Bsize%5D=10&page%5Bnumber%5D=1.
+
     last (Union[Unset, str]):  Example: server-host-name/application-
         path/projects/MyProjectId/spaces/MySpaceId/documents/MyDocumentId/parts?page%5Bsize%5D=10&page%5Bnumber%5D=9.
     next_ (Union[Unset, str]):  Example: server-host-name/application-

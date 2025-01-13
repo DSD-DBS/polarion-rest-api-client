@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestrunsListGetResponseDataItemRelationshipsDocument")
 
 @_attrs_define
 class TestrunsListGetResponseDataItemRelationshipsDocument:
-    """Attributes
-    data (Union[Unset, TestrunsListGetResponseDataItemRelationshipsDocumentData]):
+    """Attributes data (Union[Unset,
+    TestrunsListGetResponseDataItemRelationshipsDocumentData]):
     """
 
     data: Union[

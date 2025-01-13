@@ -13,9 +13,8 @@ T = TypeVar("T", bound="ProjecttemplatesListGetResponseDataItemLinks")
 
 @_attrs_define
 class ProjecttemplatesListGetResponseDataItemLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projecttemplates/MyProjectId?revision=1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application- path/projecttemplates/MyProjectId?revision=1234.
     """
 
     self_: Unset | str = UNSET

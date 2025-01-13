@@ -13,9 +13,11 @@ T = TypeVar("T", bound="TeststepResultsListGetResponseLinks")
 
 @_attrs_define
 class TeststepResultsListGetResponseLinks:
-    """Attributes
-    first (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId
-        /testrecords/MyProjectId/MyTestcaseId/0/teststepresults?page%5Bsize%5D=10&page%5Bnumber%5D=1.
+    """Attributes first (Union[Unset, str]):  Example: server-host-
+    name/application-path/projects/MyProjectId/testruns/MyTestRunId /testrecord
+    s/MyProjectId/MyTestcaseId/0/teststepresults?page%5Bsize%5D=10&page%5Bnumbe
+    r%5D=1.
+
     last (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId/
         testrecords/MyProjectId/MyTestcaseId/0/teststepresults?page%5Bsize%5D=10&page%5Bnumber%5D=9.
     next_ (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId

@@ -32,14 +32,14 @@ T = TypeVar("T", bound="PlansListGetResponseDataItem")
 
 @_attrs_define
 class PlansListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, PlansListGetResponseDataItemType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyPlanId.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, PlansListGetResponseDataItemAttributes]):
-    relationships (Union[Unset, PlansListGetResponseDataItemRelationships]):
-    links (Union[Unset, PlansListGetResponseDataItemLinks]):
-    meta (Union[Unset, PlansListGetResponseDataItemMeta]):
+    """Attributes type (Union[Unset, PlansListGetResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example: MyProjectId/MyPlanId. revision
+    (Union[Unset, str]):  Example: 1234. attributes (Union[Unset,
+    PlansListGetResponseDataItemAttributes]): relationships
+    (Union[Unset, PlansListGetResponseDataItemRelationships]): links
+    (Union[Unset, PlansListGetResponseDataItemLinks]): meta
+    (Union[Unset, PlansListGetResponseDataItemMeta]):
     """
 
     type: Unset | PlansListGetResponseDataItemType = UNSET

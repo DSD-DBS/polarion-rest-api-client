@@ -21,8 +21,8 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentCommentsListPostRequestDataItemRelationshipsAuthor:
-    """Attributes
-    data (Union[Unset, DocumentCommentsListPostRequestDataItemRelationshipsAuthorData]):
+    """Attributes data (Union[Unset,
+    DocumentCommentsListPostRequestDataItemRelationshipsAuthorData]):
     """
 
     data: Union[
@@ -53,7 +53,10 @@ class DocumentCommentsListPostRequestDataItemRelationshipsAuthor:
 
         d = src_dict.copy()
         _data = d.pop("data", UNSET)
-        data: Unset | DocumentCommentsListPostRequestDataItemRelationshipsAuthorData
+        data: (
+            Unset
+            | DocumentCommentsListPostRequestDataItemRelationshipsAuthorData
+        )
         if isinstance(_data, Unset):
             data = UNSET
         else:

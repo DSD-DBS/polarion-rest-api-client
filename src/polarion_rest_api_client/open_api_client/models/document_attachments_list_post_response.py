@@ -19,13 +19,11 @@ T = TypeVar("T", bound="DocumentAttachmentsListPostResponse")
 
 @_attrs_define
 class DocumentAttachmentsListPostResponse:
-    """Attributes
-    data (Union[Unset, List['DocumentAttachmentsListPostResponseDataItem']]):
+    """Attributes data (Union[Unset,
+    List['DocumentAttachmentsListPostResponseDataItem']]):
     """
 
-    data: Unset | list["DocumentAttachmentsListPostResponseDataItem"] = (
-        UNSET
-    )
+    data: Unset | list["DocumentAttachmentsListPostResponseDataItem"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

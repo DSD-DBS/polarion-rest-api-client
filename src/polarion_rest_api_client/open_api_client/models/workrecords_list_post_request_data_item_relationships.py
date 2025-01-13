@@ -19,8 +19,8 @@ T = TypeVar("T", bound="WorkrecordsListPostRequestDataItemRelationships")
 
 @_attrs_define
 class WorkrecordsListPostRequestDataItemRelationships:
-    """Attributes
-    user (Union[Unset, WorkrecordsListPostRequestDataItemRelationshipsUser]):
+    """Attributes user (Union[Unset,
+    WorkrecordsListPostRequestDataItemRelationshipsUser]):
     """
 
     user: Union[

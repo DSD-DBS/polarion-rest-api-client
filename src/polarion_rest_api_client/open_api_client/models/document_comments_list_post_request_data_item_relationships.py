@@ -22,8 +22,9 @@ T = TypeVar("T", bound="DocumentCommentsListPostRequestDataItemRelationships")
 
 @_attrs_define
 class DocumentCommentsListPostRequestDataItemRelationships:
-    """Attributes
-    author (Union[Unset, DocumentCommentsListPostRequestDataItemRelationshipsAuthor]):
+    """Attributes author (Union[Unset,
+    DocumentCommentsListPostRequestDataItemRelationshipsAuthor]):
+
     parent_comment (Union[Unset, DocumentCommentsListPostRequestDataItemRelationshipsParentComment]):
     """
 
@@ -68,7 +69,9 @@ class DocumentCommentsListPostRequestDataItemRelationships:
 
         d = src_dict.copy()
         _author = d.pop("author", UNSET)
-        author: Unset | DocumentCommentsListPostRequestDataItemRelationshipsAuthor
+        author: (
+            Unset | DocumentCommentsListPostRequestDataItemRelationshipsAuthor
+        )
         if isinstance(_author, Unset):
             author = UNSET
         else:
@@ -77,7 +80,10 @@ class DocumentCommentsListPostRequestDataItemRelationships:
             )
 
         _parent_comment = d.pop("parentComment", UNSET)
-        parent_comment: Unset | DocumentCommentsListPostRequestDataItemRelationshipsParentComment
+        parent_comment: (
+            Unset
+            | DocumentCommentsListPostRequestDataItemRelationshipsParentComment
+        )
         if isinstance(_parent_comment, Unset):
             parent_comment = UNSET
         else:

@@ -13,9 +13,10 @@ T = TypeVar("T", bound="LinkedoslcresourcesListGetResponseDataItemAttributes")
 
 @_attrs_define
 class LinkedoslcresourcesListGetResponseDataItemAttributes:
-    """Attributes
-    label (Union[Unset, str]):  Example: Label.
-    role (Union[Unset, str]):  Example: http://open-services.net/ns/cm#relatedChangeRequest.
+    """Attributes label (Union[Unset, str]):  Example: Label.
+
+    role (Union[Unset, str]):  Example:
+    http://open-services.net/ns/cm#relatedChangeRequest.
     uri (Union[Unset, str]):  Example: Uri.
     """
 

@@ -19,8 +19,8 @@ T = TypeVar("T", bound="DocumentCommentsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class DocumentCommentsListPostRequestDataItemAttributes:
-    """Attributes
-    resolved (Union[Unset, bool]):
+    """Attributes resolved (Union[Unset, bool]):
+
     text (Union[Unset, DocumentCommentsListPostRequestDataItemAttributesText]):
     """
 

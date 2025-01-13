@@ -23,10 +23,11 @@ T = TypeVar("T", bound="EnumerationsListPostResponseDataItem")
 
 @_attrs_define
 class EnumerationsListPostResponseDataItem:
-    """Attributes
-    type (Union[Unset, EnumerationsListPostResponseDataItemType]):
-    id (Union[Unset, str]):  Example: ~/status/~.
-    links (Union[Unset, EnumerationsListPostResponseDataItemLinks]):
+    """Attributes type (Union[Unset,
+    EnumerationsListPostResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example: ~/status/~. links (Union[Unset,
+    EnumerationsListPostResponseDataItemLinks]):
     """
 
     type: Unset | EnumerationsListPostResponseDataItemType = UNSET

@@ -13,9 +13,10 @@ T = TypeVar("T", bound="WorkitemsSingleGetResponseDataLinks")
 
 @_attrs_define
 class WorkitemsSingleGetResponseDataLinks:
-    """Attributes
-    portal (Union[Unset, str]):  Example: server-host-name/application-
-        path/polarion/redirect/project/MyProjectId/workitem?id=MyWorkItemId&revision=1234.
+    """Attributes portal (Union[Unset, str]):  Example: server-host-
+    name/application- path/polarion/redirect/project/MyProjectId/workitem?id=My
+    WorkItemId&revision=1234.
+
     self_ (Union[Unset, str]):  Example: server-host-name/application-
         path/projects/MyProjectId/workitems/MyWorkItemId?revision=1234.
     """

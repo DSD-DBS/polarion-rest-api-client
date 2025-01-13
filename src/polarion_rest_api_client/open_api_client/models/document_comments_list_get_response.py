@@ -28,8 +28,9 @@ T = TypeVar("T", bound="DocumentCommentsListGetResponse")
 
 @_attrs_define
 class DocumentCommentsListGetResponse:
-    """Attributes
-    data (Union[Unset, List['DocumentCommentsListGetResponseDataItem']]):
+    """Attributes data (Union[Unset,
+    List['DocumentCommentsListGetResponseDataItem']]):
+
     included (Union[Unset, List['DocumentCommentsListGetResponseIncludedItem']]): Related entities might be
         returned, see <a href="https://docs.sw.siemens.com/en-
         US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
@@ -39,7 +40,9 @@ class DocumentCommentsListGetResponse:
     """
 
     data: Unset | list["DocumentCommentsListGetResponseDataItem"] = UNSET
-    included: Unset | list["DocumentCommentsListGetResponseIncludedItem"] = UNSET
+    included: Unset | list["DocumentCommentsListGetResponseIncludedItem"] = (
+        UNSET
+    )
     links: Union[Unset, "DocumentCommentsListGetResponseLinks"] = UNSET
     meta: Union[Unset, "DocumentCommentsListGetResponseMeta"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

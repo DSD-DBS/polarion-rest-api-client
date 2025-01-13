@@ -17,8 +17,8 @@ T = TypeVar("T", bound="JobsSingleGetResponseDataRelationshipsProjectData")
 
 @_attrs_define
 class JobsSingleGetResponseDataRelationshipsProjectData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId.
+    """Attributes id (Union[Unset, str]):  Example: MyProjectId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, JobsSingleGetResponseDataRelationshipsProjectDataType]):
     """

@@ -13,18 +13,15 @@ T = TypeVar("T", bound="WorkflowActionsActionResponseBodyDataItem")
 
 @_attrs_define
 class WorkflowActionsActionResponseBodyDataItem:
-    """Attributes
-    id (Union[Unset, str]):
-    available (Union[Unset, bool]):
-    cleared_fields (Union[Unset, List[str]]):
-    is_adding_signature (Union[Unset, bool]):
-    is_signature_required (Union[Unset, bool]):
-    name (Union[Unset, str]):
-    native_action_id (Union[Unset, str]):
-    required_fields (Union[Unset, List[str]]):
-    required_roles (Union[Unset, List[str]]):
-    target_status (Union[Unset, str]):
-    unavailable_reason (Union[Unset, str]):
+    """Attributes id (Union[Unset, str]):
+
+    available (Union[Unset, bool]): cleared_fields (Union[Unset,
+    List[str]]): is_adding_signature (Union[Unset, bool]):
+    is_signature_required (Union[Unset, bool]): name (Union[Unset,
+    str]): native_action_id (Union[Unset, str]): required_fields
+    (Union[Unset, List[str]]): required_roles (Union[Unset, List[str]]):
+    target_status (Union[Unset, str]): unavailable_reason (Union[Unset,
+    str]):
     """
 
     id: Unset | str = UNSET

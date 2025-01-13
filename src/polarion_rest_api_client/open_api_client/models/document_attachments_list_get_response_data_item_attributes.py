@@ -15,12 +15,12 @@ T = TypeVar("T", bound="DocumentAttachmentsListGetResponseDataItemAttributes")
 
 @_attrs_define
 class DocumentAttachmentsListGetResponseDataItemAttributes:
-    """Attributes
-    file_name (Union[Unset, str]):  Example: File Name.
-    id (Union[Unset, str]):  Example: MyAttachmentId.
-    length (Union[Unset, int]):
-    title (Union[Unset, str]):  Example: Title.
-    updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    """Attributes file_name (Union[Unset, str]):  Example: File Name.
+
+    id (Union[Unset, str]):  Example: MyAttachmentId. length
+    (Union[Unset, int]): title (Union[Unset, str]):  Example: Title.
+    updated (Union[Unset, datetime.datetime]):  Example:
+    1970-01-01T00:00:00Z.
     """
 
     file_name: Unset | str = UNSET

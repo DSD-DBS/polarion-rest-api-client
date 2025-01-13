@@ -28,8 +28,9 @@ T = TypeVar("T", bound="TeststepresultAttachmentsListGetResponse")
 
 @_attrs_define
 class TeststepresultAttachmentsListGetResponse:
-    """Attributes
-    data (Union[Unset, List['TeststepresultAttachmentsListGetResponseDataItem']]):
+    """Attributes data (Union[Unset,
+    List['TeststepresultAttachmentsListGetResponseDataItem']]):
+
     included (Union[Unset, List['TeststepresultAttachmentsListGetResponseIncludedItem']]): Related entities might be
         returned, see <a href="https://docs.sw.siemens.com/en-
         US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
@@ -38,8 +39,12 @@ class TeststepresultAttachmentsListGetResponse:
     meta (Union[Unset, TeststepresultAttachmentsListGetResponseMeta]):
     """
 
-    data: Unset | list["TeststepresultAttachmentsListGetResponseDataItem"] = UNSET
-    included: Unset | list["TeststepresultAttachmentsListGetResponseIncludedItem"] = UNSET
+    data: Unset | list["TeststepresultAttachmentsListGetResponseDataItem"] = (
+        UNSET
+    )
+    included: (
+        Unset | list["TeststepresultAttachmentsListGetResponseIncludedItem"]
+    ) = UNSET
     links: Union[Unset, "TeststepresultAttachmentsListGetResponseLinks"] = (
         UNSET
     )

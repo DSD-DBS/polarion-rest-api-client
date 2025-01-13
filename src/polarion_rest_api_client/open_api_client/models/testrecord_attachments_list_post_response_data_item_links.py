@@ -13,9 +13,10 @@ T = TypeVar("T", bound="TestrecordAttachmentsListPostResponseDataItemLinks")
 
 @_attrs_define
 class TestrecordAttachmentsListPostResponseDataItemLinks:
-    """Attributes
-    content (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/testruns/MyTestRun
-        Id/testrecords/MyProjectId/MyTestcaseId/0/attachments/MyAttachmentId/content.
+    """Attributes content (Union[Unset, str]):  Example: server-host-
+    name/application-path/projects/MyProjectId/testruns/MyTestRun Id/testrecord
+    s/MyProjectId/MyTestcaseId/0/attachments/MyAttachmentId/content.
+
     self_ (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId
         /testrecords/MyProjectId/MyTestcaseId/0/attachments/MyAttachmentId.
     """

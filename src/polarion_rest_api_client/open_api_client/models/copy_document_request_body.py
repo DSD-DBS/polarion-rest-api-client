@@ -13,8 +13,10 @@ T = TypeVar("T", bound="CopyDocumentRequestBody")
 
 @_attrs_define
 class CopyDocumentRequestBody:
-    """Attributes
-    link_original_items_with_role (Union[Unset, str]): Link a copy of the document to the original. Example:
+    """Attributes link_original_items_with_role (Union[Unset, str]): Link a
+    copy of the document to the original.
+
+    Example:
         duplicates.
     remove_outgoing_links (Union[Unset, bool]): Should outgoing links be removed? Example: True.
     target_document_name (Union[Unset, str]): Name for new Document. Example: MyDocumentId.

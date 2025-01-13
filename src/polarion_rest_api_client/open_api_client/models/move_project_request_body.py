@@ -13,8 +13,10 @@ T = TypeVar("T", bound="MoveProjectRequestBody")
 
 @_attrs_define
 class MoveProjectRequestBody:
-    """Attributes
-    location (Union[Unset, str]): Location of the new Project to be created. Example: MyLocation.
+    """Attributes location (Union[Unset, str]): Location of the new Project to
+    be created.
+
+    Example: MyLocation.
     """
 
     location: Unset | str = UNSET

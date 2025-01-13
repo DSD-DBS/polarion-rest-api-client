@@ -16,11 +16,15 @@ T = TypeVar("T", bound="WorkitemApprovalsSinglePatchRequestDataAttributes")
 
 @_attrs_define
 class WorkitemApprovalsSinglePatchRequestDataAttributes:
-    """Attributes
-    status (Union[Unset, WorkitemApprovalsSinglePatchRequestDataAttributesStatus]):  Example: waiting.
+    """Attributes status (Union[Unset,
+    WorkitemApprovalsSinglePatchRequestDataAttributesStatus]):  Example:
+
+    waiting.
     """
 
-    status: Unset | WorkitemApprovalsSinglePatchRequestDataAttributesStatus = UNSET
+    status: Unset | WorkitemApprovalsSinglePatchRequestDataAttributesStatus = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

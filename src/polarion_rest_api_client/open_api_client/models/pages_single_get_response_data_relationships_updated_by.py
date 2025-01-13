@@ -19,8 +19,8 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataRelationshipsUpdatedBy")
 
 @_attrs_define
 class PagesSingleGetResponseDataRelationshipsUpdatedBy:
-    """Attributes
-    data (Union[Unset, PagesSingleGetResponseDataRelationshipsUpdatedByData]):
+    """Attributes data (Union[Unset,
+    PagesSingleGetResponseDataRelationshipsUpdatedByData]):
     """
 
     data: Union[

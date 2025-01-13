@@ -32,14 +32,14 @@ T = TypeVar("T", bound="TestrunsListGetResponseDataItem")
 
 @_attrs_define
 class TestrunsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, TestrunsListGetResponseDataItemType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, TestrunsListGetResponseDataItemAttributes]):
-    relationships (Union[Unset, TestrunsListGetResponseDataItemRelationships]):
-    links (Union[Unset, TestrunsListGetResponseDataItemLinks]):
-    meta (Union[Unset, TestrunsListGetResponseDataItemMeta]):
+    """Attributes type (Union[Unset, TestrunsListGetResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId. revision
+    (Union[Unset, str]):  Example: 1234. attributes (Union[Unset,
+    TestrunsListGetResponseDataItemAttributes]): relationships
+    (Union[Unset, TestrunsListGetResponseDataItemRelationships]): links
+    (Union[Unset, TestrunsListGetResponseDataItemLinks]): meta
+    (Union[Unset, TestrunsListGetResponseDataItemMeta]):
     """
 
     type: Unset | TestrunsListGetResponseDataItemType = UNSET

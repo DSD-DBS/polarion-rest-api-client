@@ -17,8 +17,9 @@ T = TypeVar("T", bound="UsersListPostRequestDataItemAttributesDescription")
 
 @_attrs_define
 class UsersListPostRequestDataItemAttributesDescription:
-    """Attributes
-    type (Union[Unset, UsersListPostRequestDataItemAttributesDescriptionType]):
+    """Attributes type (Union[Unset,
+    UsersListPostRequestDataItemAttributesDescriptionType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 

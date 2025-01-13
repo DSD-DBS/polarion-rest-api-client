@@ -26,11 +26,13 @@ T = TypeVar("T", bound="TestrecordsSinglePatchRequestData")
 
 @_attrs_define
 class TestrecordsSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, TestrecordsSinglePatchRequestDataType]):
-    id (Union[Unset, str]):  Example: elibrary/MyTestRunId/MyProjectId/MyTestcaseId/0.
-    attributes (Union[Unset, TestrecordsSinglePatchRequestDataAttributes]):
-    relationships (Union[Unset, TestrecordsSinglePatchRequestDataRelationships]):
+    """Attributes type (Union[Unset, TestrecordsSinglePatchRequestDataType]):
+
+    id (Union[Unset, str]):  Example:
+    elibrary/MyTestRunId/MyProjectId/MyTestcaseId/0. attributes
+    (Union[Unset, TestrecordsSinglePatchRequestDataAttributes]):
+    relationships (Union[Unset,
+    TestrecordsSinglePatchRequestDataRelationships]):
     """
 
     type: Unset | TestrecordsSinglePatchRequestDataType = UNSET

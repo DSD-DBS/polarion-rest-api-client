@@ -40,8 +40,9 @@ T = TypeVar("T", bound="DocumentsSinglePostResponseDataRelationships")
 
 @_attrs_define
 class DocumentsSinglePostResponseDataRelationships:
-    """Attributes
-    attachments (Union[Unset, DocumentsSinglePostResponseDataRelationshipsAttachments]):
+    """Attributes attachments (Union[Unset,
+    DocumentsSinglePostResponseDataRelationshipsAttachments]):
+
     author (Union[Unset, DocumentsSinglePostResponseDataRelationshipsAuthor]):
     branched_from (Union[Unset, DocumentsSinglePostResponseDataRelationshipsBranchedFrom]):
     comments (Union[Unset, DocumentsSinglePostResponseDataRelationshipsComments]):
@@ -163,7 +164,9 @@ class DocumentsSinglePostResponseDataRelationships:
 
         d = src_dict.copy()
         _attachments = d.pop("attachments", UNSET)
-        attachments: Unset | DocumentsSinglePostResponseDataRelationshipsAttachments
+        attachments: (
+            Unset | DocumentsSinglePostResponseDataRelationshipsAttachments
+        )
         if isinstance(_attachments, Unset):
             attachments = UNSET
         else:
@@ -183,7 +186,9 @@ class DocumentsSinglePostResponseDataRelationships:
             )
 
         _branched_from = d.pop("branchedFrom", UNSET)
-        branched_from: Unset | DocumentsSinglePostResponseDataRelationshipsBranchedFrom
+        branched_from: (
+            Unset | DocumentsSinglePostResponseDataRelationshipsBranchedFrom
+        )
         if isinstance(_branched_from, Unset):
             branched_from = UNSET
         else:
@@ -203,7 +208,9 @@ class DocumentsSinglePostResponseDataRelationships:
             )
 
         _derived_from = d.pop("derivedFrom", UNSET)
-        derived_from: Unset | DocumentsSinglePostResponseDataRelationshipsDerivedFrom
+        derived_from: (
+            Unset | DocumentsSinglePostResponseDataRelationshipsDerivedFrom
+        )
         if isinstance(_derived_from, Unset):
             derived_from = UNSET
         else:
@@ -223,7 +230,9 @@ class DocumentsSinglePostResponseDataRelationships:
             )
 
         _updated_by = d.pop("updatedBy", UNSET)
-        updated_by: Unset | DocumentsSinglePostResponseDataRelationshipsUpdatedBy
+        updated_by: (
+            Unset | DocumentsSinglePostResponseDataRelationshipsUpdatedBy
+        )
         if isinstance(_updated_by, Unset):
             updated_by = UNSET
         else:

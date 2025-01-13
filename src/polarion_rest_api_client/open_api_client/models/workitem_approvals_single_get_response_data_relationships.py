@@ -19,8 +19,8 @@ T = TypeVar("T", bound="WorkitemApprovalsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class WorkitemApprovalsSingleGetResponseDataRelationships:
-    """Attributes
-    user (Union[Unset, WorkitemApprovalsSingleGetResponseDataRelationshipsUser]):
+    """Attributes user (Union[Unset,
+    WorkitemApprovalsSingleGetResponseDataRelationshipsUser]):
     """
 
     user: Union[

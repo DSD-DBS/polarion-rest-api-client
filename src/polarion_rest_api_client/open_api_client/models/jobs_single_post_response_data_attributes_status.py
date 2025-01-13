@@ -17,8 +17,8 @@ T = TypeVar("T", bound="JobsSinglePostResponseDataAttributesStatus")
 
 @_attrs_define
 class JobsSinglePostResponseDataAttributesStatus:
-    """Attributes
-    message (Union[Unset, str]):  Example: message.
+    """Attributes message (Union[Unset, str]):  Example: message.
+
     type (Union[Unset, JobsSinglePostResponseDataAttributesStatusType]):
     """
 

@@ -23,10 +23,12 @@ T = TypeVar("T", bound="TestrunCommentsListPostResponseDataItem")
 
 @_attrs_define
 class TestrunCommentsListPostResponseDataItem:
-    """Attributes
-    type (Union[Unset, TestrunCommentsListPostResponseDataItemType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyCommentId.
-    links (Union[Unset, TestrunCommentsListPostResponseDataItemLinks]):
+    """Attributes type (Union[Unset,
+    TestrunCommentsListPostResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MyTestRunId/MyCommentId. links (Union[Unset,
+    TestrunCommentsListPostResponseDataItemLinks]):
     """
 
     type: Unset | TestrunCommentsListPostResponseDataItemType = UNSET

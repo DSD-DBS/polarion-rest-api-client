@@ -19,11 +19,13 @@ T = TypeVar("T", bound="WorkrecordsListGetResponseDataItemMeta")
 
 @_attrs_define
 class WorkrecordsListGetResponseDataItemMeta:
-    """Attributes
-    errors (Union[Unset, List['WorkrecordsListGetResponseDataItemMetaErrorsItem']]):
+    """Attributes errors (Union[Unset,
+    List['WorkrecordsListGetResponseDataItemMetaErrorsItem']]):
     """
 
-    errors: Unset | list["WorkrecordsListGetResponseDataItemMetaErrorsItem"] = UNSET
+    errors: (
+        Unset | list["WorkrecordsListGetResponseDataItemMetaErrorsItem"]
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

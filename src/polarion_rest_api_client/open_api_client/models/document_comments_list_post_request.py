@@ -19,8 +19,8 @@ T = TypeVar("T", bound="DocumentCommentsListPostRequest")
 
 @_attrs_define
 class DocumentCommentsListPostRequest:
-    """Attributes
-    data (Union[Unset, List['DocumentCommentsListPostRequestDataItem']]):
+    """Attributes data (Union[Unset,
+    List['DocumentCommentsListPostRequestDataItem']]):
     """
 
     data: Unset | list["DocumentCommentsListPostRequestDataItem"] = UNSET

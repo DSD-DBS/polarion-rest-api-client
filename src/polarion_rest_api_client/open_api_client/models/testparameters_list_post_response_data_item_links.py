@@ -13,9 +13,9 @@ T = TypeVar("T", bound="TestparametersListPostResponseDataItemLinks")
 
 @_attrs_define
 class TestparametersListPostResponseDataItemLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/testruns/MyTestRunId/testparameters/MyTestParameter.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/testruns/MyTestRunId/testparame
+    ters/MyTestParameter.
     """
 
     self_: Unset | str = UNSET

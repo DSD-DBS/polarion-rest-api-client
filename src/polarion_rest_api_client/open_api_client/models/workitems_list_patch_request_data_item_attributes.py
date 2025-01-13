@@ -24,8 +24,9 @@ T = TypeVar("T", bound="WorkitemsListPatchRequestDataItemAttributes")
 
 @_attrs_define
 class WorkitemsListPatchRequestDataItemAttributes:
-    """Attributes
-    description (Union[Unset, WorkitemsListPatchRequestDataItemAttributesDescription]):
+    """Attributes description (Union[Unset,
+    WorkitemsListPatchRequestDataItemAttributesDescription]):
+
     due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
     hyperlinks (Union[Unset, List['WorkitemsListPatchRequestDataItemAttributesHyperlinksItem']]):
     initial_estimate (Union[Unset, str]):  Example: 5 1/2d.
@@ -43,7 +44,10 @@ class WorkitemsListPatchRequestDataItemAttributes:
         Unset, "WorkitemsListPatchRequestDataItemAttributesDescription"
     ] = UNSET
     due_date: Unset | datetime.date = UNSET
-    hyperlinks: Unset | list["WorkitemsListPatchRequestDataItemAttributesHyperlinksItem"] = UNSET
+    hyperlinks: (
+        Unset
+        | list["WorkitemsListPatchRequestDataItemAttributesHyperlinksItem"]
+    ) = UNSET
     initial_estimate: Unset | str = UNSET
     priority: Unset | str = UNSET
     remaining_estimate: Unset | str = UNSET
@@ -134,7 +138,9 @@ class WorkitemsListPatchRequestDataItemAttributes:
 
         d = src_dict.copy()
         _description = d.pop("description", UNSET)
-        description: Unset | WorkitemsListPatchRequestDataItemAttributesDescription
+        description: (
+            Unset | WorkitemsListPatchRequestDataItemAttributesDescription
+        )
         if isinstance(_description, Unset):
             description = UNSET
         else:

@@ -19,8 +19,8 @@ T = TypeVar("T", bound="PostIconsRequestBody")
 
 @_attrs_define
 class PostIconsRequestBody:
-    """Attributes
-    files (Union[Unset, List[File]]):
+    """Attributes files (Union[Unset, List[File]]):
+
     resource (Union[Unset, IconsListPostRequest]):
     """
 

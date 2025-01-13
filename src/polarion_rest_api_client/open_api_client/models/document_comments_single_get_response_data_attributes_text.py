@@ -17,12 +17,15 @@ T = TypeVar("T", bound="DocumentCommentsSingleGetResponseDataAttributesText")
 
 @_attrs_define
 class DocumentCommentsSingleGetResponseDataAttributesText:
-    """Attributes
-    type (Union[Unset, DocumentCommentsSingleGetResponseDataAttributesTextType]):
+    """Attributes type (Union[Unset,
+    DocumentCommentsSingleGetResponseDataAttributesTextType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 
-    type: Unset | DocumentCommentsSingleGetResponseDataAttributesTextType = UNSET
+    type: Unset | DocumentCommentsSingleGetResponseDataAttributesTextType = (
+        UNSET
+    )
     value: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

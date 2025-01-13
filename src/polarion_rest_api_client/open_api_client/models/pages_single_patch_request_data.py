@@ -23,10 +23,11 @@ T = TypeVar("T", bound="PagesSinglePatchRequestData")
 
 @_attrs_define
 class PagesSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, PagesSinglePatchRequestDataType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyRichPageId.
-    attributes (Union[Unset, PagesSinglePatchRequestDataAttributes]):
+    """Attributes type (Union[Unset, PagesSinglePatchRequestDataType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MySpaceId/MyRichPageId. attributes (Union[Unset,
+    PagesSinglePatchRequestDataAttributes]):
     """
 
     type: Unset | PagesSinglePatchRequestDataType = UNSET

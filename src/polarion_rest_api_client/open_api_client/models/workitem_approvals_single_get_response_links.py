@@ -13,9 +13,9 @@ T = TypeVar("T", bound="WorkitemApprovalsSingleGetResponseLinks")
 
 @_attrs_define
 class WorkitemApprovalsSingleGetResponseLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/workitems/MyWorkItemId/approvals/MyUserId?revision=1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/workitems/MyWorkItemId/approval
+    s/MyUserId?revision=1234.
     """
 
     self_: Unset | str = UNSET

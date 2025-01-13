@@ -25,8 +25,9 @@ T = TypeVar("T", bound="WorkitemsListGetResponseDataItemAttributes")
 
 @_attrs_define
 class WorkitemsListGetResponseDataItemAttributes:
-    """Attributes
-    created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    """Attributes created (Union[Unset, datetime.datetime]):  Example:
+    1970-01-01T00:00:00Z.
+
     description (Union[Unset, WorkitemsListGetResponseDataItemAttributesDescription]):
     due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
     hyperlinks (Union[Unset, List['WorkitemsListGetResponseDataItemAttributesHyperlinksItem']]):
@@ -52,7 +53,10 @@ class WorkitemsListGetResponseDataItemAttributes:
         Unset, "WorkitemsListGetResponseDataItemAttributesDescription"
     ] = UNSET
     due_date: Unset | datetime.date = UNSET
-    hyperlinks: Unset | list["WorkitemsListGetResponseDataItemAttributesHyperlinksItem"] = UNSET
+    hyperlinks: (
+        Unset
+        | list["WorkitemsListGetResponseDataItemAttributesHyperlinksItem"]
+    ) = UNSET
     id: Unset | str = UNSET
     initial_estimate: Unset | str = UNSET
     outline_number: Unset | str = UNSET
@@ -192,7 +196,9 @@ class WorkitemsListGetResponseDataItemAttributes:
             created = isoparse(_created)
 
         _description = d.pop("description", UNSET)
-        description: Unset | WorkitemsListGetResponseDataItemAttributesDescription
+        description: (
+            Unset | WorkitemsListGetResponseDataItemAttributesDescription
+        )
         if isinstance(_description, Unset):
             description = UNSET
         else:

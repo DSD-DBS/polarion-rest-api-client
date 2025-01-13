@@ -32,8 +32,9 @@ T = TypeVar("T", bound="LinkedworkitemsListGetResponseDataItem")
 
 @_attrs_define
 class LinkedworkitemsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, LinkedworkitemsListGetResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    LinkedworkitemsListGetResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, LinkedworkitemsListGetResponseDataItemAttributes]):
@@ -141,7 +142,9 @@ class LinkedworkitemsListGetResponseDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | LinkedworkitemsListGetResponseDataItemRelationships
+        relationships: (
+            Unset | LinkedworkitemsListGetResponseDataItemRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

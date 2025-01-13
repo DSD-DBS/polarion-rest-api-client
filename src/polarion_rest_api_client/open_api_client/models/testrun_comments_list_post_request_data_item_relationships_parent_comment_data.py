@@ -20,13 +20,17 @@ T = TypeVar(
 
 @_attrs_define
 class TestrunCommentsListPostRequestDataItemRelationshipsParentCommentData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyCommentId.
+    """Attributes id (Union[Unset, str]):  Example:
+    MyProjectId/MyTestRunId/MyCommentId.
+
     type (Union[Unset, TestrunCommentsListPostRequestDataItemRelationshipsParentCommentDataType]):
     """
 
     id: Unset | str = UNSET
-    type: Unset | TestrunCommentsListPostRequestDataItemRelationshipsParentCommentDataType = UNSET
+    type: (
+        Unset
+        | TestrunCommentsListPostRequestDataItemRelationshipsParentCommentDataType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -54,7 +58,10 @@ class TestrunCommentsListPostRequestDataItemRelationshipsParentCommentData:
         id = d.pop("id", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | TestrunCommentsListPostRequestDataItemRelationshipsParentCommentDataType
+        type: (
+            Unset
+            | TestrunCommentsListPostRequestDataItemRelationshipsParentCommentDataType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

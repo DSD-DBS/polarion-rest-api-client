@@ -17,8 +17,8 @@ T = TypeVar("T", bound="BranchDocumentsRequestBody")
 
 @_attrs_define
 class BranchDocumentsRequestBody:
-    """Attributes
-    document_configurations (List['BranchDocumentsRequestBodyDocumentConfigurationsItem']):
+    """Attributes document_configurations
+    (List['BranchDocumentsRequestBodyDocumentConfigurationsItem']):
     """
 
     document_configurations: list[

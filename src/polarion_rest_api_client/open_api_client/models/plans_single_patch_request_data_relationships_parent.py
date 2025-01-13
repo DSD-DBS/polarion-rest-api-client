@@ -19,8 +19,8 @@ T = TypeVar("T", bound="PlansSinglePatchRequestDataRelationshipsParent")
 
 @_attrs_define
 class PlansSinglePatchRequestDataRelationshipsParent:
-    """Attributes
-    data (Union[Unset, PlansSinglePatchRequestDataRelationshipsParentData]):
+    """Attributes data (Union[Unset,
+    PlansSinglePatchRequestDataRelationshipsParentData]):
     """
 
     data: Union[

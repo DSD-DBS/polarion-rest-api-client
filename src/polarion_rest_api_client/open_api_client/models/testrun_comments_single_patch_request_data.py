@@ -23,10 +23,12 @@ T = TypeVar("T", bound="TestrunCommentsSinglePatchRequestData")
 
 @_attrs_define
 class TestrunCommentsSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, TestrunCommentsSinglePatchRequestDataType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyCommentId.
-    attributes (Union[Unset, TestrunCommentsSinglePatchRequestDataAttributes]):
+    """Attributes type (Union[Unset,
+    TestrunCommentsSinglePatchRequestDataType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MyTestRunId/MyCommentId. attributes (Union[Unset,
+    TestrunCommentsSinglePatchRequestDataAttributes]):
     """
 
     type: Unset | TestrunCommentsSinglePatchRequestDataType = UNSET

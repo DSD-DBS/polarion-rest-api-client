@@ -19,13 +19,15 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentsSinglePostResponseDataRelationshipsUpdatedByData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyUserId.
+    """Attributes id (Union[Unset, str]):  Example: MyUserId.
+
     type (Union[Unset, DocumentsSinglePostResponseDataRelationshipsUpdatedByDataType]):
     """
 
     id: Unset | str = UNSET
-    type: Unset | DocumentsSinglePostResponseDataRelationshipsUpdatedByDataType = UNSET
+    type: (
+        Unset | DocumentsSinglePostResponseDataRelationshipsUpdatedByDataType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -53,7 +55,10 @@ class DocumentsSinglePostResponseDataRelationshipsUpdatedByData:
         id = d.pop("id", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | DocumentsSinglePostResponseDataRelationshipsUpdatedByDataType
+        type: (
+            Unset
+            | DocumentsSinglePostResponseDataRelationshipsUpdatedByDataType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

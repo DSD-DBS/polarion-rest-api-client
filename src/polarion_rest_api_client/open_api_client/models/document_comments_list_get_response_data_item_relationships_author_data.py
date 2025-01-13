@@ -19,15 +19,18 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentCommentsListGetResponseDataItemRelationshipsAuthorData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyUserId.
+    """Attributes id (Union[Unset, str]):  Example: MyUserId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, DocumentCommentsListGetResponseDataItemRelationshipsAuthorDataType]):
     """
 
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
-    type: Unset | DocumentCommentsListGetResponseDataItemRelationshipsAuthorDataType = UNSET
+    type: (
+        Unset
+        | DocumentCommentsListGetResponseDataItemRelationshipsAuthorDataType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -61,7 +64,10 @@ class DocumentCommentsListGetResponseDataItemRelationshipsAuthorData:
         revision = d.pop("revision", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | DocumentCommentsListGetResponseDataItemRelationshipsAuthorDataType
+        type: (
+            Unset
+            | DocumentCommentsListGetResponseDataItemRelationshipsAuthorDataType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

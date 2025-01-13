@@ -19,8 +19,8 @@ T = TypeVar("T", bound="DocumentCommentsSinglePatchRequest")
 
 @_attrs_define
 class DocumentCommentsSinglePatchRequest:
-    """Attributes
-    data (Union[Unset, DocumentCommentsSinglePatchRequestData]):
+    """Attributes data (Union[Unset,
+    DocumentCommentsSinglePatchRequestData]):
     """
 
     data: Union[Unset, "DocumentCommentsSinglePatchRequestData"] = UNSET

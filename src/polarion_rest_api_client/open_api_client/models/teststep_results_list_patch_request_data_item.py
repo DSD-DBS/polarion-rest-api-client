@@ -23,8 +23,9 @@ T = TypeVar("T", bound="TeststepResultsListPatchRequestDataItem")
 
 @_attrs_define
 class TeststepResultsListPatchRequestDataItem:
-    """Attributes
-    type (Union[Unset, TeststepResultsListPatchRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    TeststepResultsListPatchRequestDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/1.
     attributes (Union[Unset, TeststepResultsListPatchRequestDataItemAttributes]):
     """

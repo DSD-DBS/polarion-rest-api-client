@@ -28,8 +28,9 @@ T = TypeVar("T", bound="RevisionsListGetResponse")
 
 @_attrs_define
 class RevisionsListGetResponse:
-    """Attributes
-    data (Union[Unset, List['RevisionsListGetResponseDataItem']]):
+    """Attributes data (Union[Unset,
+    List['RevisionsListGetResponseDataItem']]):
+
     included (Union[Unset, List['RevisionsListGetResponseIncludedItem']]): Related entities might be returned, see
         <a href="https://docs.sw.siemens.com/en-
         US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
@@ -39,9 +40,7 @@ class RevisionsListGetResponse:
     """
 
     data: Unset | list["RevisionsListGetResponseDataItem"] = UNSET
-    included: Unset | list["RevisionsListGetResponseIncludedItem"] = (
-        UNSET
-    )
+    included: Unset | list["RevisionsListGetResponseIncludedItem"] = UNSET
     links: Union[Unset, "RevisionsListGetResponseLinks"] = UNSET
     meta: Union[Unset, "RevisionsListGetResponseMeta"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

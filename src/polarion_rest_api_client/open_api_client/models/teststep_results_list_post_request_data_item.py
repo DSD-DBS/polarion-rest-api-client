@@ -23,8 +23,9 @@ T = TypeVar("T", bound="TeststepResultsListPostRequestDataItem")
 
 @_attrs_define
 class TeststepResultsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, TeststepResultsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    TeststepResultsListPostRequestDataItemType]):
+
     attributes (Union[Unset, TeststepResultsListPostRequestDataItemAttributes]):
     """
 

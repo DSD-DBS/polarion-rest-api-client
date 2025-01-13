@@ -13,9 +13,9 @@ T = TypeVar("T", bound="TestparameterDefinitionsSingleGetResponseLinks")
 
 @_attrs_define
 class TestparameterDefinitionsSingleGetResponseLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/testparameterdefinitions/MyTestParamDefinition.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/testparameterdefinitions/MyTest
+    ParamDefinition.
     """
 
     self_: Unset | str = UNSET

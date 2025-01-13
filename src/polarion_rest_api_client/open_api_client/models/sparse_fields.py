@@ -13,8 +13,9 @@ T = TypeVar("T", bound="SparseFields")
 
 @_attrs_define
 class SparseFields:
-    """Attributes
-    categories (Union[Unset, str]): Requested fields Example: @all.
+    """Attributes categories (Union[Unset, str]): Requested fields Example:
+    @all.
+
     document_attachments (Union[Unset, str]): Requested fields Example: @all.
     document_comments (Union[Unset, str]): Requested fields Example: @all.
     document_parts (Union[Unset, str]): Requested fields Example: @all.

@@ -23,9 +23,10 @@ T = TypeVar("T", bound="EnumerationsListPostRequestDataItem")
 
 @_attrs_define
 class EnumerationsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, EnumerationsListPostRequestDataItemType]):
-    attributes (Union[Unset, EnumerationsListPostRequestDataItemAttributes]):
+    """Attributes type (Union[Unset, EnumerationsListPostRequestDataItemType]):
+
+    attributes (Union[Unset,
+    EnumerationsListPostRequestDataItemAttributes]):
     """
 
     type: Unset | EnumerationsListPostRequestDataItemType = UNSET

@@ -17,8 +17,8 @@ T = TypeVar("T", bound="PlansSingleGetResponseDataRelationshipsParentData")
 
 @_attrs_define
 class PlansSingleGetResponseDataRelationshipsParentData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId/MyPlanId.
+    """Attributes id (Union[Unset, str]):  Example: MyProjectId/MyPlanId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, PlansSingleGetResponseDataRelationshipsParentDataType]):
     """

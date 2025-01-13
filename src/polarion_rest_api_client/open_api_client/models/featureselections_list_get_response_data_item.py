@@ -32,8 +32,9 @@ T = TypeVar("T", bound="FeatureselectionsListGetResponseDataItem")
 
 @_attrs_define
 class FeatureselectionsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, FeatureselectionsListGetResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    FeatureselectionsListGetResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/included/MyProjectId/MyWorkItemId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, FeatureselectionsListGetResponseDataItemAttributes]):
@@ -143,7 +144,9 @@ class FeatureselectionsListGetResponseDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | FeatureselectionsListGetResponseDataItemRelationships
+        relationships: (
+            Unset | FeatureselectionsListGetResponseDataItemRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

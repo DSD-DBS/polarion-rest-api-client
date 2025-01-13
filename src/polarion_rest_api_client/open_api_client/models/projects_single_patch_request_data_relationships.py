@@ -19,8 +19,8 @@ T = TypeVar("T", bound="ProjectsSinglePatchRequestDataRelationships")
 
 @_attrs_define
 class ProjectsSinglePatchRequestDataRelationships:
-    """Attributes
-    lead (Union[Unset, ProjectsSinglePatchRequestDataRelationshipsLead]):
+    """Attributes lead (Union[Unset,
+    ProjectsSinglePatchRequestDataRelationshipsLead]):
     """
 
     lead: Union[Unset, "ProjectsSinglePatchRequestDataRelationshipsLead"] = (

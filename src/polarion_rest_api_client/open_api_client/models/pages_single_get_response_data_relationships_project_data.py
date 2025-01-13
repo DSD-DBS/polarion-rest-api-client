@@ -17,15 +17,17 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataRelationshipsProjectData")
 
 @_attrs_define
 class PagesSingleGetResponseDataRelationshipsProjectData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId.
+    """Attributes id (Union[Unset, str]):  Example: MyProjectId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, PagesSingleGetResponseDataRelationshipsProjectDataType]):
     """
 
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
-    type: Unset | PagesSingleGetResponseDataRelationshipsProjectDataType = UNSET
+    type: Unset | PagesSingleGetResponseDataRelationshipsProjectDataType = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

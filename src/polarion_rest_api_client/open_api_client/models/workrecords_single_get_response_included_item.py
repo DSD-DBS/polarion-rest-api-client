@@ -11,7 +11,12 @@ T = TypeVar("T", bound="WorkrecordsSingleGetResponseIncludedItem")
 
 @_attrs_define
 class WorkrecordsSingleGetResponseIncludedItem:
-    """"""
+    """A single included item from the included array.
+
+    Attributes
+    ----------
+        additional_properties: Any additional properties.
+    """
 
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

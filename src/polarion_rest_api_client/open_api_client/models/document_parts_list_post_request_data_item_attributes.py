@@ -14,8 +14,8 @@ T = TypeVar("T", bound="DocumentPartsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class DocumentPartsListPostRequestDataItemAttributes:
-    """Attributes
-    level (Union[Unset, int]):
+    """Attributes level (Union[Unset, int]):
+
     type (Union[Unset, str]):  Example: workitem.
     """
 

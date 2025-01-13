@@ -19,11 +19,16 @@ T = TypeVar("T", bound="WorkrecordsSingleGetResponseDataMetaErrorsItemSource")
 
 @_attrs_define
 class WorkrecordsSingleGetResponseDataMetaErrorsItemSource:
-    """Attributes
-    parameter (Union[Unset, str]): String indicating which URI query parameter caused the error. Example: revision.
-    pointer (Union[Unset, str]): JSON Pointer to the associated entity in the request document. Example: $.data.
-    resource (Union[Unset, WorkrecordsSingleGetResponseDataMetaErrorsItemSourceResource]): Resource causing the
-        error.
+    """A JSON Pointer to the associated entity in the request document.
+
+    Attributes
+    ----------
+    parameter (Union[Unset, str]): String indicating which URI query
+    parameter caused the error. Example: revision.
+    pointer (Union[Unset, str]): JSON Pointer to the associated entity
+        in the request document. Example: $.data.
+    resource (Union[Unset, WorkrecordsSingleGetResponseDataMetaErrorsItemSourceResource]):
+        Resource causing the error.
     """
 
     parameter: Unset | str = UNSET
@@ -68,7 +73,10 @@ class WorkrecordsSingleGetResponseDataMetaErrorsItemSource:
         pointer = d.pop("pointer", UNSET)
 
         _resource = d.pop("resource", UNSET)
-        resource: Unset | WorkrecordsSingleGetResponseDataMetaErrorsItemSourceResource
+        resource: (
+            Unset
+            | WorkrecordsSingleGetResponseDataMetaErrorsItemSourceResource
+        )
         if isinstance(_resource, Unset):
             resource = UNSET
         else:

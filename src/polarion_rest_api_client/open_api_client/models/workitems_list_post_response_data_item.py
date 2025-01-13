@@ -23,10 +23,10 @@ T = TypeVar("T", bound="WorkitemsListPostResponseDataItem")
 
 @_attrs_define
 class WorkitemsListPostResponseDataItem:
-    """Attributes
-    type (Union[Unset, WorkitemsListPostResponseDataItemType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId.
-    links (Union[Unset, WorkitemsListPostResponseDataItemLinks]):
+    """Attributes type (Union[Unset, WorkitemsListPostResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId. links
+    (Union[Unset, WorkitemsListPostResponseDataItemLinks]):
     """
 
     type: Unset | WorkitemsListPostResponseDataItemType = UNSET

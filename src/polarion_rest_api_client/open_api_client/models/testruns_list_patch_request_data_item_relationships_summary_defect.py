@@ -21,8 +21,8 @@ T = TypeVar(
 
 @_attrs_define
 class TestrunsListPatchRequestDataItemRelationshipsSummaryDefect:
-    """Attributes
-    data (Union[Unset, TestrunsListPatchRequestDataItemRelationshipsSummaryDefectData]):
+    """Attributes data (Union[Unset,
+    TestrunsListPatchRequestDataItemRelationshipsSummaryDefectData]):
     """
 
     data: Union[
@@ -53,7 +53,10 @@ class TestrunsListPatchRequestDataItemRelationshipsSummaryDefect:
 
         d = src_dict.copy()
         _data = d.pop("data", UNSET)
-        data: Unset | TestrunsListPatchRequestDataItemRelationshipsSummaryDefectData
+        data: (
+            Unset
+            | TestrunsListPatchRequestDataItemRelationshipsSummaryDefectData
+        )
         if isinstance(_data, Unset):
             data = UNSET
         else:

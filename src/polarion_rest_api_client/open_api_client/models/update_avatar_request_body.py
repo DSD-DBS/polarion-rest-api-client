@@ -14,9 +14,7 @@ T = TypeVar("T", bound="UpdateAvatarRequestBody")
 
 @_attrs_define
 class UpdateAvatarRequestBody:
-    """Attributes
-    content (Union[Unset, File]): avatar content
-    """
+    """Attributes content (Union[Unset, File]): avatar content."""
 
     content: Unset | File = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

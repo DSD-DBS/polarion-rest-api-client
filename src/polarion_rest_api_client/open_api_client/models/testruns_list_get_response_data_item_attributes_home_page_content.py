@@ -19,12 +19,15 @@ T = TypeVar(
 
 @_attrs_define
 class TestrunsListGetResponseDataItemAttributesHomePageContent:
-    """Attributes
-    type (Union[Unset, TestrunsListGetResponseDataItemAttributesHomePageContentType]):
+    """Attributes type (Union[Unset,
+    TestrunsListGetResponseDataItemAttributesHomePageContentType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 
-    type: Unset | TestrunsListGetResponseDataItemAttributesHomePageContentType = UNSET
+    type: (
+        Unset | TestrunsListGetResponseDataItemAttributesHomePageContentType
+    ) = UNSET
     value: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -51,7 +54,10 @@ class TestrunsListGetResponseDataItemAttributesHomePageContent:
     def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Unset | TestrunsListGetResponseDataItemAttributesHomePageContentType
+        type: (
+            Unset
+            | TestrunsListGetResponseDataItemAttributesHomePageContentType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

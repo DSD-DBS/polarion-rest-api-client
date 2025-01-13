@@ -26,8 +26,8 @@ T = TypeVar("T", bound="DocumentsSinglePatchRequestDataAttributes")
 
 @_attrs_define
 class DocumentsSinglePatchRequestDataAttributes:
-    """Attributes
-    auto_suspect (Union[Unset, bool]):
+    """Attributes auto_suspect (Union[Unset, bool]):
+
     home_page_content (Union[Unset, DocumentsSinglePatchRequestDataAttributesHomePageContent]):
     outline_numbering (Union[Unset, DocumentsSinglePatchRequestDataAttributesOutlineNumbering]):
     rendering_layouts (Union[Unset, List['DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem']]):
@@ -44,7 +44,10 @@ class DocumentsSinglePatchRequestDataAttributes:
     outline_numbering: Union[
         Unset, "DocumentsSinglePatchRequestDataAttributesOutlineNumbering"
     ] = UNSET
-    rendering_layouts: Unset | list["DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem"] = UNSET
+    rendering_layouts: (
+        Unset
+        | list["DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem"]
+    ) = UNSET
     status: Unset | str = UNSET
     title: Unset | str = UNSET
     type: Unset | str = UNSET
@@ -117,7 +120,9 @@ class DocumentsSinglePatchRequestDataAttributes:
         auto_suspect = d.pop("autoSuspect", UNSET)
 
         _home_page_content = d.pop("homePageContent", UNSET)
-        home_page_content: Unset | DocumentsSinglePatchRequestDataAttributesHomePageContent
+        home_page_content: (
+            Unset | DocumentsSinglePatchRequestDataAttributesHomePageContent
+        )
         if isinstance(_home_page_content, Unset):
             home_page_content = UNSET
         else:
@@ -126,7 +131,9 @@ class DocumentsSinglePatchRequestDataAttributes:
             )
 
         _outline_numbering = d.pop("outlineNumbering", UNSET)
-        outline_numbering: Unset | DocumentsSinglePatchRequestDataAttributesOutlineNumbering
+        outline_numbering: (
+            Unset | DocumentsSinglePatchRequestDataAttributesOutlineNumbering
+        )
         if isinstance(_outline_numbering, Unset):
             outline_numbering = UNSET
         else:

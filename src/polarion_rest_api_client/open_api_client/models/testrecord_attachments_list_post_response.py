@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestrecordAttachmentsListPostResponse")
 
 @_attrs_define
 class TestrecordAttachmentsListPostResponse:
-    """Attributes
-    data (Union[Unset, List['TestrecordAttachmentsListPostResponseDataItem']]):
+    """Attributes data (Union[Unset,
+    List['TestrecordAttachmentsListPostResponseDataItem']]):
     """
 
     data: Unset | list["TestrecordAttachmentsListPostResponseDataItem"] = UNSET

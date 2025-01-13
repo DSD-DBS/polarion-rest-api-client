@@ -32,8 +32,9 @@ T = TypeVar("T", bound="WorkitemApprovalsSingleGetResponseData")
 
 @_attrs_define
 class WorkitemApprovalsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, WorkitemApprovalsSingleGetResponseDataType]):
+    """Attributes type (Union[Unset,
+    WorkitemApprovalsSingleGetResponseDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyUserId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, WorkitemApprovalsSingleGetResponseDataAttributes]):
@@ -141,7 +142,9 @@ class WorkitemApprovalsSingleGetResponseData:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | WorkitemApprovalsSingleGetResponseDataRelationships
+        relationships: (
+            Unset | WorkitemApprovalsSingleGetResponseDataRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

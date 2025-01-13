@@ -26,8 +26,9 @@ T = TypeVar("T", bound="WorkitemCommentsListPostRequestDataItem")
 
 @_attrs_define
 class WorkitemCommentsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, WorkitemCommentsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    WorkitemCommentsListPostRequestDataItemType]):
+
     attributes (Union[Unset, WorkitemCommentsListPostRequestDataItemAttributes]):
     relationships (Union[Unset, WorkitemCommentsListPostRequestDataItemRelationships]):
     """
@@ -97,7 +98,9 @@ class WorkitemCommentsListPostRequestDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | WorkitemCommentsListPostRequestDataItemRelationships
+        relationships: (
+            Unset | WorkitemCommentsListPostRequestDataItemRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

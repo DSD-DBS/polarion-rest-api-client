@@ -16,11 +16,15 @@ T = TypeVar("T", bound="WorkitemApprovalsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class WorkitemApprovalsListPostRequestDataItemAttributes:
-    """Attributes
-    status (Union[Unset, WorkitemApprovalsListPostRequestDataItemAttributesStatus]):  Example: waiting.
+    """Attributes status (Union[Unset,
+    WorkitemApprovalsListPostRequestDataItemAttributesStatus]):  Example:
+
+    waiting.
     """
 
-    status: Unset | WorkitemApprovalsListPostRequestDataItemAttributesStatus = UNSET
+    status: (
+        Unset | WorkitemApprovalsListPostRequestDataItemAttributesStatus
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -42,7 +46,9 @@ class WorkitemApprovalsListPostRequestDataItemAttributes:
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         _status = d.pop("status", UNSET)
-        status: Unset | WorkitemApprovalsListPostRequestDataItemAttributesStatus
+        status: (
+            Unset | WorkitemApprovalsListPostRequestDataItemAttributesStatus
+        )
         if isinstance(_status, Unset):
             status = UNSET
         else:

@@ -17,9 +17,11 @@ T = TypeVar("T", bound="TestrunAttachmentsListDeleteRequestDataItem")
 
 @_attrs_define
 class TestrunAttachmentsListDeleteRequestDataItem:
-    """Attributes
-    type (Union[Unset, TestrunAttachmentsListDeleteRequestDataItemType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyAttachmentId.
+    """Attributes type (Union[Unset,
+    TestrunAttachmentsListDeleteRequestDataItemType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MyTestRunId/MyAttachmentId.
     """
 
     type: Unset | TestrunAttachmentsListDeleteRequestDataItemType = UNSET

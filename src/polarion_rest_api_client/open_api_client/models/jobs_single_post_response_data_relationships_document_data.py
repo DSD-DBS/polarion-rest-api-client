@@ -17,13 +17,16 @@ T = TypeVar("T", bound="JobsSinglePostResponseDataRelationshipsDocumentData")
 
 @_attrs_define
 class JobsSinglePostResponseDataRelationshipsDocumentData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
+    """Attributes id (Union[Unset, str]):  Example:
+    MyProjectId/MySpaceId/MyDocumentId.
+
     type (Union[Unset, JobsSinglePostResponseDataRelationshipsDocumentDataType]):
     """
 
     id: Unset | str = UNSET
-    type: Unset | JobsSinglePostResponseDataRelationshipsDocumentDataType = UNSET
+    type: Unset | JobsSinglePostResponseDataRelationshipsDocumentDataType = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

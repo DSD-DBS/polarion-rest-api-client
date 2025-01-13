@@ -16,10 +16,12 @@ T = TypeVar("T", bound="SetLicenseRequestBody")
 
 @_attrs_define
 class SetLicenseRequestBody:
-    """Attributes
-    concurrent (Union[Unset, bool]): Is concurrent user Example: True.
+    """Attributes concurrent (Union[Unset, bool]): Is concurrent user Example:
+    True.
+
     group (Union[Unset, str]): License group Example: Department.
-    license_ (Union[Unset, SetLicenseRequestBodyLicense]): User's license type
+    license_ (Union[Unset, SetLicenseRequestBodyLicense]): User's
+    license type
     """
 
     concurrent: Unset | bool = UNSET

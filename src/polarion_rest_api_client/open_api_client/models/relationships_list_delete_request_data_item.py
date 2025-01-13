@@ -17,8 +17,9 @@ T = TypeVar("T", bound="RelationshipsListDeleteRequestDataItem")
 
 @_attrs_define
 class RelationshipsListDeleteRequestDataItem:
-    """Attributes
-    type (Union[Unset, RelationshipsListDeleteRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    RelationshipsListDeleteRequestDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyResourceId.
     """
 

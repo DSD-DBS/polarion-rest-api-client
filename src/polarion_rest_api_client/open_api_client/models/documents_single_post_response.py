@@ -19,9 +19,7 @@ T = TypeVar("T", bound="DocumentsSinglePostResponse")
 
 @_attrs_define
 class DocumentsSinglePostResponse:
-    """Attributes
-    data (Union[Unset, DocumentsSinglePostResponseData]):
-    """
+    """Attributes data (Union[Unset, DocumentsSinglePostResponseData]):"""
 
     data: Union[Unset, "DocumentsSinglePostResponseData"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

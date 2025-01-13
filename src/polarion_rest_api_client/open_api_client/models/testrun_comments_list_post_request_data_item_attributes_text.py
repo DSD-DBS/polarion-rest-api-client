@@ -17,12 +17,15 @@ T = TypeVar("T", bound="TestrunCommentsListPostRequestDataItemAttributesText")
 
 @_attrs_define
 class TestrunCommentsListPostRequestDataItemAttributesText:
-    """Attributes
-    type (Union[Unset, TestrunCommentsListPostRequestDataItemAttributesTextType]):
+    """Attributes type (Union[Unset,
+    TestrunCommentsListPostRequestDataItemAttributesTextType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 
-    type: Unset | TestrunCommentsListPostRequestDataItemAttributesTextType = UNSET
+    type: Unset | TestrunCommentsListPostRequestDataItemAttributesTextType = (
+        UNSET
+    )
     value: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

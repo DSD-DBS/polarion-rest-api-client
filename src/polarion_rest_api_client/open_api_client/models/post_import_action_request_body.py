@@ -21,9 +21,8 @@ T = TypeVar("T", bound="PostImportActionRequestBody")
 
 @_attrs_define
 class PostImportActionRequestBody:
-    """Attributes
-    file (File): excel file content
-    resource (Union[Unset, ImportTestResultsRequestBody]):
+    """Attributes file (File): excel file content resource (Union[Unset,
+    ImportTestResultsRequestBody]):
     """
 
     file: File

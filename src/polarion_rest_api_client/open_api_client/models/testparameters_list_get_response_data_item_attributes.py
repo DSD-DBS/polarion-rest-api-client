@@ -13,8 +13,9 @@ T = TypeVar("T", bound="TestparametersListGetResponseDataItemAttributes")
 
 @_attrs_define
 class TestparametersListGetResponseDataItemAttributes:
-    """Attributes
-    name (Union[Unset, str]):  Example: Example Test Parameter value.
+    """Attributes name (Union[Unset, str]):  Example: Example Test Parameter
+    value.
+
     value (Union[Unset, str]):  Example: Example Test Parameter value.
     """
 

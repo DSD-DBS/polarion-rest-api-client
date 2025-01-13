@@ -26,8 +26,9 @@ T = TypeVar("T", bound="WorkitemApprovalsListPostRequestDataItem")
 
 @_attrs_define
 class WorkitemApprovalsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, WorkitemApprovalsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    WorkitemApprovalsListPostRequestDataItemType]):
+
     attributes (Union[Unset, WorkitemApprovalsListPostRequestDataItemAttributes]):
     relationships (Union[Unset, WorkitemApprovalsListPostRequestDataItemRelationships]):
     """
@@ -97,7 +98,9 @@ class WorkitemApprovalsListPostRequestDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | WorkitemApprovalsListPostRequestDataItemRelationships
+        relationships: (
+            Unset | WorkitemApprovalsListPostRequestDataItemRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

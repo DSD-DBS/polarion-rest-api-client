@@ -29,12 +29,13 @@ T = TypeVar("T", bound="DocumentsSinglePostResponseData")
 
 @_attrs_define
 class DocumentsSinglePostResponseData:
-    """Attributes
-    type (Union[Unset, DocumentsSinglePostResponseDataType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
-    attributes (Union[Unset, DocumentsSinglePostResponseDataAttributes]):
-    relationships (Union[Unset, DocumentsSinglePostResponseDataRelationships]):
-    links (Union[Unset, DocumentsSinglePostResponseDataLinks]):
+    """Attributes type (Union[Unset, DocumentsSinglePostResponseDataType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MySpaceId/MyDocumentId. attributes (Union[Unset,
+    DocumentsSinglePostResponseDataAttributes]): relationships
+    (Union[Unset, DocumentsSinglePostResponseDataRelationships]): links
+    (Union[Unset, DocumentsSinglePostResponseDataLinks]):
     """
 
     type: Unset | DocumentsSinglePostResponseDataType = UNSET

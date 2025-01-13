@@ -13,8 +13,8 @@ T = TypeVar("T", bound="LinkedworkitemsSinglePatchRequestDataAttributes")
 
 @_attrs_define
 class LinkedworkitemsSinglePatchRequestDataAttributes:
-    """Attributes
-    revision (Union[Unset, str]):  Example: 1234.
+    """Attributes revision (Union[Unset, str]):  Example: 1234.
+
     suspect (Union[Unset, bool]):
     """
 

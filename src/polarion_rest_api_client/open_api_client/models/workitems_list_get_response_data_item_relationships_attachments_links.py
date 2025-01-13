@@ -15,9 +15,9 @@ T = TypeVar(
 
 @_attrs_define
 class WorkitemsListGetResponseDataItemRelationshipsAttachmentsLinks:
-    """Attributes
-    related (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/workitems/MyWorkItemId/attachments?revision=1234.
+    """Attributes related (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/workitems/MyWorkItemId/attachme
+    nts?revision=1234.
     """
 
     related: Unset | str = UNSET

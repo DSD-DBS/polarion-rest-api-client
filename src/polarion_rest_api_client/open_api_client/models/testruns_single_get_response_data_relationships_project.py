@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestrunsSingleGetResponseDataRelationshipsProject")
 
 @_attrs_define
 class TestrunsSingleGetResponseDataRelationshipsProject:
-    """Attributes
-    data (Union[Unset, TestrunsSingleGetResponseDataRelationshipsProjectData]):
+    """Attributes data (Union[Unset,
+    TestrunsSingleGetResponseDataRelationshipsProjectData]):
     """
 
     data: Union[

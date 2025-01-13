@@ -13,9 +13,9 @@ T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseDataLinks")
 
 @_attrs_define
 class WorkitemCommentsSingleGetResponseDataLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/workitems/MyWorkItemId/comments/MyCommentId?revision=1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/workitems/MyWorkItemId/comments
+    /MyCommentId?revision=1234.
     """
 
     self_: Unset | str = UNSET

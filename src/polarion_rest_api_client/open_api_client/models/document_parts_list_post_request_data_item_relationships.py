@@ -25,8 +25,9 @@ T = TypeVar("T", bound="DocumentPartsListPostRequestDataItemRelationships")
 
 @_attrs_define
 class DocumentPartsListPostRequestDataItemRelationships:
-    """Attributes
-    next_part (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsNextPart]):
+    """Attributes next_part (Union[Unset,
+    DocumentPartsListPostRequestDataItemRelationshipsNextPart]):
+
     previous_part (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsPreviousPart]):
     work_item (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsWorkItem]):
     """
@@ -83,7 +84,9 @@ class DocumentPartsListPostRequestDataItemRelationships:
 
         d = src_dict.copy()
         _next_part = d.pop("nextPart", UNSET)
-        next_part: Unset | DocumentPartsListPostRequestDataItemRelationshipsNextPart
+        next_part: (
+            Unset | DocumentPartsListPostRequestDataItemRelationshipsNextPart
+        )
         if isinstance(_next_part, Unset):
             next_part = UNSET
         else:
@@ -92,7 +95,10 @@ class DocumentPartsListPostRequestDataItemRelationships:
             )
 
         _previous_part = d.pop("previousPart", UNSET)
-        previous_part: Unset | DocumentPartsListPostRequestDataItemRelationshipsPreviousPart
+        previous_part: (
+            Unset
+            | DocumentPartsListPostRequestDataItemRelationshipsPreviousPart
+        )
         if isinstance(_previous_part, Unset):
             previous_part = UNSET
         else:
@@ -101,7 +107,9 @@ class DocumentPartsListPostRequestDataItemRelationships:
             )
 
         _work_item = d.pop("workItem", UNSET)
-        work_item: Unset | DocumentPartsListPostRequestDataItemRelationshipsWorkItem
+        work_item: (
+            Unset | DocumentPartsListPostRequestDataItemRelationshipsWorkItem
+        )
         if isinstance(_work_item, Unset):
             work_item = UNSET
         else:

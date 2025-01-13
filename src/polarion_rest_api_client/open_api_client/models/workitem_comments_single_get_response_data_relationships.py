@@ -28,8 +28,9 @@ T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class WorkitemCommentsSingleGetResponseDataRelationships:
-    """Attributes
-    author (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsAuthor]):
+    """Attributes author (Union[Unset,
+    WorkitemCommentsSingleGetResponseDataRelationshipsAuthor]):
+
     child_comments (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsChildComments]):
     parent_comment (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsParentComment]):
     project (Union[Unset, WorkitemCommentsSingleGetResponseDataRelationshipsProject]):
@@ -101,7 +102,9 @@ class WorkitemCommentsSingleGetResponseDataRelationships:
 
         d = src_dict.copy()
         _author = d.pop("author", UNSET)
-        author: Unset | WorkitemCommentsSingleGetResponseDataRelationshipsAuthor
+        author: (
+            Unset | WorkitemCommentsSingleGetResponseDataRelationshipsAuthor
+        )
         if isinstance(_author, Unset):
             author = UNSET
         else:
@@ -110,7 +113,10 @@ class WorkitemCommentsSingleGetResponseDataRelationships:
             )
 
         _child_comments = d.pop("childComments", UNSET)
-        child_comments: Unset | WorkitemCommentsSingleGetResponseDataRelationshipsChildComments
+        child_comments: (
+            Unset
+            | WorkitemCommentsSingleGetResponseDataRelationshipsChildComments
+        )
         if isinstance(_child_comments, Unset):
             child_comments = UNSET
         else:
@@ -119,7 +125,10 @@ class WorkitemCommentsSingleGetResponseDataRelationships:
             )
 
         _parent_comment = d.pop("parentComment", UNSET)
-        parent_comment: Unset | WorkitemCommentsSingleGetResponseDataRelationshipsParentComment
+        parent_comment: (
+            Unset
+            | WorkitemCommentsSingleGetResponseDataRelationshipsParentComment
+        )
         if isinstance(_parent_comment, Unset):
             parent_comment = UNSET
         else:
@@ -128,7 +137,9 @@ class WorkitemCommentsSingleGetResponseDataRelationships:
             )
 
         _project = d.pop("project", UNSET)
-        project: Unset | WorkitemCommentsSingleGetResponseDataRelationshipsProject
+        project: (
+            Unset | WorkitemCommentsSingleGetResponseDataRelationshipsProject
+        )
         if isinstance(_project, Unset):
             project = UNSET
         else:

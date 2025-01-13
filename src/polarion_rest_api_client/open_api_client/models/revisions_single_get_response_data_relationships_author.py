@@ -19,8 +19,8 @@ T = TypeVar("T", bound="RevisionsSingleGetResponseDataRelationshipsAuthor")
 
 @_attrs_define
 class RevisionsSingleGetResponseDataRelationshipsAuthor:
-    """Attributes
-    data (Union[Unset, RevisionsSingleGetResponseDataRelationshipsAuthorData]):
+    """Attributes data (Union[Unset,
+    RevisionsSingleGetResponseDataRelationshipsAuthorData]):
     """
 
     data: Union[

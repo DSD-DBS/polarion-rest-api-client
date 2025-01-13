@@ -25,8 +25,9 @@ T = TypeVar("T", bound="LinkedoslcresourcesListGetResponse")
 
 @_attrs_define
 class LinkedoslcresourcesListGetResponse:
-    """Attributes
-    data (Union[Unset, List['LinkedoslcresourcesListGetResponseDataItem']]):
+    """Attributes data (Union[Unset,
+    List['LinkedoslcresourcesListGetResponseDataItem']]):
+
     included (Union[Unset, List['LinkedoslcresourcesListGetResponseIncludedItem']]): Related entities might be
         returned, see <a href="https://docs.sw.siemens.com/en-
         US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
@@ -34,10 +35,10 @@ class LinkedoslcresourcesListGetResponse:
     meta (Union[Unset, LinkedoslcresourcesListGetResponseMeta]):
     """
 
-    data: Unset | list["LinkedoslcresourcesListGetResponseDataItem"] = (
-        UNSET
-    )
-    included: Unset | list["LinkedoslcresourcesListGetResponseIncludedItem"] = UNSET
+    data: Unset | list["LinkedoslcresourcesListGetResponseDataItem"] = UNSET
+    included: (
+        Unset | list["LinkedoslcresourcesListGetResponseIncludedItem"]
+    ) = UNSET
     meta: Union[Unset, "LinkedoslcresourcesListGetResponseMeta"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

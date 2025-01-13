@@ -17,15 +17,17 @@ T = TypeVar("T", bound="PlansListGetResponseDataItemRelationshipsProjectData")
 
 @_attrs_define
 class PlansListGetResponseDataItemRelationshipsProjectData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId.
+    """Attributes id (Union[Unset, str]):  Example: MyProjectId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, PlansListGetResponseDataItemRelationshipsProjectDataType]):
     """
 
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
-    type: Unset | PlansListGetResponseDataItemRelationshipsProjectDataType = UNSET
+    type: Unset | PlansListGetResponseDataItemRelationshipsProjectDataType = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

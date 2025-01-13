@@ -23,10 +23,10 @@ T = TypeVar("T", bound="IconsListPostResponseDataItem")
 
 @_attrs_define
 class IconsListPostResponseDataItem:
-    """Attributes
-    type (Union[Unset, IconsListPostResponseDataItemType]):
-    id (Union[Unset, str]):  Example: default/example.gif.
-    links (Union[Unset, IconsListPostResponseDataItemLinks]):
+    """Attributes type (Union[Unset, IconsListPostResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example: default/example.gif. links
+    (Union[Unset, IconsListPostResponseDataItemLinks]):
     """
 
     type: Unset | IconsListPostResponseDataItemType = UNSET

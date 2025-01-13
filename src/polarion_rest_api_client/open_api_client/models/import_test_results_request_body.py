@@ -13,8 +13,9 @@ T = TypeVar("T", bound="ImportTestResultsRequestBody")
 
 @_attrs_define
 class ImportTestResultsRequestBody:
-    """Attributes
-    defect_template_id (Union[Unset, str]):  Example: MyProjectId/MyDefectId.
+    """Attributes defect_template_id (Union[Unset, str]):  Example:
+    MyProjectId/MyDefectId.
+
     retest (Union[Unset, bool]):
     """
 

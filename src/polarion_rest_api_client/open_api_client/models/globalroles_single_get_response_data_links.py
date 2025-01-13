@@ -13,8 +13,8 @@ T = TypeVar("T", bound="GlobalrolesSingleGetResponseDataLinks")
 
 @_attrs_define
 class GlobalrolesSingleGetResponseDataLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-path/roles/MyRoleId.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application-path/roles/MyRoleId.
     """
 
     self_: Unset | str = UNSET

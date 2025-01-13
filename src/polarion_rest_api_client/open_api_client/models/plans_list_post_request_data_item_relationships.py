@@ -28,8 +28,9 @@ T = TypeVar("T", bound="PlansListPostRequestDataItemRelationships")
 
 @_attrs_define
 class PlansListPostRequestDataItemRelationships:
-    """Attributes
-    parent (Union[Unset, PlansListPostRequestDataItemRelationshipsParent]):
+    """Attributes parent (Union[Unset,
+    PlansListPostRequestDataItemRelationshipsParent]):
+
     project_span (Union[Unset, PlansListPostRequestDataItemRelationshipsProjectSpan]):
     template (Union[Unset, PlansListPostRequestDataItemRelationshipsTemplate]):
     work_items (Union[Unset, PlansListPostRequestDataItemRelationshipsWorkItems]):
@@ -108,7 +109,9 @@ class PlansListPostRequestDataItemRelationships:
             )
 
         _project_span = d.pop("projectSpan", UNSET)
-        project_span: Unset | PlansListPostRequestDataItemRelationshipsProjectSpan
+        project_span: (
+            Unset | PlansListPostRequestDataItemRelationshipsProjectSpan
+        )
         if isinstance(_project_span, Unset):
             project_span = UNSET
         else:

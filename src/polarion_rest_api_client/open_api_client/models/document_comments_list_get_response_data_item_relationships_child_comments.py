@@ -25,12 +25,18 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentCommentsListGetResponseDataItemRelationshipsChildComments:
-    """Attributes
-    data (Union[Unset, List['DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsDataItem']]):
+    """Attributes data (Union[Unset, List['DocumentCommentsListGetResponseDataI
+    temRelationshipsChildCommentsDataItem']]):
+
     meta (Union[Unset, DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta]):
     """
 
-    data: Unset | list["DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsDataItem"] = UNSET
+    data: (
+        Unset
+        | list[
+            "DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsDataItem"
+        ]
+    ) = UNSET
     meta: Union[
         Unset,
         "DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta",
@@ -81,7 +87,10 @@ class DocumentCommentsListGetResponseDataItemRelationshipsChildComments:
             data.append(data_item)
 
         _meta = d.pop("meta", UNSET)
-        meta: Unset | DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta
+        meta: (
+            Unset
+            | DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta
+        )
         if isinstance(_meta, Unset):
             meta = UNSET
         else:

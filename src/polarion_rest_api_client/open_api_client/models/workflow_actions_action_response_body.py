@@ -25,15 +25,14 @@ T = TypeVar("T", bound="WorkflowActionsActionResponseBody")
 
 @_attrs_define
 class WorkflowActionsActionResponseBody:
-    """Attributes
-    data (Union[Unset, List['WorkflowActionsActionResponseBodyDataItem']]):
-    links (Union[Unset, WorkflowActionsActionResponseBodyLinks]):
-    meta (Union[Unset, WorkflowActionsActionResponseBodyMeta]):
+    """Attributes data (Union[Unset,
+    List['WorkflowActionsActionResponseBodyDataItem']]):
+
+    links (Union[Unset, WorkflowActionsActionResponseBodyLinks]): meta
+    (Union[Unset, WorkflowActionsActionResponseBodyMeta]):
     """
 
-    data: Unset | list["WorkflowActionsActionResponseBodyDataItem"] = (
-        UNSET
-    )
+    data: Unset | list["WorkflowActionsActionResponseBodyDataItem"] = UNSET
     links: Union[Unset, "WorkflowActionsActionResponseBodyLinks"] = UNSET
     meta: Union[Unset, "WorkflowActionsActionResponseBodyMeta"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

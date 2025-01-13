@@ -22,11 +22,6 @@ T = TypeVar("T", bound="WorkrecordsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class WorkrecordsSingleGetResponseDataRelationships:
-    """Attributes
-    project (Union[Unset, WorkrecordsSingleGetResponseDataRelationshipsProject]):
-    user (Union[Unset, WorkrecordsSingleGetResponseDataRelationshipsUser]):
-    """
-
     project: Union[
         Unset, "WorkrecordsSingleGetResponseDataRelationshipsProject"
     ] = UNSET

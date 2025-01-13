@@ -15,8 +15,8 @@ T = TypeVar("T", bound="RelationshipDataBody")
 
 @_attrs_define
 class RelationshipDataBody:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId/MyResourceId.
+    """Attributes id (Union[Unset, str]):  Example: MyProjectId/MyResourceId.
+
     type (Union[Unset, RelationshipDataBodyType]):
     """
 

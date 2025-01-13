@@ -32,8 +32,8 @@ T = TypeVar("T", bound="DocumentPartsSingleGetResponseData")
 
 @_attrs_define
 class DocumentPartsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, DocumentPartsSingleGetResponseDataType]):
+    """Attributes type (Union[Unset, DocumentPartsSingleGetResponseDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, DocumentPartsSingleGetResponseDataAttributes]):

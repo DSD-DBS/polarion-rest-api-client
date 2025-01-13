@@ -13,13 +13,16 @@ T = TypeVar("T", bound="BranchDocumentRequestBody")
 
 @_attrs_define
 class BranchDocumentRequestBody:
-    """Attributes
-    copy_workflow_status_and_signatures (Union[Unset, bool]): Specifies that workflow status and signatures should
-        be copied to the branched document.
-    query (Union[Unset, str]): Specifies optional filtering query. Example: status:open.
-    target_document_name (Union[Unset, str]): Name for new Document. Example: MyDocumentId.
-    target_project_id (Union[Unset, str]): Project where new document will be created. Example: MyProjectId.
-    target_space_id (Union[Unset, str]): Space where new document will be created. Example: MySpaceId.
+    """Attributes copy_workflow_status_and_signatures (Union[Unset, bool]):
+    Specifies that workflow status and signatures should be copied to the
+    branched document.
+
+    query (Union[Unset, str]): Specifies optional filtering query.
+    Example: status:open. target_document_name (Union[Unset, str]): Name
+    for new Document. Example: MyDocumentId. target_project_id
+    (Union[Unset, str]): Project where new document will be created.
+    Example: MyProjectId. target_space_id (Union[Unset, str]): Space
+    where new document will be created. Example: MySpaceId.
     """
 
     copy_workflow_status_and_signatures: Unset | bool = UNSET

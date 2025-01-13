@@ -25,13 +25,17 @@ T = TypeVar("T", bound="DocumentsSingleGetResponseDataRelationshipsComments")
 
 @_attrs_define
 class DocumentsSingleGetResponseDataRelationshipsComments:
-    """Attributes
-    data (Union[Unset, List['DocumentsSingleGetResponseDataRelationshipsCommentsDataItem']]):
+    """Attributes data (Union[Unset,
+    List['DocumentsSingleGetResponseDataRelationshipsCommentsDataItem']]):
+
     links (Union[Unset, DocumentsSingleGetResponseDataRelationshipsCommentsLinks]):
     meta (Union[Unset, DocumentsSingleGetResponseDataRelationshipsCommentsMeta]):
     """
 
-    data: Unset | list["DocumentsSingleGetResponseDataRelationshipsCommentsDataItem"] = UNSET
+    data: (
+        Unset
+        | list["DocumentsSingleGetResponseDataRelationshipsCommentsDataItem"]
+    ) = UNSET
     links: Union[
         Unset, "DocumentsSingleGetResponseDataRelationshipsCommentsLinks"
     ] = UNSET

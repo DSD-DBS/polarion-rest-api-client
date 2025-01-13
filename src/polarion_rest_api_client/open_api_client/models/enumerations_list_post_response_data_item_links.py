@@ -13,8 +13,8 @@ T = TypeVar("T", bound="EnumerationsListPostResponseDataItemLinks")
 
 @_attrs_define
 class EnumerationsListPostResponseDataItemLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-path/enumerations/%7E/status/%7E.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application-path/enumerations/%7E/status/%7E.
     """
 
     self_: Unset | str = UNSET

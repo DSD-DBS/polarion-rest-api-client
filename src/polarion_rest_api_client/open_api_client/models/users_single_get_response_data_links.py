@@ -13,8 +13,8 @@ T = TypeVar("T", bound="UsersSingleGetResponseDataLinks")
 
 @_attrs_define
 class UsersSingleGetResponseDataLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-path/users/MyUserId.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application-path/users/MyUserId.
     """
 
     self_: Unset | str = UNSET

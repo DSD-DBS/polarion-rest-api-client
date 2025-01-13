@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TeststepResultsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class TeststepResultsSingleGetResponseDataRelationships:
-    """Attributes
-    test_step (Union[Unset, TeststepResultsSingleGetResponseDataRelationshipsTestStep]):
+    """Attributes test_step (Union[Unset,
+    TeststepResultsSingleGetResponseDataRelationshipsTestStep]):
     """
 
     test_step: Union[
@@ -51,7 +51,9 @@ class TeststepResultsSingleGetResponseDataRelationships:
 
         d = src_dict.copy()
         _test_step = d.pop("testStep", UNSET)
-        test_step: Unset | TeststepResultsSingleGetResponseDataRelationshipsTestStep
+        test_step: (
+            Unset | TeststepResultsSingleGetResponseDataRelationshipsTestStep
+        )
         if isinstance(_test_step, Unset):
             test_step = UNSET
         else:

@@ -23,10 +23,10 @@ T = TypeVar("T", bound="EnumerationsSinglePatchRequestData")
 
 @_attrs_define
 class EnumerationsSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, EnumerationsSinglePatchRequestDataType]):
-    id (Union[Unset, str]):  Example: ~/status/~.
-    attributes (Union[Unset, EnumerationsSinglePatchRequestDataAttributes]):
+    """Attributes type (Union[Unset, EnumerationsSinglePatchRequestDataType]):
+
+    id (Union[Unset, str]):  Example: ~/status/~. attributes
+    (Union[Unset, EnumerationsSinglePatchRequestDataAttributes]):
     """
 
     type: Unset | EnumerationsSinglePatchRequestDataType = UNSET

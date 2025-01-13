@@ -25,10 +25,12 @@ T = TypeVar("T", bound="JobsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class JobsSingleGetResponseDataRelationships:
-    """Attributes
-    document (Union[Unset, JobsSingleGetResponseDataRelationshipsDocument]):
-    documents (Union[Unset, JobsSingleGetResponseDataRelationshipsDocuments]):
-    project (Union[Unset, JobsSingleGetResponseDataRelationshipsProject]):
+    """Attributes document (Union[Unset,
+    JobsSingleGetResponseDataRelationshipsDocument]):
+
+    documents (Union[Unset,
+    JobsSingleGetResponseDataRelationshipsDocuments]): project
+    (Union[Unset, JobsSingleGetResponseDataRelationshipsProject]):
     """
 
     document: Union[

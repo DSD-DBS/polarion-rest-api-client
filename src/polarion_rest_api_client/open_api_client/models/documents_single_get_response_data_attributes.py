@@ -28,8 +28,8 @@ T = TypeVar("T", bound="DocumentsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class DocumentsSingleGetResponseDataAttributes:
-    """Attributes
-    auto_suspect (Union[Unset, bool]):
+    """Attributes auto_suspect (Union[Unset, bool]):
+
     branched_with_initialized_fields (Union[Unset, List[str]]):
     branched_with_query (Union[Unset, str]):  Example: Branched with Query.
     created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
@@ -62,7 +62,10 @@ class DocumentsSingleGetResponseDataAttributes:
     outline_numbering: Union[
         Unset, "DocumentsSingleGetResponseDataAttributesOutlineNumbering"
     ] = UNSET
-    rendering_layouts: Unset | list["DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem"] = UNSET
+    rendering_layouts: (
+        Unset
+        | list["DocumentsSingleGetResponseDataAttributesRenderingLayoutsItem"]
+    ) = UNSET
     status: Unset | str = UNSET
     structure_link_role: Unset | str = UNSET
     title: Unset | str = UNSET
@@ -202,7 +205,9 @@ class DocumentsSingleGetResponseDataAttributes:
         derived_from_link_role = d.pop("derivedFromLinkRole", UNSET)
 
         _home_page_content = d.pop("homePageContent", UNSET)
-        home_page_content: Unset | DocumentsSingleGetResponseDataAttributesHomePageContent
+        home_page_content: (
+            Unset | DocumentsSingleGetResponseDataAttributesHomePageContent
+        )
         if isinstance(_home_page_content, Unset):
             home_page_content = UNSET
         else:
@@ -215,7 +220,9 @@ class DocumentsSingleGetResponseDataAttributes:
         module_name = d.pop("moduleName", UNSET)
 
         _outline_numbering = d.pop("outlineNumbering", UNSET)
-        outline_numbering: Unset | DocumentsSingleGetResponseDataAttributesOutlineNumbering
+        outline_numbering: (
+            Unset | DocumentsSingleGetResponseDataAttributesOutlineNumbering
+        )
         if isinstance(_outline_numbering, Unset):
             outline_numbering = UNSET
         else:

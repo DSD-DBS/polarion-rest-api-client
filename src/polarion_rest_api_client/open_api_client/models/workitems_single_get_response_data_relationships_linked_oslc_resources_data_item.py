@@ -30,7 +30,10 @@ class WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResourcesDataItem:
 
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
-    type: Unset | WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResourcesDataItemType = UNSET
+    type: (
+        Unset
+        | WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResourcesDataItemType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -64,7 +67,10 @@ class WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResourcesDataItem:
         revision = d.pop("revision", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResourcesDataItemType
+        type: (
+            Unset
+            | WorkitemsSingleGetResponseDataRelationshipsLinkedOslcResourcesDataItemType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

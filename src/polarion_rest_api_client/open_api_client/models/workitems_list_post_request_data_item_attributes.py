@@ -1,8 +1,9 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
+from __future__ import annotations
 
 import datetime
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,8 +25,8 @@ T = TypeVar("T", bound="WorkitemsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class WorkitemsListPostRequestDataItemAttributes:
-    """Attributes
-    type (str):  Example: task.
+    """Attributes type (str):  Example: task.
+
     description (Union[Unset, WorkitemsListPostRequestDataItemAttributesDescription]):
     due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
     hyperlinks (Union[Unset, List['WorkitemsListPostRequestDataItemAttributesHyperlinksItem']]):
@@ -41,11 +42,13 @@ class WorkitemsListPostRequestDataItemAttributes:
     """
 
     type: str
-    description: Union[
-        Unset, "WorkitemsListPostRequestDataItemAttributesDescription"
-    ] = UNSET
+    description: (
+        Unset | WorkitemsListPostRequestDataItemAttributesDescription
+    ) = UNSET
     due_date: Unset | datetime.date = UNSET
-    hyperlinks: Unset | list["WorkitemsListPostRequestDataItemAttributesHyperlinksItem"] = UNSET
+    hyperlinks: (
+        Unset | list[WorkitemsListPostRequestDataItemAttributesHyperlinksItem]
+    ) = UNSET
     initial_estimate: Unset | str = UNSET
     priority: Unset | str = UNSET
     remaining_estimate: Unset | str = UNSET
@@ -144,7 +147,9 @@ class WorkitemsListPostRequestDataItemAttributes:
         type = d.pop("type")
 
         _description = d.pop("description", UNSET)
-        description: Unset | WorkitemsListPostRequestDataItemAttributesDescription
+        description: (
+            Unset | WorkitemsListPostRequestDataItemAttributesDescription
+        )
         if isinstance(_description, Unset):
             description = UNSET
         else:

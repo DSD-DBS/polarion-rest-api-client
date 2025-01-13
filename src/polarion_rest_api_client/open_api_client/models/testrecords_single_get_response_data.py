@@ -32,14 +32,15 @@ T = TypeVar("T", bound="TestrecordsSingleGetResponseData")
 
 @_attrs_define
 class TestrecordsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, TestrecordsSingleGetResponseDataType]):
-    id (Union[Unset, str]):  Example: elibrary/MyTestRunId/MyProjectId/MyTestcaseId/0.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, TestrecordsSingleGetResponseDataAttributes]):
-    relationships (Union[Unset, TestrecordsSingleGetResponseDataRelationships]):
-    links (Union[Unset, TestrecordsSingleGetResponseDataLinks]):
-    meta (Union[Unset, TestrecordsSingleGetResponseDataMeta]):
+    """Attributes type (Union[Unset, TestrecordsSingleGetResponseDataType]):
+
+    id (Union[Unset, str]):  Example:
+    elibrary/MyTestRunId/MyProjectId/MyTestcaseId/0. revision
+    (Union[Unset, str]):  Example: 1234. attributes (Union[Unset,
+    TestrecordsSingleGetResponseDataAttributes]): relationships
+    (Union[Unset, TestrecordsSingleGetResponseDataRelationships]): links
+    (Union[Unset, TestrecordsSingleGetResponseDataLinks]): meta
+    (Union[Unset, TestrecordsSingleGetResponseDataMeta]):
     """
 
     type: Unset | TestrecordsSingleGetResponseDataType = UNSET

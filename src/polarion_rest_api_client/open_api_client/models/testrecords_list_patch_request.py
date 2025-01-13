@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestrecordsListPatchRequest")
 
 @_attrs_define
 class TestrecordsListPatchRequest:
-    """Attributes
-    data (Union[Unset, List['TestrecordsListPatchRequestDataItem']]):
+    """Attributes data (Union[Unset,
+    List['TestrecordsListPatchRequestDataItem']]):
     """
 
     data: Unset | list["TestrecordsListPatchRequestDataItem"] = UNSET

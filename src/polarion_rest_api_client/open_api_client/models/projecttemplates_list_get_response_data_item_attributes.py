@@ -19,8 +19,8 @@ T = TypeVar("T", bound="ProjecttemplatesListGetResponseDataItemAttributes")
 
 @_attrs_define
 class ProjecttemplatesListGetResponseDataItemAttributes:
-    """Attributes
-    custom_icon (Union[Unset, str]):
+    """Attributes custom_icon (Union[Unset, str]):
+
     description (Union[Unset, str]):
     distributions (Union[Unset, List[str]]):
     id (Union[Unset, str]):
@@ -101,7 +101,9 @@ class ProjecttemplatesListGetResponseDataItemAttributes:
         name = d.pop("name", UNSET)
 
         _parameters = d.pop("parameters", UNSET)
-        parameters: Unset | ProjecttemplatesListGetResponseDataItemAttributesParameters
+        parameters: (
+            Unset | ProjecttemplatesListGetResponseDataItemAttributesParameters
+        )
         if isinstance(_parameters, Unset):
             parameters = UNSET
         else:

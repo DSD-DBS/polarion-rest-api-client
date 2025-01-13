@@ -22,12 +22,16 @@ T = TypeVar("T", bound="DocumentsSinglePostResponseDataRelationshipsComments")
 
 @_attrs_define
 class DocumentsSinglePostResponseDataRelationshipsComments:
-    """Attributes
-    data (Union[Unset, List['DocumentsSinglePostResponseDataRelationshipsCommentsDataItem']]):
+    """Attributes data (Union[Unset,
+    List['DocumentsSinglePostResponseDataRelationshipsCommentsDataItem']]):
+
     links (Union[Unset, DocumentsSinglePostResponseDataRelationshipsCommentsLinks]):
     """
 
-    data: Unset | list["DocumentsSinglePostResponseDataRelationshipsCommentsDataItem"] = UNSET
+    data: (
+        Unset
+        | list["DocumentsSinglePostResponseDataRelationshipsCommentsDataItem"]
+    ) = UNSET
     links: Union[
         Unset, "DocumentsSinglePostResponseDataRelationshipsCommentsLinks"
     ] = UNSET
@@ -77,7 +81,9 @@ class DocumentsSinglePostResponseDataRelationshipsComments:
             data.append(data_item)
 
         _links = d.pop("links", UNSET)
-        links: Unset | DocumentsSinglePostResponseDataRelationshipsCommentsLinks
+        links: (
+            Unset | DocumentsSinglePostResponseDataRelationshipsCommentsLinks
+        )
         if isinstance(_links, Unset):
             links = UNSET
         else:

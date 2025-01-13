@@ -15,12 +15,12 @@ T = TypeVar("T", bound="RevisionsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class RevisionsSingleGetResponseDataAttributes:
-    """Attributes
-    created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-    id (Union[Unset, str]):
-    internal_commit (Union[Unset, bool]):
-    message (Union[Unset, str]):  Example: Message.
-    repository_name (Union[Unset, str]):  Example: Repository name.
+    """Attributes created (Union[Unset, datetime.datetime]):  Example:
+    1970-01-01T00:00:00Z.
+
+    id (Union[Unset, str]): internal_commit (Union[Unset, bool]):
+    message (Union[Unset, str]):  Example: Message. repository_name
+    (Union[Unset, str]):  Example: Repository name.
     """
 
     created: Unset | datetime.datetime = UNSET

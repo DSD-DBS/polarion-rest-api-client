@@ -13,8 +13,8 @@ T = TypeVar("T", bound="RevisionsSingleGetResponseDataLinks")
 
 @_attrs_define
 class RevisionsSingleGetResponseDataLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-path/revisions/default/1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application-path/revisions/default/1234.
     """
 
     self_: Unset | str = UNSET

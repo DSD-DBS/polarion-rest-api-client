@@ -32,14 +32,14 @@ T = TypeVar("T", bound="RevisionsSingleGetResponseData")
 
 @_attrs_define
 class RevisionsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, RevisionsSingleGetResponseDataType]):
-    id (Union[Unset, str]):  Example: default/1234.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, RevisionsSingleGetResponseDataAttributes]):
-    relationships (Union[Unset, RevisionsSingleGetResponseDataRelationships]):
-    links (Union[Unset, RevisionsSingleGetResponseDataLinks]):
-    meta (Union[Unset, RevisionsSingleGetResponseDataMeta]):
+    """Attributes type (Union[Unset, RevisionsSingleGetResponseDataType]):
+
+    id (Union[Unset, str]):  Example: default/1234. revision
+    (Union[Unset, str]):  Example: 1234. attributes (Union[Unset,
+    RevisionsSingleGetResponseDataAttributes]): relationships
+    (Union[Unset, RevisionsSingleGetResponseDataRelationships]): links
+    (Union[Unset, RevisionsSingleGetResponseDataLinks]): meta
+    (Union[Unset, RevisionsSingleGetResponseDataMeta]):
     """
 
     type: Unset | RevisionsSingleGetResponseDataType = UNSET

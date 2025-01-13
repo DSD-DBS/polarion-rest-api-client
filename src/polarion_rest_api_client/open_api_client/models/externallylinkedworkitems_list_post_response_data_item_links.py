@@ -15,9 +15,10 @@ T = TypeVar(
 
 @_attrs_define
 class ExternallylinkedworkitemsListPostResponseDataItemLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/workitems/MyWorkItem
-        Id/externallylinkedworkitems/parent/hostname/MyProjectId/MyLinkedWorkItemId?revision=1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application-path/projects/MyProjectId/workitems/MyWorkItem Id/external
+    lylinkedworkitems/parent/hostname/MyProjectId/MyLinkedWorkItemId?revision=1
+    234.
     """
 
     self_: Unset | str = UNSET

@@ -13,8 +13,8 @@ T = TypeVar("T", bound="IconsListPostResponseDataItemLinks")
 
 @_attrs_define
 class IconsListPostResponseDataItemLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-path/enumerations/defaulticons/example.gif.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application-path/enumerations/defaulticons/example.gif.
     """
 
     self_: Unset | str = UNSET

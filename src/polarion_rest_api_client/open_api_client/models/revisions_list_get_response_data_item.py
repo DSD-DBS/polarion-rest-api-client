@@ -32,14 +32,14 @@ T = TypeVar("T", bound="RevisionsListGetResponseDataItem")
 
 @_attrs_define
 class RevisionsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, RevisionsListGetResponseDataItemType]):
-    id (Union[Unset, str]):  Example: default/1234.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, RevisionsListGetResponseDataItemAttributes]):
-    relationships (Union[Unset, RevisionsListGetResponseDataItemRelationships]):
-    links (Union[Unset, RevisionsListGetResponseDataItemLinks]):
-    meta (Union[Unset, RevisionsListGetResponseDataItemMeta]):
+    """Attributes type (Union[Unset, RevisionsListGetResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example: default/1234. revision
+    (Union[Unset, str]):  Example: 1234. attributes (Union[Unset,
+    RevisionsListGetResponseDataItemAttributes]): relationships
+    (Union[Unset, RevisionsListGetResponseDataItemRelationships]): links
+    (Union[Unset, RevisionsListGetResponseDataItemLinks]): meta
+    (Union[Unset, RevisionsListGetResponseDataItemMeta]):
     """
 
     type: Unset | RevisionsListGetResponseDataItemType = UNSET

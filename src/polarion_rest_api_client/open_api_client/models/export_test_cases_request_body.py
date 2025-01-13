@@ -13,8 +13,8 @@ T = TypeVar("T", bound="ExportTestCasesRequestBody")
 
 @_attrs_define
 class ExportTestCasesRequestBody:
-    """Attributes
-    query (Union[Unset, str]):  Example: exportExcelQueryString.
+    """Attributes query (Union[Unset, str]):  Example: exportExcelQueryString.
+
     sortby (Union[Unset, str]):  Example: exportExcelSortByString.
     template (Union[Unset, str]):  Example: exportExcelTemplateName.
     """

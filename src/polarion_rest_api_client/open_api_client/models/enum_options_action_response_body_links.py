@@ -13,9 +13,10 @@ T = TypeVar("T", bound="EnumOptionsActionResponseBodyLinks")
 
 @_attrs_define
 class EnumOptionsActionResponseBodyLinks:
-    """Attributes
-    first (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=1.
+    """Attributes first (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/.../fields/MyField/actions/acti
+    onName?page%5Bnumber%5D=1.
+
     last (Union[Unset, str]):  Example: server-host-name/application-
         path/projects/MyProjectId/.../fields/MyField/actions/actionName?page%5Bnumber%5D=9.
     next_ (Union[Unset, str]):  Example: server-host-name/application-

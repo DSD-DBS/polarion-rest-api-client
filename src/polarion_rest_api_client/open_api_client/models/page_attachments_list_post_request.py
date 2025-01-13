@@ -19,8 +19,8 @@ T = TypeVar("T", bound="PageAttachmentsListPostRequest")
 
 @_attrs_define
 class PageAttachmentsListPostRequest:
-    """Attributes
-    data (Union[Unset, List['PageAttachmentsListPostRequestDataItem']]):
+    """Attributes data (Union[Unset,
+    List['PageAttachmentsListPostRequestDataItem']]):
     """
 
     data: Unset | list["PageAttachmentsListPostRequestDataItem"] = UNSET

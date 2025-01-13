@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestrunsSingleGetResponseDataMeta")
 
 @_attrs_define
 class TestrunsSingleGetResponseDataMeta:
-    """Attributes
-    errors (Union[Unset, List['TestrunsSingleGetResponseDataMetaErrorsItem']]):
+    """Attributes errors (Union[Unset,
+    List['TestrunsSingleGetResponseDataMetaErrorsItem']]):
     """
 
     errors: Unset | list["TestrunsSingleGetResponseDataMetaErrorsItem"] = UNSET

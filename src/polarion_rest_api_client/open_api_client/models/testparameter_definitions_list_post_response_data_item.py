@@ -23,8 +23,9 @@ T = TypeVar("T", bound="TestparameterDefinitionsListPostResponseDataItem")
 
 @_attrs_define
 class TestparameterDefinitionsListPostResponseDataItem:
-    """Attributes
-    type (Union[Unset, TestparameterDefinitionsListPostResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    TestparameterDefinitionsListPostResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestParamDefinition.
     links (Union[Unset, TestparameterDefinitionsListPostResponseDataItemLinks]):
     """

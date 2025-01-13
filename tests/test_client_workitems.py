@@ -34,16 +34,16 @@ def test_get_one_work_item(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_WI_SINGLE_RESPONSE, encoding="utf8") as f:
-        httpx_mock.add_response(json=json.load(f))
-
-    work_item = client.work_items.get("MyWorkItemId")
-
     query = {
         "fields[workitems]": "@all",
         "fields[workitem_attachments]": "@all",
         "fields[linkedworkitems]": "@all",
     }
+    with open(TEST_WI_SINGLE_RESPONSE, encoding="utf8") as f:
+        httpx_mock.add_response(json=json.load(f))
+
+    work_item = client.work_items.get("MyWorkItemId")
+
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
@@ -63,21 +63,20 @@ def test_get_one_work_item_not_truncated(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_WI_NOT_TRUNCATED_RESPONSE, encoding="utf8") as f:
-        httpx_mock.add_response(json=json.load(f))
-
-    work_item = client.work_items.get("MyWorkItemId")
-
     query = {
         "fields[workitems]": "@all",
         "fields[workitem_attachments]": "@all",
         "fields[linkedworkitems]": "@all",
     }
+    with open(TEST_WI_NOT_TRUNCATED_RESPONSE, encoding="utf8") as f:
+        httpx_mock.add_response(json=json.load(f))
+
+    work_item = client.work_items.get("MyWorkItemId")
+
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
     assert len(reqs) == 1
-
     assert work_item is not None
     assert len(work_item.linked_work_items) == 1
     assert len(work_item.attachments) == 1
@@ -90,6 +89,12 @@ def test_get_all_work_items_multi_page(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
+    query = {
+        "fields[workitems]": "id",
+        "page[size]": "100",
+        "page[number]": "1",
+        "query": "",
+    }
     with open(TEST_WI_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
@@ -100,12 +105,6 @@ def test_get_all_work_items_multi_page(
         fields={"fields[workitems]": "id"},
     )
 
-    query = {
-        "fields[workitems]": "id",
-        "page[size]": "100",
-        "page[number]": "1",
-        "query": "",
-    }
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
@@ -121,19 +120,18 @@ def test_get_all_work_items_single_page(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
-    with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
-        httpx_mock.add_response(json=json.load(f))
-
-    client._client.default_fields.workitems = "@basic,description"
-
-    work_items = client.work_items.get_all("")
-
     query = {
         "fields[workitems]": "@basic,description",
         "page[size]": "100",
         "page[number]": "1",
         "query": "",
     }
+    client._client.default_fields.workitems = "@basic,description"
+    with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
+        httpx_mock.add_response(json=json.load(f))
+
+    work_items = client.work_items.get_all("")
+
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert len(work_items) == 1
@@ -170,11 +168,11 @@ def test_get_all_work_items_faulty_item(
 ):
     with open(TEST_WI_ERROR_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
-
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
     work_items = client.work_items.get_all("")
+
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert len(work_items) == 1
@@ -186,16 +184,15 @@ def test_create_work_item(
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
+    with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
     with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
     client.work_items.create(work_item)
 
-    req = httpx_mock.get_request()
-    assert req is not None and req.method == "POST"
-    with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
+    assert (req := httpx_mock.get_request())
+    assert req.method == "POST"
     assert json.loads(req.content.decode()) == expected
 
 
@@ -204,6 +201,8 @@ def test_create_work_items_successfully(
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
+    with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
     with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
         mock_response = json.load(f)
 
@@ -212,12 +211,8 @@ def test_create_work_items_successfully(
 
     client.work_items.create(3 * [work_item])
 
-    req = httpx_mock.get_request()
-
-    assert req is not None and req.method == "POST"
-    with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
+    assert (req := httpx_mock.get_request())
+    assert req.method == "POST"
     assert json.loads(req.content.decode()) == expected
 
 
@@ -226,6 +221,8 @@ def test_create_work_item_in_document(
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
+    with open(TEST_WI_MULTI_POST_REQUEST_IN_DOC, encoding="utf8") as f:
+        expected = json.load(f)
     with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
         mock_response = json.load(f)
 
@@ -236,12 +233,8 @@ def test_create_work_item_in_document(
     )
     client.work_items.create(work_item)
 
-    req = httpx_mock.get_request()
-
-    assert req is not None and req.method == "POST"
-    with open(TEST_WI_MULTI_POST_REQUEST_IN_DOC, encoding="utf8") as f:
-        expected = json.load(f)
-
+    assert (req := httpx_mock.get_request())
+    assert req.method == "POST"
     assert json.loads(req.content.decode()) == expected
 
 
@@ -250,6 +243,8 @@ def test_create_work_items_batch_exceed_successfully(
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
+    with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
     with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
         mock_response = json.load(f)
 
@@ -260,13 +255,11 @@ def test_create_work_items_batch_exceed_successfully(
     client.work_items.create(6 * [work_item])
 
     reqs = httpx_mock.get_requests()
-
     assert len(reqs) == 2
-    assert reqs[0] is not None and reqs[0].method == "POST"
-    assert reqs[1] is not None and reqs[1].method == "POST"
-    with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
+    assert reqs[0] is not None
+    assert reqs[0].method == "POST"
+    assert reqs[1] is not None
+    assert reqs[1].method == "POST"
     assert json.loads(reqs[0].content.decode()) == expected
     assert json.loads(reqs[1].content.decode()) == expected
 
@@ -308,12 +301,16 @@ def test_create_work_items_slit_by_content_size_successfully(
 
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 3
-    assert reqs[0] is not None and reqs[0].method == "POST"
-    assert len(json.loads(reqs[0].content.decode("utf-8"))["data"]) == 3
-    assert reqs[1] is not None and reqs[1].method == "POST"
-    assert len(json.loads(reqs[1].content.decode("utf-8"))["data"]) == 2
-    assert reqs[2] is not None and reqs[2].method == "POST"
-    assert len(json.loads(reqs[2].content.decode("utf-8"))["data"]) == 1
+    req, req1, req2 = reqs
+    assert req is not None
+    assert req.method == "POST"
+    assert len(json.loads(req.content.decode("utf-8"))["data"]) == 3
+    assert req1 is not None
+    assert req1.method == "POST"
+    assert len(json.loads(req1.content.decode("utf-8"))["data"]) == 2
+    assert req2 is not None
+    assert req2.method == "POST"
+    assert len(json.loads(req2.content.decode("utf-8"))["data"]) == 1
     assert all(wi.id == "MyWorkItemId" for wi in work_items)
     assert all(len(req.content) <= 2 * 1024**2 for req in reqs)
 
@@ -330,6 +327,7 @@ def test_create_work_items_content_exceed_error(
         status="open",
         additional_attributes={"capella_uuid": "asdfg"},
     )
+
     with pytest.raises(polarion_api.PolarionWorkItemException) as exc_info:
         client.work_items.create(3 * [work_item, work_item_long])
 
@@ -387,23 +385,23 @@ def test_update_work_item_completely(
     work_item_patch: polarion_api.WorkItem,
 ):
     httpx_mock.add_response(204)
+    with open(TEST_WI_PATCH_COMPLETELY_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
 
     client.work_items.update(work_item_patch)
 
-    req = httpx_mock.get_request()
-
-    assert req is not None
+    assert (req := httpx_mock.get_request())
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
-    with open(TEST_WI_PATCH_COMPLETELY_REQUEST, encoding="utf8") as f:
-        assert json.loads(req.content.decode()) == json.load(f)
+    assert json.loads(req.content.decode()) == expected_request
 
 
 def test_update_work_item_description(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
+    with open(TEST_WI_PATCH_DESCRIPTION_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
 
     client.work_items.update(
         polarion_api.WorkItem(
@@ -412,30 +410,27 @@ def test_update_work_item_description(
         )
     )
 
-    req = httpx_mock.get_request()
-    assert req is not None
+    assert (req := httpx_mock.get_request())
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
-    with open(TEST_WI_PATCH_DESCRIPTION_REQUEST, encoding="utf8") as f:
-        assert json.loads(req.content.decode()) == json.load(f)
+    assert json.loads(req.content.decode()) == expected_request
 
 
 def test_update_work_item_title(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
+    with open(TEST_WI_PATCH_TITLE_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
 
     client.work_items.update(
         polarion_api.WorkItem(id="MyWorkItemId", title="Title")
     )
 
-    req = httpx_mock.get_request()
-    assert req is not None
+    assert (req := httpx_mock.get_request())
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
-    with open(TEST_WI_PATCH_TITLE_REQUEST, encoding="utf8") as f:
-        assert json.loads(req.content.decode()) == json.load(f)
+    assert json.loads(req.content.decode()) == expected_request
 
 
 def test_update_work_item_status(
@@ -443,65 +438,63 @@ def test_update_work_item_status(
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
     httpx_mock.add_response(204)
+    with open(TEST_WI_PATCH_STATUS_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
 
     client.work_items.update(
         polarion_api.WorkItem(id="MyWorkItemId", status="open")
     )
 
-    req = httpx_mock.get_request()
-
-    assert req is not None
+    assert (req := httpx_mock.get_request())
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.method == "PATCH"
     assert len(req.url.params) == 0
-    with open(TEST_WI_PATCH_STATUS_REQUEST, encoding="utf8") as f:
-        assert json.loads(req.content.decode()) == json.load(f)
+    assert json.loads(req.content.decode()) == expected_request
 
 
 def test_update_work_item_type(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
+    with open(TEST_WI_PATCH_STATUS_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
 
     client.work_items.update(
         polarion_api.WorkItem(id="MyWorkItemId", type="newType", status="open")
     )
 
-    req = httpx_mock.get_request()
-    assert req is not None
+    assert (req := httpx_mock.get_request())
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId")
     assert req.url.params["changeTypeTo"] == "newType"
     assert req.method == "PATCH"
-    with open(TEST_WI_PATCH_STATUS_REQUEST, encoding="utf8") as f:
-        assert json.loads(req.content.decode()) == json.load(f)
+    assert json.loads(req.content.decode()) == expected_request
 
 
 def test_delete_work_item_status_mode(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
+    with open(TEST_WI_PATCH_STATUS_DELETED_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
 
     client.work_items.delete(polarion_api.WorkItem("MyWorkItemId"))
 
-    req = httpx_mock.get_request()
-    assert req is not None and req.method == "PATCH"
-    with open(TEST_WI_PATCH_STATUS_DELETED_REQUEST, encoding="utf8") as f:
-        assert json.loads(req.content.decode()) == json.load(f)
+    assert (req := httpx_mock.get_request())
+    assert req.method == "PATCH"
+    assert json.loads(req.content.decode()) == expected_request
 
 
 def test_delete_work_item_delete_mode(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
-
     client.work_items.delete_status = None
+    with open(TEST_WI_DELETE_REQUEST, encoding="utf8") as f:
+        expected_request = json.load(f)
 
     client.work_items.delete(polarion_api.WorkItem("MyWorkItemId"))
 
     req = httpx_mock.get_request()
-    assert req is not None and req.method == "DELETE"
-    with open(TEST_WI_DELETE_REQUEST, encoding="utf8") as f:
-        assert json.loads(req.content.decode()) == json.load(f)
+    assert req is not None
+    assert req.method == "DELETE"
+    assert json.loads(req.content.decode()) == expected_request

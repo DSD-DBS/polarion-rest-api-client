@@ -49,61 +49,68 @@ def fix_spec(src: str, path: str | os.PathLike):
         with open(path) as f:
             spec = json.load(f)
     elif src == "url":
+        assert isinstance(path, httpx.URL)
         response = httpx.get(path)
         spec = response.json()
     else:
         raise Exception(
             "you have to provide a file or url keyword as 1st arg."
         )
+
     spec_paths = spec["paths"]
+    octet_schema = spec_paths.get(
+        "/projects/{projectId}/testruns/{testRunId}/actions/importXUnitTestResults",
+        {},
+    )
     if (
-        octet_schema := spec_paths.get(
-            "/projects/{projectId}/testruns/{testRunId}/actions/importXUnitTestResults",
-            {},
-        )
-        .get("post", {})
+        octet_schema
+        and octet_schema.get("post", {})
         .get("requestBody", {})
         .get("content", {})
         .get("application/octet-stream", {})
         .get("schema")
-    ):
-        if octet_schema.get("type") == "object":
-            octet_schema["type"] = "string"
-            octet_schema["format"] = "binary"
+    ) and octet_schema.get("type") == "object":
+        octet_schema["type"] = "string"
+        octet_schema["format"] = "binary"
 
     for spec_path in spec_paths.values():
         for operation_description in spec_path.values():
-            if responses := operation_description.get("responses"):
-                if "4XX-5XX" in responses:
-                    for code, resp in responses.items():
-                        if error_code_pattern.fullmatch(code):
-                            resp["content"] = responses["4XX-5XX"]["content"]
-                    del responses["4XX-5XX"]
+            responses = operation_description.get("responses")
+            if responses is not None and "4XX-5XX" in responses:
+                for code, resp in responses.items():
+                    if error_code_pattern.fullmatch(code):
+                        resp["content"] = responses["4XX-5XX"]["content"]
+
+                del responses["4XX-5XX"]
 
     schemas = spec["components"]["schemas"]
+    downloads = schemas.get("jobsSingleGetResponse", {})
     if (
-        downloads := schemas.get("jobsSingleGetResponse", {})
-        .get("properties", {})
+        downloads
+        and downloads.get("properties", {})
         .get("data", {})
         .get("properties", {})
         .get("links", {})
         .get("properties", {})
         .get("downloads")
+        and "items" not in downloads
+        and downloads.get("type") == "array"
     ):
-        if "items" not in downloads and downloads.get("type") == "array":
-            downloads["items"] = {"type": "string"}
+        downloads["items"] = {"type": "string"}
 
+    downloads = schemas.get("jobsSinglePostResponse", {})
     if (
-        downloads := schemas.get("jobsSinglePostResponse", {})
-        .get("properties", {})
+        downloads
+        and downloads.get("properties", {})
         .get("data", {})
         .get("properties", {})
         .get("links", {})
         .get("properties", {})
         .get("downloads")
+        and "items" not in downloads
+        and downloads.get("type") == "array"
     ):
-        if "items" not in downloads and downloads.get("type") == "array":
-            downloads["items"] = {"type": "string"}
+        downloads["items"] = {"type": "string"}
 
     if (
         error_source := schemas.get("errors", {})

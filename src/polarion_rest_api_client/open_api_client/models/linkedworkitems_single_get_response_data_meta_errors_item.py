@@ -19,8 +19,10 @@ T = TypeVar("T", bound="LinkedworkitemsSingleGetResponseDataMetaErrorsItem")
 
 @_attrs_define
 class LinkedworkitemsSingleGetResponseDataMetaErrorsItem:
-    """Attributes
-    detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
+    """Attributes detail (Union[Unset, str]): Human-readable explanation
+    specific to this occurrence of the problem.
+
+    Example:
         Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).
     source (Union[Unset, LinkedworkitemsSingleGetResponseDataMetaErrorsItemSource]):
     status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.
@@ -72,7 +74,9 @@ class LinkedworkitemsSingleGetResponseDataMetaErrorsItem:
         detail = d.pop("detail", UNSET)
 
         _source = d.pop("source", UNSET)
-        source: Unset | LinkedworkitemsSingleGetResponseDataMetaErrorsItemSource
+        source: (
+            Unset | LinkedworkitemsSingleGetResponseDataMetaErrorsItemSource
+        )
         if isinstance(_source, Unset):
             source = UNSET
         else:

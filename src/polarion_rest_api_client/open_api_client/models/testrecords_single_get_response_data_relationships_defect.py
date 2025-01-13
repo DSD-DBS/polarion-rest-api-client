@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestrecordsSingleGetResponseDataRelationshipsDefect")
 
 @_attrs_define
 class TestrecordsSingleGetResponseDataRelationshipsDefect:
-    """Attributes
-    data (Union[Unset, TestrecordsSingleGetResponseDataRelationshipsDefectData]):
+    """Attributes data (Union[Unset,
+    TestrecordsSingleGetResponseDataRelationshipsDefectData]):
     """
 
     data: Union[

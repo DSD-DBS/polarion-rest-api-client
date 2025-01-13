@@ -25,10 +25,11 @@ T = TypeVar("T", bound="EnumOptionsActionResponseBody")
 
 @_attrs_define
 class EnumOptionsActionResponseBody:
-    """Attributes
-    data (Union[Unset, List['EnumOptionsActionResponseBodyDataItem']]):
-    links (Union[Unset, EnumOptionsActionResponseBodyLinks]):
-    meta (Union[Unset, EnumOptionsActionResponseBodyMeta]):
+    """Attributes data (Union[Unset,
+    List['EnumOptionsActionResponseBodyDataItem']]):
+
+    links (Union[Unset, EnumOptionsActionResponseBodyLinks]): meta
+    (Union[Unset, EnumOptionsActionResponseBodyMeta]):
     """
 
     data: Unset | list["EnumOptionsActionResponseBodyDataItem"] = UNSET

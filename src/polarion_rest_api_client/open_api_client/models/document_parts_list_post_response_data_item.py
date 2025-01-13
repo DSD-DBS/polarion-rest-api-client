@@ -23,8 +23,9 @@ T = TypeVar("T", bound="DocumentPartsListPostResponseDataItem")
 
 @_attrs_define
 class DocumentPartsListPostResponseDataItem:
-    """Attributes
-    type (Union[Unset, DocumentPartsListPostResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    DocumentPartsListPostResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
     links (Union[Unset, DocumentPartsListPostResponseDataItemLinks]):
     """

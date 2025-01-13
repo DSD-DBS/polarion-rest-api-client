@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TeststepResultsListGetResponseDataItemRelationships")
 
 @_attrs_define
 class TeststepResultsListGetResponseDataItemRelationships:
-    """Attributes
-    test_step (Union[Unset, TeststepResultsListGetResponseDataItemRelationshipsTestStep]):
+    """Attributes test_step (Union[Unset,
+    TeststepResultsListGetResponseDataItemRelationshipsTestStep]):
     """
 
     test_step: Union[
@@ -51,7 +51,9 @@ class TeststepResultsListGetResponseDataItemRelationships:
 
         d = src_dict.copy()
         _test_step = d.pop("testStep", UNSET)
-        test_step: Unset | TeststepResultsListGetResponseDataItemRelationshipsTestStep
+        test_step: (
+            Unset | TeststepResultsListGetResponseDataItemRelationshipsTestStep
+        )
         if isinstance(_test_step, Unset):
             test_step = UNSET
         else:

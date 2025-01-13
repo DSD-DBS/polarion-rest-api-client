@@ -20,15 +20,18 @@ T = TypeVar(
 
 @_attrs_define
 class TestrecordAttachmentsListGetResponseDataItemRelationshipsProjectData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId.
+    """Attributes id (Union[Unset, str]):  Example: MyProjectId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, TestrecordAttachmentsListGetResponseDataItemRelationshipsProjectDataType]):
     """
 
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
-    type: Unset | TestrecordAttachmentsListGetResponseDataItemRelationshipsProjectDataType = UNSET
+    type: (
+        Unset
+        | TestrecordAttachmentsListGetResponseDataItemRelationshipsProjectDataType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -62,7 +65,10 @@ class TestrecordAttachmentsListGetResponseDataItemRelationshipsProjectData:
         revision = d.pop("revision", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | TestrecordAttachmentsListGetResponseDataItemRelationshipsProjectDataType
+        type: (
+            Unset
+            | TestrecordAttachmentsListGetResponseDataItemRelationshipsProjectDataType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

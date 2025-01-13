@@ -17,9 +17,7 @@ T = TypeVar("T", bound="RelationshipDataListRequest")
 
 @_attrs_define
 class RelationshipDataListRequest:
-    """Attributes
-    data (Union[Unset, List['RelationshipDataBody']]):
-    """
+    """Attributes data (Union[Unset, List['RelationshipDataBody']]):"""
 
     data: Unset | list["RelationshipDataBody"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

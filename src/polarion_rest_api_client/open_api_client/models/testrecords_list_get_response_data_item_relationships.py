@@ -25,8 +25,9 @@ T = TypeVar("T", bound="TestrecordsListGetResponseDataItemRelationships")
 
 @_attrs_define
 class TestrecordsListGetResponseDataItemRelationships:
-    """Attributes
-    defect (Union[Unset, TestrecordsListGetResponseDataItemRelationshipsDefect]):
+    """Attributes defect (Union[Unset,
+    TestrecordsListGetResponseDataItemRelationshipsDefect]):
+
     executed_by (Union[Unset, TestrecordsListGetResponseDataItemRelationshipsExecutedBy]):
     test_case (Union[Unset, TestrecordsListGetResponseDataItemRelationshipsTestCase]):
     """
@@ -92,7 +93,9 @@ class TestrecordsListGetResponseDataItemRelationships:
             )
 
         _executed_by = d.pop("executedBy", UNSET)
-        executed_by: Unset | TestrecordsListGetResponseDataItemRelationshipsExecutedBy
+        executed_by: (
+            Unset | TestrecordsListGetResponseDataItemRelationshipsExecutedBy
+        )
         if isinstance(_executed_by, Unset):
             executed_by = UNSET
         else:
@@ -101,7 +104,9 @@ class TestrecordsListGetResponseDataItemRelationships:
             )
 
         _test_case = d.pop("testCase", UNSET)
-        test_case: Unset | TestrecordsListGetResponseDataItemRelationshipsTestCase
+        test_case: (
+            Unset | TestrecordsListGetResponseDataItemRelationshipsTestCase
+        )
         if isinstance(_test_case, Unset):
             test_case = UNSET
         else:

@@ -20,13 +20,16 @@ T = TypeVar(
 
 @_attrs_define
 class WorkitemsListPostRequestDataItemRelationshipsLinkedRevisionsDataItem:
-    """Attributes
-    id (Union[Unset, str]):  Example: default/1234.
+    """Attributes id (Union[Unset, str]):  Example: default/1234.
+
     type (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsLinkedRevisionsDataItemType]):
     """
 
     id: Unset | str = UNSET
-    type: Unset | WorkitemsListPostRequestDataItemRelationshipsLinkedRevisionsDataItemType = UNSET
+    type: (
+        Unset
+        | WorkitemsListPostRequestDataItemRelationshipsLinkedRevisionsDataItemType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -54,7 +57,10 @@ class WorkitemsListPostRequestDataItemRelationshipsLinkedRevisionsDataItem:
         id = d.pop("id", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | WorkitemsListPostRequestDataItemRelationshipsLinkedRevisionsDataItemType
+        type: (
+            Unset
+            | WorkitemsListPostRequestDataItemRelationshipsLinkedRevisionsDataItemType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

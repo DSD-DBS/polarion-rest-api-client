@@ -17,12 +17,15 @@ T = TypeVar("T", bound="PlansSingleGetResponseDataAttributesHomePageContent")
 
 @_attrs_define
 class PlansSingleGetResponseDataAttributesHomePageContent:
-    """Attributes
-    type (Union[Unset, PlansSingleGetResponseDataAttributesHomePageContentType]):
+    """Attributes type (Union[Unset,
+    PlansSingleGetResponseDataAttributesHomePageContentType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 
-    type: Unset | PlansSingleGetResponseDataAttributesHomePageContentType = UNSET
+    type: Unset | PlansSingleGetResponseDataAttributesHomePageContentType = (
+        UNSET
+    )
     value: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

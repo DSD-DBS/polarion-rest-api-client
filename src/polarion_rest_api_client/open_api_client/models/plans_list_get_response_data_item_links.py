@@ -13,9 +13,10 @@ T = TypeVar("T", bound="PlansListGetResponseDataItemLinks")
 
 @_attrs_define
 class PlansListGetResponseDataItemLinks:
-    """Attributes
-    portal (Union[Unset, str]):  Example: server-host-name/application-
-        path/polarion/redirect/project/MyProjectId/plan?id=MyPlanId&revision=1234.
+    """Attributes portal (Union[Unset, str]):  Example: server-host-
+    name/application-
+    path/polarion/redirect/project/MyProjectId/plan?id=MyPlanId&revision=1234.
+
     self_ (Union[Unset, str]):  Example: server-host-name/application-
         path/projects/MyProjectId/plans/MyPlanId?revision=1234.
     """

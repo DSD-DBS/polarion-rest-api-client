@@ -17,8 +17,9 @@ T = TypeVar("T", bound="UsersListGetResponseDataItemAttributesDescription")
 
 @_attrs_define
 class UsersListGetResponseDataItemAttributesDescription:
-    """Attributes
-    type (Union[Unset, UsersListGetResponseDataItemAttributesDescriptionType]):
+    """Attributes type (Union[Unset,
+    UsersListGetResponseDataItemAttributesDescriptionType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 

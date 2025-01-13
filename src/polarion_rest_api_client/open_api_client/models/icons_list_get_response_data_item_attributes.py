@@ -13,10 +13,10 @@ T = TypeVar("T", bound="IconsListGetResponseDataItemAttributes")
 
 @_attrs_define
 class IconsListGetResponseDataItemAttributes:
-    """Attributes
-    icon_url (Union[Unset, str]):  Example: pathexample.
-    id (Union[Unset, str]):  Example: pathexample.
-    path (Union[Unset, str]):  Example: pathexample.
+    """Attributes icon_url (Union[Unset, str]):  Example: pathexample.
+
+    id (Union[Unset, str]):  Example: pathexample. path (Union[Unset,
+    str]):  Example: pathexample.
     """
 
     icon_url: Unset | str = UNSET

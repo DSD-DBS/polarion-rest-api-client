@@ -29,8 +29,9 @@ T = TypeVar("T", bound="LinkedoslcresourcesListGetResponseDataItem")
 
 @_attrs_define
 class LinkedoslcresourcesListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, LinkedoslcresourcesListGetResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    LinkedoslcresourcesListGetResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/http://server-host-
         name/ns/cm#relatedChangeRequest/http://server-host-name/application-
         path/oslc/services/projects/MyProjectId/workitems/MyWorkItemId.
@@ -120,7 +121,9 @@ class LinkedoslcresourcesListGetResponseDataItem:
         revision = d.pop("revision", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Unset | LinkedoslcresourcesListGetResponseDataItemAttributes
+        attributes: (
+            Unset | LinkedoslcresourcesListGetResponseDataItemAttributes
+        )
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:

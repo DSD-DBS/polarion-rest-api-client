@@ -29,13 +29,13 @@ T = TypeVar("T", bound="IconsListGetResponseDataItem")
 
 @_attrs_define
 class IconsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, IconsListGetResponseDataItemType]):
-    id (Union[Unset, str]):  Example: default/example.gif.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, IconsListGetResponseDataItemAttributes]):
-    links (Union[Unset, IconsListGetResponseDataItemLinks]):
-    meta (Union[Unset, IconsListGetResponseDataItemMeta]):
+    """Attributes type (Union[Unset, IconsListGetResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example: default/example.gif. revision
+    (Union[Unset, str]):  Example: 1234. attributes (Union[Unset,
+    IconsListGetResponseDataItemAttributes]): links (Union[Unset,
+    IconsListGetResponseDataItemLinks]): meta (Union[Unset,
+    IconsListGetResponseDataItemMeta]):
     """
 
     type: Unset | IconsListGetResponseDataItemType = UNSET

@@ -26,11 +26,12 @@ T = TypeVar("T", bound="ProjectsSinglePatchRequestData")
 
 @_attrs_define
 class ProjectsSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, ProjectsSinglePatchRequestDataType]):
-    id (Union[Unset, str]):  Example: MyProjectId.
-    attributes (Union[Unset, ProjectsSinglePatchRequestDataAttributes]):
-    relationships (Union[Unset, ProjectsSinglePatchRequestDataRelationships]):
+    """Attributes type (Union[Unset, ProjectsSinglePatchRequestDataType]):
+
+    id (Union[Unset, str]):  Example: MyProjectId. attributes
+    (Union[Unset, ProjectsSinglePatchRequestDataAttributes]):
+    relationships (Union[Unset,
+    ProjectsSinglePatchRequestDataRelationships]):
     """
 
     type: Unset | ProjectsSinglePatchRequestDataType = UNSET

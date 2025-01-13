@@ -114,7 +114,7 @@ def test_create_new_document(
         expected_request = json.load(f)
 
     assert len(httpx_mock.get_requests()) == 1
-    req = httpx_mock.get_request()
+    assert (req := httpx_mock.get_request())
     assert req.method == "POST"
     assert (
         req.url == "http://127.0.0.1/api/projects/PROJ/spaces/folder/documents"

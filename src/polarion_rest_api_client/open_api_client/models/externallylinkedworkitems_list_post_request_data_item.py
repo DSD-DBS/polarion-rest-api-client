@@ -23,8 +23,9 @@ T = TypeVar("T", bound="ExternallylinkedworkitemsListPostRequestDataItem")
 
 @_attrs_define
 class ExternallylinkedworkitemsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, ExternallylinkedworkitemsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    ExternallylinkedworkitemsListPostRequestDataItemType]):
+
     attributes (Union[Unset, ExternallylinkedworkitemsListPostRequestDataItemAttributes]):
     """
 
@@ -70,7 +71,9 @@ class ExternallylinkedworkitemsListPostRequestDataItem:
             type = ExternallylinkedworkitemsListPostRequestDataItemType(_type)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Unset | ExternallylinkedworkitemsListPostRequestDataItemAttributes
+        attributes: (
+            Unset | ExternallylinkedworkitemsListPostRequestDataItemAttributes
+        )
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:

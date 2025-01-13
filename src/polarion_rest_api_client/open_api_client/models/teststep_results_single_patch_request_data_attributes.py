@@ -19,8 +19,9 @@ T = TypeVar("T", bound="TeststepResultsSinglePatchRequestDataAttributes")
 
 @_attrs_define
 class TeststepResultsSinglePatchRequestDataAttributes:
-    """Attributes
-    comment (Union[Unset, TeststepResultsSinglePatchRequestDataAttributesComment]):
+    """Attributes comment (Union[Unset,
+    TeststepResultsSinglePatchRequestDataAttributesComment]):
+
     result (Union[Unset, str]):  Example: passed.
     """
 

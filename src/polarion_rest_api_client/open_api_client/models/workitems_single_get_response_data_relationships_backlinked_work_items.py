@@ -24,12 +24,18 @@ T = TypeVar(
 
 @_attrs_define
 class WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItems:
-    """Attributes
-    data (Union[Unset, List['WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItemsDataItem']]):
+    """Attributes data (Union[Unset, List['WorkitemsSingleGetResponseDataRelati
+    onshipsBacklinkedWorkItemsDataItem']]):
+
     meta (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItemsMeta]):
     """
 
-    data: Unset | list["WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItemsDataItem"] = UNSET
+    data: (
+        Unset
+        | list[
+            "WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItemsDataItem"
+        ]
+    ) = UNSET
     meta: Union[
         Unset,
         "WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItemsMeta",
@@ -80,7 +86,10 @@ class WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItems:
             data.append(data_item)
 
         _meta = d.pop("meta", UNSET)
-        meta: Unset | WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItemsMeta
+        meta: (
+            Unset
+            | WorkitemsSingleGetResponseDataRelationshipsBacklinkedWorkItemsMeta
+        )
         if isinstance(_meta, Unset):
             meta = UNSET
         else:

@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestrunCommentsSinglePatchRequest")
 
 @_attrs_define
 class TestrunCommentsSinglePatchRequest:
-    """Attributes
-    data (Union[Unset, TestrunCommentsSinglePatchRequestData]):
+    """Attributes data (Union[Unset,
+    TestrunCommentsSinglePatchRequestData]):
     """
 
     data: Union[Unset, "TestrunCommentsSinglePatchRequestData"] = UNSET

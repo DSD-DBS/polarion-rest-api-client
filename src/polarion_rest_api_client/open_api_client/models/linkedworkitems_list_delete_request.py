@@ -19,13 +19,11 @@ T = TypeVar("T", bound="LinkedworkitemsListDeleteRequest")
 
 @_attrs_define
 class LinkedworkitemsListDeleteRequest:
-    """Attributes
-    data (Union[Unset, List['LinkedworkitemsListDeleteRequestDataItem']]):
+    """Attributes data (Union[Unset,
+    List['LinkedworkitemsListDeleteRequestDataItem']]):
     """
 
-    data: Unset | list["LinkedworkitemsListDeleteRequestDataItem"] = (
-        UNSET
-    )
+    data: Unset | list["LinkedworkitemsListDeleteRequestDataItem"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

@@ -22,8 +22,9 @@ T = TypeVar("T", bound="WorkrecordsListGetResponseDataItemRelationships")
 
 @_attrs_define
 class WorkrecordsListGetResponseDataItemRelationships:
-    """Attributes
-    project (Union[Unset, WorkrecordsListGetResponseDataItemRelationshipsProject]):
+    """Attributes project (Union[Unset,
+    WorkrecordsListGetResponseDataItemRelationshipsProject]):
+
     user (Union[Unset, WorkrecordsListGetResponseDataItemRelationshipsUser]):
     """
 

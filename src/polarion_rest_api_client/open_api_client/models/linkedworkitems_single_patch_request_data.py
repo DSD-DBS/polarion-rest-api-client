@@ -23,8 +23,9 @@ T = TypeVar("T", bound="LinkedworkitemsSinglePatchRequestData")
 
 @_attrs_define
 class LinkedworkitemsSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, LinkedworkitemsSinglePatchRequestDataType]):
+    """Attributes type (Union[Unset,
+    LinkedworkitemsSinglePatchRequestDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId.
     attributes (Union[Unset, LinkedworkitemsSinglePatchRequestDataAttributes]):
     """

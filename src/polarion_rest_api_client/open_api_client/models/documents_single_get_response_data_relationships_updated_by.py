@@ -19,8 +19,8 @@ T = TypeVar("T", bound="DocumentsSingleGetResponseDataRelationshipsUpdatedBy")
 
 @_attrs_define
 class DocumentsSingleGetResponseDataRelationshipsUpdatedBy:
-    """Attributes
-    data (Union[Unset, DocumentsSingleGetResponseDataRelationshipsUpdatedByData]):
+    """Attributes data (Union[Unset,
+    DocumentsSingleGetResponseDataRelationshipsUpdatedByData]):
     """
 
     data: Union[

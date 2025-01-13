@@ -25,8 +25,9 @@ T = TypeVar("T", bound="UsersSingleGetResponseDataRelationships")
 
 @_attrs_define
 class UsersSingleGetResponseDataRelationships:
-    """Attributes
-    global_roles (Union[Unset, UsersSingleGetResponseDataRelationshipsGlobalRoles]):
+    """Attributes global_roles (Union[Unset,
+    UsersSingleGetResponseDataRelationshipsGlobalRoles]):
+
     project_roles (Union[Unset, UsersSingleGetResponseDataRelationshipsProjectRoles]):
     user_groups (Union[Unset, UsersSingleGetResponseDataRelationshipsUserGroups]):
     """
@@ -83,7 +84,9 @@ class UsersSingleGetResponseDataRelationships:
 
         d = src_dict.copy()
         _global_roles = d.pop("globalRoles", UNSET)
-        global_roles: Unset | UsersSingleGetResponseDataRelationshipsGlobalRoles
+        global_roles: (
+            Unset | UsersSingleGetResponseDataRelationshipsGlobalRoles
+        )
         if isinstance(_global_roles, Unset):
             global_roles = UNSET
         else:
@@ -94,7 +97,9 @@ class UsersSingleGetResponseDataRelationships:
             )
 
         _project_roles = d.pop("projectRoles", UNSET)
-        project_roles: Unset | UsersSingleGetResponseDataRelationshipsProjectRoles
+        project_roles: (
+            Unset | UsersSingleGetResponseDataRelationshipsProjectRoles
+        )
         if isinstance(_project_roles, Unset):
             project_roles = UNSET
         else:

@@ -23,14 +23,13 @@ T = TypeVar("T", bound="TestparameterDefinitionsListPostRequestDataItem")
 
 @_attrs_define
 class TestparameterDefinitionsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, TestparameterDefinitionsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    TestparameterDefinitionsListPostRequestDataItemType]):
+
     attributes (Union[Unset, TestparameterDefinitionsListPostRequestDataItemAttributes]):
     """
 
-    type: Unset | TestparameterDefinitionsListPostRequestDataItemType = (
-        UNSET
-    )
+    type: Unset | TestparameterDefinitionsListPostRequestDataItemType = UNSET
     attributes: Union[
         Unset, "TestparameterDefinitionsListPostRequestDataItemAttributes"
     ] = UNSET
@@ -72,7 +71,9 @@ class TestparameterDefinitionsListPostRequestDataItem:
             type = TestparameterDefinitionsListPostRequestDataItemType(_type)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Unset | TestparameterDefinitionsListPostRequestDataItemAttributes
+        attributes: (
+            Unset | TestparameterDefinitionsListPostRequestDataItemAttributes
+        )
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:

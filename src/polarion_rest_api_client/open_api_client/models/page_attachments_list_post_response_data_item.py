@@ -23,10 +23,12 @@ T = TypeVar("T", bound="PageAttachmentsListPostResponseDataItem")
 
 @_attrs_define
 class PageAttachmentsListPostResponseDataItem:
-    """Attributes
-    type (Union[Unset, PageAttachmentsListPostResponseDataItemType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyRichPageId/MyAttachmentId.
-    links (Union[Unset, PageAttachmentsListPostResponseDataItemLinks]):
+    """Attributes type (Union[Unset,
+    PageAttachmentsListPostResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MySpaceId/MyRichPageId/MyAttachmentId. links
+    (Union[Unset, PageAttachmentsListPostResponseDataItemLinks]):
     """
 
     type: Unset | PageAttachmentsListPostResponseDataItemType = UNSET

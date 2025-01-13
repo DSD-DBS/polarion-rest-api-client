@@ -32,8 +32,9 @@ T = TypeVar("T", bound="TeststepresultAttachmentsSingleGetResponseData")
 
 @_attrs_define
 class TeststepresultAttachmentsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataType]):
+    """Attributes type (Union[Unset,
+    TeststepresultAttachmentsSingleGetResponseDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/1/MyAttachmentId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataAttributes]):
@@ -42,9 +43,7 @@ class TeststepresultAttachmentsSingleGetResponseData:
     meta (Union[Unset, TeststepresultAttachmentsSingleGetResponseDataMeta]):
     """
 
-    type: Unset | TeststepresultAttachmentsSingleGetResponseDataType = (
-        UNSET
-    )
+    type: Unset | TeststepresultAttachmentsSingleGetResponseDataType = UNSET
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
     attributes: Union[
@@ -136,7 +135,9 @@ class TeststepresultAttachmentsSingleGetResponseData:
         revision = d.pop("revision", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Unset | TeststepresultAttachmentsSingleGetResponseDataAttributes
+        attributes: (
+            Unset | TeststepresultAttachmentsSingleGetResponseDataAttributes
+        )
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:
@@ -145,7 +146,9 @@ class TeststepresultAttachmentsSingleGetResponseData:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | TeststepresultAttachmentsSingleGetResponseDataRelationships
+        relationships: (
+            Unset | TeststepresultAttachmentsSingleGetResponseDataRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

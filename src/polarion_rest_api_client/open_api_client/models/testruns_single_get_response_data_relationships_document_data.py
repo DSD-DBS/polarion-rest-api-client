@@ -19,15 +19,18 @@ T = TypeVar(
 
 @_attrs_define
 class TestrunsSingleGetResponseDataRelationshipsDocumentData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
+    """Attributes id (Union[Unset, str]):  Example:
+    MyProjectId/MySpaceId/MyDocumentId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, TestrunsSingleGetResponseDataRelationshipsDocumentDataType]):
     """
 
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
-    type: Unset | TestrunsSingleGetResponseDataRelationshipsDocumentDataType = UNSET
+    type: (
+        Unset | TestrunsSingleGetResponseDataRelationshipsDocumentDataType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -61,7 +64,9 @@ class TestrunsSingleGetResponseDataRelationshipsDocumentData:
         revision = d.pop("revision", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | TestrunsSingleGetResponseDataRelationshipsDocumentDataType
+        type: (
+            Unset | TestrunsSingleGetResponseDataRelationshipsDocumentDataType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

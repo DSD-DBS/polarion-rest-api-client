@@ -25,8 +25,9 @@ T = TypeVar("T", bound="TestrunsListPatchRequestDataItemRelationships")
 
 @_attrs_define
 class TestrunsListPatchRequestDataItemRelationships:
-    """Attributes
-    document (Union[Unset, TestrunsListPatchRequestDataItemRelationshipsDocument]):
+    """Attributes document (Union[Unset,
+    TestrunsListPatchRequestDataItemRelationshipsDocument]):
+
     project_span (Union[Unset, TestrunsListPatchRequestDataItemRelationshipsProjectSpan]):
     summary_defect (Union[Unset, TestrunsListPatchRequestDataItemRelationshipsSummaryDefect]):
     """
@@ -92,7 +93,9 @@ class TestrunsListPatchRequestDataItemRelationships:
             )
 
         _project_span = d.pop("projectSpan", UNSET)
-        project_span: Unset | TestrunsListPatchRequestDataItemRelationshipsProjectSpan
+        project_span: (
+            Unset | TestrunsListPatchRequestDataItemRelationshipsProjectSpan
+        )
         if isinstance(_project_span, Unset):
             project_span = UNSET
         else:
@@ -101,7 +104,9 @@ class TestrunsListPatchRequestDataItemRelationships:
             )
 
         _summary_defect = d.pop("summaryDefect", UNSET)
-        summary_defect: Unset | TestrunsListPatchRequestDataItemRelationshipsSummaryDefect
+        summary_defect: (
+            Unset | TestrunsListPatchRequestDataItemRelationshipsSummaryDefect
+        )
         if isinstance(_summary_defect, Unset):
             summary_defect = UNSET
         else:

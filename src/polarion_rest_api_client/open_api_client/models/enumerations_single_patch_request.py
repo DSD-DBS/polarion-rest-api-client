@@ -19,9 +19,7 @@ T = TypeVar("T", bound="EnumerationsSinglePatchRequest")
 
 @_attrs_define
 class EnumerationsSinglePatchRequest:
-    """Attributes
-    data (Union[Unset, EnumerationsSinglePatchRequestData]):
-    """
+    """Attributes data (Union[Unset, EnumerationsSinglePatchRequestData]):"""
 
     data: Union[Unset, "EnumerationsSinglePatchRequestData"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

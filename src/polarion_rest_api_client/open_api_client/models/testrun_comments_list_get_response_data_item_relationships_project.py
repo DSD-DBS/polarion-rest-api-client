@@ -21,8 +21,8 @@ T = TypeVar(
 
 @_attrs_define
 class TestrunCommentsListGetResponseDataItemRelationshipsProject:
-    """Attributes
-    data (Union[Unset, TestrunCommentsListGetResponseDataItemRelationshipsProjectData]):
+    """Attributes data (Union[Unset,
+    TestrunCommentsListGetResponseDataItemRelationshipsProjectData]):
     """
 
     data: Union[
@@ -53,7 +53,10 @@ class TestrunCommentsListGetResponseDataItemRelationshipsProject:
 
         d = src_dict.copy()
         _data = d.pop("data", UNSET)
-        data: Unset | TestrunCommentsListGetResponseDataItemRelationshipsProjectData
+        data: (
+            Unset
+            | TestrunCommentsListGetResponseDataItemRelationshipsProjectData
+        )
         if isinstance(_data, Unset):
             data = UNSET
         else:

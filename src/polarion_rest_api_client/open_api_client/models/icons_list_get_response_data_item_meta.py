@@ -19,8 +19,8 @@ T = TypeVar("T", bound="IconsListGetResponseDataItemMeta")
 
 @_attrs_define
 class IconsListGetResponseDataItemMeta:
-    """Attributes
-    errors (Union[Unset, List['IconsListGetResponseDataItemMetaErrorsItem']]):
+    """Attributes errors (Union[Unset,
+    List['IconsListGetResponseDataItemMetaErrorsItem']]):
     """
 
     errors: Unset | list["IconsListGetResponseDataItemMetaErrorsItem"] = UNSET

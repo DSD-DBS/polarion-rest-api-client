@@ -19,8 +19,8 @@ T = TypeVar("T", bound="WorkitemsListPostRequestDataItemRelationshipsModule")
 
 @_attrs_define
 class WorkitemsListPostRequestDataItemRelationshipsModule:
-    """Attributes
-    data (Union[Unset, WorkitemsListPostRequestDataItemRelationshipsModuleData]):
+    """Attributes data (Union[Unset,
+    WorkitemsListPostRequestDataItemRelationshipsModuleData]):
     """
 
     data: Union[

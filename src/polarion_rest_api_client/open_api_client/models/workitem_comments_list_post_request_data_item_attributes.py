@@ -19,8 +19,8 @@ T = TypeVar("T", bound="WorkitemCommentsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class WorkitemCommentsListPostRequestDataItemAttributes:
-    """Attributes
-    resolved (Union[Unset, bool]):
+    """Attributes resolved (Union[Unset, bool]):
+
     text (Union[Unset, WorkitemCommentsListPostRequestDataItemAttributesText]):
     title (Union[Unset, str]):  Example: Title.
     """

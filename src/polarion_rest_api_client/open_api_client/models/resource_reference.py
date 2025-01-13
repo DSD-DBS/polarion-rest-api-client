@@ -13,9 +13,7 @@ T = TypeVar("T", bound="ResourceReference")
 
 @_attrs_define
 class ResourceReference:
-    """Attributes
-    contained_resource (Union[Unset, bool]):
-    """
+    """Attributes contained_resource (Union[Unset, bool]):"""
 
     contained_resource: Unset | bool = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

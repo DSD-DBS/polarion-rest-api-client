@@ -19,8 +19,8 @@ T = TypeVar("T", bound="EnumerationsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class EnumerationsListPostRequestDataItemAttributes:
-    """Attributes
-    enum_context (Union[Unset, str]):  Example: id.
+    """Attributes enum_context (Union[Unset, str]):  Example: id.
+
     enum_name (Union[Unset, str]):  Example: id.
     options (Union[Unset, List['EnumerationsListPostRequestDataItemAttributesOptionsItem']]):
     target_type (Union[Unset, str]):  Example: id.
@@ -28,7 +28,10 @@ class EnumerationsListPostRequestDataItemAttributes:
 
     enum_context: Unset | str = UNSET
     enum_name: Unset | str = UNSET
-    options: Unset | list["EnumerationsListPostRequestDataItemAttributesOptionsItem"] = UNSET
+    options: (
+        Unset
+        | list["EnumerationsListPostRequestDataItemAttributesOptionsItem"]
+    ) = UNSET
     target_type: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

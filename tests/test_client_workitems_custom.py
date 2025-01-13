@@ -17,8 +17,7 @@ from tests.conftest import (
 
 
 def test_get_all_work_items_single_page_custom_work_item(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
@@ -30,26 +29,22 @@ def test_get_all_work_items_single_page_custom_work_item(
 
 
 def test_create_work_item_custom_work_item(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
-    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
-        httpx_mock.add_response(201, json=json.load(f))
     work_item = CustomWorkItem(
         title="Title",
         description=polarion_api.HtmlContent("My text value"),
         status="open",
         type="task",
-        capella_uuid="asdfgh",
+        capella_uuid="asdfg",
     )
-
-    work_item.capella_uuid = "asdfg"
+    with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
+        expected = json.load(f)
+    with open(TEST_WI_CREATED_RESPONSE, encoding="utf8") as f:
+        httpx_mock.add_response(201, json=json.load(f))
 
     client.work_items.create(work_item)
 
-    req = httpx_mock.get_request()
+    assert (req := httpx_mock.get_request())
     assert req.method == "POST"
-    with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
-        expected = json.load(f)
-
     assert json.loads(req.content.decode()) == expected

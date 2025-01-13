@@ -19,8 +19,8 @@ T = TypeVar("T", bound="PlansListPostRequestDataItemRelationshipsParent")
 
 @_attrs_define
 class PlansListPostRequestDataItemRelationshipsParent:
-    """Attributes
-    data (Union[Unset, PlansListPostRequestDataItemRelationshipsParentData]):
+    """Attributes data (Union[Unset,
+    PlansListPostRequestDataItemRelationshipsParentData]):
     """
 
     data: Union[

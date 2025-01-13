@@ -158,6 +158,7 @@ extend-ignore = [
   "PLW2901", # `for` loop variable `_` overwritten by assignment target
   "RUF005",  # Consider iterable unpacking instead of concatenation  # false-positives with NamedTuple and overridden __add__ (i.e. Vector2D)
   "SIM108",  # Use ternary operator instead of `if`-`else`-block
+  "RUF018",  # Definition in assertions
 ]
 
 [tool.ruff.lint.extend-per-file-ignores]

@@ -13,9 +13,9 @@ T = TypeVar("T", bound="TestrunCommentsListGetResponseDataItemLinks")
 
 @_attrs_define
 class TestrunCommentsListGetResponseDataItemLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/testruns/MyTestRunId/comments/MyCommentId?revision=1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/testruns/MyTestRunId/comments/M
+    yCommentId?revision=1234.
     """
 
     self_: Unset | str = UNSET

@@ -15,22 +15,20 @@ T = TypeVar(
 
 @_attrs_define
 class EnumerationsListPostRequestDataItemAttributesOptionsItem:
-    """Attributes
-    color (Union[Unset, str]):  Example: #F9FF4D.
-    column_width (Union[Unset, str]):  Example: 90%.
-    create_defect (Union[Unset, bool]):  Example: True.
-    default (Union[Unset, bool]):  Example: True.
-    description (Union[Unset, str]):  Example: Description.
-    hidden (Union[Unset, bool]):
-    icon_url (Union[Unset, str]):  Example: /polarion/icons/default/enums/status_open.gif.
-    id (Union[Unset, str]):  Example: open.
-    min_value (Union[Unset, float]):  Example: 30.0.
-    name (Union[Unset, str]):  Example: Open.
-    opposite_name (Union[Unset, str]):  Example: Opposite Name.
-    parent (Union[Unset, bool]):  Example: True.
-    requires_signature_for_test_case_execution (Union[Unset, bool]):  Example: True.
-    template_work_item (Union[Unset, str]):  Example: exampleTemplate.
-    terminal (Union[Unset, bool]):  Example: True.
+    """Attributes color (Union[Unset, str]):  Example: #F9FF4D.
+
+    column_width (Union[Unset, str]):  Example: 90%. create_defect
+    (Union[Unset, bool]):  Example: True. default (Union[Unset, bool]):
+    Example: True. description (Union[Unset, str]):  Example:
+    Description. hidden (Union[Unset, bool]): icon_url (Union[Unset,
+    str]):  Example: /polarion/icons/default/enums/status_open.gif. id
+    (Union[Unset, str]):  Example: open. min_value (Union[Unset,
+    float]):  Example: 30.0. name (Union[Unset, str]):  Example: Open.
+    opposite_name (Union[Unset, str]):  Example: Opposite Name. parent
+    (Union[Unset, bool]):  Example: True.
+    requires_signature_for_test_case_execution (Union[Unset, bool]):
+    Example: True. template_work_item (Union[Unset, str]):  Example:
+    exampleTemplate. terminal (Union[Unset, bool]):  Example: True.
     """
 
     color: Unset | str = UNSET

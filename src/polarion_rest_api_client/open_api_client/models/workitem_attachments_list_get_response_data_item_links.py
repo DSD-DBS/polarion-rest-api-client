@@ -13,9 +13,10 @@ T = TypeVar("T", bound="WorkitemAttachmentsListGetResponseDataItemLinks")
 
 @_attrs_define
 class WorkitemAttachmentsListGetResponseDataItemLinks:
-    """Attributes
-    content (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId/content?revision=1234.
+    """Attributes content (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/workitems/MyWorkItemId/attachme
+    nts/MyAttachmentId/content?revision=1234.
+
     self_ (Union[Unset, str]):  Example: server-host-name/application-
         path/projects/MyProjectId/workitems/MyWorkItemId/attachments/MyAttachmentId?revision=1234.
     """

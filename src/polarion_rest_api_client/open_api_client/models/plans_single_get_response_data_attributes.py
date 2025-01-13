@@ -27,8 +27,8 @@ T = TypeVar("T", bound="PlansSingleGetResponseDataAttributes")
 
 @_attrs_define
 class PlansSingleGetResponseDataAttributes:
-    """Attributes
-    allowed_types (Union[Unset, List[str]]):
+    """Attributes allowed_types (Union[Unset, List[str]]):
+
     calculation_type (Union[Unset, PlansSingleGetResponseDataAttributesCalculationType]):  Example: timeBased.
     capacity (Union[Unset, float]):
     color (Union[Unset, str]):  Example: Color.
@@ -53,7 +53,9 @@ class PlansSingleGetResponseDataAttributes:
     """
 
     allowed_types: Unset | list[str] = UNSET
-    calculation_type: Unset | PlansSingleGetResponseDataAttributesCalculationType = UNSET
+    calculation_type: (
+        Unset | PlansSingleGetResponseDataAttributesCalculationType
+    ) = UNSET
     capacity: Unset | float = UNSET
     color: Unset | str = UNSET
     created: Unset | datetime.datetime = UNSET
@@ -210,7 +212,9 @@ class PlansSingleGetResponseDataAttributes:
         allowed_types = cast(list[str], d.pop("allowedTypes", UNSET))
 
         _calculation_type = d.pop("calculationType", UNSET)
-        calculation_type: Unset | PlansSingleGetResponseDataAttributesCalculationType
+        calculation_type: (
+            Unset | PlansSingleGetResponseDataAttributesCalculationType
+        )
         if isinstance(_calculation_type, Unset):
             calculation_type = UNSET
         else:
@@ -261,7 +265,9 @@ class PlansSingleGetResponseDataAttributes:
             finished_on = isoparse(_finished_on)
 
         _home_page_content = d.pop("homePageContent", UNSET)
-        home_page_content: Unset | PlansSingleGetResponseDataAttributesHomePageContent
+        home_page_content: (
+            Unset | PlansSingleGetResponseDataAttributesHomePageContent
+        )
         if isinstance(_home_page_content, Unset):
             home_page_content = UNSET
         else:

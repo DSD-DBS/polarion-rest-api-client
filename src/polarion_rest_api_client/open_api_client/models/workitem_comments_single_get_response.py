@@ -25,8 +25,8 @@ T = TypeVar("T", bound="WorkitemCommentsSingleGetResponse")
 
 @_attrs_define
 class WorkitemCommentsSingleGetResponse:
-    """Attributes
-    data (Union[Unset, WorkitemCommentsSingleGetResponseData]):
+    """Attributes data (Union[Unset, WorkitemCommentsSingleGetResponseData]):
+
     included (Union[Unset, List['WorkitemCommentsSingleGetResponseIncludedItem']]): Related entities might be
         returned, see <a href="https://docs.sw.siemens.com/en-
         US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
@@ -35,7 +35,9 @@ class WorkitemCommentsSingleGetResponse:
     """
 
     data: Union[Unset, "WorkitemCommentsSingleGetResponseData"] = UNSET
-    included: Unset | list["WorkitemCommentsSingleGetResponseIncludedItem"] = UNSET
+    included: Unset | list["WorkitemCommentsSingleGetResponseIncludedItem"] = (
+        UNSET
+    )
     links: Union[Unset, "WorkitemCommentsSingleGetResponseLinks"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

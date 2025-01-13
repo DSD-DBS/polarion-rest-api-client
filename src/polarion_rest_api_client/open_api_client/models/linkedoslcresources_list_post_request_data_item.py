@@ -23,8 +23,9 @@ T = TypeVar("T", bound="LinkedoslcresourcesListPostRequestDataItem")
 
 @_attrs_define
 class LinkedoslcresourcesListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, LinkedoslcresourcesListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    LinkedoslcresourcesListPostRequestDataItemType]):
+
     attributes (Union[Unset, LinkedoslcresourcesListPostRequestDataItemAttributes]):
     """
 
@@ -70,7 +71,9 @@ class LinkedoslcresourcesListPostRequestDataItem:
             type = LinkedoslcresourcesListPostRequestDataItemType(_type)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Unset | LinkedoslcresourcesListPostRequestDataItemAttributes
+        attributes: (
+            Unset | LinkedoslcresourcesListPostRequestDataItemAttributes
+        )
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:

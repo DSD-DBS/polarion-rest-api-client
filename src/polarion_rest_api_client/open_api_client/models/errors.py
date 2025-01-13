@@ -17,9 +17,7 @@ T = TypeVar("T", bound="Errors")
 
 @_attrs_define
 class Errors:
-    """Attributes
-    errors (Union[Unset, List['ErrorsErrorsItem']]):
-    """
+    """Attributes errors (Union[Unset, List['ErrorsErrorsItem']]):"""
 
     errors: Unset | list["ErrorsErrorsItem"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

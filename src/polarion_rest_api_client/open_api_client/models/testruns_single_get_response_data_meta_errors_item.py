@@ -19,8 +19,10 @@ T = TypeVar("T", bound="TestrunsSingleGetResponseDataMetaErrorsItem")
 
 @_attrs_define
 class TestrunsSingleGetResponseDataMetaErrorsItem:
-    """Attributes
-    detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
+    """Attributes detail (Union[Unset, str]): Human-readable explanation
+    specific to this occurrence of the problem.
+
+    Example:
         Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).
     source (Union[Unset, TestrunsSingleGetResponseDataMetaErrorsItemSource]):
     status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.

@@ -19,13 +19,17 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentPartsListPostRequestDataItemRelationshipsNextPartData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+    """Attributes id (Union[Unset, str]):  Example:
+    MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+
     type (Union[Unset, DocumentPartsListPostRequestDataItemRelationshipsNextPartDataType]):
     """
 
     id: Unset | str = UNSET
-    type: Unset | DocumentPartsListPostRequestDataItemRelationshipsNextPartDataType = UNSET
+    type: (
+        Unset
+        | DocumentPartsListPostRequestDataItemRelationshipsNextPartDataType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -53,7 +57,10 @@ class DocumentPartsListPostRequestDataItemRelationshipsNextPartData:
         id = d.pop("id", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | DocumentPartsListPostRequestDataItemRelationshipsNextPartDataType
+        type: (
+            Unset
+            | DocumentPartsListPostRequestDataItemRelationshipsNextPartDataType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

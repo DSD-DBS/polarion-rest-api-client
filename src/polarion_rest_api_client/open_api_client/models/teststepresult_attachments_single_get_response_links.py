@@ -13,9 +13,13 @@ T = TypeVar("T", bound="TeststepresultAttachmentsSingleGetResponseLinks")
 
 @_attrs_define
 class TeststepresultAttachmentsSingleGetResponseLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId
-        /testrecords/MyProjectId/MyTestcaseId/0/teststepresults/1/attachments/MyAttachmentId.
+    """Attributes.
+
+    self_ (Union[Unset, str])
+
+    Example: server-host-
+    name/application-path/projects/MyProjectId/testruns/MyTestRunId /testrecord
+    s/MyProjectId/MyTestcaseId/0/teststepresults/1/attachments/MyAttachmentId.
     """
 
     self_: Unset | str = UNSET

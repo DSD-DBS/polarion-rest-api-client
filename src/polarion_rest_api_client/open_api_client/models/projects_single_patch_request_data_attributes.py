@@ -21,8 +21,8 @@ T = TypeVar("T", bound="ProjectsSinglePatchRequestDataAttributes")
 
 @_attrs_define
 class ProjectsSinglePatchRequestDataAttributes:
-    """Attributes
-    active (Union[Unset, bool]):
+    """Attributes active (Union[Unset, bool]):
+
     color (Union[Unset, str]):  Example: Color.
     description (Union[Unset, ProjectsSinglePatchRequestDataAttributesDescription]):
     finish (Union[Unset, datetime.date]):  Example: 1970-01-01.
@@ -111,7 +111,9 @@ class ProjectsSinglePatchRequestDataAttributes:
         color = d.pop("color", UNSET)
 
         _description = d.pop("description", UNSET)
-        description: Unset | ProjectsSinglePatchRequestDataAttributesDescription
+        description: (
+            Unset | ProjectsSinglePatchRequestDataAttributesDescription
+        )
         if isinstance(_description, Unset):
             description = UNSET
         else:

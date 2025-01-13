@@ -13,10 +13,10 @@ T = TypeVar("T", bound="LinkedworkitemsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class LinkedworkitemsSingleGetResponseDataAttributes:
-    """Attributes
-    revision (Union[Unset, str]):  Example: 1234.
-    role (Union[Unset, str]):  Example: relates_to.
-    suspect (Union[Unset, bool]):
+    """Attributes revision (Union[Unset, str]):  Example: 1234.
+
+    role (Union[Unset, str]):  Example: relates_to. suspect
+    (Union[Unset, bool]):
     """
 
     revision: Unset | str = UNSET

@@ -34,8 +34,9 @@ T = TypeVar("T", bound="TestrunsListGetResponseDataItemRelationships")
 
 @_attrs_define
 class TestrunsListGetResponseDataItemRelationships:
-    """Attributes
-    author (Union[Unset, TestrunsListGetResponseDataItemRelationshipsAuthor]):
+    """Attributes author (Union[Unset,
+    TestrunsListGetResponseDataItemRelationshipsAuthor]):
+
     document (Union[Unset, TestrunsListGetResponseDataItemRelationshipsDocument]):
     project (Union[Unset, TestrunsListGetResponseDataItemRelationshipsProject]):
     project_span (Union[Unset, TestrunsListGetResponseDataItemRelationshipsProjectSpan]):
@@ -164,7 +165,9 @@ class TestrunsListGetResponseDataItemRelationships:
             )
 
         _project_span = d.pop("projectSpan", UNSET)
-        project_span: Unset | TestrunsListGetResponseDataItemRelationshipsProjectSpan
+        project_span: (
+            Unset | TestrunsListGetResponseDataItemRelationshipsProjectSpan
+        )
         if isinstance(_project_span, Unset):
             project_span = UNSET
         else:
@@ -173,7 +176,9 @@ class TestrunsListGetResponseDataItemRelationships:
             )
 
         _summary_defect = d.pop("summaryDefect", UNSET)
-        summary_defect: Unset | TestrunsListGetResponseDataItemRelationshipsSummaryDefect
+        summary_defect: (
+            Unset | TestrunsListGetResponseDataItemRelationshipsSummaryDefect
+        )
         if isinstance(_summary_defect, Unset):
             summary_defect = UNSET
         else:

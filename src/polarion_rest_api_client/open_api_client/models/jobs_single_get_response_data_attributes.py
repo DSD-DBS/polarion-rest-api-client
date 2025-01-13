@@ -19,11 +19,11 @@ T = TypeVar("T", bound="JobsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class JobsSingleGetResponseDataAttributes:
-    """Attributes
-    job_id (Union[Unset, str]):  Example: example.
-    name (Union[Unset, str]):  Example: example.
-    state (Union[Unset, str]):  Example: example.
-    status (Union[Unset, JobsSingleGetResponseDataAttributesStatus]):
+    """Attributes job_id (Union[Unset, str]):  Example: example.
+
+    name (Union[Unset, str]):  Example: example. state (Union[Unset,
+    str]):  Example: example. status (Union[Unset,
+    JobsSingleGetResponseDataAttributesStatus]):
     """
 
     job_id: Unset | str = UNSET

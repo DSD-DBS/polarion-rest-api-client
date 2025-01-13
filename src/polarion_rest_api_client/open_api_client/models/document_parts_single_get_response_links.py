@@ -13,9 +13,9 @@ T = TypeVar("T", bound="DocumentPartsSingleGetResponseLinks")
 
 @_attrs_define
 class DocumentPartsSingleGetResponseLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/spaces/MySpaceId/documents/MyDocumentId/parts/workitem_MyWorkItemId?revision=1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/spaces/MySpaceId/documents/MyDo
+    cumentId/parts/workitem_MyWorkItemId?revision=1234.
     """
 
     self_: Unset | str = UNSET

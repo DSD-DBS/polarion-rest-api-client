@@ -15,9 +15,7 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentsSingleGetResponseDataAttributesOutlineNumbering:
-    """Attributes
-    prefix (Union[Unset, str]):  Example: ABC.
-    """
+    """Attributes prefix (Union[Unset, str]):  Example: ABC."""
 
     prefix: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

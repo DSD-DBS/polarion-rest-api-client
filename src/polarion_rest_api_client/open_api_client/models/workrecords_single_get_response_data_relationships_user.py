@@ -19,9 +19,7 @@ T = TypeVar("T", bound="WorkrecordsSingleGetResponseDataRelationshipsUser")
 
 @_attrs_define
 class WorkrecordsSingleGetResponseDataRelationshipsUser:
-    """Attributes
-    data (Union[Unset, WorkrecordsSingleGetResponseDataRelationshipsUserData]):
-    """
+    """API response for GET /workrecords/{id}/relationships/user."""
 
     data: Union[
         Unset, "WorkrecordsSingleGetResponseDataRelationshipsUserData"

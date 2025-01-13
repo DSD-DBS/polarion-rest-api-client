@@ -14,13 +14,12 @@ T = TypeVar("T", bound="DocumentPartsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class DocumentPartsSingleGetResponseDataAttributes:
-    """Attributes
-    content (Union[Unset, str]):  Example: <div id="polarion_wiki macro name=module-
-        workitem;params=id=workitem_MyWorkItemId"></div>.
-    external (Union[Unset, bool]):
-    id (Union[Unset, str]):  Example: workitem_MyWorkItemId.
-    level (Union[Unset, int]):
-    type (Union[Unset, str]):  Example: workitem.
+    """Attributes content (Union[Unset, str]):  Example: <div id="polarion_wiki
+    macro name=module- workitem;params=id=workitem_MyWorkItemId"></div>.
+
+    external (Union[Unset, bool]): id (Union[Unset, str]):  Example:
+    workitem_MyWorkItemId. level (Union[Unset, int]): type (Union[Unset,
+    str]):  Example: workitem.
     """
 
     content: Unset | str = UNSET

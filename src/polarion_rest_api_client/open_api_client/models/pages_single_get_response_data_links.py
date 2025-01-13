@@ -13,9 +13,9 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataLinks")
 
 @_attrs_define
 class PagesSingleGetResponseDataLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/spaces/MySpaceId/pages/MyRichPageId?revision=1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/spaces/MySpaceId/pages/MyRichPa
+    geId?revision=1234.
     """
 
     self_: Unset | str = UNSET

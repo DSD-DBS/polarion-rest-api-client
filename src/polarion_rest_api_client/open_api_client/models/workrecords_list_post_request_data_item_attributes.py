@@ -16,11 +16,11 @@ T = TypeVar("T", bound="WorkrecordsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class WorkrecordsListPostRequestDataItemAttributes:
-    """Attributes
-    comment (Union[Unset, str]):  Example: Comment.
-    date (Union[Unset, datetime.date]):  Example: 1970-01-01.
-    time_spent (Union[Unset, str]):  Example: 5 1/2d.
-    type (Union[Unset, str]):  Example: task.
+    """Attributes comment (Union[Unset, str]):  Example: Comment.
+
+    date (Union[Unset, datetime.date]):  Example: 1970-01-01. time_spent
+    (Union[Unset, str]):  Example: 5 1/2d. type (Union[Unset, str]):
+    Example: task.
     """
 
     comment: Unset | str = UNSET

@@ -28,8 +28,9 @@ T = TypeVar("T", bound="TestrunCommentsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class TestrunCommentsSingleGetResponseDataRelationships:
-    """Attributes
-    author (Union[Unset, TestrunCommentsSingleGetResponseDataRelationshipsAuthor]):
+    """Attributes author (Union[Unset,
+    TestrunCommentsSingleGetResponseDataRelationshipsAuthor]):
+
     child_comments (Union[Unset, TestrunCommentsSingleGetResponseDataRelationshipsChildComments]):
     parent_comment (Union[Unset, TestrunCommentsSingleGetResponseDataRelationshipsParentComment]):
     project (Union[Unset, TestrunCommentsSingleGetResponseDataRelationshipsProject]):
@@ -108,7 +109,10 @@ class TestrunCommentsSingleGetResponseDataRelationships:
             )
 
         _child_comments = d.pop("childComments", UNSET)
-        child_comments: Unset | TestrunCommentsSingleGetResponseDataRelationshipsChildComments
+        child_comments: (
+            Unset
+            | TestrunCommentsSingleGetResponseDataRelationshipsChildComments
+        )
         if isinstance(_child_comments, Unset):
             child_comments = UNSET
         else:
@@ -117,7 +121,10 @@ class TestrunCommentsSingleGetResponseDataRelationships:
             )
 
         _parent_comment = d.pop("parentComment", UNSET)
-        parent_comment: Unset | TestrunCommentsSingleGetResponseDataRelationshipsParentComment
+        parent_comment: (
+            Unset
+            | TestrunCommentsSingleGetResponseDataRelationshipsParentComment
+        )
         if isinstance(_parent_comment, Unset):
             parent_comment = UNSET
         else:
@@ -126,7 +133,9 @@ class TestrunCommentsSingleGetResponseDataRelationships:
             )
 
         _project = d.pop("project", UNSET)
-        project: Unset | TestrunCommentsSingleGetResponseDataRelationshipsProject
+        project: (
+            Unset | TestrunCommentsSingleGetResponseDataRelationshipsProject
+        )
         if isinstance(_project, Unset):
             project = UNSET
         else:

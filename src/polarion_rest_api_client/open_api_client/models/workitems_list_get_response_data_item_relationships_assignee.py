@@ -22,12 +22,16 @@ T = TypeVar("T", bound="WorkitemsListGetResponseDataItemRelationshipsAssignee")
 
 @_attrs_define
 class WorkitemsListGetResponseDataItemRelationshipsAssignee:
-    """Attributes
-    data (Union[Unset, List['WorkitemsListGetResponseDataItemRelationshipsAssigneeDataItem']]):
+    """Attributes data (Union[Unset,
+    List['WorkitemsListGetResponseDataItemRelationshipsAssigneeDataItem']]):
+
     meta (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAssigneeMeta]):
     """
 
-    data: Unset | list["WorkitemsListGetResponseDataItemRelationshipsAssigneeDataItem"] = UNSET
+    data: (
+        Unset
+        | list["WorkitemsListGetResponseDataItemRelationshipsAssigneeDataItem"]
+    ) = UNSET
     meta: Union[
         Unset, "WorkitemsListGetResponseDataItemRelationshipsAssigneeMeta"
     ] = UNSET

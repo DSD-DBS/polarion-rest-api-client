@@ -19,12 +19,15 @@ T = TypeVar(
 
 @_attrs_define
 class WorkitemsListPatchRequestDataItemAttributesDescription:
-    """Attributes
-    type (Union[Unset, WorkitemsListPatchRequestDataItemAttributesDescriptionType]):
+    """Attributes type (Union[Unset,
+    WorkitemsListPatchRequestDataItemAttributesDescriptionType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 
-    type: Unset | WorkitemsListPatchRequestDataItemAttributesDescriptionType = UNSET
+    type: (
+        Unset | WorkitemsListPatchRequestDataItemAttributesDescriptionType
+    ) = UNSET
     value: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -51,7 +54,9 @@ class WorkitemsListPatchRequestDataItemAttributesDescription:
     def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Unset | WorkitemsListPatchRequestDataItemAttributesDescriptionType
+        type: (
+            Unset | WorkitemsListPatchRequestDataItemAttributesDescriptionType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

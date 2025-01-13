@@ -25,8 +25,9 @@ T = TypeVar("T", bound="DocumentPartsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class DocumentPartsSingleGetResponseDataRelationships:
-    """Attributes
-    next_part (Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsNextPart]):
+    """Attributes next_part (Union[Unset,
+    DocumentPartsSingleGetResponseDataRelationshipsNextPart]):
+
     previous_part (Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsPreviousPart]):
     work_item (Union[Unset, DocumentPartsSingleGetResponseDataRelationshipsWorkItem]):
     """
@@ -83,7 +84,9 @@ class DocumentPartsSingleGetResponseDataRelationships:
 
         d = src_dict.copy()
         _next_part = d.pop("nextPart", UNSET)
-        next_part: Unset | DocumentPartsSingleGetResponseDataRelationshipsNextPart
+        next_part: (
+            Unset | DocumentPartsSingleGetResponseDataRelationshipsNextPart
+        )
         if isinstance(_next_part, Unset):
             next_part = UNSET
         else:
@@ -92,7 +95,9 @@ class DocumentPartsSingleGetResponseDataRelationships:
             )
 
         _previous_part = d.pop("previousPart", UNSET)
-        previous_part: Unset | DocumentPartsSingleGetResponseDataRelationshipsPreviousPart
+        previous_part: (
+            Unset | DocumentPartsSingleGetResponseDataRelationshipsPreviousPart
+        )
         if isinstance(_previous_part, Unset):
             previous_part = UNSET
         else:
@@ -101,7 +106,9 @@ class DocumentPartsSingleGetResponseDataRelationships:
             )
 
         _work_item = d.pop("workItem", UNSET)
-        work_item: Unset | DocumentPartsSingleGetResponseDataRelationshipsWorkItem
+        work_item: (
+            Unset | DocumentPartsSingleGetResponseDataRelationshipsWorkItem
+        )
         if isinstance(_work_item, Unset):
             work_item = UNSET
         else:

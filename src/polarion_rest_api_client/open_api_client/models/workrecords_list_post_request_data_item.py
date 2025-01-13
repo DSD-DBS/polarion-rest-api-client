@@ -26,10 +26,11 @@ T = TypeVar("T", bound="WorkrecordsListPostRequestDataItem")
 
 @_attrs_define
 class WorkrecordsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, WorkrecordsListPostRequestDataItemType]):
-    attributes (Union[Unset, WorkrecordsListPostRequestDataItemAttributes]):
-    relationships (Union[Unset, WorkrecordsListPostRequestDataItemRelationships]):
+    """Attributes type (Union[Unset, WorkrecordsListPostRequestDataItemType]):
+
+    attributes (Union[Unset,
+    WorkrecordsListPostRequestDataItemAttributes]): relationships
+    (Union[Unset, WorkrecordsListPostRequestDataItemRelationships]):
     """
 
     type: Unset | WorkrecordsListPostRequestDataItemType = UNSET

@@ -24,8 +24,9 @@ T = TypeVar(
 
 @_attrs_define
 class WorkitemAttachmentsListGetResponseDataItemRelationships:
-    """Attributes
-    author (Union[Unset, WorkitemAttachmentsListGetResponseDataItemRelationshipsAuthor]):
+    """Attributes author (Union[Unset,
+    WorkitemAttachmentsListGetResponseDataItemRelationshipsAuthor]):
+
     project (Union[Unset, WorkitemAttachmentsListGetResponseDataItemRelationshipsProject]):
     """
 
@@ -69,7 +70,10 @@ class WorkitemAttachmentsListGetResponseDataItemRelationships:
 
         d = src_dict.copy()
         _author = d.pop("author", UNSET)
-        author: Unset | WorkitemAttachmentsListGetResponseDataItemRelationshipsAuthor
+        author: (
+            Unset
+            | WorkitemAttachmentsListGetResponseDataItemRelationshipsAuthor
+        )
         if isinstance(_author, Unset):
             author = UNSET
         else:
@@ -78,7 +82,10 @@ class WorkitemAttachmentsListGetResponseDataItemRelationships:
             )
 
         _project = d.pop("project", UNSET)
-        project: Unset | WorkitemAttachmentsListGetResponseDataItemRelationshipsProject
+        project: (
+            Unset
+            | WorkitemAttachmentsListGetResponseDataItemRelationshipsProject
+        )
         if isinstance(_project, Unset):
             project = UNSET
         else:

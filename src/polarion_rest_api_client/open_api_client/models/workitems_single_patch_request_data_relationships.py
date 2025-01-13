@@ -31,8 +31,9 @@ T = TypeVar("T", bound="WorkitemsSinglePatchRequestDataRelationships")
 
 @_attrs_define
 class WorkitemsSinglePatchRequestDataRelationships:
-    """Attributes
-    assignee (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsAssignee]):
+    """Attributes assignee (Union[Unset,
+    WorkitemsSinglePatchRequestDataRelationshipsAssignee]):
+
     categories (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsCategories]):
     linked_revisions (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsLinkedRevisions]):
     votes (Union[Unset, WorkitemsSinglePatchRequestDataRelationshipsVotes]):
@@ -126,7 +127,9 @@ class WorkitemsSinglePatchRequestDataRelationships:
             )
 
         _categories = d.pop("categories", UNSET)
-        categories: Unset | WorkitemsSinglePatchRequestDataRelationshipsCategories
+        categories: (
+            Unset | WorkitemsSinglePatchRequestDataRelationshipsCategories
+        )
         if isinstance(_categories, Unset):
             categories = UNSET
         else:
@@ -135,7 +138,9 @@ class WorkitemsSinglePatchRequestDataRelationships:
             )
 
         _linked_revisions = d.pop("linkedRevisions", UNSET)
-        linked_revisions: Unset | WorkitemsSinglePatchRequestDataRelationshipsLinkedRevisions
+        linked_revisions: (
+            Unset | WorkitemsSinglePatchRequestDataRelationshipsLinkedRevisions
+        )
         if isinstance(_linked_revisions, Unset):
             linked_revisions = UNSET
         else:

@@ -17,8 +17,8 @@ T = TypeVar("T", bound="PagesSingleGetResponseDataRelationshipsAuthorData")
 
 @_attrs_define
 class PagesSingleGetResponseDataRelationshipsAuthorData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyUserId.
+    """Attributes id (Union[Unset, str]):  Example: MyUserId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, PagesSingleGetResponseDataRelationshipsAuthorDataType]):
     """

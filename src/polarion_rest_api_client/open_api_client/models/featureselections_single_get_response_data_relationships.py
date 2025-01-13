@@ -19,8 +19,8 @@ T = TypeVar("T", bound="FeatureselectionsSingleGetResponseDataRelationships")
 
 @_attrs_define
 class FeatureselectionsSingleGetResponseDataRelationships:
-    """Attributes
-    work_item (Union[Unset, FeatureselectionsSingleGetResponseDataRelationshipsWorkItem]):
+    """Attributes work_item (Union[Unset,
+    FeatureselectionsSingleGetResponseDataRelationshipsWorkItem]):
     """
 
     work_item: Union[
@@ -51,7 +51,9 @@ class FeatureselectionsSingleGetResponseDataRelationships:
 
         d = src_dict.copy()
         _work_item = d.pop("workItem", UNSET)
-        work_item: Unset | FeatureselectionsSingleGetResponseDataRelationshipsWorkItem
+        work_item: (
+            Unset | FeatureselectionsSingleGetResponseDataRelationshipsWorkItem
+        )
         if isinstance(_work_item, Unset):
             work_item = UNSET
         else:

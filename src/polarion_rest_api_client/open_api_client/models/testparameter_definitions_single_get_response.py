@@ -25,8 +25,9 @@ T = TypeVar("T", bound="TestparameterDefinitionsSingleGetResponse")
 
 @_attrs_define
 class TestparameterDefinitionsSingleGetResponse:
-    """Attributes
-    data (Union[Unset, TestparameterDefinitionsSingleGetResponseData]):
+    """Attributes data (Union[Unset,
+    TestparameterDefinitionsSingleGetResponseData]):
+
     included (Union[Unset, List['TestparameterDefinitionsSingleGetResponseIncludedItem']]): Related entities might
         be returned, see <a href="https://docs.sw.siemens.com/en-
         US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
@@ -35,7 +36,9 @@ class TestparameterDefinitionsSingleGetResponse:
     """
 
     data: Union[Unset, "TestparameterDefinitionsSingleGetResponseData"] = UNSET
-    included: Unset | list["TestparameterDefinitionsSingleGetResponseIncludedItem"] = UNSET
+    included: (
+        Unset | list["TestparameterDefinitionsSingleGetResponseIncludedItem"]
+    ) = UNSET
     links: Union[Unset, "TestparameterDefinitionsSingleGetResponseLinks"] = (
         UNSET
     )

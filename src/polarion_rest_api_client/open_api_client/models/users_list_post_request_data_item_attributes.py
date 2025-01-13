@@ -19,8 +19,8 @@ T = TypeVar("T", bound="UsersListPostRequestDataItemAttributes")
 
 @_attrs_define
 class UsersListPostRequestDataItemAttributes:
-    """Attributes
-    id (str):  Example: MyUserId.
+    """Attributes id (str):  Example: MyUserId.
+
     description (Union[Unset, UsersListPostRequestDataItemAttributesDescription]):
     disabled_notifications (Union[Unset, bool]):
     email (Union[Unset, str]):  Example: Email.

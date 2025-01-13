@@ -15,9 +15,10 @@ T = TypeVar(
 
 @_attrs_define
 class WorkitemsSingleGetResponseDataAttributesHyperlinksItem:
-    """Attributes
-    role (Union[Unset, str]):  Example: ref_ext.
-    uri (Union[Unset, str]):  Example: https://polarion.plm.automation.siemens.com.
+    """Attributes role (Union[Unset, str]):  Example: ref_ext.
+
+    uri (Union[Unset, str]):  Example:
+    https://polarion.plm.automation.siemens.com.
     """
 
     role: Unset | str = UNSET

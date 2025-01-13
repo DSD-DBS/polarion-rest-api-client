@@ -17,8 +17,9 @@ T = TypeVar("T", bound="PlansSinglePatchRequestDataAttributesDescription")
 
 @_attrs_define
 class PlansSinglePatchRequestDataAttributesDescription:
-    """Attributes
-    type (Union[Unset, PlansSinglePatchRequestDataAttributesDescriptionType]):
+    """Attributes type (Union[Unset,
+    PlansSinglePatchRequestDataAttributesDescriptionType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 

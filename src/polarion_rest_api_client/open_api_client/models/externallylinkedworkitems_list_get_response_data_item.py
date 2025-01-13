@@ -29,8 +29,9 @@ T = TypeVar("T", bound="ExternallylinkedworkitemsListGetResponseDataItem")
 
 @_attrs_define
 class ExternallylinkedworkitemsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, ExternallylinkedworkitemsListGetResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    ExternallylinkedworkitemsListGetResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/hostname/MyProjectId/MyLinkedWorkItemId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, ExternallylinkedworkitemsListGetResponseDataItemAttributes]):
@@ -118,7 +119,9 @@ class ExternallylinkedworkitemsListGetResponseDataItem:
         revision = d.pop("revision", UNSET)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Unset | ExternallylinkedworkitemsListGetResponseDataItemAttributes
+        attributes: (
+            Unset | ExternallylinkedworkitemsListGetResponseDataItemAttributes
+        )
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:

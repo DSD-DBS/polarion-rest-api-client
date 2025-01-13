@@ -21,8 +21,9 @@ T = TypeVar("T", bound="WorkitemCommentsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class WorkitemCommentsSingleGetResponseDataAttributes:
-    """Attributes
-    created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    """Attributes created (Union[Unset, datetime.datetime]):  Example:
+    1970-01-01T00:00:00Z.
+
     id (Union[Unset, str]):  Example: MyCommentId.
     resolved (Union[Unset, bool]):
     text (Union[Unset, WorkitemCommentsSingleGetResponseDataAttributesText]):

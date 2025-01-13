@@ -19,8 +19,10 @@ T = TypeVar("T", bound="JobsSingleGetResponseDataMetaErrorsItemSource")
 
 @_attrs_define
 class JobsSingleGetResponseDataMetaErrorsItemSource:
-    """Attributes
-    parameter (Union[Unset, str]): String indicating which URI query parameter caused the error. Example: revision.
+    """Attributes parameter (Union[Unset, str]): String indicating which URI
+    query parameter caused the error.
+
+    Example: revision.
     pointer (Union[Unset, str]): JSON Pointer to the associated entity in the request document. Example: $.data.
     resource (Union[Unset, JobsSingleGetResponseDataMetaErrorsItemSourceResource]): Resource causing the error.
     """

@@ -13,9 +13,7 @@ T = TypeVar("T", bound="JobsSingleGetResponseDataRelationshipsDocumentsMeta")
 
 @_attrs_define
 class JobsSingleGetResponseDataRelationshipsDocumentsMeta:
-    """Attributes
-    total_count (Union[Unset, int]):
-    """
+    """Attributes total_count (Union[Unset, int]):"""
 
     total_count: Unset | int = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

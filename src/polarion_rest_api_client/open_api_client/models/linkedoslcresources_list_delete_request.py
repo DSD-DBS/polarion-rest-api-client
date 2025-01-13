@@ -19,8 +19,8 @@ T = TypeVar("T", bound="LinkedoslcresourcesListDeleteRequest")
 
 @_attrs_define
 class LinkedoslcresourcesListDeleteRequest:
-    """Attributes
-    data (Union[Unset, List['LinkedoslcresourcesListDeleteRequestDataItem']]):
+    """Attributes data (Union[Unset,
+    List['LinkedoslcresourcesListDeleteRequestDataItem']]):
     """
 
     data: Unset | list["LinkedoslcresourcesListDeleteRequestDataItem"] = UNSET

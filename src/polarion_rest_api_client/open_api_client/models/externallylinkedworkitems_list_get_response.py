@@ -28,8 +28,9 @@ T = TypeVar("T", bound="ExternallylinkedworkitemsListGetResponse")
 
 @_attrs_define
 class ExternallylinkedworkitemsListGetResponse:
-    """Attributes
-    data (Union[Unset, List['ExternallylinkedworkitemsListGetResponseDataItem']]):
+    """Attributes data (Union[Unset,
+    List['ExternallylinkedworkitemsListGetResponseDataItem']]):
+
     included (Union[Unset, List['ExternallylinkedworkitemsListGetResponseIncludedItem']]): Related entities might be
         returned, see <a href="https://docs.sw.siemens.com/en-
         US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
@@ -38,8 +39,12 @@ class ExternallylinkedworkitemsListGetResponse:
     meta (Union[Unset, ExternallylinkedworkitemsListGetResponseMeta]):
     """
 
-    data: Unset | list["ExternallylinkedworkitemsListGetResponseDataItem"] = UNSET
-    included: Unset | list["ExternallylinkedworkitemsListGetResponseIncludedItem"] = UNSET
+    data: Unset | list["ExternallylinkedworkitemsListGetResponseDataItem"] = (
+        UNSET
+    )
+    included: (
+        Unset | list["ExternallylinkedworkitemsListGetResponseIncludedItem"]
+    ) = UNSET
     links: Union[Unset, "ExternallylinkedworkitemsListGetResponseLinks"] = (
         UNSET
     )

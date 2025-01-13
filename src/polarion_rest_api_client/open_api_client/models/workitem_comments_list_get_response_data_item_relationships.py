@@ -28,8 +28,9 @@ T = TypeVar("T", bound="WorkitemCommentsListGetResponseDataItemRelationships")
 
 @_attrs_define
 class WorkitemCommentsListGetResponseDataItemRelationships:
-    """Attributes
-    author (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsAuthor]):
+    """Attributes author (Union[Unset,
+    WorkitemCommentsListGetResponseDataItemRelationshipsAuthor]):
+
     child_comments (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsChildComments]):
     parent_comment (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsParentComment]):
     project (Union[Unset, WorkitemCommentsListGetResponseDataItemRelationshipsProject]):
@@ -101,7 +102,9 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
 
         d = src_dict.copy()
         _author = d.pop("author", UNSET)
-        author: Unset | WorkitemCommentsListGetResponseDataItemRelationshipsAuthor
+        author: (
+            Unset | WorkitemCommentsListGetResponseDataItemRelationshipsAuthor
+        )
         if isinstance(_author, Unset):
             author = UNSET
         else:
@@ -110,7 +113,10 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
             )
 
         _child_comments = d.pop("childComments", UNSET)
-        child_comments: Unset | WorkitemCommentsListGetResponseDataItemRelationshipsChildComments
+        child_comments: (
+            Unset
+            | WorkitemCommentsListGetResponseDataItemRelationshipsChildComments
+        )
         if isinstance(_child_comments, Unset):
             child_comments = UNSET
         else:
@@ -119,7 +125,10 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
             )
 
         _parent_comment = d.pop("parentComment", UNSET)
-        parent_comment: Unset | WorkitemCommentsListGetResponseDataItemRelationshipsParentComment
+        parent_comment: (
+            Unset
+            | WorkitemCommentsListGetResponseDataItemRelationshipsParentComment
+        )
         if isinstance(_parent_comment, Unset):
             parent_comment = UNSET
         else:
@@ -128,7 +137,9 @@ class WorkitemCommentsListGetResponseDataItemRelationships:
             )
 
         _project = d.pop("project", UNSET)
-        project: Unset | WorkitemCommentsListGetResponseDataItemRelationshipsProject
+        project: (
+            Unset | WorkitemCommentsListGetResponseDataItemRelationshipsProject
+        )
         if isinstance(_project, Unset):
             project = UNSET
         else:

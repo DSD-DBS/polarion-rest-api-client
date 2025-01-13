@@ -26,10 +26,11 @@ T = TypeVar("T", bound="PlansListPostRequestDataItem")
 
 @_attrs_define
 class PlansListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, PlansListPostRequestDataItemType]):
+    """Attributes type (Union[Unset, PlansListPostRequestDataItemType]):
+
     attributes (Union[Unset, PlansListPostRequestDataItemAttributes]):
-    relationships (Union[Unset, PlansListPostRequestDataItemRelationships]):
+    relationships (Union[Unset,
+    PlansListPostRequestDataItemRelationships]):
     """
 
     type: Unset | PlansListPostRequestDataItemType = UNSET

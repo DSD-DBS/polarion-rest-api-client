@@ -21,8 +21,8 @@ T = TypeVar("T", bound="PostDocumentAttachmentsRequestBody")
 
 @_attrs_define
 class PostDocumentAttachmentsRequestBody:
-    """Attributes
-    files (Union[Unset, List[File]]):
+    """Attributes files (Union[Unset, List[File]]):
+
     resource (Union[Unset, DocumentAttachmentsListPostRequest]):
     """
 

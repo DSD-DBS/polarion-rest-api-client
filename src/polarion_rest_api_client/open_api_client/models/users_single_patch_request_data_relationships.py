@@ -25,8 +25,9 @@ T = TypeVar("T", bound="UsersSinglePatchRequestDataRelationships")
 
 @_attrs_define
 class UsersSinglePatchRequestDataRelationships:
-    """Attributes
-    global_roles (Union[Unset, UsersSinglePatchRequestDataRelationshipsGlobalRoles]):
+    """Attributes global_roles (Union[Unset,
+    UsersSinglePatchRequestDataRelationshipsGlobalRoles]):
+
     project_roles (Union[Unset, UsersSinglePatchRequestDataRelationshipsProjectRoles]):
     user_groups (Union[Unset, UsersSinglePatchRequestDataRelationshipsUserGroups]):
     """
@@ -83,7 +84,9 @@ class UsersSinglePatchRequestDataRelationships:
 
         d = src_dict.copy()
         _global_roles = d.pop("globalRoles", UNSET)
-        global_roles: Unset | UsersSinglePatchRequestDataRelationshipsGlobalRoles
+        global_roles: (
+            Unset | UsersSinglePatchRequestDataRelationshipsGlobalRoles
+        )
         if isinstance(_global_roles, Unset):
             global_roles = UNSET
         else:
@@ -94,7 +97,9 @@ class UsersSinglePatchRequestDataRelationships:
             )
 
         _project_roles = d.pop("projectRoles", UNSET)
-        project_roles: Unset | UsersSinglePatchRequestDataRelationshipsProjectRoles
+        project_roles: (
+            Unset | UsersSinglePatchRequestDataRelationshipsProjectRoles
+        )
         if isinstance(_project_roles, Unset):
             project_roles = UNSET
         else:

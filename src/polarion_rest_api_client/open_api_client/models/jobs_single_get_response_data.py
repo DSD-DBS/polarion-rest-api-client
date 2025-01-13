@@ -32,14 +32,14 @@ T = TypeVar("T", bound="JobsSingleGetResponseData")
 
 @_attrs_define
 class JobsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, JobsSingleGetResponseDataType]):
-    id (Union[Unset, str]):  Example: MyJobId.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, JobsSingleGetResponseDataAttributes]):
-    relationships (Union[Unset, JobsSingleGetResponseDataRelationships]):
-    links (Union[Unset, JobsSingleGetResponseDataLinks]):
-    meta (Union[Unset, JobsSingleGetResponseDataMeta]):
+    """Attributes type (Union[Unset, JobsSingleGetResponseDataType]):
+
+    id (Union[Unset, str]):  Example: MyJobId. revision (Union[Unset,
+    str]):  Example: 1234. attributes (Union[Unset,
+    JobsSingleGetResponseDataAttributes]): relationships (Union[Unset,
+    JobsSingleGetResponseDataRelationships]): links (Union[Unset,
+    JobsSingleGetResponseDataLinks]): meta (Union[Unset,
+    JobsSingleGetResponseDataMeta]):
     """
 
     type: Unset | JobsSingleGetResponseDataType = UNSET

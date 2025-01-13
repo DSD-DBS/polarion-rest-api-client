@@ -19,12 +19,15 @@ T = TypeVar(
 
 @_attrs_define
 class TeststepResultsListPostRequestDataItemAttributesComment:
-    """Attributes
-    type (Union[Unset, TeststepResultsListPostRequestDataItemAttributesCommentType]):
+    """Attributes type (Union[Unset,
+    TeststepResultsListPostRequestDataItemAttributesCommentType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 
-    type: Unset | TeststepResultsListPostRequestDataItemAttributesCommentType = UNSET
+    type: (
+        Unset | TeststepResultsListPostRequestDataItemAttributesCommentType
+    ) = UNSET
     value: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -51,7 +54,9 @@ class TeststepResultsListPostRequestDataItemAttributesComment:
     def from_dict(cls: builtins.type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
-        type: Unset | TeststepResultsListPostRequestDataItemAttributesCommentType
+        type: (
+            Unset | TeststepResultsListPostRequestDataItemAttributesCommentType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

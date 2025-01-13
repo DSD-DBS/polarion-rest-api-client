@@ -17,12 +17,15 @@ T = TypeVar("T", bound="TeststepresultAttachmentsListDeleteRequestDataItem")
 
 @_attrs_define
 class TeststepresultAttachmentsListDeleteRequestDataItem:
-    """Attributes
-    type (Union[Unset, TeststepresultAttachmentsListDeleteRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    TeststepresultAttachmentsListDeleteRequestDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/1/MyAttachmentId.
     """
 
-    type: Unset | TeststepresultAttachmentsListDeleteRequestDataItemType = UNSET
+    type: Unset | TeststepresultAttachmentsListDeleteRequestDataItemType = (
+        UNSET
+    )
     id: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

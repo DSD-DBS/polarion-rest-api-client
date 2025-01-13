@@ -23,8 +23,9 @@ T = TypeVar("T", bound="TeststepresultAttachmentsListPostRequestDataItem")
 
 @_attrs_define
 class TeststepresultAttachmentsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, TeststepresultAttachmentsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    TeststepresultAttachmentsListPostRequestDataItemType]):
+
     attributes (Union[Unset, TeststepresultAttachmentsListPostRequestDataItemAttributes]):
     lid (Union[Unset, str]):
     """
@@ -76,7 +77,9 @@ class TeststepresultAttachmentsListPostRequestDataItem:
             type = TeststepresultAttachmentsListPostRequestDataItemType(_type)
 
         _attributes = d.pop("attributes", UNSET)
-        attributes: Unset | TeststepresultAttachmentsListPostRequestDataItemAttributes
+        attributes: (
+            Unset | TeststepresultAttachmentsListPostRequestDataItemAttributes
+        )
         if isinstance(_attributes, Unset):
             attributes = UNSET
         else:

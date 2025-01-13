@@ -17,9 +17,7 @@ T = TypeVar("T", bound="RelationshipDataSingleResponse")
 
 @_attrs_define
 class RelationshipDataSingleResponse:
-    """Attributes
-    data (Union[Unset, RelationshipDataBody]):
-    """
+    """Attributes data (Union[Unset, RelationshipDataBody]):"""
 
     data: Union[Unset, "RelationshipDataBody"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

@@ -36,13 +36,14 @@ def _extract_data_from_request(
 
 
 def test_get_work_item_attachments_single_page(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
-    with open(
-        TEST_WIA_NO_NEXT_PAGE_RESPONSE,
-        encoding="utf8",
-    ) as f:
+    query = {
+        "fields[workitem_attachments]": "id,title",
+        "page[size]": "100",
+        "page[number]": "1",
+    }
+    with open(TEST_WIA_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
     work_item_attachments = client.work_items.attachments.get_all(
@@ -50,12 +51,7 @@ def test_get_work_item_attachments_single_page(
         fields={"fields[workitem_attachments]": "id,title"},
     )
 
-    query = {
-        "fields[workitem_attachments]": "id,title",
-        "page[size]": "100",
-        "page[number]": "1",
-    }
-    reqs = httpx_mock.get_requests()
+    assert (reqs := httpx_mock.get_requests())
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
     assert len(work_item_attachments) == 1
@@ -66,30 +62,23 @@ def test_get_work_item_attachments_single_page(
 
 
 def test_get_work_item_attachments_multi_page(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
-    with open(
-        TEST_WIA_NEXT_PAGE_RESPONSE,
-        encoding="utf8",
-    ) as f:
+    query = {
+        "fields[workitem_attachments]": "@basic",
+        "page[size]": "100",
+        "page[number]": "1",
+    }
+    with open(TEST_WIA_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
-    with open(
-        TEST_WIA_NO_NEXT_PAGE_RESPONSE,
-        encoding="utf8",
-    ) as f:
+    with open(TEST_WIA_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
     work_items_attachments = client.work_items.attachments.get_all(
         "MyWorkItemId"
     )
 
-    query = {
-        "fields[workitem_attachments]": "@basic",
-        "page[size]": "100",
-        "page[number]": "1",
-    }
-    reqs = httpx_mock.get_requests()
+    assert (reqs := httpx_mock.get_requests())
     assert len(reqs) == 2
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
@@ -100,8 +89,7 @@ def test_get_work_item_attachments_multi_page(
 
 
 def test_delete_work_item_attachment(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
 
@@ -109,9 +97,8 @@ def test_delete_work_item_attachment(
         polarion_api.WorkItemAttachment("MyWorkItemId", "Attachment", "Title")
     )
 
-    req = httpx_mock.get_request()
-
-    assert req is not None and req.method == "DELETE"
+    assert (req := httpx_mock.get_request())
+    assert req.method == "DELETE"
     assert req.url.path.endswith(
         "PROJ/workitems/MyWorkItemId/attachments/Attachment"
     )
@@ -127,19 +114,15 @@ def test_create_single_work_item_attachment(
 
     client.work_items.attachments.create(work_item_attachment)
 
-    req = httpx_mock.get_request()
-    fields = _extract_data_from_request(req)
-    resource = fields["resource"][0]
-    files = fields["files"]
-
-    assert req is not None and req.method == "POST"
+    assert (req := httpx_mock.get_request())
+    assert req.method == "POST"
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId/attachments")
     assert work_item_attachment.id == "MyAttachmentId"
     assert work_item_attachment.content_bytes is not None
-
-    assert resource is not None
+    assert (fields := _extract_data_from_request(req))
+    assert (files := fields["files"])
     assert len(files) == 1
-
+    assert (resource := fields["resource"][0])
     assert resource.get_content_type() == "text/plain"
     assert resource.get_payload() == json.dumps(
         {
@@ -151,7 +134,6 @@ def test_create_single_work_item_attachment(
             ]
         }
     )
-
     assert files[0].get_content_type() == "text/plain"
     assert files[0].get_filename() == "test.json"
     assert files[0].get_payload() == work_item_attachment.content_bytes.decode(
@@ -175,21 +157,16 @@ def test_create_multiple_work_item_attachments(
 
     client.work_items.attachments.create(work_item_attachments)
 
-    req = httpx_mock.get_request()
-
-    assert req is not None and req.method == "POST"
+    assert (req := httpx_mock.get_request())
+    assert req.method == "POST"
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId/attachments")
-
     assert work_item_attachments[0].id == "MyAttachmentId1"
     assert work_item_attachments[1].id == "MyAttachmentId2"
     assert work_item_attachments[2].id == "MyAttachmentId3"
-
-    fields = _extract_data_from_request(req)
-    resource = fields["resource"][0]
-    files = fields["files"]
-
+    assert (fields := _extract_data_from_request(req))
+    assert (resource := fields["resource"][0])
+    assert (files := fields["files"])
     assert len(files) == 3
-
     for index, file in enumerate(files):
         assert (
             content := work_item_attachments[index - 1].content_bytes
@@ -197,7 +174,6 @@ def test_create_multiple_work_item_attachments(
         assert file.get_content_type() == "text/plain"
         assert file.get_filename() == "test.json"
         assert content.decode("utf-8")
-
     assert resource.get_content_type() == "text/plain"
     assert resource.get_payload() == json.dumps(
         {
@@ -227,12 +203,10 @@ def test_update_work_item_attachment_title(
 
     client.work_items.attachments.update(work_item_attachment)
 
-    req = httpx_mock.get_request()
-
-    fields = _extract_data_from_request(req)
-    resource = fields["resource"][0]
-
+    assert (req := httpx_mock.get_request())
+    assert (fields := _extract_data_from_request(req))
     assert "files" not in fields
+    assert (resource := fields["resource"][0])
     assert resource.get_content_type() == "text/plain"
     assert resource.get_payload() == json.dumps(
         {
@@ -257,12 +231,10 @@ def test_update_work_item_attachment_content(
 
     client.work_items.attachments.update(work_item_attachment)
 
-    req = httpx_mock.get_request()
-
-    fields = _extract_data_from_request(req)
-    resource = fields["resource"][0]
-    content = fields["content"][0]
-
+    assert (req := httpx_mock.get_request())
+    assert (fields := _extract_data_from_request(req))
+    assert (resource := fields["resource"][0])
+    assert (content := fields["content"][0])
     assert resource.get_content_type() == "text/plain"
     assert resource.get_payload() == json.dumps(
         {
@@ -273,7 +245,6 @@ def test_update_work_item_attachment_content(
             }
         }
     )
-
     assert content.get_content_type() == "text/plain"
     assert content.get_filename() == "test.json"
     assert work_item_attachment.content_bytes is not None

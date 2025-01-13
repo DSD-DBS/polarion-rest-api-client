@@ -13,10 +13,9 @@ T = TypeVar("T", bound="Pagination")
 
 @_attrs_define
 class Pagination:
-    """Attributes
-    calculated_offset (Union[Unset, int]):
-    page_number (Union[Unset, int]):
-    page_size (Union[Unset, int]):
+    """Attributes calculated_offset (Union[Unset, int]):
+
+    page_number (Union[Unset, int]): page_size (Union[Unset, int]):
     """
 
     calculated_offset: Unset | int = UNSET

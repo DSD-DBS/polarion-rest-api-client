@@ -17,12 +17,15 @@ T = TypeVar("T", bound="ExternallylinkedworkitemsListDeleteRequestDataItem")
 
 @_attrs_define
 class ExternallylinkedworkitemsListDeleteRequestDataItem:
-    """Attributes
-    type (Union[Unset, ExternallylinkedworkitemsListDeleteRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    ExternallylinkedworkitemsListDeleteRequestDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/parent/hostname/MyProjectId/MyLinkedWorkItemId.
     """
 
-    type: Unset | ExternallylinkedworkitemsListDeleteRequestDataItemType = UNSET
+    type: Unset | ExternallylinkedworkitemsListDeleteRequestDataItemType = (
+        UNSET
+    )
     id: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

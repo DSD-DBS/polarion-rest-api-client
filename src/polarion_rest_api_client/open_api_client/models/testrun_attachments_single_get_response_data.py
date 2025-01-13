@@ -32,8 +32,9 @@ T = TypeVar("T", bound="TestrunAttachmentsSingleGetResponseData")
 
 @_attrs_define
 class TestrunAttachmentsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, TestrunAttachmentsSingleGetResponseDataType]):
+    """Attributes type (Union[Unset,
+    TestrunAttachmentsSingleGetResponseDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyAttachmentId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, TestrunAttachmentsSingleGetResponseDataAttributes]):
@@ -141,7 +142,9 @@ class TestrunAttachmentsSingleGetResponseData:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | TestrunAttachmentsSingleGetResponseDataRelationships
+        relationships: (
+            Unset | TestrunAttachmentsSingleGetResponseDataRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

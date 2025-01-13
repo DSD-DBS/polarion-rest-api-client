@@ -29,12 +29,12 @@ T = TypeVar("T", bound="GlobalrolesSingleGetResponseData")
 
 @_attrs_define
 class GlobalrolesSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, GlobalrolesSingleGetResponseDataType]):
-    id (Union[Unset, str]):  Example: MyRoleId.
-    relationships (Union[Unset, GlobalrolesSingleGetResponseDataRelationships]):
-    links (Union[Unset, GlobalrolesSingleGetResponseDataLinks]):
-    meta (Union[Unset, GlobalrolesSingleGetResponseDataMeta]):
+    """Attributes type (Union[Unset, GlobalrolesSingleGetResponseDataType]):
+
+    id (Union[Unset, str]):  Example: MyRoleId. relationships
+    (Union[Unset, GlobalrolesSingleGetResponseDataRelationships]): links
+    (Union[Unset, GlobalrolesSingleGetResponseDataLinks]): meta
+    (Union[Unset, GlobalrolesSingleGetResponseDataMeta]):
     """
 
     type: Unset | GlobalrolesSingleGetResponseDataType = UNSET

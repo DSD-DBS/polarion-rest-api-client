@@ -19,8 +19,8 @@ T = TypeVar("T", bound="EnumerationsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class EnumerationsSingleGetResponseDataAttributes:
-    """Attributes
-    enum_context (Union[Unset, str]):  Example: id.
+    """Attributes enum_context (Union[Unset, str]):  Example: id.
+
     enum_name (Union[Unset, str]):  Example: id.
     options (Union[Unset, List['EnumerationsSingleGetResponseDataAttributesOptionsItem']]):
     target_type (Union[Unset, str]):  Example: id.
@@ -28,7 +28,9 @@ class EnumerationsSingleGetResponseDataAttributes:
 
     enum_context: Unset | str = UNSET
     enum_name: Unset | str = UNSET
-    options: Unset | list["EnumerationsSingleGetResponseDataAttributesOptionsItem"] = UNSET
+    options: (
+        Unset | list["EnumerationsSingleGetResponseDataAttributesOptionsItem"]
+    ) = UNSET
     target_type: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict

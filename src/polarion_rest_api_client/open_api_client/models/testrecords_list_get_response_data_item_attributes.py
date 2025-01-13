@@ -21,13 +21,14 @@ T = TypeVar("T", bound="TestrecordsListGetResponseDataItemAttributes")
 
 @_attrs_define
 class TestrecordsListGetResponseDataItemAttributes:
-    """Attributes
-    comment (Union[Unset, TestrecordsListGetResponseDataItemAttributesComment]):
-    duration (Union[Unset, float]):
-    executed (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
-    iteration (Union[Unset, int]):
-    result (Union[Unset, str]):  Example: passed.
-    test_case_revision (Union[Unset, str]):  Example: Test Case Revision.
+    """Attributes comment (Union[Unset,
+    TestrecordsListGetResponseDataItemAttributesComment]):
+
+    duration (Union[Unset, float]): executed (Union[Unset,
+    datetime.datetime]):  Example: 1970-01-01T00:00:00Z. iteration
+    (Union[Unset, int]): result (Union[Unset, str]):  Example: passed.
+    test_case_revision (Union[Unset, str]):  Example: Test Case
+    Revision.
     """
 
     comment: Union[

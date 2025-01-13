@@ -13,8 +13,9 @@ T = TypeVar("T", bound="BranchDocumentsRequestBodyDocumentConfigurationsItem")
 
 @_attrs_define
 class BranchDocumentsRequestBodyDocumentConfigurationsItem:
-    """Attributes
-    source_document (str): Reference path of the source Document. Example: MyProjectId/MySpaceId/MyDocumentId.
+    """Attributes source_document (str): Reference path of the source Document.
+
+    Example: MyProjectId/MySpaceId/MyDocumentId.
     copy_workflow_status_and_signatures (Union[Unset, bool]): Specifies that workflow status and signatures should
         be copied to the branched document.
     initialized_fields (Union[Unset, List[str]]): Specifies fields of overwritten Work Items that should be

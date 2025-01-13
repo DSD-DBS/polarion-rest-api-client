@@ -21,8 +21,8 @@ T = TypeVar("T", bound="ProjectsListGetResponseDataItemAttributes")
 
 @_attrs_define
 class ProjectsListGetResponseDataItemAttributes:
-    """Attributes
-    active (Union[Unset, bool]):
+    """Attributes active (Union[Unset, bool]):
+
     color (Union[Unset, str]):  Example: Color.
     description (Union[Unset, ProjectsListGetResponseDataItemAttributesDescription]):
     finish (Union[Unset, datetime.date]):  Example: 1970-01-01.
@@ -117,7 +117,9 @@ class ProjectsListGetResponseDataItemAttributes:
         color = d.pop("color", UNSET)
 
         _description = d.pop("description", UNSET)
-        description: Unset | ProjectsListGetResponseDataItemAttributesDescription
+        description: (
+            Unset | ProjectsListGetResponseDataItemAttributesDescription
+        )
         if isinstance(_description, Unset):
             description = UNSET
         else:

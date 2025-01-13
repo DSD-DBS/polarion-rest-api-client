@@ -32,8 +32,9 @@ T = TypeVar("T", bound="TeststepResultsListGetResponseDataItem")
 
 @_attrs_define
 class TeststepResultsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, TeststepResultsListGetResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    TeststepResultsListGetResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/1.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, TeststepResultsListGetResponseDataItemAttributes]):
@@ -141,7 +142,9 @@ class TeststepResultsListGetResponseDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | TeststepResultsListGetResponseDataItemRelationships
+        relationships: (
+            Unset | TeststepResultsListGetResponseDataItemRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

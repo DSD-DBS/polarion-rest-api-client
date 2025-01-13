@@ -4,12 +4,7 @@
 
 from collections.abc import MutableMapping
 from http import HTTPStatus
-from typing import (
-    BinaryIO,
-    Generic,
-    Literal,
-    TypeVar,
-)
+from typing import BinaryIO, Generic, Literal, TypeVar
 
 from attrs import define
 
@@ -33,8 +28,10 @@ class File:
     mime_type: str | None = None
 
     def to_tuple(self) -> FileJsonType:
-        """Return a tuple representation that httpx will accept for
-        multipart/form-data.
+        """Return a FileJSONType.
+
+        This FileJSONType is a tuple representation that httpx will
+        accept for multipart/form-data.
         """
         return self.file_name, self.payload, self.mime_type
 

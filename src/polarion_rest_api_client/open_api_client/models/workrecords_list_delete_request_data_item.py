@@ -17,9 +17,11 @@ T = TypeVar("T", bound="WorkrecordsListDeleteRequestDataItem")
 
 @_attrs_define
 class WorkrecordsListDeleteRequestDataItem:
-    """Attributes
-    type (Union[Unset, WorkrecordsListDeleteRequestDataItemType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyWorkRecordId.
+    """Attributes type (Union[Unset,
+    WorkrecordsListDeleteRequestDataItemType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MyWorkItemId/MyWorkRecordId.
     """
 
     type: Unset | WorkrecordsListDeleteRequestDataItemType = UNSET

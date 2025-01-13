@@ -32,8 +32,8 @@ T = TypeVar("T", bound="TestparametersSingleGetResponseData")
 
 @_attrs_define
 class TestparametersSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, TestparametersSingleGetResponseDataType]):
+    """Attributes type (Union[Unset, TestparametersSingleGetResponseDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyTestParameter.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, TestparametersSingleGetResponseDataAttributes]):

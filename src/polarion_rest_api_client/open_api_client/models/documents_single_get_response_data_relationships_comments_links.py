@@ -15,9 +15,9 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentsSingleGetResponseDataRelationshipsCommentsLinks:
-    """Attributes
-    related (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/spaces/MySpaceId/documents/MyDocumentId/comments?revision=1234.
+    """Attributes related (Union[Unset, str]):  Example: server-host-
+    name/application- path/projects/MyProjectId/spaces/MySpaceId/documents/MyDo
+    cumentId/comments?revision=1234.
     """
 
     related: Unset | str = UNSET

@@ -13,9 +13,7 @@ T = TypeVar("T", bound="TestrunAttachmentsSinglePatchRequestDataAttributes")
 
 @_attrs_define
 class TestrunAttachmentsSinglePatchRequestDataAttributes:
-    """Attributes
-    title (Union[Unset, str]):  Example: Title.
-    """
+    """Attributes title (Union[Unset, str]):  Example: Title."""
 
     title: Unset | str = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

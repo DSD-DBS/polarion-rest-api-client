@@ -19,8 +19,10 @@ T = TypeVar("T", bound="ErrorsErrorsItem")
 
 @_attrs_define
 class ErrorsErrorsItem:
-    """Attributes
-    status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.
+    """Attributes status (Union[Unset, str]): HTTP status code applicable to
+    this problem.
+
+    Example: 400.
     title (Union[Unset, str]): Short, human-readable summary of the problem. Example: Bad Request.
     detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
         Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).

@@ -23,8 +23,9 @@ T = TypeVar("T", bound="WorkitemCommentsSinglePatchRequestData")
 
 @_attrs_define
 class WorkitemCommentsSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, WorkitemCommentsSinglePatchRequestDataType]):
+    """Attributes type (Union[Unset,
+    WorkitemCommentsSinglePatchRequestDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyCommentId.
     attributes (Union[Unset, WorkitemCommentsSinglePatchRequestDataAttributes]):
     """

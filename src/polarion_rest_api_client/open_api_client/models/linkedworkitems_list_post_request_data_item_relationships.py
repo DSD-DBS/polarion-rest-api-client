@@ -19,8 +19,8 @@ T = TypeVar("T", bound="LinkedworkitemsListPostRequestDataItemRelationships")
 
 @_attrs_define
 class LinkedworkitemsListPostRequestDataItemRelationships:
-    """Attributes
-    work_item (Union[Unset, LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem]):
+    """Attributes work_item (Union[Unset,
+    LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem]):
     """
 
     work_item: Union[
@@ -51,7 +51,9 @@ class LinkedworkitemsListPostRequestDataItemRelationships:
 
         d = src_dict.copy()
         _work_item = d.pop("workItem", UNSET)
-        work_item: Unset | LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem
+        work_item: (
+            Unset | LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem
+        )
         if isinstance(_work_item, Unset):
             work_item = UNSET
         else:

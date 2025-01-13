@@ -19,9 +19,7 @@ T = TypeVar("T", bound="WorkitemsSinglePatchRequest")
 
 @_attrs_define
 class WorkitemsSinglePatchRequest:
-    """Attributes
-    data (Union[Unset, WorkitemsSinglePatchRequestData]):
-    """
+    """Attributes data (Union[Unset, WorkitemsSinglePatchRequestData]):"""
 
     data: Union[Unset, "WorkitemsSinglePatchRequestData"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

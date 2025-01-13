@@ -19,8 +19,8 @@ T = TypeVar("T", bound="TestrunCommentsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class TestrunCommentsListPostRequestDataItemAttributes:
-    """Attributes
-    resolved (Union[Unset, bool]):
+    """Attributes resolved (Union[Unset, bool]):
+
     text (Union[Unset, TestrunCommentsListPostRequestDataItemAttributesText]):
     title (Union[Unset, str]):  Example: Title.
     """

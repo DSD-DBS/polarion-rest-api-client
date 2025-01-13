@@ -22,8 +22,9 @@ T = TypeVar("T", bound="TestrecordsListPatchRequestDataItemRelationships")
 
 @_attrs_define
 class TestrecordsListPatchRequestDataItemRelationships:
-    """Attributes
-    defect (Union[Unset, TestrecordsListPatchRequestDataItemRelationshipsDefect]):
+    """Attributes defect (Union[Unset,
+    TestrecordsListPatchRequestDataItemRelationshipsDefect]):
+
     executed_by (Union[Unset, TestrecordsListPatchRequestDataItemRelationshipsExecutedBy]):
     """
 
@@ -76,7 +77,9 @@ class TestrecordsListPatchRequestDataItemRelationships:
             )
 
         _executed_by = d.pop("executedBy", UNSET)
-        executed_by: Unset | TestrecordsListPatchRequestDataItemRelationshipsExecutedBy
+        executed_by: (
+            Unset | TestrecordsListPatchRequestDataItemRelationshipsExecutedBy
+        )
         if isinstance(_executed_by, Unset):
             executed_by = UNSET
         else:

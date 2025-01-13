@@ -19,15 +19,18 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentsSingleGetResponseDataRelationshipsBranchedFromData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
+    """Attributes id (Union[Unset, str]):  Example:
+    MyProjectId/MySpaceId/MyDocumentId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, DocumentsSingleGetResponseDataRelationshipsBranchedFromDataType]):
     """
 
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
-    type: Unset | DocumentsSingleGetResponseDataRelationshipsBranchedFromDataType = UNSET
+    type: (
+        Unset | DocumentsSingleGetResponseDataRelationshipsBranchedFromDataType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -61,7 +64,10 @@ class DocumentsSingleGetResponseDataRelationshipsBranchedFromData:
         revision = d.pop("revision", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | DocumentsSingleGetResponseDataRelationshipsBranchedFromDataType
+        type: (
+            Unset
+            | DocumentsSingleGetResponseDataRelationshipsBranchedFromDataType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

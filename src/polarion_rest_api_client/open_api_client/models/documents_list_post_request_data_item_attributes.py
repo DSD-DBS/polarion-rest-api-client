@@ -26,8 +26,8 @@ T = TypeVar("T", bound="DocumentsListPostRequestDataItemAttributes")
 
 @_attrs_define
 class DocumentsListPostRequestDataItemAttributes:
-    """Attributes
-    auto_suspect (Union[Unset, bool]):
+    """Attributes auto_suspect (Union[Unset, bool]):
+
     home_page_content (Union[Unset, DocumentsListPostRequestDataItemAttributesHomePageContent]):
     module_name (Union[Unset, str]):  Example: MyDocumentId.
     outline_numbering (Union[Unset, DocumentsListPostRequestDataItemAttributesOutlineNumbering]):
@@ -47,7 +47,12 @@ class DocumentsListPostRequestDataItemAttributes:
     outline_numbering: Union[
         Unset, "DocumentsListPostRequestDataItemAttributesOutlineNumbering"
     ] = UNSET
-    rendering_layouts: Unset | list["DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem"] = UNSET
+    rendering_layouts: (
+        Unset
+        | list[
+            "DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem"
+        ]
+    ) = UNSET
     status: Unset | str = UNSET
     structure_link_role: Unset | str = UNSET
     title: Unset | str = UNSET
@@ -129,7 +134,9 @@ class DocumentsListPostRequestDataItemAttributes:
         auto_suspect = d.pop("autoSuspect", UNSET)
 
         _home_page_content = d.pop("homePageContent", UNSET)
-        home_page_content: Unset | DocumentsListPostRequestDataItemAttributesHomePageContent
+        home_page_content: (
+            Unset | DocumentsListPostRequestDataItemAttributesHomePageContent
+        )
         if isinstance(_home_page_content, Unset):
             home_page_content = UNSET
         else:
@@ -140,7 +147,9 @@ class DocumentsListPostRequestDataItemAttributes:
         module_name = d.pop("moduleName", UNSET)
 
         _outline_numbering = d.pop("outlineNumbering", UNSET)
-        outline_numbering: Unset | DocumentsListPostRequestDataItemAttributesOutlineNumbering
+        outline_numbering: (
+            Unset | DocumentsListPostRequestDataItemAttributesOutlineNumbering
+        )
         if isinstance(_outline_numbering, Unset):
             outline_numbering = UNSET
         else:

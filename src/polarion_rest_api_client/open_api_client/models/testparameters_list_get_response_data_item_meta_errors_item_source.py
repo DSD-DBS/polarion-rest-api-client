@@ -21,8 +21,10 @@ T = TypeVar(
 
 @_attrs_define
 class TestparametersListGetResponseDataItemMetaErrorsItemSource:
-    """Attributes
-    parameter (Union[Unset, str]): String indicating which URI query parameter caused the error. Example: revision.
+    """Attributes parameter (Union[Unset, str]): String indicating which URI
+    query parameter caused the error.
+
+    Example: revision.
     pointer (Union[Unset, str]): JSON Pointer to the associated entity in the request document. Example: $.data.
     resource (Union[Unset, TestparametersListGetResponseDataItemMetaErrorsItemSourceResource]): Resource causing the
         error.
@@ -71,7 +73,10 @@ class TestparametersListGetResponseDataItemMetaErrorsItemSource:
         pointer = d.pop("pointer", UNSET)
 
         _resource = d.pop("resource", UNSET)
-        resource: Unset | TestparametersListGetResponseDataItemMetaErrorsItemSourceResource
+        resource: (
+            Unset
+            | TestparametersListGetResponseDataItemMetaErrorsItemSourceResource
+        )
         if isinstance(_resource, Unset):
             resource = UNSET
         else:

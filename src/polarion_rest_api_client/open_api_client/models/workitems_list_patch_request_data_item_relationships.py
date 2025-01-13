@@ -31,8 +31,9 @@ T = TypeVar("T", bound="WorkitemsListPatchRequestDataItemRelationships")
 
 @_attrs_define
 class WorkitemsListPatchRequestDataItemRelationships:
-    """Attributes
-    assignee (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsAssignee]):
+    """Attributes assignee (Union[Unset,
+    WorkitemsListPatchRequestDataItemRelationshipsAssignee]):
+
     categories (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsCategories]):
     linked_revisions (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsLinkedRevisions]):
     votes (Union[Unset, WorkitemsListPatchRequestDataItemRelationshipsVotes]):
@@ -115,7 +116,9 @@ class WorkitemsListPatchRequestDataItemRelationships:
 
         d = src_dict.copy()
         _assignee = d.pop("assignee", UNSET)
-        assignee: Unset | WorkitemsListPatchRequestDataItemRelationshipsAssignee
+        assignee: (
+            Unset | WorkitemsListPatchRequestDataItemRelationshipsAssignee
+        )
         if isinstance(_assignee, Unset):
             assignee = UNSET
         else:
@@ -124,7 +127,9 @@ class WorkitemsListPatchRequestDataItemRelationships:
             )
 
         _categories = d.pop("categories", UNSET)
-        categories: Unset | WorkitemsListPatchRequestDataItemRelationshipsCategories
+        categories: (
+            Unset | WorkitemsListPatchRequestDataItemRelationshipsCategories
+        )
         if isinstance(_categories, Unset):
             categories = UNSET
         else:
@@ -133,7 +138,10 @@ class WorkitemsListPatchRequestDataItemRelationships:
             )
 
         _linked_revisions = d.pop("linkedRevisions", UNSET)
-        linked_revisions: Unset | WorkitemsListPatchRequestDataItemRelationshipsLinkedRevisions
+        linked_revisions: (
+            Unset
+            | WorkitemsListPatchRequestDataItemRelationshipsLinkedRevisions
+        )
         if isinstance(_linked_revisions, Unset):
             linked_revisions = UNSET
         else:

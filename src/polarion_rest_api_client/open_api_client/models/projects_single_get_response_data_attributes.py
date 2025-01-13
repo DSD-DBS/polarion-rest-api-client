@@ -21,8 +21,8 @@ T = TypeVar("T", bound="ProjectsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class ProjectsSingleGetResponseDataAttributes:
-    """Attributes
-    active (Union[Unset, bool]):
+    """Attributes active (Union[Unset, bool]):
+
     color (Union[Unset, str]):  Example: Color.
     description (Union[Unset, ProjectsSingleGetResponseDataAttributesDescription]):
     finish (Union[Unset, datetime.date]):  Example: 1970-01-01.

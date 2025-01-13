@@ -15,8 +15,8 @@ T = TypeVar(
 
 @_attrs_define
 class ExternallylinkedworkitemsSingleGetResponseDataAttributes:
-    """Attributes
-    role (Union[Unset, str]):  Example: relates_to.
+    """Attributes role (Union[Unset, str]):  Example: relates_to.
+
     work_item_uri (Union[Unset, str]):
     """
 

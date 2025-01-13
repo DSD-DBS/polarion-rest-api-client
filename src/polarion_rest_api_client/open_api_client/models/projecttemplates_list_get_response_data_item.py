@@ -29,8 +29,9 @@ T = TypeVar("T", bound="ProjecttemplatesListGetResponseDataItem")
 
 @_attrs_define
 class ProjecttemplatesListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, ProjecttemplatesListGetResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    ProjecttemplatesListGetResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, ProjecttemplatesListGetResponseDataItemAttributes]):

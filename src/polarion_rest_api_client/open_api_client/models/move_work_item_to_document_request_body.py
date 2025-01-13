@@ -13,8 +13,9 @@ T = TypeVar("T", bound="MoveWorkItemToDocumentRequestBody")
 
 @_attrs_define
 class MoveWorkItemToDocumentRequestBody:
-    """Attributes
-    next_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+    """Attributes next_part (Union[Unset, str]):  Example:
+    MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
+
     previous_part (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
     target_document (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId.
     """

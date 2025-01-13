@@ -23,8 +23,9 @@ T = TypeVar("T", bound="TestrunCommentsListPatchRequestDataItem")
 
 @_attrs_define
 class TestrunCommentsListPatchRequestDataItem:
-    """Attributes
-    type (Union[Unset, TestrunCommentsListPatchRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    TestrunCommentsListPatchRequestDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyCommentId.
     attributes (Union[Unset, TestrunCommentsListPatchRequestDataItemAttributes]):
     """

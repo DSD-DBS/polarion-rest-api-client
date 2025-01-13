@@ -16,12 +16,15 @@ T = TypeVar("T", bound="FeatureselectionsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class FeatureselectionsSingleGetResponseDataAttributes:
-    """Attributes
-    selection_type (Union[Unset, FeatureselectionsSingleGetResponseDataAttributesSelectionType]):  Example:
-        excluded.
+    """Attributes selection_type (Union[Unset,
+    FeatureselectionsSingleGetResponseDataAttributesSelectionType]):  Example:
+
+    excluded.
     """
 
-    selection_type: Unset | FeatureselectionsSingleGetResponseDataAttributesSelectionType = UNSET
+    selection_type: (
+        Unset | FeatureselectionsSingleGetResponseDataAttributesSelectionType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -43,7 +46,10 @@ class FeatureselectionsSingleGetResponseDataAttributes:
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
         _selection_type = d.pop("selectionType", UNSET)
-        selection_type: Unset | FeatureselectionsSingleGetResponseDataAttributesSelectionType
+        selection_type: (
+            Unset
+            | FeatureselectionsSingleGetResponseDataAttributesSelectionType
+        )
         if isinstance(_selection_type, Unset):
             selection_type = UNSET
         else:

@@ -19,8 +19,10 @@ T = TypeVar("T", bound="ErrorsErrorsItemSourceType0")
 
 @_attrs_define
 class ErrorsErrorsItemSourceType0:
-    """Attributes
-    parameter (Union[Unset, str]): String indicating which URI query parameter caused the error. Example: revision.
+    """Attributes parameter (Union[Unset, str]): String indicating which URI
+    query parameter caused the error.
+
+    Example: revision.
     pointer (Union[Unset, str]): JSON Pointer to the associated entity in the request document. Example: $.data.
     resource (Union['ErrorsErrorsItemSourceType0ResourceType0', None, Unset]): Resource causing the error.
     """

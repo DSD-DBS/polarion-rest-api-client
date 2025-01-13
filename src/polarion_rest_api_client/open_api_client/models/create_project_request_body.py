@@ -19,8 +19,10 @@ T = TypeVar("T", bound="CreateProjectRequestBody")
 
 @_attrs_define
 class CreateProjectRequestBody:
-    """Attributes
-    location (Union[Unset, str]): Location of the new Project to be created. Example: MyLocation.
+    """Attributes location (Union[Unset, str]): Location of the new Project to
+    be created.
+
+    Example: MyLocation.
     params (Union['CreateProjectRequestBodyParamsType0', None, Unset]): params of new Project to be created.
     project_id (Union[Unset, str]): Id of the new Project to be created. Example: MyProjectId.
     template_id (Union[None, Unset, str]): Id of the template to create the new Project from. Example:

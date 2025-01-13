@@ -32,14 +32,14 @@ T = TypeVar("T", bound="ProjectsListGetResponseDataItem")
 
 @_attrs_define
 class ProjectsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, ProjectsListGetResponseDataItemType]):
-    id (Union[Unset, str]):  Example: MyProjectId.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, ProjectsListGetResponseDataItemAttributes]):
-    relationships (Union[Unset, ProjectsListGetResponseDataItemRelationships]):
-    links (Union[Unset, ProjectsListGetResponseDataItemLinks]):
-    meta (Union[Unset, ProjectsListGetResponseDataItemMeta]):
+    """Attributes type (Union[Unset, ProjectsListGetResponseDataItemType]):
+
+    id (Union[Unset, str]):  Example: MyProjectId. revision
+    (Union[Unset, str]):  Example: 1234. attributes (Union[Unset,
+    ProjectsListGetResponseDataItemAttributes]): relationships
+    (Union[Unset, ProjectsListGetResponseDataItemRelationships]): links
+    (Union[Unset, ProjectsListGetResponseDataItemLinks]): meta
+    (Union[Unset, ProjectsListGetResponseDataItemMeta]):
     """
 
     type: Unset | ProjectsListGetResponseDataItemType = UNSET

@@ -26,8 +26,9 @@ T = TypeVar("T", bound="DocumentPartsListPostRequestDataItem")
 
 @_attrs_define
 class DocumentPartsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, DocumentPartsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    DocumentPartsListPostRequestDataItemType]):
+
     attributes (Union[Unset, DocumentPartsListPostRequestDataItemAttributes]):
     relationships (Union[Unset, DocumentPartsListPostRequestDataItemRelationships]):
     """
@@ -97,7 +98,9 @@ class DocumentPartsListPostRequestDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | DocumentPartsListPostRequestDataItemRelationships
+        relationships: (
+            Unset | DocumentPartsListPostRequestDataItemRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

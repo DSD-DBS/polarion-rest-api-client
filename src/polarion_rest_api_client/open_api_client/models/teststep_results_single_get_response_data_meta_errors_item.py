@@ -19,8 +19,10 @@ T = TypeVar("T", bound="TeststepResultsSingleGetResponseDataMetaErrorsItem")
 
 @_attrs_define
 class TeststepResultsSingleGetResponseDataMetaErrorsItem:
-    """Attributes
-    detail (Union[Unset, str]): Human-readable explanation specific to this occurrence of the problem. Example:
+    """Attributes detail (Union[Unset, str]): Human-readable explanation
+    specific to this occurrence of the problem.
+
+    Example:
         Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data).
     source (Union[Unset, TeststepResultsSingleGetResponseDataMetaErrorsItemSource]):
     status (Union[Unset, str]): HTTP status code applicable to this problem. Example: 400.
@@ -72,7 +74,9 @@ class TeststepResultsSingleGetResponseDataMetaErrorsItem:
         detail = d.pop("detail", UNSET)
 
         _source = d.pop("source", UNSET)
-        source: Unset | TeststepResultsSingleGetResponseDataMetaErrorsItemSource
+        source: (
+            Unset | TeststepResultsSingleGetResponseDataMetaErrorsItemSource
+        )
         if isinstance(_source, Unset):
             source = UNSET
         else:

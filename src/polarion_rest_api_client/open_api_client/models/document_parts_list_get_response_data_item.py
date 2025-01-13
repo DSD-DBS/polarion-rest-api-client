@@ -32,8 +32,9 @@ T = TypeVar("T", bound="DocumentPartsListGetResponseDataItem")
 
 @_attrs_define
 class DocumentPartsListGetResponseDataItem:
-    """Attributes
-    type (Union[Unset, DocumentPartsListGetResponseDataItemType]):
+    """Attributes type (Union[Unset,
+    DocumentPartsListGetResponseDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/workitem_MyWorkItemId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, DocumentPartsListGetResponseDataItemAttributes]):
@@ -141,7 +142,9 @@ class DocumentPartsListGetResponseDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | DocumentPartsListGetResponseDataItemRelationships
+        relationships: (
+            Unset | DocumentPartsListGetResponseDataItemRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

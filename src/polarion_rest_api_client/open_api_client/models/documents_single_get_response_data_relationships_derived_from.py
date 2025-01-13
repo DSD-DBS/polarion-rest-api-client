@@ -21,8 +21,8 @@ T = TypeVar(
 
 @_attrs_define
 class DocumentsSingleGetResponseDataRelationshipsDerivedFrom:
-    """Attributes
-    data (Union[Unset, DocumentsSingleGetResponseDataRelationshipsDerivedFromData]):
+    """Attributes data (Union[Unset,
+    DocumentsSingleGetResponseDataRelationshipsDerivedFromData]):
     """
 
     data: Union[
@@ -53,7 +53,9 @@ class DocumentsSingleGetResponseDataRelationshipsDerivedFrom:
 
         d = src_dict.copy()
         _data = d.pop("data", UNSET)
-        data: Unset | DocumentsSingleGetResponseDataRelationshipsDerivedFromData
+        data: (
+            Unset | DocumentsSingleGetResponseDataRelationshipsDerivedFromData
+        )
         if isinstance(_data, Unset):
             data = UNSET
         else:

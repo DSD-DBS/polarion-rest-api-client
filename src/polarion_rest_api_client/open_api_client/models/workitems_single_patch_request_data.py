@@ -26,7 +26,10 @@ T = TypeVar("T", bound="WorkitemsSinglePatchRequestData")
 
 @_attrs_define
 class WorkitemsSinglePatchRequestData:
-    """Attributes
+    """A single patch request of data for a work item.
+
+    Attributes
+    ----------
     type (Union[Unset, WorkitemsSinglePatchRequestDataType]):
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId.
     attributes (Union[Unset, WorkitemsSinglePatchRequestDataAttributes]):

@@ -19,8 +19,8 @@ T = TypeVar("T", bound="PlansListGetResponseDataItemRelationshipsTemplate")
 
 @_attrs_define
 class PlansListGetResponseDataItemRelationshipsTemplate:
-    """Attributes
-    data (Union[Unset, PlansListGetResponseDataItemRelationshipsTemplateData]):
+    """Attributes data (Union[Unset,
+    PlansListGetResponseDataItemRelationshipsTemplateData]):
     """
 
     data: Union[

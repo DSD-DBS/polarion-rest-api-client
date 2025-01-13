@@ -13,8 +13,10 @@ T = TypeVar("T", bound="MergeDocumentRequestBody")
 
 @_attrs_define
 class MergeDocumentRequestBody:
-    """Attributes
-    create_baseline (Union[Unset, bool]): Specifies whether the Baseline should be created. Example: True.
+    """Attributes create_baseline (Union[Unset, bool]): Specifies whether the
+    Baseline should be created.
+
+    Example: True.
     user_filter (Union[Unset, str]): Specifies the query to filter the source Work Items for the merge. Example:
         status:open.
     """

@@ -26,8 +26,9 @@ T = TypeVar("T", bound="TestrunCommentsListPostRequestDataItem")
 
 @_attrs_define
 class TestrunCommentsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, TestrunCommentsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    TestrunCommentsListPostRequestDataItemType]):
+
     attributes (Union[Unset, TestrunCommentsListPostRequestDataItemAttributes]):
     relationships (Union[Unset, TestrunCommentsListPostRequestDataItemRelationships]):
     """
@@ -97,7 +98,9 @@ class TestrunCommentsListPostRequestDataItem:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | TestrunCommentsListPostRequestDataItemRelationships
+        relationships: (
+            Unset | TestrunCommentsListPostRequestDataItemRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

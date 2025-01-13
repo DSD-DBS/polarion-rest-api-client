@@ -32,14 +32,14 @@ T = TypeVar("T", bound="UsergroupsSingleGetResponseData")
 
 @_attrs_define
 class UsergroupsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, UsergroupsSingleGetResponseDataType]):
-    id (Union[Unset, str]):  Example: MyUserGroupId.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, UsergroupsSingleGetResponseDataAttributes]):
-    relationships (Union[Unset, UsergroupsSingleGetResponseDataRelationships]):
-    links (Union[Unset, UsergroupsSingleGetResponseDataLinks]):
-    meta (Union[Unset, UsergroupsSingleGetResponseDataMeta]):
+    """Attributes type (Union[Unset, UsergroupsSingleGetResponseDataType]):
+
+    id (Union[Unset, str]):  Example: MyUserGroupId. revision
+    (Union[Unset, str]):  Example: 1234. attributes (Union[Unset,
+    UsergroupsSingleGetResponseDataAttributes]): relationships
+    (Union[Unset, UsergroupsSingleGetResponseDataRelationships]): links
+    (Union[Unset, UsergroupsSingleGetResponseDataLinks]): meta
+    (Union[Unset, UsergroupsSingleGetResponseDataMeta]):
     """
 
     type: Unset | UsergroupsSingleGetResponseDataType = UNSET

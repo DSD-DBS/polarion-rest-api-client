@@ -17,8 +17,9 @@ T = TypeVar("T", bound="TestrecordsSingleGetResponseDataAttributesComment")
 
 @_attrs_define
 class TestrecordsSingleGetResponseDataAttributesComment:
-    """Attributes
-    type (Union[Unset, TestrecordsSingleGetResponseDataAttributesCommentType]):
+    """Attributes type (Union[Unset,
+    TestrecordsSingleGetResponseDataAttributesCommentType]):
+
     value (Union[Unset, str]):  Example: My text value.
     """
 

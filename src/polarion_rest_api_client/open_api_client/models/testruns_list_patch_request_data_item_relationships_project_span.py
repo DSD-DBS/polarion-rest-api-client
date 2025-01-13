@@ -21,11 +21,16 @@ T = TypeVar(
 
 @_attrs_define
 class TestrunsListPatchRequestDataItemRelationshipsProjectSpan:
-    """Attributes
-    data (Union[Unset, List['TestrunsListPatchRequestDataItemRelationshipsProjectSpanDataItem']]):
+    """Attributes data (Union[Unset, List['TestrunsListPatchRequestDataItemRela
+    tionshipsProjectSpanDataItem']]):
     """
 
-    data: Unset | list["TestrunsListPatchRequestDataItemRelationshipsProjectSpanDataItem"] = UNSET
+    data: (
+        Unset
+        | list[
+            "TestrunsListPatchRequestDataItemRelationshipsProjectSpanDataItem"
+        ]
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

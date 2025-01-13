@@ -20,15 +20,19 @@ T = TypeVar(
 
 @_attrs_define
 class TestrunCommentsSingleGetResponseDataRelationshipsChildCommentsDataItem:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyCommentId.
+    """Attributes id (Union[Unset, str]):  Example:
+    MyProjectId/MyTestRunId/MyCommentId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, TestrunCommentsSingleGetResponseDataRelationshipsChildCommentsDataItemType]):
     """
 
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
-    type: Unset | TestrunCommentsSingleGetResponseDataRelationshipsChildCommentsDataItemType = UNSET
+    type: (
+        Unset
+        | TestrunCommentsSingleGetResponseDataRelationshipsChildCommentsDataItemType
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
@@ -62,7 +66,10 @@ class TestrunCommentsSingleGetResponseDataRelationshipsChildCommentsDataItem:
         revision = d.pop("revision", UNSET)
 
         _type = d.pop("type", UNSET)
-        type: Unset | TestrunCommentsSingleGetResponseDataRelationshipsChildCommentsDataItemType
+        type: (
+            Unset
+            | TestrunCommentsSingleGetResponseDataRelationshipsChildCommentsDataItemType
+        )
         if isinstance(_type, Unset):
             type = UNSET
         else:

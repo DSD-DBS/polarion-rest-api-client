@@ -17,8 +17,9 @@ T = TypeVar("T", bound="TestparameterDefinitionsListDeleteRequestDataItem")
 
 @_attrs_define
 class TestparameterDefinitionsListDeleteRequestDataItem:
-    """Attributes
-    type (Union[Unset, TestparameterDefinitionsListDeleteRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    TestparameterDefinitionsListDeleteRequestDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyTestParamDefinition.
     """
 

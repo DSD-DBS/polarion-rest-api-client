@@ -13,9 +13,9 @@ T = TypeVar("T", bound="PlansSingleGetResponseLinks")
 
 @_attrs_define
 class PlansSingleGetResponseLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-
-        path/projects/MyProjectId/plans/MyPlanId?revision=1234.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application-
+    path/projects/MyProjectId/plans/MyPlanId?revision=1234.
     """
 
     self_: Unset | str = UNSET

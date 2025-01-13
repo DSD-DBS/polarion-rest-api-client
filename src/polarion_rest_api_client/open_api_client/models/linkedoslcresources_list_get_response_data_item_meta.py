@@ -19,11 +19,14 @@ T = TypeVar("T", bound="LinkedoslcresourcesListGetResponseDataItemMeta")
 
 @_attrs_define
 class LinkedoslcresourcesListGetResponseDataItemMeta:
-    """Attributes
-    errors (Union[Unset, List['LinkedoslcresourcesListGetResponseDataItemMetaErrorsItem']]):
+    """Attributes errors (Union[Unset,
+    List['LinkedoslcresourcesListGetResponseDataItemMetaErrorsItem']]):
     """
 
-    errors: Unset | list["LinkedoslcresourcesListGetResponseDataItemMetaErrorsItem"] = UNSET
+    errors: (
+        Unset
+        | list["LinkedoslcresourcesListGetResponseDataItemMetaErrorsItem"]
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

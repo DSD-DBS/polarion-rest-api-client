@@ -26,11 +26,12 @@ T = TypeVar("T", bound="WorkitemsListPatchRequestDataItem")
 
 @_attrs_define
 class WorkitemsListPatchRequestDataItem:
-    """Attributes
-    type (Union[Unset, WorkitemsListPatchRequestDataItemType]):
+    """Attributes type (Union[Unset, WorkitemsListPatchRequestDataItemType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId.
-    attributes (Union[Unset, WorkitemsListPatchRequestDataItemAttributes]):
-    relationships (Union[Unset, WorkitemsListPatchRequestDataItemRelationships]):
+    attributes (Union[Unset,
+    WorkitemsListPatchRequestDataItemAttributes]): relationships
+    (Union[Unset, WorkitemsListPatchRequestDataItemRelationships]):
     """
 
     type: Unset | WorkitemsListPatchRequestDataItemType = UNSET

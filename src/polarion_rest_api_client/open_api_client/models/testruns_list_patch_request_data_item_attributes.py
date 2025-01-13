@@ -25,8 +25,9 @@ T = TypeVar("T", bound="TestrunsListPatchRequestDataItemAttributes")
 
 @_attrs_define
 class TestrunsListPatchRequestDataItemAttributes:
-    """Attributes
-    finished_on (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
+    """Attributes finished_on (Union[Unset, datetime.datetime]):  Example:
+    1970-01-01T00:00:00Z.
+
     group_id (Union[Unset, str]):  Example: Group ID.
     home_page_content (Union[Unset, TestrunsListPatchRequestDataItemAttributesHomePageContent]):
     id_prefix (Union[Unset, str]):  Example: MyTestRunIdPrefix.
@@ -48,7 +49,9 @@ class TestrunsListPatchRequestDataItemAttributes:
     id_prefix: Unset | str = UNSET
     keep_in_history: Unset | bool = UNSET
     query: Unset | str = UNSET
-    select_test_cases_by: Unset | TestrunsListPatchRequestDataItemAttributesSelectTestCasesBy = UNSET
+    select_test_cases_by: (
+        Unset | TestrunsListPatchRequestDataItemAttributesSelectTestCasesBy
+    ) = UNSET
     status: Unset | str = UNSET
     title: Unset | str = UNSET
     type: Unset | str = UNSET
@@ -131,7 +134,9 @@ class TestrunsListPatchRequestDataItemAttributes:
         group_id = d.pop("groupId", UNSET)
 
         _home_page_content = d.pop("homePageContent", UNSET)
-        home_page_content: Unset | TestrunsListPatchRequestDataItemAttributesHomePageContent
+        home_page_content: (
+            Unset | TestrunsListPatchRequestDataItemAttributesHomePageContent
+        )
         if isinstance(_home_page_content, Unset):
             home_page_content = UNSET
         else:
@@ -146,7 +151,9 @@ class TestrunsListPatchRequestDataItemAttributes:
         query = d.pop("query", UNSET)
 
         _select_test_cases_by = d.pop("selectTestCasesBy", UNSET)
-        select_test_cases_by: Unset | TestrunsListPatchRequestDataItemAttributesSelectTestCasesBy
+        select_test_cases_by: (
+            Unset | TestrunsListPatchRequestDataItemAttributesSelectTestCasesBy
+        )
         if isinstance(_select_test_cases_by, Unset):
             select_test_cases_by = UNSET
         else:

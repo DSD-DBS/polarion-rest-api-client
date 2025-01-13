@@ -13,9 +13,7 @@ T = TypeVar("T", bound="TestrunCommentsListPatchRequestDataItemAttributes")
 
 @_attrs_define
 class TestrunCommentsListPatchRequestDataItemAttributes:
-    """Attributes
-    resolved (Union[Unset, bool]):
-    """
+    """Attributes resolved (Union[Unset, bool]):"""
 
     resolved: Unset | bool = UNSET
     additional_properties: dict[str, Any] = _attrs_field(

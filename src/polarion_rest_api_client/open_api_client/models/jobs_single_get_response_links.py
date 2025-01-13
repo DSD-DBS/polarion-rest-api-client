@@ -13,8 +13,8 @@ T = TypeVar("T", bound="JobsSingleGetResponseLinks")
 
 @_attrs_define
 class JobsSingleGetResponseLinks:
-    """Attributes
-    self_ (Union[Unset, str]):  Example: server-host-name/application-path/jobs/MyJobId.
+    """Attributes self_ (Union[Unset, str]):  Example: server-host-
+    name/application-path/jobs/MyJobId.
     """
 
     self_: Unset | str = UNSET

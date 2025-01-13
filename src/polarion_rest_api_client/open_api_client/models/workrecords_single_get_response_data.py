@@ -32,14 +32,15 @@ T = TypeVar("T", bound="WorkrecordsSingleGetResponseData")
 
 @_attrs_define
 class WorkrecordsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, WorkrecordsSingleGetResponseDataType]):
-    id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/MyWorkRecordId.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, WorkrecordsSingleGetResponseDataAttributes]):
-    relationships (Union[Unset, WorkrecordsSingleGetResponseDataRelationships]):
-    links (Union[Unset, WorkrecordsSingleGetResponseDataLinks]):
-    meta (Union[Unset, WorkrecordsSingleGetResponseDataMeta]):
+    """Attributes type (Union[Unset, WorkrecordsSingleGetResponseDataType]):
+
+    id (Union[Unset, str]):  Example:
+    MyProjectId/MyWorkItemId/MyWorkRecordId. revision (Union[Unset,
+    str]):  Example: 1234. attributes (Union[Unset,
+    WorkrecordsSingleGetResponseDataAttributes]): relationships
+    (Union[Unset, WorkrecordsSingleGetResponseDataRelationships]): links
+    (Union[Unset, WorkrecordsSingleGetResponseDataLinks]): meta
+    (Union[Unset, WorkrecordsSingleGetResponseDataMeta]):
     """
 
     type: Unset | WorkrecordsSingleGetResponseDataType = UNSET

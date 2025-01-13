@@ -25,8 +25,8 @@ T = TypeVar("T", bound="PagesSingleGetResponse")
 
 @_attrs_define
 class PagesSingleGetResponse:
-    """Attributes
-    data (Union[Unset, PagesSingleGetResponseData]):
+    """Attributes data (Union[Unset, PagesSingleGetResponseData]):
+
     included (Union[Unset, List['PagesSingleGetResponseIncludedItem']]): Related entities might be returned, see <a
         href="https://docs.sw.siemens.com/en-
         US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User

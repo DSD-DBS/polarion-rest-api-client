@@ -19,15 +19,17 @@ T = TypeVar("T", bound="TeststepsSingleGetResponseDataAttributes")
 
 @_attrs_define
 class TeststepsSingleGetResponseDataAttributes:
-    """Attributes
-    index (Union[Unset, str]):
+    """Attributes index (Union[Unset, str]):
+
     keys (Union[Unset, List[str]]):
     values (Union[Unset, List['TeststepsSingleGetResponseDataAttributesValuesItem']]):
     """
 
     index: Unset | str = UNSET
     keys: Unset | list[str] = UNSET
-    values: Unset | list["TeststepsSingleGetResponseDataAttributesValuesItem"] = UNSET
+    values: (
+        Unset | list["TeststepsSingleGetResponseDataAttributesValuesItem"]
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

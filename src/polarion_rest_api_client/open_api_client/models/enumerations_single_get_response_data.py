@@ -29,13 +29,13 @@ T = TypeVar("T", bound="EnumerationsSingleGetResponseData")
 
 @_attrs_define
 class EnumerationsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, EnumerationsSingleGetResponseDataType]):
-    id (Union[Unset, str]):  Example: ~/status/~.
-    revision (Union[Unset, str]):  Example: 1234.
-    attributes (Union[Unset, EnumerationsSingleGetResponseDataAttributes]):
-    links (Union[Unset, EnumerationsSingleGetResponseDataLinks]):
-    meta (Union[Unset, EnumerationsSingleGetResponseDataMeta]):
+    """Attributes type (Union[Unset, EnumerationsSingleGetResponseDataType]):
+
+    id (Union[Unset, str]):  Example: ~/status/~. revision (Union[Unset,
+    str]):  Example: 1234. attributes (Union[Unset,
+    EnumerationsSingleGetResponseDataAttributes]): links (Union[Unset,
+    EnumerationsSingleGetResponseDataLinks]): meta (Union[Unset,
+    EnumerationsSingleGetResponseDataMeta]):
     """
 
     type: Unset | EnumerationsSingleGetResponseDataType = UNSET

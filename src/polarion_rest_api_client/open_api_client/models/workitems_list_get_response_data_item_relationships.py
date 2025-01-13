@@ -70,8 +70,9 @@ T = TypeVar("T", bound="WorkitemsListGetResponseDataItemRelationships")
 
 @_attrs_define
 class WorkitemsListGetResponseDataItemRelationships:
-    """Attributes
-    approvals (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsApprovals]):
+    """Attributes approvals (Union[Unset,
+    WorkitemsListGetResponseDataItemRelationshipsApprovals]):
+
     assignee (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAssignee]):
     attachments (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAttachments]):
     author (Union[Unset, WorkitemsListGetResponseDataItemRelationshipsAuthor]):
@@ -331,7 +332,9 @@ class WorkitemsListGetResponseDataItemRelationships:
 
         d = src_dict.copy()
         _approvals = d.pop("approvals", UNSET)
-        approvals: Unset | WorkitemsListGetResponseDataItemRelationshipsApprovals
+        approvals: (
+            Unset | WorkitemsListGetResponseDataItemRelationshipsApprovals
+        )
         if isinstance(_approvals, Unset):
             approvals = UNSET
         else:
@@ -349,7 +352,9 @@ class WorkitemsListGetResponseDataItemRelationships:
             )
 
         _attachments = d.pop("attachments", UNSET)
-        attachments: Unset | WorkitemsListGetResponseDataItemRelationshipsAttachments
+        attachments: (
+            Unset | WorkitemsListGetResponseDataItemRelationshipsAttachments
+        )
         if isinstance(_attachments, Unset):
             attachments = UNSET
         else:
@@ -369,7 +374,10 @@ class WorkitemsListGetResponseDataItemRelationships:
             )
 
         _backlinked_work_items = d.pop("backlinkedWorkItems", UNSET)
-        backlinked_work_items: Unset | WorkitemsListGetResponseDataItemRelationshipsBacklinkedWorkItems
+        backlinked_work_items: (
+            Unset
+            | WorkitemsListGetResponseDataItemRelationshipsBacklinkedWorkItems
+        )
         if isinstance(_backlinked_work_items, Unset):
             backlinked_work_items = UNSET
         else:
@@ -378,7 +386,9 @@ class WorkitemsListGetResponseDataItemRelationships:
             )
 
         _categories = d.pop("categories", UNSET)
-        categories: Unset | WorkitemsListGetResponseDataItemRelationshipsCategories
+        categories: (
+            Unset | WorkitemsListGetResponseDataItemRelationshipsCategories
+        )
         if isinstance(_categories, Unset):
             categories = UNSET
         else:
@@ -398,7 +408,10 @@ class WorkitemsListGetResponseDataItemRelationships:
         _externally_linked_work_items = d.pop(
             "externallyLinkedWorkItems", UNSET
         )
-        externally_linked_work_items: Unset | WorkitemsListGetResponseDataItemRelationshipsExternallyLinkedWorkItems
+        externally_linked_work_items: (
+            Unset
+            | WorkitemsListGetResponseDataItemRelationshipsExternallyLinkedWorkItems
+        )
         if isinstance(_externally_linked_work_items, Unset):
             externally_linked_work_items = UNSET
         else:
@@ -407,7 +420,10 @@ class WorkitemsListGetResponseDataItemRelationships:
             )
 
         _linked_oslc_resources = d.pop("linkedOslcResources", UNSET)
-        linked_oslc_resources: Unset | WorkitemsListGetResponseDataItemRelationshipsLinkedOslcResources
+        linked_oslc_resources: (
+            Unset
+            | WorkitemsListGetResponseDataItemRelationshipsLinkedOslcResources
+        )
         if isinstance(_linked_oslc_resources, Unset):
             linked_oslc_resources = UNSET
         else:
@@ -416,7 +432,10 @@ class WorkitemsListGetResponseDataItemRelationships:
             )
 
         _linked_revisions = d.pop("linkedRevisions", UNSET)
-        linked_revisions: Unset | WorkitemsListGetResponseDataItemRelationshipsLinkedRevisions
+        linked_revisions: (
+            Unset
+            | WorkitemsListGetResponseDataItemRelationshipsLinkedRevisions
+        )
         if isinstance(_linked_revisions, Unset):
             linked_revisions = UNSET
         else:
@@ -425,7 +444,10 @@ class WorkitemsListGetResponseDataItemRelationships:
             )
 
         _linked_work_items = d.pop("linkedWorkItems", UNSET)
-        linked_work_items: Unset | WorkitemsListGetResponseDataItemRelationshipsLinkedWorkItems
+        linked_work_items: (
+            Unset
+            | WorkitemsListGetResponseDataItemRelationshipsLinkedWorkItems
+        )
         if isinstance(_linked_work_items, Unset):
             linked_work_items = UNSET
         else:
@@ -445,7 +467,9 @@ class WorkitemsListGetResponseDataItemRelationships:
             )
 
         _planned_in = d.pop("plannedIn", UNSET)
-        planned_in: Unset | WorkitemsListGetResponseDataItemRelationshipsPlannedIn
+        planned_in: (
+            Unset | WorkitemsListGetResponseDataItemRelationshipsPlannedIn
+        )
         if isinstance(_planned_in, Unset):
             planned_in = UNSET
         else:
@@ -465,7 +489,9 @@ class WorkitemsListGetResponseDataItemRelationships:
             )
 
         _test_steps = d.pop("testSteps", UNSET)
-        test_steps: Unset | WorkitemsListGetResponseDataItemRelationshipsTestSteps
+        test_steps: (
+            Unset | WorkitemsListGetResponseDataItemRelationshipsTestSteps
+        )
         if isinstance(_test_steps, Unset):
             test_steps = UNSET
         else:
@@ -496,7 +522,9 @@ class WorkitemsListGetResponseDataItemRelationships:
             )
 
         _work_records = d.pop("workRecords", UNSET)
-        work_records: Unset | WorkitemsListGetResponseDataItemRelationshipsWorkRecords
+        work_records: (
+            Unset | WorkitemsListGetResponseDataItemRelationshipsWorkRecords
+        )
         if isinstance(_work_records, Unset):
             work_records = UNSET
         else:

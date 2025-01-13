@@ -23,8 +23,9 @@ T = TypeVar("T", bound="TestrunAttachmentsListPostRequestDataItem")
 
 @_attrs_define
 class TestrunAttachmentsListPostRequestDataItem:
-    """Attributes
-    type (Union[Unset, TestrunAttachmentsListPostRequestDataItemType]):
+    """Attributes type (Union[Unset,
+    TestrunAttachmentsListPostRequestDataItemType]):
+
     attributes (Union[Unset, TestrunAttachmentsListPostRequestDataItemAttributes]):
     lid (Union[Unset, str]):
     """

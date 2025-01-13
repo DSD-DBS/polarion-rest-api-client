@@ -32,8 +32,9 @@ T = TypeVar("T", bound="FeatureselectionsSingleGetResponseData")
 
 @_attrs_define
 class FeatureselectionsSingleGetResponseData:
-    """Attributes
-    type (Union[Unset, FeatureselectionsSingleGetResponseDataType]):
+    """Attributes type (Union[Unset,
+    FeatureselectionsSingleGetResponseDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MyWorkItemId/included/MyProjectId/MyWorkItemId.
     revision (Union[Unset, str]):  Example: 1234.
     attributes (Union[Unset, FeatureselectionsSingleGetResponseDataAttributes]):
@@ -141,7 +142,9 @@ class FeatureselectionsSingleGetResponseData:
             )
 
         _relationships = d.pop("relationships", UNSET)
-        relationships: Unset | FeatureselectionsSingleGetResponseDataRelationships
+        relationships: (
+            Unset | FeatureselectionsSingleGetResponseDataRelationships
+        )
         if isinstance(_relationships, Unset):
             relationships = UNSET
         else:

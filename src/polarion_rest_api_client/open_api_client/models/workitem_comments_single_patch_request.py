@@ -19,8 +19,8 @@ T = TypeVar("T", bound="WorkitemCommentsSinglePatchRequest")
 
 @_attrs_define
 class WorkitemCommentsSinglePatchRequest:
-    """Attributes
-    data (Union[Unset, WorkitemCommentsSinglePatchRequestData]):
+    """Attributes data (Union[Unset,
+    WorkitemCommentsSinglePatchRequestData]):
     """
 
     data: Union[Unset, "WorkitemCommentsSinglePatchRequestData"] = UNSET

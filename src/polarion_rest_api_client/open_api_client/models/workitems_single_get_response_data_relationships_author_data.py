@@ -17,15 +17,17 @@ T = TypeVar("T", bound="WorkitemsSingleGetResponseDataRelationshipsAuthorData")
 
 @_attrs_define
 class WorkitemsSingleGetResponseDataRelationshipsAuthorData:
-    """Attributes
-    id (Union[Unset, str]):  Example: MyUserId.
+    """Attributes id (Union[Unset, str]):  Example: MyUserId.
+
     revision (Union[Unset, str]):  Example: 1234.
     type (Union[Unset, WorkitemsSingleGetResponseDataRelationshipsAuthorDataType]):
     """
 
     id: Unset | str = UNSET
     revision: Unset | str = UNSET
-    type: Unset | WorkitemsSingleGetResponseDataRelationshipsAuthorDataType = UNSET
+    type: Unset | WorkitemsSingleGetResponseDataRelationshipsAuthorDataType = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )

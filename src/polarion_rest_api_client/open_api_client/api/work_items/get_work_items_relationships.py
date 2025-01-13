@@ -61,7 +61,11 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"] | None:
+) -> (
+    Errors
+    | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
+    | None
+):
     if response.status_code == HTTPStatus.OK:
 
         def _parse_response_200(
@@ -126,7 +130,8 @@ def _parse_response(
 def _build_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
 ) -> Response[
-    Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
+    Errors
+    | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
 ]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -148,7 +153,8 @@ def sync_detailed(
     include: Unset | str = UNSET,
     revision: Unset | str = UNSET,
 ) -> Response[
-    Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
+    Errors
+    | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
 ]:
     """Returns a list of Work Item Relationships.
 
@@ -201,7 +207,11 @@ def sync(
     fields: Union[Unset, "SparseFields"] = UNSET,
     include: Unset | str = UNSET,
     revision: Unset | str = UNSET,
-) -> Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"] | None:
+) -> (
+    Errors
+    | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
+    | None
+):
     """Returns a list of Work Item Relationships.
 
     Args:
@@ -249,7 +259,8 @@ async def asyncio_detailed(
     include: Unset | str = UNSET,
     revision: Unset | str = UNSET,
 ) -> Response[
-    Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
+    Errors
+    | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
 ]:
     """Returns a list of Work Item Relationships.
 
@@ -300,7 +311,11 @@ async def asyncio(
     fields: Union[Unset, "SparseFields"] = UNSET,
     include: Unset | str = UNSET,
     revision: Unset | str = UNSET,
-) -> Errors | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"] | None:
+) -> (
+    Errors
+    | Union["RelationshipDataListResponse", "RelationshipDataSingleResponse"]
+    | None
+):
     """Returns a list of Work Item Relationships.
 
     Args:

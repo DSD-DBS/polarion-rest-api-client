@@ -23,8 +23,9 @@ T = TypeVar("T", bound="DocumentCommentsSinglePatchRequestData")
 
 @_attrs_define
 class DocumentCommentsSinglePatchRequestData:
-    """Attributes
-    type (Union[Unset, DocumentCommentsSinglePatchRequestDataType]):
+    """Attributes type (Union[Unset,
+    DocumentCommentsSinglePatchRequestDataType]):
+
     id (Union[Unset, str]):  Example: MyProjectId/MySpaceId/MyDocumentId/MyCommentId.
     attributes (Union[Unset, DocumentCommentsSinglePatchRequestDataAttributes]):
     """
