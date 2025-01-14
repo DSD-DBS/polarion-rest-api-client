@@ -67,9 +67,9 @@ class WorkItem(StatusItem):
 
     title: str | None = None
     description: TextContent | None = None
-    additional_attributes: dict[str, t.Any] = {}
-    linked_work_items: list[WorkItemLink] = []
-    attachments: list[WorkItemAttachment] = []
+    additional_attributes: t.ClassVar[dict[str, t.Any]] = {}
+    linked_work_items: t.ClassVar[list[WorkItemLink]] = []
+    attachments: t.ClassVar[list[WorkItemAttachment]] = []
     linked_work_items_truncated: bool = False
     attachments_truncated: bool = False
     home_document: DocumentReference | None = None
@@ -111,9 +111,11 @@ class WorkItem(StatusItem):
             )
             description = TextContent(description_type, description)
         self.description = description
-        self.additional_attributes = (additional_attributes or {}) | kwargs
-        self.linked_work_items = linked_work_items or []
-        self.attachments = attachments or []
+        self.additional_attributes.update(
+            (additional_attributes or {}) | kwargs
+        )
+        self.linked_work_items.extend(linked_work_items or [])
+        self.attachments.extend(attachments or [])
         self.linked_work_items_truncated = linked_work_items_truncated
         self.attachments_truncated = attachments_truncated
         self.home_document = home_document

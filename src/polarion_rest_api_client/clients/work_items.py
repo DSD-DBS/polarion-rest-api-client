@@ -236,9 +236,8 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         current_batch = api_models.WorkitemsListPostRequest(data=[])
         content_size = min_wi_request_size
         batch_start_index = 0
-        batch_end_index = 0
 
-        for work_item in items:
+        for batch_end_index, work_item in enumerate(items):
             work_item_data = self._build_work_item_post_request(work_item)
 
             (
@@ -273,8 +272,6 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                 assert isinstance(current_batch.data, list)
                 current_batch.data.append(work_item_data)
                 content_size = proj_content_size
-
-            batch_end_index += 1
 
         if current_batch.data:
             self._retry_on_error(
@@ -386,10 +383,10 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
 
         self._raise_on_error(response)
 
-        assert (
-            isinstance(response.parsed, api_models.WorkitemsListPostResponse)
-            and response.parsed.data
+        assert isinstance(
+            response.parsed, api_models.WorkitemsListPostResponse
         )
+        assert response.parsed.data
         for index, work_item_res in enumerate(response.parsed.data):
             assert work_item_res.id
             work_item_objs[index].id = work_item_res.id.split("/")[-1]
@@ -431,10 +428,13 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         links_truncated = True
         attachments_truncated = True
         if work_item.relationships:
-            if home_document_data := work_item.relationships.module:
-                if home_document_data.data and home_document_data.data.id:
-                    _, folder, name = home_document_data.data.id.split("/")
-                    home_document = dm.DocumentReference(folder, name)
+            if (
+                (home_document_data := work_item.relationships.module)
+                and home_document_data.data
+                and home_document_data.data.id
+            ):
+                _, folder, name = home_document_data.data.id.split("/")
+                home_document = dm.DocumentReference(folder, name)
 
             if link_data := work_item.relationships.linked_work_items:
                 if (

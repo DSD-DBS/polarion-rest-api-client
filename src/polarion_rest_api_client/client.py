@@ -4,6 +4,11 @@
 
 from __future__ import annotations
 
+__all__ = [
+    "DefaultFields",
+    "PolarionClient",
+]
+
 import typing as t
 
 import polarion_rest_api_client.open_api_client as oa_client

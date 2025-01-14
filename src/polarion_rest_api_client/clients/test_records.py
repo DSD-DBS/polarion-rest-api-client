@@ -152,10 +152,10 @@ class TestRecords(
 
         self._raise_on_error(response)
 
-        assert (
-            isinstance(response.parsed, api_models.TestrecordsListPostResponse)
-            and response.parsed.data
+        assert isinstance(
+            response.parsed, api_models.TestrecordsListPostResponse
         )
+        assert response.parsed.data
         counter = 0
         for response_item in response.parsed.data:
             if response_item.id:

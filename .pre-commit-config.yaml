@@ -77,7 +77,7 @@ repos:
       - id: ruff
         name: Ruff (main Python code)
         types_or: [python, pyi, jupyter]
-        exclude: 'docs/.*\.ipynb$, src/polarion_rest_api_client/open_api_client/api|models/.*\.py$'
+        exclude: 'src/polarion_rest_api_client/open_api_client/(api|models)/.*\.py$'
         args: [--extend-ignore=FIX, --fix]
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.13.0

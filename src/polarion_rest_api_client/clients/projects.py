@@ -2,6 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0
 """A client for a specific project, using the session of PolarionClient."""
 
+__all__ = [
+    "ProjectClient",
+]
+
 import typing as t
 
 from polarion_rest_api_client.clients import base_classes as bc
@@ -35,6 +39,4 @@ class ProjectClient(bc.BaseClient):
         response = get_project.sync_detailed(
             self._project_id, client=self._client.client
         )
-        if response.status_code == 200:
-            return True
-        return False
+        return response.status_code == 200

@@ -64,50 +64,53 @@ class Documents(
 
         document_response = response.parsed
 
-        if isinstance(
-            document_response, api_models.DocumentsSingleGetResponse
-        ) and (data := document_response.data):
-            if not getattr(data.meta, "errors", []):
-                assert (attributes := data.attributes)
-                assert isinstance(data.id, str)
-                home_page_content = self._handle_text_content(
-                    attributes.home_page_content
-                )
+        if (
+            isinstance(
+                document_response, api_models.DocumentsSingleGetResponse
+            )
+            and (data := document_response.data)
+            and not getattr(data.meta, "errors", [])
+        ):
+            assert (attributes := data.attributes)
+            assert isinstance(data.id, str)
+            home_page_content = self._handle_text_content(
+                attributes.home_page_content
+            )
 
-                rendering_layouts = None
-                if attributes.rendering_layouts:
-                    rendering_layouts = [
-                        dm.RenderingLayout(
-                            self.unset_to_none(layout.label),
-                            self.unset_to_none(layout.layouter),
-                            (
-                                [p.to_dict() for p in layout.properties]
-                                if layout.properties
-                                else None
-                            ),
-                            self.unset_to_none(layout.type),
-                        )
-                        for layout in attributes.rendering_layouts
-                    ]
+            rendering_layouts = None
+            if attributes.rendering_layouts:
+                rendering_layouts = [
+                    dm.RenderingLayout(
+                        self.unset_to_none(layout.label),
+                        self.unset_to_none(layout.layouter),
+                        (
+                            [p.to_dict() for p in layout.properties]
+                            if layout.properties
+                            else None
+                        ),
+                        self.unset_to_none(layout.type),
+                    )
+                    for layout in attributes.rendering_layouts
+                ]
 
-                return dm.Document(
-                    id=data.id,
-                    module_folder=self.unset_to_none(attributes.module_folder),
-                    module_name=self.unset_to_none(attributes.module_name),
-                    type=self.unset_to_none(attributes.type),
-                    status=self.unset_to_none(attributes.status),
-                    home_page_content=home_page_content,
-                    title=self.unset_to_none(attributes.title),
-                    rendering_layouts=rendering_layouts,
-                    outline_numbering=self.unset_to_none(
-                        attributes.uses_outline_numbering
-                    ),
-                    outline_numbering_prefix=(
-                        self.unset_to_none(attributes.outline_numbering.prefix)
-                        if attributes.outline_numbering
-                        else None
-                    ),
-                )
+            return dm.Document(
+                id=data.id,
+                module_folder=self.unset_to_none(attributes.module_folder),
+                module_name=self.unset_to_none(attributes.module_name),
+                type=self.unset_to_none(attributes.type),
+                status=self.unset_to_none(attributes.status),
+                home_page_content=home_page_content,
+                title=self.unset_to_none(attributes.title),
+                rendering_layouts=rendering_layouts,
+                outline_numbering=self.unset_to_none(
+                    attributes.uses_outline_numbering
+                ),
+                outline_numbering_prefix=(
+                    self.unset_to_none(attributes.outline_numbering.prefix)
+                    if attributes.outline_numbering
+                    else None
+                ),
+            )
 
         return None
 

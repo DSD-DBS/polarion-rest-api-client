@@ -95,14 +95,14 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
         role_id, target_project_id, linked_work_item_id = info[2:]
         if isinstance(suspect, oa_types.Unset):
             suspect = False
-        work_item_link = dm.WorkItemLink(
+
+        return dm.WorkItemLink(
             work_item_id,
             linked_work_item_id,
             role_id,
             suspect,
             target_project_id,
         )
-        return work_item_link
 
     def _split_into_batches(
         self, items: list[dm.WorkItemLink]

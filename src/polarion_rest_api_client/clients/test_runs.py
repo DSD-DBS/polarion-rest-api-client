@@ -145,10 +145,8 @@ class TestRuns(
         )
 
         self._raise_on_error(response)
-        assert (
-            isinstance(response.parsed, api_models.TestrunsListPostResponse)
-            and response.parsed.data
-        )
+        assert isinstance(response.parsed, api_models.TestrunsListPostResponse)
+        assert response.parsed.data
         if response.parsed and response.parsed.data:
             for i, data in enumerate(response.parsed.data):
                 assert data.id

@@ -2,10 +2,14 @@
 # SPDX-License-Identifier: Apache-2.0
 """Contains shared errors types that can be raised from API functions."""
 
+__all__ = ["UnexpectedStatus"]
+
 
 class UnexpectedStatus(Exception):
-    """Raised by api functions when the response status an undocumented status
-    and Client.raise_on_unexpected_status is True.
+    """An unexpected status code was raised.
+
+    Raised by api functions when the response status an undocumented
+    status and Client.raise_on_unexpected_status is True.
     """
 
     def __init__(self, status_code: int, content: bytes):
@@ -13,6 +17,3 @@ class UnexpectedStatus(Exception):
         self.content = content
 
         super().__init__(f"Unexpected status code: {status_code}")
-
-
-__all__ = ["UnexpectedStatus"]

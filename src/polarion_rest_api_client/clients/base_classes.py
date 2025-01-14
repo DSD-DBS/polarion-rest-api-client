@@ -27,10 +27,10 @@ _max_sleep = 15
 UT = t.TypeVar("UT", str, int, float, datetime.datetime, bool, None)
 
 
-class BaseClient(abc.ABC):
+class BaseClient:
     """The overall base client for all project related clients."""
 
-    _retry_methods: list[str] = []
+    _retry_methods: t.ClassVar[list[str]] = []
 
     def __init__(
         self, project_id: str, client: "polarion_client.PolarionClient"
@@ -132,9 +132,9 @@ class BaseClient(abc.ABC):
         try:
             return call(*args, **kwargs)
         except Exception as e:
-            if isinstance(e, errors.PolarionApiException):
-                if e.args[0] == 404:
-                    raise e
+            if isinstance(e, errors.PolarionApiException) and e.args[0] == 404:
+                raise e
+
             logger.warning(
                 "Will retry after failing on first attempt, "
                 "due to the following error %s",
@@ -147,7 +147,12 @@ class BaseClient(abc.ABC):
 class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
     """A client for items of a project, which can be created or requested."""
 
-    _retry_methods = ["get_multi", "get", "_create", "_delete"]
+    _retry_methods: t.ClassVar[list[str]] = [
+        "get_multi",
+        "get",
+        "_create",
+        "_delete",
+    ]
 
     @abc.abstractmethod
     def get_multi(
@@ -213,10 +218,16 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
             self._delete(batch)
 
 
-class UpdatableItemsClient(ItemsClient, t.Generic[T], abc.ABC):
+class UpdatableItemsClient(ItemsClient, t.Generic[T]):
     """A client for items which can also be updated."""
 
-    _retry_methods = ["get_multi", "get", "_create", "_delete", "_update"]
+    _retry_methods: t.ClassVar[list[str]] = [
+        "get_multi",
+        "get",
+        "_create",
+        "_delete",
+        "_update",
+    ]
 
     def _split_into_update_batches(
         self, items: list[T]

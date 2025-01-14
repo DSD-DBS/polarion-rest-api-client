@@ -180,14 +180,13 @@ class WorkItemAttachments(
         )
 
         self._raise_on_error(response)
-        assert (
-            isinstance(
-                response.parsed, api_models.WorkitemAttachmentsListPostResponse
-            )
-            and response.parsed.data
+        assert isinstance(
+            response.parsed, api_models.WorkitemAttachmentsListPostResponse
         )
-        counter = 0
-        for work_item_attachment_res in response.parsed.data:
+        assert response.parsed.data
+        for counter, work_item_attachment_res in enumerate(
+            response.parsed.data
+        ):
             assert work_item_attachment_res.id
             items[counter].id = work_item_attachment_res.id.split("/")[-1]
             counter += 1

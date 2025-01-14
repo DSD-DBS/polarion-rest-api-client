@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import datetime
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,9 +18,6 @@ if TYPE_CHECKING:
     from ..models.workitems_list_post_request_data_item_attributes_hyperlinks_item import (
         WorkitemsListPostRequestDataItemAttributesHyperlinksItem,
     )
-
-
-T = TypeVar("T", bound="WorkitemsListPostRequestDataItemAttributes")
 
 
 @_attrs_define
@@ -135,7 +132,10 @@ class WorkitemsListPostRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(
+        cls: type[WorkitemsListPostRequestDataItemAttributes],  # type: ignore[valid-type]
+        src_dict: dict[str, Any],
+    ) -> WorkitemsListPostRequestDataItemAttributes:
         from ..models.workitems_list_post_request_data_item_attributes_description import (
             WorkitemsListPostRequestDataItemAttributesDescription,
         )
@@ -144,7 +144,7 @@ class WorkitemsListPostRequestDataItemAttributes:
         )
 
         d = src_dict.copy()
-        type = d.pop("type")
+        type: str = d.pop("type")
 
         _description = d.pop("description", UNSET)
         description: (
@@ -196,7 +196,7 @@ class WorkitemsListPostRequestDataItemAttributes:
 
         title = d.pop("title", UNSET)
 
-        workitems_list_post_request_data_item_attributes_obj = cls(
+        workitems_list_post_request_data_item_attributes_obj = cls(  # type:ignore[misc]
             type=type,
             description=description,
             due_date=due_date,
