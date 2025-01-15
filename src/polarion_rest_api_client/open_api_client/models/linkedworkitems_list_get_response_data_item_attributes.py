@@ -1,0 +1,80 @@
+# Copyright DB InfraGO AG and contributors
+# SPDX-License-Identifier: Apache-2.0
+
+from typing import Any, TypeVar
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+T = TypeVar("T", bound="LinkedworkitemsListGetResponseDataItemAttributes")
+
+
+@_attrs_define
+class LinkedworkitemsListGetResponseDataItemAttributes:
+    """Attributes revision (Union[Unset, str]):  Example: 1234.
+
+    role (Union[Unset, str]):  Example: relates_to. suspect
+    (Union[Unset, bool]):
+    """
+
+    revision: Unset | str = UNSET
+    role: Unset | str = UNSET
+    suspect: Unset | bool = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
+
+    def to_dict(self) -> dict[str, Any]:
+        revision = self.revision
+
+        role = self.role
+
+        suspect = self.suspect
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if revision is not UNSET:
+            field_dict["revision"] = revision
+        if role is not UNSET:
+            field_dict["role"] = role
+        if suspect is not UNSET:
+            field_dict["suspect"] = suspect
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+        d = src_dict.copy()
+        revision = d.pop("revision", UNSET)
+
+        role = d.pop("role", UNSET)
+
+        suspect = d.pop("suspect", UNSET)
+
+        linkedworkitems_list_get_response_data_item_attributes_obj = cls(
+            revision=revision,
+            role=role,
+            suspect=suspect,
+        )
+
+        linkedworkitems_list_get_response_data_item_attributes_obj.additional_properties = d
+        return linkedworkitems_list_get_response_data_item_attributes_obj
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

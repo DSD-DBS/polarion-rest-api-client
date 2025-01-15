@@ -72,7 +72,7 @@ def test_create_test_runs(
         "open",
         "Title",
         polarion_api.TextContent("text/html", "My text value"),
-        datetime.datetime.utcfromtimestamp(0),
+        datetime.datetime.fromtimestamp(0, tz=datetime.timezone.utc),
         "Group ID",
         "ID Prefix",
         True,
@@ -88,7 +88,7 @@ def test_create_test_runs(
         "open",
         "Title",
         polarion_api.TextContent("text/html", "My text value 2"),
-        datetime.datetime.utcfromtimestamp(0),
+        datetime.datetime.fromtimestamp(0, tz=datetime.timezone.utc),
         "Group ID",
         "ID Prefix",
         True,
@@ -116,6 +116,8 @@ def test_update_test_run(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
 ):
+    with open(TEST_TRUN_PATCH_REQUEST, encoding="utf8") as f:
+        expected_req = json.load(f)
     httpx_mock.add_response(204)
     test_run_id = "asdfg"
     tr = polarion_api.TestRun(
@@ -123,26 +125,24 @@ def test_update_test_run(
         "manual",
         "passed",
         "Title",
-        finished_on=datetime.datetime.utcfromtimestamp(0),
+        finished_on=datetime.datetime.fromtimestamp(
+            0, tz=datetime.timezone.utc
+        ),
         query="Query",
         use_report_from_template=False,
     )
 
     client.test_runs.update(tr)
 
-    reqs = httpx_mock.get_requests()
+    assert (reqs := httpx_mock.get_requests())
     assert len(reqs) == 1
-    req_data = json.loads(reqs[0].content.decode("utf-8"))
-    with open(TEST_TRUN_PATCH_REQUEST, encoding="utf8") as f:
-        expected_req = json.load(f)
-
+    assert (req_data := json.loads(reqs[0].content.decode("utf-8")))
     assert req_data == expected_req
     assert reqs[0].url.path.endswith(f"/testruns/{test_run_id}")
 
 
 def test_update_test_run_fully(
-    client: polarion_api.ProjectClient,
-    httpx_mock: pytest_httpx.HTTPXMock,
+    client: polarion_api.ProjectClient, httpx_mock: pytest_httpx.HTTPXMock
 ):
     httpx_mock.add_response(204)
     tr = polarion_api.TestRun(
@@ -151,7 +151,7 @@ def test_update_test_run_fully(
         "open",
         "Title",
         polarion_api.TextContent("text/html", "My text value"),
-        datetime.datetime.utcfromtimestamp(0),
+        datetime.datetime.fromtimestamp(0, tz=datetime.timezone.utc),
         "Group ID",
         "ID Prefix",
         True,

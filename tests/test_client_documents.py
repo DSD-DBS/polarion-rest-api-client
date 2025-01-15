@@ -110,11 +110,11 @@ def test_create_new_document(
     )
     client.documents.create(document)
 
-    with open(TEST_DOCUMENT_POST_REQUEST, "r", encoding="utf-8") as f:
+    with open(TEST_DOCUMENT_POST_REQUEST, encoding="utf-8") as f:
         expected_request = json.load(f)
 
     assert len(httpx_mock.get_requests()) == 1
-    req = httpx_mock.get_request()
+    assert (req := httpx_mock.get_request())
     assert req.method == "POST"
     assert (
         req.url == "http://127.0.0.1/api/projects/PROJ/spaces/folder/documents"
@@ -168,9 +168,9 @@ def test_update_document(
     httpx_mock.add_response(204)
     client.documents.update([document, document2])
 
-    with open(TEST_DOCUMENT_PATCH_REQUEST, "r", encoding="utf-8") as f:
+    with open(TEST_DOCUMENT_PATCH_REQUEST, encoding="utf-8") as f:
         expected_request = json.load(f)
-    with open(TEST_DOCUMENT_PATCH_REQUEST2, "r", encoding="utf-8") as f:
+    with open(TEST_DOCUMENT_PATCH_REQUEST2, encoding="utf-8") as f:
         expected_request_2 = json.load(f)
     reqs = httpx_mock.get_requests()
 
