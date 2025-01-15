@@ -46,6 +46,7 @@ dev = [
   "pytest-cov",
   "pytest-httpx",
   "pytest-mock",
+  "pre-commit",
 ]
 
 docs = ["furo", "sphinx", "sphinx-copybutton", "tomli; python_version<'3.12'"]
