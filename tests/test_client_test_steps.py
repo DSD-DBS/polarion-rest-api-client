@@ -65,6 +65,9 @@ def test_create_test_steps(
     with open(TEST_STEPS_CREATED_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(201, json=json.load(f))
 
+    with open(TEST_STEPS_POST_REQUEST, encoding="utf8") as f:
+        expected_req = json.load(f)
+
     work_item_id = "asdfg"
 
     ts_1 = polarion_api.TestStep(
@@ -81,9 +84,6 @@ def test_create_test_steps(
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 1
     req_data = json.loads(reqs[0].content.decode("utf-8"))
-    with open(TEST_STEPS_POST_REQUEST, encoding="utf8") as f:
-        expected_req = json.load(f)
-
     assert req_data == expected_req
     assert reqs[0].url.path.endswith(f"/workitems/{work_item_id}/teststeps")
     assert ts_1.step_index == 0
@@ -96,10 +96,11 @@ def test_update_test_step(
 ):
     httpx_mock.add_response(204)
     httpx_mock.add_response(204)
+    with open(TEST_STEPS_PATCH_REQUEST, encoding="utf8") as f:
+        expected_req = json.load(f)
 
     work_item_1_id = "asdfg"
     work_item_2_id = "qwertz"
-
     ts_1 = polarion_api.TestStep(
         work_item_1_id,
         1,
@@ -121,9 +122,6 @@ def test_update_test_step(
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 2
     req_data = json.loads(reqs[0].content.decode("utf-8"))
-    with open(TEST_STEPS_PATCH_REQUEST, encoding="utf8") as f:
-        expected_req = json.load(f)
-
     assert req_data == expected_req
     assert reqs[0].url.path.endswith(f"/workitems/{work_item_1_id}/teststeps")
     assert reqs[1].url.path.endswith(f"/workitems/{work_item_2_id}/teststeps")

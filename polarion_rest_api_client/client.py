@@ -24,70 +24,70 @@ class DefaultFields:
     _teststeps: str = "@basic"
 
     @property
-    def workitems(self):
+    def workitems(self) -> dict[str, str]:
         """Return the fields dict for workitems."""
         return {"workitems": self._workitems}
 
     @workitems.setter
-    def workitems(self, value):
+    def workitems(self, value: str):
         self._workitems = value
 
     @property
-    def linkedworkitems(self):
+    def linkedworkitems(self) -> dict[str, str]:
         """Return the fields dict for linkedworkitems."""
         return {"linkedworkitems": self._linkedworkitems}
 
     @linkedworkitems.setter
-    def linkedworkitems(self, value):
+    def linkedworkitems(self, value: str):
         self._linkedworkitems = value
 
     @property
-    def workitem_attachments(self):
+    def workitem_attachments(self) -> dict[str, str]:
         """Return the fields dict for workitem_attachments."""
         return {"workitem_attachments": self._workitem_attachments}
 
     @workitem_attachments.setter
-    def workitem_attachments(self, value):
+    def workitem_attachments(self, value: str):
         self._workitem_attachments = value
 
     @property
-    def documents(self):
+    def documents(self) -> dict[str, str]:
         """Return the fields dict for document."""
         return {"documents": self._documents}
 
     @documents.setter
-    def documents(self, value):
+    def documents(self, value: str):
         self._documents = value
 
     @property
-    def testruns(self):
+    def testruns(self) -> dict[str, str]:
         """Return the fields dict for document."""
         return {"testruns": self._testruns}
 
     @testruns.setter
-    def testruns(self, value):
+    def testruns(self, value: str):
         self._testruns = value
 
     @property
-    def testrecords(self):
+    def testrecords(self) -> dict[str, str]:
         """Return the fields dict for document."""
         return {"testrecords": self._testrecords}
 
     @testrecords.setter
-    def testrecords(self, value):
+    def testrecords(self, value: str):
         self._testrecords = value
 
     @property
-    def teststeps(self):
+    def teststeps(self) -> dict[str, str]:
         """Return the fields dict for document."""
         return {"teststeps": self._teststeps}
 
     @teststeps.setter
-    def teststeps(self, value):
+    def teststeps(self, value: str):
         self._teststeps = value
 
     @property
-    def all_types(self):
+    def all_types(self) -> dict[str, str]:
         """Return all fields dicts merged together."""
         return (
             self.workitem_attachments
@@ -125,6 +125,6 @@ class PolarionClient:
         self,
         project_id: str,
         delete_status: str | None = None,
-    ):
+    ) -> projects.ProjectClient:
         """Return a client for a specific project."""
         return projects.ProjectClient(project_id, self, delete_status)
