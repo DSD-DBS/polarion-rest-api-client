@@ -29,13 +29,13 @@ def test_get_test_records_multi_page(
         httpx_mock.add_response(json=json.load(f))
 
     test_records = client.test_runs.records.get_all(
-        "123", fields={"test_records": "@all"}
+        "123", fields={"testrecords": "@all"}
     )
 
     query = {
         "page[size]": "100",
         "page[number]": "1",
-        "fields[test_records]": "@all",
+        "fields[testrecords]": "@all",
     }
     reqs = httpx_mock.get_requests()
 

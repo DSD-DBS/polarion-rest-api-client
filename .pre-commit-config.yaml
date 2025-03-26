@@ -2,10 +2,11 @@
 # SPDX-License-Identifier: CC0-1.0
 
 default_install_hook_types: [commit-msg, pre-commit]
-default_stages: [commit, merge-commit]
+default_stages: [pre-commit, pre-merge-commit]
+minimum_pre_commit_version: 3.2.0
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
       - id: check-ast
@@ -25,8 +26,8 @@ repos:
       - id: end-of-file-fixer
       - id: fix-byte-order-marker
       - id: trailing-whitespace
-  - repo: https://github.com/psf/black
-    rev: 24.8.0
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 24.10.0
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/isort
@@ -47,7 +48,7 @@ repos:
         additional_dependencies:
           - pydocstyle[toml]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.2
+    rev: v1.15.0
     hooks:
       - id: mypy
         additional_dependencies:
@@ -67,7 +68,7 @@ repos:
           - --license-filepath
           - LICENSES/.license_header.txt
           - --comment-style
-          - '#'
+          - "#"
       - id: insert-license
         name: Insert license headers (XML-style comments)
         files: '\.(?:html|md|xml)$'
@@ -77,7 +78,7 @@ repos:
           - --license-filepath
           - LICENSES/.license_header.txt
           - --comment-style
-          - '<!--| ~| -->'
+          - "<!--| ~| -->"
       - id: insert-license
         name: Insert license headers (C-style comments)
         files: '\.(?:css|js|ts)$'
@@ -87,7 +88,7 @@ repos:
           - --license-filepath
           - LICENSES/.license_header.txt
           - --comment-style
-          - '/*| *| */'
+          - "/*| *| */"
       - id: insert-license
         name: Insert license headers (reST comments)
         files: '\.rst$'
@@ -97,7 +98,7 @@ repos:
           - --license-filepath
           - LICENSES/.license_header.txt
           - --comment-style
-          - '..|  |'
+          - "..|  |"
   - repo: https://github.com/fsfe/reuse-tool
     rev: v4.0.3
     hooks:

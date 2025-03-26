@@ -20,6 +20,7 @@ __all__ = [
     "StatusItem",
     "TestRecord",
     "TestRun",
+    "TestStep",
     "TextContent",
     "WorkItem",
     "WorkItemAttachment",
@@ -334,6 +335,18 @@ class TestRecord:
     comment: TextContent | None = None
     executed: datetime.datetime | None = None
     additional_attributes: dict[str, t.Any] = dataclasses.field(
+        default_factory=dict
+    )
+
+
+@dataclasses.dataclass
+class TestStep:
+    """Representation of TestSteps of a test case WorkItem in Polarion."""
+
+    work_item_id: str
+    step_index: int | None = None
+    revision: str | None = None
+    step_columns: dict[str, TextContent] = dataclasses.field(
         default_factory=dict
     )
 

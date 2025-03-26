@@ -124,7 +124,7 @@ def test_get_all_work_items_single_page(
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    client._client.default_fields.workitems = "@basic,description"
+    client._client.default_fields.workitems = "@basic,description"  # type: ignore
 
     work_items = client.work_items.get_all("")
 
