@@ -7,6 +7,7 @@ from enum import Enum
 class WorkitemsSingleGetResponseDataRelationshipsApprovalsDataItemType(
     str, Enum
 ):
+    WORKITEM_APPROVALS = "workitem_approvals"
     WORKRECORDS = "workrecords"
 
     def __str__(self) -> str:
