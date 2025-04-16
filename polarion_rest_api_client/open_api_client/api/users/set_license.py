@@ -22,8 +22,8 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/users/{userId}/actions/setLicense".format(
-            userId=user_id,
+        "url": "/users/{user_id}/actions/setLicense".format(
+            user_id=user_id,
         ),
     }
 

@@ -25,6 +25,7 @@ class EnumerationsSinglePatchRequestDataAttributesOptionsItem:
         hidden (Union[Unset, bool]):
         icon_url (Union[Unset, str]):  Example: /polarion/icons/default/enums/status_open.gif.
         id (Union[Unset, str]):  Example: open.
+        limited (Union[Unset, bool]):  Example: True.
         min_value (Union[Unset, float]):  Example: 30.0.
         name (Union[Unset, str]):  Example: Open.
         opposite_name (Union[Unset, str]):  Example: Opposite Name.
@@ -42,6 +43,7 @@ class EnumerationsSinglePatchRequestDataAttributesOptionsItem:
     hidden: Union[Unset, bool] = UNSET
     icon_url: Union[Unset, str] = UNSET
     id: Union[Unset, str] = UNSET
+    limited: Union[Unset, bool] = UNSET
     min_value: Union[Unset, float] = UNSET
     name: Union[Unset, str] = UNSET
     opposite_name: Union[Unset, str] = UNSET
@@ -69,6 +71,8 @@ class EnumerationsSinglePatchRequestDataAttributesOptionsItem:
         icon_url = self.icon_url
 
         id = self.id
+
+        limited = self.limited
 
         min_value = self.min_value
 
@@ -105,6 +109,8 @@ class EnumerationsSinglePatchRequestDataAttributesOptionsItem:
             field_dict["iconURL"] = icon_url
         if id is not UNSET:
             field_dict["id"] = id
+        if limited is not UNSET:
+            field_dict["limited"] = limited
         if min_value is not UNSET:
             field_dict["minValue"] = min_value
         if name is not UNSET:
@@ -143,6 +149,8 @@ class EnumerationsSinglePatchRequestDataAttributesOptionsItem:
 
         id = d.pop("id", UNSET)
 
+        limited = d.pop("limited", UNSET)
+
         min_value = d.pop("minValue", UNSET)
 
         name = d.pop("name", UNSET)
@@ -168,6 +176,7 @@ class EnumerationsSinglePatchRequestDataAttributesOptionsItem:
             hidden=hidden,
             icon_url=icon_url,
             id=id,
+            limited=limited,
             min_value=min_value,
             name=name,
             opposite_name=opposite_name,

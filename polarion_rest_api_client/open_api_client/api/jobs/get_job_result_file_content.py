@@ -18,8 +18,8 @@ def _get_kwargs(
 ) -> Dict[str, Any]:
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/jobs/{jobId}/actions/download/{filename}".format(
-            jobId=job_id,
+        "url": "/jobs/{job_id}/actions/download/{filename}".format(
+            job_id=job_id,
             filename=filename,
         ),
     }

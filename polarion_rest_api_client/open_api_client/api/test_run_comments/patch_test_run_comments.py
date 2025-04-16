@@ -25,9 +25,9 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/projects/{projectId}/testruns/{testRunId}/comments".format(
-            projectId=project_id,
-            testRunId=test_run_id,
+        "url": "/projects/{project_id}/testruns/{test_run_id}/comments".format(
+            project_id=project_id,
+            test_run_id=test_run_id,
         ),
     }
 

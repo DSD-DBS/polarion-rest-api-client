@@ -24,10 +24,10 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/projects/{projectId}/spaces/{spaceId}/pages/{pageName}".format(
-            projectId=project_id,
-            spaceId=space_id,
-            pageName=page_name,
+        "url": "/projects/{project_id}/spaces/{space_id}/pages/{page_name}".format(
+            project_id=project_id,
+            space_id=space_id,
+            page_name=page_name,
         ),
     }
 

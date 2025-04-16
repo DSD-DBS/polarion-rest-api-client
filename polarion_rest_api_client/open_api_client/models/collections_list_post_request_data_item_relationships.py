@@ -1,0 +1,118 @@
+# Copyright DB InfraGO AG and contributors
+# SPDX-License-Identifier: Apache-2.0
+
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.collections_list_post_request_data_item_relationships_documents import (
+        CollectionsListPostRequestDataItemRelationshipsDocuments,
+    )
+    from ..models.collections_list_post_request_data_item_relationships_upstream_collections import (
+        CollectionsListPostRequestDataItemRelationshipsUpstreamCollections,
+    )
+
+
+T = TypeVar("T", bound="CollectionsListPostRequestDataItemRelationships")
+
+
+@_attrs_define
+class CollectionsListPostRequestDataItemRelationships:
+    """
+    Attributes:
+        documents (Union[Unset, CollectionsListPostRequestDataItemRelationshipsDocuments]):
+        upstream_collections (Union[Unset, CollectionsListPostRequestDataItemRelationshipsUpstreamCollections]):
+    """
+
+    documents: Union[
+        Unset, "CollectionsListPostRequestDataItemRelationshipsDocuments"
+    ] = UNSET
+    upstream_collections: Union[
+        Unset,
+        "CollectionsListPostRequestDataItemRelationshipsUpstreamCollections",
+    ] = UNSET
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict
+    )
+
+    def to_dict(self) -> Dict[str, Any]:
+        documents: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.documents, Unset):
+            documents = self.documents.to_dict()
+
+        upstream_collections: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.upstream_collections, Unset):
+            upstream_collections = self.upstream_collections.to_dict()
+
+        field_dict: Dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if documents is not UNSET:
+            field_dict["documents"] = documents
+        if upstream_collections is not UNSET:
+            field_dict["upstreamCollections"] = upstream_collections
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        from ..models.collections_list_post_request_data_item_relationships_documents import (
+            CollectionsListPostRequestDataItemRelationshipsDocuments,
+        )
+        from ..models.collections_list_post_request_data_item_relationships_upstream_collections import (
+            CollectionsListPostRequestDataItemRelationshipsUpstreamCollections,
+        )
+
+        d = src_dict.copy()
+        _documents = d.pop("documents", UNSET)
+        documents: Union[
+            Unset, CollectionsListPostRequestDataItemRelationshipsDocuments
+        ]
+        if isinstance(_documents, Unset):
+            documents = UNSET
+        else:
+            documents = CollectionsListPostRequestDataItemRelationshipsDocuments.from_dict(
+                _documents
+            )
+
+        _upstream_collections = d.pop("upstreamCollections", UNSET)
+        upstream_collections: Union[
+            Unset,
+            CollectionsListPostRequestDataItemRelationshipsUpstreamCollections,
+        ]
+        if isinstance(_upstream_collections, Unset):
+            upstream_collections = UNSET
+        else:
+            upstream_collections = CollectionsListPostRequestDataItemRelationshipsUpstreamCollections.from_dict(
+                _upstream_collections
+            )
+
+        collections_list_post_request_data_item_relationships_obj = cls(
+            documents=documents,
+            upstream_collections=upstream_collections,
+        )
+
+        collections_list_post_request_data_item_relationships_obj.additional_properties = (
+            d
+        )
+        return collections_list_post_request_data_item_relationships_obj
+
+    @property
+    def additional_keys(self) -> List[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

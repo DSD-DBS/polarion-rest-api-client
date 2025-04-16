@@ -10,9 +10,12 @@ class SetLicenseRequestBodyLicense(str, Enum):
     QA = "QA"
     REQUIREMENTS = "REQUIREMENTS"
     REVIEWER = "REVIEWER"
+    XAUTOMOTIVE = "XAutomotive"
     XBASE = "XBase"
     XENTERPRISE = "XEnterprise"
+    XPREMIUM = "XPremium"
     XPRO = "XPro"
+    XREVIEWER = "XReviewer"
 
     def __str__(self) -> str:
         return str(self.value)
