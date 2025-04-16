@@ -41,11 +41,11 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/enumerations/{enumContext}/{enumName}/{targetType}".format(
-            projectId=project_id,
-            enumContext=enum_context,
-            enumName=enum_name,
-            targetType=target_type,
+        "url": "/projects/{project_id}/enumerations/{enum_context}/{enum_name}/{target_type}".format(
+            project_id=project_id,
+            enum_context=enum_context,
+            enum_name=enum_name,
+            target_type=target_type,
         ),
         "params": params,
     }

@@ -38,8 +38,8 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/roles/{roleId}".format(
-            roleId=role_id,
+        "url": "/roles/{role_id}".format(
+            role_id=role_id,
         ),
         "params": params,
     }

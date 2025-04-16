@@ -37,8 +37,8 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/revisions/{repositoryName}/{revision}".format(
-            repositoryName=repository_name,
+        "url": "/revisions/{repository_name}/{revision}".format(
+            repository_name=repository_name,
             revision=revision,
         ),
         "params": params,

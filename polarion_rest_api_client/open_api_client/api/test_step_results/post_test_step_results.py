@@ -31,11 +31,11 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/testruns/{testRunId}/testrecords/{testCaseProjectId}/{testCaseId}/{iteration}/teststepresults".format(
-            projectId=project_id,
-            testRunId=test_run_id,
-            testCaseProjectId=test_case_project_id,
-            testCaseId=test_case_id,
+        "url": "/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/teststepresults".format(
+            project_id=project_id,
+            test_run_id=test_run_id,
+            test_case_project_id=test_case_project_id,
+            test_case_id=test_case_id,
             iteration=iteration,
         ),
     }

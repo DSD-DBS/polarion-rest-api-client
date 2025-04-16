@@ -33,14 +33,14 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/testruns/{testRunId}/testrecords/{testCaseProjectId}/{testCaseId}/{iteration}/teststepresults/{testStepIndex}/attachments/{attachmentId}/content".format(
-            projectId=project_id,
-            testRunId=test_run_id,
-            testCaseProjectId=test_case_project_id,
-            testCaseId=test_case_id,
+        "url": "/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/teststepresults/{test_step_index}/attachments/{attachment_id}/content".format(
+            project_id=project_id,
+            test_run_id=test_run_id,
+            test_case_project_id=test_case_project_id,
+            test_case_id=test_case_id,
             iteration=iteration,
-            testStepIndex=test_step_index,
-            attachmentId=attachment_id,
+            test_step_index=test_step_index,
+            attachment_id=attachment_id,
         ),
         "params": params,
     }

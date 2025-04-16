@@ -19,10 +19,10 @@ def _get_kwargs(
 ) -> Dict[str, Any]:
     _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": "/enumerations/{enumContext}/{enumName}/{targetType}".format(
-            enumContext=enum_context,
-            enumName=enum_name,
-            targetType=target_type,
+        "url": "/enumerations/{enum_context}/{enum_name}/{target_type}".format(
+            enum_context=enum_context,
+            enum_name=enum_name,
+            target_type=target_type,
         ),
     }
 

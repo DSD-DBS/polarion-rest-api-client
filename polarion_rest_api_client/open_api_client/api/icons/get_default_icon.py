@@ -33,8 +33,8 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/enumerations/defaulticons/{iconId}".format(
-            iconId=icon_id,
+        "url": "/enumerations/defaulticons/{icon_id}".format(
+            icon_id=icon_id,
         ),
         "params": params,
     }

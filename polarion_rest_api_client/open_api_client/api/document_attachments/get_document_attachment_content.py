@@ -30,11 +30,11 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/attachments/{attachmentId}/content".format(
-            projectId=project_id,
-            spaceId=space_id,
-            documentName=document_name,
-            attachmentId=attachment_id,
+        "url": "/projects/{project_id}/spaces/{space_id}/documents/{document_name}/attachments/{attachment_id}/content".format(
+            project_id=project_id,
+            space_id=space_id,
+            document_name=document_name,
+            attachment_id=attachment_id,
         ),
         "params": params,
     }
