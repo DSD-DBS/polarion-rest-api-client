@@ -52,10 +52,10 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{projectId}/workitems/{workItemId}/relationships/{relationshipId}".format(
-            projectId=project_id,
-            workItemId=work_item_id,
-            relationshipId=relationship_id,
+        "url": "/projects/{project_id}/workitems/{work_item_id}/relationships/{relationship_id}".format(
+            project_id=project_id,
+            work_item_id=work_item_id,
+            relationship_id=relationship_id,
         ),
         "params": params,
     }

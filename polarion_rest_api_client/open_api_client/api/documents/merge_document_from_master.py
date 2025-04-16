@@ -25,10 +25,10 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/actions/mergeFromMaster".format(
-            projectId=project_id,
-            spaceId=space_id,
-            documentName=document_name,
+        "url": "/projects/{project_id}/spaces/{space_id}/documents/{document_name}/actions/mergeFromMaster".format(
+            project_id=project_id,
+            space_id=space_id,
+            document_name=document_name,
         ),
     }
 
@@ -113,7 +113,7 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     body: MergeDocumentRequestBody,
 ) -> Response[Union[Errors, JobsSinglePostResponse]]:
-    """Merges Master Work Items changes to specified Branched Document.
+    """Merges Master Work Item changes to the specified Branched Document.
 
     Args:
         project_id (str):
@@ -151,7 +151,7 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     body: MergeDocumentRequestBody,
 ) -> Optional[Union[Errors, JobsSinglePostResponse]]:
-    """Merges Master Work Items changes to specified Branched Document.
+    """Merges Master Work Item changes to the specified Branched Document.
 
     Args:
         project_id (str):
@@ -184,7 +184,7 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     body: MergeDocumentRequestBody,
 ) -> Response[Union[Errors, JobsSinglePostResponse]]:
-    """Merges Master Work Items changes to specified Branched Document.
+    """Merges Master Work Item changes to the specified Branched Document.
 
     Args:
         project_id (str):
@@ -220,7 +220,7 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     body: MergeDocumentRequestBody,
 ) -> Optional[Union[Errors, JobsSinglePostResponse]]:
-    """Merges Master Work Items changes to specified Branched Document.
+    """Merges Master Work Item changes to the specified Branched Document.
 
     Args:
         project_id (str):

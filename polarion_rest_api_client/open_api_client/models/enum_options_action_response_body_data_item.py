@@ -23,6 +23,7 @@ class EnumOptionsActionResponseBodyDataItem:
         description (Union[Unset, str]):  Example: Description.
         hidden (Union[Unset, bool]):
         icon_url (Union[Unset, str]):  Example: /polarion/icons/default/enums/status_open.gif.
+        limited (Union[Unset, bool]):  Example: True.
         min_value (Union[Unset, float]):  Example: 30.0.
         name (Union[Unset, str]):  Example: Open.
         opposite_name (Union[Unset, str]):  Example: Opposite Name.
@@ -40,6 +41,7 @@ class EnumOptionsActionResponseBodyDataItem:
     description: Union[Unset, str] = UNSET
     hidden: Union[Unset, bool] = UNSET
     icon_url: Union[Unset, str] = UNSET
+    limited: Union[Unset, bool] = UNSET
     min_value: Union[Unset, float] = UNSET
     name: Union[Unset, str] = UNSET
     opposite_name: Union[Unset, str] = UNSET
@@ -67,6 +69,8 @@ class EnumOptionsActionResponseBodyDataItem:
         hidden = self.hidden
 
         icon_url = self.icon_url
+
+        limited = self.limited
 
         min_value = self.min_value
 
@@ -103,6 +107,8 @@ class EnumOptionsActionResponseBodyDataItem:
             field_dict["hidden"] = hidden
         if icon_url is not UNSET:
             field_dict["iconURL"] = icon_url
+        if limited is not UNSET:
+            field_dict["limited"] = limited
         if min_value is not UNSET:
             field_dict["minValue"] = min_value
         if name is not UNSET:
@@ -141,6 +147,8 @@ class EnumOptionsActionResponseBodyDataItem:
 
         icon_url = d.pop("iconURL", UNSET)
 
+        limited = d.pop("limited", UNSET)
+
         min_value = d.pop("minValue", UNSET)
 
         name = d.pop("name", UNSET)
@@ -166,6 +174,7 @@ class EnumOptionsActionResponseBodyDataItem:
             description=description,
             hidden=hidden,
             icon_url=icon_url,
+            limited=limited,
             min_value=min_value,
             name=name,
             opposite_name=opposite_name,

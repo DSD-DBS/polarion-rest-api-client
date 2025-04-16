@@ -7,6 +7,304 @@ from .branch_documents_request_body import BranchDocumentsRequestBody
 from .branch_documents_request_body_document_configurations_item import (
     BranchDocumentsRequestBodyDocumentConfigurationsItem,
 )
+from .collections_list_delete_request import CollectionsListDeleteRequest
+from .collections_list_delete_request_data_item import (
+    CollectionsListDeleteRequestDataItem,
+)
+from .collections_list_delete_request_data_item_type import (
+    CollectionsListDeleteRequestDataItemType,
+)
+from .collections_list_get_response import CollectionsListGetResponse
+from .collections_list_get_response_data_item import (
+    CollectionsListGetResponseDataItem,
+)
+from .collections_list_get_response_data_item_attributes import (
+    CollectionsListGetResponseDataItemAttributes,
+)
+from .collections_list_get_response_data_item_attributes_description import (
+    CollectionsListGetResponseDataItemAttributesDescription,
+)
+from .collections_list_get_response_data_item_attributes_description_type import (
+    CollectionsListGetResponseDataItemAttributesDescriptionType,
+)
+from .collections_list_get_response_data_item_links import (
+    CollectionsListGetResponseDataItemLinks,
+)
+from .collections_list_get_response_data_item_meta import (
+    CollectionsListGetResponseDataItemMeta,
+)
+from .collections_list_get_response_data_item_meta_errors_item import (
+    CollectionsListGetResponseDataItemMetaErrorsItem,
+)
+from .collections_list_get_response_data_item_meta_errors_item_source import (
+    CollectionsListGetResponseDataItemMetaErrorsItemSource,
+)
+from .collections_list_get_response_data_item_meta_errors_item_source_resource import (
+    CollectionsListGetResponseDataItemMetaErrorsItemSourceResource,
+)
+from .collections_list_get_response_data_item_relationships import (
+    CollectionsListGetResponseDataItemRelationships,
+)
+from .collections_list_get_response_data_item_relationships_author import (
+    CollectionsListGetResponseDataItemRelationshipsAuthor,
+)
+from .collections_list_get_response_data_item_relationships_author_data import (
+    CollectionsListGetResponseDataItemRelationshipsAuthorData,
+)
+from .collections_list_get_response_data_item_relationships_author_data_type import (
+    CollectionsListGetResponseDataItemRelationshipsAuthorDataType,
+)
+from .collections_list_get_response_data_item_relationships_documents import (
+    CollectionsListGetResponseDataItemRelationshipsDocuments,
+)
+from .collections_list_get_response_data_item_relationships_documents_data_item import (
+    CollectionsListGetResponseDataItemRelationshipsDocumentsDataItem,
+)
+from .collections_list_get_response_data_item_relationships_documents_data_item_type import (
+    CollectionsListGetResponseDataItemRelationshipsDocumentsDataItemType,
+)
+from .collections_list_get_response_data_item_relationships_documents_meta import (
+    CollectionsListGetResponseDataItemRelationshipsDocumentsMeta,
+)
+from .collections_list_get_response_data_item_relationships_downstream_collections import (
+    CollectionsListGetResponseDataItemRelationshipsDownstreamCollections,
+)
+from .collections_list_get_response_data_item_relationships_downstream_collections_data_item import (
+    CollectionsListGetResponseDataItemRelationshipsDownstreamCollectionsDataItem,
+)
+from .collections_list_get_response_data_item_relationships_downstream_collections_data_item_type import (
+    CollectionsListGetResponseDataItemRelationshipsDownstreamCollectionsDataItemType,
+)
+from .collections_list_get_response_data_item_relationships_downstream_collections_meta import (
+    CollectionsListGetResponseDataItemRelationshipsDownstreamCollectionsMeta,
+)
+from .collections_list_get_response_data_item_relationships_project import (
+    CollectionsListGetResponseDataItemRelationshipsProject,
+)
+from .collections_list_get_response_data_item_relationships_project_data import (
+    CollectionsListGetResponseDataItemRelationshipsProjectData,
+)
+from .collections_list_get_response_data_item_relationships_project_data_type import (
+    CollectionsListGetResponseDataItemRelationshipsProjectDataType,
+)
+from .collections_list_get_response_data_item_relationships_reused_from import (
+    CollectionsListGetResponseDataItemRelationshipsReusedFrom,
+)
+from .collections_list_get_response_data_item_relationships_reused_from_data import (
+    CollectionsListGetResponseDataItemRelationshipsReusedFromData,
+)
+from .collections_list_get_response_data_item_relationships_reused_from_data_type import (
+    CollectionsListGetResponseDataItemRelationshipsReusedFromDataType,
+)
+from .collections_list_get_response_data_item_relationships_upstream_collections import (
+    CollectionsListGetResponseDataItemRelationshipsUpstreamCollections,
+)
+from .collections_list_get_response_data_item_relationships_upstream_collections_data_item import (
+    CollectionsListGetResponseDataItemRelationshipsUpstreamCollectionsDataItem,
+)
+from .collections_list_get_response_data_item_relationships_upstream_collections_data_item_type import (
+    CollectionsListGetResponseDataItemRelationshipsUpstreamCollectionsDataItemType,
+)
+from .collections_list_get_response_data_item_relationships_upstream_collections_meta import (
+    CollectionsListGetResponseDataItemRelationshipsUpstreamCollectionsMeta,
+)
+from .collections_list_get_response_data_item_type import (
+    CollectionsListGetResponseDataItemType,
+)
+from .collections_list_get_response_included_item import (
+    CollectionsListGetResponseIncludedItem,
+)
+from .collections_list_get_response_links import (
+    CollectionsListGetResponseLinks,
+)
+from .collections_list_get_response_meta import CollectionsListGetResponseMeta
+from .collections_list_post_request import CollectionsListPostRequest
+from .collections_list_post_request_data_item import (
+    CollectionsListPostRequestDataItem,
+)
+from .collections_list_post_request_data_item_attributes import (
+    CollectionsListPostRequestDataItemAttributes,
+)
+from .collections_list_post_request_data_item_attributes_description import (
+    CollectionsListPostRequestDataItemAttributesDescription,
+)
+from .collections_list_post_request_data_item_attributes_description_type import (
+    CollectionsListPostRequestDataItemAttributesDescriptionType,
+)
+from .collections_list_post_request_data_item_relationships import (
+    CollectionsListPostRequestDataItemRelationships,
+)
+from .collections_list_post_request_data_item_relationships_documents import (
+    CollectionsListPostRequestDataItemRelationshipsDocuments,
+)
+from .collections_list_post_request_data_item_relationships_documents_data_item import (
+    CollectionsListPostRequestDataItemRelationshipsDocumentsDataItem,
+)
+from .collections_list_post_request_data_item_relationships_documents_data_item_type import (
+    CollectionsListPostRequestDataItemRelationshipsDocumentsDataItemType,
+)
+from .collections_list_post_request_data_item_relationships_upstream_collections import (
+    CollectionsListPostRequestDataItemRelationshipsUpstreamCollections,
+)
+from .collections_list_post_request_data_item_relationships_upstream_collections_data_item import (
+    CollectionsListPostRequestDataItemRelationshipsUpstreamCollectionsDataItem,
+)
+from .collections_list_post_request_data_item_relationships_upstream_collections_data_item_type import (
+    CollectionsListPostRequestDataItemRelationshipsUpstreamCollectionsDataItemType,
+)
+from .collections_list_post_request_data_item_type import (
+    CollectionsListPostRequestDataItemType,
+)
+from .collections_list_post_response import CollectionsListPostResponse
+from .collections_list_post_response_data_item import (
+    CollectionsListPostResponseDataItem,
+)
+from .collections_list_post_response_data_item_links import (
+    CollectionsListPostResponseDataItemLinks,
+)
+from .collections_list_post_response_data_item_type import (
+    CollectionsListPostResponseDataItemType,
+)
+from .collections_single_get_response import CollectionsSingleGetResponse
+from .collections_single_get_response_data import (
+    CollectionsSingleGetResponseData,
+)
+from .collections_single_get_response_data_attributes import (
+    CollectionsSingleGetResponseDataAttributes,
+)
+from .collections_single_get_response_data_attributes_description import (
+    CollectionsSingleGetResponseDataAttributesDescription,
+)
+from .collections_single_get_response_data_attributes_description_type import (
+    CollectionsSingleGetResponseDataAttributesDescriptionType,
+)
+from .collections_single_get_response_data_links import (
+    CollectionsSingleGetResponseDataLinks,
+)
+from .collections_single_get_response_data_meta import (
+    CollectionsSingleGetResponseDataMeta,
+)
+from .collections_single_get_response_data_meta_errors_item import (
+    CollectionsSingleGetResponseDataMetaErrorsItem,
+)
+from .collections_single_get_response_data_meta_errors_item_source import (
+    CollectionsSingleGetResponseDataMetaErrorsItemSource,
+)
+from .collections_single_get_response_data_meta_errors_item_source_resource import (
+    CollectionsSingleGetResponseDataMetaErrorsItemSourceResource,
+)
+from .collections_single_get_response_data_relationships import (
+    CollectionsSingleGetResponseDataRelationships,
+)
+from .collections_single_get_response_data_relationships_author import (
+    CollectionsSingleGetResponseDataRelationshipsAuthor,
+)
+from .collections_single_get_response_data_relationships_author_data import (
+    CollectionsSingleGetResponseDataRelationshipsAuthorData,
+)
+from .collections_single_get_response_data_relationships_author_data_type import (
+    CollectionsSingleGetResponseDataRelationshipsAuthorDataType,
+)
+from .collections_single_get_response_data_relationships_documents import (
+    CollectionsSingleGetResponseDataRelationshipsDocuments,
+)
+from .collections_single_get_response_data_relationships_documents_data_item import (
+    CollectionsSingleGetResponseDataRelationshipsDocumentsDataItem,
+)
+from .collections_single_get_response_data_relationships_documents_data_item_type import (
+    CollectionsSingleGetResponseDataRelationshipsDocumentsDataItemType,
+)
+from .collections_single_get_response_data_relationships_documents_meta import (
+    CollectionsSingleGetResponseDataRelationshipsDocumentsMeta,
+)
+from .collections_single_get_response_data_relationships_downstream_collections import (
+    CollectionsSingleGetResponseDataRelationshipsDownstreamCollections,
+)
+from .collections_single_get_response_data_relationships_downstream_collections_data_item import (
+    CollectionsSingleGetResponseDataRelationshipsDownstreamCollectionsDataItem,
+)
+from .collections_single_get_response_data_relationships_downstream_collections_data_item_type import (
+    CollectionsSingleGetResponseDataRelationshipsDownstreamCollectionsDataItemType,
+)
+from .collections_single_get_response_data_relationships_downstream_collections_meta import (
+    CollectionsSingleGetResponseDataRelationshipsDownstreamCollectionsMeta,
+)
+from .collections_single_get_response_data_relationships_project import (
+    CollectionsSingleGetResponseDataRelationshipsProject,
+)
+from .collections_single_get_response_data_relationships_project_data import (
+    CollectionsSingleGetResponseDataRelationshipsProjectData,
+)
+from .collections_single_get_response_data_relationships_project_data_type import (
+    CollectionsSingleGetResponseDataRelationshipsProjectDataType,
+)
+from .collections_single_get_response_data_relationships_reused_from import (
+    CollectionsSingleGetResponseDataRelationshipsReusedFrom,
+)
+from .collections_single_get_response_data_relationships_reused_from_data import (
+    CollectionsSingleGetResponseDataRelationshipsReusedFromData,
+)
+from .collections_single_get_response_data_relationships_reused_from_data_type import (
+    CollectionsSingleGetResponseDataRelationshipsReusedFromDataType,
+)
+from .collections_single_get_response_data_relationships_upstream_collections import (
+    CollectionsSingleGetResponseDataRelationshipsUpstreamCollections,
+)
+from .collections_single_get_response_data_relationships_upstream_collections_data_item import (
+    CollectionsSingleGetResponseDataRelationshipsUpstreamCollectionsDataItem,
+)
+from .collections_single_get_response_data_relationships_upstream_collections_data_item_type import (
+    CollectionsSingleGetResponseDataRelationshipsUpstreamCollectionsDataItemType,
+)
+from .collections_single_get_response_data_relationships_upstream_collections_meta import (
+    CollectionsSingleGetResponseDataRelationshipsUpstreamCollectionsMeta,
+)
+from .collections_single_get_response_data_type import (
+    CollectionsSingleGetResponseDataType,
+)
+from .collections_single_get_response_included_item import (
+    CollectionsSingleGetResponseIncludedItem,
+)
+from .collections_single_get_response_links import (
+    CollectionsSingleGetResponseLinks,
+)
+from .collections_single_patch_request import CollectionsSinglePatchRequest
+from .collections_single_patch_request_data import (
+    CollectionsSinglePatchRequestData,
+)
+from .collections_single_patch_request_data_attributes import (
+    CollectionsSinglePatchRequestDataAttributes,
+)
+from .collections_single_patch_request_data_attributes_description import (
+    CollectionsSinglePatchRequestDataAttributesDescription,
+)
+from .collections_single_patch_request_data_attributes_description_type import (
+    CollectionsSinglePatchRequestDataAttributesDescriptionType,
+)
+from .collections_single_patch_request_data_relationships import (
+    CollectionsSinglePatchRequestDataRelationships,
+)
+from .collections_single_patch_request_data_relationships_documents import (
+    CollectionsSinglePatchRequestDataRelationshipsDocuments,
+)
+from .collections_single_patch_request_data_relationships_documents_data_item import (
+    CollectionsSinglePatchRequestDataRelationshipsDocumentsDataItem,
+)
+from .collections_single_patch_request_data_relationships_documents_data_item_type import (
+    CollectionsSinglePatchRequestDataRelationshipsDocumentsDataItemType,
+)
+from .collections_single_patch_request_data_relationships_upstream_collections import (
+    CollectionsSinglePatchRequestDataRelationshipsUpstreamCollections,
+)
+from .collections_single_patch_request_data_relationships_upstream_collections_data_item import (
+    CollectionsSinglePatchRequestDataRelationshipsUpstreamCollectionsDataItem,
+)
+from .collections_single_patch_request_data_relationships_upstream_collections_data_item_type import (
+    CollectionsSinglePatchRequestDataRelationshipsUpstreamCollectionsDataItemType,
+)
+from .collections_single_patch_request_data_type import (
+    CollectionsSinglePatchRequestDataType,
+)
 from .copy_document_request_body import CopyDocumentRequestBody
 from .create_project_request_body import CreateProjectRequestBody
 from .create_project_request_body_params_type_0 import (
@@ -5968,6 +6266,110 @@ __all__ = (
     "BranchDocumentRequestBody",
     "BranchDocumentsRequestBody",
     "BranchDocumentsRequestBodyDocumentConfigurationsItem",
+    "CollectionsListDeleteRequest",
+    "CollectionsListDeleteRequestDataItem",
+    "CollectionsListDeleteRequestDataItemType",
+    "CollectionsListGetResponse",
+    "CollectionsListGetResponseDataItem",
+    "CollectionsListGetResponseDataItemAttributes",
+    "CollectionsListGetResponseDataItemAttributesDescription",
+    "CollectionsListGetResponseDataItemAttributesDescriptionType",
+    "CollectionsListGetResponseDataItemLinks",
+    "CollectionsListGetResponseDataItemMeta",
+    "CollectionsListGetResponseDataItemMetaErrorsItem",
+    "CollectionsListGetResponseDataItemMetaErrorsItemSource",
+    "CollectionsListGetResponseDataItemMetaErrorsItemSourceResource",
+    "CollectionsListGetResponseDataItemRelationships",
+    "CollectionsListGetResponseDataItemRelationshipsAuthor",
+    "CollectionsListGetResponseDataItemRelationshipsAuthorData",
+    "CollectionsListGetResponseDataItemRelationshipsAuthorDataType",
+    "CollectionsListGetResponseDataItemRelationshipsDocuments",
+    "CollectionsListGetResponseDataItemRelationshipsDocumentsDataItem",
+    "CollectionsListGetResponseDataItemRelationshipsDocumentsDataItemType",
+    "CollectionsListGetResponseDataItemRelationshipsDocumentsMeta",
+    "CollectionsListGetResponseDataItemRelationshipsDownstreamCollections",
+    "CollectionsListGetResponseDataItemRelationshipsDownstreamCollectionsDataItem",
+    "CollectionsListGetResponseDataItemRelationshipsDownstreamCollectionsDataItemType",
+    "CollectionsListGetResponseDataItemRelationshipsDownstreamCollectionsMeta",
+    "CollectionsListGetResponseDataItemRelationshipsProject",
+    "CollectionsListGetResponseDataItemRelationshipsProjectData",
+    "CollectionsListGetResponseDataItemRelationshipsProjectDataType",
+    "CollectionsListGetResponseDataItemRelationshipsReusedFrom",
+    "CollectionsListGetResponseDataItemRelationshipsReusedFromData",
+    "CollectionsListGetResponseDataItemRelationshipsReusedFromDataType",
+    "CollectionsListGetResponseDataItemRelationshipsUpstreamCollections",
+    "CollectionsListGetResponseDataItemRelationshipsUpstreamCollectionsDataItem",
+    "CollectionsListGetResponseDataItemRelationshipsUpstreamCollectionsDataItemType",
+    "CollectionsListGetResponseDataItemRelationshipsUpstreamCollectionsMeta",
+    "CollectionsListGetResponseDataItemType",
+    "CollectionsListGetResponseIncludedItem",
+    "CollectionsListGetResponseLinks",
+    "CollectionsListGetResponseMeta",
+    "CollectionsListPostRequest",
+    "CollectionsListPostRequestDataItem",
+    "CollectionsListPostRequestDataItemAttributes",
+    "CollectionsListPostRequestDataItemAttributesDescription",
+    "CollectionsListPostRequestDataItemAttributesDescriptionType",
+    "CollectionsListPostRequestDataItemRelationships",
+    "CollectionsListPostRequestDataItemRelationshipsDocuments",
+    "CollectionsListPostRequestDataItemRelationshipsDocumentsDataItem",
+    "CollectionsListPostRequestDataItemRelationshipsDocumentsDataItemType",
+    "CollectionsListPostRequestDataItemRelationshipsUpstreamCollections",
+    "CollectionsListPostRequestDataItemRelationshipsUpstreamCollectionsDataItem",
+    "CollectionsListPostRequestDataItemRelationshipsUpstreamCollectionsDataItemType",
+    "CollectionsListPostRequestDataItemType",
+    "CollectionsListPostResponse",
+    "CollectionsListPostResponseDataItem",
+    "CollectionsListPostResponseDataItemLinks",
+    "CollectionsListPostResponseDataItemType",
+    "CollectionsSingleGetResponse",
+    "CollectionsSingleGetResponseData",
+    "CollectionsSingleGetResponseDataAttributes",
+    "CollectionsSingleGetResponseDataAttributesDescription",
+    "CollectionsSingleGetResponseDataAttributesDescriptionType",
+    "CollectionsSingleGetResponseDataLinks",
+    "CollectionsSingleGetResponseDataMeta",
+    "CollectionsSingleGetResponseDataMetaErrorsItem",
+    "CollectionsSingleGetResponseDataMetaErrorsItemSource",
+    "CollectionsSingleGetResponseDataMetaErrorsItemSourceResource",
+    "CollectionsSingleGetResponseDataRelationships",
+    "CollectionsSingleGetResponseDataRelationshipsAuthor",
+    "CollectionsSingleGetResponseDataRelationshipsAuthorData",
+    "CollectionsSingleGetResponseDataRelationshipsAuthorDataType",
+    "CollectionsSingleGetResponseDataRelationshipsDocuments",
+    "CollectionsSingleGetResponseDataRelationshipsDocumentsDataItem",
+    "CollectionsSingleGetResponseDataRelationshipsDocumentsDataItemType",
+    "CollectionsSingleGetResponseDataRelationshipsDocumentsMeta",
+    "CollectionsSingleGetResponseDataRelationshipsDownstreamCollections",
+    "CollectionsSingleGetResponseDataRelationshipsDownstreamCollectionsDataItem",
+    "CollectionsSingleGetResponseDataRelationshipsDownstreamCollectionsDataItemType",
+    "CollectionsSingleGetResponseDataRelationshipsDownstreamCollectionsMeta",
+    "CollectionsSingleGetResponseDataRelationshipsProject",
+    "CollectionsSingleGetResponseDataRelationshipsProjectData",
+    "CollectionsSingleGetResponseDataRelationshipsProjectDataType",
+    "CollectionsSingleGetResponseDataRelationshipsReusedFrom",
+    "CollectionsSingleGetResponseDataRelationshipsReusedFromData",
+    "CollectionsSingleGetResponseDataRelationshipsReusedFromDataType",
+    "CollectionsSingleGetResponseDataRelationshipsUpstreamCollections",
+    "CollectionsSingleGetResponseDataRelationshipsUpstreamCollectionsDataItem",
+    "CollectionsSingleGetResponseDataRelationshipsUpstreamCollectionsDataItemType",
+    "CollectionsSingleGetResponseDataRelationshipsUpstreamCollectionsMeta",
+    "CollectionsSingleGetResponseDataType",
+    "CollectionsSingleGetResponseIncludedItem",
+    "CollectionsSingleGetResponseLinks",
+    "CollectionsSinglePatchRequest",
+    "CollectionsSinglePatchRequestData",
+    "CollectionsSinglePatchRequestDataAttributes",
+    "CollectionsSinglePatchRequestDataAttributesDescription",
+    "CollectionsSinglePatchRequestDataAttributesDescriptionType",
+    "CollectionsSinglePatchRequestDataRelationships",
+    "CollectionsSinglePatchRequestDataRelationshipsDocuments",
+    "CollectionsSinglePatchRequestDataRelationshipsDocumentsDataItem",
+    "CollectionsSinglePatchRequestDataRelationshipsDocumentsDataItemType",
+    "CollectionsSinglePatchRequestDataRelationshipsUpstreamCollections",
+    "CollectionsSinglePatchRequestDataRelationshipsUpstreamCollectionsDataItem",
+    "CollectionsSinglePatchRequestDataRelationshipsUpstreamCollectionsDataItemType",
+    "CollectionsSinglePatchRequestDataType",
     "CopyDocumentRequestBody",
     "CreateProjectRequestBody",
     "CreateProjectRequestBodyParamsType0",

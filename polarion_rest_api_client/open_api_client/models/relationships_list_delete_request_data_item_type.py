@@ -6,6 +6,7 @@ from enum import Enum
 
 class RelationshipsListDeleteRequestDataItemType(str, Enum):
     CATEGORIES = "categories"
+    COLLECTIONS = "collections"
     DOCUMENTS = "documents"
     DOCUMENT_ATTACHMENTS = "document_attachments"
     DOCUMENT_COMMENTS = "document_comments"

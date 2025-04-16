@@ -36,10 +36,10 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/spaces/{spaceId}/documents/{documentName}/actions/branch".format(
-            projectId=project_id,
-            spaceId=space_id,
-            documentName=document_name,
+        "url": "/projects/{project_id}/spaces/{space_id}/documents/{document_name}/actions/branch".format(
+            project_id=project_id,
+            space_id=space_id,
+            document_name=document_name,
         ),
         "params": params,
     }

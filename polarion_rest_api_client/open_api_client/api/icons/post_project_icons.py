@@ -23,8 +23,8 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/enumerations/icons".format(
-            projectId=project_id,
+        "url": "/projects/{project_id}/enumerations/icons".format(
+            project_id=project_id,
         ),
     }
 
