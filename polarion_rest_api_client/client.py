@@ -1,9 +1,13 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """The overall Polarion Client which handles the HTTP session, auth etc."""
+
 from __future__ import annotations
 
+import ssl
 import typing as t
+
+import truststore
 
 import polarion_rest_api_client.open_api_client as oa_client
 from polarion_rest_api_client import data_models as dm
@@ -110,10 +114,14 @@ class PolarionClient:
         batch_size: int = 100,
         page_size: int = 100,
         max_content_size: int = 2 * 1024**2,
+        verify_ssl: ssl.SSLContext | bool | None = None,
     ):
+        if verify_ssl is None:
+            verify_ssl = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
         self.client = oa_client.AuthenticatedClient(
             polarion_api_endpoint,
             polarion_access_token,
+            verify_ssl=verify_ssl,
             httpx_args=httpx_args or {},
         )
         self.batch_size = batch_size
