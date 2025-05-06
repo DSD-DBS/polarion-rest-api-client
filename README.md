@@ -127,7 +127,7 @@ Read the [full documentation on Github pages](https://dsd-dbs.github.io/polarion
 
 # Installation
 
-You can install the latest released version directly from PyPI (**Not yet**).
+You can install the latest released version directly from [PyPI](https://pypi.org/project/polarion-rest-api-client/).
 
 ```zsh
 pip install polarion-rest-api-client
