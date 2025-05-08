@@ -41,7 +41,7 @@ class WorkItemAttachments(
         multipart = api_models.PatchWorkItemAttachmentsRequestBody(
             resource=api_models.WorkitemAttachmentsSinglePatchRequest(
                 data=api_models.WorkitemAttachmentsSinglePatchRequestData(
-                    type=api_models.WorkitemAttachmentsSinglePatchRequestDataType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
+                    type_=api_models.WorkitemAttachmentsSinglePatchRequestDataType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
                     id=f"{self._project_id}/{to_update.work_item_id}/{to_update.id}",  # pylint: disable=line-too-long
                     attributes=attributes,
                 )
@@ -154,7 +154,7 @@ class WorkItemAttachments(
 
             attachment_attributes.append(
                 api_models.WorkitemAttachmentsListPostRequestDataItem(
-                    type=api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
+                    type_=api_models.WorkitemAttachmentsListPostRequestDataItemType.WORKITEM_ATTACHMENTS,  # pylint: disable=line-too-long
                     attributes=attributes,
                 )
             )

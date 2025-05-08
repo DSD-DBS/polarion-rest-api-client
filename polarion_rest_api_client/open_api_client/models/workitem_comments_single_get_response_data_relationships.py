@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -50,28 +51,28 @@ class WorkitemCommentsSingleGetResponseDataRelationships:
     project: Union[
         Unset, "WorkitemCommentsSingleGetResponseDataRelationshipsProject"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        author: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        author: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
-        child_comments: Union[Unset, Dict[str, Any]] = UNSET
+        child_comments: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.child_comments, Unset):
             child_comments = self.child_comments.to_dict()
 
-        parent_comment: Union[Unset, Dict[str, Any]] = UNSET
+        parent_comment: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.parent_comment, Unset):
             parent_comment = self.parent_comment.to_dict()
 
-        project: Union[Unset, Dict[str, Any]] = UNSET
+        project: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.project, Unset):
             project = self.project.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if author is not UNSET:
@@ -86,7 +87,7 @@ class WorkitemCommentsSingleGetResponseDataRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workitem_comments_single_get_response_data_relationships_author import (
             WorkitemCommentsSingleGetResponseDataRelationshipsAuthor,
         )
@@ -100,7 +101,7 @@ class WorkitemCommentsSingleGetResponseDataRelationships:
             WorkitemCommentsSingleGetResponseDataRelationshipsProject,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _author = d.pop("author", UNSET)
         author: Union[
             Unset, WorkitemCommentsSingleGetResponseDataRelationshipsAuthor
@@ -160,7 +161,7 @@ class WorkitemCommentsSingleGetResponseDataRelationships:
         return workitem_comments_single_get_response_data_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

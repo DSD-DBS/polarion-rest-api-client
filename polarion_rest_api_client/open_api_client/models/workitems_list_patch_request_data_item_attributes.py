@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -28,7 +29,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
     Attributes:
         description (Union[Unset, WorkitemsListPatchRequestDataItemAttributesDescription]):
         due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        hyperlinks (Union[Unset, List['WorkitemsListPatchRequestDataItemAttributesHyperlinksItem']]):
+        hyperlinks (Union[Unset, list['WorkitemsListPatchRequestDataItemAttributesHyperlinksItem']]):
         initial_estimate (Union[Unset, str]):  Example: 5 1/2d.
         priority (Union[Unset, str]):  Example: 90.0.
         remaining_estimate (Union[Unset, str]):  Example: 5 1/2d.
@@ -46,7 +47,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
     due_date: Union[Unset, datetime.date] = UNSET
     hyperlinks: Union[
         Unset,
-        List["WorkitemsListPatchRequestDataItemAttributesHyperlinksItem"],
+        list["WorkitemsListPatchRequestDataItemAttributesHyperlinksItem"],
     ] = UNSET
     initial_estimate: Union[Unset, str] = UNSET
     priority: Union[Unset, str] = UNSET
@@ -57,12 +58,12 @@ class WorkitemsListPatchRequestDataItemAttributes:
     status: Union[Unset, str] = UNSET
     time_spent: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        description: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        description: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -70,7 +71,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
         if not isinstance(self.due_date, Unset):
             due_date = self.due_date.isoformat()
 
-        hyperlinks: Union[Unset, List[Dict[str, Any]]] = UNSET
+        hyperlinks: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.hyperlinks, Unset):
             hyperlinks = []
             for hyperlinks_item_data in self.hyperlinks:
@@ -97,7 +98,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
 
         title = self.title
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if description is not UNSET:
@@ -128,7 +129,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workitems_list_patch_request_data_item_attributes_description import (
             WorkitemsListPatchRequestDataItemAttributesDescription,
         )
@@ -136,7 +137,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
             WorkitemsListPatchRequestDataItemAttributesHyperlinksItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _description = d.pop("description", UNSET)
         description: Union[
             Unset, WorkitemsListPatchRequestDataItemAttributesDescription
@@ -208,7 +209,7 @@ class WorkitemsListPatchRequestDataItemAttributes:
         return workitems_list_patch_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

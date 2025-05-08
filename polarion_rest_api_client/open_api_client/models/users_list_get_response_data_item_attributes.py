@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -40,14 +41,14 @@ class UsersListGetResponseDataItemAttributes:
     id: Union[Unset, str] = UNSET
     initials: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         avatar_url = self.avatar_url
 
-        description: Union[Unset, Dict[str, Any]] = UNSET
+        description: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -61,7 +62,7 @@ class UsersListGetResponseDataItemAttributes:
 
         name = self.name
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if avatar_url is not UNSET:
@@ -82,12 +83,12 @@ class UsersListGetResponseDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.users_list_get_response_data_item_attributes_description import (
             UsersListGetResponseDataItemAttributesDescription,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         avatar_url = d.pop("avatarUrl", UNSET)
 
         _description = d.pop("description", UNSET)
@@ -129,7 +130,7 @@ class UsersListGetResponseDataItemAttributes:
         return users_list_get_response_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:
