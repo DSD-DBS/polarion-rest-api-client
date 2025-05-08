@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -62,36 +63,36 @@ class PlansListGetResponseDataItemRelationships:
     work_items: Union[
         Unset, "PlansListGetResponseDataItemRelationshipsWorkItems"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        author: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        author: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
-        parent: Union[Unset, Dict[str, Any]] = UNSET
+        parent: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.parent, Unset):
             parent = self.parent.to_dict()
 
-        project: Union[Unset, Dict[str, Any]] = UNSET
+        project: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.project, Unset):
             project = self.project.to_dict()
 
-        project_span: Union[Unset, Dict[str, Any]] = UNSET
+        project_span: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.project_span, Unset):
             project_span = self.project_span.to_dict()
 
-        template: Union[Unset, Dict[str, Any]] = UNSET
+        template: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.template, Unset):
             template = self.template.to_dict()
 
-        work_items: Union[Unset, Dict[str, Any]] = UNSET
+        work_items: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.work_items, Unset):
             work_items = self.work_items.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if author is not UNSET:
@@ -110,7 +111,7 @@ class PlansListGetResponseDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.plans_list_get_response_data_item_relationships_author import (
             PlansListGetResponseDataItemRelationshipsAuthor,
         )
@@ -130,7 +131,7 @@ class PlansListGetResponseDataItemRelationships:
             PlansListGetResponseDataItemRelationshipsWorkItems,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _author = d.pop("author", UNSET)
         author: Union[Unset, PlansListGetResponseDataItemRelationshipsAuthor]
         if isinstance(_author, Unset):
@@ -214,7 +215,7 @@ class PlansListGetResponseDataItemRelationships:
         return plans_list_get_response_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -26,10 +27,10 @@ T = TypeVar("T", bound="WorkitemsListPostRequestDataItemAttributes")
 class WorkitemsListPostRequestDataItemAttributes:
     """
     Attributes:
-        type (str):  Example: task.
+        type_ (str):  Example: task.
         description (Union[Unset, WorkitemsListPostRequestDataItemAttributesDescription]):
         due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        hyperlinks (Union[Unset, List['WorkitemsListPostRequestDataItemAttributesHyperlinksItem']]):
+        hyperlinks (Union[Unset, list['WorkitemsListPostRequestDataItemAttributesHyperlinksItem']]):
         initial_estimate (Union[Unset, str]):  Example: 5 1/2d.
         priority (Union[Unset, str]):  Example: 90.0.
         remaining_estimate (Union[Unset, str]):  Example: 5 1/2d.
@@ -41,13 +42,13 @@ class WorkitemsListPostRequestDataItemAttributes:
         title (Union[Unset, str]):  Example: Title.
     """
 
-    type: str
+    type_: str
     description: Union[
         Unset, "WorkitemsListPostRequestDataItemAttributesDescription"
     ] = UNSET
     due_date: Union[Unset, datetime.date] = UNSET
     hyperlinks: Union[
-        Unset, List["WorkitemsListPostRequestDataItemAttributesHyperlinksItem"]
+        Unset, list["WorkitemsListPostRequestDataItemAttributesHyperlinksItem"]
     ] = UNSET
     initial_estimate: Union[Unset, str] = UNSET
     priority: Union[Unset, str] = UNSET
@@ -58,14 +59,14 @@ class WorkitemsListPostRequestDataItemAttributes:
     status: Union[Unset, str] = UNSET
     time_spent: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type = self.type
+    def to_dict(self) -> dict[str, Any]:
+        type_ = self.type_
 
-        description: Union[Unset, Dict[str, Any]] = UNSET
+        description: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -73,7 +74,7 @@ class WorkitemsListPostRequestDataItemAttributes:
         if not isinstance(self.due_date, Unset):
             due_date = self.due_date.isoformat()
 
-        hyperlinks: Union[Unset, List[Dict[str, Any]]] = UNSET
+        hyperlinks: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.hyperlinks, Unset):
             hyperlinks = []
             for hyperlinks_item_data in self.hyperlinks:
@@ -100,11 +101,11 @@ class WorkitemsListPostRequestDataItemAttributes:
 
         title = self.title
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "type": type,
+                "type": type_,
             }
         )
         if description is not UNSET:
@@ -135,7 +136,7 @@ class WorkitemsListPostRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workitems_list_post_request_data_item_attributes_description import (
             WorkitemsListPostRequestDataItemAttributesDescription,
         )
@@ -143,8 +144,8 @@ class WorkitemsListPostRequestDataItemAttributes:
             WorkitemsListPostRequestDataItemAttributesHyperlinksItem,
         )
 
-        d = src_dict.copy()
-        type = d.pop("type")
+        d = dict(src_dict)
+        type_ = d.pop("type")
 
         _description = d.pop("description", UNSET)
         description: Union[
@@ -197,7 +198,7 @@ class WorkitemsListPostRequestDataItemAttributes:
         title = d.pop("title", UNSET)
 
         workitems_list_post_request_data_item_attributes_obj = cls(
-            type=type,
+            type_=type_,
             description=description,
             due_date=due_date,
             hyperlinks=hyperlinks,
@@ -218,7 +219,7 @@ class WorkitemsListPostRequestDataItemAttributes:
         return workitems_list_post_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

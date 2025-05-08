@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -34,14 +35,14 @@ class JobsSingleGetResponseDataMetaErrorsItem:
     )
     status: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         detail = self.detail
 
-        source: Union[Unset, Dict[str, Any]] = UNSET
+        source: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.source, Unset):
             source = self.source.to_dict()
 
@@ -49,7 +50,7 @@ class JobsSingleGetResponseDataMetaErrorsItem:
 
         title = self.title
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if detail is not UNSET:
@@ -64,12 +65,12 @@ class JobsSingleGetResponseDataMetaErrorsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.jobs_single_get_response_data_meta_errors_item_source import (
             JobsSingleGetResponseDataMetaErrorsItemSource,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         detail = d.pop("detail", UNSET)
 
         _source = d.pop("source", UNSET)
@@ -98,7 +99,7 @@ class JobsSingleGetResponseDataMetaErrorsItem:
         return jobs_single_get_response_data_meta_errors_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

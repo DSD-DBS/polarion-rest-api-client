@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -150,86 +151,86 @@ class WorkitemsListGetResponseDataItemRelationships:
     work_records: Union[
         Unset, "WorkitemsListGetResponseDataItemRelationshipsWorkRecords"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        approvals: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        approvals: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.approvals, Unset):
             approvals = self.approvals.to_dict()
 
-        assignee: Union[Unset, Dict[str, Any]] = UNSET
+        assignee: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.assignee, Unset):
             assignee = self.assignee.to_dict()
 
-        attachments: Union[Unset, Dict[str, Any]] = UNSET
+        attachments: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.attachments, Unset):
             attachments = self.attachments.to_dict()
 
-        author: Union[Unset, Dict[str, Any]] = UNSET
+        author: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
-        backlinked_work_items: Union[Unset, Dict[str, Any]] = UNSET
+        backlinked_work_items: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.backlinked_work_items, Unset):
             backlinked_work_items = self.backlinked_work_items.to_dict()
 
-        categories: Union[Unset, Dict[str, Any]] = UNSET
+        categories: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.categories, Unset):
             categories = self.categories.to_dict()
 
-        comments: Union[Unset, Dict[str, Any]] = UNSET
+        comments: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.comments, Unset):
             comments = self.comments.to_dict()
 
-        externally_linked_work_items: Union[Unset, Dict[str, Any]] = UNSET
+        externally_linked_work_items: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.externally_linked_work_items, Unset):
             externally_linked_work_items = (
                 self.externally_linked_work_items.to_dict()
             )
 
-        linked_oslc_resources: Union[Unset, Dict[str, Any]] = UNSET
+        linked_oslc_resources: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.linked_oslc_resources, Unset):
             linked_oslc_resources = self.linked_oslc_resources.to_dict()
 
-        linked_revisions: Union[Unset, Dict[str, Any]] = UNSET
+        linked_revisions: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.linked_revisions, Unset):
             linked_revisions = self.linked_revisions.to_dict()
 
-        linked_work_items: Union[Unset, Dict[str, Any]] = UNSET
+        linked_work_items: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.linked_work_items, Unset):
             linked_work_items = self.linked_work_items.to_dict()
 
-        module: Union[Unset, Dict[str, Any]] = UNSET
+        module: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.module, Unset):
             module = self.module.to_dict()
 
-        planned_in: Union[Unset, Dict[str, Any]] = UNSET
+        planned_in: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.planned_in, Unset):
             planned_in = self.planned_in.to_dict()
 
-        project: Union[Unset, Dict[str, Any]] = UNSET
+        project: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.project, Unset):
             project = self.project.to_dict()
 
-        test_steps: Union[Unset, Dict[str, Any]] = UNSET
+        test_steps: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.test_steps, Unset):
             test_steps = self.test_steps.to_dict()
 
-        votes: Union[Unset, Dict[str, Any]] = UNSET
+        votes: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.votes, Unset):
             votes = self.votes.to_dict()
 
-        watches: Union[Unset, Dict[str, Any]] = UNSET
+        watches: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.watches, Unset):
             watches = self.watches.to_dict()
 
-        work_records: Union[Unset, Dict[str, Any]] = UNSET
+        work_records: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.work_records, Unset):
             work_records = self.work_records.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if approvals is not UNSET:
@@ -274,7 +275,7 @@ class WorkitemsListGetResponseDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workitems_list_get_response_data_item_relationships_approvals import (
             WorkitemsListGetResponseDataItemRelationshipsApprovals,
         )
@@ -330,7 +331,7 @@ class WorkitemsListGetResponseDataItemRelationships:
             WorkitemsListGetResponseDataItemRelationshipsWorkRecords,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _approvals = d.pop("approvals", UNSET)
         approvals: Union[
             Unset, WorkitemsListGetResponseDataItemRelationshipsApprovals
@@ -569,7 +570,7 @@ class WorkitemsListGetResponseDataItemRelationships:
         return workitems_list_get_response_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

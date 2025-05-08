@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -29,18 +30,18 @@ class DocumentCommentsListPostRequestDataItemAttributes:
     text: Union[
         Unset, "DocumentCommentsListPostRequestDataItemAttributesText"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         resolved = self.resolved
 
-        text: Union[Unset, Dict[str, Any]] = UNSET
+        text: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.text, Unset):
             text = self.text.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if resolved is not UNSET:
@@ -51,12 +52,12 @@ class DocumentCommentsListPostRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.document_comments_list_post_request_data_item_attributes_text import (
             DocumentCommentsListPostRequestDataItemAttributesText,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         resolved = d.pop("resolved", UNSET)
 
         _text = d.pop("text", UNSET)
@@ -81,7 +82,7 @@ class DocumentCommentsListPostRequestDataItemAttributes:
         return document_comments_list_post_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -23,26 +24,26 @@ class EnumerationsSingleGetResponseDataAttributes:
     Attributes:
         enum_context (Union[Unset, str]):  Example: id.
         enum_name (Union[Unset, str]):  Example: id.
-        options (Union[Unset, List['EnumerationsSingleGetResponseDataAttributesOptionsItem']]):
+        options (Union[Unset, list['EnumerationsSingleGetResponseDataAttributesOptionsItem']]):
         target_type (Union[Unset, str]):  Example: id.
     """
 
     enum_context: Union[Unset, str] = UNSET
     enum_name: Union[Unset, str] = UNSET
     options: Union[
-        Unset, List["EnumerationsSingleGetResponseDataAttributesOptionsItem"]
+        Unset, list["EnumerationsSingleGetResponseDataAttributesOptionsItem"]
     ] = UNSET
     target_type: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         enum_context = self.enum_context
 
         enum_name = self.enum_name
 
-        options: Union[Unset, List[Dict[str, Any]]] = UNSET
+        options: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.options, Unset):
             options = []
             for options_item_data in self.options:
@@ -51,7 +52,7 @@ class EnumerationsSingleGetResponseDataAttributes:
 
         target_type = self.target_type
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if enum_context is not UNSET:
@@ -66,12 +67,12 @@ class EnumerationsSingleGetResponseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.enumerations_single_get_response_data_attributes_options_item import (
             EnumerationsSingleGetResponseDataAttributesOptionsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         enum_context = d.pop("enumContext", UNSET)
 
         enum_name = d.pop("enumName", UNSET)
@@ -100,7 +101,7 @@ class EnumerationsSingleGetResponseDataAttributes:
         return enumerations_single_get_response_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

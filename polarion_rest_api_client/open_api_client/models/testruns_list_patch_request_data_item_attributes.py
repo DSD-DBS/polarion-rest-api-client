@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -36,7 +37,7 @@ class TestrunsListPatchRequestDataItemAttributes:
             manualSelection.
         status (Union[Unset, str]):  Example: open.
         title (Union[Unset, str]):  Example: Title.
-        type (Union[Unset, str]):  Example: manual.
+        type_ (Union[Unset, str]):  Example: manual.
         use_report_from_template (Union[Unset, bool]):
     """
 
@@ -53,20 +54,20 @@ class TestrunsListPatchRequestDataItemAttributes:
     ] = UNSET
     status: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
-    type: Union[Unset, str] = UNSET
+    type_: Union[Unset, str] = UNSET
     use_report_from_template: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         finished_on: Union[Unset, str] = UNSET
         if not isinstance(self.finished_on, Unset):
             finished_on = self.finished_on.isoformat()
 
         group_id = self.group_id
 
-        home_page_content: Union[Unset, Dict[str, Any]] = UNSET
+        home_page_content: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.home_page_content, Unset):
             home_page_content = self.home_page_content.to_dict()
 
@@ -84,11 +85,11 @@ class TestrunsListPatchRequestDataItemAttributes:
 
         title = self.title
 
-        type = self.type
+        type_ = self.type_
 
         use_report_from_template = self.use_report_from_template
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if finished_on is not UNSET:
@@ -109,20 +110,20 @@ class TestrunsListPatchRequestDataItemAttributes:
             field_dict["status"] = status
         if title is not UNSET:
             field_dict["title"] = title
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if use_report_from_template is not UNSET:
             field_dict["useReportFromTemplate"] = use_report_from_template
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.testruns_list_patch_request_data_item_attributes_home_page_content import (
             TestrunsListPatchRequestDataItemAttributesHomePageContent,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _finished_on = d.pop("finishedOn", UNSET)
         finished_on: Union[Unset, datetime.datetime]
         if isinstance(_finished_on, Unset):
@@ -166,7 +167,7 @@ class TestrunsListPatchRequestDataItemAttributes:
 
         title = d.pop("title", UNSET)
 
-        type = d.pop("type", UNSET)
+        type_ = d.pop("type", UNSET)
 
         use_report_from_template = d.pop("useReportFromTemplate", UNSET)
 
@@ -180,7 +181,7 @@ class TestrunsListPatchRequestDataItemAttributes:
             select_test_cases_by=select_test_cases_by,
             status=status,
             title=title,
-            type=type,
+            type_=type_,
             use_report_from_template=use_report_from_template,
         )
 
@@ -190,7 +191,7 @@ class TestrunsListPatchRequestDataItemAttributes:
         return testruns_list_patch_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

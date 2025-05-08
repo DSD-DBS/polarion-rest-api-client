@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -21,21 +21,21 @@ def _get_kwargs(
     *,
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
-    type: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+    type_: Union[Unset, str] = UNSET,
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["page[size]"] = pagesize
 
     params["page[number]"] = pagenumber
 
-    params["type"] = type
+    params["type"] = type_
 
     params = {
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/projects/{project_id}/documents/fields/{field_id}/actions/getAvailableOptions".format(
             project_id=project_id,
@@ -50,35 +50,35 @@ def _get_kwargs(
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[EnumOptionsActionResponseBody, Errors]]:
-    if response.status_code == HTTPStatus.OK:
+    if response.status_code == 200:
         response_200 = EnumOptionsActionResponseBody.from_dict(response.json())
 
         return response_200
-    if response.status_code == HTTPStatus.BAD_REQUEST:
+    if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
-    if response.status_code == HTTPStatus.UNAUTHORIZED:
+    if response.status_code == 401:
         response_401 = Errors.from_dict(response.json())
 
         return response_401
-    if response.status_code == HTTPStatus.FORBIDDEN:
+    if response.status_code == 403:
         response_403 = Errors.from_dict(response.json())
 
         return response_403
-    if response.status_code == HTTPStatus.NOT_FOUND:
+    if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
-    if response.status_code == HTTPStatus.NOT_ACCEPTABLE:
+    if response.status_code == 406:
         response_406 = Errors.from_dict(response.json())
 
         return response_406
-    if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
+    if response.status_code == 500:
         response_500 = Errors.from_dict(response.json())
 
         return response_500
-    if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
+    if response.status_code == 503:
         response_503 = Errors.from_dict(response.json())
 
         return response_503
@@ -106,7 +106,7 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
-    type: Union[Unset, str] = UNSET,
+    type_: Union[Unset, str] = UNSET,
 ) -> Response[Union[EnumOptionsActionResponseBody, Errors]]:
     """Returns a list of available options for the requested field for the
     specified Document type.
@@ -116,7 +116,7 @@ def sync_detailed(
         field_id (str):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
-        type (Union[Unset, str]):
+        type_ (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -131,7 +131,7 @@ def sync_detailed(
         field_id=field_id,
         pagesize=pagesize,
         pagenumber=pagenumber,
-        type=type,
+        type_=type_,
     )
 
     response = client.get_httpx_client().request(
@@ -148,7 +148,7 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
-    type: Union[Unset, str] = UNSET,
+    type_: Union[Unset, str] = UNSET,
 ) -> Optional[Union[EnumOptionsActionResponseBody, Errors]]:
     """Returns a list of available options for the requested field for the
     specified Document type.
@@ -158,7 +158,7 @@ def sync(
         field_id (str):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
-        type (Union[Unset, str]):
+        type_ (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -174,7 +174,7 @@ def sync(
         client=client,
         pagesize=pagesize,
         pagenumber=pagenumber,
-        type=type,
+        type_=type_,
     ).parsed
 
 
@@ -185,7 +185,7 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
-    type: Union[Unset, str] = UNSET,
+    type_: Union[Unset, str] = UNSET,
 ) -> Response[Union[EnumOptionsActionResponseBody, Errors]]:
     """Returns a list of available options for the requested field for the
     specified Document type.
@@ -195,7 +195,7 @@ async def asyncio_detailed(
         field_id (str):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
-        type (Union[Unset, str]):
+        type_ (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -210,7 +210,7 @@ async def asyncio_detailed(
         field_id=field_id,
         pagesize=pagesize,
         pagenumber=pagenumber,
-        type=type,
+        type_=type_,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -225,7 +225,7 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     pagesize: Union[Unset, int] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
-    type: Union[Unset, str] = UNSET,
+    type_: Union[Unset, str] = UNSET,
 ) -> Optional[Union[EnumOptionsActionResponseBody, Errors]]:
     """Returns a list of available options for the requested field for the
     specified Document type.
@@ -235,7 +235,7 @@ async def asyncio(
         field_id (str):
         pagesize (Union[Unset, int]):
         pagenumber (Union[Unset, int]):
-        type (Union[Unset, str]):
+        type_ (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -252,6 +252,6 @@ async def asyncio(
             client=client,
             pagesize=pagesize,
             pagenumber=pagenumber,
-            type=type,
+            type_=type_,
         )
     ).parsed

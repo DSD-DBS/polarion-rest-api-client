@@ -91,7 +91,7 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
         keys = attributes.keys or []
         values = [
             dm.TextContent(
-                val.type.value if val.type else "text/plain",
+                val.type_.value if val.type_ else "text/plain",
                 val.value or None,
             )
             for val in attributes.values or []
@@ -129,7 +129,7 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
             items = [items]
         body_data = [
             api_models.TeststepsListDeleteRequestDataItem(
-                type=api_models.TeststepsListDeleteRequestDataItemType.TESTSTEPS,
+                type_=api_models.TeststepsListDeleteRequestDataItemType.TESTSTEPS,
                 id=f"{self._project_id}/{step.work_item_id}/{step.step_index}",
             )
             for step in items
@@ -166,7 +166,7 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
             keys=list(test_step.step_columns.keys()),
             values=[
                 value_item_cls(
-                    type=(
+                    type_=(
                         value_item_type.TEXTHTML
                         if col.type == "text/html"
                         else value_item_type.TEXTPLAIN
@@ -182,7 +182,7 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
     ) -> list[api_models.TeststepsListPatchRequestDataItem]:
         return [
             api_models.TeststepsListPatchRequestDataItem(
-                type=api_models.TeststepsListPatchRequestDataItemType.TESTSTEPS,
+                type_=api_models.TeststepsListPatchRequestDataItemType.TESTSTEPS,
                 id=(
                     f"{self._project_id}/{step.work_item_id}/{step.step_index}"
                     if step.step_index
@@ -204,7 +204,7 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
     ) -> list[api_models.TeststepsListPostRequestDataItem]:
         return [
             api_models.TeststepsListPostRequestDataItem(
-                type=api_models.TeststepsListPostRequestDataItemType.TESTSTEPS,
+                type_=api_models.TeststepsListPostRequestDataItemType.TESTSTEPS,
                 attributes=t.cast(
                     api_models.TeststepsListPostRequestDataItemAttributes,
                     self._fill_test_step_attributes(

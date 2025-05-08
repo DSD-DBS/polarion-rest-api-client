@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -34,18 +35,18 @@ class CreateProjectRequestBody:
     project_id: Union[Unset, str] = UNSET
     template_id: Union[None, Unset, str] = UNSET
     tracker_prefix: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.create_project_request_body_params_type_0 import (
             CreateProjectRequestBodyParamsType0,
         )
 
         location = self.location
 
-        params: Union[Dict[str, Any], None, Unset]
+        params: Union[None, Unset, dict[str, Any]]
         if isinstance(self.params, Unset):
             params = UNSET
         elif isinstance(self.params, CreateProjectRequestBodyParamsType0):
@@ -63,7 +64,7 @@ class CreateProjectRequestBody:
 
         tracker_prefix = self.tracker_prefix
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if location is not UNSET:
@@ -80,12 +81,12 @@ class CreateProjectRequestBody:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_project_request_body_params_type_0 import (
             CreateProjectRequestBodyParamsType0,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         location = d.pop("location", UNSET)
 
         def _parse_params(
@@ -136,7 +137,7 @@ class CreateProjectRequestBody:
         return create_project_request_body_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

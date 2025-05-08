@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -29,7 +30,7 @@ T = TypeVar("T", bound="PlansSinglePatchRequestDataAttributes")
 class PlansSinglePatchRequestDataAttributes:
     """
     Attributes:
-        allowed_types (Union[Unset, List[str]]):
+        allowed_types (Union[Unset, list[str]]):
         calculation_type (Union[Unset, PlansSinglePatchRequestDataAttributesCalculationType]):  Example: timeBased.
         capacity (Union[Unset, float]):
         color (Union[Unset, str]):  Example: Color.
@@ -50,7 +51,7 @@ class PlansSinglePatchRequestDataAttributes:
         use_report_from_template (Union[Unset, bool]):
     """
 
-    allowed_types: Union[Unset, List[str]] = UNSET
+    allowed_types: Union[Unset, list[str]] = UNSET
     calculation_type: Union[
         Unset, PlansSinglePatchRequestDataAttributesCalculationType
     ] = UNSET
@@ -75,12 +76,12 @@ class PlansSinglePatchRequestDataAttributes:
     started_on: Union[Unset, datetime.datetime] = UNSET
     status: Union[Unset, str] = UNSET
     use_report_from_template: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        allowed_types: Union[Unset, List[str]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        allowed_types: Union[Unset, list[str]] = UNSET
         if not isinstance(self.allowed_types, Unset):
             allowed_types = self.allowed_types
 
@@ -94,7 +95,7 @@ class PlansSinglePatchRequestDataAttributes:
 
         default_estimate = self.default_estimate
 
-        description: Union[Unset, Dict[str, Any]] = UNSET
+        description: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -108,7 +109,7 @@ class PlansSinglePatchRequestDataAttributes:
         if not isinstance(self.finished_on, Unset):
             finished_on = self.finished_on.isoformat()
 
-        home_page_content: Union[Unset, Dict[str, Any]] = UNSET
+        home_page_content: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.home_page_content, Unset):
             home_page_content = self.home_page_content.to_dict()
 
@@ -134,7 +135,7 @@ class PlansSinglePatchRequestDataAttributes:
 
         use_report_from_template = self.use_report_from_template
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if allowed_types is not UNSET:
@@ -179,7 +180,7 @@ class PlansSinglePatchRequestDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.plans_single_patch_request_data_attributes_description import (
             PlansSinglePatchRequestDataAttributesDescription,
         )
@@ -187,8 +188,8 @@ class PlansSinglePatchRequestDataAttributes:
             PlansSinglePatchRequestDataAttributesHomePageContent,
         )
 
-        d = src_dict.copy()
-        allowed_types = cast(List[str], d.pop("allowedTypes", UNSET))
+        d = dict(src_dict)
+        allowed_types = cast(list[str], d.pop("allowedTypes", UNSET))
 
         _calculation_type = d.pop("calculationType", UNSET)
         calculation_type: Union[
@@ -307,7 +308,7 @@ class PlansSinglePatchRequestDataAttributes:
         return plans_single_patch_request_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

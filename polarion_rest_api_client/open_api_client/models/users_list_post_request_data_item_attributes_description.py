@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,51 +19,53 @@ T = TypeVar("T", bound="UsersListPostRequestDataItemAttributesDescription")
 class UsersListPostRequestDataItemAttributesDescription:
     """
     Attributes:
-        type (Union[Unset, UsersListPostRequestDataItemAttributesDescriptionType]):
+        type_ (Union[Unset, UsersListPostRequestDataItemAttributesDescriptionType]):
         value (Union[Unset, str]):  Example: My text value.
     """
 
-    type: Union[
+    type_: Union[
         Unset, UsersListPostRequestDataItemAttributesDescriptionType
     ] = UNSET
     value: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value
+    def to_dict(self) -> dict[str, Any]:
+        type_: Union[Unset, str] = UNSET
+        if not isinstance(self.type_, Unset):
+            type_ = self.type_.value
 
         value = self.value
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if value is not UNSET:
             field_dict["value"] = value
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        d = src_dict.copy()
-        _type = d.pop("type", UNSET)
-        type: Union[
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        _type_ = d.pop("type", UNSET)
+        type_: Union[
             Unset, UsersListPostRequestDataItemAttributesDescriptionType
         ]
-        if isinstance(_type, Unset):
-            type = UNSET
+        if isinstance(_type_, Unset):
+            type_ = UNSET
         else:
-            type = UsersListPostRequestDataItemAttributesDescriptionType(_type)
+            type_ = UsersListPostRequestDataItemAttributesDescriptionType(
+                _type_
+            )
 
         value = d.pop("value", UNSET)
 
         users_list_post_request_data_item_attributes_description_obj = cls(
-            type=type,
+            type_=type_,
             value=value,
         )
 
@@ -72,7 +75,7 @@ class UsersListPostRequestDataItemAttributesDescription:
         return users_list_post_request_data_item_attributes_description_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:
