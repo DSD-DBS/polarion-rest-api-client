@@ -84,7 +84,7 @@ class Documents(
                                 if layout.properties
                                 else None
                             ),
-                            self.unset_to_none(layout.type),
+                            self.unset_to_none(layout.type_),
                         )
                         for layout in attributes.rendering_layouts
                     ]
@@ -93,7 +93,7 @@ class Documents(
                     id=data.id,
                     module_folder=self.unset_to_none(attributes.module_folder),
                     module_name=self.unset_to_none(attributes.module_name),
-                    type=self.unset_to_none(attributes.type),
+                    type=self.unset_to_none(attributes.type_),
                     status=self.unset_to_none(attributes.status),
                     home_page_content=home_page_content,
                     title=self.unset_to_none(attributes.title),
@@ -128,7 +128,7 @@ class Documents(
                 attributes=api_models.DocumentsSinglePatchRequestDataAttributes(
                     home_page_content=(
                         api_models.DocumentsSinglePatchRequestDataAttributesHomePageContent(
-                            type=api_models.DocumentsSinglePatchRequestDataAttributesHomePageContentType(
+                            type_=api_models.DocumentsSinglePatchRequestDataAttributesHomePageContentType(
                                 to_update.home_page_content.type
                             ),
                             value=to_update.home_page_content.value or "",
@@ -138,7 +138,7 @@ class Documents(
                     ),
                     status=to_update.status or oa_types.UNSET,
                     title=to_update.title or oa_types.UNSET,
-                    type=to_update.type or oa_types.UNSET,
+                    type_=to_update.type or oa_types.UNSET,
                     rendering_layouts=(
                         [
                             api_models.DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItem(
@@ -148,7 +148,7 @@ class Documents(
                                     if layout.layouter is not None
                                     else oa_types.UNSET
                                 ),
-                                type=layout.type or oa_types.UNSET,
+                                type_=layout.type or oa_types.UNSET,
                                 properties=(
                                     [
                                         api_models.DocumentsSinglePatchRequestDataAttributesRenderingLayoutsItemPropertiesItem.from_dict(
@@ -203,11 +203,11 @@ class Documents(
             # pylint: disable=line-too-long
             data=[
                 api_models.DocumentsListPostRequestDataItem(
-                    type=api_models.DocumentsListPostRequestDataItemType.DOCUMENTS,
+                    type_=api_models.DocumentsListPostRequestDataItemType.DOCUMENTS,
                     attributes=api_models.DocumentsListPostRequestDataItemAttributes(
                         home_page_content=(
                             api_models.DocumentsListPostRequestDataItemAttributesHomePageContent(
-                                type=api_models.DocumentsListPostRequestDataItemAttributesHomePageContentType(
+                                type_=api_models.DocumentsListPostRequestDataItemAttributesHomePageContentType(
                                     document.home_page_content.type
                                 ),
                                 value=document.home_page_content.value or "",
@@ -218,7 +218,7 @@ class Documents(
                         module_name=document.module_name or oa_types.UNSET,
                         status=document.status or oa_types.UNSET,
                         title=document.title or oa_types.UNSET,
-                        type=document.type or oa_types.UNSET,
+                        type_=document.type or oa_types.UNSET,
                         rendering_layouts=(
                             [
                                 api_models.DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem(
@@ -228,7 +228,7 @@ class Documents(
                                         if layout.layouter is not None
                                         else oa_types.UNSET
                                     ),
-                                    type=layout.type or oa_types.UNSET,
+                                    type_=layout.type or oa_types.UNSET,
                                     properties=(
                                         [
                                             api_models.DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesItem.from_dict(

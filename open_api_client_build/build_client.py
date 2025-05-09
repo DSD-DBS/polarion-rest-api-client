@@ -129,7 +129,7 @@ def fix_spec(src: str, path: str | os.PathLike):
         subprocess.run(
             [
                 generator_path,
-                "update",
+                "generate",
                 "--meta",
                 "none",
                 "--path",
@@ -137,6 +137,7 @@ def fix_spec(src: str, path: str | os.PathLike):
                 f"--custom-template-path={template_path}",
                 "--config",
                 config_path,
+                "--overwrite",
             ],
             cwd=rest_api_path,
             check=True,

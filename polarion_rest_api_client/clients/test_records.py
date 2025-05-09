@@ -35,7 +35,7 @@ class TestRecords(
             # pylint: disable=line-too-long
             body=api_models.TestrecordsSinglePatchRequest(
                 data=api_models.TestrecordsSinglePatchRequestData(
-                    type=api_models.TestrecordsSinglePatchRequestDataType.TESTRECORDS,
+                    type_=api_models.TestrecordsSinglePatchRequestDataType.TESTRECORDS,
                     id=f"{self._project_id}/{to_update.test_run_id}/{to_update.work_item_project_id}/{to_update.work_item_id}/{to_update.iteration}",
                     attributes=self._fill_test_record_attributes(
                         api_models.TestrecordsSinglePatchRequestDataAttributes,
@@ -130,7 +130,7 @@ class TestRecords(
             body=api_models.TestrecordsListPostRequest(
                 [
                     api_models.TestrecordsListPostRequestDataItem(
-                        type=api_models.TestrecordsListPostRequestDataItemType.TESTRECORDS,
+                        type_=api_models.TestrecordsListPostRequestDataItemType.TESTRECORDS,
                         attributes=self._fill_test_record_attributes(
                             api_models.TestrecordsListPostRequestDataItemAttributes,
                             test_record,
@@ -138,7 +138,7 @@ class TestRecords(
                         relationships=api_models.TestrecordsListPostRequestDataItemRelationships(
                             test_case=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCase(
                                 data=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseData(
-                                    type=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseDataType.WORKITEMS,
+                                    type_=api_models.TestrecordsListPostRequestDataItemRelationshipsTestCaseDataType.WORKITEMS,
                                     id=f"{test_record.work_item_project_id}/{test_record.work_item_id}",
                                 )
                             )
@@ -181,7 +181,7 @@ class TestRecords(
             attributes.comment = getattr(api_models, f"{type_prefix}Comment")()
             assert attributes.comment
             if test_record.comment.type:
-                attributes.comment.type = getattr(
+                attributes.comment.type_ = getattr(
                     api_models, f"{type_prefix}CommentType"
                 )(test_record.comment.type)
             if test_record.comment.value:

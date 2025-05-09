@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -41,24 +42,24 @@ class TestrecordsListPostRequestDataItemRelationships:
     test_case: Union[
         Unset, "TestrecordsListPostRequestDataItemRelationshipsTestCase"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        defect: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        defect: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.defect, Unset):
             defect = self.defect.to_dict()
 
-        executed_by: Union[Unset, Dict[str, Any]] = UNSET
+        executed_by: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.executed_by, Unset):
             executed_by = self.executed_by.to_dict()
 
-        test_case: Union[Unset, Dict[str, Any]] = UNSET
+        test_case: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.test_case, Unset):
             test_case = self.test_case.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if defect is not UNSET:
@@ -71,7 +72,7 @@ class TestrecordsListPostRequestDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.testrecords_list_post_request_data_item_relationships_defect import (
             TestrecordsListPostRequestDataItemRelationshipsDefect,
         )
@@ -82,7 +83,7 @@ class TestrecordsListPostRequestDataItemRelationships:
             TestrecordsListPostRequestDataItemRelationshipsTestCase,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _defect = d.pop("defect", UNSET)
         defect: Union[
             Unset, TestrecordsListPostRequestDataItemRelationshipsDefect
@@ -128,7 +129,7 @@ class TestrecordsListPostRequestDataItemRelationships:
         return testrecords_list_post_request_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

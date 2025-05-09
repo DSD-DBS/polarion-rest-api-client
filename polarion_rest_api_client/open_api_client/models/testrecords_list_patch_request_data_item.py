@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -27,13 +28,13 @@ T = TypeVar("T", bound="TestrecordsListPatchRequestDataItem")
 class TestrecordsListPatchRequestDataItem:
     """
     Attributes:
-        type (Union[Unset, TestrecordsListPatchRequestDataItemType]):
+        type_ (Union[Unset, TestrecordsListPatchRequestDataItemType]):
         id (Union[Unset, str]):  Example: elibrary/MyTestRunId/MyProjectId/MyTestcaseId/0.
         attributes (Union[Unset, TestrecordsListPatchRequestDataItemAttributes]):
         relationships (Union[Unset, TestrecordsListPatchRequestDataItemRelationships]):
     """
 
-    type: Union[Unset, TestrecordsListPatchRequestDataItemType] = UNSET
+    type_: Union[Unset, TestrecordsListPatchRequestDataItemType] = UNSET
     id: Union[Unset, str] = UNSET
     attributes: Union[
         Unset, "TestrecordsListPatchRequestDataItemAttributes"
@@ -41,30 +42,30 @@ class TestrecordsListPatchRequestDataItem:
     relationships: Union[
         Unset, "TestrecordsListPatchRequestDataItemRelationships"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value
+    def to_dict(self) -> dict[str, Any]:
+        type_: Union[Unset, str] = UNSET
+        if not isinstance(self.type_, Unset):
+            type_ = self.type_.value
 
         id = self.id
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        relationships: Union[Unset, Dict[str, Any]] = UNSET
+        relationships: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if id is not UNSET:
             field_dict["id"] = id
         if attributes is not UNSET:
@@ -75,7 +76,7 @@ class TestrecordsListPatchRequestDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.testrecords_list_patch_request_data_item_attributes import (
             TestrecordsListPatchRequestDataItemAttributes,
         )
@@ -83,13 +84,13 @@ class TestrecordsListPatchRequestDataItem:
             TestrecordsListPatchRequestDataItemRelationships,
         )
 
-        d = src_dict.copy()
-        _type = d.pop("type", UNSET)
-        type: Union[Unset, TestrecordsListPatchRequestDataItemType]
-        if isinstance(_type, Unset):
-            type = UNSET
+        d = dict(src_dict)
+        _type_ = d.pop("type", UNSET)
+        type_: Union[Unset, TestrecordsListPatchRequestDataItemType]
+        if isinstance(_type_, Unset):
+            type_ = UNSET
         else:
-            type = TestrecordsListPatchRequestDataItemType(_type)
+            type_ = TestrecordsListPatchRequestDataItemType(_type_)
 
         id = d.pop("id", UNSET)
 
@@ -118,7 +119,7 @@ class TestrecordsListPatchRequestDataItem:
             )
 
         testrecords_list_patch_request_data_item_obj = cls(
-            type=type,
+            type_=type_,
             id=id,
             attributes=attributes,
             relationships=relationships,
@@ -128,7 +129,7 @@ class TestrecordsListPatchRequestDataItem:
         return testrecords_list_patch_request_data_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

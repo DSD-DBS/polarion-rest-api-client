@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -39,11 +40,11 @@ class CollectionsSingleGetResponseDataAttributes:
     id: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         closed_on: Union[Unset, str] = UNSET
         if not isinstance(self.closed_on, Unset):
             closed_on = self.closed_on.isoformat()
@@ -52,7 +53,7 @@ class CollectionsSingleGetResponseDataAttributes:
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
 
-        description: Union[Unset, Dict[str, Any]] = UNSET
+        description: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -64,7 +65,7 @@ class CollectionsSingleGetResponseDataAttributes:
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if closed_on is not UNSET:
@@ -83,12 +84,12 @@ class CollectionsSingleGetResponseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.collections_single_get_response_data_attributes_description import (
             CollectionsSingleGetResponseDataAttributesDescription,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _closed_on = d.pop("closedOn", UNSET)
         closed_on: Union[Unset, datetime.datetime]
         if isinstance(_closed_on, Unset):
@@ -140,7 +141,7 @@ class CollectionsSingleGetResponseDataAttributes:
         return collections_single_get_response_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

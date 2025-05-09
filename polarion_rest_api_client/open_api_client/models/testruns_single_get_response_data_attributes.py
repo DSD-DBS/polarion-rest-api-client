@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -39,7 +40,7 @@ class TestrunsSingleGetResponseDataAttributes:
             manualSelection.
         status (Union[Unset, str]):  Example: open.
         title (Union[Unset, str]):  Example: Title.
-        type (Union[Unset, str]):  Example: manual.
+        type_ (Union[Unset, str]):  Example: manual.
         updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
         use_report_from_template (Union[Unset, bool]):
     """
@@ -60,14 +61,14 @@ class TestrunsSingleGetResponseDataAttributes:
     ] = UNSET
     status: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
-    type: Union[Unset, str] = UNSET
+    type_: Union[Unset, str] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
     use_report_from_template: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         created: Union[Unset, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
@@ -78,7 +79,7 @@ class TestrunsSingleGetResponseDataAttributes:
 
         group_id = self.group_id
 
-        home_page_content: Union[Unset, Dict[str, Any]] = UNSET
+        home_page_content: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.home_page_content, Unset):
             home_page_content = self.home_page_content.to_dict()
 
@@ -100,7 +101,7 @@ class TestrunsSingleGetResponseDataAttributes:
 
         title = self.title
 
-        type = self.type
+        type_ = self.type_
 
         updated: Union[Unset, str] = UNSET
         if not isinstance(self.updated, Unset):
@@ -108,7 +109,7 @@ class TestrunsSingleGetResponseDataAttributes:
 
         use_report_from_template = self.use_report_from_template
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if created is not UNSET:
@@ -135,8 +136,8 @@ class TestrunsSingleGetResponseDataAttributes:
             field_dict["status"] = status
         if title is not UNSET:
             field_dict["title"] = title
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if updated is not UNSET:
             field_dict["updated"] = updated
         if use_report_from_template is not UNSET:
@@ -145,12 +146,12 @@ class TestrunsSingleGetResponseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.testruns_single_get_response_data_attributes_home_page_content import (
             TestrunsSingleGetResponseDataAttributesHomePageContent,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
         if isinstance(_created, Unset):
@@ -205,7 +206,7 @@ class TestrunsSingleGetResponseDataAttributes:
 
         title = d.pop("title", UNSET)
 
-        type = d.pop("type", UNSET)
+        type_ = d.pop("type", UNSET)
 
         _updated = d.pop("updated", UNSET)
         updated: Union[Unset, datetime.datetime]
@@ -229,7 +230,7 @@ class TestrunsSingleGetResponseDataAttributes:
             select_test_cases_by=select_test_cases_by,
             status=status,
             title=title,
-            type=type,
+            type_=type_,
             updated=updated,
             use_report_from_template=use_report_from_template,
         )
@@ -240,7 +241,7 @@ class TestrunsSingleGetResponseDataAttributes:
         return testruns_single_get_response_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

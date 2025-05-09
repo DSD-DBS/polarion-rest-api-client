@@ -120,7 +120,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
             body=api_models.LinkedworkitemsListPostRequest(
                 data=[
                     api_models.LinkedworkitemsListPostRequestDataItem(
-                        type=api_models.LinkedworkitemsListPostRequestDataItemType.LINKEDWORKITEMS,
+                        type_=api_models.LinkedworkitemsListPostRequestDataItemType.LINKEDWORKITEMS,
                         attributes=api_models.LinkedworkitemsListPostRequestDataItemAttributes(
                             role=work_item_link.role,
                             suspect=work_item_link.suspect or False,
@@ -128,7 +128,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
                         relationships=api_models.LinkedworkitemsListPostRequestDataItemRelationships(
                             work_item=api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem(
                                 data=api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemData(
-                                    type=api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemDataType.WORKITEMS,
+                                    type_=api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemDataType.WORKITEMS,
                                     id=f"{work_item_link.secondary_work_item_project or self._project_id}/{work_item_link.secondary_work_item_id}",
                                 )
                             )
@@ -151,7 +151,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
             body=api_models.LinkedworkitemsListDeleteRequest(
                 data=[
                     api_models.LinkedworkitemsListDeleteRequestDataItem(
-                        type=api_models.LinkedworkitemsListDeleteRequestDataItemType.LINKEDWORKITEMS,
+                        type_=api_models.LinkedworkitemsListDeleteRequestDataItemType.LINKEDWORKITEMS,
                         id=f"{self._project_id}/{work_item_link.primary_work_item_id}/{work_item_link.role}/{work_item_link.secondary_work_item_project or self._project_id}/{work_item_link.secondary_work_item_id}",
                     )
                     for work_item_link in items

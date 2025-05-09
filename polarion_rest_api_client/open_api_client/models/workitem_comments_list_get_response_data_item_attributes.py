@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -37,11 +38,11 @@ class WorkitemCommentsListGetResponseDataItemAttributes:
         Unset, "WorkitemCommentsListGetResponseDataItemAttributesText"
     ] = UNSET
     title: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         created: Union[Unset, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
@@ -50,13 +51,13 @@ class WorkitemCommentsListGetResponseDataItemAttributes:
 
         resolved = self.resolved
 
-        text: Union[Unset, Dict[str, Any]] = UNSET
+        text: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.text, Unset):
             text = self.text.to_dict()
 
         title = self.title
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if created is not UNSET:
@@ -73,12 +74,12 @@ class WorkitemCommentsListGetResponseDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workitem_comments_list_get_response_data_item_attributes_text import (
             WorkitemCommentsListGetResponseDataItemAttributesText,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
         if isinstance(_created, Unset):
@@ -117,7 +118,7 @@ class WorkitemCommentsListGetResponseDataItemAttributes:
         return workitem_comments_list_get_response_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

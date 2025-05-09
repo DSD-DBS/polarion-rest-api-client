@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,31 +22,31 @@ T = TypeVar("T", bound="TeststepsListPostRequestDataItemAttributes")
 class TeststepsListPostRequestDataItemAttributes:
     """
     Attributes:
-        keys (Union[Unset, List[str]]):
-        values (Union[Unset, List['TeststepsListPostRequestDataItemAttributesValuesItem']]):
+        keys (Union[Unset, list[str]]):
+        values (Union[Unset, list['TeststepsListPostRequestDataItemAttributesValuesItem']]):
     """
 
-    keys: Union[Unset, List[str]] = UNSET
+    keys: Union[Unset, list[str]] = UNSET
     values: Union[
-        Unset, List["TeststepsListPostRequestDataItemAttributesValuesItem"]
+        Unset, list["TeststepsListPostRequestDataItemAttributesValuesItem"]
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        keys: Union[Unset, List[str]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        keys: Union[Unset, list[str]] = UNSET
         if not isinstance(self.keys, Unset):
             keys = self.keys
 
-        values: Union[Unset, List[Dict[str, Any]]] = UNSET
+        values: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.values, Unset):
             values = []
             for values_item_data in self.values:
                 values_item = values_item_data.to_dict()
                 values.append(values_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if keys is not UNSET:
@@ -56,13 +57,13 @@ class TeststepsListPostRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.teststeps_list_post_request_data_item_attributes_values_item import (
             TeststepsListPostRequestDataItemAttributesValuesItem,
         )
 
-        d = src_dict.copy()
-        keys = cast(List[str], d.pop("keys", UNSET))
+        d = dict(src_dict)
+        keys = cast(list[str], d.pop("keys", UNSET))
 
         values = []
         _values = d.pop("values", UNSET)
@@ -86,7 +87,7 @@ class TeststepsListPostRequestDataItemAttributes:
         return teststeps_list_post_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

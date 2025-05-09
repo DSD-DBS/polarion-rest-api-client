@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -27,38 +28,38 @@ T = TypeVar("T", bound="UsersListPostRequestDataItem")
 class UsersListPostRequestDataItem:
     """
     Attributes:
-        type (Union[Unset, UsersListPostRequestDataItemType]):
+        type_ (Union[Unset, UsersListPostRequestDataItemType]):
         attributes (Union[Unset, UsersListPostRequestDataItemAttributes]):
         relationships (Union[Unset, UsersListPostRequestDataItemRelationships]):
     """
 
-    type: Union[Unset, UsersListPostRequestDataItemType] = UNSET
+    type_: Union[Unset, UsersListPostRequestDataItemType] = UNSET
     attributes: Union[Unset, "UsersListPostRequestDataItemAttributes"] = UNSET
     relationships: Union[
         Unset, "UsersListPostRequestDataItemRelationships"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value
+    def to_dict(self) -> dict[str, Any]:
+        type_: Union[Unset, str] = UNSET
+        if not isinstance(self.type_, Unset):
+            type_ = self.type_.value
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        relationships: Union[Unset, Dict[str, Any]] = UNSET
+        relationships: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
         if relationships is not UNSET:
@@ -67,7 +68,7 @@ class UsersListPostRequestDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.users_list_post_request_data_item_attributes import (
             UsersListPostRequestDataItemAttributes,
         )
@@ -75,13 +76,13 @@ class UsersListPostRequestDataItem:
             UsersListPostRequestDataItemRelationships,
         )
 
-        d = src_dict.copy()
-        _type = d.pop("type", UNSET)
-        type: Union[Unset, UsersListPostRequestDataItemType]
-        if isinstance(_type, Unset):
-            type = UNSET
+        d = dict(src_dict)
+        _type_ = d.pop("type", UNSET)
+        type_: Union[Unset, UsersListPostRequestDataItemType]
+        if isinstance(_type_, Unset):
+            type_ = UNSET
         else:
-            type = UsersListPostRequestDataItemType(_type)
+            type_ = UsersListPostRequestDataItemType(_type_)
 
         _attributes = d.pop("attributes", UNSET)
         attributes: Union[Unset, UsersListPostRequestDataItemAttributes]
@@ -104,7 +105,7 @@ class UsersListPostRequestDataItem:
             )
 
         users_list_post_request_data_item_obj = cls(
-            type=type,
+            type_=type_,
             attributes=attributes,
             relationships=relationships,
         )
@@ -113,7 +114,7 @@ class UsersListPostRequestDataItem:
         return users_list_post_request_data_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

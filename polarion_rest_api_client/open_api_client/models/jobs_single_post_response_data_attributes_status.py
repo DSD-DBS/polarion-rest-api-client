@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,47 +20,47 @@ class JobsSinglePostResponseDataAttributesStatus:
     """
     Attributes:
         message (Union[Unset, str]):  Example: message.
-        type (Union[Unset, JobsSinglePostResponseDataAttributesStatusType]):
+        type_ (Union[Unset, JobsSinglePostResponseDataAttributesStatusType]):
     """
 
     message: Union[Unset, str] = UNSET
-    type: Union[Unset, JobsSinglePostResponseDataAttributesStatusType] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    type_: Union[Unset, JobsSinglePostResponseDataAttributesStatusType] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         message = self.message
 
-        type: Union[Unset, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value
+        type_: Union[Unset, str] = UNSET
+        if not isinstance(self.type_, Unset):
+            type_ = self.type_.value
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if message is not UNSET:
             field_dict["message"] = message
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         message = d.pop("message", UNSET)
 
-        _type = d.pop("type", UNSET)
-        type: Union[Unset, JobsSinglePostResponseDataAttributesStatusType]
-        if isinstance(_type, Unset):
-            type = UNSET
+        _type_ = d.pop("type", UNSET)
+        type_: Union[Unset, JobsSinglePostResponseDataAttributesStatusType]
+        if isinstance(_type_, Unset):
+            type_ = UNSET
         else:
-            type = JobsSinglePostResponseDataAttributesStatusType(_type)
+            type_ = JobsSinglePostResponseDataAttributesStatusType(_type_)
 
         jobs_single_post_response_data_attributes_status_obj = cls(
             message=message,
-            type=type,
+            type_=type_,
         )
 
         jobs_single_post_response_data_attributes_status_obj.additional_properties = (
@@ -68,7 +69,7 @@ class JobsSinglePostResponseDataAttributesStatus:
         return jobs_single_post_response_data_attributes_status_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

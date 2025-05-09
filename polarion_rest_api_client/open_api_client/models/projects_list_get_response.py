@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -30,8 +31,8 @@ T = TypeVar("T", bound="ProjectsListGetResponse")
 class ProjectsListGetResponse:
     """
     Attributes:
-        data (Union[Unset, List['ProjectsListGetResponseDataItem']]):
-        included (Union[Unset, List['ProjectsListGetResponseIncludedItem']]): Related entities might be returned, see <a
+        data (Union[Unset, list['ProjectsListGetResponseDataItem']]):
+        included (Union[Unset, list['ProjectsListGetResponseIncludedItem']]): Related entities might be returned, see <a
             href="https://docs.sw.siemens.com/en-
             US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
             Guide</a>.
@@ -39,38 +40,38 @@ class ProjectsListGetResponse:
         meta (Union[Unset, ProjectsListGetResponseMeta]):
     """
 
-    data: Union[Unset, List["ProjectsListGetResponseDataItem"]] = UNSET
-    included: Union[Unset, List["ProjectsListGetResponseIncludedItem"]] = UNSET
+    data: Union[Unset, list["ProjectsListGetResponseDataItem"]] = UNSET
+    included: Union[Unset, list["ProjectsListGetResponseIncludedItem"]] = UNSET
     links: Union[Unset, "ProjectsListGetResponseLinks"] = UNSET
     meta: Union[Unset, "ProjectsListGetResponseMeta"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        data: Union[Unset, List[Dict[str, Any]]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        data: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.data, Unset):
             data = []
             for data_item_data in self.data:
                 data_item = data_item_data.to_dict()
                 data.append(data_item)
 
-        included: Union[Unset, List[Dict[str, Any]]] = UNSET
+        included: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.included, Unset):
             included = []
             for included_item_data in self.included:
                 included_item = included_item_data.to_dict()
                 included.append(included_item)
 
-        links: Union[Unset, Dict[str, Any]] = UNSET
+        links: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
+        meta: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.meta, Unset):
             meta = self.meta.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if data is not UNSET:
@@ -85,7 +86,7 @@ class ProjectsListGetResponse:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.projects_list_get_response_data_item import (
             ProjectsListGetResponseDataItem,
         )
@@ -99,7 +100,7 @@ class ProjectsListGetResponse:
             ProjectsListGetResponseMeta,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         data = []
         _data = d.pop("data", UNSET)
         for data_item_data in _data or []:
@@ -143,7 +144,7 @@ class ProjectsListGetResponse:
         return projects_list_get_response_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -55,32 +56,32 @@ class WorkitemsListPostRequestDataItemRelationships:
     module: Union[
         Unset, "WorkitemsListPostRequestDataItemRelationshipsModule"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        assignee: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        assignee: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.assignee, Unset):
             assignee = self.assignee.to_dict()
 
-        author: Union[Unset, Dict[str, Any]] = UNSET
+        author: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
-        categories: Union[Unset, Dict[str, Any]] = UNSET
+        categories: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.categories, Unset):
             categories = self.categories.to_dict()
 
-        linked_revisions: Union[Unset, Dict[str, Any]] = UNSET
+        linked_revisions: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.linked_revisions, Unset):
             linked_revisions = self.linked_revisions.to_dict()
 
-        module: Union[Unset, Dict[str, Any]] = UNSET
+        module: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.module, Unset):
             module = self.module.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if assignee is not UNSET:
@@ -97,7 +98,7 @@ class WorkitemsListPostRequestDataItemRelationships:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workitems_list_post_request_data_item_relationships_assignee import (
             WorkitemsListPostRequestDataItemRelationshipsAssignee,
         )
@@ -114,7 +115,7 @@ class WorkitemsListPostRequestDataItemRelationships:
             WorkitemsListPostRequestDataItemRelationshipsModule,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _assignee = d.pop("assignee", UNSET)
         assignee: Union[
             Unset, WorkitemsListPostRequestDataItemRelationshipsAssignee
@@ -188,7 +189,7 @@ class WorkitemsListPostRequestDataItemRelationships:
         return workitems_list_post_request_data_item_relationships_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

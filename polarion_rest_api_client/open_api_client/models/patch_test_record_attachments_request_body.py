@@ -2,8 +2,9 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import json
+from collections.abc import Mapping
 from io import BytesIO
-from typing import TYPE_CHECKING, Any, Dict, List, Tuple, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -29,18 +30,18 @@ class PatchTestRecordAttachmentsRequestBody:
 
     resource: "TestrecordAttachmentsSinglePatchRequest"
     content: Union[Unset, File] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         resource = self.resource.to_dict()
 
         content: Union[Unset, FileJsonType] = UNSET
         if not isinstance(self.content, Unset):
             content = self.content.to_tuple()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -52,8 +53,8 @@ class PatchTestRecordAttachmentsRequestBody:
 
         return field_dict
 
-    def to_multipart(self) -> List[Tuple[str, Any]]:
-        field_list: List[Tuple[str, Any]] = []
+    def to_multipart(self) -> list[tuple[str, Any]]:
+        field_list: list[tuple[str, Any]] = []
         resource = (
             None,
             json.dumps(self.resource.to_dict()).encode(),
@@ -68,25 +69,21 @@ class PatchTestRecordAttachmentsRequestBody:
         if content is not UNSET:
             field_list.append(("content", content))
 
-        field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                key: (None, str(value).encode(), "text/plain")
-                for key, value in self.additional_properties.items()
-            }
-        )
+        field_dict: dict[str, Any] = {}
+        for prop_name, prop in self.additional_properties.items():
+            field_dict[prop_name] = (None, str(prop).encode(), "text/plain")
 
         field_list += list(field_dict.items())
 
         return field_list
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.testrecord_attachments_single_patch_request import (
             TestrecordAttachmentsSinglePatchRequest,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         resource = TestrecordAttachmentsSinglePatchRequest.from_dict(
             d.pop("resource")
         )
@@ -109,7 +106,7 @@ class PatchTestRecordAttachmentsRequestBody:
         return patch_test_record_attachments_request_body_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

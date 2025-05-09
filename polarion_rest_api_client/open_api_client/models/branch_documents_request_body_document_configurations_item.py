@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,7 +19,7 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
         source_document (str): Reference path of the source Document. Example: MyProjectId/MySpaceId/MyDocumentId.
         copy_workflow_status_and_signatures (Union[Unset, bool]): Specifies that workflow status and signatures should
             be copied to the branched document.
-        initialized_fields (Union[Unset, List[str]]): Specifies fields of overwritten Work Items that should be
+        initialized_fields (Union[Unset, list[str]]): Specifies fields of overwritten Work Items that should be
             initialized (instead of being copied from source Work Items).
         overwrite_work_items (Union[Unset, bool]): Specifies that Work Items in the branched Document should be
             overwritten (instead of being referenced).
@@ -34,7 +35,7 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
 
     source_document: str
     copy_workflow_status_and_signatures: Union[Unset, bool] = UNSET
-    initialized_fields: Union[Unset, List[str]] = UNSET
+    initialized_fields: Union[Unset, list[str]] = UNSET
     overwrite_work_items: Union[Unset, bool] = UNSET
     query: Union[Unset, str] = UNSET
     source_revision: Union[Unset, str] = UNSET
@@ -43,18 +44,18 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
     target_project_id: Union[Unset, str] = UNSET
     target_space_id: Union[Unset, str] = UNSET
     update_title_heading: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         source_document = self.source_document
 
         copy_workflow_status_and_signatures = (
             self.copy_workflow_status_and_signatures
         )
 
-        initialized_fields: Union[Unset, List[str]] = UNSET
+        initialized_fields: Union[Unset, list[str]] = UNSET
         if not isinstance(self.initialized_fields, Unset):
             initialized_fields = self.initialized_fields
 
@@ -74,7 +75,7 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
 
         update_title_heading = self.update_title_heading
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -107,15 +108,15 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         source_document = d.pop("sourceDocument")
 
         copy_workflow_status_and_signatures = d.pop(
             "copyWorkflowStatusAndSignatures", UNSET
         )
 
-        initialized_fields = cast(List[str], d.pop("initializedFields", UNSET))
+        initialized_fields = cast(list[str], d.pop("initializedFields", UNSET))
 
         overwrite_work_items = d.pop("overwriteWorkItems", UNSET)
 
@@ -153,7 +154,7 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
         return branch_documents_request_body_document_configurations_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

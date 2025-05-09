@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -23,18 +24,18 @@ class LinkedworkitemsListPostRequestDataItemAttributes:
     revision: Union[Unset, str] = UNSET
     role: Union[Unset, str] = UNSET
     suspect: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         revision = self.revision
 
         role = self.role
 
         suspect = self.suspect
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if revision is not UNSET:
@@ -47,8 +48,8 @@ class LinkedworkitemsListPostRequestDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         revision = d.pop("revision", UNSET)
 
         role = d.pop("role", UNSET)
@@ -67,7 +68,7 @@ class LinkedworkitemsListPostRequestDataItemAttributes:
         return linkedworkitems_list_post_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -16,40 +17,40 @@ class DocumentPartsListPostRequestDataItemAttributes:
     """
     Attributes:
         level (Union[Unset, int]):
-        type (Union[Unset, str]):  Example: workitem.
+        type_ (Union[Unset, str]):  Example: workitem.
     """
 
     level: Union[Unset, int] = UNSET
-    type: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    type_: Union[Unset, str] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         level = self.level
 
-        type = self.type
+        type_ = self.type_
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if level is not UNSET:
             field_dict["level"] = level
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         level = d.pop("level", UNSET)
 
-        type = d.pop("type", UNSET)
+        type_ = d.pop("type", UNSET)
 
         document_parts_list_post_request_data_item_attributes_obj = cls(
             level=level,
-            type=type,
+            type_=type_,
         )
 
         document_parts_list_post_request_data_item_attributes_obj.additional_properties = (
@@ -58,7 +59,7 @@ class DocumentPartsListPostRequestDataItemAttributes:
         return document_parts_list_post_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

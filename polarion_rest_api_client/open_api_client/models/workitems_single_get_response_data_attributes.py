@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -29,7 +30,7 @@ class WorkitemsSingleGetResponseDataAttributes:
         created (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
         description (Union[Unset, WorkitemsSingleGetResponseDataAttributesDescription]):
         due_date (Union[Unset, datetime.date]):  Example: 1970-01-01.
-        hyperlinks (Union[Unset, List['WorkitemsSingleGetResponseDataAttributesHyperlinksItem']]):
+        hyperlinks (Union[Unset, list['WorkitemsSingleGetResponseDataAttributesHyperlinksItem']]):
         id (Union[Unset, str]):  Example: MyWorkItemId.
         initial_estimate (Union[Unset, str]):  Example: 5 1/2d.
         outline_number (Union[Unset, str]):  Example: 1.11.
@@ -43,7 +44,7 @@ class WorkitemsSingleGetResponseDataAttributes:
         status (Union[Unset, str]):  Example: open.
         time_spent (Union[Unset, str]):  Example: 5 1/2d.
         title (Union[Unset, str]):  Example: Title.
-        type (Union[Unset, str]):  Example: task.
+        type_ (Union[Unset, str]):  Example: task.
         updated (Union[Unset, datetime.datetime]):  Example: 1970-01-01T00:00:00Z.
     """
 
@@ -53,7 +54,7 @@ class WorkitemsSingleGetResponseDataAttributes:
     ] = UNSET
     due_date: Union[Unset, datetime.date] = UNSET
     hyperlinks: Union[
-        Unset, List["WorkitemsSingleGetResponseDataAttributesHyperlinksItem"]
+        Unset, list["WorkitemsSingleGetResponseDataAttributesHyperlinksItem"]
     ] = UNSET
     id: Union[Unset, str] = UNSET
     initial_estimate: Union[Unset, str] = UNSET
@@ -68,18 +69,18 @@ class WorkitemsSingleGetResponseDataAttributes:
     status: Union[Unset, str] = UNSET
     time_spent: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
-    type: Union[Unset, str] = UNSET
+    type_: Union[Unset, str] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         created: Union[Unset, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
 
-        description: Union[Unset, Dict[str, Any]] = UNSET
+        description: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -87,7 +88,7 @@ class WorkitemsSingleGetResponseDataAttributes:
         if not isinstance(self.due_date, Unset):
             due_date = self.due_date.isoformat()
 
-        hyperlinks: Union[Unset, List[Dict[str, Any]]] = UNSET
+        hyperlinks: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.hyperlinks, Unset):
             hyperlinks = []
             for hyperlinks_item_data in self.hyperlinks:
@@ -126,13 +127,13 @@ class WorkitemsSingleGetResponseDataAttributes:
 
         title = self.title
 
-        type = self.type
+        type_ = self.type_
 
         updated: Union[Unset, str] = UNSET
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if created is not UNSET:
@@ -169,15 +170,15 @@ class WorkitemsSingleGetResponseDataAttributes:
             field_dict["timeSpent"] = time_spent
         if title is not UNSET:
             field_dict["title"] = title
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if updated is not UNSET:
             field_dict["updated"] = updated
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workitems_single_get_response_data_attributes_description import (
             WorkitemsSingleGetResponseDataAttributesDescription,
         )
@@ -185,7 +186,7 @@ class WorkitemsSingleGetResponseDataAttributes:
             WorkitemsSingleGetResponseDataAttributesHyperlinksItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
         if isinstance(_created, Unset):
@@ -263,7 +264,7 @@ class WorkitemsSingleGetResponseDataAttributes:
 
         title = d.pop("title", UNSET)
 
-        type = d.pop("type", UNSET)
+        type_ = d.pop("type", UNSET)
 
         _updated = d.pop("updated", UNSET)
         updated: Union[Unset, datetime.datetime]
@@ -290,7 +291,7 @@ class WorkitemsSingleGetResponseDataAttributes:
             status=status,
             time_spent=time_spent,
             title=title,
-            type=type,
+            type_=type_,
             updated=updated,
         )
 
@@ -300,7 +301,7 @@ class WorkitemsSingleGetResponseDataAttributes:
         return workitems_single_get_response_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

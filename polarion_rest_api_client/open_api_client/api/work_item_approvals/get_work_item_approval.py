@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -24,10 +24,10 @@ def _get_kwargs(
     fields: Union[Unset, "SparseFields"] = UNSET,
     include: Union[Unset, str] = UNSET,
     revision: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
-    json_fields: Union[Unset, Dict[str, Any]] = UNSET
+    json_fields: Union[Unset, dict[str, Any]] = UNSET
     if not isinstance(fields, Unset):
         json_fields = fields.to_dict()
     if not isinstance(json_fields, Unset):
@@ -41,7 +41,7 @@ def _get_kwargs(
         k: v for k, v in params.items() if v is not UNSET and v is not None
     }
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/projects/{project_id}/workitems/{work_item_id}/approvals/{user_id}".format(
             project_id=project_id,
@@ -57,37 +57,37 @@ def _get_kwargs(
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Errors, WorkitemApprovalsSingleGetResponse]]:
-    if response.status_code == HTTPStatus.OK:
+    if response.status_code == 200:
         response_200 = WorkitemApprovalsSingleGetResponse.from_dict(
             response.json()
         )
 
         return response_200
-    if response.status_code == HTTPStatus.BAD_REQUEST:
+    if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
-    if response.status_code == HTTPStatus.UNAUTHORIZED:
+    if response.status_code == 401:
         response_401 = Errors.from_dict(response.json())
 
         return response_401
-    if response.status_code == HTTPStatus.FORBIDDEN:
+    if response.status_code == 403:
         response_403 = Errors.from_dict(response.json())
 
         return response_403
-    if response.status_code == HTTPStatus.NOT_FOUND:
+    if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
-    if response.status_code == HTTPStatus.NOT_ACCEPTABLE:
+    if response.status_code == 406:
         response_406 = Errors.from_dict(response.json())
 
         return response_406
-    if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
+    if response.status_code == 500:
         response_500 = Errors.from_dict(response.json())
 
         return response_500
-    if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
+    if response.status_code == 503:
         response_503 = Errors.from_dict(response.json())
 
         return response_503

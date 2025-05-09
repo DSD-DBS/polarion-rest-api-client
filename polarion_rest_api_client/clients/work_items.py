@@ -291,7 +291,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             body=api_models.WorkitemsListDeleteRequest(
                 data=[
                     api_models.WorkitemsListDeleteRequestDataItem(
-                        type=api_models.WorkitemsListDeleteRequestDataItemType.WORKITEMS,  # pylint: disable=line-too-long
+                        type_=api_models.WorkitemsListDeleteRequestDataItemType.WORKITEMS,  # pylint: disable=line-too-long
                         id=f"{self._project_id}/{work_item_id}",
                     )
                     for work_item_id in work_item_ids
@@ -306,10 +306,10 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         assert work_item.type is not None
 
         attrs = api_models.WorkitemsListPostRequestDataItemAttributes(
-            type=work_item.type,
+            type_=work_item.type,
             description=(
                 api_models.WorkitemsListPostRequestDataItemAttributesDescription(  # pylint: disable=line-too-long
-                    type=api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
+                    type_=api_models.WorkitemsListPostRequestDataItemAttributesDescriptionType(  # pylint: disable=line-too-long
                         work_item.description.type
                     ),
                     value=work_item.description.value or "",
@@ -324,7 +324,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         attrs.additional_properties.update(work_item.additional_attributes)
 
         return api_models.WorkitemsListPostRequestDataItem(
-            type=api_models.WorkitemsListPostRequestDataItemType.WORKITEMS,
+            type_=api_models.WorkitemsListPostRequestDataItemType.WORKITEMS,
             attributes=attrs,
             # pylint: disable=line-too-long
             relationships=(
@@ -332,7 +332,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                     module=api_models.WorkitemsListPostRequestDataItemRelationshipsModule(
                         data=api_models.WorkitemsListPostRequestDataItemRelationshipsModuleData(
                             id=f"{self._project_id}/{doc_ref.module_folder}/{doc_ref.module_name}",
-                            type=api_models.WorkitemsListPostRequestDataItemRelationshipsModuleDataType.DOCUMENTS,
+                            type_=api_models.WorkitemsListPostRequestDataItemRelationshipsModuleDataType.DOCUMENTS,
                         ),
                     )
                 )
@@ -356,7 +356,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
 
         if work_item.description is not None:
             attrs.description = api_models.WorkitemsSinglePatchRequestDataAttributesDescription(  # pylint: disable=line-too-long
-                type=api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
+                type_=api_models.WorkitemsSinglePatchRequestDataAttributesDescriptionType(  # pylint: disable=line-too-long
                     work_item.description.type
                 ),
                 value=work_item.description.value or "",
@@ -369,7 +369,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
 
         return api_models.WorkitemsSinglePatchRequest(
             data=api_models.WorkitemsSinglePatchRequestData(
-                type=api_models.WorkitemsSinglePatchRequestDataType.WORKITEMS,
+                type_=api_models.WorkitemsSinglePatchRequestDataType.WORKITEMS,
                 id=f"{self._project_id}/{work_item.id}",
                 attributes=attrs,
             )
@@ -472,7 +472,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         description = None
         if work_item.attributes.description:
             description = dm.TextContent(
-                self.unset_to_none(work_item.attributes.description.type),
+                self.unset_to_none(work_item.attributes.description.type_),
                 self.unset_to_none(work_item.attributes.description.value),
             )
 
@@ -480,7 +480,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             work_item_id,
             title=self.unset_to_none(work_item.attributes.title),
             description=description,
-            type=self.unset_to_none(work_item.attributes.type),
+            type=self.unset_to_none(work_item.attributes.type_),
             status=self.unset_to_none(work_item.attributes.status),
             additional_attributes=work_item.attributes.additional_properties,
             linked_work_items=links,

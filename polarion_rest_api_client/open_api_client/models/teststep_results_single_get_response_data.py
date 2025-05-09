@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -33,7 +34,7 @@ T = TypeVar("T", bound="TeststepResultsSingleGetResponseData")
 class TeststepResultsSingleGetResponseData:
     """
     Attributes:
-        type (Union[Unset, TeststepResultsSingleGetResponseDataType]):
+        type_ (Union[Unset, TeststepResultsSingleGetResponseDataType]):
         id (Union[Unset, str]):  Example: MyProjectId/MyTestRunId/MyProjectId/MyTestcaseId/0/1.
         revision (Union[Unset, str]):  Example: 1234.
         attributes (Union[Unset, TeststepResultsSingleGetResponseDataAttributes]):
@@ -42,7 +43,7 @@ class TeststepResultsSingleGetResponseData:
         meta (Union[Unset, TeststepResultsSingleGetResponseDataMeta]):
     """
 
-    type: Union[Unset, TeststepResultsSingleGetResponseDataType] = UNSET
+    type_: Union[Unset, TeststepResultsSingleGetResponseDataType] = UNSET
     id: Union[Unset, str] = UNSET
     revision: Union[Unset, str] = UNSET
     attributes: Union[
@@ -53,40 +54,40 @@ class TeststepResultsSingleGetResponseData:
     ] = UNSET
     links: Union[Unset, "TeststepResultsSingleGetResponseDataLinks"] = UNSET
     meta: Union[Unset, "TeststepResultsSingleGetResponseDataMeta"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value
+    def to_dict(self) -> dict[str, Any]:
+        type_: Union[Unset, str] = UNSET
+        if not isinstance(self.type_, Unset):
+            type_ = self.type_.value
 
         id = self.id
 
         revision = self.revision
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        relationships: Union[Unset, Dict[str, Any]] = UNSET
+        relationships: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.relationships, Unset):
             relationships = self.relationships.to_dict()
 
-        links: Union[Unset, Dict[str, Any]] = UNSET
+        links: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        meta: Union[Unset, Dict[str, Any]] = UNSET
+        meta: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.meta, Unset):
             meta = self.meta.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if id is not UNSET:
             field_dict["id"] = id
         if revision is not UNSET:
@@ -103,7 +104,7 @@ class TeststepResultsSingleGetResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.teststep_results_single_get_response_data_attributes import (
             TeststepResultsSingleGetResponseDataAttributes,
         )
@@ -117,13 +118,13 @@ class TeststepResultsSingleGetResponseData:
             TeststepResultsSingleGetResponseDataRelationships,
         )
 
-        d = src_dict.copy()
-        _type = d.pop("type", UNSET)
-        type: Union[Unset, TeststepResultsSingleGetResponseDataType]
-        if isinstance(_type, Unset):
-            type = UNSET
+        d = dict(src_dict)
+        _type_ = d.pop("type", UNSET)
+        type_: Union[Unset, TeststepResultsSingleGetResponseDataType]
+        if isinstance(_type_, Unset):
+            type_ = UNSET
         else:
-            type = TeststepResultsSingleGetResponseDataType(_type)
+            type_ = TeststepResultsSingleGetResponseDataType(_type_)
 
         id = d.pop("id", UNSET)
 
@@ -170,7 +171,7 @@ class TeststepResultsSingleGetResponseData:
             meta = TeststepResultsSingleGetResponseDataMeta.from_dict(_meta)
 
         teststep_results_single_get_response_data_obj = cls(
-            type=type,
+            type_=type_,
             id=id,
             revision=revision,
             attributes=attributes,
@@ -183,7 +184,7 @@ class TeststepResultsSingleGetResponseData:
         return teststep_results_single_get_response_data_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

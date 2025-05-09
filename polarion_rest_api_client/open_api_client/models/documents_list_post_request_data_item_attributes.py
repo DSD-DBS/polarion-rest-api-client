@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,11 +32,11 @@ class DocumentsListPostRequestDataItemAttributes:
         home_page_content (Union[Unset, DocumentsListPostRequestDataItemAttributesHomePageContent]):
         module_name (Union[Unset, str]):  Example: MyDocumentId.
         outline_numbering (Union[Unset, DocumentsListPostRequestDataItemAttributesOutlineNumbering]):
-        rendering_layouts (Union[Unset, List['DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem']]):
+        rendering_layouts (Union[Unset, list['DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem']]):
         status (Union[Unset, str]):  Example: draft.
         structure_link_role (Union[Unset, str]):  Example: relates_to.
         title (Union[Unset, str]):  Example: Title.
-        type (Union[Unset, str]):  Example: req_specification.
+        type_ (Union[Unset, str]):  Example: req_specification.
         uses_outline_numbering (Union[Unset, bool]):
     """
 
@@ -49,31 +50,31 @@ class DocumentsListPostRequestDataItemAttributes:
     ] = UNSET
     rendering_layouts: Union[
         Unset,
-        List["DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem"],
+        list["DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem"],
     ] = UNSET
     status: Union[Unset, str] = UNSET
     structure_link_role: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
-    type: Union[Unset, str] = UNSET
+    type_: Union[Unset, str] = UNSET
     uses_outline_numbering: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         auto_suspect = self.auto_suspect
 
-        home_page_content: Union[Unset, Dict[str, Any]] = UNSET
+        home_page_content: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.home_page_content, Unset):
             home_page_content = self.home_page_content.to_dict()
 
         module_name = self.module_name
 
-        outline_numbering: Union[Unset, Dict[str, Any]] = UNSET
+        outline_numbering: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.outline_numbering, Unset):
             outline_numbering = self.outline_numbering.to_dict()
 
-        rendering_layouts: Union[Unset, List[Dict[str, Any]]] = UNSET
+        rendering_layouts: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.rendering_layouts, Unset):
             rendering_layouts = []
             for rendering_layouts_item_data in self.rendering_layouts:
@@ -86,11 +87,11 @@ class DocumentsListPostRequestDataItemAttributes:
 
         title = self.title
 
-        type = self.type
+        type_ = self.type_
 
         uses_outline_numbering = self.uses_outline_numbering
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if auto_suspect is not UNSET:
@@ -109,15 +110,15 @@ class DocumentsListPostRequestDataItemAttributes:
             field_dict["structureLinkRole"] = structure_link_role
         if title is not UNSET:
             field_dict["title"] = title
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if uses_outline_numbering is not UNSET:
             field_dict["usesOutlineNumbering"] = uses_outline_numbering
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.documents_list_post_request_data_item_attributes_home_page_content import (
             DocumentsListPostRequestDataItemAttributesHomePageContent,
         )
@@ -128,7 +129,7 @@ class DocumentsListPostRequestDataItemAttributes:
             DocumentsListPostRequestDataItemAttributesRenderingLayoutsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         auto_suspect = d.pop("autoSuspect", UNSET)
 
         _home_page_content = d.pop("homePageContent", UNSET)
@@ -170,7 +171,7 @@ class DocumentsListPostRequestDataItemAttributes:
 
         title = d.pop("title", UNSET)
 
-        type = d.pop("type", UNSET)
+        type_ = d.pop("type", UNSET)
 
         uses_outline_numbering = d.pop("usesOutlineNumbering", UNSET)
 
@@ -183,7 +184,7 @@ class DocumentsListPostRequestDataItemAttributes:
             status=status,
             structure_link_role=structure_link_role,
             title=title,
-            type=type,
+            type_=type_,
             uses_outline_numbering=uses_outline_numbering,
         )
 
@@ -193,7 +194,7 @@ class DocumentsListPostRequestDataItemAttributes:
         return documents_list_post_request_data_item_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

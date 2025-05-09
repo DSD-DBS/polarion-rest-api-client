@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -35,12 +36,12 @@ class UsergroupsSingleGetResponseDataAttributes:
     ldap_search_filter: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
     sso_synchronization_allowed: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        description: Union[Unset, Dict[str, Any]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        description: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.description, Unset):
             description = self.description.to_dict()
 
@@ -52,7 +53,7 @@ class UsergroupsSingleGetResponseDataAttributes:
 
         sso_synchronization_allowed = self.sso_synchronization_allowed
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if description is not UNSET:
@@ -71,12 +72,12 @@ class UsergroupsSingleGetResponseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.usergroups_single_get_response_data_attributes_description import (
             UsergroupsSingleGetResponseDataAttributesDescription,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _description = d.pop("description", UNSET)
         description: Union[
             Unset, UsergroupsSingleGetResponseDataAttributesDescription
@@ -112,7 +113,7 @@ class UsergroupsSingleGetResponseDataAttributes:
         return usergroups_single_get_response_data_attributes_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:
