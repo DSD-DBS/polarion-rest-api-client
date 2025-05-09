@@ -41,8 +41,8 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/usergroups/{groupId}".format(
-            groupId=group_id,
+        "url": "/usergroups/{group_id}".format(
+            group_id=group_id,
         ),
         "params": params,
     }

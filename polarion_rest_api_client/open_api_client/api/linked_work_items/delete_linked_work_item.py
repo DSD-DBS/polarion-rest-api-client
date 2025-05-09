@@ -21,12 +21,12 @@ def _get_kwargs(
 ) -> Dict[str, Any]:
     _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": "/projects/{projectId}/workitems/{workItemId}/linkedworkitems/{roleId}/{targetProjectId}/{linkedWorkItemId}".format(
-            projectId=project_id,
-            workItemId=work_item_id,
-            roleId=role_id,
-            targetProjectId=target_project_id,
-            linkedWorkItemId=linked_work_item_id,
+        "url": "/projects/{project_id}/workitems/{work_item_id}/linkedworkitems/{role_id}/{target_project_id}/{linked_work_item_id}".format(
+            project_id=project_id,
+            work_item_id=work_item_id,
+            role_id=role_id,
+            target_project_id=target_project_id,
+            linked_work_item_id=linked_work_item_id,
         ),
     }
 

@@ -26,10 +26,10 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "patch",
-        "url": "/enumerations/{enumContext}/{enumName}/{targetType}".format(
-            enumContext=enum_context,
-            enumName=enum_name,
-            targetType=target_type,
+        "url": "/enumerations/{enum_context}/{enum_name}/{target_type}".format(
+            enum_context=enum_context,
+            enum_name=enum_name,
+            target_type=target_type,
         ),
     }
 

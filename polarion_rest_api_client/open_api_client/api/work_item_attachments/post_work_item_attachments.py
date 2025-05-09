@@ -28,9 +28,9 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/workitems/{workItemId}/attachments".format(
-            projectId=project_id,
-            workItemId=work_item_id,
+        "url": "/projects/{project_id}/workitems/{work_item_id}/attachments".format(
+            project_id=project_id,
+            work_item_id=work_item_id,
         ),
     }
 
@@ -119,7 +119,7 @@ def sync_detailed(
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:
@@ -159,7 +159,7 @@ def sync(
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:
@@ -194,7 +194,7 @@ async def asyncio_detailed(
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:
@@ -232,7 +232,7 @@ async def asyncio(
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20231017526942799.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:

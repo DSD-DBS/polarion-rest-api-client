@@ -16,6 +16,7 @@ class SparseFields:
     """
     Attributes:
         categories (Union[Unset, str]): Requested fields Example: @all.
+        collections (Union[Unset, str]): Requested fields Example: @all.
         document_attachments (Union[Unset, str]): Requested fields Example: @all.
         document_comments (Union[Unset, str]): Requested fields Example: @all.
         document_parts (Union[Unset, str]): Requested fields Example: @all.
@@ -55,6 +56,7 @@ class SparseFields:
     """
 
     categories: Union[Unset, str] = UNSET
+    collections: Union[Unset, str] = UNSET
     document_attachments: Union[Unset, str] = UNSET
     document_comments: Union[Unset, str] = UNSET
     document_parts: Union[Unset, str] = UNSET
@@ -97,6 +99,8 @@ class SparseFields:
 
     def to_dict(self) -> Dict[str, Any]:
         categories = self.categories
+
+        collections = self.collections
 
         document_attachments = self.document_attachments
 
@@ -175,6 +179,8 @@ class SparseFields:
         field_dict.update({})
         if categories is not UNSET:
             field_dict["categories"] = categories
+        if collections is not UNSET:
+            field_dict["collections"] = collections
         if document_attachments is not UNSET:
             field_dict["document_attachments"] = document_attachments
         if document_comments is not UNSET:
@@ -257,6 +263,8 @@ class SparseFields:
         d = src_dict.copy()
         categories = d.pop("categories", UNSET)
 
+        collections = d.pop("collections", UNSET)
+
         document_attachments = d.pop("document_attachments", UNSET)
 
         document_comments = d.pop("document_comments", UNSET)
@@ -331,6 +339,7 @@ class SparseFields:
 
         sparse_fields_obj = cls(
             categories=categories,
+            collections=collections,
             document_attachments=document_attachments,
             document_comments=document_comments,
             document_parts=document_parts,

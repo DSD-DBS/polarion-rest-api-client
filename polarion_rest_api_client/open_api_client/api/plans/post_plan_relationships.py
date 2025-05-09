@@ -31,10 +31,10 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/plans/{planId}/relationships/{relationshipId}".format(
-            projectId=project_id,
-            planId=plan_id,
-            relationshipId=relationship_id,
+        "url": "/projects/{project_id}/plans/{plan_id}/relationships/{relationship_id}".format(
+            project_id=project_id,
+            plan_id=plan_id,
+            relationship_id=relationship_id,
         ),
     }
 
@@ -131,7 +131,8 @@ def sync_detailed(
         plan_id (str):
         relationship_id (str):
         body (Union['RelationshipDataListRequest', 'RelationshipDataSingleRequest']): List of
-            generic contents Example: {'data': [{'type': 'plans', 'id': 'MyProjectId/MyResourceId'}]}.
+            generic contents Example: {'data': [{'type': 'MyResourceType', 'id':
+            'MyProjectId/MyResourceId'}]}.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -172,7 +173,8 @@ def sync(
         plan_id (str):
         relationship_id (str):
         body (Union['RelationshipDataListRequest', 'RelationshipDataSingleRequest']): List of
-            generic contents Example: {'data': [{'type': 'plans', 'id': 'MyProjectId/MyResourceId'}]}.
+            generic contents Example: {'data': [{'type': 'MyResourceType', 'id':
+            'MyProjectId/MyResourceId'}]}.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -208,7 +210,8 @@ async def asyncio_detailed(
         plan_id (str):
         relationship_id (str):
         body (Union['RelationshipDataListRequest', 'RelationshipDataSingleRequest']): List of
-            generic contents Example: {'data': [{'type': 'plans', 'id': 'MyProjectId/MyResourceId'}]}.
+            generic contents Example: {'data': [{'type': 'MyResourceType', 'id':
+            'MyProjectId/MyResourceId'}]}.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -247,7 +250,8 @@ async def asyncio(
         plan_id (str):
         relationship_id (str):
         body (Union['RelationshipDataListRequest', 'RelationshipDataSingleRequest']): List of
-            generic contents Example: {'data': [{'type': 'plans', 'id': 'MyProjectId/MyResourceId'}]}.
+            generic contents Example: {'data': [{'type': 'MyResourceType', 'id':
+            'MyProjectId/MyResourceId'}]}.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

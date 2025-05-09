@@ -24,9 +24,9 @@ def _get_kwargs(
 
     _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{projectId}/spaces/{spaceId}/documents".format(
-            projectId=project_id,
-            spaceId=space_id,
+        "url": "/projects/{project_id}/spaces/{space_id}/documents".format(
+            project_id=project_id,
+            space_id=space_id,
         ),
     }
 

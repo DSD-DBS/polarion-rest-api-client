@@ -18,9 +18,9 @@ def _get_kwargs(
 ) -> Dict[str, Any]:
     _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": "/projects/{projectId}/plans/{planId}".format(
-            projectId=project_id,
-            planId=plan_id,
+        "url": "/projects/{project_id}/plans/{plan_id}".format(
+            project_id=project_id,
+            plan_id=plan_id,
         ),
     }
 
