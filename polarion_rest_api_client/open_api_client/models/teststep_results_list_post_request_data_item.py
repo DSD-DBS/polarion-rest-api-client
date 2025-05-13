@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,50 +25,50 @@ T = TypeVar("T", bound="TeststepResultsListPostRequestDataItem")
 class TeststepResultsListPostRequestDataItem:
     """
     Attributes:
-        type (Union[Unset, TeststepResultsListPostRequestDataItemType]):
+        type_ (Union[Unset, TeststepResultsListPostRequestDataItemType]):
         attributes (Union[Unset, TeststepResultsListPostRequestDataItemAttributes]):
     """
 
-    type: Union[Unset, TeststepResultsListPostRequestDataItemType] = UNSET
+    type_: Union[Unset, TeststepResultsListPostRequestDataItemType] = UNSET
     attributes: Union[
         Unset, "TeststepResultsListPostRequestDataItemAttributes"
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        type: Union[Unset, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value
+    def to_dict(self) -> dict[str, Any]:
+        type_: Union[Unset, str] = UNSET
+        if not isinstance(self.type_, Unset):
+            type_ = self.type_.value
 
-        attributes: Union[Unset, Dict[str, Any]] = UNSET
+        attributes: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if type is not UNSET:
-            field_dict["type"] = type
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.teststep_results_list_post_request_data_item_attributes import (
             TeststepResultsListPostRequestDataItemAttributes,
         )
 
-        d = src_dict.copy()
-        _type = d.pop("type", UNSET)
-        type: Union[Unset, TeststepResultsListPostRequestDataItemType]
-        if isinstance(_type, Unset):
-            type = UNSET
+        d = dict(src_dict)
+        _type_ = d.pop("type", UNSET)
+        type_: Union[Unset, TeststepResultsListPostRequestDataItemType]
+        if isinstance(_type_, Unset):
+            type_ = UNSET
         else:
-            type = TeststepResultsListPostRequestDataItemType(_type)
+            type_ = TeststepResultsListPostRequestDataItemType(_type_)
 
         _attributes = d.pop("attributes", UNSET)
         attributes: Union[
@@ -83,7 +84,7 @@ class TeststepResultsListPostRequestDataItem:
             )
 
         teststep_results_list_post_request_data_item_obj = cls(
-            type=type,
+            type_=type_,
             attributes=attributes,
         )
 
@@ -93,7 +94,7 @@ class TeststepResultsListPostRequestDataItem:
         return teststep_results_list_post_request_data_item_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

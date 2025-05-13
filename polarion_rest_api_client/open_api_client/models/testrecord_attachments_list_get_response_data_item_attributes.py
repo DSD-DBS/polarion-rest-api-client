@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,11 +32,11 @@ class TestrecordAttachmentsListGetResponseDataItemAttributes:
     length: Union[Unset, int] = UNSET
     title: Union[Unset, str] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         file_name = self.file_name
 
         id = self.id
@@ -48,7 +49,7 @@ class TestrecordAttachmentsListGetResponseDataItemAttributes:
         if not isinstance(self.updated, Unset):
             updated = self.updated.isoformat()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if file_name is not UNSET:
@@ -65,8 +66,8 @@ class TestrecordAttachmentsListGetResponseDataItemAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         file_name = d.pop("fileName", UNSET)
 
         id = d.pop("id", UNSET)
@@ -100,7 +101,7 @@ class TestrecordAttachmentsListGetResponseDataItemAttributes:
         )
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

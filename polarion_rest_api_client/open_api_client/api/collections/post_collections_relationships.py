@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -25,10 +25,10 @@ def _get_kwargs(
     body: Union[
         "RelationshipDataListRequest", "RelationshipDataSingleRequest"
     ],
-) -> Dict[str, Any]:
-    headers: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/projects/{project_id}/collections/{collection_id}/relationships/{relationship_id}".format(
             project_id=project_id,
@@ -37,7 +37,7 @@ def _get_kwargs(
         ),
     }
 
-    _body: Dict[str, Any]
+    _body: dict[str, Any]
     if isinstance(body, RelationshipDataSingleRequest):
         _body = body.to_dict()
     else:

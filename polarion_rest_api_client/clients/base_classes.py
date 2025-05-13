@@ -61,7 +61,9 @@ class BaseClient(abc.ABC):
             return None
 
         return dm.TextContent(
-            type=str(polarion_content.type) if polarion_content.type else None,
+            type=(
+                str(polarion_content.type_) if polarion_content.type_ else None
+            ),
             value=polarion_content.value or None,
         )
 

@@ -41,7 +41,7 @@ class TestRuns(
             client=self._client.client,
             body=api_models.TestrunsSinglePatchRequest(
                 data=api_models.TestrunsSinglePatchRequestData(
-                    type=api_models.TestrunsSinglePatchRequestDataType.TESTRUNS,  # pylint: disable=line-too-long
+                    type_=api_models.TestrunsSinglePatchRequestDataType.TESTRUNS,  # pylint: disable=line-too-long
                     id=f"{self._project_id}/{to_update.id}",
                     attributes=self._fill_test_run_attributes(
                         api_models.TestrunsSinglePatchRequestDataAttributes,
@@ -95,7 +95,7 @@ class TestRuns(
             test_runs.append(
                 dm.TestRun(
                     data.id.split("/")[-1],
-                    self.unset_to_none(data.attributes.type),
+                    self.unset_to_none(data.attributes.type_),
                     self.unset_to_none(data.attributes.status),
                     self.unset_to_none(data.attributes.title),
                     self._handle_text_content(
@@ -129,7 +129,7 @@ class TestRuns(
         """Create the given list of test runs."""
         polarion_test_runs = [
             api_models.TestrunsListPostRequestDataItem(
-                type=api_models.TestrunsListPostRequestDataItemType.TESTRUNS,
+                type_=api_models.TestrunsListPostRequestDataItemType.TESTRUNS,
                 attributes=self._fill_test_run_attributes(
                     api_models.TestrunsListPostRequestDataItemAttributes,
                     test_run,
@@ -168,7 +168,7 @@ class TestRuns(
         type_prefix = attributes_type.__name__
         attributes = attributes_type()
         if test_run.type is not None:
-            attributes.type = test_run.type
+            attributes.type_ = test_run.type
         if test_run.id and hasattr(attributes, "id"):
             attributes.id = test_run.id
         if test_run.status is not None:
@@ -205,7 +205,7 @@ class TestRuns(
             )()
             assert attributes.home_page_content
             if test_run.home_page_content.type:
-                attributes.home_page_content.type = getattr(
+                attributes.home_page_content.type_ = getattr(
                     api_models, f"{type_prefix}HomePageContentType"
                 )(test_run.home_page_content.type)
             if test_run.home_page_content.value:

@@ -2,8 +2,9 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import json
+from collections.abc import Mapping
 from io import BytesIO
-from typing import TYPE_CHECKING, Any, Dict, List, Tuple, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -23,18 +24,18 @@ T = TypeVar("T", bound="PostDocumentAttachmentsRequestBody")
 class PostDocumentAttachmentsRequestBody:
     """
     Attributes:
-        files (Union[Unset, List[File]]):
+        files (Union[Unset, list[File]]):
         resource (Union[Unset, DocumentAttachmentsListPostRequest]):
     """
 
-    files: Union[Unset, List[File]] = UNSET
+    files: Union[Unset, list[File]] = UNSET
     resource: Union[Unset, "DocumentAttachmentsListPostRequest"] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
-        files: Union[Unset, List[FileJsonType]] = UNSET
+    def to_dict(self) -> dict[str, Any]:
+        files: Union[Unset, list[FileJsonType]] = UNSET
         if not isinstance(self.files, Unset):
             files = []
             for files_item_data in self.files:
@@ -42,11 +43,11 @@ class PostDocumentAttachmentsRequestBody:
 
                 files.append(files_item)
 
-        resource: Union[Unset, Dict[str, Any]] = UNSET
+        resource: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.resource, Unset):
             resource = self.resource.to_dict()
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if files is not UNSET:
@@ -56,14 +57,14 @@ class PostDocumentAttachmentsRequestBody:
 
         return field_dict
 
-    def to_multipart(self) -> List[Tuple[str, Any]]:
-        field_list: List[Tuple[str, Any]] = []
+    def to_multipart(self) -> list[tuple[str, Any]]:
+        field_list: list[tuple[str, Any]] = []
         for cont in self.files or []:
             files_item = cont.to_tuple()
 
             field_list.append(("files", files_item))
 
-        resource: Union[Unset, Tuple[None, bytes, str]] = UNSET
+        resource: Union[Unset, tuple[None, bytes, str]] = UNSET
         if not isinstance(self.resource, Unset):
             resource = (
                 None,
@@ -74,25 +75,21 @@ class PostDocumentAttachmentsRequestBody:
         if resource is not UNSET:
             field_list.append(("resource", resource))
 
-        field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                key: (None, str(value).encode(), "text/plain")
-                for key, value in self.additional_properties.items()
-            }
-        )
+        field_dict: dict[str, Any] = {}
+        for prop_name, prop in self.additional_properties.items():
+            field_dict[prop_name] = (None, str(prop).encode(), "text/plain")
 
         field_list += list(field_dict.items())
 
         return field_list
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.document_attachments_list_post_request import (
             DocumentAttachmentsListPostRequest,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         files = []
         _files = d.pop("files", UNSET)
         for files_item_data in _files or []:
@@ -116,7 +113,7 @@ class PostDocumentAttachmentsRequestBody:
         return post_document_attachments_request_body_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -1,7 +1,8 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,11 +32,11 @@ class ErrorsErrorsItemSourceType0:
     resource: Union[
         "ErrorsErrorsItemSourceType0ResourceType0", None, Unset
     ] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(
+    additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         from ..models.errors_errors_item_source_type_0_resource_type_0 import (
             ErrorsErrorsItemSourceType0ResourceType0,
         )
@@ -44,7 +45,7 @@ class ErrorsErrorsItemSourceType0:
 
         pointer = self.pointer
 
-        resource: Union[Dict[str, Any], None, Unset]
+        resource: Union[None, Unset, dict[str, Any]]
         if isinstance(self.resource, Unset):
             resource = UNSET
         elif isinstance(
@@ -54,7 +55,7 @@ class ErrorsErrorsItemSourceType0:
         else:
             resource = self.resource
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if parameter is not UNSET:
@@ -67,12 +68,12 @@ class ErrorsErrorsItemSourceType0:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.errors_errors_item_source_type_0_resource_type_0 import (
             ErrorsErrorsItemSourceType0ResourceType0,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         parameter = d.pop("parameter", UNSET)
 
         pointer = d.pop("pointer", UNSET)
@@ -111,7 +112,7 @@ class ErrorsErrorsItemSourceType0:
         return errors_errors_item_source_type_0_obj
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

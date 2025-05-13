@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -15,8 +15,8 @@ from ...types import Response
 
 def _get_kwargs(
     project_id: str,
-) -> Dict[str, Any]:
-    _kwargs: Dict[str, Any] = {
+) -> dict[str, Any]:
+    _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/projects/{project_id}/actions/unmarkProject".format(
             project_id=project_id,
@@ -29,23 +29,23 @@ def _get_kwargs(
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Errors, JobsSinglePostResponse]]:
-    if response.status_code == HTTPStatus.ACCEPTED:
+    if response.status_code == 202:
         response_202 = JobsSinglePostResponse.from_dict(response.json())
 
         return response_202
-    if response.status_code == HTTPStatus.UNAUTHORIZED:
+    if response.status_code == 401:
         response_401 = Errors.from_dict(response.json())
 
         return response_401
-    if response.status_code == HTTPStatus.NOT_ACCEPTABLE:
+    if response.status_code == 406:
         response_406 = Errors.from_dict(response.json())
 
         return response_406
-    if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
+    if response.status_code == 500:
         response_500 = Errors.from_dict(response.json())
 
         return response_500
-    if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
+    if response.status_code == 503:
         response_503 = Errors.from_dict(response.json())
 
         return response_503
