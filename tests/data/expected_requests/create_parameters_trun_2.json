@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "type": "testparameters",
+      "attributes": {
+        "name": "name2",
+        "value": "value2"
+      }
+    }
+  ]
+}

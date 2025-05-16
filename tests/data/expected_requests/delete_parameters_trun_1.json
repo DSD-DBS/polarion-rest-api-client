@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "type": "testparameters",
+      "id": "PROJ/TRUN/name1"
+    },
+    {
+      "type": "testparameters",
+      "id": "PROJ/TRUN/name2"
+    }
+  ]
+}

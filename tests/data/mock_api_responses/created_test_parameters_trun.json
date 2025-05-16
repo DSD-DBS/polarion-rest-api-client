@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "type": "testparameters",
+      "id": "MyProjectId/MyTestRunId/MyTestParameter",
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId/testparameters/MyTestParameter"
+      }
+    }
+  ]
+}
