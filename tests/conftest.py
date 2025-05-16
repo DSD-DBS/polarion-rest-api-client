@@ -139,6 +139,18 @@ TEST_STEPS_NO_NEXT_RESPONSE = TEST_RESPONSES / "test_steps_no_next_page.json"
 TEST_STEPS_PATCH_REQUEST = TEST_REQUESTS / "patch_test_steps.json"
 TEST_STEPS_POST_REQUEST = TEST_REQUESTS / "post_test_steps.json"
 
+TEST_TRUN_PARAM_NEXT_RES = TEST_RESPONSES / "get_test_run_parameter.json"
+TEST_TRUN_PARAM_NO_NEXT_RES = (
+    TEST_RESPONSES / "get_test_run_parameter_no_next.json"
+)
+TEST_TRUN_PARAM_CREATED_RES = (
+    TEST_RESPONSES / "created_test_parameters_trun.json"
+)
+TEST_TRUN_PARAM_CREATED_REQ_1 = TEST_REQUESTS / "create_parameters_trun_1.json"
+TEST_TRUN_PARAM_CREATED_REQ_2 = TEST_REQUESTS / "create_parameters_trun_2.json"
+TEST_TRUN_PARAM_DELETE_REQ_1 = TEST_REQUESTS / "delete_parameters_trun_1.json"
+TEST_TRUN_PARAM_DELETE_REQ_2 = TEST_REQUESTS / "delete_parameters_trun_2.json"
+
 
 class CustomWorkItem(polarion_api.WorkItem):
     capella_uuid: str | None

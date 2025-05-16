@@ -18,6 +18,7 @@ __all__ = [
     "RenderingProperties",
     "SelectTestCasesBy",
     "StatusItem",
+    "TestParameter",
     "TestRecord",
     "TestRun",
     "TestStep",
@@ -392,3 +393,12 @@ class SelectTestCasesBy(str, enum.Enum):
     MANUALSELECTION = "manualSelection"
     STATICLIVEDOC = "staticLiveDoc"
     STATICQUERYRESULT = "staticQueryResult"
+
+
+@dataclasses.dataclass
+class TestParameter:
+    """TestParameter class being used in TestRuns and TestRecords."""
+
+    scope: str | TestRecord  # Use string to reference a testrun
+    name: str
+    value: str

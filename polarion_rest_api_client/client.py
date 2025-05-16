@@ -26,6 +26,7 @@ class DefaultFields:
     _testrecords: str = "@basic"
     _testruns: str = "@basic"
     _teststeps: str = "@basic"
+    _testparameters: str = "@all"
 
     @property
     def workitems(self) -> dict[str, str]:
@@ -65,7 +66,7 @@ class DefaultFields:
 
     @property
     def testruns(self) -> dict[str, str]:
-        """Return the fields dict for document."""
+        """Return the fields dict for testruns."""
         return {"testruns": self._testruns}
 
     @testruns.setter
@@ -74,7 +75,7 @@ class DefaultFields:
 
     @property
     def testrecords(self) -> dict[str, str]:
-        """Return the fields dict for document."""
+        """Return the fields dict for testrecords."""
         return {"testrecords": self._testrecords}
 
     @testrecords.setter
@@ -83,12 +84,21 @@ class DefaultFields:
 
     @property
     def teststeps(self) -> dict[str, str]:
-        """Return the fields dict for document."""
+        """Return the fields dict for teststeps."""
         return {"teststeps": self._teststeps}
 
     @teststeps.setter
     def teststeps(self, value: str):
         self._teststeps = value
+
+    @property
+    def testparameters(self) -> dict[str, str]:
+        """Return the fields dict for testparameters."""
+        return {"testparameters": self._testparameters}
+
+    @testparameters.setter
+    def testparameters(self, value: str):
+        self._testparameters = value
 
     @property
     def all_types(self) -> dict[str, str]:
@@ -100,6 +110,7 @@ class DefaultFields:
             | self.documents
             | self.testruns
             | self.testrecords
+            | self.testparameters
         )
 
 
