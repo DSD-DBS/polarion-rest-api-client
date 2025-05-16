@@ -14,12 +14,24 @@ from polarion_rest_api_client.open_api_client.api.test_records import (
 )
 
 from . import base_classes as bc
+from . import test_parameters
+
+if t.TYPE_CHECKING:
+    from polarion_rest_api_client import client as polarion_client
 
 
 class TestRecords(
     bc.SingleUpdatableItemsMixin[dm.TestRecord],
     bc.UpdatableItemsClient[dm.TestRecord],
 ):
+    def __init__(
+        self, project_id: str, client: "polarion_client.PolarionClient"
+    ):
+        super().__init__(project_id, client)
+        self.parameters = test_parameters.TestRecordParameters(
+            project_id, client
+        )
+
     def get(self, *args, **kwargs) -> dm.TestRecord:
         raise NotImplementedError
 

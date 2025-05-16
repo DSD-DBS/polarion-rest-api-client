@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "totalCount": 0
+  },
+  "data": [
+    {
+      "type": "testparameters",
+      "id": "MyProjectId/MyTestRunId/MyTestParameter",
+      "revision": "1234",
+      "attributes": {
+        "name": "Example Test Parameter value",
+        "value": "Example Test Parameter value"
+      },
+      "relationships": {
+        "definition": {
+          "data": {
+            "type": "testparameter_definitions",
+            "id": "MyProjectId/MyTestParamDefinition",
+            "revision": "1234"
+          }
+        }
+      },
+      "meta": {
+        "errors": [
+          {
+            "status": "400",
+            "title": "Bad Request",
+            "detail": "Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data)",
+            "source": {
+              "pointer": "$.data",
+              "parameter": "revision",
+              "resource": {
+                "id": "MyProjectId/id",
+                "type": "type"
+              }
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId/testparameters/MyTestParameter"
+      }
+    },
+    {
+      "type": "testparameters",
+      "id": "MyProjectId/MyTestRunId/MyTestParameter",
+      "revision": "1234",
+      "attributes": {
+        "name": "Another Name",
+        "value": "Example Test Parameter value"
+      },
+      "relationships": {
+        "definition": {
+          "data": {
+            "type": "testparameter_definitions",
+            "id": "MyProjectId/MyTestParamDefinition",
+            "revision": "1234"
+          }
+        }
+      },
+      "meta": {
+        "errors": [
+          {
+            "status": "400",
+            "title": "Bad Request",
+            "detail": "Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data)",
+            "source": {
+              "pointer": "$.data",
+              "parameter": "revision",
+              "resource": {
+                "id": "MyProjectId/id",
+                "type": "type"
+              }
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId/testparameters/MyTestParameter"
+      }
+    }
+  ],
+  "included": [
+    {}
+  ],
+  "links": {
+    "self": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId/testparameters?page%5Bsize%5D=10&page%5Bnumber%5D=5",
+    "first": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId/testparameters?page%5Bsize%5D=10&page%5Bnumber%5D=1",
+    "prev": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId/testparameters?page%5Bsize%5D=10&page%5Bnumber%5D=4",
+    "last": "server-host-name/application-path/projects/MyProjectId/testruns/MyTestRunId/testparameters?page%5Bsize%5D=10&page%5Bnumber%5D=9"
+  }
+}
