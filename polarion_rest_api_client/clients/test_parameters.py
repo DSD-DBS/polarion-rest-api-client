@@ -1,5 +1,6 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
+"""Clients to handle test parameters."""
 
 import itertools
 import typing as t
@@ -21,6 +22,8 @@ from . import base_classes as bc
 
 
 class TestRunParameters(bc.ItemsClient[dm.TestParameter]):
+    """Client to handle TestParameters of a TestRun."""
+
     def get(self, *args, **kwargs) -> dm.TestParameter:
         raise NotImplementedError
 
@@ -118,6 +121,8 @@ class TestRunParameters(bc.ItemsClient[dm.TestParameter]):
 
 
 class TestRecordParameters(bc.ItemsClient[dm.TestParameter]):
+    """Clients to handle TestParameters of a TestRecord."""
+
     def get(self, *args, **kwargs) -> dm.TestParameter:
         raise NotImplementedError
 
