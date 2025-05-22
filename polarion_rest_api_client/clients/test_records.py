@@ -1,5 +1,6 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
+from __future__ import annotations
 
 import itertools
 import typing as t
@@ -25,7 +26,7 @@ class TestRecords(
     bc.UpdatableItemsClient[dm.TestRecord],
 ):
     def __init__(
-        self, project_id: str, client: "polarion_client.PolarionClient"
+        self, project_id: str, client: polarion_client.PolarionClient
     ):
         super().__init__(project_id, client)
         self.parameters = test_parameters.TestRecordParameters(
