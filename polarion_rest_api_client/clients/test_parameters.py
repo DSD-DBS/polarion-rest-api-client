@@ -64,11 +64,13 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
             yield list(group)
 
     def _create(self, items: list[dm.TestRunParameter]):
+        """Call only with items with common test_run_id."""
+        test_run_id = items[0].test_run_id
         body = _build_post_body(items)
 
         response = post_test_run_test_parameters.sync_detailed(
             self._project_id,
-            items[0].test_run_id,
+            test_run_id,
             client=self._client.client,
             body=body,
         )
@@ -82,6 +84,8 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
         )
 
     def _delete(self, items: list[dm.TestRunParameter]):
+        """Call only with items with common test_run_id."""
+        test_run_id = items[0].test_run_id
         body = api_models.TestparametersListDeleteRequest(
             data=[
                 api_models.TestparametersListDeleteRequestDataItem(
@@ -94,7 +98,7 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
 
         response = delete_test_run_test_parameters.sync_detailed(
             self._project_id,
-            items[0].test_run_id,
+            test_run_id,
             client=self._client.client,
             body=body,
         )
@@ -150,14 +154,16 @@ class TestRecordParameters(bc.ItemsClient[dm.TestRecordParameter]):
             yield list(group)
 
     def _create(self, items: list[dm.TestRecordParameter]):
+        """Call only with items with common test_records."""
+        test_record = items[0].test_record
         body = _build_post_body(items)
 
         response = post_test_record_test_parameters.sync_detailed(
             self._project_id,
-            items[0].test_record.test_run_id,
-            items[0].test_record.work_item_project_id,
-            items[0].test_record.work_item_id,
-            str(items[0].test_record.iteration),
+            test_record.test_run_id,
+            test_record.work_item_project_id,
+            test_record.work_item_id,
+            str(test_record.iteration),
             client=self._client.client,
             body=body,
         )
@@ -166,12 +172,14 @@ class TestRecordParameters(bc.ItemsClient[dm.TestRecordParameter]):
     def _delete(self, items: list[dm.TestRecordParameter]):
         """We expect only one TestRecordParameter for deletion."""
         assert len(items) == 1
+        test_record = items[0].test_record
+
         response = delete_test_record_test_parameter.sync_detailed(
             self._project_id,
-            items[0].test_record.test_run_id,
-            items[0].test_record.work_item_project_id,
-            items[0].test_record.work_item_id,
-            str(items[0].test_record.iteration),
+            test_record.test_run_id,
+            test_record.work_item_project_id,
+            test_record.work_item_id,
+            str(test_record.iteration),
             items[0].name,
             client=self._client.client,
         )
