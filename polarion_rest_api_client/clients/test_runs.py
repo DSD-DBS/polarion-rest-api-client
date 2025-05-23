@@ -12,7 +12,7 @@ from polarion_rest_api_client.open_api_client.api.test_runs import (
 )
 
 from . import base_classes as bc
-from . import test_records
+from . import test_parameters, test_records
 
 if t.TYPE_CHECKING:
     from polarion_rest_api_client import client as polarion_client
@@ -30,6 +30,7 @@ class TestRuns(
     ):
         super().__init__(project_id, client)
         self.records = test_records.TestRecords(project_id, client)
+        self.parameters = test_parameters.TestRunParameters(project_id, client)
 
     def _update(self, to_update: list[dm.TestRun] | dm.TestRun):
         """Create the given list of test runs."""
