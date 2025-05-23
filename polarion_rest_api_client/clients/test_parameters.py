@@ -57,9 +57,9 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
         for _, group in itertools.groupby(
             sorted(
                 items,
-                key=lambda x: x.scope,
+                key=lambda x: x.test_run_id,
             ),
-            lambda x: x.scope,
+            lambda x: x.test_run_id,
         ):
             yield list(group)
 
@@ -68,7 +68,7 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
 
         response = post_test_run_test_parameters.sync_detailed(
             self._project_id,
-            items[0].scope,
+            items[0].test_run_id,
             client=self._client.client,
             body=body,
         )
@@ -86,7 +86,7 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
             data=[
                 api_models.TestparametersListDeleteRequestDataItem(
                     type_=api_models.TestparametersListDeleteRequestDataItemType.TESTPARAMETERS,
-                    id=f"{self._project_id}/{item.scope}/{item.name}",
+                    id=f"{self._project_id}/{item.test_run_id}/{item.name}",
                 )
                 for item in items
             ]
@@ -94,7 +94,7 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
 
         response = delete_test_run_test_parameters.sync_detailed(
             self._project_id,
-            items[0].scope,
+            items[0].test_run_id,
             client=self._client.client,
             body=body,
         )
@@ -142,10 +142,10 @@ class TestRecordParameters(bc.ItemsClient[dm.TestRecordParameter]):
             sorted(
                 items,
                 key=lambda x: (
-                    f"{x.scope.test_run_id}/{x.scope.work_item_project_id}/{x.scope.work_item_id}/{x.scope.iteration}"
+                    f"{x.test_record.test_run_id}/{x.test_record.work_item_project_id}/{x.test_record.work_item_id}/{x.test_record.iteration}"
                 ),
             ),
-            lambda x: x.scope,
+            lambda x: x.test_record,
         ):
             yield list(group)
 
@@ -154,10 +154,10 @@ class TestRecordParameters(bc.ItemsClient[dm.TestRecordParameter]):
 
         response = post_test_record_test_parameters.sync_detailed(
             self._project_id,
-            items[0].scope.test_run_id,
-            items[0].scope.work_item_project_id,
-            items[0].scope.work_item_id,
-            str(items[0].scope.iteration),
+            items[0].test_record.test_run_id,
+            items[0].test_record.work_item_project_id,
+            items[0].test_record.work_item_id,
+            str(items[0].test_record.iteration),
             client=self._client.client,
             body=body,
         )
@@ -168,10 +168,10 @@ class TestRecordParameters(bc.ItemsClient[dm.TestRecordParameter]):
         assert len(items) == 1
         response = delete_test_record_test_parameter.sync_detailed(
             self._project_id,
-            items[0].scope.test_run_id,
-            items[0].scope.work_item_project_id,
-            items[0].scope.work_item_id,
-            str(items[0].scope.iteration),
+            items[0].test_record.test_run_id,
+            items[0].test_record.work_item_project_id,
+            items[0].test_record.work_item_id,
+            str(items[0].test_record.iteration),
             items[0].name,
             client=self._client.client,
         )
@@ -220,7 +220,7 @@ def _parse_get_response(
     if isinstance(scope, str):
         return [
             dm.TestRunParameter(
-                scope=scope,
+                test_run_id=scope,
                 name=data.attributes.name or "",
                 value=data.attributes.value or "",
             )
@@ -230,7 +230,7 @@ def _parse_get_response(
 
     return [
         dm.TestRecordParameter(
-            scope=scope,
+            test_record=scope,
             name=data.attributes.name or "",
             value=data.attributes.value or "",
         )

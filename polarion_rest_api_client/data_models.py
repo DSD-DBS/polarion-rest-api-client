@@ -410,19 +410,19 @@ class AbstractTestParameter(abc.ABC):
 class TestRunParameter(AbstractTestParameter):
     """Parameter of a TestRun."""
 
-    scope: str
+    test_run_id: str
 
-    def __init__(self, scope: str, name: str, value: str):
+    def __init__(self, test_run_id: str, name: str, value: str):
         super().__init__(name, value)
-        self.scope = scope
+        self.test_run_id = test_run_id
 
 
 @dataclasses.dataclass
 class TestRecordParameter(AbstractTestParameter):
     """Parameter of a TestRecord."""
 
-    scope: TestRecord
+    test_record: TestRecord
 
-    def __init__(self, scope: TestRecord, name: str, value: str):
+    def __init__(self, test_record: TestRecord, name: str, value: str):
         super().__init__(name, value)
-        self.scope = scope
+        self.test_record = test_record

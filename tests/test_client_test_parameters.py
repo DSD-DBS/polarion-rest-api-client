@@ -56,7 +56,7 @@ def test_get_test_params_trun_multi_page(
     assert len(params) == 6
     assert params.pop(5).name == "Another Name"
     assert all(
-        param.scope == "123"
+        param.test_run_id == "123"
         and param.name == "Example Test Parameter value"
         and param.value == "Example Test Parameter value"
         for param in params
@@ -105,7 +105,7 @@ def test_get_test_params_trecord_multi_page(
     assert len(params) == 4
     assert params.pop(3).name == "Another Name"
     assert all(
-        param.scope
+        param.test_record
         == polarion_api.TestRecord("TRUN", "PROJ", "TCID", iteration=0)
         and param.name == "Example Test Parameter value"
         and param.value == "Example Test Parameter value"
