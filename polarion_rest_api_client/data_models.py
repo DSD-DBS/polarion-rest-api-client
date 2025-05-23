@@ -3,6 +3,7 @@
 """Data model classes returned by the client."""
 from __future__ import annotations
 
+import abc
 import dataclasses
 import datetime
 import enum
@@ -18,7 +19,9 @@ __all__ = [
     "RenderingProperties",
     "SelectTestCasesBy",
     "StatusItem",
-    "TestParameter",
+    "AbstractTestParameter",
+    "TestRunParameter",
+    "TestRecordParameter",
     "TestRecord",
     "TestRun",
     "TestStep",
@@ -396,9 +399,30 @@ class SelectTestCasesBy(str, enum.Enum):
 
 
 @dataclasses.dataclass
-class TestParameter:
-    """TestParameter class being used in TestRuns and TestRecords."""
+class AbstractTestParameter(abc.ABC):
+    """Baseclass for TestParameters."""
 
-    scope: str | TestRecord  # Use string to reference a testrun
     name: str
     value: str
+
+
+@dataclasses.dataclass
+class TestRunParameter(AbstractTestParameter):
+    """Parameter of a TestRun."""
+
+    scope: str
+
+    def __init__(self, scope: str, name: str, value: str):
+        super().__init__(name, value)
+        self.scope = scope
+
+
+@dataclasses.dataclass
+class TestRecordParameter(AbstractTestParameter):
+    """Parameter of a TestRecord."""
+
+    scope: TestRecord
+
+    def __init__(self, scope: TestRecord, name: str, value: str):
+        super().__init__(name, value)
+        self.scope = scope
