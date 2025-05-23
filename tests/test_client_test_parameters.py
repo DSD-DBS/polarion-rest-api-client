@@ -29,7 +29,7 @@ def test_get_test_params_trun_multi_page(
     with open(TEST_TRUN_PARAM_NO_NEXT_RES, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    params: list[polarion_api.TestParameter] = (
+    params: list[polarion_api.TestRunParameter] = (
         client.test_runs.parameters.get_all(
             "123", fields={"teststeps": "@basic"}
         )
@@ -74,7 +74,7 @@ def test_get_test_params_trecord_multi_page(
     with open(TEST_TRUN_PARAM_NO_NEXT_RES, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
-    params: list[polarion_api.TestParameter] = (
+    params: list[polarion_api.TestRecordParameter] = (
         client.test_runs.records.parameters.get_all(
             polarion_api.TestRecord("TRUN", "PROJ", "TCID", iteration=0),
             fields={"teststeps": "@basic"},
@@ -131,9 +131,9 @@ def test_create_parameters_trun(
     test_run_id = "asdfg"
     test_run_id_1 = "qwertz"
 
-    tp_1 = polarion_api.TestParameter(test_run_id, "name1", "value1")
-    tp_2 = polarion_api.TestParameter(test_run_id_1, "name2", "value2")
-    tp_3 = polarion_api.TestParameter(test_run_id, "name3", "value3")
+    tp_1 = polarion_api.TestRunParameter(test_run_id, "name1", "value1")
+    tp_2 = polarion_api.TestRunParameter(test_run_id_1, "name2", "value2")
+    tp_3 = polarion_api.TestRunParameter(test_run_id, "name3", "value3")
 
     client.test_runs.parameters.create([tp_1, tp_2, tp_3])
 
@@ -171,9 +171,9 @@ def test_create_parameters_trecord(
     test_record_1 = polarion_api.TestRecord("TRUN", "PROJ", "TC1", iteration=0)
     test_record_2 = polarion_api.TestRecord("TRUN", "PROJ", "TC1", iteration=1)
 
-    tp_1 = polarion_api.TestParameter(test_record_1, "name1", "value1")
-    tp_2 = polarion_api.TestParameter(test_record_2, "name2", "value2")
-    tp_3 = polarion_api.TestParameter(test_record_1, "name3", "value3")
+    tp_1 = polarion_api.TestRecordParameter(test_record_1, "name1", "value1")
+    tp_2 = polarion_api.TestRecordParameter(test_record_2, "name2", "value2")
+    tp_3 = polarion_api.TestRecordParameter(test_record_1, "name3", "value3")
 
     client.test_runs.records.parameters.create([tp_1, tp_2, tp_3])
 
@@ -208,9 +208,9 @@ def test_delete_parameters_trun(
     with open(TEST_TRUN_PARAM_DELETE_REQ_2, encoding="utf8") as f:
         expected_req_2 = json.load(f)
 
-    tp_1 = polarion_api.TestParameter("TRUN", "name1", "value1")
-    tp_2 = polarion_api.TestParameter("TRUN2", "name1", "value2")
-    tp_3 = polarion_api.TestParameter("TRUN", "name2", "value1")
+    tp_1 = polarion_api.TestRunParameter("TRUN", "name1", "value1")
+    tp_2 = polarion_api.TestRunParameter("TRUN2", "name1", "value2")
+    tp_3 = polarion_api.TestRunParameter("TRUN", "name2", "value1")
 
     client.test_runs.parameters.delete([tp_1, tp_2, tp_3])
 
@@ -241,9 +241,9 @@ def test_delete_parameters_trecord(
     test_record_1 = polarion_api.TestRecord("TRUN", "PROJ", "TC1", iteration=0)
     test_record_2 = polarion_api.TestRecord("TRUN", "PROJ", "TC1", iteration=1)
 
-    tp_1 = polarion_api.TestParameter(test_record_1, "name1", "value1")
-    tp_2 = polarion_api.TestParameter(test_record_2, "name2", "value2")
-    tp_3 = polarion_api.TestParameter(test_record_1, "name3", "value3")
+    tp_1 = polarion_api.TestRecordParameter(test_record_1, "name1", "value1")
+    tp_2 = polarion_api.TestRecordParameter(test_record_2, "name2", "value2")
+    tp_3 = polarion_api.TestRecordParameter(test_record_1, "name3", "value3")
 
     client.test_runs.records.parameters.delete([tp_1, tp_2, tp_3])
 
