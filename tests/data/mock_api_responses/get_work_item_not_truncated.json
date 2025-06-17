@@ -40,7 +40,7 @@
       "approvals": {
         "data": [
           {
-            "type": "workrecords",
+            "type": "workitem_approvals",
             "id": "MyProjectId/MyWorkItemId/MyWorkRecordId",
             "revision": "1234"
           }
