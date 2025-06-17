@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 [build-system]
-requires = ["setuptools>=64", "setuptools_scm[toml]>=3.4", "wheel"]
+requires = ["setuptools>=77", "setuptools_scm[toml]>=3.4", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -12,14 +12,14 @@ name = "polarion-rest-api-client"
 description = "An API Client for the Polarion REST API"
 readme = "README.md"
 requires-python = ">=3.10, <3.13"
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
+license-files = ["LICENSES/*.txt"]
 authors = [
   { name = "DB InfraGO AG" },
 ]
 keywords = []
 classifiers = [
   "Development Status :: 1 - Planning",
-  "License :: OSI Approved :: Apache Software License",
   "Natural Language :: English",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
@@ -208,7 +208,10 @@ zip-safe = false
 "*" = ["py.typed"]
 
 [tool.setuptools.packages.find]
-exclude = ["LICENSES"]
+include = [
+  "polarion_rest_api_client"
+]
 
 [tool.setuptools_scm]
 # This section must exist for setuptools_scm to work
+local_scheme = "no-local-version"
