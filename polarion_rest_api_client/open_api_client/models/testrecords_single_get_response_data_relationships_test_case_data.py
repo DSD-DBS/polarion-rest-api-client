@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -83,9 +87,7 @@ class TestrecordsSingleGetResponseDataRelationshipsTestCaseData:
             type_=type_,
         )
 
-        testrecords_single_get_response_data_relationships_test_case_data_obj.additional_properties = (
-            d
-        )
+        testrecords_single_get_response_data_relationships_test_case_data_obj.additional_properties = d
         return testrecords_single_get_response_data_relationships_test_case_data_obj
 
     @property

@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -34,7 +39,7 @@ class ExternallylinkedworkitemsListGetResponse:
         data (Union[Unset, list['ExternallylinkedworkitemsListGetResponseDataItem']]):
         included (Union[Unset, list['ExternallylinkedworkitemsListGetResponseIncludedItem']]): Related entities might be
             returned, see <a href="https://docs.sw.siemens.com/en-
-            US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
+            US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
             Guide</a>.
         links (Union[Unset, ExternallylinkedworkitemsListGetResponseLinks]):
         meta (Union[Unset, ExternallylinkedworkitemsListGetResponseMeta]):
@@ -154,9 +159,7 @@ class ExternallylinkedworkitemsListGetResponse:
             meta=meta,
         )
 
-        externallylinkedworkitems_list_get_response_obj.additional_properties = (
-            d
-        )
+        externallylinkedworkitems_list_get_response_obj.additional_properties = d
         return externallylinkedworkitems_list_get_response_obj
 
     @property

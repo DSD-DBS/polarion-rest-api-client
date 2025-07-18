@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -59,7 +59,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, WorkitemsListGetResponse]]:
+) -> Union[Errors, WorkitemsListGetResponse] | None:
     if response.status_code == 200:
         response_200 = WorkitemsListGetResponse.from_dict(response.json())
 
@@ -90,8 +90,7 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
@@ -162,7 +161,7 @@ def sync(
     query: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
     revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, WorkitemsListGetResponse]]:
+) -> Union[Errors, WorkitemsListGetResponse] | None:
     """Returns a list of Work Items from the Global context.
 
     Args:
@@ -249,7 +248,7 @@ async def asyncio(
     query: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
     revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, WorkitemsListGetResponse]]:
+) -> Union[Errors, WorkitemsListGetResponse] | None:
     """Returns a list of Work Items from the Global context.
 
     Args:

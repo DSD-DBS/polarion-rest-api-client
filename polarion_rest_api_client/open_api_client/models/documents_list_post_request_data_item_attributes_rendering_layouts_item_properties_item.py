@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -56,9 +60,7 @@ class DocumentsListPostRequestDataItemAttributesRenderingLayoutsItemPropertiesIt
             value=value,
         )
 
-        documents_list_post_request_data_item_attributes_rendering_layouts_item_properties_item_obj.additional_properties = (
-            d
-        )
+        documents_list_post_request_data_item_attributes_rendering_layouts_item_properties_item_obj.additional_properties = d
         return documents_list_post_request_data_item_attributes_rendering_layouts_item_properties_item_obj
 
     @property

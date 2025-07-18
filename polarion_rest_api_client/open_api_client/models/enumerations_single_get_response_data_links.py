@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -44,9 +48,7 @@ class EnumerationsSingleGetResponseDataLinks:
             self_=self_,
         )
 
-        enumerations_single_get_response_data_links_obj.additional_properties = (
-            d
-        )
+        enumerations_single_get_response_data_links_obj.additional_properties = d
         return enumerations_single_get_response_data_links_obj
 
     @property

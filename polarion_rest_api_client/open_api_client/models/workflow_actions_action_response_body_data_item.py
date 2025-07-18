@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+    cast,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -140,9 +145,7 @@ class WorkflowActionsActionResponseBodyDataItem:
             unavailable_reason=unavailable_reason,
         )
 
-        workflow_actions_action_response_body_data_item_obj.additional_properties = (
-            d
-        )
+        workflow_actions_action_response_body_data_item_obj.additional_properties = d
         return workflow_actions_action_response_body_data_item_obj
 
     @property

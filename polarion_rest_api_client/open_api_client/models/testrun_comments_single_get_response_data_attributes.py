@@ -3,7 +3,12 @@
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -112,9 +117,7 @@ class TestrunCommentsSingleGetResponseDataAttributes:
             title=title,
         )
 
-        testrun_comments_single_get_response_data_attributes_obj.additional_properties = (
-            d
-        )
+        testrun_comments_single_get_response_data_attributes_obj.additional_properties = d
         return testrun_comments_single_get_response_data_attributes_obj
 
     @property

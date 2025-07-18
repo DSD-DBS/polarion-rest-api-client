@@ -3,7 +3,12 @@
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -103,9 +108,7 @@ class DocumentCommentsListGetResponseDataItemAttributes:
             text=text,
         )
 
-        document_comments_list_get_response_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        document_comments_list_get_response_data_item_attributes_obj.additional_properties = d
         return document_comments_list_get_response_data_item_attributes_obj
 
     @property

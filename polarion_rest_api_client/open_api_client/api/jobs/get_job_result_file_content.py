@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Optional, Union, cast
+from typing import Any, Union, cast
 
 import httpx
 
@@ -18,10 +18,7 @@ def _get_kwargs(
 ) -> dict[str, Any]:
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/jobs/{job_id}/actions/download/{filename}".format(
-            job_id=job_id,
-            filename=filename,
-        ),
+        "url": f"/jobs/{job_id}/actions/download/{filename}",
     }
 
     return _kwargs
@@ -29,7 +26,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     if response.status_code == 200:
         response_200 = cast(Any, None)
         return response_200
@@ -63,8 +60,7 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
@@ -115,7 +111,7 @@ def sync(
     filename: str,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     """Downloads the file content for a specified job.
 
     Args:
@@ -172,7 +168,7 @@ async def asyncio(
     filename: str,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     """Downloads the file content for a specified job.
 
     Args:

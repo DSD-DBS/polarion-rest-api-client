@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,10 +23,12 @@ class WorkitemsSingleGetResponseDataAttributesHyperlinksItem:
     """
     Attributes:
         role (Union[Unset, str]):  Example: ref_ext.
+        title (Union[Unset, str]):  Example: Title.
         uri (Union[Unset, str]):  Example: https://polarion.plm.automation.siemens.com.
     """
 
     role: Union[Unset, str] = UNSET
+    title: Union[Unset, str] = UNSET
     uri: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
@@ -31,6 +37,8 @@ class WorkitemsSingleGetResponseDataAttributesHyperlinksItem:
     def to_dict(self) -> dict[str, Any]:
         role = self.role
 
+        title = self.title
+
         uri = self.uri
 
         field_dict: dict[str, Any] = {}
@@ -38,6 +46,8 @@ class WorkitemsSingleGetResponseDataAttributesHyperlinksItem:
         field_dict.update({})
         if role is not UNSET:
             field_dict["role"] = role
+        if title is not UNSET:
+            field_dict["title"] = title
         if uri is not UNSET:
             field_dict["uri"] = uri
 
@@ -48,18 +58,19 @@ class WorkitemsSingleGetResponseDataAttributesHyperlinksItem:
         d = dict(src_dict)
         role = d.pop("role", UNSET)
 
+        title = d.pop("title", UNSET)
+
         uri = d.pop("uri", UNSET)
 
         workitems_single_get_response_data_attributes_hyperlinks_item_obj = (
             cls(
                 role=role,
+                title=title,
                 uri=uri,
             )
         )
 
-        workitems_single_get_response_data_attributes_hyperlinks_item_obj.additional_properties = (
-            d
-        )
+        workitems_single_get_response_data_attributes_hyperlinks_item_obj.additional_properties = d
         return (
             workitems_single_get_response_data_attributes_hyperlinks_item_obj
         )

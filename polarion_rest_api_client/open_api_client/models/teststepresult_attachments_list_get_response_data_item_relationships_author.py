@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -72,9 +77,7 @@ class TeststepresultAttachmentsListGetResponseDataItemRelationshipsAuthor:
             data=data,
         )
 
-        teststepresult_attachments_list_get_response_data_item_relationships_author_obj.additional_properties = (
-            d
-        )
+        teststepresult_attachments_list_get_response_data_item_relationships_author_obj.additional_properties = d
         return teststepresult_attachments_list_get_response_data_item_relationships_author_obj
 
     @property

@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+    cast,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -148,9 +153,7 @@ class BranchDocumentsRequestBodyDocumentConfigurationsItem:
             update_title_heading=update_title_heading,
         )
 
-        branch_documents_request_body_document_configurations_item_obj.additional_properties = (
-            d
-        )
+        branch_documents_request_body_document_configurations_item_obj.additional_properties = d
         return branch_documents_request_body_document_configurations_item_obj
 
     @property

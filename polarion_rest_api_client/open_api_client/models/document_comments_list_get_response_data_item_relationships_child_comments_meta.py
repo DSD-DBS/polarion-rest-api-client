@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -47,9 +51,7 @@ class DocumentCommentsListGetResponseDataItemRelationshipsChildCommentsMeta:
             total_count=total_count,
         )
 
-        document_comments_list_get_response_data_item_relationships_child_comments_meta_obj.additional_properties = (
-            d
-        )
+        document_comments_list_get_response_data_item_relationships_child_comments_meta_obj.additional_properties = d
         return document_comments_list_get_response_data_item_relationships_child_comments_meta_obj
 
     @property

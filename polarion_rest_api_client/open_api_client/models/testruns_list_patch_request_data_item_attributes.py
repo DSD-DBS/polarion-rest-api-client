@@ -3,7 +3,12 @@
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -185,9 +190,7 @@ class TestrunsListPatchRequestDataItemAttributes:
             use_report_from_template=use_report_from_template,
         )
 
-        testruns_list_patch_request_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        testruns_list_patch_request_data_item_attributes_obj.additional_properties = d
         return testruns_list_patch_request_data_item_attributes_obj
 
     @property

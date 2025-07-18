@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,6 +30,9 @@ if TYPE_CHECKING:
     from ..models.collections_list_get_response_data_item_relationships_reused_from import (
         CollectionsListGetResponseDataItemRelationshipsReusedFrom,
     )
+    from ..models.collections_list_get_response_data_item_relationships_rich_pages import (
+        CollectionsListGetResponseDataItemRelationshipsRichPages,
+    )
     from ..models.collections_list_get_response_data_item_relationships_upstream_collections import (
         CollectionsListGetResponseDataItemRelationshipsUpstreamCollections,
     )
@@ -42,6 +50,7 @@ class CollectionsListGetResponseDataItemRelationships:
         downstream_collections (Union[Unset, CollectionsListGetResponseDataItemRelationshipsDownstreamCollections]):
         project (Union[Unset, CollectionsListGetResponseDataItemRelationshipsProject]):
         reused_from (Union[Unset, CollectionsListGetResponseDataItemRelationshipsReusedFrom]):
+        rich_pages (Union[Unset, CollectionsListGetResponseDataItemRelationshipsRichPages]):
         upstream_collections (Union[Unset, CollectionsListGetResponseDataItemRelationshipsUpstreamCollections]):
     """
 
@@ -60,6 +69,9 @@ class CollectionsListGetResponseDataItemRelationships:
     ] = UNSET
     reused_from: Union[
         Unset, "CollectionsListGetResponseDataItemRelationshipsReusedFrom"
+    ] = UNSET
+    rich_pages: Union[
+        Unset, "CollectionsListGetResponseDataItemRelationshipsRichPages"
     ] = UNSET
     upstream_collections: Union[
         Unset,
@@ -90,6 +102,10 @@ class CollectionsListGetResponseDataItemRelationships:
         if not isinstance(self.reused_from, Unset):
             reused_from = self.reused_from.to_dict()
 
+        rich_pages: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.rich_pages, Unset):
+            rich_pages = self.rich_pages.to_dict()
+
         upstream_collections: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.upstream_collections, Unset):
             upstream_collections = self.upstream_collections.to_dict()
@@ -107,6 +123,8 @@ class CollectionsListGetResponseDataItemRelationships:
             field_dict["project"] = project
         if reused_from is not UNSET:
             field_dict["reusedFrom"] = reused_from
+        if rich_pages is not UNSET:
+            field_dict["richPages"] = rich_pages
         if upstream_collections is not UNSET:
             field_dict["upstreamCollections"] = upstream_collections
 
@@ -128,6 +146,9 @@ class CollectionsListGetResponseDataItemRelationships:
         )
         from ..models.collections_list_get_response_data_item_relationships_reused_from import (
             CollectionsListGetResponseDataItemRelationshipsReusedFrom,
+        )
+        from ..models.collections_list_get_response_data_item_relationships_rich_pages import (
+            CollectionsListGetResponseDataItemRelationshipsRichPages,
         )
         from ..models.collections_list_get_response_data_item_relationships_upstream_collections import (
             CollectionsListGetResponseDataItemRelationshipsUpstreamCollections,
@@ -190,6 +211,17 @@ class CollectionsListGetResponseDataItemRelationships:
                 _reused_from
             )
 
+        _rich_pages = d.pop("richPages", UNSET)
+        rich_pages: Union[
+            Unset, CollectionsListGetResponseDataItemRelationshipsRichPages
+        ]
+        if isinstance(_rich_pages, Unset):
+            rich_pages = UNSET
+        else:
+            rich_pages = CollectionsListGetResponseDataItemRelationshipsRichPages.from_dict(
+                _rich_pages
+            )
+
         _upstream_collections = d.pop("upstreamCollections", UNSET)
         upstream_collections: Union[
             Unset,
@@ -208,12 +240,11 @@ class CollectionsListGetResponseDataItemRelationships:
             downstream_collections=downstream_collections,
             project=project,
             reused_from=reused_from,
+            rich_pages=rich_pages,
             upstream_collections=upstream_collections,
         )
 
-        collections_list_get_response_data_item_relationships_obj.additional_properties = (
-            d
-        )
+        collections_list_get_response_data_item_relationships_obj.additional_properties = d
         return collections_list_get_response_data_item_relationships_obj
 
     @property

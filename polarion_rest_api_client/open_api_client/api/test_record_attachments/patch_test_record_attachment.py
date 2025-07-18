@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Optional, Union, cast
+from typing import Any, Union, cast
 
 import httpx
 
@@ -29,19 +29,10 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/attachments/{attachment_id}".format(
-            project_id=project_id,
-            test_run_id=test_run_id,
-            test_case_project_id=test_case_project_id,
-            test_case_id=test_case_id,
-            iteration=iteration,
-            attachment_id=attachment_id,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/attachments/{attachment_id}",
     }
 
-    _body = body.to_multipart()
-
-    _kwargs["files"] = _body
+    _kwargs["files"] = body.to_multipart()
 
     _kwargs["headers"] = headers
     return _kwargs
@@ -49,7 +40,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     if response.status_code == 204:
         response_204 = cast(Any, None)
         return response_204
@@ -91,8 +82,7 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
@@ -120,7 +110,7 @@ def sync_detailed(
     r"""Updates the specified Test Record Attachment.
 
      See more in the <a href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:
@@ -167,11 +157,11 @@ def sync(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PatchTestRecordAttachmentsRequestBody,
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     r"""Updates the specified Test Record Attachment.
 
      See more in the <a href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:
@@ -217,7 +207,7 @@ async def asyncio_detailed(
     r"""Updates the specified Test Record Attachment.
 
      See more in the <a href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:
@@ -262,11 +252,11 @@ async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PatchTestRecordAttachmentsRequestBody,
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     r"""Updates the specified Test Record Attachment.
 
      See more in the <a href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:

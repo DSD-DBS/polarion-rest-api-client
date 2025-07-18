@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -74,9 +78,7 @@ class LinkedworkitemsListPostRequestDataItemRelationshipsWorkItemData:
             type_=type_,
         )
 
-        linkedworkitems_list_post_request_data_item_relationships_work_item_data_obj.additional_properties = (
-            d
-        )
+        linkedworkitems_list_post_request_data_item_relationships_work_item_data_obj.additional_properties = d
         return linkedworkitems_list_post_request_data_item_relationships_work_item_data_obj
 
     @property

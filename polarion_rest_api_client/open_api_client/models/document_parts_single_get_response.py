@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,7 +36,7 @@ class DocumentPartsSingleGetResponse:
         data (Union[Unset, DocumentPartsSingleGetResponseData]):
         included (Union[Unset, list['DocumentPartsSingleGetResponseIncludedItem']]): Related entities might be returned,
             see <a href="https://docs.sw.siemens.com/en-
-            US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
+            US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871" target="_blank">REST API User
             Guide</a>.
         links (Union[Unset, DocumentPartsSingleGetResponseLinks]):
     """

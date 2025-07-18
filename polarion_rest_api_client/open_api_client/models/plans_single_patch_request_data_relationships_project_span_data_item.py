@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -72,9 +76,7 @@ class PlansSinglePatchRequestDataRelationshipsProjectSpanDataItem:
             type_=type_,
         )
 
-        plans_single_patch_request_data_relationships_project_span_data_item_obj.additional_properties = (
-            d
-        )
+        plans_single_patch_request_data_relationships_project_span_data_item_obj.additional_properties = d
         return plans_single_patch_request_data_relationships_project_span_data_item_obj
 
     @property

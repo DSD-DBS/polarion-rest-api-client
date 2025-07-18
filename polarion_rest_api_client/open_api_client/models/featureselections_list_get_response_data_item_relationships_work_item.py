@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -71,9 +76,7 @@ class FeatureselectionsListGetResponseDataItemRelationshipsWorkItem:
             data=data,
         )
 
-        featureselections_list_get_response_data_item_relationships_work_item_obj.additional_properties = (
-            d
-        )
+        featureselections_list_get_response_data_item_relationships_work_item_obj.additional_properties = d
         return featureselections_list_get_response_data_item_relationships_work_item_obj
 
     @property

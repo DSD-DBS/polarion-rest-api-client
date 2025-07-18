@@ -4,11 +4,17 @@
 import json
 from collections.abc import Mapping
 from io import BytesIO
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from .. import types
 from ..types import UNSET, File, Unset
 
 if TYPE_CHECKING:
@@ -53,29 +59,27 @@ class PostImportActionRequestBody:
 
         return field_dict
 
-    def to_multipart(self) -> list[tuple[str, Any]]:
-        field_list: list[tuple[str, Any]] = []
-        file = self.file.to_tuple()
+    def to_multipart(self) -> types.RequestFiles:
+        files: types.RequestFiles = []
 
-        field_list.append(("file", file))
-        resource: Union[Unset, tuple[None, bytes, str]] = UNSET
+        files.append(("file", self.file.to_tuple()))
+
         if not isinstance(self.resource, Unset):
-            resource = (
-                None,
-                json.dumps(self.resource.to_dict()).encode(),
-                "text/plain",
+            files.append(
+                (
+                    "resource",
+                    (
+                        None,
+                        json.dumps(self.resource.to_dict()).encode(),
+                        "text/plain",
+                    ),
+                )
             )
 
-        if resource is not UNSET:
-            field_list.append(("resource", resource))
-
-        field_dict: dict[str, Any] = {}
         for prop_name, prop in self.additional_properties.items():
-            field_dict[prop_name] = (None, str(prop).encode(), "text/plain")
+            files.append((prop_name, (None, str(prop).encode(), "text/plain")))
 
-        field_list += list(field_dict.items())
-
-        return field_list
+        return files
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:

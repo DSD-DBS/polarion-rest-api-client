@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -75,9 +80,7 @@ class WorkitemsListPatchRequestDataItemRelationshipsCategories:
             )
         )
 
-        workitems_list_patch_request_data_item_relationships_categories_obj.additional_properties = (
-            d
-        )
+        workitems_list_patch_request_data_item_relationships_categories_obj.additional_properties = d
         return (
             workitems_list_patch_request_data_item_relationships_categories_obj
         )

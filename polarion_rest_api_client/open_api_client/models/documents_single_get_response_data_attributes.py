@@ -3,7 +3,13 @@
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+    cast,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -277,9 +283,7 @@ class DocumentsSingleGetResponseDataAttributes:
             uses_outline_numbering=uses_outline_numbering,
         )
 
-        documents_single_get_response_data_attributes_obj.additional_properties = (
-            d
-        )
+        documents_single_get_response_data_attributes_obj.additional_properties = d
         return documents_single_get_response_data_attributes_obj
 
     @property

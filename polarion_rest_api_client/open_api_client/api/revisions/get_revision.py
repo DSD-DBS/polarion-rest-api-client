@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -37,10 +37,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/revisions/{repository_name}/{revision}".format(
-            repository_name=repository_name,
-            revision=revision,
-        ),
+        "url": f"/revisions/{repository_name}/{revision}",
         "params": params,
     }
 
@@ -49,7 +46,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, RevisionsSingleGetResponse]]:
+) -> Union[Errors, RevisionsSingleGetResponse] | None:
     if response.status_code == 200:
         response_200 = RevisionsSingleGetResponse.from_dict(response.json())
 
@@ -84,8 +81,7 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
@@ -144,7 +140,7 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, "SparseFields"] = UNSET,
     include: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, RevisionsSingleGetResponse]]:
+) -> Union[Errors, RevisionsSingleGetResponse] | None:
     """Returns the specified instance.
 
     Args:
@@ -213,7 +209,7 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     fields: Union[Unset, "SparseFields"] = UNSET,
     include: Union[Unset, str] = UNSET,
-) -> Optional[Union[Errors, RevisionsSingleGetResponse]]:
+) -> Union[Errors, RevisionsSingleGetResponse] | None:
     """Returns the specified instance.
 
     Args:

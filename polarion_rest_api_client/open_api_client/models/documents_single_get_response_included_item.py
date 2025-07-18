@@ -2,7 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import (
+    Any,
+    TypeVar,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -29,9 +32,7 @@ class DocumentsSingleGetResponseIncludedItem:
         d = dict(src_dict)
         documents_single_get_response_included_item_obj = cls()
 
-        documents_single_get_response_included_item_obj.additional_properties = (
-            d
-        )
+        documents_single_get_response_included_item_obj.additional_properties = d
         return documents_single_get_response_included_item_obj
 
     @property
