@@ -20,6 +20,12 @@ from . import test_parameters
 if t.TYPE_CHECKING:
     from polarion_rest_api_client import client as polarion_client
 
+AttributesType = t.TypeVar(
+    "AttributesType",
+    bound=api_models.TestrecordsListPostRequestDataItemAttributes
+    | api_models.TestrecordsSinglePatchRequestDataAttributes,
+)
+
 
 class TestRecords(
     bc.SingleUpdatableItemsMixin[dm.TestRecord],
@@ -33,10 +39,10 @@ class TestRecords(
             project_id, client
         )
 
-    def get(self, *args, **kwargs) -> dm.TestRecord:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> dm.TestRecord:
         raise NotImplementedError
 
-    def _update(self, to_update: list[dm.TestRecord] | dm.TestRecord):
+    def _update(self, to_update: list[dm.TestRecord] | dm.TestRecord) -> None:
         assert not isinstance(to_update, list), "Expected only one item"
         response = patch_test_record.sync_detailed(
             self._project_id,
@@ -133,7 +139,7 @@ class TestRecords(
     def _create(
         self,
         items: list[dm.TestRecord],
-    ):
+    ) -> None:
         """Create the given list of test records."""
         response = post_test_records.sync_detailed(
             self._project_id,
@@ -165,27 +171,25 @@ class TestRecords(
 
         self._raise_on_error(response)
 
-        assert (
-            isinstance(response.parsed, api_models.TestrecordsListPostResponse)
-            and response.parsed.data
+        assert isinstance(
+            response.parsed, api_models.TestrecordsListPostResponse
         )
+        assert response.parsed.data
+
         counter = 0
         for response_item in response.parsed.data:
             if response_item.id:
                 items[counter].iteration = int(response_item.id.split("/")[-1])
                 counter += 1
 
-    def _delete(self, items: dm.TestRecord | list[dm.TestRecord]):
+    def _delete(self, items: dm.TestRecord | list[dm.TestRecord]) -> None:
         raise NotImplementedError
 
     def _fill_test_record_attributes(
         self,
-        attributes_type: type[
-            api_models.TestrecordsListPostRequestDataItemAttributes
-            | api_models.TestrecordsSinglePatchRequestDataAttributes
-        ],
+        attributes_type: type[AttributesType],
         test_record: dm.TestRecord,
-    ):
+    ) -> AttributesType:
         type_prefix = attributes_type.__name__
         attributes = attributes_type()
         if test_record.result:
@@ -209,4 +213,4 @@ class TestRecords(
             attributes.additional_properties = (
                 test_record.additional_attributes
             )
-        return attributes
+        return t.cast(AttributesType, attributes)

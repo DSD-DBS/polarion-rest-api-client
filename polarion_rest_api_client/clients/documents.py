@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Implementation of the documents client."""
+
 import itertools
 import typing as t
 import urllib.parse
@@ -63,50 +64,54 @@ class Documents(
 
         document_response = response.parsed
 
-        if isinstance(
-            document_response, api_models.DocumentsSingleGetResponse
-        ) and (data := document_response.data):
-            if not getattr(data.meta, "errors", []):
-                assert (attributes := data.attributes)
-                assert isinstance(data.id, str)
-                home_page_content = self._handle_text_content(
-                    attributes.home_page_content
-                )
+        if (
+            isinstance(
+                document_response, api_models.DocumentsSingleGetResponse
+            )
+            and (data := document_response.data)
+            and not getattr(data.meta, "errors", [])
+        ):
+            assert data.attributes
+            attributes = data.attributes
+            assert isinstance(data.id, str)
+            home_page_content = self._handle_text_content(
+                attributes.home_page_content
+            )
 
-                rendering_layouts = None
-                if attributes.rendering_layouts:
-                    rendering_layouts = [
-                        dm.RenderingLayout(
-                            self.unset_to_none(layout.label),
-                            self.unset_to_none(layout.layouter),
-                            (
-                                [p.to_dict() for p in layout.properties]
-                                if layout.properties
-                                else None
-                            ),
-                            self.unset_to_none(layout.type_),
-                        )
-                        for layout in attributes.rendering_layouts
-                    ]
+            rendering_layouts = None
+            if attributes.rendering_layouts:
+                rendering_layouts = [
+                    dm.RenderingLayout(
+                        self.unset_to_none(layout.label),
+                        self.unset_to_none(layout.layouter),
+                        (
+                            [p.to_dict() for p in layout.properties]
+                            if layout.properties
+                            else None
+                        ),
+                        self.unset_to_none(layout.type_),
+                    )
+                    for layout in attributes.rendering_layouts
+                ]
 
-                return dm.Document(
-                    id=data.id,
-                    module_folder=self.unset_to_none(attributes.module_folder),
-                    module_name=self.unset_to_none(attributes.module_name),
-                    type=self.unset_to_none(attributes.type_),
-                    status=self.unset_to_none(attributes.status),
-                    home_page_content=home_page_content,
-                    title=self.unset_to_none(attributes.title),
-                    rendering_layouts=rendering_layouts,
-                    outline_numbering=self.unset_to_none(
-                        attributes.uses_outline_numbering
-                    ),
-                    outline_numbering_prefix=(
-                        self.unset_to_none(attributes.outline_numbering.prefix)
-                        if attributes.outline_numbering
-                        else None
-                    ),
-                )
+            return dm.Document(
+                id=data.id,
+                module_folder=self.unset_to_none(attributes.module_folder),
+                module_name=self.unset_to_none(attributes.module_name),
+                type=self.unset_to_none(attributes.type_),
+                status=self.unset_to_none(attributes.status),
+                home_page_content=home_page_content,
+                title=self.unset_to_none(attributes.title),
+                rendering_layouts=rendering_layouts,
+                outline_numbering=self.unset_to_none(
+                    attributes.uses_outline_numbering
+                ),
+                outline_numbering_prefix=(
+                    self.unset_to_none(attributes.outline_numbering.prefix)
+                    if attributes.outline_numbering
+                    else None
+                ),
+            )
 
         return None
 
@@ -116,7 +121,7 @@ class Documents(
         for _, group in itertools.groupby(items, lambda x: x.module_folder):
             yield from super()._split_into_batches(list(group))
 
-    def _update(self, to_update: dm.Document | list[dm.Document]):
+    def _update(self, to_update: dm.Document | list[dm.Document]) -> None:
         assert not isinstance(to_update, list), "Expected only one item"
         assert to_update.module_folder is not None, "module folder must be set"
         assert to_update.module_name is not None, "module name must be set"
@@ -190,12 +195,16 @@ class Documents(
         self._raise_on_error(res)
 
     def get_multi(
-        self, *args, page_size=100, page_number=1, **kwargs
+        self,
+        *args: t.Any,
+        page_size: int = 100,
+        page_number: int = 1,
+        **kwargs: t.Any,
     ) -> tuple[list[dm.Document], bool]:
         """Return a list of documents - Not implemented yet."""
         raise NotImplementedError
 
-    def _create(self, items: list[dm.Document]):
+    def _create(self, items: list[dm.Document]) -> None:
         # due to grouping in _split_into_batches all module folders are equal
         assert items[0].module_folder is not None, "module folder must be set"
 
@@ -270,5 +279,5 @@ class Documents(
 
         self._raise_on_error(res)
 
-    def _delete(self, items: list[dm.Document]):
+    def _delete(self, items: list[dm.Document]) -> None:
         raise NotImplementedError

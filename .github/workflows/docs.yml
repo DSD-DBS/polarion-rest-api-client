@@ -4,8 +4,14 @@
 name: Docs
 
 on:
+  pull_request:
   push:
-    branches: ["main"]
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref_type == 'tag' && github.sha || '0' }}
+  cancel-in-progress: true
 
 jobs:
   sphinx:
@@ -16,23 +22,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v6
         with:
-          python-version: "3.12"
-      - name: Upgrade pip
-        run: |
-          python -m pip install -U pip
-      - name: Install dependencies
-        run: |
-          python -m pip install '.[docs]'
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
+          python-version: "3.13"
       - name: Auto-generate APIDOC sources
-        run: |-
-          sphinx-apidoc --output-dir docs/source/code --force . polarion_rest_api_client/open_api_client
+        run: uv run --no-dev --group docs sphinx-apidoc --output-dir docs/source/code --force .
       - name: Create docs
-        run: |
-          make -C docs html
+        env:
+          SPHINXOPTS: ${{ github.ref != 'refs/heads/main' && '-W' || '' }}
+        run: make -C docs html
+      - name: Upload built docs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Documentation
+          path: docs/build/html
+          if-no-files-found: error
+          retention-days: 5
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
         with:
           force_orphan: true
           github_token: ${{ secrets.GITHUB_TOKEN }}

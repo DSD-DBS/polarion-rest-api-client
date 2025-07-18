@@ -18,10 +18,10 @@ from . import base_classes as bc
 
 
 class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
-    def get(self, *args, **kwargs) -> dm.TestStep:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> dm.TestStep:
         raise NotImplementedError
 
-    def _update(self, to_update: list[dm.TestStep] | dm.TestStep):
+    def _update(self, to_update: list[dm.TestStep] | dm.TestStep) -> None:
         if not isinstance(to_update, list):
             to_update = [to_update]
 
@@ -96,7 +96,8 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
             )
             for val in attributes.values or []
         ]
-        return {key: val for key, val in zip(keys, values)}
+        assert len(keys) == len(values)
+        return dict(zip(keys, values, strict=False))
 
     def _split_into_batches(
         self, items: list[dm.TestStep]
@@ -104,7 +105,7 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
         for _, group in itertools.groupby(items, lambda x: x.work_item_id):
             yield list(group)
 
-    def _create(self, items: list[dm.TestStep]):
+    def _create(self, items: list[dm.TestStep]) -> None:
         body_data = self._build_post_request_data(items)
         body = api_models.TeststepsListPostRequest(data=body_data)  # type: ignore[arg-type]
 
@@ -116,15 +117,16 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
         )
         self._raise_on_error(response)
 
-        assert (
-            isinstance(response.parsed, api_models.TeststepsListPostResponse)
-            and response.parsed.data
+        assert isinstance(
+            response.parsed, api_models.TeststepsListPostResponse
         )
+        assert response.parsed.data
+
         for idx, response_item in enumerate(response.parsed.data):
             if response_item.id:
                 items[idx].step_index = int(response_item.id.split("/")[-1])
 
-    def _delete(self, items: dm.TestStep | list[dm.TestStep]):
+    def _delete(self, items: dm.TestStep | list[dm.TestStep]) -> None:
         if not isinstance(items, list):
             items = [items]
         body_data = [

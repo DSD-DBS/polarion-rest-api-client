@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Base classes for client implementations on project Level."""
+
 import abc
 import datetime
 import functools
@@ -14,6 +15,9 @@ from polarion_rest_api_client import errors
 from polarion_rest_api_client.open_api_client import models as api_models
 from polarion_rest_api_client.open_api_client import types as oa_types
 
+HTTP_NOT_FOUND = 404
+R = t.TypeVar("R")
+
 if t.TYPE_CHECKING:
     from polarion_rest_api_client import client as polarion_client
 
@@ -26,10 +30,10 @@ _max_sleep = 15
 UT = t.TypeVar("UT", str, int, float, datetime.datetime, bool, None)
 
 
-class BaseClient(abc.ABC):
+class BaseClient:
     """The overall base client for all project related clients."""
 
-    _retry_methods: list[str] = []
+    _retry_methods: t.ClassVar[list[str]] = []
 
     def __init__(
         self, project_id: str, client: "polarion_client.PolarionClient"
@@ -37,7 +41,7 @@ class BaseClient(abc.ABC):
         self._project_id = project_id
         self._client = client
 
-    def __getattribute__(self, name):
+    def __getattribute__(self, name: str) -> t.Any:
         """Retry method calls defined in _retry_methods."""
         attr = super().__getattribute__(name)
         retry_methods = super().__getattribute__("_retry_methods")
@@ -96,8 +100,8 @@ class BaseClient(abc.ABC):
             return None
         return value
 
-    def _raise_on_error(self, response: oa_types.Response):
-        def unexpected_error():
+    def _raise_on_error(self, response: oa_types.Response) -> None:
+        def unexpected_error() -> errors.PolarionApiUnexpectedException:
             return errors.PolarionApiUnexpectedException(
                 response.status_code, response.content
             )
@@ -129,13 +133,17 @@ class BaseClient(abc.ABC):
             )
         raise unexpected_error()
 
-    def _retry_on_error(self, call: t.Callable, *args: t.Any, **kwargs: t.Any):
+    def _retry_on_error(
+        self, call: t.Callable[..., R], *args: t.Any, **kwargs: t.Any
+    ) -> R:
         try:
             return call(*args, **kwargs)
         except Exception as e:
-            if isinstance(e, errors.PolarionApiException):
-                if e.args[0] == 404:
-                    raise e
+            if (
+                isinstance(e, errors.PolarionApiException)
+                and e.args[0] == HTTP_NOT_FOUND
+            ):
+                raise e
             logger.warning(
                 "Will retry after failing on first attempt, "
                 "due to the following error %s",
@@ -148,7 +156,12 @@ class BaseClient(abc.ABC):
 class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
     """A client for items of a project, which can be created or requested."""
 
-    _retry_methods = ["get_multi", "get", "_create", "_delete"]
+    _retry_methods: t.ClassVar[list[str]] = [
+        "get_multi",
+        "get",
+        "_create",
+        "_delete",
+    ]
 
     @abc.abstractmethod
     def get_multi(
@@ -165,11 +178,11 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
         """
 
     @abc.abstractmethod
-    def get(self, *args, **kwargs) -> T | None:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> T | None:
         """Get a specific single item."""
         return self._retry_on_error(self.get, *args, **kwargs)
 
-    def get_all(self, *args, **kwargs) -> list[T]:
+    def get_all(self, *args: t.Any, **kwargs: t.Any) -> list[T]:
         """Return all matching items using get_multi with auto pagination."""
         page = 1
         items, next_page = self.get_multi(
@@ -187,7 +200,7 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
         return items
 
     @abc.abstractmethod
-    def _create(self, items: list[T]): ...
+    def _create(self, items: list[T]) -> None: ...
 
     def _split_into_batches(
         self, items: list[T]
@@ -195,7 +208,7 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
         for i in range(0, len(items), self._client.batch_size):
             yield items[i : i + self._client.batch_size]
 
-    def create(self, items: T | list[T]):
+    def create(self, items: T | list[T]) -> None:
         """Create one or multiple items."""
         if not isinstance(items, list):
             items = [items]
@@ -204,9 +217,9 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
             self._create(batch)
 
     @abc.abstractmethod
-    def _delete(self, items: list[T]): ...
+    def _delete(self, items: list[T]) -> None: ...
 
-    def delete(self, items: T | list[T]):
+    def delete(self, items: T | list[T]) -> None:
         """Delete one or multiple items."""
         if not isinstance(items, list):
             items = [items]
@@ -217,7 +230,13 @@ class ItemsClient(BaseClient, t.Generic[T], abc.ABC):
 class UpdatableItemsClient(ItemsClient, t.Generic[T], abc.ABC):
     """A client for items which can also be updated."""
 
-    _retry_methods = ["get_multi", "get", "_create", "_delete", "_update"]
+    _retry_methods: t.ClassVar[list[str]] = [
+        "get_multi",
+        "get",
+        "_create",
+        "_delete",
+        "_update",
+    ]
 
     def _split_into_update_batches(
         self, items: list[T]
@@ -225,9 +244,9 @@ class UpdatableItemsClient(ItemsClient, t.Generic[T], abc.ABC):
         yield from self._split_into_batches(items)
 
     @abc.abstractmethod
-    def _update(self, to_update: T | list[T]): ...
+    def _update(self, to_update: T | list[T]) -> None: ...
 
-    def update(self, items: T | list[T]):
+    def update(self, items: T | list[T]) -> None:
         """Update the provided item or items."""
         if not isinstance(items, list):
             items = [items]
@@ -263,7 +282,7 @@ class StatusItemClient(UpdatableItemsClient, t.Generic[ST], abc.ABC):
         super().__init__(project_id, client)
         self.delete_status = delete_status
 
-    def delete(self, items: ST | list[ST]):
+    def delete(self, items: ST | list[ST]) -> None:
         """Delete the item if no delete_status was set, else update status."""
         if self.delete_status is None:
             super().delete(items)

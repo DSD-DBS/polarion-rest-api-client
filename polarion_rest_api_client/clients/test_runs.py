@@ -17,12 +17,18 @@ from . import test_parameters, test_records
 if t.TYPE_CHECKING:
     from polarion_rest_api_client import client as polarion_client
 
+AttributesType = t.TypeVar(
+    "AttributesType",
+    bound=api_models.TestrunsListPostRequestDataItemAttributes
+    | api_models.TestrunsSinglePatchRequestDataAttributes,
+)
+
 
 class TestRuns(
     bc.SingleUpdatableItemsMixin[dm.TestRun],
     bc.UpdatableItemsClient[dm.TestRun],
 ):
-    def get(self, *args, **kwargs) -> dm.TestRun:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> dm.TestRun:
         raise NotImplementedError
 
     def __init__(
@@ -32,7 +38,7 @@ class TestRuns(
         self.records = test_records.TestRecords(project_id, client)
         self.parameters = test_parameters.TestRunParameters(project_id, client)
 
-    def _update(self, to_update: list[dm.TestRun] | dm.TestRun):
+    def _update(self, to_update: list[dm.TestRun] | dm.TestRun) -> None:
         """Create the given list of test runs."""
         assert not isinstance(to_update, list), "Expected only one item"
         assert to_update.id
@@ -60,7 +66,7 @@ class TestRuns(
         *,
         page_size: int = 100,
         page_number: int = 1,
-        fields: t.Optional[dict[str, str]] = None,
+        fields: dict[str, str] | None = None,
     ) -> tuple[list[dm.TestRun], bool]:
         """Return the test runs on a defined page matching the given query.
 
@@ -126,7 +132,7 @@ class TestRuns(
 
         return test_runs, next_page
 
-    def _create(self, items: list[dm.TestRun]):
+    def _create(self, items: list[dm.TestRun]) -> None:
         """Create the given list of test runs."""
         polarion_test_runs = [
             api_models.TestrunsListPostRequestDataItem(
@@ -146,26 +152,22 @@ class TestRuns(
         )
 
         self._raise_on_error(response)
-        assert (
-            isinstance(response.parsed, api_models.TestrunsListPostResponse)
-            and response.parsed.data
-        )
+        assert isinstance(response.parsed, api_models.TestrunsListPostResponse)
+        assert response.parsed.data
+
         if response.parsed and response.parsed.data:
             for i, data in enumerate(response.parsed.data):
                 assert data.id
                 items[i].id = data.id.split("/")[-1]
 
-    def _delete(self, items: dm.TestRun | list[dm.TestRun]):
+    def _delete(self, items: dm.TestRun | list[dm.TestRun]) -> None:
         raise NotImplementedError
 
-    def _fill_test_run_attributes(
+    def _fill_test_run_attributes(  # noqa: C901
         self,
-        attributes_type: type[
-            api_models.TestrunsListPostRequestDataItemAttributes
-            | api_models.TestrunsSinglePatchRequestDataAttributes
-        ],
+        attributes_type: type[AttributesType],
         test_run: dm.TestRun,
-    ):
+    ) -> AttributesType:
         type_prefix = attributes_type.__name__
         attributes = attributes_type()
         if test_run.type is not None:
@@ -214,4 +216,4 @@ class TestRuns(
                     test_run.home_page_content.value
                 )
 
-        return attributes
+        return t.cast(AttributesType, attributes)

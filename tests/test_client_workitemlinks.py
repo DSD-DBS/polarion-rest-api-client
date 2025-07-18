@@ -100,7 +100,8 @@ def test_delete_work_item_link(
 
     req = httpx_mock.get_request()
 
-    assert req is not None and req.method == "DELETE"
+    assert req is not None
+    assert req.method == "DELETE"
     with open(TEST_WIL_DELETED_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
@@ -124,7 +125,8 @@ def test_delete_work_item_links(
 
     req = httpx_mock.get_request()
 
-    assert req is not None and req.method == "DELETE"
+    assert req is not None
+    assert req.method == "DELETE"
     with open(TEST_WIL_DELETE_REQUEST, encoding="utf8") as f:
         expected_request = json.load(f)
 
@@ -178,7 +180,8 @@ def test_create_work_item_link(
 
     req = httpx_mock.get_request()
 
-    assert req is not None and req.method == "POST"
+    assert req is not None
+    assert req.method == "POST"
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId/linkedworkitems")
     with open(TEST_WIL_POSTED_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
@@ -251,7 +254,8 @@ def test_create_work_item_links_same_primaries(
 
     req = httpx_mock.get_request()
 
-    assert req is not None and req.method == "POST"
+    assert req is not None
+    assert req.method == "POST"
     with open(TEST_WIL_MULTI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 

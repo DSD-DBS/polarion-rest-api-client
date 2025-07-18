@@ -1,12 +1,15 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """A client for a specific project, using the session of PolarionClient."""
+
 import typing as t
 
 from polarion_rest_api_client.clients import base_classes as bc
 from polarion_rest_api_client.open_api_client.api.projects import get_project
 
 from . import documents, test_runs, work_items
+
+HTTP_OK_CODE = 200
 
 if t.TYPE_CHECKING:
     from polarion_rest_api_client import client as polarion_client
@@ -29,11 +32,9 @@ class ProjectClient(bc.BaseClient):
         self.test_runs = test_runs.TestRuns(project_id, client)
         self.documents = documents.Documents(project_id, client)
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return True, if the clients project exists."""
         response = get_project.sync_detailed(
             self._project_id, client=self._client.client
         )
-        if response.status_code == 200:
-            return True
-        return False
+        return response.status_code == HTTP_OK_CODE
