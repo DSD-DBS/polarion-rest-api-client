@@ -70,14 +70,20 @@ class DocumentReference:
 class WorkItem(StatusItem):
     """A data class containing all relevant data of a Polarion WorkItem."""
 
-    title: str | None
-    description: TextContent | None
-    additional_attributes: dict[str, t.Any]
-    linked_work_items: list[WorkItemLink]
-    attachments: list[WorkItemAttachment]
-    linked_work_items_truncated: bool
-    attachments_truncated: bool
-    home_document: DocumentReference | None
+    title: str | None = None
+    description: TextContent | None = None
+    additional_attributes: dict[str, t.Any] = dataclasses.field(
+        default_factory=dict
+    )
+    linked_work_items: list[WorkItemLink] = dataclasses.field(
+        default_factory=list
+    )
+    attachments: list[WorkItemAttachment] = dataclasses.field(
+        default_factory=list
+    )
+    linked_work_items_truncated: bool = False
+    attachments_truncated: bool = False
+    home_document: DocumentReference | None = None
 
     def __init__(
         self,

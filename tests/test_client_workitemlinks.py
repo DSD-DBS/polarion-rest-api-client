@@ -83,7 +83,7 @@ def test_get_work_item_links_multi_page(
     assert dict(reqs[1].url.params) == query
     assert len(work_items) == 2
     assert len(reqs) == 2
-    assert work_items[0].suspect is False
+    assert work_items[0].suspect is None
 
 
 def test_delete_work_item_link(
