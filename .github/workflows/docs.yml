@@ -9,10 +9,6 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref_type == 'tag' && github.sha || '0' }}
-  cancel-in-progress: true
-
 jobs:
   sphinx:
     runs-on: ubuntu-latest
@@ -26,9 +22,9 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
-          python-version: "3.13"
-      - name: Auto-generate APIDOC sources
-        run: uv run --no-dev --group docs sphinx-apidoc --output-dir docs/source/code --force .
+          python-version: "3.12"
+      - name: Install system-level dependencies
+        run: sudo apt-get install -y pandoc
       - name: Create docs
         env:
           SPHINXOPTS: ${{ github.ref != 'refs/heads/main' && '-W' || '' }}
