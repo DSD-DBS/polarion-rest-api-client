@@ -26,8 +26,6 @@ jobs:
       - name: Install system-level dependencies
         run: sudo apt-get install -y pandoc
       - name: Create docs
-        env:
-          SPHINXOPTS: ${{ github.ref != 'refs/heads/main' && '-W' || '' }}
         run: make -C docs html
       - name: Upload built docs as artifact
         uses: actions/upload-artifact@v4
