@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -44,9 +48,7 @@ class WorkflowActionsActionResponseBodyMeta:
             total_count=total_count,
         )
 
-        workflow_actions_action_response_body_meta_obj.additional_properties = (
-            d
-        )
+        workflow_actions_action_response_body_meta_obj.additional_properties = d
         return workflow_actions_action_response_body_meta_obj
 
     @property

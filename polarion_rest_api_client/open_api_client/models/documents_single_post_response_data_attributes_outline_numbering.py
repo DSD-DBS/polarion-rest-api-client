@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -46,9 +50,7 @@ class DocumentsSinglePostResponseDataAttributesOutlineNumbering:
             prefix=prefix,
         )
 
-        documents_single_post_response_data_attributes_outline_numbering_obj.additional_properties = (
-            d
-        )
+        documents_single_post_response_data_attributes_outline_numbering_obj.additional_properties = d
         return documents_single_post_response_data_attributes_outline_numbering_obj
 
     @property

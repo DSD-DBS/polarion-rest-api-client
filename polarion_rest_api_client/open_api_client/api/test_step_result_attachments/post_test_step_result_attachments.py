@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -32,19 +32,10 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/teststepresults/{test_step_index}/attachments".format(
-            project_id=project_id,
-            test_run_id=test_run_id,
-            test_case_project_id=test_case_project_id,
-            test_case_id=test_case_id,
-            iteration=iteration,
-            test_step_index=test_step_index,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/teststepresults/{test_step_index}/attachments",
     }
 
-    _body = body.to_multipart()
-
-    _kwargs["files"] = _body
+    _kwargs["files"] = body.to_multipart()
 
     _kwargs["headers"] = headers
     return _kwargs
@@ -52,7 +43,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, TeststepresultAttachmentsListPostResponse]]:
+) -> Union[Errors, TeststepresultAttachmentsListPostResponse] | None:
     if response.status_code == 201:
         response_201 = TeststepresultAttachmentsListPostResponse.from_dict(
             response.json()
@@ -101,8 +92,7 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
@@ -131,7 +121,7 @@ def sync_detailed(
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:
@@ -178,12 +168,12 @@ def sync(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PostTestStepResultAttachmentsRequestBody,
-) -> Optional[Union[Errors, TeststepresultAttachmentsListPostResponse]]:
+) -> Union[Errors, TeststepresultAttachmentsListPostResponse] | None:
     r"""Creates a list of Test Step Result Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:
@@ -230,7 +220,7 @@ async def asyncio_detailed(
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:
@@ -275,12 +265,12 @@ async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PostTestStepResultAttachmentsRequestBody,
-) -> Optional[Union[Errors, TeststepresultAttachmentsListPostResponse]]:
+) -> Union[Errors, TeststepresultAttachmentsListPostResponse] | None:
     r"""Creates a list of Test Step Result Attachments.
 
      Files are identified by order or optionally by the 'lid' attribute. See more in the <a
     href=\"https://docs.sw.siemens.com/en-
-    US/doc/230235217/PL20240424963191224.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
+    US/doc/230235217/PL20241023686685479.polarion_help_sc.xid2134849/xid2134871\" target=\"_blank\">REST
     API User Guide</a>.
 
     Args:

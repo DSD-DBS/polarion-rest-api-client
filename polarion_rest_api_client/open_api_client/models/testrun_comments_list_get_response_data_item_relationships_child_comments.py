@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -104,9 +109,7 @@ class TestrunCommentsListGetResponseDataItemRelationshipsChildComments:
             meta=meta,
         )
 
-        testrun_comments_list_get_response_data_item_relationships_child_comments_obj.additional_properties = (
-            d
-        )
+        testrun_comments_list_get_response_data_item_relationships_child_comments_obj.additional_properties = d
         return testrun_comments_list_get_response_data_item_relationships_child_comments_obj
 
     @property

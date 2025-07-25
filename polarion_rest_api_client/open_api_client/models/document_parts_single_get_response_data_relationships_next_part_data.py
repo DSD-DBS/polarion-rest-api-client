@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -81,9 +85,7 @@ class DocumentPartsSingleGetResponseDataRelationshipsNextPartData:
             type_=type_,
         )
 
-        document_parts_single_get_response_data_relationships_next_part_data_obj.additional_properties = (
-            d
-        )
+        document_parts_single_get_response_data_relationships_next_part_data_obj.additional_properties = d
         return document_parts_single_get_response_data_relationships_next_part_data_obj
 
     @property

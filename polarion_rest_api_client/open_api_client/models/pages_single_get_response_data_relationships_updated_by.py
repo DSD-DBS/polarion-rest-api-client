@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -69,9 +74,7 @@ class PagesSingleGetResponseDataRelationshipsUpdatedBy:
             data=data,
         )
 
-        pages_single_get_response_data_relationships_updated_by_obj.additional_properties = (
-            d
-        )
+        pages_single_get_response_data_relationships_updated_by_obj.additional_properties = d
         return pages_single_get_response_data_relationships_updated_by_obj
 
     @property

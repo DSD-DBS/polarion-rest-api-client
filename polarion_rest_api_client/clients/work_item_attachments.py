@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Implementations of WorkItemAttachment relates functions."""
+
 import io
 import typing as t
 
@@ -23,13 +24,13 @@ class WorkItemAttachments(
 ):
     """A class to handle WorkItemAttachments."""
 
-    def get(self, *args, **kwargs) -> dm.WorkItemAttachment:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> dm.WorkItemAttachment:
         """Return a specific attachment - not Implemented yet."""
         raise NotImplementedError
 
     def _update(
         self, to_update: dm.WorkItemAttachment | list[dm.WorkItemAttachment]
-    ):
+    ) -> None:
         """Update the given work item attachment in Polarion."""
         assert not isinstance(to_update, list), "Expected only one item"
         attributes = (
@@ -70,7 +71,7 @@ class WorkItemAttachments(
         *,
         page_size: int = 100,
         page_number: int = 1,
-        fields: t.Optional[dict[str, str]] = None,
+        fields: dict[str, str] | None = None,
     ) -> tuple[list[dm.WorkItemAttachment], bool]:
         """Return the attachments for a given work item on a defined page.
 
@@ -127,7 +128,7 @@ class WorkItemAttachments(
 
         return work_item_attachments, next_page
 
-    def _create(self, items: list[dm.WorkItemAttachment]):
+    def _create(self, items: list[dm.WorkItemAttachment]) -> None:
         """Create the given work item attachment in Polarion."""
         attachment_attributes = []
         attachment_files = []
@@ -136,15 +137,15 @@ class WorkItemAttachments(
             [wia.work_item_id == items[0].work_item_id] for wia in items
         ), "All attachments must belong to the same WorkItem."
         for work_item_attachment in items:
-            assert (
-                work_item_attachment.file_name
-            ), "You have to define a FileName."
-            assert (
-                work_item_attachment.content_bytes
-            ), "You have to provide content bytes."
-            assert (
-                work_item_attachment.mime_type
-            ), "You have to provide a mime_type."
+            assert work_item_attachment.file_name, (
+                "You have to define a FileName."
+            )
+            assert work_item_attachment.content_bytes, (
+                "You have to provide content bytes."
+            )
+            assert work_item_attachment.mime_type, (
+                "You have to provide a mime_type."
+            )
 
             attributes = api_models.WorkitemAttachmentsListPostRequestDataItemAttributes(  # pylint: disable=line-too-long
                 file_name=work_item_attachment.file_name
@@ -180,23 +181,24 @@ class WorkItemAttachments(
         )
 
         self._raise_on_error(response)
-        assert (
-            isinstance(
-                response.parsed, api_models.WorkitemAttachmentsListPostResponse
-            )
-            and response.parsed.data
+        assert isinstance(
+            response.parsed, api_models.WorkitemAttachmentsListPostResponse
         )
-        counter = 0
-        for work_item_attachment_res in response.parsed.data:
+        assert response.parsed.data
+
+        for counter, work_item_attachment_res in enumerate(
+            response.parsed.data
+        ):
             assert work_item_attachment_res.id
             items[counter].id = work_item_attachment_res.id.split("/")[-1]
-            counter += 1
 
-    def _delete(self, items: list[dm.WorkItemAttachment]):
+    def _delete(self, items: list[dm.WorkItemAttachment]) -> None:
         for item in items:
             self._retry_on_error(self._single_delete, item)
 
-    def _single_delete(self, work_item_attachment: dm.WorkItemAttachment):
+    def _single_delete(
+        self, work_item_attachment: dm.WorkItemAttachment
+    ) -> None:
         """Delete the given work item attachment."""
         response = delete_work_item_attachment.sync_detailed(
             self._project_id,

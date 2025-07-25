@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Optional, Union, cast
+from typing import Any, Union, cast
 
 import httpx
 
@@ -32,14 +32,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/attachments/{attachment_id}/content".format(
-            project_id=project_id,
-            test_run_id=test_run_id,
-            test_case_project_id=test_case_project_id,
-            test_case_id=test_case_id,
-            iteration=iteration,
-            attachment_id=attachment_id,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/attachments/{attachment_id}/content",
         "params": params,
     }
 
@@ -48,7 +41,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     if response.status_code == 200:
         response_200 = cast(Any, None)
         return response_200
@@ -82,8 +75,7 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
@@ -154,7 +146,7 @@ def sync(
     *,
     client: Union[AuthenticatedClient, Client],
     revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     """Downloads the file content for a specified Test Record Attachment.
 
     Args:
@@ -241,7 +233,7 @@ async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
     revision: Union[Unset, str] = UNSET,
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     """Downloads the file content for a specified Test Record Attachment.
 
     Args:

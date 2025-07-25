@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Data model classes returned by the client."""
+
 from __future__ import annotations
 
 import abc
@@ -11,6 +12,7 @@ import typing as t
 import warnings
 
 __all__ = [
+    "AbstractTestParameter",
     "Document",
     "DocumentReference",
     "HtmlContent",
@@ -19,11 +21,10 @@ __all__ = [
     "RenderingProperties",
     "SelectTestCasesBy",
     "StatusItem",
-    "AbstractTestParameter",
-    "TestRunParameter",
-    "TestRecordParameter",
     "TestRecord",
+    "TestRecordParameter",
     "TestRun",
+    "TestRunParameter",
     "TestStep",
     "TextContent",
     "WorkItem",
@@ -71,9 +72,15 @@ class WorkItem(StatusItem):
 
     title: str | None = None
     description: TextContent | None = None
-    additional_attributes: dict[str, t.Any] = {}
-    linked_work_items: list[WorkItemLink] = []
-    attachments: list[WorkItemAttachment] = []
+    additional_attributes: dict[str, t.Any] = dataclasses.field(
+        default_factory=dict
+    )
+    linked_work_items: list[WorkItemLink] = dataclasses.field(
+        default_factory=list
+    )
+    attachments: list[WorkItemAttachment] = dataclasses.field(
+        default_factory=list
+    )
     linked_work_items_truncated: bool = False
     attachments_truncated: bool = False
     home_document: DocumentReference | None = None
@@ -93,8 +100,8 @@ class WorkItem(StatusItem):
         linked_work_items_truncated: bool = False,
         attachments_truncated: bool = False,
         home_document: DocumentReference | None = None,
-        **kwargs,
-    ):
+        **kwargs: t.Any,
+    ) -> None:
         super().__init__(id, type, status)
         self.title = title
         if description_type or isinstance(description, str):
@@ -106,12 +113,10 @@ class WorkItem(StatusItem):
             )
 
             assert description_type, (
-                "You have to set a description_type when using a string as"
-                " description"
+                "You have to set a description_type when using a string as description"
             )
             assert not isinstance(description, TextContent), (
-                "Don't use description_type when setting description as "
-                "TextContent"
+                "Don't use description_type when setting description as TextContent"
             )
             description = TextContent(description_type, description)
         self.description = description
@@ -128,7 +133,7 @@ class WorkItem(StatusItem):
             return super().__getattribute__(item)
         return self.additional_attributes.get(item)
 
-    def __setattr__(self, key: str, value: t.Any):
+    def __setattr__(self, key: str, value: t.Any) -> None:
         """Set all non WorkItem attributes in additional_properties."""
         if key in dir(self.__class__):
             super().__setattr__(key, value)
@@ -230,9 +235,12 @@ class Document(StatusItem):
         self.outline_numbering = outline_numbering
         self.outline_numbering_prefix = outline_numbering_prefix
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         """Compare dicts instead of hashes."""
-        return self.__dict__ == other.__dict__
+        return isinstance(other, Document) and self.__dict__ == other.__dict__
+
+    def __hash__(self) -> int:
+        return hash(self.__dict__)
 
 
 @dataclasses.dataclass
@@ -362,21 +370,21 @@ class TextContent(dict):
         super().__init__(type=type, value=value)
 
     @property
-    def type(self):
+    def type(self) -> str | None:
         """Return type of the TextContent."""
         return self["type"]
 
     @type.setter
-    def type(self, type: str):
+    def type(self, type: str) -> None:
         self["type"] = type
 
     @property
-    def value(self):
+    def value(self) -> str | None:
         """Return value of the TextContent."""
         return self["value"]
 
     @value.setter
-    def value(self, value: str):
+    def value(self, value: str) -> None:
         self["value"] = value
 
 

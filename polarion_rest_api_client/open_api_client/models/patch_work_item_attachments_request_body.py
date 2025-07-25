@@ -4,12 +4,18 @@
 import json
 from collections.abc import Mapping
 from io import BytesIO
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, File, FileJsonType, Unset
+from .. import types
+from ..types import UNSET, File, Unset
 
 if TYPE_CHECKING:
     from ..models.workitem_attachments_single_patch_request import (
@@ -37,7 +43,7 @@ class PatchWorkItemAttachmentsRequestBody:
     def to_dict(self) -> dict[str, Any]:
         resource = self.resource.to_dict()
 
-        content: Union[Unset, FileJsonType] = UNSET
+        content: Union[Unset, types.FileTypes] = UNSET
         if not isinstance(self.content, Unset):
             content = self.content.to_tuple()
 
@@ -53,29 +59,27 @@ class PatchWorkItemAttachmentsRequestBody:
 
         return field_dict
 
-    def to_multipart(self) -> list[tuple[str, Any]]:
-        field_list: list[tuple[str, Any]] = []
-        resource = (
-            None,
-            json.dumps(self.resource.to_dict()).encode(),
-            "text/plain",
+    def to_multipart(self) -> types.RequestFiles:
+        files: types.RequestFiles = []
+
+        files.append(
+            (
+                "resource",
+                (
+                    None,
+                    json.dumps(self.resource.to_dict()).encode(),
+                    "text/plain",
+                ),
+            )
         )
 
-        field_list.append(("resource", resource))
-        content: Union[Unset, FileJsonType] = UNSET
         if not isinstance(self.content, Unset):
-            content = self.content.to_tuple()
+            files.append(("content", self.content.to_tuple()))
 
-        if content is not UNSET:
-            field_list.append(("content", content))
-
-        field_dict: dict[str, Any] = {}
         for prop_name, prop in self.additional_properties.items():
-            field_dict[prop_name] = (None, str(prop).encode(), "text/plain")
+            files.append((prop_name, (None, str(prop).encode(), "text/plain")))
 
-        field_list += list(field_dict.items())
-
-        return field_list
+        return files
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:

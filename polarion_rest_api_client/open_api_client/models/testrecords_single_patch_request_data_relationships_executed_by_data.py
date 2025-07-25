@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -72,9 +76,7 @@ class TestrecordsSinglePatchRequestDataRelationshipsExecutedByData:
             type_=type_,
         )
 
-        testrecords_single_patch_request_data_relationships_executed_by_data_obj.additional_properties = (
-            d
-        )
+        testrecords_single_patch_request_data_relationships_executed_by_data_obj.additional_properties = d
         return testrecords_single_patch_request_data_relationships_executed_by_data_obj
 
     @property

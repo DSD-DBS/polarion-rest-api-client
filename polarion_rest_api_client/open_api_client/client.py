@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import ssl
-from typing import Any, Optional, Union
+from typing import Any, Union
 
 import httpx
 from attrs import define, evolve, field
@@ -45,7 +45,7 @@ class Client:
     _headers: dict[str, str] = field(
         factory=dict, kw_only=True, alias="headers"
     )
-    _timeout: Optional[httpx.Timeout] = field(
+    _timeout: httpx.Timeout | None = field(
         default=None, kw_only=True, alias="timeout"
     )
     _verify_ssl: Union[str, bool, ssl.SSLContext] = field(
@@ -57,10 +57,8 @@ class Client:
     _httpx_args: dict[str, Any] = field(
         factory=dict, kw_only=True, alias="httpx_args"
     )
-    _client: Optional[httpx.Client] = field(default=None, init=False)
-    _async_client: Optional[httpx.AsyncClient] = field(
-        default=None, init=False
-    )
+    _client: httpx.Client | None = field(default=None, init=False)
+    _async_client: httpx.AsyncClient | None = field(default=None, init=False)
 
     def with_headers(self, headers: dict[str, str]) -> "Client":
         """Get a new client matching this one with additional headers."""
@@ -199,7 +197,7 @@ class AuthenticatedClient:
     _headers: dict[str, str] = field(
         factory=dict, kw_only=True, alias="headers"
     )
-    _timeout: Optional[httpx.Timeout] = field(
+    _timeout: httpx.Timeout | None = field(
         default=None, kw_only=True, alias="timeout"
     )
     _verify_ssl: Union[str, bool, ssl.SSLContext] = field(
@@ -211,10 +209,8 @@ class AuthenticatedClient:
     _httpx_args: dict[str, Any] = field(
         factory=dict, kw_only=True, alias="httpx_args"
     )
-    _client: Optional[httpx.Client] = field(default=None, init=False)
-    _async_client: Optional[httpx.AsyncClient] = field(
-        default=None, init=False
-    )
+    _client: httpx.Client | None = field(default=None, init=False)
+    _async_client: httpx.AsyncClient | None = field(default=None, init=False)
 
     token: str
     prefix: str = "Bearer"

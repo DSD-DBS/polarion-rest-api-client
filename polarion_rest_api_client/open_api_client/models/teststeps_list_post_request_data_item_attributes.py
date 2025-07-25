@@ -2,7 +2,13 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+    cast,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -81,9 +87,7 @@ class TeststepsListPostRequestDataItemAttributes:
             values=values,
         )
 
-        teststeps_list_post_request_data_item_attributes_obj.additional_properties = (
-            d
-        )
+        teststeps_list_post_request_data_item_attributes_obj.additional_properties = d
         return teststeps_list_post_request_data_item_attributes_obj
 
     @property

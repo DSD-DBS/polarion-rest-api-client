@@ -192,7 +192,8 @@ def test_create_work_item(
     client.work_items.create(work_item)
 
     req = httpx_mock.get_request()
-    assert req is not None and req.method == "POST"
+    assert req is not None
+    assert req.method == "POST"
     with open(TEST_WI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
@@ -214,7 +215,8 @@ def test_create_work_items_successfully(
 
     req = httpx_mock.get_request()
 
-    assert req is not None and req.method == "POST"
+    assert req is not None
+    assert req.method == "POST"
     with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
@@ -238,7 +240,8 @@ def test_create_work_item_in_document(
 
     req = httpx_mock.get_request()
 
-    assert req is not None and req.method == "POST"
+    assert req is not None
+    assert req.method == "POST"
     with open(TEST_WI_MULTI_POST_REQUEST_IN_DOC, encoding="utf8") as f:
         expected = json.load(f)
 
@@ -262,8 +265,10 @@ def test_create_work_items_batch_exceed_successfully(
     reqs = httpx_mock.get_requests()
 
     assert len(reqs) == 2
-    assert reqs[0] is not None and reqs[0].method == "POST"
-    assert reqs[1] is not None and reqs[1].method == "POST"
+    assert reqs[0] is not None
+    assert reqs[0].method == "POST"
+    assert reqs[1] is not None
+    assert reqs[1].method == "POST"
     with open(TEST_WI_MULTI_POST_REQUEST, encoding="utf8") as f:
         expected = json.load(f)
 
@@ -308,11 +313,14 @@ def test_create_work_items_slit_by_content_size_successfully(
 
     reqs = httpx_mock.get_requests()
     assert len(reqs) == 3
-    assert reqs[0] is not None and reqs[0].method == "POST"
+    assert reqs[0] is not None
+    assert reqs[0].method == "POST"
     assert len(json.loads(reqs[0].content.decode("utf-8"))["data"]) == 3
-    assert reqs[1] is not None and reqs[1].method == "POST"
+    assert reqs[1] is not None
+    assert reqs[1].method == "POST"
     assert len(json.loads(reqs[1].content.decode("utf-8"))["data"]) == 2
-    assert reqs[2] is not None and reqs[2].method == "POST"
+    assert reqs[2] is not None
+    assert reqs[2].method == "POST"
     assert len(json.loads(reqs[2].content.decode("utf-8"))["data"]) == 1
     assert all(wi.id == "MyWorkItemId" for wi in work_items)
     assert all(len(req.content) <= 2 * 1024**2 for req in reqs)
@@ -346,10 +354,7 @@ def test_create_work_items_failed(
     httpx_mock: pytest_httpx.HTTPXMock,
     work_item: polarion_api.WorkItem,
 ):
-    expected = (
-        "Unexpected token, BEGIN_ARRAY expected, but was"
-        " : BEGIN_OBJECT (at $.data)"
-    )
+    expected = "Unexpected token, BEGIN_ARRAY expected, but was : BEGIN_OBJECT (at $.data)"
     with open(TEST_ERROR_RESPONSE, encoding="utf8") as f:
         response = json.load(f)
 
@@ -486,7 +491,8 @@ def test_delete_work_item_status_mode(
     client.work_items.delete(polarion_api.WorkItem("MyWorkItemId"))
 
     req = httpx_mock.get_request()
-    assert req is not None and req.method == "PATCH"
+    assert req is not None
+    assert req.method == "PATCH"
     with open(TEST_WI_PATCH_STATUS_DELETED_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)
 
@@ -502,6 +508,7 @@ def test_delete_work_item_delete_mode(
     client.work_items.delete(polarion_api.WorkItem("MyWorkItemId"))
 
     req = httpx_mock.get_request()
-    assert req is not None and req.method == "DELETE"
+    assert req is not None
+    assert req.method == "DELETE"
     with open(TEST_WI_DELETE_REQUEST, encoding="utf8") as f:
         assert json.loads(req.content.decode()) == json.load(f)

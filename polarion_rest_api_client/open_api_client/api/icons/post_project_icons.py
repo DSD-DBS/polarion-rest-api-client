@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any, Union
 
 import httpx
 
@@ -23,14 +23,10 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/projects/{project_id}/enumerations/icons".format(
-            project_id=project_id,
-        ),
+        "url": f"/projects/{project_id}/enumerations/icons",
     }
 
-    _body = body.to_multipart()
-
-    _kwargs["files"] = _body
+    _kwargs["files"] = body.to_multipart()
 
     _kwargs["headers"] = headers
     return _kwargs
@@ -38,7 +34,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, IconsListPostResponse]]:
+) -> Union[Errors, IconsListPostResponse] | None:
     if response.status_code == 201:
         response_201 = IconsListPostResponse.from_dict(response.json())
 
@@ -85,8 +81,7 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
@@ -139,7 +134,7 @@ def sync(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PostIconsRequestBody,
-) -> Optional[Union[Errors, IconsListPostResponse]]:
+) -> Union[Errors, IconsListPostResponse] | None:
     """Creates a list of Icons in the Project context.
 
      Icons are identified by order
@@ -200,7 +195,7 @@ async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
     body: PostIconsRequestBody,
-) -> Optional[Union[Errors, IconsListPostResponse]]:
+) -> Union[Errors, IconsListPostResponse] | None:
     """Creates a list of Icons in the Project context.
 
      Icons are identified by order

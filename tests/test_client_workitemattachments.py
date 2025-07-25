@@ -111,7 +111,8 @@ def test_delete_work_item_attachment(
 
     req = httpx_mock.get_request()
 
-    assert req is not None and req.method == "DELETE"
+    assert req is not None
+    assert req.method == "DELETE"
     assert req.url.path.endswith(
         "PROJ/workitems/MyWorkItemId/attachments/Attachment"
     )
@@ -132,7 +133,8 @@ def test_create_single_work_item_attachment(
     resource = fields["resource"][0]
     files = fields["files"]
 
-    assert req is not None and req.method == "POST"
+    assert req is not None
+    assert req.method == "POST"
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId/attachments")
     assert work_item_attachment.id == "MyAttachmentId"
     assert work_item_attachment.content_bytes is not None
@@ -177,7 +179,8 @@ def test_create_multiple_work_item_attachments(
 
     req = httpx_mock.get_request()
 
-    assert req is not None and req.method == "POST"
+    assert req is not None
+    assert req.method == "POST"
     assert req.url.path.endswith("PROJ/workitems/MyWorkItemId/attachments")
 
     assert work_item_attachments[0].id == "MyAttachmentId1"

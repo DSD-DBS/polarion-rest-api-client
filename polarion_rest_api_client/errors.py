@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Polarion API related errors."""
+
 from __future__ import annotations
 
 from . import data_models as dm

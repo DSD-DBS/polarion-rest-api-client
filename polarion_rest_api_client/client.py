@@ -34,7 +34,7 @@ class DefaultFields:
         return {"workitems": self._workitems}
 
     @workitems.setter
-    def workitems(self, value: str):
+    def workitems(self, value: str) -> None:
         self._workitems = value
 
     @property
@@ -43,7 +43,7 @@ class DefaultFields:
         return {"linkedworkitems": self._linkedworkitems}
 
     @linkedworkitems.setter
-    def linkedworkitems(self, value: str):
+    def linkedworkitems(self, value: str) -> None:
         self._linkedworkitems = value
 
     @property
@@ -52,7 +52,7 @@ class DefaultFields:
         return {"workitem_attachments": self._workitem_attachments}
 
     @workitem_attachments.setter
-    def workitem_attachments(self, value: str):
+    def workitem_attachments(self, value: str) -> None:
         self._workitem_attachments = value
 
     @property
@@ -61,7 +61,7 @@ class DefaultFields:
         return {"documents": self._documents}
 
     @documents.setter
-    def documents(self, value: str):
+    def documents(self, value: str) -> None:
         self._documents = value
 
     @property
@@ -70,7 +70,7 @@ class DefaultFields:
         return {"testruns": self._testruns}
 
     @testruns.setter
-    def testruns(self, value: str):
+    def testruns(self, value: str) -> None:
         self._testruns = value
 
     @property
@@ -79,7 +79,7 @@ class DefaultFields:
         return {"testrecords": self._testrecords}
 
     @testrecords.setter
-    def testrecords(self, value: str):
+    def testrecords(self, value: str) -> None:
         self._testrecords = value
 
     @property
@@ -88,7 +88,7 @@ class DefaultFields:
         return {"teststeps": self._teststeps}
 
     @teststeps.setter
-    def teststeps(self, value: str):
+    def teststeps(self, value: str) -> None:
         self._teststeps = value
 
     @property
@@ -97,7 +97,7 @@ class DefaultFields:
         return {"testparameters": self._testparameters}
 
     @testparameters.setter
-    def testparameters(self, value: str):
+    def testparameters(self, value: str) -> None:
         self._testparameters = value
 
     @property
@@ -121,7 +121,7 @@ class PolarionClient:
         self,
         polarion_api_endpoint: str,
         polarion_access_token: str,
-        httpx_args: t.Optional[dict[str, t.Any]] = None,
+        httpx_args: dict[str, t.Any] | None = None,
         batch_size: int = 100,
         page_size: int = 100,
         max_content_size: int = 2 * 1024**2,

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Optional, Union, cast
+from typing import Any, Union, cast
 
 import httpx
 
@@ -22,14 +22,10 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/users/{user_id}/actions/updateAvatar".format(
-            user_id=user_id,
-        ),
+        "url": f"/users/{user_id}/actions/updateAvatar",
     }
 
-    _body = body.to_multipart()
-
-    _kwargs["files"] = _body
+    _kwargs["files"] = body.to_multipart()
 
     _kwargs["headers"] = headers
     return _kwargs
@@ -37,7 +33,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     if response.status_code == 204:
         response_204 = cast(Any, None)
         return response_204
@@ -79,8 +75,7 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
@@ -131,7 +126,7 @@ def sync(
     *,
     client: Union[AuthenticatedClient, Client],
     body: UpdateAvatarRequestBody,
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     """Updates the specified User Avatar.
 
     Args:
@@ -188,7 +183,7 @@ async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
     body: UpdateAvatarRequestBody,
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     """Updates the specified User Avatar.
 
     Args:

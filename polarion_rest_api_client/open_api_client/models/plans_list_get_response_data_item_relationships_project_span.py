@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -97,9 +102,7 @@ class PlansListGetResponseDataItemRelationshipsProjectSpan:
             meta=meta,
         )
 
-        plans_list_get_response_data_item_relationships_project_span_obj.additional_properties = (
-            d
-        )
+        plans_list_get_response_data_item_relationships_project_span_obj.additional_properties = d
         return plans_list_get_response_data_item_relationships_project_span_obj
 
     @property

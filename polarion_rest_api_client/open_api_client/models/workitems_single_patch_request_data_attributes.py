@@ -3,7 +3,12 @@
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -204,9 +209,7 @@ class WorkitemsSinglePatchRequestDataAttributes:
             title=title,
         )
 
-        workitems_single_patch_request_data_attributes_obj.additional_properties = (
-            d
-        )
+        workitems_single_patch_request_data_attributes_obj.additional_properties = d
         return workitems_single_patch_request_data_attributes_obj
 
     @property

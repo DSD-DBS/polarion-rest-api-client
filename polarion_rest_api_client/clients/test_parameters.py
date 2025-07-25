@@ -24,7 +24,7 @@ from . import base_classes as bc
 class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
     """Client to handle TestParameters of a TestRun."""
 
-    def get(self, *args, **kwargs) -> dm.TestRunParameter:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> dm.TestRunParameter:
         raise NotImplementedError
 
     def get_multi(  # type: ignore[override]
@@ -63,7 +63,7 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
         ):
             yield list(group)
 
-    def _create(self, items: list[dm.TestRunParameter]):
+    def _create(self, items: list[dm.TestRunParameter]) -> None:
         """Call only with items with common test_run_id."""
         test_run_id = items[0].test_run_id
         body = _build_post_body(items)
@@ -76,14 +76,12 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
         )
         self._raise_on_error(response)
 
-        assert (
-            isinstance(
-                response.parsed, api_models.TestparametersListPostResponse
-            )
-            and response.parsed.data
+        assert isinstance(
+            response.parsed, api_models.TestparametersListPostResponse
         )
+        assert response.parsed.data
 
-    def _delete(self, items: list[dm.TestRunParameter]):
+    def _delete(self, items: list[dm.TestRunParameter]) -> None:
         """Call only with items with common test_run_id."""
         test_run_id = items[0].test_run_id
         body = api_models.TestparametersListDeleteRequest(
@@ -108,7 +106,7 @@ class TestRunParameters(bc.ItemsClient[dm.TestRunParameter]):
 class TestRecordParameters(bc.ItemsClient[dm.TestRecordParameter]):
     """Clients to handle TestParameters of a TestRecord."""
 
-    def get(self, *args, **kwargs) -> dm.TestRecordParameter:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> dm.TestRecordParameter:
         raise NotImplementedError
 
     def get_multi(  # type: ignore[override]
@@ -153,7 +151,7 @@ class TestRecordParameters(bc.ItemsClient[dm.TestRecordParameter]):
         ):
             yield list(group)
 
-    def _create(self, items: list[dm.TestRecordParameter]):
+    def _create(self, items: list[dm.TestRecordParameter]) -> None:
         """Call only with items with common test_records."""
         test_record = items[0].test_record
         body = _build_post_body(items)
@@ -169,7 +167,7 @@ class TestRecordParameters(bc.ItemsClient[dm.TestRecordParameter]):
         )
         self._raise_on_error(response)
 
-    def _delete(self, items: list[dm.TestRecordParameter]):
+    def _delete(self, items: list[dm.TestRecordParameter]) -> None:
         """We expect only one TestRecordParameter for deletion."""
         assert len(items) == 1
         test_record = items[0].test_record
@@ -187,7 +185,7 @@ class TestRecordParameters(bc.ItemsClient[dm.TestRecordParameter]):
 
     def delete(
         self, items: dm.TestRecordParameter | list[dm.TestRecordParameter]
-    ):
+    ) -> None:
         if not isinstance(items, list):
             items = [items]
 
@@ -250,7 +248,7 @@ def _parse_get_response(
 def _build_post_body(
     items: list[dm.TestRunParameter] | list[dm.TestRecordParameter],
 ) -> api_models.TestparametersListPostRequest:
-    body = api_models.TestparametersListPostRequest(
+    return api_models.TestparametersListPostRequest(
         data=[
             api_models.TestparametersListPostRequestDataItem(
                 type_=api_models.TestparametersListPostRequestDataItemType.TESTPARAMETERS,
@@ -261,4 +259,3 @@ def _build_post_body(
             for item in items
         ]
     )
-    return body

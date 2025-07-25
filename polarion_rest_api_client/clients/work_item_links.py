@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Implementation of LinkedWorkItems operations."""
+
 import itertools
 import typing as t
 
@@ -15,11 +16,13 @@ from polarion_rest_api_client.open_api_client.api.linked_work_items import (
 
 from . import base_classes as bc
 
+LINK_ID_PART_COUNT = 5
+
 
 class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
     """A client providing LinkedWorkItems functions."""
 
-    def get(self, *args, **kwargs) -> dm.WorkItemLink:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> dm.WorkItemLink:
         """Return a specific link - not implemented yet."""
         raise NotImplementedError
 
@@ -88,20 +91,20 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
 
         return work_item_links, next_page
 
-    def _parse_work_item_link(self, link_id, suspect, work_item_id):
+    def _parse_work_item_link(
+        self, link_id: str, suspect: bool | oa_types.Unset, work_item_id: str
+    ) -> dm.WorkItemLink:
         info = link_id.split("/")
-        assert len(info) == 5
+        assert len(info) == LINK_ID_PART_COUNT
         role_id, target_project_id, linked_work_item_id = info[2:]
-        if isinstance(suspect, oa_types.Unset):
-            suspect = False
-        work_item_link = dm.WorkItemLink(
+
+        return dm.WorkItemLink(
             work_item_id,
             linked_work_item_id,
             role_id,
-            suspect,
+            None if isinstance(suspect, oa_types.Unset) else suspect,
             target_project_id,
         )
-        return work_item_link
 
     def _split_into_batches(
         self, items: list[dm.WorkItemLink]
@@ -111,7 +114,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
         ):
             yield from super()._split_into_batches(list(group))
 
-    def _create(self, items: list[dm.WorkItemLink]):
+    def _create(self, items: list[dm.WorkItemLink]) -> None:
         response = post_linked_work_items.sync_detailed(
             self._project_id,
             items[0].primary_work_item_id,
@@ -142,7 +145,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
 
         self._raise_on_error(response)
 
-    def _delete(self, items: list[dm.WorkItemLink]):
+    def _delete(self, items: list[dm.WorkItemLink]) -> None:
         response = delete_linked_work_items.sync_detailed(
             self._project_id,
             items[0].primary_work_item_id,

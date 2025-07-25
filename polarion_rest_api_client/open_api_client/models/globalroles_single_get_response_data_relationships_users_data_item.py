@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -74,9 +78,7 @@ class GlobalrolesSingleGetResponseDataRelationshipsUsersDataItem:
             type_=type_,
         )
 
-        globalroles_single_get_response_data_relationships_users_data_item_obj.additional_properties = (
-            d
-        )
+        globalroles_single_get_response_data_relationships_users_data_item_obj.additional_properties = d
         return globalroles_single_get_response_data_relationships_users_data_item_obj
 
     @property

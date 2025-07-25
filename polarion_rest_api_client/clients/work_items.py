@@ -1,6 +1,7 @@
 # Copyright DB InfraGO AG and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Implementation of a client providing work item specific functions."""
+
 import json
 import logging
 import typing as t
@@ -26,7 +27,7 @@ if t.TYPE_CHECKING:
     from polarion_rest_api_client import client as polarion_client
 
 
-def _get_json_content_size(data: dict):
+def _get_json_content_size(data: dict) -> int:
     return len(json.dumps(data).encode("utf-8"))
 
 
@@ -52,7 +53,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         self.test_steps = test_steps.TestSteps(project_id, client)
         self.item_cls = dm.WorkItem
 
-    def _update(self, to_update: list[dm.WorkItem] | dm.WorkItem):
+    def _update(self, to_update: list[dm.WorkItem] | dm.WorkItem) -> None:
         assert not isinstance(to_update, list), "Expected only one item"
         assert to_update.id is not None
         if to_update.type:
@@ -112,7 +113,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         page_size: int = 100,
         page_number: int = 1,
         fields: dict[str, str] | None = None,
-        work_item_cls=dm.WorkItem,
+        work_item_cls: type[dm.WorkItem] = dm.WorkItem,
     ) -> tuple[list[dm.WorkItem], bool] | tuple[list[WT], bool]:
         """Return the work items on a defined page matching the given query.
 
@@ -190,7 +191,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
     def get(
         self,
         work_item_id: str,
-        work_item_cls=dm.WorkItem,
+        work_item_cls: type[dm.WorkItem] = dm.WorkItem,
         revision: str | None = None,
     ) -> WT | dm.WorkItem | None:
         """Return one specific work item with all fields.
@@ -226,19 +227,18 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
 
         return None
 
-    def _create(self, items: list[dm.WorkItem]):
+    def _create(self, items: list[dm.WorkItem]) -> None:
         raise NotImplementedError("We have a custom create instead.")
 
-    def create(self, items: dm.WorkItem | list[dm.WorkItem]):
+    def create(self, items: dm.WorkItem | list[dm.WorkItem]) -> None:
         """Create WorkItems and respect the max body size of the server."""
         if not isinstance(items, list):
             items = [items]
         current_batch = api_models.WorkitemsListPostRequest(data=[])
         content_size = min_wi_request_size
         batch_start_index = 0
-        batch_end_index = 0
 
-        for work_item in items:
+        for batch_end_index, work_item in enumerate(items):
             work_item_data = self._build_work_item_post_request(work_item)
 
             (
@@ -274,8 +274,6 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                 current_batch.data.append(work_item_data)
                 content_size = proj_content_size
 
-            batch_end_index += 1
-
         if current_batch.data:
             self._retry_on_error(
                 self._post_work_item_batch,
@@ -283,7 +281,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                 items[batch_start_index:],
             )
 
-    def _delete(self, items: list[dm.WorkItem]):
+    def _delete(self, items: list[dm.WorkItem]) -> None:
         work_item_ids = [work_item.id for work_item in items]
         response = delete_work_items.sync_detailed(
             self._project_id,
@@ -379,17 +377,17 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         self,
         work_item_batch: api_models.WorkitemsListPostRequest,
         work_item_objs: list[dm.WorkItem],
-    ):
+    ) -> None:
         response = post_work_items.sync_detailed(
             self._project_id, client=self._client.client, body=work_item_batch
         )
 
         self._raise_on_error(response)
 
-        assert (
-            isinstance(response.parsed, api_models.WorkitemsListPostResponse)
-            and response.parsed.data
+        assert isinstance(
+            response.parsed, api_models.WorkitemsListPostResponse
         )
+        assert response.parsed.data
         for index, work_item_res in enumerate(response.parsed.data):
             assert work_item_res.id
             work_item_objs[index].id = work_item_res.id.split("/")[-1]
@@ -398,7 +396,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         self,
         work_item_data: api_models.WorkitemsListPostRequestDataItem,
         current_content_size: int = min_wi_request_size,
-    ) -> t.Tuple[int, bool]:
+    ) -> tuple[int, bool]:
         work_item_size = _get_json_content_size(work_item_data.to_dict())
 
         proj_content_size = current_content_size + work_item_size
@@ -431,10 +429,13 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         links_truncated = True
         attachments_truncated = True
         if work_item.relationships:
-            if home_document_data := work_item.relationships.module:
-                if home_document_data.data and home_document_data.data.id:
-                    _, folder, name = home_document_data.data.id.split("/")
-                    home_document = dm.DocumentReference(folder, name)
+            if (
+                (home_document_data := work_item.relationships.module)
+                and home_document_data.data
+                and home_document_data.data.id
+            ):
+                _, folder, name = home_document_data.data.id.split("/")
+                home_document = dm.DocumentReference(folder, name)
 
             if link_data := work_item.relationships.linked_work_items:
                 if (
@@ -445,7 +446,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
 
                 links = [
                     self.links._parse_work_item_link(
-                        link.id,
+                        link.id or "",
                         link.additional_properties.get("suspect", False),
                         work_item_id,
                     )

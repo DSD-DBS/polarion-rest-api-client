@@ -71,7 +71,7 @@ def test_create_test_records(
         "MyProjectId",
         "MyWorkItemId",
         "0",
-        executed=datetime.datetime.utcfromtimestamp(0),
+        executed=datetime.datetime.fromtimestamp(0, datetime.timezone.utc),
         duration=0,
         result="passed",
         comment=polarion_api.TextContent("text/html", "My text value"),
@@ -81,7 +81,7 @@ def test_create_test_records(
         "MyProjectId",
         "MyWorkItemId",
         "1234",
-        executed=datetime.datetime.utcfromtimestamp(0),
+        executed=datetime.datetime.fromtimestamp(0, datetime.timezone.utc),
         duration=1,
         result="failed",
         comment=polarion_api.TextContent("text/html", "My text value 2"),
@@ -131,6 +131,5 @@ def test_update_test_record(
 
     assert req_data == expected_req
     assert reqs[0].url.path.endswith(
-        f"/testruns/{test_run_id}"
-        f"/testrecords/{work_item_project}/{work_item_id}/4"
+        f"/testruns/{test_run_id}/testrecords/{work_item_project}/{work_item_id}/4"
     )

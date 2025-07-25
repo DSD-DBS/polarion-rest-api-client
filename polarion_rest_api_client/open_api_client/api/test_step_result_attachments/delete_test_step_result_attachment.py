@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
-from typing import Any, Optional, Union, cast
+from typing import Any, Union, cast
 
 import httpx
 
@@ -23,15 +23,7 @@ def _get_kwargs(
 ) -> dict[str, Any]:
     _kwargs: dict[str, Any] = {
         "method": "delete",
-        "url": "/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/teststepresults/{test_step_index}/attachments/{attachment_id}".format(
-            project_id=project_id,
-            test_run_id=test_run_id,
-            test_case_project_id=test_case_project_id,
-            test_case_id=test_case_id,
-            iteration=iteration,
-            test_step_index=test_step_index,
-            attachment_id=attachment_id,
-        ),
+        "url": f"/projects/{project_id}/testruns/{test_run_id}/testrecords/{test_case_project_id}/{test_case_id}/{iteration}/teststepresults/{test_step_index}/attachments/{attachment_id}",
     }
 
     return _kwargs
@@ -39,7 +31,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     if response.status_code == 204:
         response_204 = cast(Any, None)
         return response_204
@@ -73,8 +65,7 @@ def _parse_response(
         return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    return None
 
 
 def _build_response(
@@ -145,7 +136,7 @@ def sync(
     attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     """Deletes the specified Test Step Result Attachment.
 
     Args:
@@ -232,7 +223,7 @@ async def asyncio(
     attachment_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Any, Errors]]:
+) -> Union[Any, Errors] | None:
     """Deletes the specified Test Step Result Attachment.
 
     Args:

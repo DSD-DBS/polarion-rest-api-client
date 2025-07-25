@@ -2,68 +2,56 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-T = TypeVar("T", bound="ExportTestCasesRequestBody")
+T = TypeVar(
+    "T", bound="CollectionsSingleGetResponseDataRelationshipsRichPagesMeta"
+)
 
 
 @_attrs_define
-class ExportTestCasesRequestBody:
+class CollectionsSingleGetResponseDataRelationshipsRichPagesMeta:
     """
     Attributes:
-        query (Union[Unset, str]):  Example: exportExcelQueryString.
-        sortby (Union[Unset, str]):  Example: exportExcelSortByString.
-        template (Union[Unset, str]):  Example: exportExcelTemplateName.
+        total_count (Union[Unset, int]):
     """
 
-    query: Union[Unset, str] = UNSET
-    sortby: Union[Unset, str] = UNSET
-    template: Union[Unset, str] = UNSET
+    total_count: Union[Unset, int] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(
         init=False, factory=dict
     )
 
     def to_dict(self) -> dict[str, Any]:
-        query = self.query
-
-        sortby = self.sortby
-
-        template = self.template
+        total_count = self.total_count
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if query is not UNSET:
-            field_dict["query"] = query
-        if sortby is not UNSET:
-            field_dict["sortby"] = sortby
-        if template is not UNSET:
-            field_dict["template"] = template
+        if total_count is not UNSET:
+            field_dict["totalCount"] = total_count
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        query = d.pop("query", UNSET)
+        total_count = d.pop("totalCount", UNSET)
 
-        sortby = d.pop("sortby", UNSET)
-
-        template = d.pop("template", UNSET)
-
-        export_test_cases_request_body_obj = cls(
-            query=query,
-            sortby=sortby,
-            template=template,
+        collections_single_get_response_data_relationships_rich_pages_meta_obj = cls(
+            total_count=total_count,
         )
 
-        export_test_cases_request_body_obj.additional_properties = d
-        return export_test_cases_request_body_obj
+        collections_single_get_response_data_relationships_rich_pages_meta_obj.additional_properties = d
+        return collections_single_get_response_data_relationships_rich_pages_meta_obj
 
     @property
     def additional_keys(self) -> list[str]:

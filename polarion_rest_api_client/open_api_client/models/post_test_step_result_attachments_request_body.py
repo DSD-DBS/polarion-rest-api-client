@@ -4,12 +4,18 @@
 import json
 from collections.abc import Mapping
 from io import BytesIO
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, File, FileJsonType, Unset
+from .. import types
+from ..types import UNSET, File, Unset
 
 if TYPE_CHECKING:
     from ..models.teststepresult_attachments_list_post_request import (
@@ -35,7 +41,7 @@ class PostTestStepResultAttachmentsRequestBody:
     )
 
     def to_dict(self) -> dict[str, Any]:
-        files: Union[Unset, list[FileJsonType]] = UNSET
+        files: Union[Unset, list[types.FileTypes]] = UNSET
         if not isinstance(self.files, Unset):
             files = []
             for files_item_data in self.files:
@@ -57,31 +63,29 @@ class PostTestStepResultAttachmentsRequestBody:
 
         return field_dict
 
-    def to_multipart(self) -> list[tuple[str, Any]]:
-        field_list: list[tuple[str, Any]] = []
-        for cont in self.files or []:
-            files_item = cont.to_tuple()
+    def to_multipart(self) -> types.RequestFiles:
+        files: types.RequestFiles = []
 
-            field_list.append(("files", files_item))
+        if not isinstance(self.files, Unset):
+            for files_item_element in self.files:
+                files.append(("files", files_item_element.to_tuple()))
 
-        resource: Union[Unset, tuple[None, bytes, str]] = UNSET
         if not isinstance(self.resource, Unset):
-            resource = (
-                None,
-                json.dumps(self.resource.to_dict()).encode(),
-                "text/plain",
+            files.append(
+                (
+                    "resource",
+                    (
+                        None,
+                        json.dumps(self.resource.to_dict()).encode(),
+                        "text/plain",
+                    ),
+                )
             )
 
-        if resource is not UNSET:
-            field_list.append(("resource", resource))
-
-        field_dict: dict[str, Any] = {}
         for prop_name, prop in self.additional_properties.items():
-            field_dict[prop_name] = (None, str(prop).encode(), "text/plain")
+            files.append((prop_name, (None, str(prop).encode(), "text/plain")))
 
-        field_list += list(field_dict.items())
-
-        return field_list
+        return files
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -111,9 +115,7 @@ class PostTestStepResultAttachmentsRequestBody:
             resource=resource,
         )
 
-        post_test_step_result_attachments_request_body_obj.additional_properties = (
-            d
-        )
+        post_test_step_result_attachments_request_body_obj.additional_properties = d
         return post_test_step_result_attachments_request_body_obj
 
     @property

@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -93,9 +98,7 @@ class UsersSingleGetResponseDataMetaErrorsItem:
             title=title,
         )
 
-        users_single_get_response_data_meta_errors_item_obj.additional_properties = (
-            d
-        )
+        users_single_get_response_data_meta_errors_item_obj.additional_properties = d
         return users_single_get_response_data_meta_errors_item_obj
 
     @property

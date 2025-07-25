@@ -2,7 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import (
+    Any,
+    TypeVar,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -29,13 +32,9 @@ class ProjecttemplatesListGetResponseDataItemAttributesParameters:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        projecttemplates_list_get_response_data_item_attributes_parameters_obj = (
-            cls()
-        )
+        projecttemplates_list_get_response_data_item_attributes_parameters_obj = cls()
 
-        projecttemplates_list_get_response_data_item_attributes_parameters_obj.additional_properties = (
-            d
-        )
+        projecttemplates_list_get_response_data_item_attributes_parameters_obj.additional_properties = d
         return projecttemplates_list_get_response_data_item_attributes_parameters_obj
 
     @property

@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import (
+    Any,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -71,9 +75,7 @@ class CollectionsSinglePatchRequestDataAttributesDescription:
             value=value,
         )
 
-        collections_single_patch_request_data_attributes_description_obj.additional_properties = (
-            d
-        )
+        collections_single_patch_request_data_attributes_description_obj.additional_properties = d
         return collections_single_patch_request_data_attributes_description_obj
 
     @property

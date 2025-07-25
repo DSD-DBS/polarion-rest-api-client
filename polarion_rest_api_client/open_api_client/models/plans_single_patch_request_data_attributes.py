@@ -3,7 +3,13 @@
 
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    TypeVar,
+    Union,
+    cast,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -302,9 +308,7 @@ class PlansSinglePatchRequestDataAttributes:
             use_report_from_template=use_report_from_template,
         )
 
-        plans_single_patch_request_data_attributes_obj.additional_properties = (
-            d
-        )
+        plans_single_patch_request_data_attributes_obj.additional_properties = d
         return plans_single_patch_request_data_attributes_obj
 
     @property
