@@ -19,7 +19,7 @@ authors = [
 ]
 keywords = []
 classifiers = [
-  "Development Status :: 5 - Production",
+  "Development Status :: 5 - Production/Stable",
   "Natural Language :: English",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
