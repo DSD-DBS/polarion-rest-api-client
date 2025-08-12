@@ -72,7 +72,7 @@ class WorkItems(
         )
         self._raise_on_error(response)
 
-    async def _a_update(self, to_update: list[dm.WorkItem]) -> None:
+    async def _async_update(self, to_update: list[dm.WorkItem]) -> None:
         item = self._check_update_item(to_update)
         response = await patch_work_item.asyncio_detailed(
             self._project_id,
@@ -160,7 +160,7 @@ class WorkItems(
         return self._process_get_response(work_item_cls, response)
 
     @t.overload  # type: ignore[override]
-    async def a_get_multi(
+    async def async_get_multi(
         self,
         query: str = "",
         *,
@@ -178,7 +178,7 @@ class WorkItems(
         """
 
     @t.overload
-    async def a_get_multi(
+    async def async_get_multi(
         self,
         query: str = "",
         *,
@@ -193,7 +193,7 @@ class WorkItems(
         Polarion API documentation to get certain fields.
         """
 
-    async def a_get_multi(
+    async def async_get_multi(
         self,
         query: str = "",
         *,
@@ -308,7 +308,7 @@ class WorkItems(
         return self._process_single_get_response(response, work_item_cls)
 
     @t.overload
-    async def a_get(
+    async def async_get(
         self,
         work_item_id: str,
         work_item_cls: type[WT],
@@ -324,7 +324,7 @@ class WorkItems(
         """
 
     @t.overload
-    async def a_get(
+    async def async_get(
         self, work_item_id: str, *, revision: str | None = None
     ) -> dm.WorkItem | None:
         """Return one specific work item with all fields.
@@ -335,7 +335,7 @@ class WorkItems(
         set to True.
         """
 
-    async def a_get(
+    async def async_get(
         self,
         work_item_id: str,
         work_item_cls: type[dm.WorkItem] = dm.WorkItem,
@@ -435,10 +435,12 @@ class WorkItems(
                 items[batch_start_index:],
             )
 
-    async def _a_create(self, items: list[dm.WorkItem]) -> None:
+    async def _async_create(self, items: list[dm.WorkItem]) -> None:
         raise NotImplementedError("We have a custom create instead.")
 
-    async def a_create(self, items: dm.WorkItem | list[dm.WorkItem]) -> None:
+    async def async_create(
+        self, items: dm.WorkItem | list[dm.WorkItem]
+    ) -> None:
         """Create WorkItems and respect the max body size of the server."""
         if not isinstance(items, list):
             items = [items]
@@ -497,7 +499,7 @@ class WorkItems(
         )
         self._raise_on_error(response)
 
-    async def _a_delete(self, items: list[dm.WorkItem]) -> None:
+    async def _async_delete(self, items: list[dm.WorkItem]) -> None:
         response = await delete_work_items.asyncio_detailed(
             self._project_id,
             client=self._client.client,

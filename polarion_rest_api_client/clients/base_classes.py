@@ -182,7 +182,7 @@ class SingleGetClient(BaseClient[T], abc.ABC):
 
     _retry_methods: t.ClassVar[set[str]] = {
         "get",
-        "a_get",
+        "async_get",
     }
 
     @abc.abstractmethod
@@ -190,7 +190,7 @@ class SingleGetClient(BaseClient[T], abc.ABC):
         """Get a specific single item."""
 
     @abc.abstractmethod
-    async def a_get(self, *args: t.Any, **kwargs: t.Any) -> T | None:
+    async def async_get(self, *args: t.Any, **kwargs: t.Any) -> T | None:
         """Get a specific single item."""
 
 
@@ -199,7 +199,7 @@ class CreateClient(BaseClient[T], abc.ABC):
 
     _retry_methods: t.ClassVar[set[str]] = {
         "_create",
-        "_a_create",
+        "_async_create",
     }
     _create_batch_size: int = 0
 
@@ -207,7 +207,7 @@ class CreateClient(BaseClient[T], abc.ABC):
     def _create(self, items: list[T]) -> None: ...
 
     @abc.abstractmethod
-    async def _a_create(self, items: list[T]) -> None: ...
+    async def _async_create(self, items: list[T]) -> None: ...
 
     def _split_into_create_batches(
         self, items: list[T]
@@ -225,13 +225,13 @@ class CreateClient(BaseClient[T], abc.ABC):
         for batch in self._split_into_create_batches(items):
             self._create(batch)
 
-    async def a_create(self, items: T | list[T]) -> None:
+    async def async_create(self, items: T | list[T]) -> None:
         """Create one or multiple items."""
         if not isinstance(items, list):
             items = [items]
 
         for batch in self._split_into_create_batches(items):
-            await self._a_create(batch)
+            await self._async_create(batch)
 
 
 class DeleteClient(BaseClient[T], abc.ABC):
@@ -239,6 +239,7 @@ class DeleteClient(BaseClient[T], abc.ABC):
 
     _retry_methods: t.ClassVar[set[str]] = {
         "_delete",
+        "_async_delete",
     }
     _delete_batch_size: int = 0
 
@@ -254,7 +255,7 @@ class DeleteClient(BaseClient[T], abc.ABC):
     def _delete(self, items: list[T]) -> None: ...
 
     @abc.abstractmethod
-    async def _a_delete(self, items: list[T]) -> None: ...
+    async def _async_delete(self, items: list[T]) -> None: ...
 
     def delete(self, items: T | list[T]) -> None:
         """Delete one or multiple items."""
@@ -263,12 +264,12 @@ class DeleteClient(BaseClient[T], abc.ABC):
         for batch in self._split_into_delete_batches(items):
             self._delete(batch)
 
-    async def a_delete(self, items: T | list[T]) -> None:
+    async def async_delete(self, items: T | list[T]) -> None:
         """Delete one or multiple items."""
         if not isinstance(items, list):
             items = [items]
         for batch in self._split_into_delete_batches(items):
-            await self._a_delete(batch)
+            await self._async_delete(batch)
 
 
 class MultiGetClient(BaseClient[T], abc.ABC):
@@ -276,6 +277,7 @@ class MultiGetClient(BaseClient[T], abc.ABC):
 
     _retry_methods: t.ClassVar[set[str]] = {
         "get_multi",
+        "async_get_multi",
     }
 
     @abc.abstractmethod
@@ -293,7 +295,7 @@ class MultiGetClient(BaseClient[T], abc.ABC):
         """
 
     @abc.abstractmethod
-    async def a_get_multi(
+    async def async_get_multi(
         self,
         *args: t.Any,
         page_size: int = 100,
@@ -323,15 +325,15 @@ class MultiGetClient(BaseClient[T], abc.ABC):
             items += _items
         return items
 
-    async def a_get_all(self, *args: t.Any, **kwargs: t.Any) -> list[T]:
+    async def async_get_all(self, *args: t.Any, **kwargs: t.Any) -> list[T]:
         """Return all matching items using get_multi with auto pagination."""
         page = 1
-        items, next_page = await self.a_get_multi(
+        items, next_page = await self.async_get_multi(
             *args, page_size=self._client.page_size, page_number=page, **kwargs
         )
         while next_page:
             page += 1
-            _items, next_page = await self.a_get_multi(
+            _items, next_page = await self.async_get_multi(
                 *args,
                 page_size=self._client.page_size,
                 page_number=page,
@@ -346,6 +348,7 @@ class UpdateClient(BaseClient[T], abc.ABC):
 
     _retry_methods: t.ClassVar[set[str]] = {
         "_update",
+        "_async_update",
     }
     _update_batch_size: int = 0
 
@@ -361,7 +364,7 @@ class UpdateClient(BaseClient[T], abc.ABC):
     def _update(self, to_update: list[T]) -> None: ...
 
     @abc.abstractmethod
-    async def _a_update(self, to_update: list[T]) -> None: ...
+    async def _async_update(self, to_update: list[T]) -> None: ...
 
     def update(self, items: T | list[T]) -> None:
         """Update the provided item or items."""
@@ -371,13 +374,13 @@ class UpdateClient(BaseClient[T], abc.ABC):
         for batch in self._split_into_update_batches(items):
             self._update(batch)
 
-    async def a_update(self, items: T | list[T]) -> None:
+    async def async_update(self, items: T | list[T]) -> None:
         """Update the provided item or items."""
         if not isinstance(items, list):
             items = [items]
 
         for batch in self._split_into_update_batches(items):
-            await self._a_update(batch)
+            await self._async_update(batch)
 
 
 class StatusItemClient(UpdateClient, DeleteClient, t.Generic[ST], abc.ABC):
@@ -406,10 +409,10 @@ class StatusItemClient(UpdateClient, DeleteClient, t.Generic[ST], abc.ABC):
             delete_items = self._prepare_update_items(items)
             self.update(delete_items)
 
-    async def a_delete(self, items: ST | list[ST]) -> None:
+    async def async_delete(self, items: ST | list[ST]) -> None:
         """Delete the item if no delete_status was set, else update status."""
         if self.delete_status is None:
-            await super().a_delete(items)
+            await super().async_delete(items)
         else:
             delete_items = self._prepare_update_items(items)
             await self.a_update(delete_items)

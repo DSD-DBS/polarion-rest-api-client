@@ -53,7 +53,7 @@ class Documents(
 
         return self._parse_document_response(response)
 
-    async def a_get(
+    async def async_get(
         self,
         space_id: str,
         document_name: str,
@@ -156,7 +156,7 @@ class Documents(
 
         self._raise_on_error(res)
 
-    async def _a_update(self, to_update: list[dm.Document]) -> None:
+    async def _async_update(self, to_update: list[dm.Document]) -> None:
         assert len(to_update) == 1, "Expected only one item"
         assert to_update[0].module_folder
         assert to_update[0].module_name
@@ -245,7 +245,7 @@ class Documents(
 
         self._raise_on_error(res)
 
-    async def _a_create(self, items: list[dm.Document]) -> None:
+    async def _async_create(self, items: list[dm.Document]) -> None:
         assert items[0].module_folder
         res = await post_documents.asyncio_detailed(
             self._project_id,
