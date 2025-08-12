@@ -6,8 +6,8 @@
 # polarion-rest-api-client
 
 <!-- prettier-ignore -->
-![image](https://github.com/DSD-DBS/polarion-rest-api-client/actions/workflows/build-test-publish.yml/badge.svg)
-![image](https://github.com/DSD-DBS/polarion-rest-api-client/actions/workflows/lint.yml/badge.svg)
+![image](https://github.com/dbinfrago/polarion-rest-api-client/actions/workflows/build-test-publish.yml/badge.svg)
+![image](https://github.com/dbinfrago/polarion-rest-api-client/actions/workflows/lint.yml/badge.svg)
 
 A client library for accessing Polarion REST API. This project consists of multiple layers. There is a high level, still incomplete
 version of the client and a feature complete low level API client, which was generated using an [OpenAPI generator](https://github.com/openapi-generators/openapi-python-client).
@@ -123,7 +123,7 @@ Things to know:
 # Documentation
 
 <!-- prettier-ignore -->
-Read the [full documentation on Github pages](https://dsd-dbs.github.io/polarion-rest-api-client).
+Read the [full documentation on Github pages](https://dbinfrago.github.io/polarion-rest-api-client).
 
 # Installation
 
@@ -137,7 +137,7 @@ To set up a development environment, clone the project and install it into a
 virtual environment.
 
 ```zsh
-git clone https://github.com/DSD-DBS/polarion-rest-api-client
+git clone https://github.com/dbinfrago/polarion-rest-api-client
 cd polarion-rest-api-client
 python -m venv .venv
 

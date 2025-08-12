@@ -17,9 +17,9 @@ our style guidelines outlined below.
 
 <!-- prettier-ignore -->
 [open an issue]:
-  https://github.com/DSD-DBS/polarion-rest-api-client/issues
+  https://github.com/dbinfrago/polarion-rest-api-client/issues
 [open a pull request]:
-  https://github.com/DSD-DBS/polarion-rest-api-client/pulls
+  https://github.com/dbinfrago/polarion-rest-api-client/pulls
 
 ## Developing
 
