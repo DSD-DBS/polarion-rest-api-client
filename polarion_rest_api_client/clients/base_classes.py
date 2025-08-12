@@ -5,6 +5,7 @@
 import abc
 import datetime
 import functools
+import inspect
 import logging
 import random
 import time
@@ -154,22 +155,35 @@ class BaseClient(t.Generic[T]):
 
     def _retry_on_error(
         self, call: t.Callable[..., R], *args: t.Any, **kwargs: t.Any
-    ) -> R:
+    ) -> R | t.Coroutine[t.Any, t.Any, R]:
+        if inspect.iscoroutinefunction(call):
+
+            async def wrapped() -> R:
+                try:
+                    return await call(*args, **kwargs)
+                except Exception as e:
+                    self._handle_tolerated_exception(e)
+                    return await call(*args, **kwargs)
+
+            return wrapped()
         try:
             return call(*args, **kwargs)
         except Exception as e:
-            if (
-                isinstance(e, errors.PolarionApiException)
-                and e.args[0] == HTTP_NOT_FOUND
-            ):
-                raise e
-            logger.warning(
-                "Will retry after failing on first attempt, "
-                "due to the following error %s",
-                e,
-            )
-            time.sleep(random.uniform(_min_sleep, _max_sleep))
+            self._handle_tolerated_exception(e)
             return call(*args, **kwargs)
+
+    def _handle_tolerated_exception(self, e: Exception) -> None:
+        if (
+            isinstance(e, errors.PolarionApiException)
+            and e.args[0] == HTTP_NOT_FOUND
+        ):
+            raise e
+        logger.warning(
+            "Will retry after failing on first attempt, "
+            "due to the following error %s",
+            e,
+        )
+        time.sleep(random.uniform(_min_sleep, _max_sleep))
 
     def _pre_batching_grouping(
         self, items: list[T]
@@ -415,7 +429,7 @@ class StatusItemClient(UpdateClient, DeleteClient, t.Generic[ST], abc.ABC):
             await super().async_delete(items)
         else:
             delete_items = self._prepare_update_items(items)
-            await self.a_update(delete_items)
+            await self.async_update(delete_items)
 
     def _prepare_update_items(self, items: ST | list[ST]) -> list[ST]:
         if not isinstance(items, list):
