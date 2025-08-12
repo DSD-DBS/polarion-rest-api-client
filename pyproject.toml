@@ -36,8 +36,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/DSD-DBS/polarion-rest-api-client"
-Documentation = "https://dsd-dbs.github.io/polarion-rest-api-client"
+Homepage = "https://github.com/dbinfrago/polarion-rest-api-client"
+Documentation = "https://dbinfrago.github.io/polarion-rest-api-client"
 
 [dependency-groups]
 dev = [

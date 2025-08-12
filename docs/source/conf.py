@@ -95,7 +95,7 @@ html_theme_options = {
     "footer_icons": [
         {
             "name": "GitHub",
-            "url": "https://github.com/DSD-DBS/polarion-rest-api-client",
+            "url": "https://github.com/dbinfrago/polarion-rest-api-client",
             "html": '<img src="/_static/img/github-logo.svg"/>',
             "class": "",
         },
