@@ -1,0 +1,26 @@
+polarion\_rest\_api\_client.open\_api\_client.api.pages package
+===============================================================
+
+.. automodule:: polarion_rest_api_client.open_api_client.api.pages
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+polarion\_rest\_api\_client.open\_api\_client.api.pages.get\_page module
+------------------------------------------------------------------------
+
+.. automodule:: polarion_rest_api_client.open_api_client.api.pages.get_page
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+polarion\_rest\_api\_client.open\_api\_client.api.pages.patch\_rich\_page module
+--------------------------------------------------------------------------------
+
+.. automodule:: polarion_rest_api_client.open_api_client.api.pages.patch_rich_page
+   :members:
+   :show-inheritance:
+   :undoc-members:
