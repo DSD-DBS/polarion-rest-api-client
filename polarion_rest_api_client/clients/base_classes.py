@@ -3,6 +3,7 @@
 """Base classes for client implementations on project Level."""
 
 import abc
+import asyncio
 import datetime
 import functools
 import inspect
@@ -163,6 +164,7 @@ class BaseClient(t.Generic[T]):
                     return await call(*args, **kwargs)
                 except Exception as e:
                     self._handle_tolerated_exception(e)
+                    await asyncio.sleep(random.uniform(_min_sleep, _max_sleep))
                     return await call(*args, **kwargs)
 
             return wrapped()
@@ -170,6 +172,7 @@ class BaseClient(t.Generic[T]):
             return call(*args, **kwargs)
         except Exception as e:
             self._handle_tolerated_exception(e)
+            time.sleep(random.uniform(_min_sleep, _max_sleep))
             return call(*args, **kwargs)
 
     def _handle_tolerated_exception(self, e: Exception) -> None:
@@ -183,7 +186,6 @@ class BaseClient(t.Generic[T]):
             "due to the following error %s",
             e,
         )
-        time.sleep(random.uniform(_min_sleep, _max_sleep))
 
     def _pre_batching_grouping(
         self, items: list[T]
