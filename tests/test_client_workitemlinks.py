@@ -21,9 +21,36 @@ from tests.conftest import (
 )
 
 
+@pytest.mark.parametrize(
+    ("revision", "query"),
+    [
+        (
+            None,
+            {
+                "fields[linkedworkitems]": "id,role",
+                "page[size]": "100",
+                "page[number]": "1",
+                "include": "workitem",
+            },
+        ),
+        (
+            "12345",
+            {
+                "fields[linkedworkitems]": "id,role",
+                "page[size]": "100",
+                "page[number]": "1",
+                "include": "workitem",
+                "revision": "12345",
+            },
+        ),
+    ],
+    ids=["no_revision", "with_revision"],
+)
 def test_get_work_item_links_single_page(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
+    revision: str | None,
+    query: dict,
 ):
     with open(
         TEST_WIL_NO_NEXT_PAGE_RESPONSE,
@@ -35,14 +62,9 @@ def test_get_work_item_links_single_page(
         "MyWorkItemId",
         include="workitem",
         fields={"fields[linkedworkitems]": "id,role"},
+        revision=revision,
     )
 
-    query = {
-        "fields[linkedworkitems]": "id,role",
-        "page[size]": "100",
-        "page[number]": "1",
-        "include": "workitem",
-    }
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query

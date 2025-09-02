@@ -117,23 +117,44 @@ def test_get_all_work_items_multi_page(
     assert work_items[0].status is None
 
 
+@pytest.mark.parametrize(
+    ("revision", "query"),
+    [
+        (
+            None,
+            {
+                "fields[workitems]": "@basic,description",
+                "page[size]": "100",
+                "page[number]": "1",
+                "query": "",
+            },
+        ),
+        (
+            "12345",
+            {
+                "fields[workitems]": "@basic,description",
+                "page[size]": "100",
+                "page[number]": "1",
+                "query": "",
+                "revision": "12345",
+            },
+        ),
+    ],
+    ids=["no_revision", "with_revision"],
+)
 def test_get_all_work_items_single_page(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
+    revision: str | None,
+    query: dict,
 ):
     with open(TEST_WI_NO_NEXT_PAGE_RESPONSE, encoding="utf8") as f:
         httpx_mock.add_response(json=json.load(f))
 
     client._client.default_fields.workitems = "@basic,description"  # type: ignore
 
-    work_items = client.work_items.get_all("")
+    work_items = client.work_items.get_all("", revision=revision)
 
-    query = {
-        "fields[workitems]": "@basic,description",
-        "page[size]": "100",
-        "page[number]": "1",
-        "query": "",
-    }
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert len(work_items) == 1
