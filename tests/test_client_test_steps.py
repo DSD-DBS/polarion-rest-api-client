@@ -3,6 +3,7 @@
 
 import json
 
+import pytest
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
@@ -15,9 +16,34 @@ from tests.conftest import (
 )
 
 
+@pytest.mark.parametrize(
+    ("revision", "query"),
+    [
+        (
+            None,
+            {
+                "page[size]": "100",
+                "page[number]": "1",
+                "fields[teststeps]": "@all",
+            },
+        ),
+        (
+            "12345",
+            {
+                "page[size]": "100",
+                "page[number]": "1",
+                "fields[teststeps]": "@all",
+                "revision": "12345",
+            },
+        ),
+    ],
+    ids=["no_revision", "with_revision"],
+)
 def test_get_test_steps_multi_page(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
+    revision: str | None,
+    query: dict,
 ):
     with open(TEST_STEPS_NEXT_RESPONSE, encoding="utf8") as f:
         content = json.load(f)
@@ -29,15 +55,10 @@ def test_get_test_steps_multi_page(
 
     test_steps: list[polarion_api.TestStep] = (
         client.work_items.test_steps.get_all(
-            "123", fields={"teststeps": "@all"}
+            "123", fields={"teststeps": "@all"}, revision=revision
         )
     )
 
-    query = {
-        "page[size]": "100",
-        "page[number]": "1",
-        "fields[teststeps]": "@all",
-    }
     reqs = httpx_mock.get_requests()
 
     assert len(reqs) == 3

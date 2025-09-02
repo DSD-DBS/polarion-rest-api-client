@@ -81,6 +81,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         page_number: int = 1,
         fields: dict[str, str] | None = None,
         work_item_cls: type[WT],
+        revision: str | None = None,
     ) -> tuple[list[WT], bool]:
         """Return the work items on a defined page matching the given query.
 
@@ -98,6 +99,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         page_size: int = 100,
         page_number: int = 1,
         fields: dict[str, str] | None = None,
+        revision: str | None = None,
     ) -> tuple[list[dm.WorkItem], bool]:
         """Return the work items on a defined page matching the given query.
 
@@ -114,6 +116,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
         page_number: int = 1,
         fields: dict[str, str] | None = None,
         work_item_cls: type[dm.WorkItem] = dm.WorkItem,
+        revision: str | None = None,
     ) -> tuple[list[dm.WorkItem], bool] | tuple[list[WT], bool]:
         """Return the work items on a defined page matching the given query.
 
@@ -132,6 +135,7 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
             query=query,
             pagesize=page_size,
             pagenumber=page_number,
+            revision=revision or oa_types.UNSET,
         )
 
         self._raise_on_error(response)

@@ -9,6 +9,7 @@ import json
 from email import message
 
 import httpx
+import pytest
 import pytest_httpx
 
 import polarion_rest_api_client as polarion_api
@@ -35,9 +36,34 @@ def _extract_data_from_request(
     return fields
 
 
+@pytest.mark.parametrize(
+    ("revision", "query"),
+    [
+        (
+            None,
+            {
+                "fields[workitem_attachments]": "id,title",
+                "page[size]": "100",
+                "page[number]": "1",
+            },
+        ),
+        (
+            "12345",
+            {
+                "fields[workitem_attachments]": "id,title",
+                "page[size]": "100",
+                "page[number]": "1",
+                "revision": "12345",
+            },
+        ),
+    ],
+    ids=["no_revision", "with_revision"],
+)
 def test_get_work_item_attachments_single_page(
     client: polarion_api.ProjectClient,
     httpx_mock: pytest_httpx.HTTPXMock,
+    revision: str | None,
+    query: dict,
 ):
     with open(
         TEST_WIA_NO_NEXT_PAGE_RESPONSE,
@@ -48,13 +74,9 @@ def test_get_work_item_attachments_single_page(
     work_item_attachments = client.work_items.attachments.get_all(
         "MyWorkItemId",
         fields={"fields[workitem_attachments]": "id,title"},
+        revision=revision,
     )
 
-    query = {
-        "fields[workitem_attachments]": "id,title",
-        "page[size]": "100",
-        "page[number]": "1",
-    }
     reqs = httpx_mock.get_requests()
     assert reqs[0].method == "GET"
     assert dict(reqs[0].url.params) == query
