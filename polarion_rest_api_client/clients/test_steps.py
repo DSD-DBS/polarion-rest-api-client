@@ -6,7 +6,7 @@ import typing as t
 
 from polarion_rest_api_client import data_models as dm
 from polarion_rest_api_client.open_api_client import models as api_models
-from polarion_rest_api_client.open_api_client import types
+from polarion_rest_api_client.open_api_client import types as oa_types
 from polarion_rest_api_client.open_api_client.api.test_steps import (
     delete_test_steps,
     get_test_steps,
@@ -43,6 +43,7 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
         page_size: int = 100,
         page_number: int = 1,
         fields: dict[str, str] | None = None,
+        revision: str | None = None,
     ) -> tuple[list[dm.TestStep], bool]:
         if fields is None:
             fields = self._client.default_fields.teststeps
@@ -55,6 +56,7 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
             fields=sparse_fields,
             pagenumber=page_number,
             pagesize=page_size,
+            revision=revision or oa_types.UNSET,
         )
 
         self._raise_on_error(response)
@@ -82,10 +84,11 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
     def _make_step_columns(
         self,
         attributes: (
-            api_models.TeststepsListGetResponseDataItemAttributes | types.Unset
+            api_models.TeststepsListGetResponseDataItemAttributes
+            | oa_types.Unset
         ),
     ) -> dict[str, dm.TextContent]:
-        if isinstance(attributes, types.Unset):
+        if isinstance(attributes, oa_types.Unset):
             return {}
 
         keys = attributes.keys or []
@@ -188,7 +191,7 @@ class TestSteps(bc.UpdatableItemsClient[dm.TestStep]):
                 id=(
                     f"{self._project_id}/{step.work_item_id}/{step.step_index}"
                     if step.step_index
-                    else types.UNSET
+                    else oa_types.UNSET
                 ),
                 attributes=t.cast(
                     api_models.TeststepsListPatchRequestDataItemAttributes,

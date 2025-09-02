@@ -34,6 +34,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
         page_number: int = 1,
         fields: dict[str, str] | None = None,
         include: str | None | oa_types.Unset = None,
+        revision: str | None | oa_types.Unset = None,
     ) -> tuple[list[dm.WorkItemLink], bool]:
         """Get the work item links for the given work item on a page.
 
@@ -56,6 +57,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
             include=include,
             pagesize=page_size,
             pagenumber=page_number,
+            revision=revision or oa_types.UNSET,
         )
 
         self._raise_on_error(response)
