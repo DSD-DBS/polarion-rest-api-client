@@ -161,11 +161,13 @@ class BaseClient(t.Generic[T]):
 
             async def wrapped() -> R:
                 try:
-                    return await call(*args, **kwargs)
+                    async with self._client.semaphore:
+                        return await call(*args, **kwargs)
                 except Exception as e:
                     self._handle_tolerated_exception(e)
                     await asyncio.sleep(random.uniform(_min_sleep, _max_sleep))
-                    return await call(*args, **kwargs)
+                    async with self._client.semaphore:
+                        return await call(*args, **kwargs)
 
             return wrapped()
         try:
