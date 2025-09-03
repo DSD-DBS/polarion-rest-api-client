@@ -189,6 +189,9 @@ class WorkItemLink:
     secondary_work_item_project: str | None = (
         None  # Use to set differing project
     )
+    secondary_work_item_revision: str | None = (
+        None  # Use to set specific revision
+    )
 
 
 @dataclasses.dataclass

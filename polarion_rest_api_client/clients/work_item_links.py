@@ -82,7 +82,10 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
 
                 work_item_links.append(
                     self._parse_work_item_link(
-                        link.id, link.attributes.suspect, work_item_id
+                        link.id,
+                        link.attributes.suspect,
+                        work_item_id,
+                        link.attributes.revision,
                     )
                 )
 
@@ -94,7 +97,11 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
         return work_item_links, next_page
 
     def _parse_work_item_link(
-        self, link_id: str, suspect: bool | oa_types.Unset, work_item_id: str
+        self,
+        link_id: str,
+        suspect: bool | oa_types.Unset,
+        work_item_id: str,
+        revision: str | oa_types.Unset,
     ) -> dm.WorkItemLink:
         info = link_id.split("/")
         assert len(info) == LINK_ID_PART_COUNT
@@ -106,6 +113,7 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
             role_id,
             None if isinstance(suspect, oa_types.Unset) else suspect,
             target_project_id,
+            None if isinstance(revision, oa_types.Unset) else revision,
         )
 
     def _split_into_batches(
@@ -129,6 +137,8 @@ class WorkItemLinks(bc.ItemsClient[dm.WorkItemLink]):
                         attributes=api_models.LinkedworkitemsListPostRequestDataItemAttributes(
                             role=work_item_link.role,
                             suspect=work_item_link.suspect or False,
+                            revision=work_item_link.secondary_work_item_revision
+                            or oa_types.UNSET,
                         ),
                         relationships=api_models.LinkedworkitemsListPostRequestDataItemRelationships(
                             work_item=api_models.LinkedworkitemsListPostRequestDataItemRelationshipsWorkItem(

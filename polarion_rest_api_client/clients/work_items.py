@@ -453,6 +453,9 @@ class WorkItems(bc.SingleUpdatableItemsMixin, bc.StatusItemClient):
                         link.id or "",
                         link.additional_properties.get("suspect", False),
                         work_item_id,
+                        link.additional_properties.get(
+                            "revision", oa_types.UNSET
+                        ),
                     )
                     for link in link_data.data or []
                 ]
