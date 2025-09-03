@@ -8,15 +8,13 @@
       "id": "MyProjectId/MyWorkItemId/parent/MyProjectId/MyLinkedWorkItemId",
       "revision": "1234",
       "attributes": {
-        "revision": "1234",
         "role": "relates_to"
       },
       "relationships": {
         "workItem": {
           "data": {
             "type": "workitems",
-            "id": "MyProjectId/MyWorkItemId2",
-            "revision": "1234"
+            "id": "MyProjectId/MyWorkItemId2"
           }
         }
       },

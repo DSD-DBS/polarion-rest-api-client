@@ -71,7 +71,12 @@ def test_get_work_item_links_single_page(
     assert len(work_item_links) == 1
     assert len(reqs) == 1
     assert work_item_links[0] == polarion_api.WorkItemLink(
-        "MyWorkItemId", "MyWorkItemId2", "relates_to", True, "MyProjectId"
+        "MyWorkItemId",
+        "MyWorkItemId2",
+        "relates_to",
+        True,
+        "MyProjectId",
+        "1234",
     )
 
 
@@ -106,6 +111,8 @@ def test_get_work_item_links_multi_page(
     assert len(work_items) == 2
     assert len(reqs) == 2
     assert work_items[0].suspect is None
+    assert work_items[0].secondary_work_item_revision is None
+    assert work_items[1].secondary_work_item_revision == "1234"
 
 
 def test_delete_work_item_link(
@@ -271,6 +278,13 @@ def test_create_work_item_links_same_primaries(
             polarion_api.WorkItemLink(
                 "MyWorkItemId", "MyWorkItemId3", "parent", False
             ),
+            polarion_api.WorkItemLink(
+                "MyWorkItemId",
+                "MyWorkItemId4",
+                "parent",
+                False,
+                secondary_work_item_revision="12345",
+            ),
         ]
     )
 
@@ -311,5 +325,10 @@ def test_get_work_item_links_error_first_request(
     )
     assert len(reqs) == 2
     assert work_item_links[0] == polarion_api.WorkItemLink(
-        "MyWorkItemId", "MyWorkItemId2", "relates_to", True, "MyProjectId"
+        "MyWorkItemId",
+        "MyWorkItemId2",
+        "relates_to",
+        True,
+        "MyProjectId",
+        "1234",
     )

@@ -29,6 +29,22 @@
           }
         }
       }
+    },
+    {
+      "type": "linkedworkitems",
+      "attributes": {
+        "role": "parent",
+        "suspect": false,
+        "revision": "12345"
+      },
+      "relationships": {
+        "workItem": {
+          "data": {
+            "type": "workitems",
+            "id": "PROJ/MyWorkItemId4"
+          }
+        }
+      }
     }
   ]
 }
