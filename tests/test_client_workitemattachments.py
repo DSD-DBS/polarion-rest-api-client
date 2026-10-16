@@ -305,3 +305,39 @@ def test_update_work_item_attachment_content(
     assert content.get_payload() == work_item_attachment.content_bytes.decode(
         "utf-8"
     )
+
+
+def _multipart_boundary(req: httpx.Request) -> str:
+    content_type = req.headers["Content-Type"]
+    assert content_type.startswith("multipart/form-data;")
+    boundary = content_type.partition("boundary=")[2]
+    assert f"--{boundary}--".encode() in req.content
+    return boundary
+
+
+def test_create_work_item_attachment_uses_random_boundary(
+    client: polarion_api.ProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+    work_item_attachment: polarion_api.WorkItemAttachment,
+):
+    with open(TEST_WIA_CREATED_RESPONSE, encoding="utf8") as f:
+        httpx_mock.add_response(201, json=json.load(f))
+
+    client.work_items.attachments.create(work_item_attachment)
+
+    boundary = _multipart_boundary(httpx_mock.get_request())
+    assert boundary not in {"", "+++"}
+
+
+def test_update_work_item_attachment_uses_random_boundary(
+    client: polarion_api.ProjectClient,
+    httpx_mock: pytest_httpx.HTTPXMock,
+    work_item_attachment: polarion_api.WorkItemAttachment,
+):
+    httpx_mock.add_response(204)
+    work_item_attachment.id = "MyAttachmentId"
+
+    client.work_items.attachments.update(work_item_attachment)
+
+    boundary = _multipart_boundary(httpx_mock.get_request())
+    assert boundary not in {"", "+++"}
