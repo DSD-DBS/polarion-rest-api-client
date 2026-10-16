@@ -44,6 +44,29 @@ def _compute_backoff(sleeptime: float, attempt: int) -> float:
     return sleeptime * 3 + random.uniform(0.5, (attempt + 1) / 2)
 
 
+class MultipartEndpoint(t.Protocol):
+    """A generated endpoint module that sends a multipart body."""
+
+    _get_kwargs: t.Callable[..., dict[str, t.Any]]
+    _build_response: t.Callable[..., oa_types.Response[t.Any]]
+
+
+def _random_boundary_kwargs(
+    endpoint: MultipartEndpoint, **kwargs: t.Any
+) -> dict[str, t.Any]:
+    """Return request arguments of ``endpoint`` without a fixed boundary.
+
+    The generated multipart endpoints set the header
+    ``Content-Type: multipart/form-data; boundary=+++``. httpx then uses
+    ``+++`` as the boundary, and web application firewalls such as Azure
+    Application Gateway reject those requests with HTTP 403. Without the
+    header, httpx generates a random boundary and sets the header itself.
+    """
+    request = endpoint._get_kwargs(**kwargs)
+    request["headers"].pop("Content-Type", None)
+    return request
+
+
 class BaseClient[T]:
     """The overall base client for all project related clients."""
 
@@ -133,6 +156,44 @@ class BaseClient[T]:
         if value is None:
             return oa_types.UNSET
         return value
+
+    def _send_multipart(
+        self, endpoint: MultipartEndpoint, **kwargs: t.Any
+    ) -> oa_types.Response[t.Any]:
+        """Call ``endpoint`` like ``sync_detailed`` with a random boundary.
+
+        Parameters
+        ----------
+        endpoint
+            The generated endpoint module.
+        **kwargs
+            The arguments of the endpoint's ``sync_detailed`` without
+            ``client``.
+        """
+        client = self._client.client
+        response = client.get_httpx_client().request(
+            **_random_boundary_kwargs(endpoint, **kwargs)
+        )
+        return endpoint._build_response(client=client, response=response)
+
+    async def _async_send_multipart(
+        self, endpoint: MultipartEndpoint, **kwargs: t.Any
+    ) -> oa_types.Response[t.Any]:
+        """Call ``endpoint`` like ``asyncio_detailed`` with a random boundary.
+
+        Parameters
+        ----------
+        endpoint
+            The generated endpoint module.
+        **kwargs
+            The arguments of the endpoint's ``asyncio_detailed`` without
+            ``client``.
+        """
+        client = self._client.client
+        response = await client.get_async_httpx_client().request(
+            **_random_boundary_kwargs(endpoint, **kwargs)
+        )
+        return endpoint._build_response(client=client, response=response)
 
     def _raise_on_error(self, response: oa_types.Response[t.Any]) -> None:
         """Raise a PolarionApiBaseException, if the response has errors."""

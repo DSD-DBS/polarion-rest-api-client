@@ -32,11 +32,11 @@ class WorkItemAttachments(
         """Update the given work item attachment in Polarion."""
         item, multipart = self._prepare_patch_request(to_update)
 
-        response = patch_work_item_attachment.sync_detailed(
-            self._project_id,
-            item.work_item_id,
-            item.id,
-            client=self._client.client,
+        response = self._send_multipart(
+            patch_work_item_attachment,
+            project_id=self._project_id,
+            work_item_id=item.work_item_id,
+            attachment_id=item.id,
             body=multipart,
         )
         self._raise_on_error(response)
@@ -47,11 +47,11 @@ class WorkItemAttachments(
         """Update the given work item attachment in Polarion."""
         item, multipart = self._prepare_patch_request(to_update)
 
-        response = await patch_work_item_attachment.asyncio_detailed(
-            self._project_id,
-            item.work_item_id,
-            item.id,
-            client=self._client.client,
+        response = await self._async_send_multipart(
+            patch_work_item_attachment,
+            project_id=self._project_id,
+            work_item_id=item.work_item_id,
+            attachment_id=item.id,
             body=multipart,
         )
         self._raise_on_error(response)
@@ -190,10 +190,10 @@ class WorkItemAttachments(
     def _create(self, items: list[dm.WorkItemAttachment]) -> None:
         """Create the given work item attachment in Polarion."""
         multipart = self._prepare_post_request(items)
-        response = post_work_item_attachments.sync_detailed(
-            self._project_id,
-            items[0].work_item_id,
-            client=self._client.client,
+        response = self._send_multipart(
+            post_work_item_attachments,
+            project_id=self._project_id,
+            work_item_id=items[0].work_item_id,
             body=multipart,
         )
 
@@ -202,10 +202,10 @@ class WorkItemAttachments(
     async def _async_create(self, items: list[dm.WorkItemAttachment]) -> None:
         """Create the given work item attachment in Polarion."""
         multipart = self._prepare_post_request(items)
-        response = await post_work_item_attachments.asyncio_detailed(
-            self._project_id,
-            items[0].work_item_id,
-            client=self._client.client,
+        response = await self._async_send_multipart(
+            post_work_item_attachments,
+            project_id=self._project_id,
+            work_item_id=items[0].work_item_id,
             body=multipart,
         )
 
