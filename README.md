@@ -120,6 +120,19 @@ Things to know:
 1. All path/query params, and bodies become method arguments.
 1. If your endpoint had any tags on it, the first tag will be used as a module name for the function (my_tag above)
 1. Any endpoint which did not have a tag will be in `polarion_rest_api_client.open_api_client.api.default`
+1. Endpoints with a multipart body (attachment, icon and import uploads) send the fixed header
+   `Content-Type: multipart/form-data; boundary=+++`. Some web application firewalls, e.g. Azure Application
+   Gateway, reject such requests with `403 Forbidden`. The high-level client uploads work item attachments with a
+   random boundary instead. When you call a multipart endpoint directly, send the request yourself without the
+   fixed header, so that httpx generates the boundary:
+
+   ```python
+   from polarion_rest_api_client.open_api_client.api.work_item_attachments import post_work_item_attachments
+
+   kwargs = post_work_item_attachments._get_kwargs("PROJ", "PROJ-1", body=body)
+   kwargs["headers"].pop("Content-Type")
+   response = client.get_httpx_client().request(**kwargs)
+   ```
 
 # Documentation
 
