@@ -103,6 +103,34 @@ def test_assign_generated_ids_skips_comments():
     assert next_uid == 3
 
 
+def test_assign_generated_ids_leaves_headings_without_id():
+    fragments, next_uid = html_utils.assign_generated_ids(
+        '<h1>Title</h1><p></p><h2 id="polarion_wiki macro name=module-'
+        'workitem;params=id=H-1"></h2><h3>Sub</h3>'
+    )
+
+    h1, paragraph, h2, h3 = fragments
+    assert not isinstance(h1, str)
+    assert not isinstance(paragraph, str)
+    assert not isinstance(h2, str)
+    assert not isinstance(h3, str)
+    assert h1.get("id") is None
+    assert paragraph.attrib["id"] == "rest-api:uid=1"
+    assert h2.attrib["id"].endswith("params=id=H-1")
+    assert h3.get("id") is None
+    assert next_uid == 2
+
+
+def test_validate_root_element_ids_accepts_headings_without_id(caplog):
+    with caplog.at_level("WARNING"):
+        is_valid = html_utils.validate_root_element_ids(
+            '<h1>Title</h1><p id="one"></p><h2>Sub</h2>'
+        )
+
+    assert is_valid
+    assert not caplog.text
+
+
 def test_validate_root_element_ids_ignores_comments(caplog):
     with caplog.at_level("WARNING"):
         is_valid = html_utils.validate_root_element_ids(

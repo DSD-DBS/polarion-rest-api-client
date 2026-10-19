@@ -173,8 +173,7 @@ def test_render_document_escapes_heading_text(tmp_path):
     assert rendered.document.home_page_content.value is not None
     assert (
         rendered.document.home_page_content.value.strip()
-        == '<h1 id="rest-api:uid=1">'
-        'Main &lt;Heading&gt; &amp; "Title"</h1>'
+        == '<h1>Main &lt;Heading&gt; &amp; "Title"</h1>'
     )
 
 
@@ -306,12 +305,12 @@ def test_render_document_preserves_html_comments(tmp_path):
     assert rendered.document.home_page_content is not None
     assert rendered.document.home_page_content.value == (
         "<!-- License header -->\n\n"
-        '<h1 id="rest-api:uid=1">Title</h1>\n\n'
+        "<h1>Title</h1>\n\n"
         "<!-- Between elements -->\n\n"
-        '<p id="rest-api:uid=2">Text<!-- nested -->'
-        '<span id="rest-api:uid=3">span</span></p>\n\n'
+        '<p id="rest-api:uid=1">Text<!-- nested -->'
+        '<span id="rest-api:uid=2">span</span></p>\n\n'
         '<workitem id="txt-1"><!-- inside -->\n'
-        '<p id="rest-api:uid=4">Hello</p></workitem>'
+        '<p id="rest-api:uid=3">Hello</p></workitem>'
     )
     work_item = rendered.text_work_item_provider.new_text_work_items["txt-1"]
     assert work_item.description is not None
