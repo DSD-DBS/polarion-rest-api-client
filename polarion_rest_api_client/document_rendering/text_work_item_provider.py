@@ -86,14 +86,8 @@ class TextWorkItemProvider:
                 )
 
             inner_content = "".join(
-                [
-                    (
-                        lxmlhtml.tostring(child, encoding="unicode")
-                        if isinstance(child, lxmlhtml.HtmlElement)
-                        else child
-                    )
-                    for child in element.iterchildren()
-                ]
+                lxmlhtml.tostring(child, encoding="unicode")
+                for child in element.iterchildren()
             )
             if element.text:
                 inner_content = element.text + inner_content
@@ -149,5 +143,5 @@ class TextWorkItemProvider:
         document.home_page_content.value = "\n".join(
             lxmlhtml.tostring(element).decode("utf-8")
             for element in new_content
-            if isinstance(element, lxmlhtml.HtmlElement)
+            if not isinstance(element, str)
         )
