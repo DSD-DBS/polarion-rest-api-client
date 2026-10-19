@@ -88,6 +88,31 @@ def test_assign_generated_ids_assigns_ids_recursively():
     assert next_uid == 4
 
 
+def test_assign_generated_ids_skips_comments():
+    fragments, next_uid = html_utils.assign_generated_ids(
+        "<!-- root --><p><!-- nested --><span></span></p>"
+    )
+
+    comment, paragraph = fragments
+    assert isinstance(comment, lxmlhtml.HtmlComment)
+    assert not isinstance(paragraph, str)
+    assert comment.get("id") is None
+    assert paragraph.attrib["id"] == "rest-api:uid=1"
+    assert isinstance(paragraph[0], lxmlhtml.HtmlComment)
+    assert paragraph[1].attrib["id"] == "rest-api:uid=2"
+    assert next_uid == 3
+
+
+def test_validate_root_element_ids_ignores_comments(caplog):
+    with caplog.at_level("WARNING"):
+        is_valid = html_utils.validate_root_element_ids(
+            '<!-- root --><p id="one"></p><!-- other -->'
+        )
+
+    assert is_valid
+    assert not caplog.text
+
+
 def test_validate_root_element_ids_accepts_unique_ids():
     html_utils.validate_root_element_ids(
         '<p id="one"><span></span></p><div id="two"></div>'

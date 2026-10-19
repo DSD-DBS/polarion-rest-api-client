@@ -9,6 +9,7 @@ import html
 import logging
 import re
 
+from lxml import etree
 from lxml import html as lxmlhtml
 
 from polarion_rest_api_client import data_models
@@ -187,7 +188,7 @@ def assign_generated_ids(
     for element in html_fragments:
         if not isinstance(element, lxmlhtml.HtmlElement):
             continue
-        for child in element.iter():
+        for child in element.iter(etree.Element):
             if not child.get("id"):
                 child.set("id", f"{prefix}{next_uid}")
                 next_uid += 1
